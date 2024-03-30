@@ -9,20 +9,19 @@ import base64
 import zlib
 import struct
 import re
-
-import rwgraphsub
+from typing import Union
  
-def bytes_to_int_array(bytes_array)->list[int]:
+def bytes_to_int_array(bytes_array:bytes)->list[int]:
     '''
-
+    4 bytes for 1 int
     Parameters
     ----------
-    bytes_array
+    bytes_array : bytes
 
     Returns
     -------
     int_array : list[int]
-        4 bytes for 1 int
+
 
     '''
 
@@ -34,24 +33,80 @@ def bytes_to_int_array(bytes_array)->list[int]:
 
 class Coordinate:
     
-    def __init__(self, x=0, y=0):
+    def __init__(self, x, y)->None:
+        '''
+        Initialization of Coordinate
+        
+        Parameters
+        ----------
+        x : number
+        y : number
+            Coordinate of RW map
+
+        Returns
+        -------
+        None.
+
+        '''
         self.content = np.array([[0], [0]], dtype=float)
         self.content[0][0] = x
         self.content[1][0] = y
 
     def x(self):
+        '''
+        x of the Coordiante
+        
+        Returns
+        -------
+        number
+            
+        '''
         return self.content[0][0]
 
     def y(self):
+        '''
+        y of the Coordiante
+        
+        Returns
+        -------
+        number
+            
+        '''
         return self.content[1][0]
 
     def __add__(self, other):
+        '''
+
+        Parameters
+        ----------
+        other : 
+            number: add to x and y
+            Coordiante: add them seperately
+
+        Returns
+        -------
+        Coordinate
+
+        '''
         if isinstance(other, Coordinate):
             return Coordinate(self.x() + other.x(), self.Y() + other.Y())
         else:
             return Coordinate(other + self.X(), other + self.Y())
 
     def __mul__(self, other):
+        '''
+
+        Parameters
+        ----------
+        other : 
+            number: multiply to x and y
+            Coordiante: multiply them seperately
+            np.matrix or np.ndarray: matrix multiplication
+        Returns
+        -------
+        Coordinate
+
+        '''
         ans = Coordinate(0, 0)
         if isinstance(other, Coordinate):
             new_content = other.content * self.content
@@ -63,32 +118,85 @@ class Coordinate:
         return ans
 
     def __sub__(self, other):
+        '''
+
+        Parameters
+        ----------
+        other : 
+            number: subtract other from x and y
+            Coordiante: substract other from self seperately
+
+        Returns
+        -------
+        Coordinate
+
+        '''
         if isinstance(other, Coordinate):
             return Coordinate(self.X() - other.X(), self.Y() - other.Y())
         else:
             return Coordinate(self.X() - other, self.Y() - other)
 
     def __neg__(self):
+        '''
+        Negative Coordinate
+        
+        Returns
+        -------
+        Coordinate
+
+        '''
         return Coordinate(-self.X(), -self.Y())
 
 squareType_matrixChange: dict[str, np.ndarray] = {
     'hex_x': np.array([[1, -1/2], [0, -1]], dtype=float)}
+#square deformation matrix for different tag
 
-def remove_comments(code):
+def remove_comments(code:str)->str:
+    '''
+    Remove python style comments of a string
     
+    e.g. \# ...
+    \'\'\'
+    ...
+    \'\'\'
+    
+    Parameters
+    ----------
+    code : str
+
+    Returns
+    -------
+    str
+
+    '''
     code = re.sub(r'#.*$', '', code, flags=re.MULTILINE)
-    
     code = re.sub(r"'''[^']*?(?='''|\.\n)|\"\"\"[^']*?(?=\"\"\"|\.\n)", '', code)
     return code.strip()
 
 class TypeName:
-    zh_name: str
-    zh_expression_name: str
-    graph_name: str
-    graph_detect_name: str
-    isbuilding: bool
+    
+    def __init__(self, zh_name:str, zh_expression_name:str, graph_name:str, graph_detect_name:str, isbuilding:bool)->None:
+        '''
+        Initialization of TypeName
 
-    def __init__(self, zh_name, zh_expression_name, graph_name, graph_detect_name, isbuilding):
+        Parameters
+        ----------
+        zh_name : str
+            Chinese official name of a unit of RW 
+        zh_expression_name : str
+            Chinese personal name of a unit of RW
+        graph_name : str
+            Official nome of a unit of RW map editor
+        graph_detect_name : str
+            Some unit names separated by ',' which can be updated from a unit, for unitType of trigger(unitDetect)
+        isbuilding : bool
+            Whether it's building or not
+
+        Returns
+        -------
+        None.
+
+        '''
         self.zh_name = zh_name
         self.zh_expression_name = zh_expression_name
         self.graph_name = graph_name
@@ -96,34 +204,80 @@ class TypeName:
         self.isbuilding = isbuilding
 
 class RWGraph:
-    def __init__(self, graph_file: str, grid_pixel, graph_grid, teamnum, teamgroup, default_name_file = './RWgraph_sub/RWgraph_sub_default_name.txt', personal_name_file = None):
+    def __init__(self, graph_file: str, grid_pixel:Coordinate, graph_grid:Coordinate, teamnum:int, teamgroup:int, default_name_file:str, personal_name_file:str = None)->None:
+        '''
+        Initialization of a RW graph
+
+        Parameters
+        ----------
+        graph_file : str
+            The path of your graph
+        grid_pixel : Coordinate
+            The width and height of one grid
+        graph_grid : Coordinate
+            The width and height of your graph(unit:grid)
+        teamnum : int
+            The number of player
+        teamgroup : int
+            The number of group
+        default_name_file : str
+            The path of default units' name file.
+            The example is in RWgraph_sub/RWgraph_sub_default_name.txt.
+        personal_name_file : str, optional
+            The path of personal units' name file. The default is None.
+            The example is in RWgraph_sub/RWgraph_sub_name.txt.
+
+        Returns
+        -------
+        None.
+
+        '''
         self.xmltree = et.ElementTree(file=graph_file)
         self.root = self.xmltree.getroot()
         self.grid_pixel = grid_pixel
         self.graph_grid = graph_grid
         self.teamnum = teamnum
         self.teamgroup = teamgroup
-        self.inputName_TypeName = self.rwUnitNameDict(default_name_file, personal_name_file)
+        self.inputName_TypeName = self.__rwUnitNameDict(default_name_file, personal_name_file)
         for tag in self.root:
             if (tag.tag == "objectgroup") and (tag.attrib.get("name") == "Triggers"):
                 self.TriggersElement = tag
                 
     @staticmethod
-    def rwUnitNameDict(default_name_file = './RWgraph_sub/RWgraph_sub_default_name.txt', personal_name_file = None):
-        inputName_TypeName = {}
-        with open(default_name_file, 'r', encoding = 'utf-8') as file:
-            default_name_matrix = file.read()
-            default_name_matrix = remove_comments(default_name_matrix)
-            default_name_list = default_name_matrix.split('\n')
-            for default_name in default_name_list:
-                default_name_sep = default_name.split(' ')
-                if len(default_name_sep) < 4:
-                    continue
-                for one_default_name in default_name_sep:
-                    one_default_name.strip()
-                inputName_TypeName[default_name_sep[0]] = TypeName(default_name_sep[1], default_name_sep[1], default_name_sep[0], default_name_sep[3], bool(default_name_sep[2]))
+    def __rwUnitNameDict(default_name_file:str, personal_name_file:str = None)->dict[str, TypeName]:
+        '''
+        Create name dictionary for __init__
 
-        if personal_name_file == None:
+        Parameters
+        ----------
+        default_name_file : str
+            The path of default units' name file.
+            The example is in RWgraph_sub/RWgraph_sub_default_name.txt.
+        personal_name_file : str, optional
+            The path of personal units' name file. The default is None.
+            The example is in RWgraph_sub/RWgraph_sub_name.txt.
+
+        Returns
+        -------
+        inputName_TypeName : dict[str, TypeName]
+            the unit dictionary of this graph
+
+        '''
+        if default_name_file != None:
+            inputName_TypeName = {}
+            with open(default_name_file, 'r', encoding = 'utf-8') as file:
+                default_name_matrix = file.read()
+                default_name_matrix = remove_comments(default_name_matrix)
+                default_name_list = default_name_matrix.split('\n')
+                for default_name in default_name_list:
+                    default_name_sep = default_name.split(' ')
+                    if len(default_name_sep) < 4:
+                        continue
+                    for one_default_name in default_name_sep:
+                        one_default_name.strip()
+                    inputName_TypeName[default_name_sep[0]] = TypeName(default_name_sep[1], default_name_sep[1], default_name_sep[0], default_name_sep[3], bool(default_name_sep[2]))
+
+        if personal_name_file != None:
             with open(personal_name_file, 'r', encoding = 'utf-8') as file:
                 default_name_matrix = file.read()
                 default_name_matrix = remove_comments(default_name_matrix)
@@ -139,7 +293,25 @@ class RWGraph:
                 inputName_TypeName.pop(default_name_sep[0])
         return inputName_TypeName
     
-    def addObject(self, tobject_attrib: dict[str, str], properties_dict: dict[str, str], otherItems_list: dict[dict[str, dict[str, str]], dict[str, dict[str, str]]] = {}):
+    def addObject(self, tobject_attrib: dict[str, str], properties_dict: dict[str, str], otherItems_list: dict[dict[str, dict[str, str]], dict[str, dict[str, str]]] = {})->et.Element:
+        '''
+        Add an object to the layer 'Triggers'
+
+        Parameters
+        ----------
+        tobject_attrib : dict[str, str]
+            The default properties of this object
+        properties_dict : dict[str, str]
+            The optional properties of this object
+        otherItems_list : dict[dict[str, dict[str, str]], dict[str, dict[str, str]]], optional
+            The other properties of this object. The default is {}.
+
+        Returns
+        -------
+        objectElement : et.Element
+            The object 
+
+        '''
         objectElement = self.TriggersElement.makeelement(
             'object', tobject_attrib)
         self.TriggersElement.append(objectElement)
@@ -158,11 +330,31 @@ class RWGraph:
                 for child_Name, child_attrib in other_Child.items():
                     childItems = Items.makeelement(child_Name, child_attrib)
                     Items.append(childItems)
+        print(type(objectElement))
         return objectElement
     
-    def strall(self, depth, existtext = -1):
+    @staticmethod
+    def strall(etElement:et.Element, depth:int, existtext:int = -1)->str:
+        '''
+        Present a node of the .tmx file. It is suitable for reading in .txt. 
+
+        Parameters
+        ----------
+        etElement : et.Element
+            The node.
+        depth : int
+            The maximum depth of node which would output.
+        existtext : int, optional
+            The maximum length of text which would output. The default is -1, no output limit.
+
+        Returns
+        -------
+        str
+            A string for reading.
+
+        '''
         strallans = ''
-        element_list = [self.root]
+        element_list = [etElement]
         index_list = [0]
         while element_list != []:
             if index_list[-1] == 0:
@@ -179,29 +371,77 @@ class RWGraph:
                 index_list = index_list[:-1]
         return strallans
     
-    def decodelayer(self, layername):
+    def decodeLayer(self, layername:str)->list[int]:
+        '''
+        Decode a layer into an array of grid id.
+
+        Parameters
+        ----------
+        layername : str
+
+        Returns
+        -------
+        list[int]
+
+        '''
         for layer in self.root:
             if layer.attrib.get("name") == layername:
                 for data in layer:
                     return bytes_to_int_array(zlib.decompress(base64.b64decode(data.text)))
     
     @staticmethod
-    def printObject(tobject):
-        print('>tobject start')
-        print('>attrib')
+    def strObject(tobject:et.Element)->str:
+        '''
+        Present an Object from Triggers
+        Parameters
+        ----------
+        tobject : et.Element
+        
+        Returns
+        -------
+        str
+
+        '''
+        strtobjectans = '>tobject start'
+        strtobjectans = strtobjectans + '>attrib'
         for tobject_name, tobject_value in tobject.attrib.items():
-            print(tobject_name + ':' + tobject_value)
-        print('>property')
+            strtobjectans = strtobjectans + tobject_name + ':' + tobject_value
+        strtobjectans = strtobjectans + '>property'
         for tobject_properties in tobject:
             if tobject_properties.tag == 'properties':
                 for tobject_property in tobject_properties:
-                    print(tobject_property.attrib['name'] + ':' + tobject_property.attrib['value'])
-        print('>tobject end')
+                    strtobjectans = strtobjectans + tobject_property.attrib['name'] + ':' + tobject_property.attrib['value']
+        strtobjectans = strtobjectans + '>tobject end'
+        return strtobjectans
     
-    def deleteObject(self, tobject):
+    def deleteObject(self, tobject:et.Element)->None:
+        '''
+        Delete an Object from Triggers
+
+        Parameters
+        ----------
+        tobject : et.Element
+
+        Returns
+        -------
+        None
+
+        '''
         self.TriggersElement.remove(tobject)
         
-    def deleteObject_partname(self, partname: str):
+    def deleteObject_partname(self, partname: str)->None:
+        '''
+        Delete some objects by overlap of the partname
+
+        Parameters
+        ----------
+        partname : str
+
+        Returns
+        -------
+        None.
+
+        '''
         boolfinish: bool = False
         while boolfinish == False:
             boolfinish = True
@@ -211,23 +451,68 @@ class RWGraph:
                     boolfinish = False
         self.IDreset_IDneqid()
     
-    def IDreset_IDneqid(self):
+    def IDreset_IDneqid(self)->None:
+        '''
+        Reset ID of all objects of Triggers if IDs(default) do not equal to ids(alsoactivate).
+
+        Returns
+        -------
+        None.
+
+        '''
         nowid = 1
         for tobject in self.TriggersElement:
             tobject.attrib['id'] = str(nowid)
             nowid = nowid + 1
 
-    def emptyIDresetfront_IDneqid(self):
+    def emptyIDresetfront_IDneqid(self)->None:
+        '''
+        Some object with empty name will be advanced in the file.
+
+        Returns
+        -------
+        None.
+
+        '''
         for tobject in self.TriggersElement:
             if tobject.attrib.get('name') == None or tobject.attrib['name'] == '':
                 self.TriggersElement.remove(tobject)
                 self.TriggersElement.insert(0, tobject)
 
-    def outputFile(self, graph_file: str):
+    def outputFile(self, graph_file: str)->None:
+        '''
+        Output the RWGraph class to a new RW graph file.
+
+        Parameters
+        ----------
+        graph_file : str
+            The path of your new graph.
+
+        Returns
+        -------
+        None.
+
+        '''
         self.xmltree.write(graph_file)
 
     @staticmethod
-    def changeTriggersProperty(tobject, name, value):
+    def changeObjectProperty(tobject:et.Element, name:str, value:str)->None:
+        '''
+        Change(or add if there'\s no this property) a property of an object from Triggers.
+
+        Parameters
+        ----------
+        tobject : et.Element
+        name : str
+            The name of the property
+        value : str
+            The value of the property
+
+        Returns
+        -------
+        None.
+
+        '''
         for properties in tobject:
             if properties.tag == "properties":
                 for nproperty in properties:
@@ -239,20 +524,78 @@ class RWGraph:
                 properties.append(aproperty)
 
     @staticmethod
-    def returnTriggersProperty(tobject, name):
+    def returnTriggersProperty(tobject:et.Element, name:str)->None:
+        '''
+        Return the value of an object's property by name.
+
+        Parameters
+        ----------
+        tobject : et.Element
+        name : str
+            The name of the property
+
+        Returns
+        -------
+        None.
+
+        '''
         for properties in tobject:
             if properties.tag == "properties":
                 for nproperty in properties:
                     if nproperty.attrib['name'] == name:
                         return nproperty.attrib['value']
 
-    def teamRank(self, teamnow):
+    def teamRank(self, teamnow:int)->int:
+        '''
+        A player\'s rank from the same group by its team.
+
+        Parameters
+        ----------
+        teamnow : int
+            its team
+
+        Returns
+        -------
+        int
+            its rank from the same group.
+
+        '''
         return math.floor(teamnow / self.teamgroup)
     
-    def teamGroup(self, teamnow):
+    def teamGroup(self, teamnow:int)->int:
+        '''
+        A player\'s group by its team.
+
+        Parameters
+        ----------
+        teamnow : int
+            its team
+
+        Returns
+        -------
+        int
+            its group
+
+        '''
         return teamnow % self.teamgroup
     
-    def neighborTeam(self, teamnow):
+    def neighborTeam(self, teamnow:int)->Union[set[int], int, None]:
+        '''
+        A player's enemy which has the same rank.
+
+        Parameters
+        ----------
+        teamnow : int
+            its team
+
+        Returns
+        -------
+        (Union[set[int], int, None])
+            Its enemy team which has the same rank.
+            Return type is int if only one enemy.
+            Return None if no enemy.
+
+        '''
         teamranknow = self.teamRank(teamnow)
         teamgroupnow = self.teamGroup(teamnow)
         if self.teamgroup == 1:
@@ -260,7 +603,7 @@ class RWGraph:
         else:
             teamgroupset = set([teamgroup + teamranknow * self.teamgroup for teamgroup in range(self.teamgroup) if teamgroup != teamgroupnow])
             if self.teamgroup == 2:
-                return teamgroupset[0]
+                return teamgroupset.pop()
             else:
                 return teamgroupset
             
