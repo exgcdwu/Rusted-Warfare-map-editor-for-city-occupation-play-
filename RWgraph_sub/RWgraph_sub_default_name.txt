@@ -1,0 +1,26 @@
+# default name list of RW units
+# 
+# eg_name(map editor) zh_name(translation) isbuilding(True or False) eg_name(for unitDetect)
+
+turret 炮塔 True turret,turretT2,turretT3,turret_flamethrower,turret_artillery,c_turret_t2_artillery,c_turret_t1_lightning,c_turret_t2_lightning
+repairbay 修复湾 True repairbay
+outpostT1 战争塔楼 True outpostT1,outpostT2
+outpostT2 战争塔楼T2 True outpostT2
+supplyDepot 补给站 True supplyDepot
+bugTurret 虫塔 True bugTurret
+
+c_tank 小坦克 False c_tank
+heavyTank 重型坦克 False heavyTank
+mechGun 小机甲 False mechGun
+heavyArtillery 重型火炮 False heavyArtillery
+mechBunker 移动炮台 False mechBunker,mechBunkerDeployed
+mechBunkerDeployed 移动炮台部署状态 False mechBunker,mechBunkerDeployed
+mechMissile 防空机甲 False mechMissile
+bugMeleeLarge 巨型啃噬虫 False bugMeleeLarge
+bugRanged 远程虫 False bugRanged
+bugBee 爆炸虫 False bugBee
+bugPickup 运输虫 bugPickup
+bomber 轰炸机 bomber 
+gunShip 武装直升机 gunShip
+dropship 运输机 dropship
+helicopter 直升机 helicopter
