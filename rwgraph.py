@@ -209,7 +209,7 @@ current_personal_name_file = current_dir_sub + "RWgraph_sub_name.txt"
 
 class RWGraph:
     
-    def __init__(self, graph_file:str, teamnum:int = 2, teamgroup:int = 2, default_name_file:str = current_dir_sub + default_name_file, personal_name_file:str = current_dir_sub + personal_name_file)->None:
+    def __init__(self, graph_file:str, teamnum:int = 2, teamgroup:int = 2, default_name_file:str = current_default_name_file, personal_name_file:str = current_personal_name_file)->None:
         self.xmltree = et.ElementTree(file=graph_file)
         self.root = self.xmltree.getroot()
         
