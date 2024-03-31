@@ -1,5 +1,6 @@
 #my ignore
 !.gitignore
+RWgraph_sub_name.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
