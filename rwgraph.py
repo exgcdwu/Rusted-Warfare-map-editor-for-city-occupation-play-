@@ -9,6 +9,7 @@ import base64
 import zlib
 import struct
 import re
+import os
 from typing import Union
  
 def bytes_to_int_array(bytes_array:bytes)->list[int]:
@@ -33,24 +34,22 @@ def bytes_to_int_array(bytes_array:bytes)->list[int]:
 
 class Coordinate:
     
-    def __init__(self, x, y)->None:
+    def __init__(self, x, y, dtype = 'int32')->None:
         '''
-        Initialization of Coordinate
+        Initialization of RW map Coordinate
         
         Parameters
         ----------
         x : number
         y : number
-            Coordinate of RW map
+        dtype : str, the type of number
 
         Returns
         -------
         None.
 
         '''
-        self.content = np.array([[0], [0]], dtype=float)
-        self.content[0][0] = x
-        self.content[1][0] = y
+        self.content = np.array([[x], [y]], dtype = dtype)
 
     def x(self):
         '''
@@ -147,10 +146,6 @@ class Coordinate:
         '''
         return Coordinate(-self.X(), -self.Y())
 
-squareType_matrixChange: dict[str, np.ndarray] = {
-    'hex_x': np.array([[1, -1/2], [0, -1]], dtype=float)}
-#square deformation matrix for different tag
-
 def remove_comments(code:str)->str:
     '''
     Remove python style comments of a string
@@ -203,46 +198,124 @@ class TypeName:
         self.graph_detect_name = graph_detect_name
         self.isbuilding = isbuilding
 
+squareType_matrixChange: dict[str, np.ndarray] = {
+    'hex_x': np.array([[1, -1/2], [0, -1]], dtype='double')}
+#square deformation matrix for different tag
+
+current_dir = os.path.dirname(__file__)
+current_dir_sub = current_dir + "\\RWgraph_sub\\"
+current_default_name_file = current_dir_sub + "RWgraph_sub_default_name.txt"
+current_personal_name_file = current_dir_sub + "RWgraph_sub_name.txt"
+
 class RWGraph:
-    def __init__(self, graph_file: str, grid_pixel:Coordinate, graph_grid:Coordinate, teamnum:int, teamgroup:int, default_name_file:str, personal_name_file:str = None)->None:
-        '''
-        Initialization of a RW graph
-
-        Parameters
-        ----------
-        graph_file : str
-            The path of your graph
-        grid_pixel : Coordinate
-            The width and height of one grid
-        graph_grid : Coordinate
-            The width and height of your graph(unit:grid)
-        teamnum : int
-            The number of player
-        teamgroup : int
-            The number of group
-        default_name_file : str
-            The path of default units' name file.
-            The example is in RWgraph_sub/RWgraph_sub_default_name.txt.
-        personal_name_file : str, optional
-            The path of personal units' name file. The default is None.
-            The example is in RWgraph_sub/RWgraph_sub_name.txt.
-
-        Returns
-        -------
-        None.
-
-        '''
+    
+    def __init__(self, graph_file:str, teamnum:int = 2, teamgroup:int = 2, default_name_file:str = current_dir_sub + default_name_file, personal_name_file:str = current_dir_sub + personal_name_file)->None:
         self.xmltree = et.ElementTree(file=graph_file)
         self.root = self.xmltree.getroot()
-        self.grid_pixel = grid_pixel
-        self.graph_grid = graph_grid
-        self.teamnum = teamnum
-        self.teamgroup = teamgroup
+        
+        self.version = self.root.attrib['version']
+        self.tiledversion = self.root.attrib['tiledversion']
+        
+        self.grid_pixel = Coordinate(int(self.root.attrib['tilewidth']), int(self.root.attrib['tileheight']))
+        self.graph_grid = Coordinate(int(self.root.attrib['width']), int(self.root.attrib['height']))      
+        
         self.inputName_TypeName = self.__rwUnitNameDict(default_name_file, personal_name_file)
+        
         for tag in self.root:
             if (tag.tag == "objectgroup") and (tag.attrib.get("name") == "Triggers"):
                 self.TriggersElement = tag
-                
+    # @overload
+    # def __init__(self, grid_pixel:Coordinate, graph_grid:Coordinate, teamnum:int, teamgroup:int, default_name_file:str, personal_name_file:str = None, version:str = '1.10', tiledversion:str = '1.10.2')->None:
+    #     '''
+    #     No original graph file
+    #     Build a map xml tree
+
+    #     Parameters
+    #     ----------
+    #     grid_pixel : Coordinate
+    #         DESCRIPTION.
+    #     graph_grid : Coordinate
+    #         DESCRIPTION.
+    #     teamnum : int
+    #         DESCRIPTION.
+    #     teamgroup : int
+    #         DESCRIPTION.
+    #     default_name_file : str
+    #         DESCRIPTION.
+    #     personal_name_file : str, optional
+    #         DESCRIPTION. The default is None.
+    #     version : str, optional
+    #         DESCRIPTION. The default is '1.10'.
+    #     tiledversion : str, optional
+    #         DESCRIPTION. The default is '1.10.2'.
+
+    #     Returns
+    #     -------
+    #     None
+    #         DESCRIPTION.
+
+    #     '''
+    #     self.root = et.Element("map", {'version': version, 'tiledversion': tiledversion, 'orientation': 'orthogonal', 'renderorder': 'right-down', 'width': graph_grid.x(), 'height': graph_grid.y(), 'tilewidth': grid_pixel.x(), 'tileheight': grid_pixel.y(), 'infinite': '0', 'nextlayerid': '1', 'nextobjectid': '1'})
+    #     self.xmltree = et.ElementTree(self.root)
+    #     self.addLayer('Ground')
+    #     self.addLayer('Units')
+    #     self.addLayer('Items')
+    #     self.addObjectgroup('Triggers')
+        
+    #     self.version = version
+    #     self.tiledversion = tiledversion
+    #     self.grid_pixel = grid_pixel
+    #     self.graph_grid = graph_grid
+    #     self.teamnum = teamnum
+    #     self.teamgroup = teamgroup
+    #     self.inputName_TypeName = self.__rwUnitNameDict(default_name_file, personal_name_file)
+    #     for tag in self.root:
+    #         if (tag.tag == "objectgroup") and (tag.attrib.get("name") == "Triggers"):
+    #             self.TriggersElement = tag
+    # @overload
+    # def __init__(self, graph_file: str, teamnum:int, teamgroup:int, default_name_file:str, personal_name_file:str = None)->None:
+    #     self.xmltree = et.ElementTree(file=graph_file)
+    #     self.root = self.xmltree.getroot()
+        
+    #     self.version = self.root.attrib['version']
+    #     self.tiledversion = self.root.attrib['tiledversion']
+        
+    #     self.grid_pixel = Coordinate(int(self.root.attrib['tilewidth']), int(self.root.attrib['tileheight']))
+    #     self.graph_grid = Coordinate(int(self.root.attrib['width']), int(self.root.attrib['height']))
+    #     self.teamnum = teamnum
+    #     self.teamgroup = teamgroup
+    #     self.inputName_TypeName = self.__rwUnitNameDict(default_name_file, personal_name_file)
+    #     for tag in self.root:
+    #         if (tag.tag == "objectgroup") and (tag.attrib.get("name") == "Triggers"):
+    #             self.TriggersElement = tag
+    
+    def __newLayerid(self)->int:
+        newlayerid = int(self.root.attrib['nextlayerid'])
+        self.root.attrib['nextlayerid'] = str(int(self.root.attrib['nextlayerid']) + 1)
+        return newlayerid
+   
+    def addLayer(self, layername:str)->et.Element:
+        layerid = self.__newLayerid()
+        layerelement = self.root.makeelement('layer', {'id':str(layerid), 'name': layername, 'width': str(self.graph_grid.x()), 'height': str(self.graph_grid.y())})
+        self.root.append(layerelement)
+        return layerelement
+        
+    def addObjectgroup(self, objectgroupname:str)->et.Element:
+        layerid = self.__newLayerid()
+        layerelement = self.root.makeelement('objectgroup', {'id':str(layerid), 'name': objectgroupname})
+        self.root.append(layerelement)
+        return layerelement
+    
+    def __newobjectid(self)->int:
+        newobjectid = int(self.root.attrib['nextobjectid'])
+        self.root.attrib['nextobjectid'] = str(int(self.root.attrib['nextobjectid']) + 1)
+        return newobjectid
+    
+    def __resetmaxobjectid(self, maxid:int)->None:
+        self.root.attrib['nextobjectid'] = maxid
+    
+    
+    
     @staticmethod
     def __rwUnitNameDict(default_name_file:str, personal_name_file:str = None)->dict[str, TypeName]:
         '''
@@ -293,6 +366,72 @@ class RWGraph:
                 inputName_TypeName.pop(default_name_sep[0])
         return inputName_TypeName
     
+    @staticmethod
+    def strall(etElement:et.Element, depth:int, existtext:int = -1)->str:
+        '''
+        Present a node of the .tmx file. It is suitable for reading in .txt. 
+
+        Parameters
+        ----------
+        etElement : et.Element
+            The node.
+        depth : int
+            The maximum depth of node which would output.
+        existtext : int, optional
+            The maximum length of text which would output. The default is -1, no output limit.
+
+        Returns
+        -------
+        str
+            A string for reading.
+
+        '''
+        strallans = ''
+        element_list = [etElement]
+        index_list = [0]
+        while element_list != []:
+            if index_list[-1] == 0:
+                strallans = strallans + '\t' * (len(element_list) - 1) + str(element_list[-1].tag) + str(element_list[-1].attrib)
+                if element_list[-1].text != None and str(element_list[-1].text).strip() != '':
+                    strallans = strallans + '[' + str(element_list[-1].text)[0:existtext] + ']'
+                strallans = strallans + '\n' 
+            if len(element_list) < depth and index_list[-1] < len(element_list[-1]):
+                element_list.append(element_list[-1][index_list[-1]])
+                index_list[-1] = index_list[-1] + 1
+                index_list.append(0)
+            else:
+                element_list = element_list[:-1]
+                index_list = index_list[:-1]
+        return strallans
+    
+    def decodeLayer(self, layername:str)->np.ndarray:
+        '''
+        Decode a layer into an array of grid id.
+
+        Parameters
+        ----------
+        layername : str
+
+        Returns
+        -------
+        np.ndarray
+        
+        ndim = 2
+        width = self.graph_grid.x()
+        height = self.graph_grid.y()
+        Tile id matrix of the layer
+
+        '''
+        for layer in self.root:
+            if layer.attrib.get("name") == layername:
+                for data in layer:
+                    int_list = bytes_to_int_array(zlib.decompress(base64.b64decode(data.text)))
+        grid_matrix = np.array(int_list)
+        
+        grid_matrix = np.reshape(grid_matrix, [self.graph_grid.x(), self.graph_grid.y()])
+        print(type(grid_matrix))
+        return grid_matrix
+    
     def addObject(self, tobject_attrib: dict[str, str], properties_dict: dict[str, str], otherItems_list: dict[dict[str, dict[str, str]], dict[str, dict[str, str]]] = {})->et.Element:
         '''
         Add an object to the layer 'Triggers'
@@ -332,62 +471,6 @@ class RWGraph:
                     Items.append(childItems)
         print(type(objectElement))
         return objectElement
-    
-    @staticmethod
-    def strall(etElement:et.Element, depth:int, existtext:int = -1)->str:
-        '''
-        Present a node of the .tmx file. It is suitable for reading in .txt. 
-
-        Parameters
-        ----------
-        etElement : et.Element
-            The node.
-        depth : int
-            The maximum depth of node which would output.
-        existtext : int, optional
-            The maximum length of text which would output. The default is -1, no output limit.
-
-        Returns
-        -------
-        str
-            A string for reading.
-
-        '''
-        strallans = ''
-        element_list = [etElement]
-        index_list = [0]
-        while element_list != []:
-            if index_list[-1] == 0:
-                strallans = strallans + '\t' * (len(element_list) - 1) + str(element_list[-1].tag) + str(element_list[-1].attrib)
-                if element_list[-1].text != None and str(element_list[-1].text).strip() != '':
-                    strallans = strallans + '[' + str(element_list[-1].text)[0:existtext] + ']'
-                strallans = strallans + '\n' 
-            if len(element_list) < depth and index_list[-1] < len(element_list[-1]):
-                element_list.append(element_list[-1][index_list[-1]])
-                index_list[-1] = index_list[-1] + 1
-                index_list.append(0)
-            else:
-                element_list = element_list[:-1]
-                index_list = index_list[:-1]
-        return strallans
-    
-    def decodeLayer(self, layername:str)->list[int]:
-        '''
-        Decode a layer into an array of grid id.
-
-        Parameters
-        ----------
-        layername : str
-
-        Returns
-        -------
-        list[int]
-
-        '''
-        for layer in self.root:
-            if layer.attrib.get("name") == layername:
-                for data in layer:
-                    return bytes_to_int_array(zlib.decompress(base64.b64decode(data.text)))
     
     @staticmethod
     def strObject(tobject:et.Element)->str:
