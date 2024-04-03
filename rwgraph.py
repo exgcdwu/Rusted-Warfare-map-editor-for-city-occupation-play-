@@ -11,6 +11,7 @@ import struct
 import re
 import os
 from typing import Union
+from typing import overload
  
 def bytes_to_int_array(bytes_array:bytes)->list[int]:
     '''
@@ -209,12 +210,15 @@ current_personal_name_file = current_dir_sub + "RWgraph_sub_name.txt"
 
 class RWGraph:
     
-    def __init__(self, graph_file:str, teamnum:int = 2, teamgroup:int = 2, default_name_file:str = current_default_name_file, personal_name_file:str = current_personal_name_file)->None:
+    @overload
+    def __init__(self, graph_file:str, teamnum:int, teamgroup:int, default_name_file:str = current_default_name_file, personal_name_file:str = current_personal_name_file)->None:
         self.xmltree = et.ElementTree(file=graph_file)
         self.root = self.xmltree.getroot()
         
         self.version = self.root.attrib['version']
         self.tiledversion = self.root.attrib['tiledversion']
+        self.orientation = self.root.attrib['orientation']
+        self.renderorder = self.root.attrib['renderorder']
         
         self.grid_pixel = Coordinate(int(self.root.attrib['tilewidth']), int(self.root.attrib['tileheight']))
         self.graph_grid = Coordinate(int(self.root.attrib['width']), int(self.root.attrib['height']))      
@@ -224,6 +228,13 @@ class RWGraph:
         for tag in self.root:
             if (tag.tag == "objectgroup") and (tag.attrib.get("name") == "Triggers"):
                 self.TriggersElement = tag
+        
+    @overload
+    def __init__(self, grid_pixel:Coordinate, graph_grid:Coordinate, teamnum:int, teamgroup:int,\
+                 default_name_file:str = current_default_name_file, personal_name_file:str = current_personal_name_file,\
+                     version:str = '1.10', tiledversion:str = '1.10.2', orientation:str = 'orthogonal', renderorder:str = 'right-down')->None: ...
+    
+    def __init__(self, *args):...
     # @overload
     # def __init__(self, grid_pixel:Coordinate, graph_grid:Coordinate, teamnum:int, teamgroup:int, default_name_file:str, personal_name_file:str = None, version:str = '1.10', tiledversion:str = '1.10.2')->None:
     #     '''
