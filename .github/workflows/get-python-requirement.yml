@@ -20,12 +20,11 @@ jobs:
  
     - name: set conda
       uses: conda-incubator/setup-miniconda@v3
- 
+      with:
+        auto-activate-base: true
+        activate-environment: "RustedWarfare"
     - name: create environment of conda
       run: |
-        conda create --name RustedWarfare
-        conda init --system --all
-        conda activate RustedWarfare
         conda install pipreqs
     - name: create requirement.txt
       run: |
