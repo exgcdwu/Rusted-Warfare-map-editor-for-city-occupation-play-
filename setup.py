@@ -16,5 +16,5 @@ setup(
     description = 'Python Setup',
     packages = find_packages(exclude=["tests"]),
     python_requires = '>=3.0.0'
-    #install_requires = requirements
-        )
+    #,install_requires = requirements
+)
