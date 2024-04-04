@@ -15,6 +15,6 @@ setup(
     url = "https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-",
     description = 'Python Setup',
     packages = find_packages(exclude=["tests"]),
-    python_requires = '>=3.0.0',
+    python_requires = '>=3.0.0'
     #install_requires = requirements
         )
