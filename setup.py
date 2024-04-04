@@ -1,11 +1,9 @@
 # setup.py
 
-import os
 from setuptools import setup, find_packages
 
 __version__ = '1.0'
-current_dir = os.path.dirname(__file__)
-requirements = open(current_dir + '/requirements.txt').readlines()
+requirements = open('rwmapeditor_exgcdwu.egg-info/requires.txt').readlines()
 
 setup(
     name = 'rwmapeditor_exgcdwu',
