@@ -1,1 +1,1 @@
-from rwgraph._core import rwgraph
+#from rwgraph._core import rwgraph

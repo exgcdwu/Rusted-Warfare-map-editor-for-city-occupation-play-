@@ -1,0 +1,33 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: get python requirement
+ 
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - uses: actions/checkout@v2
+ 
+    - name: set conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        conda-version: latest
+        miniconda-version: latest
+ 
+    - name: create environment of conda
+      run: |
+        conda create --name RustedWarfare pipreqs
+        conda activate RustedWarfare
+    - name: create requirement.txt
+      run: |
+        pipreqs . --force
