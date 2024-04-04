@@ -27,6 +27,7 @@ jobs:
     - name: create environment of conda
       run: |
         conda install pipreqs
+        pipreqs -v
     - name: create requirement.txt
       run: |
         pipreqs . --force
