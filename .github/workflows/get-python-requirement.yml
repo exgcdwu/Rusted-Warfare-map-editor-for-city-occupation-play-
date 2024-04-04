@@ -20,9 +20,6 @@ jobs:
  
     - name: set conda
       uses: conda-incubator/setup-miniconda@v2
-      with:
-        conda-version: latest
-        miniconda-version: latest
  
     - name: create environment of conda
       run: |
