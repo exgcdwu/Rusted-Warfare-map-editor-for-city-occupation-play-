@@ -8,7 +8,7 @@ __version__ = '1.0'
 #requirements = open(current_dir + '/requirements.txt').readlines()
 
 def readme():
-    with open('README.rst') as file:
+    with open('README.md') as file:
         return file.read()
 
 strreadme = readme()
@@ -20,6 +20,7 @@ setup(
     author_email = '1006605318@qq.com',
     url = "https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-",
     long_description = strreadme,
+    long_description_content_type = "text/markdown",
     packages = find_packages(exclude=["tests"]),
     python_requires = '>=3.0.0'
     #,install_requires = requirements
