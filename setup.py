@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 __version__ = '1.0'
-requirements = open('requirements.txt').readlines()
+requirements = open(',/requirements.txt').readlines()
 
 setup(
     name = 'rwmapeditor_exgcdwu',
