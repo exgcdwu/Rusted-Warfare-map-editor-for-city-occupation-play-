@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 __version__ = '1.0'
 current_dir = os.path.dirname(__file__)
-requirements = open(current_dir + '\\requirements.txt').readlines()
+requirements = open(current_dir + '/requirements.txt').readlines()
 
 setup(
     name = 'rwmapeditor_exgcdwu',
