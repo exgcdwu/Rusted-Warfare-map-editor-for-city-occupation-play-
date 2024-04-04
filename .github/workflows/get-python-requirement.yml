@@ -23,6 +23,7 @@ jobs:
       with:
         auto-activate-base: true
         activate-environment: "RustedWarfare"
+        channels: conda-forge,defaults
     - name: create environment of conda
       run: |
         conda install pipreqs
