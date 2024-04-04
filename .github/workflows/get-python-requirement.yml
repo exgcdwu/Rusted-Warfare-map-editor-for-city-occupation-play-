@@ -23,8 +23,9 @@ jobs:
  
     - name: create environment of conda
       run: |
-        conda create --name RustedWarfare pipreqs
+        conda create --name RustedWarfare
         conda activate RustedWarfare
+        conda install pipreqs
     - name: create requirement.txt
       run: |
         pipreqs . --force
