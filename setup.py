@@ -1,11 +1,11 @@
 # setup.py
 
-import os
+#import os
 from setuptools import setup, find_packages
 
 __version__ = '1.0'
-current_dir = os.path.dirname(__file__)
-requirements = open(current_dir + '/requirements.txt').readlines()
+#current_dir = os.path.dirname(__file__)
+#requirements = open(current_dir + '/requirements.txt').readlines()
 
 setup(
     name = 'rwmapeditor_exgcdwu',
@@ -16,5 +16,5 @@ setup(
     description = 'Python Setup',
     packages = find_packages(exclude=["tests"]),
     python_requires = '>=3.0.0',
-    install_requires = requirements
+    #install_requires = requirements
         )
