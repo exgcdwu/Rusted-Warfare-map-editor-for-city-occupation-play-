@@ -25,3 +25,9 @@ class Layer:
         str_ans = utility.indentstr_Tab(str_ans)
         return str_ans
 
+    def output_etElement(self)->et.Element:
+        root = et.Element("layer")
+        self.layer_properties.output_etElement(root)
+        root.append(utility._get_etElement_from_text_packed(self.tilematrix))
+        return root
+        

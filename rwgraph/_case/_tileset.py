@@ -36,4 +36,24 @@ class TileSet:
         str_ans = utility.indentstr_Tab(str_ans)
         return str_ans
 
+    def output_etElement(self)->et.Element:
+        root = et.Element("tileset")
+        self.tileset_properties.output_etElement(root)
+        if self.image_properties != None:
+            image_element = et.Element("image")
+            self.image_properties.output_etElement(image_element)
+            root.append(image_element)
+        if self.png_text != None:
+            png_element = et.Element("property", {"name": "embedded_png"})
+            png_element.text = self.png_text
+            properties = utility._get_etElement_callable_from_tag(root, "properties")
+            properties.insert(0, png_element)
+        if self.tilelist_properties != None:
+            for tile in self.tilelist_properties:
+                tile_element = et.Element("tile")
+                tile.output_etElement(tile_element)
+                root.append(tile_element)
+        return root
+
+
 

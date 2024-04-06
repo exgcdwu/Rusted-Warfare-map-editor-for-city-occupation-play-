@@ -4,6 +4,7 @@
 """
 
 import xml.etree.ElementTree as et
+from xml.dom import minidom
 
 import rwgraph._exceptions as rwexceptions
 import rwgraph._default_data as rwdata
@@ -19,8 +20,8 @@ class RWGraph:
         self._layer_list = layer_list
         self._objectGroup_list = objectGroup_list
     @classmethod
-    def init_graphfile(cls, graph_file:str)->None:
-        xmlTree:et.ElementTree = et.ElementTree(file=graph_file)
+    def init_graphfile(cls, map_file:str)->None:
+        xmlTree:et.ElementTree = et.ElementTree(file=map_file)
         root:et.Element = xmlTree.getroot()
         map_properties = utility.ElementProperties.init_etElement(root)
 
@@ -42,5 +43,27 @@ class RWGraph:
         str_ans = str_ans + "\n".join([tobject.output_str(objectnum) for tobject in self._objectGroup_list]) + "\n"
         str_ans = utility.indentstr_Tab(str_ans)
         return str_ans
+
+    def output_etElement(self)->et.Element:
+        root = et.Element("map")
+        self._map_properties.output_etElement(root)
+        if self._tileset_list != None:
+            for tileset in self._tileset_list:
+                root.append(tileset.output_etElement())
+        if self._layer_list != None:
+            for layer in self._layer_list:
+                root.append(layer.output_etElement())
+        if self._objectGroup_list != None:
+            for objectGroup in self._objectGroup_list:
+                root.append(objectGroup.output_etElement())
+        return root
+    
+    def write_file(self, map_file:str)->None:
+        root = self.output_etElement()
+        dom = minidom.parseString(et.tostring(root, encoding='utf-8'))
+        pretty_xml = dom.toprettyxml(indent='  ')
+        with open(map_file, 'w', encoding='utf-8') as file:
+            file.write(pretty_xml)
+
         
 

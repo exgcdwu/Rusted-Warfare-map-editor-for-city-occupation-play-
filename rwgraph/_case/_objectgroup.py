@@ -25,4 +25,12 @@ class ObjectGroup:
         str_ans = utility.indentstr_Tab(str_ans)
         return str_ans
 
+    def output_etElement(self)->et.Element:
+        root = et.Element("objectgroup")
+        self.objectgroup_properties.output_etElement(root)
+        for tobject in self.object_list:
+            tobject_element = et.Element("object")
+            tobject.output_etElement(tobject_element)
+            root.append(tobject_element)
+        return root
 
