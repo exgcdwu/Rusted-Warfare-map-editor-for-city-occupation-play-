@@ -19,6 +19,12 @@ python实现铁锈地图文件地块编辑和宾语编辑。
 pip install rwmapeditor-exgcdwu
 ```
 
+## 使用之前
+
+1.使用地图编辑器(Tiled,notTiled)创建新地图，确定大小。
+2.手动载入地块集
+3.即可使用python库自动改变地块和宾语
+
 ## 简易使用例子
 
 ```python
