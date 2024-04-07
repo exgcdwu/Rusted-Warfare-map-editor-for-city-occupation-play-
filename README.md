@@ -37,7 +37,7 @@ map_dir = 'D:/Game/steam/steamapps/common/Rusted Warfare/mods/maps/'
 map_name = 'example_mission.tmx'
 map_name_out = 'example_mission(1).tmx'
 
-mygraph:rw.RWmap = rw.RWmap.init_graphfile(map_dir + map_name, map_dir)
+mygraph:rw.RWmap = rw.RWmap.init_mapfile(map_dir + map_name, map_dir)
 
 print(mygraph.output_str())
 
