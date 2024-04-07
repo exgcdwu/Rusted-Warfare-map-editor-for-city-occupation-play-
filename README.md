@@ -25,7 +25,9 @@ pip install rwmapeditor-exgcdwu
 
 2.手动载入地块集
 
-3.即可使用python库自动改变地块和宾语
+3.手动创建所需的地块层和宾语层
+
+4.即可使用python库自动改变地块和宾语
 
 ## 简易使用例子
 
