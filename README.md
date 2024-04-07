@@ -23,10 +23,14 @@ pip install rwmapeditor-exgcdwu
 
 ```python
 # coding: utf-8
+import rwmap as rw
+
 map_dir = 'D:/Game/steam/steamapps/common/Rusted Warfare/mods/maps/'
 map_name = 'example_mission.tmx'
 map_name_out = 'example_mission(1).tmx'
+
 mygraph:rw.RWmap = rw.RWmap.init_graphfile(map_dir + map_name, map_dir)
+
 print(mygraph.output_str())
 
 mygraph.addObject("Triggers", {"id": "100","type": "unitAdd", "x": "1000", "y":"1000", "width": "20", "height": "20"}, {"resetActivationAfter":"5s", "spawnUnits": "heavyTank*10", "team" :"0", "warmup":"20s"})
