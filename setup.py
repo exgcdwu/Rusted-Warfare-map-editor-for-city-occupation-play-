@@ -3,7 +3,7 @@
 #import os
 from setuptools import setup, find_packages
 
-__version__ = '1.0'
+__version__ = '1.1'
 #current_dir = os.path.dirname(__file__)
 #requirements = open(current_dir + '/requirements.txt').readlines()
 

@@ -11,6 +11,9 @@ class Coordinate:
 
     def y(self):
         return self._content[1][0]
+    
+    def id(self, width:int)->int:
+        return int(self.y() * width + self.x())
 
     def __add__(self, other):
         if isinstance(other, Coordinate):
@@ -51,3 +54,8 @@ class Rectangle:
     
     def e(self):
         return self._initialCoordinate + self._addCoordinate
+    
+    def iterator(self):
+        for i in range(0, self._addCoordinate.x()):
+            for j in range(0, self._addCoordinate.y()):
+                yield self._initialCoordinate + Coordinate(i, j)

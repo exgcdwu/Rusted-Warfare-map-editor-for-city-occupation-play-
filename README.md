@@ -1,9 +1,44 @@
-为铁锈战争地图编辑服务，使用python自动化，偏向减轻城夺地图宾语工作量。
+# rwmapeditor-exgcdwu
+___一个铁锈战争(Rusted Warfare)地图编辑python库___
 
-城夺地图中创建一个可刷新的建筑需要写两个宾语，这一过程是非常枯燥无聊机械的，可以试图通过代码快速生成。
+[![released version](https://img.shields.io/pypi/v/rwmapeditor-exgcdwu.svg)][pypi]
+[![license](https://img.shields.io/github/license/Gsllchb/rwmapeditor-exgcdwu.svg)][license]
 
-为了实现地图编辑的基础功能和城夺地图自动化的要求，写了些代码解决问题。
+## 目标
 
-目前仅是框架，暂时没法用。
+python实现铁锈地图文件地块编辑和宾语编辑。
 
-还是先去学习怎么用github和制作python包吧
+暂时不打算接触地块集。
+
+重点减轻城市争夺地图的宾语编辑工作量
+
+基本框架已完成。
+
+## 安装
+
+pip install rwmapeditor-exgcdwu
+
+## 简易使用例子
+
+```python
+# coding: utf-8
+map_dir = 'D:/Game/steam/steamapps/common/Rusted Warfare/mods/maps/'
+map_name = 'example_mission.tmx'
+map_name_out = 'example_mission(1).tmx'
+mygraph:rw.RWmap = rw.RWmap.init_graphfile(map_dir + map_name, map_dir)
+print(mygraph.output_str())
+
+mygraph.addObject("Triggers", {"id": "100","type": "unitAdd", "x": "1000", "y":"1000", "width": "20", "height": "20"}, {"resetActivationAfter":"5s", "spawnUnits": "heavyTank*10", "team" :"0", "warmup":"20s"})
+
+mygraph.addTile("Ground", rw.Coordinate(1, 0), "Long Grass", rw.Coordinate(0, 0))
+mygraph.addTile("Ground", rw.Coordinate(2, 0), "Long Grass", rw.Coordinate(0, 0))
+mygraph.addTile("Ground", rw.Coordinate(0, 1), "Long Grass", rw.Coordinate(0, 0))
+
+mygraph.addTile_square("Ground", rw.Rectangle(rw.Coordinate(5, 5), rw.Coordinate(10, 10)), "Deep Water", rw.Coordinate(0, 0))
+
+mygraph.write_file(map_dir + map_name_out)
+
+```
+
+
+
