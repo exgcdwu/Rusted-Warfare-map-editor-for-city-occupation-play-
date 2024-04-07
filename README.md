@@ -1,8 +1,7 @@
 # rwmapeditor-exgcdwu
-___一个铁锈战争(Rusted Warfare)地图编辑python库___
+___一个铁锈战争 (Rusted Warfare) 地图编辑 python 库___
 
-[![released version](https://img.shields.io/pypi/v/rwmapeditor-exgcdwu.svg)][pypi]
-[![license](https://img.shields.io/github/license/Gsllchb/rwmapeditor-exgcdwu.svg)][license]
+![released version](https://img.shields.io/pypi/v/rwmapeditor-exgcdwu.svg)
 
 ## 目标
 
@@ -16,7 +15,9 @@ python实现铁锈地图文件地块编辑和宾语编辑。
 
 ## 安装
 
+```console
 pip install rwmapeditor-exgcdwu
+```
 
 ## 简易使用例子
 

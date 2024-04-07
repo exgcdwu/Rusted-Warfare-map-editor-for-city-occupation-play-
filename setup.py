@@ -3,7 +3,7 @@
 #import os
 from setuptools import setup, find_packages
 
-__version__ = '1.1'
+__version__ = '1.1.1'
 #current_dir = os.path.dirname(__file__)
 #requirements = open(current_dir + '/requirements.txt').readlines()
 
@@ -21,7 +21,7 @@ setup(
     url = "https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-",
     long_description = strreadme,
     long_description_content_type = "text/markdown",
-    packages = find_packages(exclude=["tests"]),
+    packages = find_packages(exclude=["tests", "rwmap_data"]),
     python_requires = '>=3.0.0'
     #,install_requires = requirements
 )
