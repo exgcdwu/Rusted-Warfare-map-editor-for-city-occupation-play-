@@ -7,9 +7,10 @@ import xml.etree.ElementTree as et
 
 import rwmap._util as utility
 import rwmap._frame as frame
+from rwmap._case._object import TObject
 
 class ObjectGroup(frame.ElementOri):
-    def __init__(self, properties:frame.ElementProperties, object_list:list[frame.ElementProperties])->None:
+    def __init__(self, properties:frame.ElementProperties, object_list:list[TObject])->None:
         super().__init__(properties)
         self._object_list = object_list
 
@@ -19,8 +20,8 @@ class ObjectGroup(frame.ElementOri):
     @classmethod
     def init_etElement(cls, root:et.Element)->None:
         properties = frame.ElementProperties.init_etElement(root)
-        _object_list = [frame.ElementProperties.init_etElement(tobject) for tobject in root if tobject.tag == "object"]
-        return cls(properties, _object_list)
+        object_list = [TObject.init_etElement(tobject) for tobject in root if tobject.tag == "object"]
+        return cls(properties, object_list)
     
     def output_str(self, objectnum:int = -1)->str:
         str_ans = ""
@@ -38,6 +39,6 @@ class ObjectGroup(frame.ElementOri):
             root.append(tobject_element)
         return root
     
-    def addObject(self, default_properties:dict[str, str], optional_properties :dict[str, str])->None:
-        self._object_list.append(frame.ElementProperties("object", default_properties, optional_properties))
+    def addObject(self, default_properties:dict[str, str] = {}, optional_properties:dict[str, str] = {}, other_properties:list[et.Element] = [])->None:
+        self._object_list.append(TObject("object", default_properties, optional_properties, other_properties))
 

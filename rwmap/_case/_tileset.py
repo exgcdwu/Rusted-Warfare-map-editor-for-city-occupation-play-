@@ -6,12 +6,13 @@ import xml.etree.ElementTree as et
 
 import rwmap._util as utility
 import rwmap._frame as frame
+import rwmap._exceptions as exception
 
 class TileSet(frame.ElementOri):
-    def __init__(self, properties:frame.ElementProperties, column:int, image_properties:frame.ElementProperties = None,
+    def __init__(self, properties:frame.ElementProperties, size:frame.Coordinate, image_properties:frame.ElementProperties = None,
                   png_text:str = None, tilelist_properties:list[frame.ElementProperties] = None)->None:
         super().__init__(properties)
-        self._column = column
+        self._size = size
         self._image_properties = image_properties
         self._png_text = png_text
         self._tilelist_properties = tilelist_properties
@@ -29,23 +30,29 @@ class TileSet(frame.ElementOri):
 
             source = rwmaps_dir + source_file
             root = et.ElementTree(file=source).getroot()
-            if root.attrib.get("columns") == None:
-                tilewidth = int(root.attrib["tilewidth"])
-                image_element = utility.get_etElement_callable_from_tag(root, "image")
-                if image_element.attrib.get("width") == None:
-                    source_fa_dir = "/".join(source_file.split("/")[0:-1]) + "/"
-                    source_fa_dir = "" if source_fa_dir == "/" else source_fa_dir
-                    width = utility.image_width(rwmaps_dir + source_fa_dir + image_element.attrib["source"])
-                else:
-                    width = int(image_element.attrib["width"])
-                column = int(width / tilewidth)
+            #if root.attrib.get("columns") == None:
+            tilewidth = int(root.attrib["tilewidth"])
+            tileheight = int(root.attrib["tileheight"])
+            image_element = utility.get_etElement_callable_from_tag(root, "image")
+            if image_element.attrib.get("width") == None:
+                source_fa_dir = "/".join(source_file.split("/")[0:-1]) + "/"
+                source_fa_dir = "" if source_fa_dir == "/" else source_fa_dir
+                width = utility.image_width(rwmaps_dir + source_fa_dir + image_element.attrib["source"])
+                height = utility.image_height(rwmaps_dir + source_fa_dir + image_element.attrib["source"])
             else:
-                column = int(root.attrib["columns"])
+                width = int(image_element.attrib["width"])
+                height = int(image_element.attrib["height"])
+            column = int(width / tilewidth)
+            row = int(height / tileheight)
+            #else:
+                #column = int(root.attrib["columns"])
+                #row = int(int(root.attrib["tilecount"]) / column)
 
         else:
             column = int(properties.returnDefaultProperty("columns"))
-
-        return cls(properties, column, image_properties, png_text, tilelist_properties)
+            row = int(int(properties.returnDefaultProperty("tilecount")) / column)
+        size = frame.Coordinate(row, column)
+        return cls(properties, size, image_properties, png_text, tilelist_properties)
     
     def output_str(self, pngtextnum:int = -1, tilenum:int = -1)->str:
         str_ans = ""
@@ -87,9 +94,15 @@ class TileSet(frame.ElementOri):
         return tileset_name
     
     def tileid(self, tile_grid:frame.Coordinate)->int:
-        id_now = tile_grid.id(self._column)
-        id_ans = int(self._properties.returnDefaultProperty("firstgid")) + id_now
+        if tile_grid < self._size:
+            id_now = tile_grid.id(self._size.y())
+            id_ans = int(self._properties.returnDefaultProperty("firstgid")) + id_now
+        else:
+            raise exception.CoordinateIndexError(f"Beyond the boundary of this tileset{self.output_name()}")
         return id_ans
+    
+    def isexist(self)->bool:
+        return self._properties.returnDefaultProperty("firstgid") != "0"
         
 
 

@@ -1,0 +1,1 @@
+from rwmap._object._object_ori import TobjectGroupOri

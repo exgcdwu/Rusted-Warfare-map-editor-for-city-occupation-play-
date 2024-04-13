@@ -41,6 +41,22 @@ class Coordinate:
     def __neg__(self):
         return Coordinate(-self.x(), -self.y())
     
+    def _iterator(self):
+        for i in range(0, self.x()):
+            for j in range(0, self.y()):
+                yield Coordinate(i, j)
+
+    def __iter__(self):
+        return self._iterator()
+    
+    def __lt__(self, other)->int:
+        if self.x() < other.x() and self.y() < other.y():
+            return 1
+        elif self.x() > other.x() and self.y() > other.y():
+            return -1
+        else:
+            return 0
+    
 class Rectangle:
     def __init__(self, initialCoordinate:Coordinate, addCoordinate:Coordinate):
         self._initialCoordinate = initialCoordinate
@@ -55,7 +71,26 @@ class Rectangle:
     def e(self):
         return self._initialCoordinate + self._addCoordinate
     
-    def iterator(self):
+    def _iterator(self):
         for i in range(0, self._addCoordinate.x()):
             for j in range(0, self._addCoordinate.y()):
-                yield self._initialCoordinate + Coordinate(i, j)
+                coordinate_now = self._initialCoordinate + Coordinate(i, j)
+                yield Coordinate(coordinate_now.x(), coordinate_now.y())
+
+    def __iter__(self):
+        return self._iterator()
+    
+class TagCoordinate:
+    def __init__(self, tag:str, place:Coordinate):
+        self._place = place
+        self._tag = tag
+
+    @classmethod
+    def init_xy(cls, tag:str, x = 0, y = 0, dtype:str = np.int32):
+        return cls(tag, Coordinate(x, y, dtype))
+
+    def tag(self):
+        return self._tag
+    
+    def place(self):
+        return self._place

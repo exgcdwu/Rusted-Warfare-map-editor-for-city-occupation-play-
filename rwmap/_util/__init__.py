@@ -10,6 +10,10 @@ from rwmap._util._etElement_process import output_etElement_properties
 from rwmap._util._str_util import indentstr_Tab
 from rwmap._util._str_util import str_slash_to_dot
 
+from rwmap._util._dict_util import dict_isconflict
+
 from rwmap._util._class_rel import get_ElementOri_from_list_by_name
 
-from rwmap._util._png_rel import image_width
+from rwmap._util._png_rel import image_width, image_height
+
+from rwmap._util._list_util import fill_list_of_list
