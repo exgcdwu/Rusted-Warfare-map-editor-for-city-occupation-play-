@@ -3,9 +3,9 @@
 #import os
 from setuptools import setup, find_packages
 
-__version__ = '1.2.0'
-#current_dir = os.path.dirname(__file__)
-#requirements = open(current_dir + '/requirements.txt').readlines()
+__version__ = '1.2.1'
+current_dir = os.path.dirname(__file__)
+requirements = open(current_dir + '/requirements.txt').readlines()
 
 def readme():
     with open('README.md') as file:
@@ -22,6 +22,6 @@ setup(
     long_description = strreadme,
     long_description_content_type = "text/markdown",
     packages = find_packages(exclude=["tests"]),
-    python_requires = '>=3.0.0'
-    #,install_requires = requirements
+    python_requires = '>=3.0.0',
+    install_requires = requirements
 )
