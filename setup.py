@@ -22,7 +22,7 @@ setup(
     long_description = strreadme,
     long_description_content_type = "text/markdown",
     packages = find_packages(exclude=["tests"]),
-    package_data = 'requirements.txt',
+    package_data = {'':'requirements.txt'},
     python_requires = '>=3.0.0',
     install_requires = requirements
 )
