@@ -37,10 +37,11 @@ pip install rwmapeditor-exgcdwu
 # coding: utf-8
 import rwmap as rw
 
-map_dir = 'D:/Game/steam/steamapps/common/Rusted Warfare/mods/maps/'
+rwmap_dir = 'D:/Game/steam/steamapps/common/Rusted Warfare/mods/maps/'
+youmap_dir = 'D:/Game/steam/steamapps/common/Rusted Warfare/mods/maps/'
 map_name = '[p2]example_skirmish_(2p).tmx'
 map_name_out = '[p2]example_skirmish_(2p)(1).tmx'
-mygraph:rw.RWmap = rw.RWmap.init_mapfile(map_dir + map_name, map_dir)
+mygraph:rw.RWmap = rw.RWmap.init_mapfile(youmap_dir + map_name, rwmap_dir)
 print(mygraph)
 
 mygraph.addObject(
@@ -56,7 +57,7 @@ mygraph.addTile_square("Ground", rw.Rectangle(rw.Coordinate(5, 5), rw.Coordinate
 
 mygraph.addTile_group(rw.Coordinate(5, 20), rw.data.tile_group_grid.fill_tile_group_one_ground_water_28_24)
 
-mygraph.write_file(map_dir + map_name_out)
+mygraph.write_file(youmap_dir + map_name_out)
 
 ```
 
