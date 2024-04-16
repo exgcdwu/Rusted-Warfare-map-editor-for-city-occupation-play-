@@ -4,6 +4,8 @@ import os
 from setuptools import setup, find_packages
 
 __version__ = '1.2.1'
+current_dir = os.path.dirname(__file__)
+
 
 def readme():
     with open('README.md') as file:
@@ -23,7 +25,7 @@ setup(
     long_description = readme(),
     long_description_content_type = "text/markdown",
     packages = find_packages(exclude=["tests"]),
-    package_data = {'.': ['./*.txt']},
+    package_data = {current_dir: [f'{current_dir}/*.txt']},
     python_requires = '>=3.0.0',
     install_requires = requirements()
 )
