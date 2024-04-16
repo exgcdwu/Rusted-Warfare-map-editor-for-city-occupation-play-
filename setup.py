@@ -23,7 +23,7 @@ setup(
     long_description = readme(),
     long_description_content_type = "text/markdown",
     packages = find_packages(exclude=["tests"]),
-    package_data = {'.': './*.txt'},
+    package_data = {'.': ['./*.txt']},
     python_requires = '>=3.0.0',
     install_requires = requirements()
 )
