@@ -1,1 +1,1 @@
-recursive-include rwmap/_map
+recursive-include rwmap/_map *.tsx *.png
