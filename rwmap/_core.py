@@ -4,6 +4,7 @@
 """
 import xml.etree.ElementTree as et
 import re
+import os
 
 import rwmap._exceptions as rwexceptions
 import rwmap._util as utility
@@ -11,6 +12,8 @@ import rwmap._case as case
 import rwmap._frame as frame
 import rwmap._tile as tile
 
+
+RWMAP_DIR = os.path.dirname(__file__)
 
 class RWmap(frame.ElementOri):
     def __init__(self, properties:frame.ElementProperties, tileset_list:list[case.TileSet],
@@ -20,7 +23,7 @@ class RWmap(frame.ElementOri):
         self._layer_list = layer_list
         self._objectGroup_list = objectGroup_list
     @classmethod
-    def init_mapfile(cls, map_file:str, rwmaps_dir:str)->None:
+    def init_mapfile(cls, map_file:str, rwmaps_dir:str = RWMAP_DIR + "/_maps")->None:
         xmlTree:et.ElementTree = et.ElementTree(file=map_file)
         root:et.Element = xmlTree.getroot()
         properties = frame.ElementProperties.init_etElement(root)
