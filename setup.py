@@ -19,6 +19,6 @@ setup(
     long_description = readme(),
     long_description_content_type = "text/markdown",
     packages = find_packages(exclude=["tests"]),
-    package_data = {"_maps": ["_maps/*"]},
+    package_data = {"rwmap": ["_maps/*"]},
     python_requires = '>=3.0.0',
 )
