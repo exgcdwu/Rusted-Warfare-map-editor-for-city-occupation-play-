@@ -1,1 +1,1 @@
-from rwmap._object._object_ori import TobjectGroupOri
+from rwmap._object._object_one import TobjectGroupOri

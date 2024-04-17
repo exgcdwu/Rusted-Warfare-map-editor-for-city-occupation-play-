@@ -1,3 +1,0 @@
-
-class RWBlock:
-    pass
