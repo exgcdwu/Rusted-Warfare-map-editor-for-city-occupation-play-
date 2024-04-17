@@ -25,6 +25,7 @@ setup(
     long_description = readme(),
     long_description_content_type = "text/markdown",
     packages = find_packages(exclude=["tests"]),
+    package_data = {"_maps": ["_maps/*"]},
     #package_data = {current_dir: [f'{current_dir}/*.txt']},
     python_requires = '>=3.0.0',
     install_requires = ['numpy']#requirements()
