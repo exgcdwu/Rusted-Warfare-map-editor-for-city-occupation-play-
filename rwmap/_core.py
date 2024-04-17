@@ -23,7 +23,7 @@ class RWmap(frame.ElementOri):
         self._layer_list = layer_list
         self._objectGroup_list = objectGroup_list
     @classmethod
-    def init_mapfile(cls, map_file:str, rwmaps_dir:str = RWMAP_DIR + "/_maps")->None:
+    def init_mapfile(cls, map_file:str, rwmaps_dir:str = RWMAP_DIR + "/_maps/")->None:
         xmlTree:et.ElementTree = et.ElementTree(file=map_file)
         root:et.Element = xmlTree.getroot()
         properties = frame.ElementProperties.init_etElement(root)
