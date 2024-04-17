@@ -4,16 +4,10 @@ import os
 from setuptools import setup, find_packages
 
 __version__ = '1.2.1'
-current_dir = os.path.dirname(__file__)
-
 
 def readme():
     with open('README.md') as file:
         return file.read()
-
-def requirements():
-    with open('requirements.txt') as file:
-        return file.readlines()
 
 setup(
     name = 'rwmapeditor_exgcdwu',
@@ -26,7 +20,5 @@ setup(
     long_description_content_type = "text/markdown",
     packages = find_packages(exclude=["tests"]),
     package_data = {"_maps": ["_maps/*"]},
-    #package_data = {current_dir: [f'{current_dir}/*.txt']},
     python_requires = '>=3.0.0',
-    install_requires = ['numpy']#requirements()
 )
