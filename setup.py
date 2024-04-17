@@ -19,7 +19,7 @@ setup(
     long_description = read_file('README.md'),
     long_description_content_type = "text/markdown",
     packages = find_packages(exclude=["tests"]),
-    package_data={'rwmaps': ['_maps/*/*/*']},
+    package_data={'rwmaps': ['_maps/*']},
     include_package_data=True,
     python_requires = '>=3.0.0',
 )
