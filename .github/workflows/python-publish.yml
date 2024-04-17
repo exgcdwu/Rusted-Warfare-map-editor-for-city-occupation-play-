@@ -39,8 +39,8 @@ jobs:
         pipreqs ./ --encoding=utf8 --force --use-local
     - name: Commit files
       run: |
-        git config --local user.email "1006605318@qq.com"
-        git config --local user.name "exgcdwu"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
         git add *
         git commit -m "Add changes"
     - name: Push changes
