@@ -32,6 +32,9 @@ jobs:
       run: |
         pip install pipreqs
         pipreqs ./ --encoding=utf8 --force --use-local
+        git add requirements.txt
+        git commit -m "Add generated requirements.txt"
+        git push origin main
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
