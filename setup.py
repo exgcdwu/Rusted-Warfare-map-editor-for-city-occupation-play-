@@ -3,7 +3,7 @@
 import os
 from setuptools import setup, find_packages
 
-__version__ = '1.2.3'
+__version__ = '1.2.4'
 
 def read_file(file:str):
     with open(file) as file:
@@ -19,7 +19,7 @@ setup(
     long_description = read_file('README.md'),
     long_description_content_type = "text/markdown",
     packages = find_packages(exclude=["tests"]),
-    package_data={'rwmap': ['_maps/*.tsx', '_maps/bitmaps/*.png', '_maps/ridges/*.tsx', '_maps/ridges/bitmaps/*.png', '_maps/terrain/*.tsx', '_maps/ridges/terrain/*.png']},
+    package_data={'rwmap': ['_maps/*.tsx', '_maps/bitmaps/*.png', '_maps/ridges/*.tsx', '_maps/ridges/bitmaps/*.png', '_maps/terrain/*.tsx', '_maps/terrain/bitmaps/*.png']},
     include_package_data=True,
     python_requires = '>=3.0.0',
 )
