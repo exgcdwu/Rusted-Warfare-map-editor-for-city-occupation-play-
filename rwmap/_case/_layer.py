@@ -42,7 +42,7 @@ class Layer(frame.ElementOri):
         return int(self._tilematrix[place_grid.x()][place_grid.y()])
     
     def assigntileid(self, place_grid:frame.Coordinate, tileid:int):
-        self._tilematrix[place_grid.x()][place_grid.y()] = tileid
+        self._tilematrix[place_grid.y()][place_grid.x()] = tileid
     
     
     
