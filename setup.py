@@ -3,7 +3,7 @@
 import os
 from setuptools import setup, find_packages
 
-__version__ = '1.2.6'
+__version__ = '1.2.7'
 
 def read_file(file:str):
     with open(file) as file:
@@ -12,6 +12,8 @@ def read_file(file:str):
 def readline_file(file:str):
     with open(file) as file:
         return file.readline()
+
+DATA_PREFIX_MAPS = 'other_data/maps/'
 
 setup(
     name = 'rwmapeditor_exgcdwu',
@@ -23,9 +25,8 @@ setup(
     long_description = read_file('README.md'),
     long_description_content_type = "text/markdown",
     packages = find_packages(exclude=["tests"]),
-    package_data={'rwmap': ['other_data/*.tsx', 'other_data/*.txt', 'other_data/bitmaps/*.png', 'other_data/ridges/*.tsx',
-                             'other_data/ridges/bitmaps/*.png', 'other_data/terrain/*.tsx', 
-                             'other_data/terrain/bitmaps/*.png']},
+    package_data={'rwmap': ['other_data/*.txt', DATA_PREFIX_MAPS + '*.tsx', DATA_PREFIX_MAPS + 'bitmaps/*.png',
+                             DATA_PREFIX_MAPS + 'ridges/*.tsx', DATA_PREFIX_MAPS + 'terrain/*.tsx']},
     python_requires = '>=3.0.0',
     install_requires = readline_file("./rwmap/other_data/requirements.txt")
 )
