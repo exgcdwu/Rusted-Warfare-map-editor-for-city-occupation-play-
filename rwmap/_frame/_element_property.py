@@ -40,3 +40,9 @@ class ElementProperties:
     
     def returnOptionalProperty(self, name:str):
         return self._optional_properties.get(name)
+    
+    def deleteDefaultProperty(self, name:str):
+        del self._default_properties[name]
+    
+    def deleteOptionalProperty(self, name:str):
+        del self._optional_properties[name]

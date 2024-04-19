@@ -27,6 +27,6 @@ setup(
     packages = find_packages(exclude=["tests"]),
     package_data={'rwmap': ['other_data/*.txt', DATA_PREFIX_MAPS + '*.tsx', DATA_PREFIX_MAPS + 'bitmaps/*.png',
                              DATA_PREFIX_MAPS + 'ridges/*.tsx', DATA_PREFIX_MAPS + 'terrain/*.tsx']},
-    python_requires = '>=3.0.0',
+    python_requires = '>=3.5.0',
     install_requires = readline_file("./rwmap/other_data/requirements.txt")
 )

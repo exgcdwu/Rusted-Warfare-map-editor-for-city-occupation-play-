@@ -5,6 +5,7 @@
 import xml.etree.ElementTree as et
 import re
 import os
+from typing import Generator
 
 import rwmap._exceptions as rwexceptions
 import rwmap._util as utility
@@ -79,8 +80,8 @@ class RWmap(frame.ElementOri):
             default_properties["id"] = self._properties.returnDefaultProperty("nextobjectid")
         str_nextobjectid = str(max(int(self._properties.returnDefaultProperty("nextobjectid")), int(default_properties["id"]) + 1))
         self._properties.assignDefaultProperty("nextobjectid", str_nextobjectid)
-    
-    def iterator_object(self, objectGroup_name:str, default_re:dict[str, str], optional_re:dict[str, str]):
+
+    def iterator_object(self, objectGroup_name:str, default_re:dict[str, str] = {}, optional_re:dict[str, str] = {})->Generator[case.TObject, None, None]:
         objectGroup_now:case.ObjectGroup = utility.get_ElementOri_from_list_by_name(self._objectGroup_list, objectGroup_name)
         if objectGroup_now == None:
             raise KeyError("objectGroup name:" + objectGroup_name + " not found")
