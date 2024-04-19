@@ -27,5 +27,5 @@ setup(
                              'other_data/ridges/bitmaps/*.png', 'other_data/terrain/*.tsx', 
                              'other_data/terrain/bitmaps/*.png']},
     python_requires = '>=3.0.0',
-    install_requires = readline_file("requirements.txt")
+    install_requires = readline_file("./rwmap/other_data/requirements.txt")
 )
