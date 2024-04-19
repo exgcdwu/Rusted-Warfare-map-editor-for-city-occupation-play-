@@ -2,7 +2,7 @@
 !.gitignore
 !.github/
 tests/
-rwmap_sub_name.txt
+github_publish.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
