@@ -87,3 +87,13 @@ mygraph.write_file(map_dir + map_name_out)
 #输出到新地图文件
 
 ```
+
+## 其他
+
+### 外部文件
+
+本库使用了铁锈战争的默认地块集，存放在rwmap/other_data/，除去requirements.txt
+
+### 第三方库依赖
+
+numpy
