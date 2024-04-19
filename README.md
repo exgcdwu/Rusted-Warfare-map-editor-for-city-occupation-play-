@@ -49,13 +49,30 @@ map_name = '[p2]example_skirmish_(2p).tmx'#输入地图
 map_name_out = '[p2]example_skirmish_(2p)(1).tmx'#输出地图
 
 mygraph:rw.RWmap = rw.RWmap.init_mapfile(map_dir + map_name)#地图载入
-#第二项可以是自己的铁锈地块集默认文件夹（maps）文件夹，也可以省略
 print(mygraph)#地图输出【部分】
 
-mygraph.addObject(#添加宾语：第一项图层名称（Triggers），第二项默认属性，第三项可选属性
+mygraph.addObject(
     "Triggers", 
-    {"id": "100", "name": "刷兵实验", "type": "unitAdd", "x": "1500", "y":"1000", "width": "20", "height": "20"}, 
+    {"name": "刷兵实验", "type": "unitAdd", "x": "1500", "y":"1000", "width": "20", "height": "20", "visible": "0"}, 
     {"resetActivationAfter":"5s", "spawnUnits": "heavyTank*10", "team" :"0", "warmup":"5s"})
+#添加宾语：第一项图层名称（Triggers），第二项默认属性，第三项可选属性
+#默认属性可添加id也可不添加，没有id项会自动添加
+
+mygraph.addObject(
+    "Triggers", 
+    {"name": "刷兵实验", "type": "unitAdd", "x": "1000", "y":"1500", "width": "20", "height": "20"}, 
+    {"resetActivationAfter":"5s", "spawnUnits": "heavyTank*10", "team" :"0", "warmup":"5s"})
+
+for tobject in mygraph.iterator_object("Triggers", {"y": "1500"}):#返回属性成功匹配正则表达式的宾语
+    del tobject#宾语被删除
+
+for tobject in mygraph.iterator_object("Triggers", {"y": "1000"}):
+    tobject.assignDefaultProperty("name", "名字改变了")#宾语默认属性被赋值
+    tobject.assignOptionalProperty("team", "1")#宾语可选属性被赋值
+    print(tobject.returnDefaultProperty("name"))#输出宾语默认属性
+    print(tobject.returnOptionalProperty("team"))#输出宾语可选属性
+    tobject.deleteDefaultProperty("visible")#删除宾语默认属性
+    tobject.deleteOptionalProperty("resetActivationAfter")#删除宾语可选属性
 
 mygraph.addTile("Ground", rw.Coordinate(1, 0), "Long Grass", rw.Coordinate(0, 0))
 mygraph.addTile("Ground", rw.Coordinate(2, 0), "Long Grass", rw.Coordinate(1, 2))
