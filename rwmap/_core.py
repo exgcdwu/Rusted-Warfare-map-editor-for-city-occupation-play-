@@ -14,6 +14,7 @@ import rwmap._tile as tile
 
 
 RWMAP_DIR = os.path.dirname(__file__)
+RWMAP_MAPS = RWMAP_DIR + "/other_data/maps/"
 
 class RWmap(frame.ElementOri):
     def __init__(self, properties:frame.ElementProperties, tileset_list:list[case.TileSet],
@@ -23,12 +24,10 @@ class RWmap(frame.ElementOri):
         self._layer_list = layer_list
         self._objectGroup_list = objectGroup_list
     @classmethod
-    def init_mapfile(cls, map_file:str)->None:
+    def init_mapfile(cls, map_file:str, rwmaps_dir = RWMAP_MAPS)->None:
         xmlTree:et.ElementTree = et.ElementTree(file=map_file)
         root:et.Element = xmlTree.getroot()
         properties = frame.ElementProperties.init_etElement(root)
-
-        rwmaps_dir = RWMAP_DIR + "/other_data/"
 
         tileset_list = [case.TileSet(frame.ElementProperties("tileset", {"firstgid": "0", "name": "empty"}), frame.Coordinate(1, 1))]
         tileset_list = tileset_list + [case.TileSet.init_etElement(tileset, rwmaps_dir) for tileset in root if tileset.tag == "tileset"]

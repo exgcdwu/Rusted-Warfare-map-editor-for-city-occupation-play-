@@ -29,16 +29,15 @@ class TileSet(frame.ElementOri):
             source_file = properties.returnDefaultProperty("source")
 
             source = rwmaps_dir + source_file
-            root = et.ElementTree(file=source).getroot()
+            root = et.ElementTree(file = source).getroot()
             #if root.attrib.get("columns") == None:
             tilewidth = int(root.attrib["tilewidth"])
             tileheight = int(root.attrib["tileheight"])
             image_element = utility.get_etElement_callable_from_tag(root, "image")
             if image_element.attrib.get("width") == None:
-                source_fa_dir = "/".join(source_file.split("/")[0:-1]) + "/"
-                source_fa_dir = "" if source_fa_dir == "/" else source_fa_dir
-                width = utility.image_width(rwmaps_dir + source_fa_dir + image_element.attrib["source"])
-                height = utility.image_height(rwmaps_dir + source_fa_dir + image_element.attrib["source"])
+                image_file = rwmaps_dir + "bitmaps/" + image_element.attrib["source"].split("/")[-1]
+                width = utility.image_width(image_file)
+                height = utility.image_height(image_file)
             else:
                 width = int(image_element.attrib["width"])
                 height = int(image_element.attrib["height"])

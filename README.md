@@ -49,6 +49,7 @@ map_name = '[p2]example_skirmish_(2p).tmx'#输入地图
 map_name_out = '[p2]example_skirmish_(2p)(1).tmx'#输出地图
 
 mygraph:rw.RWmap = rw.RWmap.init_mapfile(map_dir + map_name)#地图载入
+#第二项可以是自己的铁锈地块集默认文件夹（maps）文件夹，也可以省略
 print(mygraph)#地图输出【部分】
 
 mygraph.addObject(#添加宾语：第一项图层名称（Triggers），第二项默认属性，第三项可选属性
@@ -92,7 +93,7 @@ mygraph.write_file(map_dir + map_name_out)
 
 ### 外部文件
 
-本库使用了铁锈战争的默认地块集，存放在rwmap/other_data/，除去requirements.txt
+本库使用了铁锈战争的默认地块集，存放在rwmap/other_data/maps/
 
 ### 第三方库依赖
 
