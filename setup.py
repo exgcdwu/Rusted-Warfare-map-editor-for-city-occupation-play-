@@ -23,9 +23,9 @@ setup(
     long_description = read_file('README.md'),
     long_description_content_type = "text/markdown",
     packages = find_packages(exclude=["tests"]),
-    package_data={'rwmap': ['_maps/*.tsx', '_maps/bitmaps/*.png', '_maps/ridges/*.tsx',
-                             '_maps/ridges/bitmaps/*.png', '_maps/terrain/*.tsx', '_maps/terrain/bitmaps/*.png'], 
-                    '': ['*.txt']},
+    package_data={'rwmap': ['other_data/*.tsx', 'other_data/*.txt', 'other_data/bitmaps/*.png', 'other_data/ridges/*.tsx',
+                             'other_data/ridges/bitmaps/*.png', 'other_data/terrain/*.tsx', 
+                             'other_data/terrain/bitmaps/*.png']},
     python_requires = '>=3.0.0',
     install_requires = readline_file("requirements.txt")
 )
