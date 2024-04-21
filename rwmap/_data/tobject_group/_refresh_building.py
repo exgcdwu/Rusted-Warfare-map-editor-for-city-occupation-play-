@@ -2,7 +2,7 @@ from typing import Union
 
 import rwmap._object as object
 import rwmap._frame as frame
-import rwmap.data.tobject as tobject
+import rwmap._data.tobject as tobject
 
 class RefreshBuilding(object.TObject_Group):
     @classmethod

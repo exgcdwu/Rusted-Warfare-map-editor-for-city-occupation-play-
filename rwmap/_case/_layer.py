@@ -26,8 +26,8 @@ class Layer(ElementOri):
     def output_str(self, output_rectangle:frame.Rectangle = frame.Rectangle(frame.Coordinate(), frame.Coordinate(-1, -1)))->str:
         str_ans = ""
         str_ans = str_ans + self._properties.output_str() + "\n"
-        str_ans = str_ans + "".join([" ".join([self._tilematrix[i][j] for j in range(output_rectangle.i().y(), output_rectangle.e().y())]) + "\n"
-                                 for i in range(output_rectangle.i().x(), output_rectangle.e().x())]) + "\n"
+        str_ans = str_ans + "".join([" ".join([str(self._tilematrix[i][j]) for j in range(max(output_rectangle.i().y(), 0), min(output_rectangle.e().y(), self._tilematrix.shape[1]))]) + "\n"
+                                 for i in range(max(output_rectangle.i().x(), 0), min(output_rectangle.e().x(), self._tilematrix.shape[0]))]) + "\n"
         str_ans = utility.indentstr_Tab(str_ans)
         return str_ans
 

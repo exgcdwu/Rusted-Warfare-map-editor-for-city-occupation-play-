@@ -103,9 +103,9 @@ mymap.addObject(
 
 initial_c = rw.frame.Coordinate(1200, 2000)
 add_c = rw.frame.Coordinate(40, 40)
-mymap.addObject_one(rw.object.TObject_One(rw.object.TObject_Type.init_unitAdd(0, "heavyTank*10"), 
-                                    rw.object.TObject_Pos.init_rectangle(rw.frame.Rectangle(initial_c, add_c)), 
-                                    time = rw.object.TObject_Time.init_time(warmup = 20, reset = 20)))
+mymap.addObject_one(rw.tobject.TObject_One(rw.tobject.TObject_Type.init_unitAdd(0, "heavyTank*10"), 
+                                    rw.tobject.TObject_Pos.init_rectangle(rw.frame.Rectangle(initial_c, add_c)), 
+                                    time = rw.tobject.TObject_Time.init_time(warmup = 20, reset = 20)))
 #建立一个自动刷兵点
 
 ```
@@ -214,8 +214,8 @@ tilegroup_matrix = rw.tile.TileGroup_Matrix([['a'] * 6  if i % 2 == 0 else ['b']
 tilegroup_addlayer = rw.tile.TileGroup_AddLayer.init_tilegroup_matrix("Ground", tilegroup_matrix)
 #匿名地块组确定地块层
 tile_dict = {
-    "a": rw.frame.Coordinate("Long Grass", rw.frame.Coordinate(0, 0)), 
-    "b": rw.frame.Coordinate("Dirt", rw.frame.Coordinate(0, 0))
+    "a": rw.frame.TagCoordinate("Long Grass", rw.frame.Coordinate(0, 0)), 
+    "b": rw.frame.TagCoordinate("Dirt", rw.frame.Coordinate(0, 0))
 }
 tilegroup_one = rw.tile.TileGroup_One.init_tilegroup_addlayer(
     tile_dict, tilegroup_addlayer)

@@ -64,7 +64,7 @@ class TileSet(ElementOri):
             _png_text_now = self._png_text[:pngtextnum] if pngtextnum != -1 else ""
             str_ans = str_ans + _png_text_now + "\n"
         if self._tilelist_properties != None:
-            str_ans = str_ans + "".join([self._tilelist_properties[i].output_str() + "\n" for i in range(0, tilenum)]) + "\n"
+            str_ans = str_ans + "".join([self._tilelist_properties[i].output_str() + "\n" for i in range(0, min(tilenum, len(self._tilelist_properties)))]) + "\n"
         str_ans = utility.indentstr_Tab(str_ans)
         return str_ans
     
