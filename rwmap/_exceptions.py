@@ -4,3 +4,6 @@ class KeyConflictError(KeyError):
 
 class CoordinateIndexError(IndexError):
     pass
+
+class ObjectNameError(KeyError):
+    pass

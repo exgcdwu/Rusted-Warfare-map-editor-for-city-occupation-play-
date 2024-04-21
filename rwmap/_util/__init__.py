@@ -17,3 +17,5 @@ from rwmap._util._class_rel import get_ElementOri_from_list_by_name
 from rwmap._util._png_rel import image_width, image_height
 
 from rwmap._util._list_util import fill_list_of_list
+
+from rwmap._util._add_dict import add_str_pro, add_time_pro, add_acti_pro

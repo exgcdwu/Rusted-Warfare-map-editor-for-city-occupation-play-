@@ -31,7 +31,19 @@ class Coordinate:
             new_content = other * self._content
         ans._content = new_content
         return ans
-
+    
+    def __truediv__(self, other):
+        ans = Coordinate(0, 0)
+        if isinstance(other, Coordinate):
+            new_content = self._content / other._content
+        else:
+            new_content = self._content / other
+        ans._content = new_content
+        return ans
+    
+    def __floordiv__(self, other):
+        return self.__truediv__(other)
+    
     def __sub__(self, other):
         if isinstance(other, Coordinate):
             return Coordinate(self.x() - other.x(), self.y() - other.y())

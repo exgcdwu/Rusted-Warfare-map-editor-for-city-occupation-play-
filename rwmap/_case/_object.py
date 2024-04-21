@@ -29,4 +29,7 @@ class TObject(frame.ElementProperties):
         str_add = utility.indentstr_Tab(str_ans)
         str_ans = str_ans + str_add
         return str_ans
+    
+    def __repr__(self)->str:
+        return self.output_str()
         

@@ -53,7 +53,7 @@ print(mygraph)#地图输出【部分】
 
 mygraph.addObject(
     "Triggers", 
-    {"name": "刷兵实验", "type": "unitAdd", "x": "1500", "y":"1000", "width": "20", "height": "20", "visible": "0"}, 
+    {"name": "刷兵实验", "type": "unitAdd", "x": "1500", "y":"1100", "width": "20", "height": "20", "visible": "0"}, 
     {"resetActivationAfter":"5s", "spawnUnits": "heavyTank*10", "team" :"0", "warmup":"5s"})
 #添加宾语：第一项图层名称（Triggers），第二项默认属性，第三项可选属性
 #默认属性可添加id也可不添加，没有id项会自动添加
@@ -63,16 +63,29 @@ mygraph.addObject(
     {"name": "刷兵实验", "type": "unitAdd", "x": "1000", "y":"1500", "width": "20", "height": "20"}, 
     {"resetActivationAfter":"5s", "spawnUnits": "heavyTank*10", "team" :"0", "warmup":"5s"})
 
-for tobject in mygraph.iterator_object("Triggers", {"y": "1500"}):#返回属性成功匹配正则表达式的宾语
+for tobject in mygraph.iterator_object("Triggers", {"y": "1500"}):#返回属性成功匹配正则表达式的宾语（生成器）
     del tobject#宾语被删除
 
-for tobject in mygraph.iterator_object("Triggers", {"y": "1000"}):
+for tobject in mygraph.iterator_object("Triggers", {"y": "1100"}):
     tobject.assignDefaultProperty("name", "名字改变了")#宾语默认属性被赋值
     tobject.assignOptionalProperty("team", "1")#宾语可选属性被赋值
     print(tobject.returnDefaultProperty("name"))#输出宾语默认属性
     print(tobject.returnOptionalProperty("team"))#输出宾语可选属性
     tobject.deleteDefaultProperty("visible")#删除宾语默认属性
     tobject.deleteOptionalProperty("resetActivationAfter")#删除宾语可选属性
+
+mygraph.addObject_group(rw.data.RefreshBuilding.init_building(rw.Coordinate(1500, 1000), rw.Coordinate(40, 40), 
+                                               "turret", "acti_tu1", 10, 10,
+                                               name_add = "城市添加", name_detect = "城市检测", 
+                                               warmup_add = 10, warmup_detect = 5))
+#建立一个可自动刷新的建筑
+
+mygraph.addObject_group(rw.data.City.init_city(rw.Coordinate(1500, 1500), rw.Coordinate(40, 40), 
+                                               "turret", "acti_tu2", 10, 10, "城市", textColor = "white", 
+                                               textSize = 50, name_add = "城市添加", name_detect = "城市检测", 
+                                               name_maptext = "城市文本", warmup_add = 10, warmup_detect = 5))
+#建立一个自动刷新的城市，有名字
+
 
 mygraph.addTile("Ground", rw.Coordinate(1, 0), "Long Grass", rw.Coordinate(0, 0))
 mygraph.addTile("Ground", rw.Coordinate(2, 0), "Long Grass", rw.Coordinate(1, 2))
@@ -111,7 +124,3 @@ mygraph.write_file(map_dir + map_name_out)
 ### 外部文件
 
 本库使用了铁锈战争的默认地块集，存放在rwmap/other_data/maps/
-
-### 第三方库依赖
-
-numpy

@@ -65,6 +65,9 @@ class TileSet(frame.ElementOri):
             str_ans = str_ans + "".join([self._tilelist_properties[i].output_str() + "\n" for i in range(0, tilenum)]) + "\n"
         str_ans = utility.indentstr_Tab(str_ans)
         return str_ans
+    
+    def __repr__(self)->str:
+        return self.output_str()
 
     def output_etElement(self)->et.Element:
         root = et.Element("tileset")

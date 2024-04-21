@@ -35,6 +35,9 @@ class Layer(frame.ElementOri):
         root.append(utility.get_etElement_from_text_packed(self._tilematrix, self._encoding, self._compression))
         return root
     
+    def __repr__(self)->str:
+        return self.output_str()
+
     def id(self)->int:
         return int(self._properties.default_properties["id"])
     
