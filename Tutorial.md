@@ -68,7 +68,7 @@ print(mymap.output_str(100, 100, rw.frame.Rectangle(rw.frame.Coordinate(0, 0), r
 
 ```python
 
-map_name_out = '[p2]example_skirmish_(2p).tmx'
+map_name_out = '[p2]example_skirmish_(2p)(1).tmx'
 mymap.write_file(map_dir + map_name_out)
 
 ```
