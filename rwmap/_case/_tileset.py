@@ -7,10 +7,12 @@ import xml.etree.ElementTree as et
 import rwmap._util as utility
 import rwmap._frame as frame
 import rwmap._exceptions as exception
+from rwmap._frame._element_ori import ElementOri
+from rwmap._frame._element_property import ElementProperties
 
-class TileSet(frame.ElementOri):
-    def __init__(self, properties:frame.ElementProperties, size:frame.Coordinate, image_properties:frame.ElementProperties = None,
-                  png_text:str = None, tilelist_properties:list[frame.ElementProperties] = None)->None:
+class TileSet(ElementOri):
+    def __init__(self, properties:ElementProperties, size:frame.Coordinate, image_properties:ElementProperties = None,
+                  png_text:str = None, tilelist_properties:list[ElementProperties] = None)->None:
         super().__init__(properties)
         self._size = size
         self._image_properties = image_properties
@@ -20,9 +22,9 @@ class TileSet(frame.ElementOri):
     def init_etElement(cls, root:et.Element, rwmaps_dir:str)->None:
         png_text_pro = utility.get_etElement_callable_from_tag(root, "properties")
         png_text = utility.get_etElement_name_to_text_rm(png_text_pro, "embedded_png")
-        properties = frame.ElementProperties.init_etElement(root)
-        image_properties = frame.ElementProperties.init_etElement(utility.get_etElement_callable_from_tag(root, "image"))
-        tilelist_properties = [frame.ElementProperties.init_etElement(tile) for tile in root if tile.tag == "tile"]
+        properties = ElementProperties.init_etElement(root)
+        image_properties = ElementProperties.init_etElement(utility.get_etElement_callable_from_tag(root, "image"))
+        tilelist_properties = [ElementProperties.init_etElement(tile) for tile in root if tile.tag == "tile"]
         tilelist_properties = None if tilelist_properties == [] else tilelist_properties
         
         if properties.returnDefaultProperty("columns") == None:

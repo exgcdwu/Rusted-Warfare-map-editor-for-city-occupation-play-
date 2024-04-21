@@ -7,16 +7,18 @@ import numpy as np
 
 import rwmap._util as utility
 import rwmap._frame as frame
+from rwmap._frame._element_ori import ElementOri
+from rwmap._frame._element_property import ElementProperties
 
-class Layer(frame.ElementOri):
-    def __init__(self, properties:frame.ElementProperties, tilematrix:np.ndarray, encoding:str, compression:str)->None:
+class Layer(ElementOri):
+    def __init__(self, properties:ElementProperties, tilematrix:np.ndarray, encoding:str, compression:str)->None:
         super().__init__(properties)
         self._tilematrix = tilematrix
         self._encoding = encoding
         self._compression = compression
     @classmethod
     def init_etElement(cls, root:et.Element)->None:
-        properties = frame.ElementProperties.init_etElement(root)
+        properties = ElementProperties.init_etElement(root)
         data = utility.get_etElement_callable_from_tag(root, "data")
         _tilematrix = utility.get_etElement_ndarray_from_text_packed(data, frame.Coordinate(root.attrib['width'], root.attrib['height']))
         return cls(properties, _tilematrix, data.attrib["encoding"], data.attrib["compression"])

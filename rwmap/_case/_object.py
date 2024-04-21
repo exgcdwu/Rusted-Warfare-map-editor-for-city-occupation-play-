@@ -2,7 +2,9 @@ import xml.etree.ElementTree as et
 
 import rwmap._frame as frame
 import rwmap._util as utility
-class TObject(frame.ElementProperties):
+from rwmap._frame._element_property import ElementProperties
+
+class TObject(ElementProperties):
     def __init__(self, tag:str, default_properties:dict[str, str] = {}, optional_properties:dict[str, str] = {}, other_properties:list[et.Element] = [])->None:
         super().__init__(tag, default_properties, optional_properties)
         self._other_properties = other_properties

@@ -2,7 +2,7 @@ from typing import Union
 
 import rwmap._object as object
 import rwmap._frame as frame
-import rwmap.data.tobject._tobject_one as tobject_one
+import rwmap._data.tobject as tobject
 
 class City(object.TObject_Group):
     @classmethod
@@ -10,12 +10,12 @@ class City(object.TObject_Group):
                   reset_add:int, reset_detect:int, text:str, textColor:str = None, textSize:int = -1, 
                   name_add:str = None, name_detect:str = None, name_maptext:str = None, 
                   warmup_add:int = -1, warmup_detect:int = -1, techLevel:int = -1):
-        uadd = tobject_one.unitAdd(pos, -1, spawnUnits, name = name_add, warmup = warmup_add, 
+        uadd = tobject.UnitAdd(pos, -1, spawnUnits, name = name_add, warmup = warmup_add, 
                                    reset = reset_add, techLevel = techLevel)
-        udetect = tobject_one.unitDetect(pos, size, name = name_detect, maxUnits = 0, 
+        udetect = tobject.UnitDetect(pos, size, name = name_detect, maxUnits = 0, 
                                          unitType = spawnUnits, warmup = warmup_detect, reset = reset_detect, 
                                          id = id_detect)
-        maptext = tobject_one.mapText(pos, text = text, textColor = textColor, textSize = textSize, 
+        maptext = tobject.MapText(pos, text = text, textColor = textColor, textSize = textSize, 
                                       name = name_maptext)
         tobn = udetect.return_idTObject()
         uadd.add_actiBy([tobn])

@@ -8,9 +8,11 @@ import xml.etree.ElementTree as et
 import rwmap._util as utility
 import rwmap._frame as frame
 from rwmap._case._object import TObject
+from rwmap._frame._element_ori import ElementOri
+from rwmap._frame._element_property import ElementProperties
 
-class ObjectGroup(frame.ElementOri):
-    def __init__(self, properties:frame.ElementProperties, object_list:list[TObject])->None:
+class ObjectGroup(ElementOri):
+    def __init__(self, properties:ElementProperties, object_list:list[TObject])->None:
         super().__init__(properties)
         self._object_list = object_list
 
@@ -19,7 +21,7 @@ class ObjectGroup(frame.ElementOri):
 
     @classmethod
     def init_etElement(cls, root:et.Element)->None:
-        properties = frame.ElementProperties.init_etElement(root)
+        properties = ElementProperties.init_etElement(root)
         object_list = [TObject.init_etElement(tobject) for tobject in root if tobject.tag == "object"]
         return cls(properties, object_list)
     

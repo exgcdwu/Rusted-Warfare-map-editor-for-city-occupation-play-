@@ -1,3 +1,5 @@
+import rwmap._frame as frame
+
 
 class KEY:
     empty_tile = "0"
@@ -25,6 +27,9 @@ class WIN:
     allBuildings = "allBuildings"
     commandCenter = "commandCenter"
     requiredObjectives = "requiredObjectives"
+
+class COO:
+    SIZE_STANDARD = frame.Coordinate(20, 20)
 
 
 

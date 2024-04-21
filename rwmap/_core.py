@@ -11,6 +11,8 @@ import rwmap._exceptions as rwexceptions
 import rwmap._util as utility
 import rwmap._case as case
 import rwmap._frame as frame
+from rwmap._frame._element_ori import ElementOri
+from rwmap._frame._element_property import ElementProperties
 import rwmap._tile as tile
 import rwmap._object as object
 import rwmap._otgroup as otgroup
@@ -19,8 +21,8 @@ import rwmap._otgroup as otgroup
 RWMAP_DIR = os.path.dirname(__file__)
 RWMAP_MAPS = RWMAP_DIR + "/other_data/maps/"
 
-class RWmap(frame.ElementOri):
-    def __init__(self, properties:frame.ElementProperties, tileset_list:list[case.TileSet],
+class RWmap(ElementOri):
+    def __init__(self, properties:ElementProperties, tileset_list:list[case.TileSet],
                   layer_list:list[case.Layer], objectGroup_list:list[case.ObjectGroup])->None:
         super().__init__(properties)
         self._tileset_list = tileset_list
@@ -30,9 +32,9 @@ class RWmap(frame.ElementOri):
     def init_mapfile(cls, map_file:str, rwmaps_dir = RWMAP_MAPS)->None:
         xmlTree:et.ElementTree = et.ElementTree(file=map_file)
         root:et.Element = xmlTree.getroot()
-        properties = frame.ElementProperties.init_etElement(root)
+        properties = ElementProperties.init_etElement(root)
 
-        tileset_list = [case.TileSet(frame.ElementProperties("tileset", {"firstgid": "0", "name": "empty"}), frame.Coordinate(1, 1))]
+        tileset_list = [case.TileSet(ElementProperties("tileset", {"firstgid": "0", "name": "empty"}), frame.Coordinate(1, 1))]
         tileset_list = tileset_list + [case.TileSet.init_etElement(tileset, rwmaps_dir) for tileset in root if tileset.tag == "tileset"]
         layer_list = [case.Layer.init_etElement(layer) for layer in root if layer.tag == "layer"]
         objectGroup_list = [case.ObjectGroup.init_etElement(objectGroup) for objectGroup in root if objectGroup.tag == "objectgroup"]  
