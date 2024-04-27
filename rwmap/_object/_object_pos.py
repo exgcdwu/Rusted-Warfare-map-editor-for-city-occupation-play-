@@ -8,8 +8,8 @@ class TObject_Pos:
 
 class TObject_Pos:
     def __init__(self, default_properties:dict[str, str], other_properties:list[et.Element] = {}):
-        self._default_properties = default_properties
-        self._other_properties = other_properties
+        self._default_properties = deepcopy(default_properties)
+        self._other_properties = deepcopy(other_properties)
 
     @classmethod
     def init_rectangle(cls, rect:frame.Rectangle):
@@ -17,11 +17,22 @@ class TObject_Pos:
                               "width": f"{rect.a().x():.0f}", "height": f"{rect.a().y():.0f}"}
         return cls(default_properties)
     
+    def size(self)->frame.Coordinate:
+        return frame.Coordinate(int(self._default_properties["width"]),
+                                int(self._default_properties["height"]))
+    
+    def pos(self)->frame.Coordinate:
+        return frame.Coordinate(int(self._default_properties["x"]) + int(self._default_properties["width"]) / 2,
+                                int(self._default_properties["y"]) + int(self._default_properties["height"]) / 2)
+    
+    def rectangle(self)->frame.Rectangle:
+        return frame.Rectangle(self.pos(), self.size())
+
     def output_default_properties(self):
-        return self._default_properties
+        return deepcopy(self._default_properties)
     
     def output_other_properties(self):
-        return self._other_properties
+        return deepcopy(self._other_properties)
     
     def offset(self, offset:frame.Coordinate)->TObject_Pos:
         newtp = deepcopy(self)

@@ -7,3 +7,9 @@ class CoordinateIndexError(IndexError):
 
 class ObjectNameError(KeyError):
     pass
+
+class CoordinateDimError(IndexError):
+    pass
+
+class BuildingDetectError(ValueError):
+    pass

@@ -1,5 +1,5 @@
 import rwmap._frame as frame
-
+from typing import Union
 
 class KEY:
     empty_tile = "0"
@@ -30,6 +30,9 @@ class WIN:
 
 class COO:
     SIZE_STANDARD = frame.Coordinate(20, 20)
+
+class TYPE:
+    tileid = Union[int, tuple[str, int], frame.TagCoordinate]
 
 
 

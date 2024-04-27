@@ -1,19 +1,20 @@
 import xml.etree.ElementTree as et
-import re
+from copy import deepcopy
+from typing import Union
 
 import rwmap._frame as frame
 import rwmap._util as utility
 
 class TObject_Type:
-    def __init__(self, default_properties:dict[str, str], optional_properties:dict[str, str] = {}):
-        self._default_properties = default_properties
-        self._optional_properties = optional_properties
+    def __init__(self, default_properties:dict[str, str], optional_properties:dict[str, Union[str, dict[str, str]]] = {}):
+        self._default_properties = deepcopy(default_properties)
+        self._optional_properties = deepcopy(optional_properties)
 
     def output_default_properties(self):
-        return self._default_properties
+        return deepcopy(self._default_properties)
     
     def output_optional_properties(self):
-        return self._optional_properties
+        return deepcopy(self._optional_properties)
     
     def _add_optional(self, name:str, value:str):
         self._optional_properties.update(utility.add_str_pro(name, value))
@@ -38,7 +39,8 @@ class TObject_Type:
         for only in onlyList:
             if only[0:13] == "onlyTechLevel":
                 otype._add_optional(only[0:13], only[13])
-            otype._add_optional(only, "1")
+            else:
+                otype._optional_properties.update({only:{"type": "bool", "value": "true"}})
         return otype
 
     @classmethod
@@ -56,10 +58,11 @@ class TObject_Type:
         return otype
 
     @classmethod
-    def init_changeCredits(cls, setCredits:int = None, addCredits:int = None):
+    def init_changeCredits(cls, team:int, setCredits:int = None, addCredits:int = None):
         otype = cls({"type": "changeCredits"}, {})
-        otype._add_optional("set", str(setCredits))
-        otype._add_optional("add", str(addCredits))
+        otype._add_optional("set", setCredits)
+        otype._add_optional("add", addCredits)
+        otype._add_optional("team", team)
         return otype
 
     @classmethod

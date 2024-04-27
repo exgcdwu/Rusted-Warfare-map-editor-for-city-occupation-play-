@@ -24,7 +24,7 @@ setup(
     url = "https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-",
     long_description = read_file('README.md'),
     long_description_content_type = "text/markdown",
-    packages = find_packages(exclude=["tests"]),
+    packages = find_packages(exclude=["tests", "examples"]),
     package_data={'rwmap': ['other_data/*.txt', DATA_PREFIX_MAPS + '*.tsx', DATA_PREFIX_MAPS + 'bitmaps/*.png',
                              DATA_PREFIX_MAPS + 'ridges/*.tsx', DATA_PREFIX_MAPS + 'terrain/*.tsx']},
     python_requires = '>=3.6.0',

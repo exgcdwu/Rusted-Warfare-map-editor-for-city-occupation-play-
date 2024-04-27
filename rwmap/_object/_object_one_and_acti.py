@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as et
 from typing import Union
+from copy import deepcopy
 
 import rwmap._frame as frame
 import rwmap._util as utility
@@ -9,60 +10,66 @@ from rwmap._object._object_type import TObject_Type
 from rwmap._object._object_time import TObject_Time
 from rwmap._object._object_global import TObject_Global
 
-from copy import deepcopy
-
 class TObject_One:
     pass
 
 class TObject_Acti:
-    def __init__(self, idTObject_One:TObject_One = None, alsoacti:list[TObject_One] = [], 
-                 actiBy:list[TObject_One] = [], deactiBy:list[TObject_One] = [], 
+    def __init__(self, idTObject_One_s:TObject_One = None, alsoacti_s:list[TObject_One] = [], 
+                 actiBy_s:list[TObject_One] = [], deactiBy_s:list[TObject_One] = [], 
                  isalltoacti:bool = False):
-        self._idTObject_One = idTObject_One
-        self._alsoacti = alsoacti
-        self._actiBy = actiBy
-        self._deactiBy = deactiBy
+        self._idTObject_One_s = idTObject_One_s
+        self._alsoacti_s = alsoacti_s
+        self._actiBy_s = actiBy_s
+        self._deactiBy_s = deactiBy_s
         self._isalltoacti = isalltoacti
 
     @classmethod
-    def init_acti(cls, id:str = None, alsoacti:list[TObject_One] = [], 
-                 actiBy:list[TObject_One] = [], deactiBy:list[TObject_One] = [], 
+    def init_acti(cls, id:str = None, alsoacti_s:list[TObject_One] = [], 
+                 actiBy_s:list[TObject_One] = [], deactiBy_s:list[TObject_One] = [], 
                  isalltoacti:bool = False):
-        return cls(TObject_One(TObject_Type({}), name = id) if id != None else None, alsoacti, actiBy, deactiBy, isalltoacti)
+        return cls(TObject_One(TObject_Type({}), name = id) if id != None else None, alsoacti_s, actiBy_s, deactiBy_s, isalltoacti)
 
-    def add_alsoacti(self, add_TObject_One:list[TObject_One] = []):
-        self._alsoacti = self._alsoacti + add_TObject_One
+    def add_alsoacti_s(self, add_TObject_One_s:Union[list[TObject_One], TObject_One] = []):
+        add_TObject_One_s_list = utility.list_variable_s(add_TObject_One_s)
+        self._alsoacti_s = self._alsoacti_s + add_TObject_One_s_list
 
-    def add_actiBy(self, add_TObject_One:list[TObject_One] = []):
-        self._actiBy = self._actiBy + add_TObject_One
+    def add_actiBy_s(self, add_TObject_One_s:Union[list[TObject_One], TObject_One] = []):
+        add_TObject_One_s_list = utility.list_variable_s(add_TObject_One_s)
+        self._actiBy_s = self._actiBy_s + add_TObject_One_s_list
 
-    def add_deactiBy(self, add_TObject_One:list[TObject_One] = []):
-        self._deactiBy = self._deactiBy + add_TObject_One
+    def add_deactiBy_s(self, add_TObject_One_s:Union[list[TObject_One], TObject_One] = []):
+        add_TObject_One_s_list = utility.list_variable_s(add_TObject_One_s)
+        self._deactiBy_s = self._deactiBy_s + add_TObject_One_s_list
 
-    def return_idTObject(self)->Union[TObject_One, None]:
-        return self._idTObject_One
+    def add_twoactiBy_s(self, add_TObject_One_two_s:tuple[list[TObject_One], 
+                                                          list[TObject_One]] = ([], [])):
+        self.add_actiBy_s(add_TObject_One_two_s[0])
+        self.add_deactiBy_s(add_TObject_One_two_s[1])
+
+    def idTObject_s(self)->Union[TObject_One, None]:
+        return self._idTObject_One_s
 
     def output_optional_properties(self)->dict[str, str]:
         op_dict = {}
-        if self._idTObject_One != None:
-            op_dict.update({"id": self._idTObject_One._name}) 
+        if self._idTObject_One_s != None:
+            op_dict.update({"id": self._idTObject_One_s._name}) 
         if self._isalltoacti:
             op_dict.update({"allToActivate": "1"}) 
-        op_dict.update(utility.add_acti_pro("alsoActivate", self._alsoacti))
-        op_dict.update(utility.add_acti_pro("activatedBy", self._actiBy))
-        op_dict.update(utility.add_acti_pro("deactivatedBy", self._deactiBy))
+        op_dict.update(utility.add_acti_pro("alsoactivate", self._alsoacti_s))
+        op_dict.update(utility.add_acti_pro("activatedBy", self._actiBy_s))
+        op_dict.update(utility.add_acti_pro("deactivatedBy", self._deactiBy_s))
         return op_dict
 
 class TObject_One:
     def __init__(self, otype:TObject_Type, pos:TObject_Pos = TObject_Pos({}), name:str = None, 
                  acti:TObject_Acti = TObject_Acti(), time:TObject_Time = TObject_Time(),
                  nglobal:TObject_Global = TObject_Global()):
-        self._name = name
-        self._pos = pos
-        self._otype = otype
-        self._acti = acti
-        self._time = time
-        self._global = nglobal
+        self._name = deepcopy(name)
+        self._pos = deepcopy(pos)
+        self._otype = deepcopy(otype)
+        self._acti = deepcopy(acti)
+        self._time = deepcopy(time)
+        self._global = deepcopy(nglobal)
 
     def default_properties(self)->dict[str, str]:
         dict_ans = {}
@@ -76,7 +83,7 @@ class TObject_One:
         ntob._pos = ntob._pos.offset(offset)
         return ntob
 
-    def optional_properties(self)->dict[str, str]:
+    def optional_properties(self)->dict[str, Union[str, dict[str, str]]]:
         return {**self._otype.output_optional_properties(), 
                 **self._acti.output_optional_properties(),
                 **self._time.output_optional_properties(), 
@@ -85,16 +92,20 @@ class TObject_One:
     def other_properties(self)->list[et.Element]:
         return self._pos.output_other_properties()
     
-    def return_idTObject(self)->Union[TObject_One, None]:
-        return self._acti.return_idTObject()
+    def idTObject_s(self)->Union[TObject_One, None]:
+        return self._acti.idTObject_s()
     
-    def add_alsoacti(self, add_TObject_One:list[TObject_One] = []):
-        self._acti.add_alsoacti(add_TObject_One)
+    def add_alsoacti_s(self, add_TObject_One_s:list[TObject_One] = []):
+        self._acti.add_alsoacti_s(add_TObject_One_s)
 
-    def add_actiBy(self, add_TObject_One:list[TObject_One] = []):
-        self._acti.add_actiBy(add_TObject_One)
+    def add_actiBy_s(self, add_TObject_One_s:list[TObject_One] = []):
+        self._acti.add_actiBy_s(add_TObject_One_s)
 
-    def add_deactiBy(self, add_TObject_One:list[TObject_One] = []):
-        self._acti.add_deactiBy(add_TObject_One)
+    def add_deactiBy_s(self, add_TObject_One_s:list[TObject_One] = []):
+        self._acti.add_deactiBy_s(add_TObject_One_s)
+
+    def add_twoactiBy_s(self, add_TObject_One_two_s:tuple[list[TObject_One], 
+                                                          list[TObject_One]] = ([], [])):
+        self._acti.add_twoactiBy_s(add_TObject_One_two_s)
 
 

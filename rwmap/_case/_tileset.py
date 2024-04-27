@@ -3,6 +3,7 @@
 
 """
 import xml.etree.ElementTree as et
+from copy import deepcopy
 
 import rwmap._util as utility
 import rwmap._frame as frame
@@ -14,40 +15,45 @@ class TileSet(ElementOri):
     def __init__(self, properties:ElementProperties, size:frame.Coordinate, image_properties:ElementProperties = None,
                   png_text:str = None, tilelist_properties:list[ElementProperties] = None)->None:
         super().__init__(properties)
-        self._size = size
-        self._image_properties = image_properties
-        self._png_text = png_text
-        self._tilelist_properties = tilelist_properties
+        self._size = deepcopy(size)
+        self._image_properties = deepcopy(image_properties)
+        self._png_text = deepcopy(png_text)
+        self._tilelist_properties = deepcopy(tilelist_properties)
     @classmethod
     def init_etElement(cls, root:et.Element, rwmaps_dir:str)->None:
-        png_text_pro = utility.get_etElement_callable_from_tag(root, "properties")
-        png_text = utility.get_etElement_name_to_text_rm(png_text_pro, "embedded_png")
+        png_text_pro = utility.get_etElement_callable_from_tag_s(root, "properties")
+        png_text = utility.get_etElement_name_to_text_s(png_text_pro, "embedded_png")
         properties = ElementProperties.init_etElement(root)
-        image_properties = ElementProperties.init_etElement(utility.get_etElement_callable_from_tag(root, "image"))
+        if png_text != None:
+            properties.deleteOptionalProperty("embedded_png")
+        image_properties = ElementProperties.init_etElement(utility.get_etElement_callable_from_tag_s(root, "image"))
         tilelist_properties = [ElementProperties.init_etElement(tile) for tile in root if tile.tag == "tile"]
         tilelist_properties = None if tilelist_properties == [] else tilelist_properties
         
         if properties.returnDefaultProperty("columns") == None:
-            source_file = properties.returnDefaultProperty("source")
 
+            source_file = properties.returnDefaultProperty("source")
+            source_list = source_file.split("/")
+            source_list = source_list[utility.search_list_to_index(source_list, "maps") + 1:]
+            source_list = source_list[utility.search_list_to_index(source_list, "tilesets") + 1:]
+            source_file = "/".join(source_list)
             source = rwmaps_dir + source_file
+
             root = et.ElementTree(file = source).getroot()
-            #if root.attrib.get("columns") == None:
             tilewidth = int(root.attrib["tilewidth"])
             tileheight = int(root.attrib["tileheight"])
-            image_element = utility.get_etElement_callable_from_tag(root, "image")
-            if image_element.attrib.get("width") == None:
+
+            if root.attrib.get("columns") == None:
+                image_element = utility.get_etElement_callable_from_tag_s(root, "image")
                 image_file = rwmaps_dir + "bitmaps/" + image_element.attrib["source"].split("/")[-1]
                 width = utility.image_width(image_file)
                 height = utility.image_height(image_file)
+
+                column = int(width / tilewidth)
+                row = int(height / tileheight)
             else:
-                width = int(image_element.attrib["width"])
-                height = int(image_element.attrib["height"])
-            column = int(width / tilewidth)
-            row = int(height / tileheight)
-            #else:
-                #column = int(root.attrib["columns"])
-                #row = int(int(root.attrib["tilecount"]) / column)
+                column = int(root.attrib["columns"])
+                row = int(int(root.attrib["tilecount"]) / column)
 
         else:
             column = int(properties.returnDefaultProperty("columns"))
@@ -73,38 +79,68 @@ class TileSet(ElementOri):
 
     def output_etElement(self)->et.Element:
         root = et.Element("tileset")
-        self._properties.output_etElement(root)
+        root = self._properties.output_etElement(root)
         if self._image_properties != None:
             image_element = et.Element("image")
-            self._image_properties.output_etElement(image_element)
+            image_element = self._image_properties.output_etElement(image_element)
             root.append(image_element)
         if self._png_text != None:
             png_element = et.Element("property", {"name": "embedded_png"})
             png_element.text = self._png_text
-            properties = utility.get_etElement_callable_from_tag(root, "properties")
+            properties = utility.get_etElement_callable_from_tag_s(root, "properties")
             properties.insert(0, png_element)
         if self._tilelist_properties != None:
             for tile in self._tilelist_properties:
                 tile_element = et.Element("tile")
-                tile.output_etElement(tile_element)
+                tile_element = tile.output_etElement(tile_element)
                 root.append(tile_element)
         return root
     
-    def output_name(self)->str:
+    def name(self)->str:
         tileset_name = self._properties.returnDefaultProperty("name")
         if tileset_name == None:
             tileset_name = self._properties.returnDefaultProperty("source")
         tileset_name = utility.str_slash_to_dot(tileset_name)
         return tileset_name
     
-    def tileid(self, tile_grid:frame.Coordinate)->int:
-        if tile_grid < self._size:
-            id_now = tile_grid.id(self._size.y())
-            id_ans = int(self._properties.returnDefaultProperty("firstgid")) + id_now
+    def totalgid(self)->int:
+        return self._size.x() * self._size.y()
+
+    def firstgid(self)->int:
+        return int(self._properties.returnDefaultProperty("firstgid"))
+    
+    def endgid(self)->int:
+        return self.firstgid() + self.totalgid()
+
+    def gid_to_tileid(self, gid:int)->tuple[str, int]:
+        tileid = gid - self.firstgid()
+        if tileid < 0:
+            raise IndexError("The gid cannot be loaded into the current tileset.")
+        return (self.name(), gid - self.firstgid())
+    
+    def tileid_to_gid(self, tileid:int)->int:
+        return self.firstgid() + tileid
+    
+    def tileid_to_coo(self, tileid:int)->frame.TagCoordinate:
+        if tileid < self.totalgid:
+            tagcoo = frame.TagCoordinate.init_id(self.name(), tileid, self._size.y())
         else:
-            raise exception.CoordinateIndexError(f"Beyond the boundary of this tileset{self.output_name()}")
+            raise exception.CoordinateIndexError(f"Beyond the boundary of this tileset{self.name()}")
+        return tagcoo
+
+    def coo_to_tileid(self, tile_grid:frame.Coordinate)->int:
+        if tile_grid < self._size:
+            id_ans = tile_grid.id(self._size.y())
+        else:
+            raise exception.CoordinateIndexError(f"Beyond the boundary of this tileset{self.name()}")
         return id_ans
     
+    def coo_to_gid(self, tile_grid:frame.Coordinate)->int:
+        return self.coo_to_tileid(tile_grid) + self.firstgid()
+    
+    def gid_to_coo(self, gid:int)->frame.TagCoordinate:
+        return self.tileid_to_coo(self.gid_to_tileid(gid))
+
     def isexist(self)->bool:
         return self._properties.returnDefaultProperty("firstgid") != "0"
         

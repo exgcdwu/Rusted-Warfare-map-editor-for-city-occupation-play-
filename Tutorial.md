@@ -16,7 +16,6 @@
       - [分组宾语添加模式](#分组宾语添加模式)
       - [宾语组添加模式](#宾语组添加模式)
     - [宾语搜索与操作](#宾语搜索与操作)
-    - [宾语组格式](#宾语组格式)
   - [地块](#地块)
     - [地块添加](#地块添加)
       - [单个地块](#单个地块)
@@ -49,9 +48,8 @@ import rwmap as rw
 
 map_dir = 'D:/Game/steam/steamapps/common/Rusted Warfare/mods/maps/'
 map_name = '[p2]example_skirmish_(2p).tmx'
-map_file = map_dir + map_name
 
-mymap:rw.RWmap = rw.RWmap.init_mapfile(map_file)
+mymap = rw.RWmap.init_mapfile(map_dir + map_name)
 
 ```
 
@@ -66,6 +64,14 @@ print(mymap.output_str(100, 100, rw.frame.Rectangle(rw.frame.Coordinate(0, 0), r
 
 ### 地图载出
 
+注意，不建议输出到原地图文件，会造成文件覆盖。
+
+文件覆盖会带来以下后果：
+
+1.如果之后代码更改，将无法重新运行修改地图
+
+2.如果操作错误或者库出现bug，将没有备份补救
+
 ```python
 
 map_name_out = '[p2]example_skirmish_(2p)(1).tmx'
@@ -79,7 +85,7 @@ mymap.write_file(map_dir + map_name_out)
 
 #### 字典添加模式
 
-朴素的宾语添加方式，默认属性和自定义属性不得填反。
+朴素的宾语添加方式，默认属性和自定义属性不得填反，属性字符串不得填错。
 
 ```python
 
@@ -114,19 +120,16 @@ mymap.addObject_one(rw.tobject.TObject_One(rw.tobject.TObject_Type.init_unitAdd(
 
 使用现成的宾语组根据有限参数添加一组宾语。
 
+现已更新建筑刷新宾语组，城市刷新宾语组（添加mapText），二者均可以提供任意队伍的检测接口。
+
+已更新单位刷新宾语组，可以接受队伍检测接口。
+
 ```python
 
-mymap.addObject_group(rw.object_group_useful.RefreshBuilding.init_building(rw.frame.Coordinate(1500, 1000), rw.frame.Coordinate(40, 40), 
-                                               "turret", "acti_tu1", 10, 10,
-                                               name_add = "城市添加", name_detect = "城市检测", 
-                                               warmup_add = 10, warmup_detect = 5))
-#建立一个可自动刷新的建筑
-
-mymap.addObject_group(rw.object_group_useful.City.init_city(rw.frame.Coordinate(1500, 1500), rw.frame.Coordinate(40, 40), 
-                                               "turret", "acti_tu2", 10, 10, "城市", textColor = "white", 
-                                               textSize = 50, name_add = "城市添加", name_detect = "城市检测", 
-                                               name_maptext = "城市文本", warmup_add = 10, warmup_detect = 5))
-#建立一个自动刷新的城市，有名字
+mymap.addObject_group(
+    rw.object_group_useful.CityNoTeam.init_base\
+    (rw.frame.Coordinate(1000, 1000), "acti_tu1", "城市", -1, 20, 20, 20))
+# 建立一个补给站城市
 
 ```
 
@@ -134,40 +137,16 @@ mymap.addObject_group(rw.object_group_useful.City.init_city(rw.frame.Coordinate(
 
 ```python
 
-for tobject in mymap.iterator_object("Triggers", {"y": "1500"}):#返回属性成功匹配正则表达式的宾语（生成器）
+for tobject in mymap.iterator_object_s("Triggers", {"y": "1500"}):#返回属性成功匹配正则表达式的宾语（生成器）
     del tobject#宾语被删除
 
-for tobject in mymap.iterator_object("Triggers", {"y": "1100"}):
+for tobject in mymap.iterator_object_s("Triggers", {"y": "1100"}):
     tobject.assignDefaultProperty("name", "名字改变了")#宾语默认属性被赋值
     tobject.assignOptionalProperty("team", "1")#宾语可选属性被赋值
     print(tobject.returnDefaultProperty("name"))#输出宾语默认属性
     print(tobject.returnOptionalProperty("team"))#输出宾语可选属性
     tobject.deleteDefaultProperty("visible")#删除宾语默认属性
     tobject.deleteOptionalProperty("resetActivationAfter")#删除宾语可选属性
-
-```
-
-### 宾语组格式
-
-可制作自己的宾语组
-
-```python
-
-class RefreshBuilding(rw.tobject.TObject_Group):
-    @classmethod
-    def init_building(cls, pos: rw.frame.Coordinate, size: rw.frame.Coordinate, spawnUnits:str, id_detect:str, 
-                  reset_add:int, reset_detect:int, name_add:str = None, name_detect:str = None, 
-                  warmup_add:int = -1, warmup_detect:int = -1, techLevel:int = -1):
-        uadd = rw.object_useful.UnitAdd(pos, -1, spawnUnits, name = name_add, warmup = warmup_add, 
-                                   reset = reset_add, techLevel = techLevel)
-        udetect = rw.object_useful.UnitDetect(pos, size, name = name_detect, maxUnits = 0, 
-                                         unitType = spawnUnits, warmup = warmup_detect, reset = reset_detect, 
-                                         id = id_detect)
-        tobn = udetect.return_idTObject()
-        uadd.add_actiBy([tobn])
-        return cls([uadd, udetect])
-
-#可自动刷新的建筑示例
 
 ```
 
@@ -179,10 +158,9 @@ class RefreshBuilding(rw.tobject.TObject_Group):
 
 ```python
 
-mymap.addTile("Ground", rw.frame.Coordinate(1, 0), "Long Grass", rw.frame.Coordinate(0, 0))
-mymap.addTile("Ground", rw.frame.Coordinate(2, 0), "Long Grass", rw.frame.Coordinate(1, 2))
-mymap.addTile("Ground", rw.frame.Coordinate(0, 1), "Long Grass", rw.frame.Coordinate(0, 0))
-#改变地块类型：第一项地块层名称，第二项地块层改变位置，第三项地块集名称（全名），第四项所用地块位置（在地块集中）
+mymap.addTile(rw.frame.TagCoordinate("Ground", rw.frame.Coordinate(1, 0)), 126) 
+
+#改变地块类型：第一项为地块位置（地块层名称+坐标），第二项提供三种参数（gid, 地块集名称+tileid，地块集名称+坐标）
 
 ```
 
@@ -190,9 +168,9 @@ mymap.addTile("Ground", rw.frame.Coordinate(0, 1), "Long Grass", rw.frame.Coordi
 
 ```python
 
-mymap.addTile_square("Ground", rw.frame.Rectangle(rw.frame.Coordinate(5, 5), rw.frame.Coordinate(10, 10)), "Deep Water", rw.frame.Coordinate(0, 0))
-mymap.addTile_square("Ground", rw.frame.Rectangle(rw.frame.Coordinate(20, 5), rw.frame.Coordinate(30, 10)), "Long Grass", rw.frame.Coordinate(2, 1))
-#改变地块类型（矩形）：第一项地块层名称，第二项地块层改变位置（前者为起始位置，后者为增量），第三项地块集名称（全名），第四项所用地块位置（在地块集中）
+tile1 = rw.frame.TagCoordinate("Deep Water", rw.frame.Coordinate(0, 0))
+mymap.addTile_square(rw.frame.TagRectangle("Ground", rw.frame.Rectangle(rw.frame.Coordinate(5, 5), rw.frame.Coordinate(10, 10))), tile1)
+#改变地块类型（矩形）：第一项为地块位置（地块层名称+矩形），第二项提供三种参数（gid, 地块集名称+tileid，地块集名称+坐标）
 
 ```
 

@@ -1,4 +1,9 @@
 import numpy as np
+from copy import deepcopy
+import math
+
+import rwmap._exceptions as rwexceptions
+
 class Coordinate:
     
     def __init__(self, x:int = 0, y:int = 0, dtype:str = np.int32):
@@ -6,14 +11,25 @@ class Coordinate:
         self._content[0][0] = x
         self._content[1][0] = y
 
+    @classmethod
+    def init_np(cls, content:np.ndarray):
+        if content.shape == (2, 1):
+            return cls(deepcopy(content[0][0]), deepcopy(content[1][0]), dtype = content.dtype)
+        else:
+            raise rwexceptions.CoordinateDimError(str(content))
+
+    @classmethod
+    def init_id(cls, id:int, column:int):
+        return cls(math.floor(id / column), id % column)
+
     def x(self):
-        return self._content[0][0]
+        return deepcopy(self._content[0][0])
 
     def y(self):
-        return self._content[1][0]
+        return deepcopy(self._content[1][0])
     
     def id(self, width:int)->int:
-        return int(self.y() * width + self.x())
+        return int(self.x() * width + self.y())
 
     def __add__(self, other):
         if isinstance(other, Coordinate):
@@ -75,13 +91,13 @@ class Rectangle:
         self._addCoordinate = addCoordinate
     
     def i(self):
-        return self._initialCoordinate
+        return deepcopy(self._initialCoordinate)
 
     def a(self):
-        return self._addCoordinate
+        return deepcopy(self._addCoordinate)
     
     def e(self):
-        return self._initialCoordinate + self._addCoordinate
+        return deepcopy(self._initialCoordinate + self._addCoordinate)
     
     def _iterator(self):
         for i in range(0, self._addCoordinate.x()):
@@ -92,17 +108,55 @@ class Rectangle:
     def __iter__(self):
         return self._iterator()
     
-class TagCoordinate:
+class TagCoordinate(Coordinate):
     def __init__(self, tag:str, place:Coordinate):
-        self._place = place
+        self.__dict__ = deepcopy(place.__dict__)
         self._tag = tag
 
     @classmethod
     def init_xy(cls, tag:str, x = 0, y = 0, dtype:str = np.int32):
         return cls(tag, Coordinate(x, y, dtype))
+    
+    @classmethod
+    def init_np(cls, tag:str, content:np.ndarray):
+        return cls(tag, Coordinate.init_np(content))
+
+    @classmethod
+    def init_id(cls, tag:str, id:int, column:int):
+        return cls(tag, Coordinate.init_id(id, column))
 
     def tag(self):
         return self._tag
     
     def place(self):
-        return self._place
+        return Coordinate.init_np(self._content)
+    
+class TagRectangle(Rectangle):
+    def __init__(self, tag:str, place:Rectangle):
+        self._initialCoordinate = deepcopy(place._initialCoordinate)
+        self._addCoordinate = deepcopy(place._addCoordinate)
+        self._tag = tag
+
+    def tag(self)->str:
+        return self._tag
+    
+    def rectangle(self)->Rectangle:
+        return Rectangle(deepcopy(self._initialCoordinate), deepcopy(self._addCoordinate))
+
+    def i(self):
+        return TagCoordinate(self._tag, deepcopy(self._initialCoordinate))
+
+    def a(self):
+        return TagCoordinate(self._tag, deepcopy(self._addCoordinate))
+    
+    def e(self):
+        return TagCoordinate(self._tag, self._initialCoordinate + self._addCoordinate)
+
+    def _iterator(self):
+        for i in range(0, self._addCoordinate.x()):
+            for j in range(0, self._addCoordinate.y()):
+                coordinate_now = self._initialCoordinate + Coordinate(i, j)
+                yield TagCoordinate(self._tag, coordinate_now)
+
+    def __iter__(self):
+        return self._iterator()

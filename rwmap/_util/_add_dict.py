@@ -22,8 +22,9 @@ def add_acti_pro(name:str, tob_list:list[TObject_One])->dict[str, str]:
         for tobject in tob_list:
             value_list.append(tobject._name)
             if tobject._name == None:
-                raise rwexception.ObjectNameError
+                raise rwexception.ObjectNameError\
             ("The object does not have a name but participates in activation or deactivation.")
+        value_list = list(set(value_list))
         value = ",".join(value_list)
         return {name: value}
     else:

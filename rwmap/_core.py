@@ -5,7 +5,9 @@
 import xml.etree.ElementTree as et
 import re
 import os
-from typing import Generator
+from copy import deepcopy
+from typing import Generator, Union
+from numbers import Integral
 
 import rwmap._exceptions as rwexceptions
 import rwmap._util as utility
@@ -16,6 +18,7 @@ from rwmap._frame._element_property import ElementProperties
 import rwmap._tile as tile
 import rwmap._object as object
 import rwmap._otgroup as otgroup
+import rwmap._data.const as const
 
 
 RWMAP_DIR = os.path.dirname(__file__)
@@ -25,11 +28,11 @@ class RWmap(ElementOri):
     def __init__(self, properties:ElementProperties, tileset_list:list[case.TileSet],
                   layer_list:list[case.Layer], objectGroup_list:list[case.ObjectGroup])->None:
         super().__init__(properties)
-        self._tileset_list = tileset_list
-        self._layer_list = layer_list
-        self._objectGroup_list = objectGroup_list
+        self._tileset_list = deepcopy(tileset_list)
+        self._layer_list = deepcopy(layer_list)
+        self._objectGroup_list = deepcopy(objectGroup_list)
     @classmethod
-    def init_mapfile(cls, map_file:str, rwmaps_dir = RWMAP_MAPS)->None:
+    def init_mapfile(cls, map_file:str, rwmaps_dir = RWMAP_MAPS):
         xmlTree:et.ElementTree = et.ElementTree(file=map_file)
         root:et.Element = xmlTree.getroot()
         properties = ElementProperties.init_etElement(root)
@@ -38,10 +41,6 @@ class RWmap(ElementOri):
         tileset_list = tileset_list + [case.TileSet.init_etElement(tileset, rwmaps_dir) for tileset in root if tileset.tag == "tileset"]
         layer_list = [case.Layer.init_etElement(layer) for layer in root if layer.tag == "layer"]
         objectGroup_list = [case.ObjectGroup.init_etElement(objectGroup) for objectGroup in root if objectGroup.tag == "objectgroup"]  
-        
-        tileset_list = None if tileset_list == [] else tileset_list
-        layer_list = None if layer_list == [] else layer_list
-        objectGroup_list = None if objectGroup_list == [] else objectGroup_list
         
         return cls(properties, tileset_list, layer_list, objectGroup_list)
 
@@ -52,6 +51,33 @@ class RWmap(ElementOri):
     def tile_size(self)->frame.Coordinate:
         return frame.Coordinate(int(self._properties.returnDefaultProperty("tilewidth")), 
                                 int(self._properties.returnDefaultProperty("tileheight")))
+    
+    def tileset_name_list(self)->list[str]:
+        return [tileset.name() for tileset in self._tileset_list]
+    
+    def layer_name_list(self)->list[str]:
+        return [layer.name() for layer in self._layer_list]
+    
+    def objectgroup_name_list(self)->list[str]:
+        return [objectgroup.name() for objectgroup in self._objectGroup_list]
+    
+    def get_layer_s(self, name:str)->case.Layer:
+        layer = utility.get_ElementOri_from_list_by_name_s(self._layer_list, name)
+        if layer == None:
+            raise KeyError("layer name:" + name + " not found")
+        return layer
+        
+    def get_tileset_s(self, name:str)->case.TileSet:
+        tileset = utility.get_ElementOri_from_list_by_name_s(self._tileset_list, name)
+        if tileset == None:
+            raise KeyError("tileset name:" + name + " not found")
+        return tileset
+        
+    def get_objectgroup_s(self, name:str)->case.ObjectGroup:
+        objectgroup = utility.get_ElementOri_from_list_by_name_s(self._objectGroup_list, name)
+        if objectgroup == None:
+            raise KeyError("objectgroup name:" + name + " not found")
+        return objectgroup
 
     def output_str(self, pngtextnum:int = -1, tilenum:int = -1, output_rectangle:frame.Rectangle = frame.Rectangle(frame.Coordinate(), frame.Coordinate(-1, -1)), objectnum:int = -1)->str:
         str_ans = ""
@@ -67,7 +93,7 @@ class RWmap(ElementOri):
 
     def output_etElement(self)->et.Element:
         root = et.Element("map")
-        self._properties.output_etElement(root)
+        root = self._properties.output_etElement(root)
         if self._tileset_list != None:
             for tileset in self._tileset_list:
                 if tileset.isexist():
@@ -83,26 +109,37 @@ class RWmap(ElementOri):
     def write_file(self, map_file:str)->None:
         utility.output_file_from_etElement(self.output_etElement(), map_file)
 
-    def addObject(self, objectGroup_name:str, default_properties:dict[str, str] = {}, optional_properties :dict[str, str] = {}, other_properties:list[et.Element] = [])->None:
-        objectGroup_now:case.ObjectGroup = utility.get_ElementOri_from_list_by_name(self._objectGroup_list, objectGroup_name)
+    def addObject_dict(self, objectGroup_name:str, default_properties:dict[str, str] = {}, optional_properties :dict[str, Union[str, dict[str, str]]] = {}, other_properties:list[et.Element] = [])->None:
+        objectGroup_now:case.ObjectGroup = utility.get_ElementOri_from_list_by_name_s(self._objectGroup_list, objectGroup_name)
         if objectGroup_now == None:
             raise KeyError("objectGroup name:" + objectGroup_name + " not found")
-        objectGroup_now.addObject(default_properties, optional_properties, other_properties)
-        if default_properties.get("id") == None:
-            default_properties["id"] = self._properties.returnDefaultProperty("nextobjectid")
-        str_nextobjectid = str(max(int(self._properties.returnDefaultProperty("nextobjectid")), int(default_properties["id"]) + 1))
+        default_properties_n = deepcopy(default_properties)
+        if default_properties_n.get("id") == None:
+            default_properties_n["id"] = self._properties.returnDefaultProperty("nextobjectid")
+        objectGroup_now.addObject(default_properties_n, optional_properties, other_properties)
+        str_nextobjectid = str(max(int(self._properties.returnDefaultProperty("nextobjectid")), int(default_properties_n["id"]) + 1))
         self._properties.assignDefaultProperty("nextobjectid", str_nextobjectid)
     
-    def addObject_one(self, tobject:object.TObject_One, offset:frame.Coordinate = frame.Coordinate()):
-        ntobject = tobject.offset(offset)
-        self.addObject("Triggers", ntobject.default_properties(), ntobject.optional_properties(), ntobject.other_properties())
+    def addObject_one(self, tobject_one:object.TObject_One, offset:frame.Coordinate = frame.Coordinate()):
+        ntobject = tobject_one.offset(offset)
+        self.addObject_dict("Triggers", ntobject.default_properties(), ntobject.optional_properties(), ntobject.other_properties())
 
     def addObject_group(self, tobject_group:object.TObject_Group, offset:frame.Coordinate = frame.Coordinate()):
         for tobject in tobject_group._TObject_One_list:
             self.addObject_one(tobject, offset)
+        for tobject_group in tobject_group._TObject_Group_list:
+            self.addObject_group(tobject_group, offset)
 
-    def iterator_object(self, objectGroup_name:str, default_re:dict[str, str] = {}, optional_re:dict[str, str] = {})->Generator[case.TObject, None, None]:
-        objectGroup_now:case.ObjectGroup = utility.get_ElementOri_from_list_by_name(self._objectGroup_list, objectGroup_name)
+    def addObject(self, tobject:Union[object.TObject_One, object.TObject_Group], offset:frame.Coordinate = frame.Coordinate()):
+        if isinstance(tobject, object.TObject_One):
+            self.addObject_one(tobject, offset)
+        elif isinstance(tobject, object.TObject_Group):
+            self.addObject_group(tobject, offset)
+        else:
+            raise TypeError("The type of RWmap.addObject(tobject, ...) is wrong.")
+
+    def iterator_object_s(self, objectGroup_name:str, default_re:dict[str, str] = {}, optional_re:dict[str, str] = {})->Generator[case.TObject, None, None]:
+        objectGroup_now:case.ObjectGroup = utility.get_ElementOri_from_list_by_name_s(self._objectGroup_list, objectGroup_name)
         if objectGroup_now == None:
             raise KeyError("objectGroup name:" + objectGroup_name + " not found")
         for tobject in objectGroup_now._object_list:
@@ -122,41 +159,47 @@ class RWmap(ElementOri):
             if tobject_sas == False:
                 continue
             yield tobject
+    
+    def _tileplace_to_gid(self, tileplace:Union[int, tuple[str, int], frame.TagCoordinate])->int:
+        if isinstance(tileplace, int):
+            tileplace_now = tileplace
+        elif isinstance(tileplace, tuple) and isinstance(tileplace[0], str) and isinstance(tileplace[1], int):
+            tileplace_now = self.get_tileset_s(tileplace[0]).tileid_to_gid(tileplace[1])
+        elif isinstance(tileplace, frame.TagCoordinate):
+            tileplace_now = self.get_tileset_s(tileplace.tag()).coo_to_gid(tileplace.place())
+        else:
+            raise TypeError("The type of RWmap.addTile(..., tileplace) is wrong.")
+        return tileplace_now
 
-    def addTile_place(self, layerplace:frame.TagCoordinate, tileplace:frame.TagCoordinate):
-        layer:case.Layer = utility.get_ElementOri_from_list_by_name(self._layer_list, layerplace.tag())
-        if layer == None:
-            raise KeyError("layer name:" + layerplace.tag() + " not found")
-        for tileset_now in self._tileset_list:
-            if tileset_now.output_name() == tileplace.tag():
-                tileset = tileset_now
-        try:
-            layer.assigntileid(layerplace.place(), tileset.tileid(tileplace.place()))
-        except UnboundLocalError:
-            raise KeyError("tileset name:" + tileplace.tag() + " not found")
+    def addTile_gid(self, layerplace:frame.TagCoordinate, gid:int):
+        if gid >= 0 and isinstance(gid, Integral):
+            layer:case.Layer = self.get_layer_s(layerplace.tag())
+        else:
+            raise TypeError("gid is less than 0 or not integer.")
+        layer.assigntileid(layerplace.place(), gid)
 
-    def addTile(self, layer_name:str, place_grid:frame.Coordinate, tileset_name:str, tile_grid:frame.Coordinate)->None:        
-        layer_name = layer_name.strip()
-        tileset_name = tileset_name.strip()
-        self.addTile_place(frame.TagCoordinate(layer_name, place_grid), \
-                           frame.TagCoordinate(tileset_name, tile_grid))
+    def addTile(self, layerplace:frame.TagCoordinate, tileplace:Union[int, tuple[str, int], frame.TagCoordinate]):
+        tileplace_now = self._tileplace_to_gid(tileplace)
+        self.addTile_gid(layerplace, tileplace_now)
 
-    def addTile_group(self, original_grid:frame.Coordinate, tilegroup:tile.TileGroup_One):
+    def addTile_square(self, layerRectangle:frame.TagRectangle, tileplace:Union[int, tuple[str, int], frame.TagCoordinate])->None:
+        tileplace_now = self._tileplace_to_gid(tileplace)
+        layer:case.Layer = self.get_layer_s(layerRectangle.tag())
+        layer.assigntileid_square(layerRectangle.rectangle(), tileplace_now)
+
+    def addTile_group(self, tilegroup:tile.TileGroup_One, original_grid:frame.Coordinate):
         for place_grid in tilegroup.size():
             layerplace = frame.TagCoordinate(tilegroup.layername(), original_grid + place_grid)
             tileplace = tilegroup[place_grid]
-            self.addTile_place(layerplace, tileplace)
+            if tileplace.tag() != "empty":
+                self.addTile(layerplace, tileplace)
 
-    def addTile_group_list(self, original_grid:frame.Coordinate, tilegroup_list:tile.TileGroup_List):
+    def addTile_group_list(self, tilegroup_list:tile.TileGroup_List, original_grid:frame.Coordinate):
         for tilegroup in tilegroup_list:
-            self.addTile_group(original_grid, tilegroup)
+            self.addTile_group(tilegroup, original_grid)
 
-    def addTile_square(self, layer_name:str, place_rectangle:frame.Rectangle, tileset_name:str, tile_grid:frame.Coordinate)->None:
-        for place_grid in place_rectangle:
-            self.addTile(layer_name, place_grid, tileset_name, tile_grid)
-
-    def add_OTGroup(self, otgroup:otgroup.OTGroup, offset_grid:frame.Coordinate = frame.Coordinate(), ):
-        self.addTile_group_list(offset_grid, otgroup._tilegroup_list)
+    def addOTGroup(self, otgroup:otgroup.OTGroup, offset_grid:frame.Coordinate = frame.Coordinate()):
+        self.addTile_group_list(otgroup._tilegroup_list, offset_grid)
         self.addObject_group(otgroup._tobject_group, offset_grid * self.tile_size())
         
 

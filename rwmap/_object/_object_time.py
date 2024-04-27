@@ -1,11 +1,13 @@
+from copy import deepcopy
+
 import rwmap._util as utility
 
 class TObject_Time:
     def __init__(self, optional_properties:dict[str, str] = {}):
-        self._optional_properties = optional_properties
+        self._optional_properties = deepcopy(optional_properties)
 
     def output_optional_properties(self):
-        return self._optional_properties
+        return deepcopy(self._optional_properties)
     
     @classmethod
     def init_time(cls, warmup:int = -1, delay:int = -1, reset:int = -1, repeat:int = -1, issecond:bool = True):

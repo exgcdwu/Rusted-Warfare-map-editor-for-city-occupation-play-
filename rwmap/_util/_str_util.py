@@ -12,6 +12,8 @@ def ndarray_from_text_packed(text:str, encoding:str, compression:str)->np.ndarra
         nmatrix = zlib.decompress(nmatrix)
     elif compression == "gzip":
         nmatrix = gzip.decompress(nmatrix)
+    elif compression == None:
+        pass
     else:
         raise NotImplementedError(f": Compression type {compression} not supported")
     nmatrix = np.frombuffer(nmatrix, dtype=np.uint32)
@@ -24,6 +26,8 @@ def text_packed_from_ndarray(ndarray_now:np.ndarray, encoding:str, compression:s
         text_packed = zlib.compress(text_packed)
     elif compression == "gzip":
         text_packed = gzip.compress(text_packed)
+    elif compression == None:
+        pass
     else:
         raise NotImplementedError(f": Compression type {compression} not supported")
     if encoding == "base64":
