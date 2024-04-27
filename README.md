@@ -6,6 +6,8 @@ ___一个铁锈战争 (Rusted Warfare) 地图编辑 python 库___
 
 [简易使用教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/Tutorial.md)
 
+[简单城夺地图代码例子](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/examples/example1/example1.py)
+
 ## 目标
 
 python实现铁锈地图文件地块编辑和宾语编辑。
@@ -30,7 +32,7 @@ pip install rwmapeditor-exgcdwu
 
 ### 1.使用地图编辑器(Tiled,notTiled)创建新地图
 
-地图格式：zlib、gzip
+地图格式：zlib、gzip、纯base64
 
 渲染顺序：右下(right-down)
 

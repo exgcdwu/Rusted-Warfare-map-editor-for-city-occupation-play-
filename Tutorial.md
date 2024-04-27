@@ -27,7 +27,7 @@
 
 ### 1.使用地图编辑器(Tiled,notTiled)创建新地图
 
-地图格式：zlib、gzip
+地图格式：zlib、gzip、纯base64
 
 渲染顺序：右下(right-down)
 
