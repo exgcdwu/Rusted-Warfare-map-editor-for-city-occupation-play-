@@ -89,16 +89,18 @@ mymap.write_file(map_dir + map_name_out)
 
 ```python
 
-mymap.addObject(
+mymap.addObject_dict(
     "Triggers", 
     {"name": "刷兵实验", "type": "unitAdd", "x": "1500", "y":"1100", "width": "20", "height": "20", "visible": "0"}, 
-    {"resetActivationAfter":"5s", "spawnUnits": "heavyTank*10", "team" :"0", "warmup":"5s"})
+    {"resetActivationAfter":"50s", "spawnUnits": "heavyTank*2", "team" :"0", "warmup":"5s"})
+#添加宾语：第一项图层名称（Triggers），第二项默认属性，第三项可选属性
+#默认属性可添加id也可不添加，没有id项会自动添加
 
-mymap.addObject(
+mymap.addObject_dict(
     "Triggers", 
-    {"name": "刷兵实验", "type": "unitAdd", "x": "1000", "y":"1500", "width": "20", "height": "20"}, 
-    {"resetActivationAfter":"5s", "spawnUnits": "heavyTank*10", "team" :"0", "warmup":"5s"})
-
+    {"name": "刷兵实验", "type": "unitAdd", "x": "500", "y":"1500", "width": "20", "height": "20"}, 
+    {"resetActivationAfter":"50s", "spawnUnits": "heavyTank*2", "team" :"0", "warmup":"5s"})
+    
 ```
 
 #### 分组宾语添加模式
