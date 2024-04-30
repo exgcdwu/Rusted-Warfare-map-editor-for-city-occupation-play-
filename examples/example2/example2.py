@@ -70,6 +70,8 @@ example2.addObject_one(rw.object_useful.Mapinfo(origin, rw.const.MAPTYPE.skirmis
 #添加map_info
 example2.addObject_one(rw.object_useful.Credit(credit_pos, 0, setCredits = 0, reset = 1))
 example2.addObject_one(rw.object_useful.Credit(credit_pos, 1, setCredits = 0, reset = 1))
+example2.addObject_one(rw.object_useful.Credit(credit_pos, 2, setCredits = 0, reset = 1))
+example2.addObject_one(rw.object_useful.Credit(credit_pos, 3, setCredits = 0, reset = 1))
 #添加credit重置
 
 def new_city(cityname:str, id_now:int)->rw.object_group_useful.CityNoTeam:
@@ -83,7 +85,7 @@ def new_city(cityname:str, id_now:int)->rw.object_group_useful.CityNoTeam:
 
 def new_troopadd(spawnUnits:str, reset:int)->rw.object_group_useful.RefreshTroop:
     return rw.object_group_useful.RefreshTroop(rw.frame.Coordinate(0, 0), -1, spawnUnits, 
-                                               20, reset)
+                                               5, reset)
 #兵力生产函数
 city_matrix = []
 for x in range(10, 200, 20):
