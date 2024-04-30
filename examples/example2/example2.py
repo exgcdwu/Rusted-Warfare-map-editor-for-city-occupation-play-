@@ -63,7 +63,10 @@ id_now = 1
 # 为城市检测提供id
 
 example2.addObject_one(rw.object_useful.Mapinfo(origin, rw.const.MAPTYPE.skirmish, 
-                                                rw.const.FOG.los, rw.const.WIN.commandCenter))
+                                                rw.const.FOG.los, rw.const.WIN.commandCenter, 
+                                                text = 
+                                                "本地图宾语完全由宾语自动化完成。此为城夺刷兵地图例子2。\n\
+                                                城市名称会根据占领者改变颜色；存在兵力撤退和占领区机制"))
 #添加map_info
 example2.addObject_one(rw.object_useful.Credit(credit_pos, 0, setCredits = 0, reset = 1))
 example2.addObject_one(rw.object_useful.Credit(credit_pos, 1, setCredits = 0, reset = 1))

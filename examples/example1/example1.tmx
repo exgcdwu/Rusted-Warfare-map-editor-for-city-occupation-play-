@@ -58,6 +58,8 @@
       <properties>
         <property name="type" value="skirmish"/>
         <property name="fog" value="los"/>
+        <property name="introText" value="本地图宾语完全由宾语自动化完成。此为城夺刷兵地图例子1。
+                                                    使用普通的城市宾语组。"/>
         <property name="winCondition" value="commandCenter"/>
       </properties>
     </object>

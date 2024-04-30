@@ -52,7 +52,9 @@ def new_troopadd()->rw.object_group_useful.RefreshTroop:
 #小坦生产函数
 
 example1.addObject_one(rw.object_useful.Mapinfo(origin, rw.const.MAPTYPE.skirmish, 
-                                                rw.const.FOG.los, rw.const.WIN.commandCenter))
+                                                rw.const.FOG.los, rw.const.WIN.commandCenter, 
+                                                text = "本地图宾语完全由宾语自动化完成。此为城夺刷兵地图例子1。\n\
+                                                    使用普通的城市宾语组。"))
 #添加map_info
 example1.addObject_one(rw.object_useful.Credit(credit_pos, 0, setCredits = 0, reset = 1))
 example1.addObject_one(rw.object_useful.Credit(credit_pos, 1, setCredits = 0, reset = 1))
