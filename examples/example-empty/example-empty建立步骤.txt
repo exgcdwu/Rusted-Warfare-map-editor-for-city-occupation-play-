@@ -8,8 +8,9 @@
 
 200 * 200大小
 
-2.手动载入默认地块集
+2.手动载入地块集
 
+默认地块集
 terrain/Deep Water.tsx
 terrain/Dirt.tsx
 terrain/Ice.tsx
@@ -23,6 +24,9 @@ terrain/Snow.tsx
 terrain/Stone.tsx
 terrain/Water.tsx
 units.tsx
+
+其他地块集
+export_units.tsx
 
 3.手动创建所需的地块层和宾语层
 

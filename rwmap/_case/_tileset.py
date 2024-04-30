@@ -111,6 +111,9 @@ class TileSet(ElementOri):
     
     def endgid(self)->int:
         return self.firstgid() + self.totalgid()
+    
+    def changefirstgid(self, firstgid:int)->None:
+        self._properties.assignDefaultProperty("firstgid", str(firstgid))
 
     def gid_to_tileid(self, gid:int)->tuple[str, int]:
         tileid = gid - self.firstgid()

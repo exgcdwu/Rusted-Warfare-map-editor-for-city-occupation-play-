@@ -99,9 +99,9 @@ class BuildingDetectAllTeamGroup(BuildingDetectAllTeam):
                  warmup:int, reset:int, unitType_andob:Union[str, bool] = True, 
                  size:frame.Coordinate = const.COO.SIZE_STANDARD, 
                  name:str = None, teamgroup:int = 2, minUnits:int = None, 
-                 maxUnits:int = None):
+                 maxUnits:int = None, isacti_accu:bool = False):
         self._teamgroup = teamgroup
-        id_group = [team % teamgroup for team in range(teamnum)]
+        id_group = [team % teamgroup for team in range(teamnum)]  if isacti_accu else []
         BuildingDetectAllTeam.__init__(self, pos, id, teamnum, warmup, reset, size = size, 
                                        unitType_andob = unitType_andob, name = name, 
                                        id_group = id_group, minUnits = minUnits, maxUnits = maxUnits)

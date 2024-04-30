@@ -75,7 +75,7 @@ def _make_udetectallteamgroup_s(pos:frame.Coordinate, id:str, teamnum:int, units
                     size:frame.Coordinate = const.COO.SIZE_STANDARD, 
                     isonlybuilding:bool = True, name:str = [], teamgroup:int = 2, 
                     unitsnum:int = 1, 
-                    is_detect_acti_add:bool = False)->city_detect.BuildingDetectAllTeam:
+                    is_detect_acti_add:bool = False, isacti_accu:bool = False)->city_detect.BuildingDetectAllTeam:
         
         minUnits = unitsnum if not is_detect_acti_add else None
         maxUnits = unitsnum - 1 if is_detect_acti_add else None
@@ -84,7 +84,7 @@ def _make_udetectallteamgroup_s(pos:frame.Coordinate, id:str, teamnum:int, units
         udetect_s = city_detect.BuildingDetectAllTeamGroup(pos, id, teamnum, warmup, reset, size = size, 
                                                       unitType_andob = unitType_andob, name = name, 
                                                       teamgroup = teamgroup, minUnits = minUnits, 
-                                                      maxUnits = maxUnits)
+                                                      maxUnits = maxUnits, isacti_accu = isacti_accu)
 
         return udetect_s
 
@@ -250,7 +250,7 @@ class RefreshBuildingAllTeamGroup(RefreshBuildingAllTeam):
                  team_add:int = -1, size:frame.Coordinate = const.COO.SIZE_STANDARD, 
                  isonlybuilding:bool = True, name_detect:str = None, 
                  name_add:str = None, unitsnum:int = 1, teamgroup:int = 2, 
-                 is_detect_acti_add:bool = False):
+                 is_detect_acti_add:bool = False, isacti_accu:bool = False):
 
         uadd_s = _make_uadd_s(pos, warmup_add, reset_add, units, team = team_add, 
                               size = size, name = name_add, unitsnum = unitsnum)
@@ -258,7 +258,8 @@ class RefreshBuildingAllTeamGroup(RefreshBuildingAllTeam):
         udetect_s = _make_udetectallteamgroup_s(pos, id, teamnum, units, warmup_detect, reset_detect, 
                                            size = size, isonlybuilding = isonlybuilding, 
                                            name = name_detect, teamgroup = teamgroup,
-                                           unitsnum = unitsnum, is_detect_acti_add = is_detect_acti_add)
+                                           unitsnum = unitsnum, is_detect_acti_add = is_detect_acti_add, 
+                                           isacti_accu = isacti_accu)
 
         return cls(uadd_s, udetect_s, is_detect_acti_add)
     

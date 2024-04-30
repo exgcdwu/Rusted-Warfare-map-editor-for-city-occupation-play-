@@ -78,6 +78,12 @@ class RWmap(ElementOri):
         if objectgroup == None:
             raise KeyError("objectgroup name:" + name + " not found")
         return objectgroup
+    
+    def add_tileset(self, tileset:case.TileSet)->None:
+        tileset_n = deepcopy(tileset)
+        firstgid = self._tileset_list[-1].endgid()
+        tileset_n.changefirstgid(firstgid)
+        self._tileset_list.append(tileset_n)
 
     def output_str(self, pngtextnum:int = -1, tilenum:int = -1, output_rectangle:frame.Rectangle = frame.Rectangle(frame.Coordinate(), frame.Coordinate(-1, -1)), objectnum:int = -1)->str:
         str_ans = ""

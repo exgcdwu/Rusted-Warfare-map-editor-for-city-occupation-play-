@@ -154,12 +154,12 @@ class CityAllTeam(refresh_building.RefreshBuildingAllTeam, City):
     
     @classmethod
     def init_base(cls, pos:frame.Coordinate, id:str, teamnum:int, 
-                  text:list[str], warmup_detect:int, warmup_add:int, 
+                  text:Union[str, list[str]], warmup_detect:int, warmup_add:int, 
                   reset_detect:int, reset_add:int, units:str = "supplyDepot", 
                   team_add:int = -1, size:frame.Coordinate = const.COO.SIZE_STANDARD, 
                   isonlybuilding:bool = True, name_detect:str = None, 
-                  name_add:str = None, name_text:list[str] = [], unitsnum:int = 1, 
-                  id_group:list[int] = [], textColor:list[str] = [], textSize:int = -1, 
+                  name_add:str = None, name_text:Union[str, list[str]] = [], unitsnum:int = 1, 
+                  id_group:list[int] = [], textColor:Union[str, list[str]] = [], textSize:int = -1, 
                   is_detect_acti_add:bool = False, detect_to_text:list[int] = None):
         building_s = refresh_building.RefreshBuildingAllTeam.init_base\
         (pos, id, teamnum, units, warmup_detect = warmup_detect, warmup_add = warmup_add, 
@@ -172,9 +172,9 @@ class CityAllTeam(refresh_building.RefreshBuildingAllTeam, City):
     
     @classmethod
     def init_bb(cls, building_s:refresh_building.RefreshBuildingAllTeam, 
-                text:list[str], name_text:list[str] = [], 
-                textColor:list[str] = [], textSize:int = -1, 
-                detect_to_text:list[int] = None):
+                text:Union[str, list[str]], name_text:list[str] = [], 
+                textColor:Union[str, list[str]] = [], textSize:int = -1, 
+                detect_to_text:Union[str, list[str]] = None):
         citytext = city_text.CityTextAllTeam(building_s.pos(), text, building_s.size(), textColor = textColor, 
                                       textSize = textSize, name = name_text)
         return cls(building_s, citytext, detect_to_text = detect_to_text)
@@ -185,8 +185,10 @@ class CityAllTeamGroup(refresh_building.RefreshBuildingAllTeamGroup, CityAllTeam
         if ((not isinstance(building_s, refresh_building.RefreshBuildingAllTeamGroup)) or \
            (not isinstance(citytext, city_text.CityTextAllTeam))):
             raise TypeError("CityAllTeamGroup.__init__:must be allteamgroup/allteam")
-        
-        detect_to_text = list(range(building_s.group()))
+        teamgroupnum = building_s.group()
+        detect_to_text = [textn % teamgroupnum for textn in range(building_s.length() - 1)]
+        if citytext.length() != teamgroupnum:
+            raise ValueError("Length of citytext is not equal to building.")
         City.__init__(self, building_s, citytext, detect_to_text = detect_to_text)
 
     @classmethod
@@ -200,27 +202,28 @@ class CityAllTeamGroup(refresh_building.RefreshBuildingAllTeamGroup, CityAllTeam
     
     @classmethod
     def init_base(cls, pos:frame.Coordinate, id:str, teamnum:int, 
-                  text:list[str], warmup_detect:int, warmup_add:int, 
+                  text:Union[list[str], str], warmup_detect:int, warmup_add:int, 
                   reset_detect:int, reset_add:int, units:str = "supplyDepot", 
                   team_add:int = -1, size:frame.Coordinate = const.COO.SIZE_STANDARD, 
                   isonlybuilding:bool = True, name_detect:str = None, 
-                  name_add:str = None, name_text:list[str] = [], unitsnum:int = 1, 
-                  teamgroup:int = 2, textColor:list[str] = [], textSize:int = -1, 
-                  is_detect_acti_add:bool = False):
+                  name_add:str = None, name_text:Union[list[str], str] = [], unitsnum:int = 1, 
+                  teamgroup:int = 2, textColor:Union[list[str], str] = [], textSize:int = -1, 
+                  is_detect_acti_add:bool = False, isacti_accu:bool = False):
         
         building_s = refresh_building.RefreshBuildingAllTeamGroup.init_base\
         (pos, id, teamnum, units, warmup_detect = warmup_detect, warmup_add = warmup_add, 
          reset_detect = reset_detect, reset_add = reset_add, team_add = team_add, size = size, 
          isonlybuilding = isonlybuilding, name_detect = name_detect, name_add = name_add, 
-         unitsnum = unitsnum,teamgroup = teamgroup, is_detect_acti_add = is_detect_acti_add)
+         unitsnum = unitsnum,teamgroup = teamgroup, is_detect_acti_add = is_detect_acti_add, 
+         isacti_accu = isacti_accu)
         citytext = _make_citytextallteam_s(pos, text, size = size, textColor = textColor, 
                                   textSize = textSize, name = name_text)
         return cls(building_s, citytext, teamgroup = teamgroup)
     
     @classmethod
     def init_bb(cls, building_s:refresh_building.RefreshBuildingAllTeamGroup, 
-                text:list[str], name_text:list[str] = [], 
-                textColor:list[str] = [], textSize:int = -1):
+                text:Union[list[str], str], name_text:Union[list[str], str] = [], 
+                textColor:Union[list[str], str] = [], textSize:int = -1):
         citytext = city_text.CityTextAllTeam(building_s.pos(), text, building_s.size(), textColor = textColor, 
                                       textSize = textSize, name = name_text)
         return cls(building_s, citytext)
