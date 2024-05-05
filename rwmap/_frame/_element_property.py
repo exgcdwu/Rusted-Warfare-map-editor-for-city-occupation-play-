@@ -5,6 +5,9 @@ from typing import Union
 import rwmap._util as utility
 
 class ElementProperties:
+    pass
+
+class ElementProperties:
     def __init__(self, tag:str, default_properties:dict[str, str] = {}, optional_properties:dict[str, Union[str, dict[str, str]]] = {})->None:
         self._tag = tag
         self._default_properties = deepcopy(default_properties)
@@ -34,6 +37,9 @@ class ElementProperties:
         str_ans = utility.indentstr_Tab(str_ans)
         return str_ans
     
+    def __lt__(self, other:ElementProperties)->bool:
+        return int(self.returnDefaultProperty("id")) < int(other.returnDefaultProperty("id"))
+
     def assignDefaultProperty(self, name:str, value:Union[str, dict[str, str]]):
         self._default_properties[name] = value
     
@@ -41,13 +47,14 @@ class ElementProperties:
         self._optional_properties[name] = value
 
     def returnDefaultProperty(self, name:str)->Union[str, dict[str, str]]:
-        return self._default_properties.get(name)
+        return deepcopy(self._default_properties.get(name))
     
     def returnOptionalProperty(self, name:str)->Union[str, dict[str, str]]:
-        return self._optional_properties.get(name)
+        return deepcopy(self._optional_properties.get(name))
     
     def deleteDefaultProperty(self, name:str)->None:
         self._default_properties.pop(name)
     
     def deleteOptionalProperty(self, name:str)->None:
         self._optional_properties.pop(name)
+    

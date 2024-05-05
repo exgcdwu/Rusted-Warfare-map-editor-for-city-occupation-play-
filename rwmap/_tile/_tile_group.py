@@ -3,6 +3,7 @@ from copy import deepcopy
 from typing import Union
 
 import rwmap._frame as frame
+import rwmap._data.const as const
 import rwmap._util as utility
 from rwmap._exceptions import KeyConflictError
 from rwmap._data.const import TYPE
@@ -10,9 +11,13 @@ from rwmap._data.const import TYPE
 tilestate_type = "S20"
 
 class TileGroup_Matrix:
-    def __init__(self, tilename_matrix):
+    pass
+
+class TileGroup_Matrix:
+    def __init__(self, tilename_matrix:list[list]):
         self._tilematrix = deepcopy(np.array(tilename_matrix, tilestate_type))
         self._size = frame.Coordinate(self._tilematrix.shape[0], self._tilematrix.shape[1])
+        self._acce_dict = {}
 
     def tilematrix(self):
         return self._tilematrix
@@ -21,7 +26,47 @@ class TileGroup_Matrix:
         return self._size
     
     def __getitem__(self, place:frame.Coordinate)->str:
-        return deepcopy(self._tilematrix[place.x()][place.y()])
+        return bytes(self._tilematrix[place.x(), place.y()]).decode("utf-8")
+    
+    def save_acce_s(self, map:str, gidmatrix:np.ndarray):
+        self._acce_dict[map] = gidmatrix
+    
+    def get_acce_s(self, map:str):
+        return self._acce_dict.get(map)
+
+    def map(self, dic:dict)->TileGroup_Matrix:
+        tilegroup_map = deepcopy(self)
+        for place in self._size:
+            value = self.__getitem__(place)
+            if dic.get(value) != None:
+                tilegroup_map._tilematrix[place.x()][place.y()] = deepcopy(dic[value])
+        return tilegroup_map
+    
+    def part(self, rect:frame.Rectangle)->TileGroup_Matrix:
+        tilegroup_part = deepcopy(self)
+        tilegroup_part._size = deepcopy(rect._addCoordinate)
+        tilegroup_part._tilematrix = deepcopy(self._tilematrix[int(rect.i().x()):int(rect.e().x()), int(rect.i().y()):int(rect.e().y())])
+        return tilegroup_part
+    
+    def flip_h(self)->TileGroup_Matrix:
+        tilegroup_part = deepcopy(self)
+        tilegroup_part._tilematrix = np.flipud(tilegroup_part._tilematrix)
+
+    def flip_v(self)->TileGroup_Matrix:
+        tilegroup_part = deepcopy(self)
+        tilegroup_part._tilematrix = np.fliplr(tilegroup_part._tilematrix)
+
+    def rotate_CW(self)->TileGroup_Matrix:
+        tilegroup_part = deepcopy(self)
+        tilegroup_part._tilematrix = np.flipud(tilegroup_part._tilematrix.transpose())
+
+    def rotate_RW(self)->TileGroup_Matrix:
+        tilegroup_part = deepcopy(self)
+        tilegroup_part._tilematrix = np.fliplr(tilegroup_part._tilematrix.transpose())
+    
+    def rotate_O(self)->TileGroup_Matrix:
+        tilegroup_part = deepcopy(self)
+        tilegroup_part._tilematrix = np.fliplr(np.flipud(tilegroup_part._tilematrix))
     
 class TileGroup_AddLayer(TileGroup_Matrix):
     def __init__(self, layername:str, tilename_matrix):
@@ -51,7 +96,7 @@ class TileGroup_AddFile(TileGroup_Matrix):
 
     def _add_tilename(self, tilename_to_tileset:dict[str, TYPE.tileid])->None:
         tilename_to_tileset_n = deepcopy(tilename_to_tileset)
-        zeroadd = {"0": frame.TagCoordinate.init_xy("empty", 0, 0)}
+        zeroadd = {const.KEY.empty_tile_for_tilegroup: frame.TagCoordinate.init_xy("empty", 0, 0)}
         if utility.dict_isconflict(tilename_to_tileset, zeroadd):
             raise KeyConflictError("Key-value of the tile group conflicts at instantiation. \
                                    0 is the default empty tile.")
@@ -63,8 +108,11 @@ class TileGroup_AddFile(TileGroup_Matrix):
         return cls(tilename_to_tileset, tilegroup_matrix._tilematrix)
 
     def __getitem__(self, place: frame.Coordinate) -> TYPE.tileid:
-        stritems = bytes(TileGroup_Matrix.__getitem__(self, place)).decode("utf-8")
-        return deepcopy(self._tilename_to_tileset[stritems])
+        stritems = TileGroup_Matrix.__getitem__(self, place)
+        if self._tilename_to_tileset.get(stritems) == None:
+            return 0
+        else:
+            return deepcopy(self._tilename_to_tileset[stritems])
     
     def tilename_to_tileset(self)->dict[str, TYPE.tileid]:
         return deepcopy(self._tilename_to_tileset)
@@ -96,7 +144,7 @@ class TileGroup_List_SubTileName:
 
 class TileGroup_List(TileGroup_List_SubTileName):
     def __init__(self, tilename_to_tileset:dict[str, TYPE.tileid], tilegrouplist_addlayer:list[TileGroup_AddLayer]):
-        super().__init__(self, tilegrouplist_addlayer)
+        TileGroup_List_SubTileName.__init__(self, tilegrouplist_addlayer)
         self._add_tilename(tilename_to_tileset)
 
     def _add_tilename(self, tilename_to_tileset:dict[str, TYPE.tileid])->None:
@@ -111,9 +159,11 @@ class TileGroup_List(TileGroup_List_SubTileName):
         tilegrouplist_addlayer = []
         tilename_to_tileset = {}
         for tilegroup in tilegrouplist:
-            if utility.dict_isconflict(tilename_to_tileset, tilegroup.tilename_to_tileset()):
+            dict_new = tilegroup.tilename_to_tileset()
+            del dict_new[const.KEY.empty_tile_for_tilegroup]
+            if utility.dict_isconflict(tilename_to_tileset, dict_new):
                 raise KeyConflictError("Key-value of the tile group conflicts at instantiation.")
-            tilename_to_tileset.update(tilegroup.tilename_to_tileset())
+            tilename_to_tileset.update(dict_new)
             tilegrouplist_addlayer.append(TileGroup_AddLayer.init_tilegroup(tilegroup))
         return cls(tilename_to_tileset, tilegrouplist_addlayer)
 

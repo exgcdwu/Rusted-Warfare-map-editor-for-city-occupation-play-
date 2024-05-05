@@ -27,6 +27,17 @@ class ObjectGroup(ElementOri):
         object_list = [TObject.init_etElement(tobject) for tobject in root if tobject.tag == "object"]
         return cls(properties, object_list)
     
+    @classmethod
+    def init_ObjectGroup(cls, name:str)->None:
+        properties = ElementProperties("objectgroup", {"name": "Triggers"})
+        return cls(properties, [])
+    
+    def id(self)->int:
+        return int(self._properties.returnDefaultProperty("id"))
+    
+    def changeid(self, id:int)->None:
+        self._properties.assignDefaultProperty("id", id)
+    
     def output_str(self, objectnum:int = -1)->str:
         str_ans = ""
         str_ans = str_ans + self._properties.output_str() + "\n"

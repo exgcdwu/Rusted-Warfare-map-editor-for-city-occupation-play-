@@ -39,6 +39,9 @@ class BuildingDetect(object.TObject_Group):
             if tobject._otype.output_optional_properties().get("team") == team:
                 return tobject.idTObject_s()
         return None
+    
+    def idTObject_s_team_list(self, team_list:list[Union[int, None]])->list[Union[object.TObject_One, None]]:
+        return [self.idTObject_s_team(team) for team in team_list]
 
     def pos(self)->frame.Coordinate:
         return self.idTObject_s_index(0)._pos.pos()
@@ -82,12 +85,9 @@ class BuildingDetectAllTeam(BuildingDetect):
                               unitType_andob = unitType_andob, name = name_list, 
                               team = teamlist, minUnits = minUnits, 
                               maxUnits = maxUnits)
-
-    def idTObject_s_list(self, teamlist:list[int])->list[object.TObject_One]:
-        return [self.idTObject_s_index(team) for team in teamlist]
     
     def idTObject_s_team_list(self, teamnow:int, teamgroupnum:int = 2)->list[object.TObject_One]:
-        return self.idTObject_s_list([team for team in range(len(self._TObject_One_list))
+        return self.idTObject_s_team_list([team for team in range(len(self._TObject_One_list))
                                              if team % teamgroupnum == teamnow])
     
     def idTObject_s_id(self, id:str)->list[object.TObject_One]:
@@ -108,3 +108,6 @@ class BuildingDetectAllTeamGroup(BuildingDetectAllTeam):
         
     def group(self)->int:
         return self._teamgroup
+    
+    def team_list(self, teamgroupnow:int)->list[int]:
+        return [team for team in range(self.length()) if team % self._teamgroup == teamgroupnow]

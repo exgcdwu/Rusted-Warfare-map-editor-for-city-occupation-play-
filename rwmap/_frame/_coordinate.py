@@ -5,6 +5,9 @@ import math
 import rwmap._exceptions as rwexceptions
 
 class Coordinate:
+    pass
+
+class Coordinate:
     
     def __init__(self, x:int = 0, y:int = 0, dtype:str = np.int32):
         self._content = np.array([[0], [0]], dtype=dtype)
@@ -30,12 +33,15 @@ class Coordinate:
     
     def id(self, width:int)->int:
         return int(self.x() * width + self.y())
+    
+    def transpose(self)->Coordinate:
+        return Coordinate(self.y(), self.x(), self._content.dtype)
 
     def __add__(self, other):
         if isinstance(other, Coordinate):
-            return Coordinate(self.x() + other.x(), self.y() + other.y())
+            return Coordinate(self.x() + other.x(), self.y() + other.y(), self._content.dtype)
         else:
-            return Coordinate(other + self.x(), other + self.y())
+            return Coordinate(other + self.x(), other + self.y(), self._content.dtype)
 
     def __mul__(self, other):
         ans = Coordinate(0, 0)
@@ -62,17 +68,17 @@ class Coordinate:
     
     def __sub__(self, other):
         if isinstance(other, Coordinate):
-            return Coordinate(self.x() - other.x(), self.y() - other.y())
+            return Coordinate(self.x() - other.x(), self.y() - other.y(), self._content.dtype)
         else:
-            return Coordinate(self.x() - other, self.y() - other)
+            return Coordinate(self.x() - other, self.y() - other, self._content.dtype)
 
     def __neg__(self):
-        return Coordinate(-self.x(), -self.y())
+        return Coordinate(-self.x(), -self.y(), self._content.dtype)
     
     def _iterator(self):
         for i in range(0, self.x()):
             for j in range(0, self.y()):
-                yield Coordinate(i, j)
+                yield Coordinate(i, j, self._content.dtype)
 
     def __iter__(self):
         return self._iterator()
@@ -86,9 +92,12 @@ class Coordinate:
             return 0
     
 class Rectangle:
+    pass
+
+class Rectangle:
     def __init__(self, initialCoordinate:Coordinate, addCoordinate:Coordinate):
-        self._initialCoordinate = initialCoordinate
-        self._addCoordinate = addCoordinate
+        self._initialCoordinate = deepcopy(initialCoordinate)
+        self._addCoordinate = deepcopy(addCoordinate)
     
     def i(self):
         return deepcopy(self._initialCoordinate)
@@ -99,6 +108,14 @@ class Rectangle:
     def e(self):
         return deepcopy(self._initialCoordinate + self._addCoordinate)
     
+    def transpose(self)->Rectangle:
+        return Rectangle(self._initialCoordinate.transpose(), self._addCoordinate.transpose())
+    
+    @classmethod
+    def init_ae(cls, initialCoordinate:Coordinate, endCoordinate:Coordinate):
+        addCoordinate = endCoordinate - initialCoordinate
+        return cls(initialCoordinate, addCoordinate)
+
     def _iterator(self):
         for i in range(0, self._addCoordinate.x()):
             for j in range(0, self._addCoordinate.y()):
@@ -108,6 +125,24 @@ class Rectangle:
     def __iter__(self):
         return self._iterator()
     
+    def __add__(self, other):
+        if isinstance(other, Rectangle):
+            return Rectangle(self._addCoordinate + other._addCoordinate, self._initialCoordinate + other._initialCoordinate)
+        elif isinstance(other, Coordinate):
+            return Rectangle(self._initialCoordinate, self._addCoordinate + other)
+    
+    def __sub__(self, other):
+        if isinstance(other, Rectangle):
+            return Rectangle(self._initialCoordinate - other._initialCoordinate, self._addCoordinate - other._addCoordinate)
+        elif isinstance(other, Coordinate):
+            return Rectangle(self._initialCoordinate, self._addCoordinate - other)
+
+    def __neg__(self):
+        return Rectangle(-self._initialCoordinate, -self._addCoordinate)
+    
+class TagCoordinate(Coordinate):
+    pass
+
 class TagCoordinate(Coordinate):
     def __init__(self, tag:str, place:Coordinate):
         self.__dict__ = deepcopy(place.__dict__)
@@ -131,6 +166,34 @@ class TagCoordinate(Coordinate):
     def place(self):
         return Coordinate.init_np(self._content)
     
+    def transpose(self)->TagCoordinate:
+        return TagCoordinate(self._tag, Coordinate.transpose(self))
+    
+    def __add__(self, other):
+        return TagCoordinate(deepcopy(self._tag), Coordinate.__add__(self, other))
+
+    def __mul__(self, other):
+        return TagCoordinate(deepcopy(self._tag), Coordinate.__mul__(self, other))
+    
+    def __truediv__(self, other):
+        return TagCoordinate(deepcopy(self._tag), Coordinate.__truediv__(self, other))
+    
+    def __floordiv__(self, other):
+        return TagCoordinate(deepcopy(self._tag), Coordinate.__floordiv__(self, other))
+    
+    def __sub__(self, other):
+        return TagCoordinate(deepcopy(self._tag), Coordinate.__sub__(self, other))
+
+    def __neg__(self, other):
+        return TagCoordinate(deepcopy(self._tag), Coordinate.__neg__(self, other))
+    
+    def _iterator(self):
+        for coo in Coordinate._iterator(self):
+            yield TagCoordinate(deepcopy(self._tag), coo)
+    
+class TagRectangle(Rectangle):
+    pass
+
 class TagRectangle(Rectangle):
     def __init__(self, tag:str, place:Rectangle):
         self._initialCoordinate = deepcopy(place._initialCoordinate)
@@ -142,6 +205,9 @@ class TagRectangle(Rectangle):
     
     def rectangle(self)->Rectangle:
         return Rectangle(deepcopy(self._initialCoordinate), deepcopy(self._addCoordinate))
+    
+    def transpose(self)->TagRectangle:
+        return TagRectangle(self._tag, Rectangle.transpose(self))
 
     def i(self):
         return TagCoordinate(self._tag, deepcopy(self._initialCoordinate))

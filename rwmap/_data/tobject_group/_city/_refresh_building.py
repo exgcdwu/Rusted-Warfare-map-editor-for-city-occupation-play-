@@ -95,8 +95,6 @@ class RefreshBuilding(object.TObject_Group):
     def __init__(self, uadd_s:city_add.NormalUnitAdd, udetect_s:city_detect.BuildingDetect, 
                  is_detect_acti_add:bool = True):
         self._is_detect_acti_add = is_detect_acti_add
-        udetect_s._TObject_Group_list
-        udetect_s._TObject_One_list
         toba = udetect_s.idTObject_s_team(None)
         if is_detect_acti_add:
             uadd_s.add_actiBy_s(toba)
@@ -175,6 +173,9 @@ class RefreshBuilding(object.TObject_Group):
     
     def idTObject_s_team(self, team:Union[int, None])->Union[object.TObject_One, None]:
         return self.unitDetect_s().idTObject_s_team(team)
+    
+    def idTObject_s_team_list(self, team_list:list[Union[int, None]])->list[Union[object.TObject_One, None]]:
+        return [self.unitDetect_s().idTObject_s_team(team) for team in team_list]
     
 class RefreshBuildingNoTeam(RefreshBuilding):
     def __init__(self, uadd_s:city_add.NormalUnitAdd, udetect_s:city_detect.BuildingDetectNoTeam, 

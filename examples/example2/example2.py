@@ -12,7 +12,7 @@ import numpy as np
 
 import rwmap as rw
 
-tileset_map = rw.RWmap.init_mapfile(f'{example_dir_path}\\example-empty\\v3.tmx')
+tileset_map = rw.RWmap.init_mapfile(f'{example_dir_path}\\template\\v3.tmx')
 # V3模板
 example2 = rw.RWmap.init_mapfile(f'{example_dir_path}\\example-empty\\example-empty.tmx')
 # 一个200*200空地图 
@@ -46,7 +46,7 @@ command3 = rw.frame.TagCoordinate("export_units", team3 * export_units_grid + co
 origin = rw.frame.Coordinate(0, 0)
 # 原点位置
 
-credit_pos = rw.frame.Coordinate(0, 20)
+credit_pos = rw.frame.Coordinate(0, 0)
 # 添加资金改动宾语的位置
 
 ground_graph = rw.frame.TagRectangle("Ground", rw.frame.Rectangle(
@@ -92,7 +92,7 @@ for x in range(10, 200, 20):
     city_matrix.append([])
     for y in range(10, 200, 20):
         # 循环建立城市
-        pos_building = rw.frame.Coordinate(x + 1, y + 1) * example2.tile_size()
+        pos_building = rw.frame.Coordinate(2 * x + 1, 2 * y + 1) * example2.tile_size() / 2
         # 建筑位置
         if x < 100:
             if y < 100:
@@ -172,7 +172,7 @@ for troop in troop_add:
         pos_deacti = rw.frame.Coordinate(troop["deacti"][0], troop["deacti"][1]) * 2
         pos_deacti_list = pos_list(pos_deacti, mid_pos, True if len(pos_acti_list) == 4 else False)
     for index, pos_acti in enumerate(pos_acti_list):
-        pos_acti_grid = ((pos_acti * example2.tile_size() / 2) + rw.frame.Coordinate(12, 12)) * rw.frame.Coordinate(20, 20) 
+        pos_acti_grid = ((pos_acti * example2.tile_size()) + rw.frame.Coordinate(23, 23)) * rw.frame.Coordinate(20, 20) / 2
         new_troop:rw.object_group_useful.RefreshTroop = new_troopadd(troop["spawnUnits"], troop["reset"])
         sub_pos = pos_acti - mid_pos
         if (sub_pos.x() > 0) ^ (sub_pos.y() > 0):

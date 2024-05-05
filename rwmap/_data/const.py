@@ -3,11 +3,20 @@ from typing import Union
 
 class KEY:
     empty_tile = "0"
+    empty_tile_for_tilegroup = "e"
+    tag_for_tile_notre = "|"
 
 class NAME:
     Ground = "Ground"
+    PathingOverride = "PathingOverride"
+    Units = "Units"
+    ItemsExtra = "ItemsExtra"
+    Items = "Items"
+    GroundDetails = "GroundDetails"
     Triggers = "Triggers"
     unitAdd = "unitAdd"
+
+
 
 class MAPTYPE:
     skirmish = "skirmish"
@@ -33,6 +42,7 @@ class COO:
 
 class TYPE:
     tileid = Union[int, tuple[str, int], frame.TagCoordinate]
+
 
 
 

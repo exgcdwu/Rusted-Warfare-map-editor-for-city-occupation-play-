@@ -57,6 +57,9 @@ class City(refresh_building.RefreshBuilding):
                     citytext.maptext(textindex).add_actiBy_s(building_s.idTObject_s_index(index))
         self._TObject_Group_list.append(citytext)
     
+    def cityText_s(self)->city_text.CityText:
+        return self._TObject_Group_list[2]
+
     @classmethod
     def init_adt(cls, uadd_s:city_add.NormalUnitAdd, udetect_s:city_detect.BuildingDetect, 
                  citytext:city_text.CityText, is_detect_acti_add:bool = True, 

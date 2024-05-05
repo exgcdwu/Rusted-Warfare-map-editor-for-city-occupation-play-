@@ -3,7 +3,7 @@ from copy import deepcopy
 import rwmap._frame as frame
 
 def fill_list_of_list(element, size:frame.Coordinate):
-    return [[deepcopy(element)] * size.y() for i in range(size.x())]
+    return [[deepcopy(element)] * size.x() for i in range(size.y())]
 
 def list_variable_s(element_s):
     if isinstance(element_s, list):

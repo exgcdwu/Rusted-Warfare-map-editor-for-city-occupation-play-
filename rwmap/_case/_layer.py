@@ -25,6 +25,11 @@ class Layer(ElementOri):
         data = utility.get_etElement_callable_from_tag_s(root, "data")
         _tilematrix = utility.get_etElement_ndarray_from_text_packed(data, frame.Coordinate(root.attrib['width'], root.attrib['height']))
         return cls(properties, _tilematrix, data.attrib["encoding"], data.attrib.get("compression"))
+    
+    @classmethod
+    def init_Layer(cls, property:frame.TagCoordinate, compression:str = "zlib")->None:
+        properties = ElementProperties("layer", {"name": property.tag(), "width": str(property.x()), "height": str(property.y())})
+        return cls(properties, np.zeros((property.y(), property.x()), dtype = np.uint32), "base64", compression)
 
     def output_str(self, output_rectangle:frame.Rectangle = frame.Rectangle(frame.Coordinate(), frame.Coordinate(-1, -1)))->str:
         str_ans = ""
@@ -51,16 +56,39 @@ class Layer(ElementOri):
         return self.output_str()
 
     def id(self)->int:
-        return int(self._properties.default_properties["id"])
+        return int(self._properties.returnDefaultProperty("id"))
     
+    def changeid(self, id:int)->None:
+        self._properties.assignDefaultProperty("id", id)
+
+    def opacity(self)->float:
+        return float(self._properties.returnDefaultProperty("opacity"))
+    
+    def change_opacity(self, num:float)->None:
+        self._properties.assignDefaultProperty("opacity", f"{num:.2f}")
+
     def tileid(self, place_grid:frame.Coordinate)->int:
         return int(self._tilematrix[place_grid.x()][place_grid.y()])
     
     def assigntileid(self, place_grid:frame.Coordinate, tileid:int):
-        self._tilematrix[place_grid.y()][place_grid.x()] = tileid
+        size = self.size()
+        if place_grid.x() < 0 or place_grid.y() < 0 or place_grid.x() >= size.x() or place_grid.y() >= size.y():
+            return
+        self._tilematrix[place_grid.x()][place_grid.y()] = tileid
 
     def assigntileid_square(self, square_grid:frame.Rectangle, tileid:int):
-        self._tilematrix[square_grid.i().y():square_grid.e().y()][square_grid.i().x():square_grid.e().x()] = tileid
+        size = self.size()
+        self._tilematrix[max(0, square_grid.i().x()):min(size.x(), square_grid.e().x()), 
+        max(0, square_grid.i().y()):min(size.y(), square_grid.e().y())]\
+        = tileid
+
+    def assigntileid_squarematrix_exclude0(self, pos:frame.Coordinate, tileid_matrix:np.ndarray, tilerec:frame.Rectangle = None):
+        utility.save_matrix_exclude0(self._tilematrix, pos, tileid_matrix, tilerec)
+
+    def assigntileid_squarematrix(self, pos:frame.Coordinate, tileid_matrix:np.ndarray, tilerec:frame.Coordinate = None):
+        utility.save_matrix(self._tilematrix, pos, tileid_matrix, tilerec)
+        
+
     
     
     

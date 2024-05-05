@@ -18394,7 +18394,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
   </layer>
   <objectgroup id="4" name="Triggers">
     <properties/>
-    <object x="-10" y="-10" width="20" height="20" name="map_info" id="1">
+    <object x="0" y="0" width="20" height="20" name="map_info" id="1">
       <properties>
         <property name="type" value="skirmish"/>
         <property name="fog" value="los"/>
@@ -18403,28 +18403,28 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="winCondition" value="commandCenter"/>
       </properties>
     </object>
-    <object x="-10" y="10" width="20" height="20" type="changeCredits" id="2">
+    <object x="0" y="0" width="20" height="20" type="changeCredits" id="2">
       <properties>
         <property name="set" value="0"/>
         <property name="team" value="0"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="-10" y="10" width="20" height="20" type="changeCredits" id="3">
+    <object x="0" y="0" width="20" height="20" type="changeCredits" id="3">
       <properties>
         <property name="set" value="0"/>
         <property name="team" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="-10" y="10" width="20" height="20" type="changeCredits" id="4">
+    <object x="0" y="0" width="20" height="20" type="changeCredits" id="4">
       <properties>
         <property name="set" value="0"/>
         <property name="team" value="2"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="-10" y="10" width="20" height="20" type="changeCredits" id="5">
+    <object x="0" y="0" width="20" height="20" type="changeCredits" id="5">
       <properties>
         <property name="set" value="0"/>
         <property name="team" value="3"/>
@@ -18489,7 +18489,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(0,0)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu00100,acti_tu00102"/>
+        <property name="activatedBy" value="acti_tu00102,acti_tu00100"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -18498,7 +18498,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(0,0)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu00101,acti_tu00103"/>
+        <property name="activatedBy" value="acti_tu00103,acti_tu00101"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -18569,7 +18569,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(0,1)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu00203,acti_tu00201"/>
+        <property name="activatedBy" value="acti_tu00201,acti_tu00203"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -18640,7 +18640,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(0,2)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu00303,acti_tu00301"/>
+        <property name="activatedBy" value="acti_tu00301,acti_tu00303"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -18702,7 +18702,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(0,3)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu00400,acti_tu00402"/>
+        <property name="activatedBy" value="acti_tu00402,acti_tu00400"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -18782,7 +18782,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(0,4)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu00501,acti_tu00503"/>
+        <property name="activatedBy" value="acti_tu00503,acti_tu00501"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -18986,7 +18986,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(0,7)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu00802,acti_tu00800"/>
+        <property name="activatedBy" value="acti_tu00800,acti_tu00802"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19128,7 +19128,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(0,9)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu01002,acti_tu01000"/>
+        <property name="activatedBy" value="acti_tu01000,acti_tu01002"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19137,7 +19137,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(0,9)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu01001,acti_tu01003"/>
+        <property name="activatedBy" value="acti_tu01003,acti_tu01001"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19199,7 +19199,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(1,0)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu01100,acti_tu01102"/>
+        <property name="activatedBy" value="acti_tu01102,acti_tu01100"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19270,7 +19270,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(1,1)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu01200,acti_tu01202"/>
+        <property name="activatedBy" value="acti_tu01202,acti_tu01200"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19350,7 +19350,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(1,2)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu01301,acti_tu01303"/>
+        <property name="activatedBy" value="acti_tu01303,acti_tu01301"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19421,7 +19421,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(1,3)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu01403,acti_tu01401"/>
+        <property name="activatedBy" value="acti_tu01401,acti_tu01403"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19483,7 +19483,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(1,4)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu01500,acti_tu01502"/>
+        <property name="activatedBy" value="acti_tu01502,acti_tu01500"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19554,7 +19554,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(1,5)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu01600,acti_tu01602"/>
+        <property name="activatedBy" value="acti_tu01602,acti_tu01600"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19563,7 +19563,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(1,5)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu01601,acti_tu01603"/>
+        <property name="activatedBy" value="acti_tu01603,acti_tu01601"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19634,7 +19634,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(1,6)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu01703,acti_tu01701"/>
+        <property name="activatedBy" value="acti_tu01701,acti_tu01703"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19696,7 +19696,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(1,7)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu01800,acti_tu01802"/>
+        <property name="activatedBy" value="acti_tu01802,acti_tu01800"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19767,7 +19767,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(1,8)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu01902,acti_tu01900"/>
+        <property name="activatedBy" value="acti_tu01900,acti_tu01902"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19838,7 +19838,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(1,9)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu02000,acti_tu02002"/>
+        <property name="activatedBy" value="acti_tu02002,acti_tu02000"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19847,7 +19847,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(1,9)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu02003,acti_tu02001"/>
+        <property name="activatedBy" value="acti_tu02001,acti_tu02003"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -19918,7 +19918,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(2,0)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu02101,acti_tu02103"/>
+        <property name="activatedBy" value="acti_tu02103,acti_tu02101"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20060,7 +20060,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(2,2)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu02303,acti_tu02301"/>
+        <property name="activatedBy" value="acti_tu02301,acti_tu02303"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20122,7 +20122,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(2,3)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu02402,acti_tu02400"/>
+        <property name="activatedBy" value="acti_tu02400,acti_tu02402"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20264,7 +20264,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(2,5)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu02602,acti_tu02600"/>
+        <property name="activatedBy" value="acti_tu02600,acti_tu02602"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20273,7 +20273,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(2,5)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu02601,acti_tu02603"/>
+        <property name="activatedBy" value="acti_tu02603,acti_tu02601"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20344,7 +20344,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(2,6)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu02703,acti_tu02701"/>
+        <property name="activatedBy" value="acti_tu02701,acti_tu02703"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20477,7 +20477,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(2,8)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu02902,acti_tu02900"/>
+        <property name="activatedBy" value="acti_tu02900,acti_tu02902"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20486,7 +20486,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(2,8)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu02901,acti_tu02903"/>
+        <property name="activatedBy" value="acti_tu02903,acti_tu02901"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20690,7 +20690,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,1)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu03200,acti_tu03202"/>
+        <property name="activatedBy" value="acti_tu03202,acti_tu03200"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20699,7 +20699,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,1)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu03203,acti_tu03201"/>
+        <property name="activatedBy" value="acti_tu03201,acti_tu03203"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20761,7 +20761,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,2)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu03300,acti_tu03302"/>
+        <property name="activatedBy" value="acti_tu03302,acti_tu03300"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20770,7 +20770,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,2)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu03303,acti_tu03301"/>
+        <property name="activatedBy" value="acti_tu03301,acti_tu03303"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20832,7 +20832,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,3)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu03400,acti_tu03402"/>
+        <property name="activatedBy" value="acti_tu03402,acti_tu03400"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20903,7 +20903,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,4)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu03502,acti_tu03500"/>
+        <property name="activatedBy" value="acti_tu03500,acti_tu03502"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20912,7 +20912,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,4)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu03501,acti_tu03503"/>
+        <property name="activatedBy" value="acti_tu03503,acti_tu03501"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20974,7 +20974,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,5)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu03600,acti_tu03602"/>
+        <property name="activatedBy" value="acti_tu03602,acti_tu03600"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -20983,7 +20983,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,5)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu03603,acti_tu03601"/>
+        <property name="activatedBy" value="acti_tu03601,acti_tu03603"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -21125,7 +21125,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,7)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu03803,acti_tu03801"/>
+        <property name="activatedBy" value="acti_tu03801,acti_tu03803"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -21187,7 +21187,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,8)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu03902,acti_tu03900"/>
+        <property name="activatedBy" value="acti_tu03900,acti_tu03902"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -21196,7 +21196,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,8)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu03901,acti_tu03903"/>
+        <property name="activatedBy" value="acti_tu03903,acti_tu03901"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -21258,7 +21258,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,9)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu04002,acti_tu04000"/>
+        <property name="activatedBy" value="acti_tu04000,acti_tu04002"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -21267,7 +21267,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(3,9)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu04001,acti_tu04003"/>
+        <property name="activatedBy" value="acti_tu04003,acti_tu04001"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -21329,7 +21329,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(4,0)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu04102,acti_tu04100"/>
+        <property name="activatedBy" value="acti_tu04100,acti_tu04102"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -21480,7 +21480,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(4,2)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu04303,acti_tu04301"/>
+        <property name="activatedBy" value="acti_tu04301,acti_tu04303"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -21684,7 +21684,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(4,5)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu04602,acti_tu04600"/>
+        <property name="activatedBy" value="acti_tu04600,acti_tu04602"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -21693,7 +21693,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(4,5)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu04603,acti_tu04601"/>
+        <property name="activatedBy" value="acti_tu04601,acti_tu04603"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -21755,7 +21755,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(4,6)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu04700,acti_tu04702"/>
+        <property name="activatedBy" value="acti_tu04702,acti_tu04700"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -21897,7 +21897,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(4,8)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu04902,acti_tu04900"/>
+        <property name="activatedBy" value="acti_tu04900,acti_tu04902"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -21968,7 +21968,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(4,9)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu05002,acti_tu05000"/>
+        <property name="activatedBy" value="acti_tu05000,acti_tu05002"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22039,7 +22039,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(5,0)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu05102,acti_tu05100"/>
+        <property name="activatedBy" value="acti_tu05100,acti_tu05102"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22181,7 +22181,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(5,2)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu05302,acti_tu05300"/>
+        <property name="activatedBy" value="acti_tu05300,acti_tu05302"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22261,7 +22261,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(5,3)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu05401,acti_tu05403"/>
+        <property name="activatedBy" value="acti_tu05403,acti_tu05401"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22332,7 +22332,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(5,4)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu05503,acti_tu05501"/>
+        <property name="activatedBy" value="acti_tu05501,acti_tu05503"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22394,7 +22394,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(5,5)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu05602,acti_tu05600"/>
+        <property name="activatedBy" value="acti_tu05600,acti_tu05602"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22403,7 +22403,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(5,5)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu05601,acti_tu05603"/>
+        <property name="activatedBy" value="acti_tu05603,acti_tu05601"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22465,7 +22465,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(5,6)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu05702,acti_tu05700"/>
+        <property name="activatedBy" value="acti_tu05700,acti_tu05702"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22536,7 +22536,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(5,7)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu05800,acti_tu05802"/>
+        <property name="activatedBy" value="acti_tu05802,acti_tu05800"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22607,7 +22607,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(5,8)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu05902,acti_tu05900"/>
+        <property name="activatedBy" value="acti_tu05900,acti_tu05902"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22616,7 +22616,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(5,8)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu05901,acti_tu05903"/>
+        <property name="activatedBy" value="acti_tu05903,acti_tu05901"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22678,7 +22678,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(5,9)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu06000,acti_tu06002"/>
+        <property name="activatedBy" value="acti_tu06002,acti_tu06000"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22687,7 +22687,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(5,9)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu06001,acti_tu06003"/>
+        <property name="activatedBy" value="acti_tu06003,acti_tu06001"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22749,7 +22749,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(6,0)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu06102,acti_tu06100"/>
+        <property name="activatedBy" value="acti_tu06100,acti_tu06102"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22962,7 +22962,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(6,3)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu06400,acti_tu06402"/>
+        <property name="activatedBy" value="acti_tu06402,acti_tu06400"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -22971,7 +22971,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(6,3)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu06403,acti_tu06401"/>
+        <property name="activatedBy" value="acti_tu06401,acti_tu06403"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23042,7 +23042,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(6,4)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu06501,acti_tu06503"/>
+        <property name="activatedBy" value="acti_tu06503,acti_tu06501"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23104,7 +23104,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(6,5)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu06602,acti_tu06600"/>
+        <property name="activatedBy" value="acti_tu06600,acti_tu06602"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23113,7 +23113,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(6,5)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu06603,acti_tu06601"/>
+        <property name="activatedBy" value="acti_tu06601,acti_tu06603"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23184,7 +23184,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(6,6)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu06701,acti_tu06703"/>
+        <property name="activatedBy" value="acti_tu06703,acti_tu06701"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23326,7 +23326,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(6,8)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu06901,acti_tu06903"/>
+        <property name="activatedBy" value="acti_tu06903,acti_tu06901"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23388,7 +23388,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(6,9)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07002,acti_tu07000"/>
+        <property name="activatedBy" value="acti_tu07000,acti_tu07002"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23459,7 +23459,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,0)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07100,acti_tu07102"/>
+        <property name="activatedBy" value="acti_tu07102,acti_tu07100"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23468,7 +23468,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,0)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07103,acti_tu07101"/>
+        <property name="activatedBy" value="acti_tu07101,acti_tu07103"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23530,7 +23530,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,1)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07202,acti_tu07200"/>
+        <property name="activatedBy" value="acti_tu07200,acti_tu07202"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23539,7 +23539,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,1)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07203,acti_tu07201"/>
+        <property name="activatedBy" value="acti_tu07201,acti_tu07203"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23601,7 +23601,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,2)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07302,acti_tu07300"/>
+        <property name="activatedBy" value="acti_tu07300,acti_tu07302"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23610,7 +23610,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,2)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07301,acti_tu07303"/>
+        <property name="activatedBy" value="acti_tu07303,acti_tu07301"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23672,7 +23672,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,3)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07402,acti_tu07400"/>
+        <property name="activatedBy" value="acti_tu07400,acti_tu07402"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23681,7 +23681,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,3)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07401,acti_tu07403"/>
+        <property name="activatedBy" value="acti_tu07403,acti_tu07401"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23743,7 +23743,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,4)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07502,acti_tu07500"/>
+        <property name="activatedBy" value="acti_tu07500,acti_tu07502"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23823,7 +23823,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,5)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07601,acti_tu07603"/>
+        <property name="activatedBy" value="acti_tu07603,acti_tu07601"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23885,7 +23885,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,6)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07700,acti_tu07702"/>
+        <property name="activatedBy" value="acti_tu07702,acti_tu07700"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -23965,7 +23965,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,7)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07801,acti_tu07803"/>
+        <property name="activatedBy" value="acti_tu07803,acti_tu07801"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -24036,7 +24036,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(7,8)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu07903,acti_tu07901"/>
+        <property name="activatedBy" value="acti_tu07901,acti_tu07903"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -24169,7 +24169,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(8,0)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu08100,acti_tu08102"/>
+        <property name="activatedBy" value="acti_tu08102,acti_tu08100"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -24249,7 +24249,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(8,1)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu08203,acti_tu08201"/>
+        <property name="activatedBy" value="acti_tu08201,acti_tu08203"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -24320,7 +24320,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(8,2)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu08301,acti_tu08303"/>
+        <property name="activatedBy" value="acti_tu08303,acti_tu08301"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -24391,7 +24391,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(8,3)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu08403,acti_tu08401"/>
+        <property name="activatedBy" value="acti_tu08401,acti_tu08403"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -24462,7 +24462,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(8,4)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu08503,acti_tu08501"/>
+        <property name="activatedBy" value="acti_tu08501,acti_tu08503"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -24595,7 +24595,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(8,6)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu08702,acti_tu08700"/>
+        <property name="activatedBy" value="acti_tu08700,acti_tu08702"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -24666,7 +24666,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(8,7)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu08800,acti_tu08802"/>
+        <property name="activatedBy" value="acti_tu08802,acti_tu08800"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -24675,7 +24675,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(8,7)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu08803,acti_tu08801"/>
+        <property name="activatedBy" value="acti_tu08801,acti_tu08803"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -24808,7 +24808,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(8,9)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu09000,acti_tu09002"/>
+        <property name="activatedBy" value="acti_tu09002,acti_tu09000"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -24959,7 +24959,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(9,1)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu09201,acti_tu09203"/>
+        <property name="activatedBy" value="acti_tu09203,acti_tu09201"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -25021,7 +25021,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(9,2)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu09302,acti_tu09300"/>
+        <property name="activatedBy" value="acti_tu09300,acti_tu09302"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -25101,7 +25101,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(9,3)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu09401,acti_tu09403"/>
+        <property name="activatedBy" value="acti_tu09403,acti_tu09401"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -25172,7 +25172,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(9,4)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu09503,acti_tu09501"/>
+        <property name="activatedBy" value="acti_tu09501,acti_tu09503"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -25234,7 +25234,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(9,5)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu09602,acti_tu09600"/>
+        <property name="activatedBy" value="acti_tu09600,acti_tu09602"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -25305,7 +25305,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(9,6)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu09700,acti_tu09702"/>
+        <property name="activatedBy" value="acti_tu09702,acti_tu09700"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -25314,7 +25314,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(9,6)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu09703,acti_tu09701"/>
+        <property name="activatedBy" value="acti_tu09701,acti_tu09703"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -25376,7 +25376,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(9,7)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu09802,acti_tu09800"/>
+        <property name="activatedBy" value="acti_tu09800,acti_tu09802"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -25447,7 +25447,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(9,8)"/>
         <property name="textColor" value="green"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu09900,acti_tu09902"/>
+        <property name="activatedBy" value="acti_tu09902,acti_tu09900"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -25456,7 +25456,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城市(9,8)"/>
         <property name="textColor" value="red"/>
         <property name="textSize" value="12"/>
-        <property name="activatedBy" value="acti_tu09903,acti_tu09901"/>
+        <property name="activatedBy" value="acti_tu09901,acti_tu09903"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
@@ -25544,7 +25544,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu00501,acti_tu00503"/>
+        <property name="deactivatedBy" value="acti_tu00503,acti_tu00501"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -25553,7 +25553,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu06001,acti_tu06003"/>
+        <property name="deactivatedBy" value="acti_tu06003,acti_tu06001"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -25580,7 +25580,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu05102,acti_tu05100"/>
+        <property name="deactivatedBy" value="acti_tu05100,acti_tu05102"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -25598,7 +25598,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu05002,acti_tu05000"/>
+        <property name="deactivatedBy" value="acti_tu05000,acti_tu05002"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -25607,7 +25607,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu03103,acti_tu04102,acti_tu03101,acti_tu04100"/>
+        <property name="deactivatedBy" value="acti_tu04100,acti_tu04102,acti_tu03103,acti_tu03101"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25616,7 +25616,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu00502,acti_tu00401,acti_tu00403,acti_tu00500"/>
+        <property name="deactivatedBy" value="acti_tu00401,acti_tu00403,acti_tu00502,acti_tu00500"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25625,7 +25625,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu06000,acti_tu06002,acti_tu07003,acti_tu07001"/>
+        <property name="deactivatedBy" value="acti_tu06002,acti_tu06000,acti_tu07003,acti_tu07001"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25634,7 +25634,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu09703,acti_tu09600,acti_tu09701,acti_tu09602"/>
+        <property name="deactivatedBy" value="acti_tu09701,acti_tu09600,acti_tu09602,acti_tu09703"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25643,7 +25643,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu00601,acti_tu00702,acti_tu00603,acti_tu00700"/>
+        <property name="deactivatedBy" value="acti_tu00702,acti_tu00700,acti_tu00603,acti_tu00601"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25652,7 +25652,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu05103,acti_tu06102,acti_tu05101,acti_tu06100"/>
+        <property name="deactivatedBy" value="acti_tu05103,acti_tu06100,acti_tu06102,acti_tu05101"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25661,7 +25661,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu09400,acti_tu09501,acti_tu09503,acti_tu09402"/>
+        <property name="deactivatedBy" value="acti_tu09501,acti_tu09400,acti_tu09402,acti_tu09503"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25670,7 +25670,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu04002,acti_tu04000,acti_tu05001,acti_tu05003"/>
+        <property name="deactivatedBy" value="acti_tu04000,acti_tu04002,acti_tu05003,acti_tu05001"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25679,7 +25679,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu03102,acti_tu02101,acti_tu03100,acti_tu02103"/>
+        <property name="deactivatedBy" value="acti_tu03102,acti_tu03100,acti_tu02103,acti_tu02101"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25688,7 +25688,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu00303,acti_tu00402,acti_tu00400,acti_tu00301"/>
+        <property name="deactivatedBy" value="acti_tu00301,acti_tu00402,acti_tu00303,acti_tu00400"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25697,7 +25697,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu07002,acti_tu08001,acti_tu08003,acti_tu07000"/>
+        <property name="deactivatedBy" value="acti_tu08001,acti_tu08003,acti_tu07002,acti_tu07000"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25706,7 +25706,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu09801,acti_tu09803,acti_tu09700,acti_tu09702"/>
+        <property name="deactivatedBy" value="acti_tu09801,acti_tu09803,acti_tu09702,acti_tu09700"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25715,7 +25715,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu00703,acti_tu00802,acti_tu00701,acti_tu00800"/>
+        <property name="deactivatedBy" value="acti_tu00800,acti_tu00703,acti_tu00701,acti_tu00802"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25724,7 +25724,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu06101,acti_tu06103,acti_tu07100,acti_tu07102"/>
+        <property name="deactivatedBy" value="acti_tu06101,acti_tu07102,acti_tu06103,acti_tu07100"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25733,7 +25733,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu09302,acti_tu09300,acti_tu09403,acti_tu09401"/>
+        <property name="deactivatedBy" value="acti_tu09403,acti_tu09300,acti_tu09302,acti_tu09401"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25742,7 +25742,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu04001,acti_tu04003,acti_tu03000,acti_tu03002"/>
+        <property name="deactivatedBy" value="acti_tu04003,acti_tu03000,acti_tu04001,acti_tu03002"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25769,7 +25769,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu05901,acti_tu05903"/>
+        <property name="deactivatedBy" value="acti_tu05903,acti_tu05901"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -25787,7 +25787,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu01600,acti_tu01602"/>
+        <property name="deactivatedBy" value="acti_tu01602,acti_tu01600"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -25814,7 +25814,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu04902,acti_tu04900"/>
+        <property name="deactivatedBy" value="acti_tu04900,acti_tu04902"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -25823,7 +25823,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu04200,acti_tu03203,acti_tu03201,acti_tu04202"/>
+        <property name="deactivatedBy" value="acti_tu04200,acti_tu04202,acti_tu03201,acti_tu03203"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25832,7 +25832,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu01403,acti_tu01401,acti_tu01500,acti_tu01502"/>
+        <property name="deactivatedBy" value="acti_tu01502,acti_tu01401,acti_tu01500,acti_tu01403"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25841,7 +25841,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu06901,acti_tu05902,acti_tu06903,acti_tu05900"/>
+        <property name="deactivatedBy" value="acti_tu05900,acti_tu05902,acti_tu06903,acti_tu06901"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25859,7 +25859,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu01702,acti_tu01601,acti_tu01603,acti_tu01700"/>
+        <property name="deactivatedBy" value="acti_tu01702,acti_tu01700,acti_tu01603,acti_tu01601"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25877,7 +25877,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu08400,acti_tu08503,acti_tu08501,acti_tu08402"/>
+        <property name="deactivatedBy" value="acti_tu08501,acti_tu08400,acti_tu08402,acti_tu08503"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25886,7 +25886,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu04901,acti_tu03902,acti_tu03900,acti_tu04903"/>
+        <property name="deactivatedBy" value="acti_tu03900,acti_tu04901,acti_tu04903,acti_tu03902"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -25895,7 +25895,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu03200,acti_tu02203,acti_tu03202,acti_tu02201"/>
+        <property name="deactivatedBy" value="acti_tu02203,acti_tu03200,acti_tu03202,acti_tu02201"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25904,7 +25904,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu01301,acti_tu01402,acti_tu01303,acti_tu01400"/>
+        <property name="deactivatedBy" value="acti_tu01303,acti_tu01301,acti_tu01402,acti_tu01400"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25913,7 +25913,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu06902,acti_tu07903,acti_tu06900,acti_tu07901"/>
+        <property name="deactivatedBy" value="acti_tu06900,acti_tu07901,acti_tu07903,acti_tu06902"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25922,7 +25922,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu08702,acti_tu08803,acti_tu08700,acti_tu08801"/>
+        <property name="deactivatedBy" value="acti_tu08801,acti_tu08700,acti_tu08702,acti_tu08803"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25931,7 +25931,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu01800,acti_tu01703,acti_tu01701,acti_tu01802"/>
+        <property name="deactivatedBy" value="acti_tu01701,acti_tu01703,acti_tu01802,acti_tu01800"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25940,7 +25940,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu07202,acti_tu06203,acti_tu07200,acti_tu06201"/>
+        <property name="deactivatedBy" value="acti_tu07200,acti_tu07202,acti_tu06201,acti_tu06203"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25949,7 +25949,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu08302,acti_tu08300,acti_tu08403,acti_tu08401"/>
+        <property name="deactivatedBy" value="acti_tu08401,acti_tu08302,acti_tu08403,acti_tu08300"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25958,7 +25958,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu02902,acti_tu02900,acti_tu03901,acti_tu03903"/>
+        <property name="deactivatedBy" value="acti_tu02900,acti_tu03903,acti_tu03901,acti_tu02902"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -25967,7 +25967,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu04303,acti_tu04301"/>
+        <property name="deactivatedBy" value="acti_tu04301,acti_tu04303"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -25994,7 +25994,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu07601,acti_tu07603"/>
+        <property name="deactivatedBy" value="acti_tu07603,acti_tu07601"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26003,7 +26003,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu02602,acti_tu02600"/>
+        <property name="deactivatedBy" value="acti_tu02600,acti_tu02602"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26012,7 +26012,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu05302,acti_tu05300"/>
+        <property name="deactivatedBy" value="acti_tu05300,acti_tu05302"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26021,7 +26021,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu07502,acti_tu07500"/>
+        <property name="deactivatedBy" value="acti_tu07500,acti_tu07502"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26039,7 +26039,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu03303,acti_tu03301,acti_tu04300,acti_tu04302"/>
+        <property name="deactivatedBy" value="acti_tu04300,acti_tu04302,acti_tu03301,acti_tu03303"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -26048,7 +26048,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu02502,acti_tu02403,acti_tu02500,acti_tu02401"/>
+        <property name="deactivatedBy" value="acti_tu02500,acti_tu02403,acti_tu02401,acti_tu02502"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -26057,7 +26057,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu05800,acti_tu06803,acti_tu05802,acti_tu06801"/>
+        <property name="deactivatedBy" value="acti_tu05802,acti_tu05800,acti_tu06803,acti_tu06801"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -26066,7 +26066,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu07602,acti_tu07600,acti_tu07703,acti_tu07701"/>
+        <property name="deactivatedBy" value="acti_tu07703,acti_tu07602,acti_tu07600,acti_tu07701"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -26075,7 +26075,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu02700,acti_tu02601,acti_tu02702,acti_tu02603"/>
+        <property name="deactivatedBy" value="acti_tu02700,acti_tu02702,acti_tu02603,acti_tu02601"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -26084,7 +26084,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu06300,acti_tu06302,acti_tu05301,acti_tu05303"/>
+        <property name="deactivatedBy" value="acti_tu05303,acti_tu06300,acti_tu05301,acti_tu06302"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -26093,7 +26093,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu07503,acti_tu07501,acti_tu07402,acti_tu07400"/>
+        <property name="deactivatedBy" value="acti_tu07400,acti_tu07503,acti_tu07501,acti_tu07402"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -26102,7 +26102,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu04801,acti_tu04803,acti_tu03802,acti_tu03800"/>
+        <property name="deactivatedBy" value="acti_tu03802,acti_tu04801,acti_tu03800,acti_tu04803"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -26111,7 +26111,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu02303,acti_tu02400,acti_tu02301,acti_tu02402"/>
+        <property name="deactivatedBy" value="acti_tu02400,acti_tu02402,acti_tu02301,acti_tu02303"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26120,7 +26120,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu07801,acti_tu07803,acti_tu07700,acti_tu07702"/>
+        <property name="deactivatedBy" value="acti_tu07700,acti_tu07702,acti_tu07803,acti_tu07801"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26129,7 +26129,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu06303,acti_tu07302,acti_tu07300,acti_tu06301"/>
+        <property name="deactivatedBy" value="acti_tu06303,acti_tu07300,acti_tu07302,acti_tu06301"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26156,7 +26156,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu03501,acti_tu03503"/>
+        <property name="deactivatedBy" value="acti_tu03503,acti_tu03501"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26174,7 +26174,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu06603,acti_tu06601"/>
+        <property name="deactivatedBy" value="acti_tu06601,acti_tu06603"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26183,7 +26183,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu03600,acti_tu03602"/>
+        <property name="deactivatedBy" value="acti_tu03602,acti_tu03600"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26210,7 +26210,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu04700,acti_tu04702"/>
+        <property name="deactivatedBy" value="acti_tu04702,acti_tu04700"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26219,7 +26219,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu04402,acti_tu04400,acti_tu02203,acti_tu02201"/>
+        <property name="deactivatedBy" value="acti_tu02203,acti_tu04400,acti_tu04402,acti_tu02201"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26228,7 +26228,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu01301,acti_tu01303,acti_tu03502,acti_tu03500"/>
+        <property name="deactivatedBy" value="acti_tu01303,acti_tu01301,acti_tu03500,acti_tu03502"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26237,7 +26237,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu05702,acti_tu07903,acti_tu05700,acti_tu07901"/>
+        <property name="deactivatedBy" value="acti_tu05700,acti_tu07901,acti_tu05702,acti_tu07903"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26246,7 +26246,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu08803,acti_tu06602,acti_tu06600,acti_tu08801"/>
+        <property name="deactivatedBy" value="acti_tu08801,acti_tu06600,acti_tu08803,acti_tu06602"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26255,7 +26255,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu03603,acti_tu01800,acti_tu03601,acti_tu01802"/>
+        <property name="deactivatedBy" value="acti_tu03601,acti_tu03603,acti_tu01802,acti_tu01800"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26264,7 +26264,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu07202,acti_tu05401,acti_tu05403,acti_tu07200"/>
+        <property name="deactivatedBy" value="acti_tu07200,acti_tu05403,acti_tu05401,acti_tu07202"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26273,7 +26273,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu06501,acti_tu08302,acti_tu08300,acti_tu06503"/>
+        <property name="deactivatedBy" value="acti_tu06503,acti_tu06501,acti_tu08302,acti_tu08300"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26282,7 +26282,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu02902,acti_tu02900,acti_tu04703,acti_tu04701"/>
+        <property name="deactivatedBy" value="acti_tu02900,acti_tu04703,acti_tu02902,acti_tu04701"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26300,7 +26300,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu05601,acti_tu05603"/>
+        <property name="deactivatedBy" value="acti_tu05603,acti_tu05601"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26318,7 +26318,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu04602,acti_tu04600"/>
+        <property name="deactivatedBy" value="acti_tu04600,acti_tu04602"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26327,7 +26327,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu03401,acti_tu03403,acti_tu04502,acti_tu04500"/>
+        <property name="deactivatedBy" value="acti_tu04502,acti_tu03401,acti_tu03403,acti_tu04500"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -26336,7 +26336,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu05602,acti_tu06701,acti_tu06703,acti_tu05600"/>
+        <property name="deactivatedBy" value="acti_tu05600,acti_tu06703,acti_tu05602,acti_tu06701"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -26345,7 +26345,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu06400,acti_tu05503,acti_tu05501,acti_tu06402"/>
+        <property name="deactivatedBy" value="acti_tu05501,acti_tu06402,acti_tu06400,acti_tu05503"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="150s"/>
       </properties>
@@ -26363,7 +26363,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu02303,acti_tu03400,acti_tu03402,acti_tu02301"/>
+        <property name="deactivatedBy" value="acti_tu03402,acti_tu03400,acti_tu02301,acti_tu02303"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26372,7 +26372,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu07801,acti_tu07803,acti_tu06702,acti_tu06700"/>
+        <property name="deactivatedBy" value="acti_tu06702,acti_tu07803,acti_tu06700,acti_tu07801"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26381,7 +26381,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu07302,acti_tu07300,acti_tu06401,acti_tu06403"/>
+        <property name="deactivatedBy" value="acti_tu06401,acti_tu06403,acti_tu07300,acti_tu07302"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26390,7 +26390,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="mechGun*1"/>
-        <property name="deactivatedBy" value="acti_tu03703,acti_tu03701,acti_tu02800,acti_tu02802"/>
+        <property name="deactivatedBy" value="acti_tu03703,acti_tu02800,acti_tu02802,acti_tu03701"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="200s"/>
       </properties>
@@ -26399,7 +26399,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="heavyTank*1"/>
-        <property name="deactivatedBy" value="acti_tu02101,acti_tu02103"/>
+        <property name="deactivatedBy" value="acti_tu02103,acti_tu02101"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26408,7 +26408,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="heavyTank*1"/>
-        <property name="deactivatedBy" value="acti_tu00303,acti_tu00301"/>
+        <property name="deactivatedBy" value="acti_tu00301,acti_tu00303"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26435,7 +26435,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="heavyTank*1"/>
-        <property name="deactivatedBy" value="acti_tu00802,acti_tu00800"/>
+        <property name="deactivatedBy" value="acti_tu00800,acti_tu00802"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26444,7 +26444,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="heavyTank*1"/>
-        <property name="deactivatedBy" value="acti_tu07100,acti_tu07102"/>
+        <property name="deactivatedBy" value="acti_tu07102,acti_tu07100"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26453,7 +26453,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="heavyTank*1"/>
-        <property name="deactivatedBy" value="acti_tu09302,acti_tu09300"/>
+        <property name="deactivatedBy" value="acti_tu09300,acti_tu09302"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26498,7 +26498,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="heavyTank*1"/>
-        <property name="deactivatedBy" value="acti_tu01902,acti_tu01900"/>
+        <property name="deactivatedBy" value="acti_tu01900,acti_tu01902"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26516,7 +26516,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="heavyArtillery*1"/>
-        <property name="deactivatedBy" value="acti_tu00203,acti_tu00201"/>
+        <property name="deactivatedBy" value="acti_tu00201,acti_tu00203"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26534,7 +26534,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="heavyArtillery*1"/>
-        <property name="deactivatedBy" value="acti_tu09903,acti_tu09901"/>
+        <property name="deactivatedBy" value="acti_tu09901,acti_tu09903"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26552,7 +26552,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="heavyArtillery*1"/>
-        <property name="deactivatedBy" value="acti_tu08100,acti_tu08102"/>
+        <property name="deactivatedBy" value="acti_tu08102,acti_tu08100"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26570,7 +26570,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="heavyArtillery*1"/>
-        <property name="deactivatedBy" value="acti_tu02000,acti_tu02002"/>
+        <property name="deactivatedBy" value="acti_tu02002,acti_tu02000"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="100s"/>
       </properties>
@@ -26579,7 +26579,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="bomber*1"/>
-        <property name="deactivatedBy" value="acti_tu00101,acti_tu00103"/>
+        <property name="deactivatedBy" value="acti_tu00103,acti_tu00101"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="400s"/>
       </properties>
@@ -26606,7 +26606,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="bomber*1"/>
-        <property name="deactivatedBy" value="acti_tu01002,acti_tu01000"/>
+        <property name="deactivatedBy" value="acti_tu01000,acti_tu01002"/>
         <property name="warmup" value="5s"/>
         <property name="resetActivationAfter" value="400s"/>
       </properties>

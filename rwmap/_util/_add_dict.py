@@ -4,7 +4,10 @@ import rwmap._exceptions as rwexception
 def add_time_pro(name:str, aint:float, issecond:bool = True)->dict[str, str]:
     if aint != -1:
         if issecond:
-            return {name: str(aint) + "s"}
+            if isinstance(aint, int):
+                return {name: f"{str(aint)}s"}
+            else:
+                return {name: f"{aint:.2f}s"}
         else:
             return {name: str(int(aint))}
     else:

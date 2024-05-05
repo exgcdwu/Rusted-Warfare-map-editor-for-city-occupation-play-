@@ -8,6 +8,7 @@ import os
 from copy import deepcopy
 from typing import Generator, Union
 from numbers import Integral
+import numpy as np
 
 import rwmap._exceptions as rwexceptions
 import rwmap._util as utility
@@ -25,6 +26,9 @@ RWMAP_DIR = os.path.dirname(__file__)
 RWMAP_MAPS = RWMAP_DIR + "/other_data/maps/"
 
 class RWmap(ElementOri):
+    pass
+
+class RWmap(ElementOri):
     def __init__(self, properties:ElementProperties, tileset_list:list[case.TileSet],
                   layer_list:list[case.Layer], objectGroup_list:list[case.ObjectGroup])->None:
         super().__init__(properties)
@@ -37,11 +41,32 @@ class RWmap(ElementOri):
         root:et.Element = xmlTree.getroot()
         properties = ElementProperties.init_etElement(root)
 
-        tileset_list = [case.TileSet(ElementProperties("tileset", {"firstgid": "0", "name": "empty"}), frame.Coordinate(1, 1))]
+        tileset_list = [case.TileSet(ElementProperties("tileset", {"firstgid": const.KEY.empty_tile, "name": "empty"}), frame.Coordinate(1, 1))]
         tileset_list = tileset_list + [case.TileSet.init_etElement(tileset, rwmaps_dir) for tileset in root if tileset.tag == "tileset"]
         layer_list = [case.Layer.init_etElement(layer) for layer in root if layer.tag == "layer"]
         objectGroup_list = [case.ObjectGroup.init_etElement(objectGroup) for objectGroup in root if objectGroup.tag == "objectgroup"]  
         
+        return cls(properties, tileset_list, layer_list, objectGroup_list)
+
+    @classmethod
+    def init_map(cls, size:frame.Coordinate, tile_size:frame.Coordinate = const.COO.SIZE_STANDARD):
+        properties = ElementProperties("map", \
+                                       {
+                                           "version": "1.10", 
+                                           "tiledversion": "1.10.2", 
+                                           "orientation": "orthogonal", 
+                                           "renderorder": "right-down", 
+                                           "width": str(size.x()), 
+                                           "height": str(size.y()), 
+                                           "tilewidth": str(tile_size.x()), 
+                                           "tileheight": str(tile_size.y()), 
+                                           "infinite": "0"
+                                       })
+        properties.assignDefaultProperty("nextlayerid", "1")
+        properties.assignDefaultProperty("nextobjectid", "1")
+        tileset_list = [case.TileSet(ElementProperties("tileset", {"firstgid": const.KEY.empty_tile, "name": "empty"}), frame.Coordinate(1, 1))]
+        layer_list = []
+        objectGroup_list = []
         return cls(properties, tileset_list, layer_list, objectGroup_list)
 
     def size(self)->frame.Coordinate:
@@ -52,8 +77,20 @@ class RWmap(ElementOri):
         return frame.Coordinate(int(self._properties.returnDefaultProperty("tilewidth")), 
                                 int(self._properties.returnDefaultProperty("tileheight")))
     
+    def nextlayerid(self)->int:
+        return int(self._properties.returnDefaultProperty("nextlayerid"))
+    
+    def changenextlayerid(self, layerid:int)->None:
+        self._properties.assignDefaultProperty("nextlayerid", str(layerid))
+
+    def nextobjectid(self)->int:
+        return int(self._properties.returnDefaultProperty("nextobjectid"))
+    
+    def changenextobjectid(self, layerid:int)->None:
+        self._properties.assignDefaultProperty("nextobjectid", str(layerid))
+
     def tileset_name_list(self)->list[str]:
-        return [tileset.name() for tileset in self._tileset_list]
+        return [tileset.name() for tileset in self._tileset_list if tileset.isexist()]
     
     def layer_name_list(self)->list[str]:
         return [layer.name() for layer in self._layer_list]
@@ -79,11 +116,51 @@ class RWmap(ElementOri):
             raise KeyError("objectgroup name:" + name + " not found")
         return objectgroup
     
-    def add_tileset(self, tileset:case.TileSet)->None:
+    def add_tileset_fromTileSet(self, tileset:case.TileSet)->None:
         tileset_n = deepcopy(tileset)
         firstgid = self._tileset_list[-1].endgid()
         tileset_n.changefirstgid(firstgid)
         self._tileset_list.append(tileset_n)
+
+    def add_tileset_fromMap(self, rwmap:RWmap)->None:
+        for tileset in rwmap._tileset_list:
+            if tileset.isexist():
+                self.add_tileset_fromTileSet(tileset)
+
+    def add_tileset_fromMapFile(self, map_file:str)->None:
+        rwmap = RWmap.init_mapfile(map_file)
+        self.add_tileset_fromMap(rwmap)
+
+    def add_layer(self, layername:str, compression:str = "default")->None:
+        if compression == "default":
+            if self._layer_list == []:
+                compression = "zlib"
+            else:
+                compression = self._layer_list[0]._compression
+        layer = case.Layer.init_Layer(frame.TagCoordinate(layername, self.size()), compression = compression)
+        self._layer_list.append(layer)
+
+    def add_Layer_fromLayer(self, layer:case.Layer)->None:
+        layer_n = deepcopy(layer)
+        layerid = self.nextlayerid()
+        self.changenextlayerid(layerid)
+        layer_n.changeid(layerid)
+        self._layer_list.append(layer_n)
+
+    def add_objectgroup(self, objectgroupname:str)->None:
+        objectgroup = case.ObjectGroup.init_ObjectGroup(objectgroupname)
+        self._objectGroup_list.append(objectgroup)
+
+    def add_objectgroup_fromObjectGroup(self, objectgroup:case.ObjectGroup)->None:
+        objectgroup_n = deepcopy(objectgroup)
+        layerid = int(self._properties.returnDefaultProperty("nextlayerid"))
+        self._properties.assignDefaultProperty("nextlayerid", str(layerid + 1))
+        objectgroup_n.changeid(layerid)
+        self._objectGroup_list.append(objectgroup_n)
+
+    def write_png(self, dir:str)->None:
+        for tileset in self._tileset_list:
+            tileset.write_png(dir)
 
     def output_str(self, pngtextnum:int = -1, tilenum:int = -1, output_rectangle:frame.Rectangle = frame.Rectangle(frame.Coordinate(), frame.Coordinate(-1, -1)), objectnum:int = -1)->str:
         str_ans = ""
@@ -172,7 +249,13 @@ class RWmap(ElementOri):
         elif isinstance(tileplace, tuple) and isinstance(tileplace[0], str) and isinstance(tileplace[1], int):
             tileplace_now = self.get_tileset_s(tileplace[0]).tileid_to_gid(tileplace[1])
         elif isinstance(tileplace, frame.TagCoordinate):
-            tileplace_now = self.get_tileset_s(tileplace.tag()).coo_to_gid(tileplace.place())
+            if tileplace.tag()[-1] == const.KEY.tag_for_tile_notre:
+                tileset = self.get_tileset_s(tileplace.tag()[:-1])
+                isre = False
+            else:
+                tileset = self.get_tileset_s(tileplace.tag())
+                isre = True
+            tileplace_now = tileset.coo_to_gid(tileplace.place(), isre = isre)
         else:
             raise TypeError("The type of RWmap.addTile(..., tileplace) is wrong.")
         return tileplace_now
@@ -193,16 +276,30 @@ class RWmap(ElementOri):
         layer:case.Layer = self.get_layer_s(layerRectangle.tag())
         layer.assigntileid_square(layerRectangle.rectangle(), tileplace_now)
 
-    def addTile_group(self, tilegroup:tile.TileGroup_One, original_grid:frame.Coordinate):
-        for place_grid in tilegroup.size():
-            layerplace = frame.TagCoordinate(tilegroup.layername(), original_grid + place_grid)
-            tileplace = tilegroup[place_grid]
-            if tileplace.tag() != "empty":
-                self.addTile(layerplace, tileplace)
+    def addTile_group(self, tilegroup:tile.TileGroup_One, original_grid:frame.Coordinate, rect_execute:frame.Rectangle = None, isacce = False):
+        if rect_execute == None:
+            range_excute = frame.Rectangle(frame.Coordinate(0, 0), tilegroup.size())
+        else:
+            range_excute = rect_execute
+        
+        selfid = str(id(self))
 
-    def addTile_group_list(self, tilegroup_list:tile.TileGroup_List, original_grid:frame.Coordinate):
+        gidmatrix = tilegroup.get_acce_s(selfid)
+        if type(gidmatrix) != np.ndarray:
+            gidmatrix = np.ndarray([tilegroup.size().x(), tilegroup.size().y()], dtype = np.uint32)
+            for place_grid in tilegroup.size():
+                gidmatrix[place_grid.x(), place_grid.y()] = self._tileplace_to_gid(tilegroup[place_grid])
+        
+        layer_s = self.get_layer_s(tilegroup.layername())
+        
+        layer_s.assigntileid_squarematrix_exclude0(original_grid, gidmatrix, range_excute)
+        if isacce:
+            if type(tilegroup.get_acce_s(selfid)) != np.ndarray:
+                tilegroup.save_acce_s(selfid, gidmatrix)
+
+    def addTile_group_list(self, tilegroup_list:tile.TileGroup_List, original_grid:frame.Coordinate, rect_execute:frame.Rectangle = None):
         for tilegroup in tilegroup_list:
-            self.addTile_group(tilegroup, original_grid)
+            self.addTile_group(tilegroup, original_grid, rect_execute)
 
     def addOTGroup(self, otgroup:otgroup.OTGroup, offset_grid:frame.Coordinate = frame.Coordinate()):
         self.addTile_group_list(otgroup._tilegroup_list, offset_grid)

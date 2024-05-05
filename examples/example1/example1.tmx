@@ -54,7 +54,7 @@
   </layer>
   <objectgroup id="4" name="Triggers">
     <properties/>
-    <object x="-10" y="-10" width="20" height="20" name="map_info" id="1">
+    <object x="0" y="0" width="20" height="20" name="map_info" id="1">
       <properties>
         <property name="type" value="skirmish"/>
         <property name="fog" value="los"/>
@@ -63,14 +63,14 @@
         <property name="winCondition" value="commandCenter"/>
       </properties>
     </object>
-    <object x="-10" y="10" width="20" height="20" type="changeCredits" id="2">
+    <object x="0" y="0" width="20" height="20" type="changeCredits" id="2">
       <properties>
         <property name="set" value="0"/>
         <property name="team" value="0"/>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="-10" y="10" width="20" height="20" type="changeCredits" id="3">
+    <object x="0" y="0" width="20" height="20" type="changeCredits" id="3">
       <properties>
         <property name="set" value="0"/>
         <property name="team" value="1"/>

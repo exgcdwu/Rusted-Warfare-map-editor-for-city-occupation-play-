@@ -23,7 +23,7 @@ command1 = rw.frame.TagCoordinate("units", rw.frame.Coordinate(5, 6))
 origin = rw.frame.Coordinate(0, 0)
 # 原点位置
 
-credit_pos = rw.frame.Coordinate(0, 20)
+credit_pos = rw.frame.Coordinate(0, 0)
 # 添加资金改动宾语的位置
 
 ground_graph = rw.frame.TagRectangle("Ground", rw.frame.Rectangle(
@@ -63,9 +63,9 @@ example1.addObject_one(rw.object_useful.Credit(credit_pos, 1, setCredits = 0, re
 for x in range(10, 200, 20):
     for y in range(10, 200, 20):
         # 循环建立城市与刷兵
-        pos_building = rw.frame.Coordinate(x + 1, y + 1) * example1.tile_size()
+        pos_building = rw.frame.Coordinate(2 * x + 1, 2 * y + 1) * example1.tile_size() / 2
         # 建筑位置
-        pos_troopadd = rw.frame.Coordinate(x + 2, y + 2) * example1.tile_size()
+        pos_troopadd = rw.frame.Coordinate(2 * x + 3, 2 * y + 3) * example1.tile_size() / 2
         # 兵力位置
         if x < 100:
             example1.addTile(rw.frame.TagCoordinate.init_xy("Units", x, y), turret0)
