@@ -34,3 +34,7 @@ def search_list_to_index(nlist:list, value)->int:
         return nlist.index(value)
     except ValueError:
         return -1
+    
+def list_filling(nlist:list, length:int, value, istolist = False)->list:
+    nlist_now = [[deepcopy(value)] if istolist else deepcopy(value) for value in nlist] + [deepcopy(value) for i in range(length - len(nlist))]
+    return nlist_now

@@ -49,8 +49,8 @@ class Layer(ElementOri):
         return self._properties.returnDefaultProperty("name")
     
     def size(self)->frame.Coordinate:
-        return frame.Coordinate(int(self._properties.returnDefaultProperty("width")), 
-                                int(self._properties.returnDefaultProperty("height")))
+        return frame.Coordinate(int(self._properties.returnDefaultProperty("height")), 
+                                int(self._properties.returnDefaultProperty("width")))
 
     def __repr__(self)->str:
         return self.output_str()

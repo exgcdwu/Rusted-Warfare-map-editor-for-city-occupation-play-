@@ -5,7 +5,7 @@ from typing import Union
 import rwmap._frame as frame
 import rwmap._data.const as const
 import rwmap._util as utility
-from rwmap._exceptions import KeyConflictError
+from rwmap._exceptions import KeyConflictError, TileGroupMatrixListOfListError
 from rwmap._data.const import TYPE
 
 tilestate_type = "S20"
@@ -16,6 +16,8 @@ class TileGroup_Matrix:
 class TileGroup_Matrix:
     def __init__(self, tilename_matrix:list[list]):
         self._tilematrix = deepcopy(np.array(tilename_matrix, tilestate_type))
+        if len(self._tilematrix.shape) == 1:
+            self._tilematrix = self._tilematrix.reshape((1, len(tilename_matrix)))
         self._size = frame.Coordinate(self._tilematrix.shape[0], self._tilematrix.shape[1])
         self._acce_dict = {}
 

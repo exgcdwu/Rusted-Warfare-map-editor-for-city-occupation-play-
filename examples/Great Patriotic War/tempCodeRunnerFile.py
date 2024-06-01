@@ -1,1 +1,0 @@
-lukimap.addTile_group(tilegroup_now, pos_grid)

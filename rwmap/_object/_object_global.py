@@ -11,7 +11,7 @@ class TObject_Global:
     @classmethod
     def init_global(cls, message:str, delayPerChar:int = -1, textColor:str = None, issecond:bool = True):
         op_dict = {}
-        op_dict.update({"globalMessage", message})
+        op_dict.update({"globalMessage": message})
         op_dict.update(utility.add_time_pro("globalMessage_delayPerChar", delayPerChar, issecond))
         op_dict.update(utility.add_str_pro("globalMessage_textColor", textColor))
         return cls(op_dict)

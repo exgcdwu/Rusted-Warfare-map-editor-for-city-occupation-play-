@@ -13,9 +13,9 @@ class Flash(object.TObject_Group):
     def __init__(self, pos: frame.Coordinate, delay:Union[int, float], 
                  pre_period:Union[int, float], period:Union[int, float], 
                  id:str, issecond:bool = True, 
-                 size:frame.Coordinate = const.COO.SIZE_STANDARD, 
+                 size:frame.Coordinate = const.COO.SIZE_STANDARD * 2, 
                  name_add:str = None, name_detect:str = None, name_remove:str = None, 
-                 units:str = "antiAirTurret", delayisdetect:bool = True, reset_detect = 0.25):
+                 units:str = const.UNIT.c_antiAirTurretT3, delayisdetect:bool = True, reset_detect = 0.25):
         uadd_s = tobject.UnitAdd(pos, -2, spawnUnits = units, size = size, 
                                  name = name_add, warmup = delay, reset = period, 
                                  isdelay = True, isrepeat = True)
@@ -40,6 +40,6 @@ class Flash(object.TObject_Group):
     def unitDetect_s(self)->tobject.UnitDetect:
         return self._TObject_One_list[2]
 
-    def idTObject_s(self)->list[object.TObject_One]:
+    def idTObject_s(self)->object.TObject_One:
         return self.unitDetect_s().idTObject_s()
 

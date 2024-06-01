@@ -13,3 +13,6 @@ class CoordinateDimError(IndexError):
 
 class BuildingDetectError(ValueError):
     pass
+
+class TileGroupMatrixListOfListError(ValueError):
+    pass

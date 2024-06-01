@@ -1,10 +1,10 @@
 import rwmap as rw
 import hexcity.tile_group_data.tile_group_matrix as tile_matrix
 
-tile_group_addlayer_ground_hex28_32_fill_acore = \
+tile_group_addlayer_ground_hex28_32_fill = \
 rw.tile.TileGroup_AddLayer.init_tilegroup_matrix(
     rw.const.NAME.Ground, 
-    tile_matrix.tile_group_hex28_32_fill_acore
+    tile_matrix.tile_group_hex28_32_fill
 )
 
 tile_group_addlayer_ground_hex28_32_fill_light_barrier = \
@@ -36,3 +36,4 @@ rw.tile.TileGroup_AddLayer.init_tilegroup_matrix(
     rw.const.NAME.Items, 
     tile_matrix.tile_group_hex28_32_railway
 )
+

@@ -43,6 +43,31 @@ class COO:
 class TYPE:
     tileid = Union[int, tuple[str, int], frame.TagCoordinate]
 
+class UNIT:
+    turret_flamethrower = "turret_flamethrower"
+    turret_artillery = "turret_artillery"
+    turretT2 = "turretT2"
+    turret = "turret"
+    supplyDepot = "supplyDepot"
+    repairbay = "repairbay"
+    outpostT1 = "outpostT1"
+    outpostT2 = "outpostT2"
+    antiAirTurret = "antiAirTurrets"
+    builder = "builder"
+    landFactory = "landFactory"
+    mechGun = "mechGun"
+    mechMissile = "mechMissile"
+    mechBunker = "mechBunker"
+    mechBunkerDeployed = "mechBunkerDeployed"
+    heavyArtillery = "heavyArtillery"
+    bugMeleeLarge = "bugMeleeLarge"
+    hovercraft = "hovercraft"
+    antiAirTurret = "antiAirTurret"
+    c_antiAirTurretT2 = "c_antiAirTurretT2"
+    c_antiAirTurretT3 = "c_antiAirTurretT3"
+    combatEngineer = "combatEngineer"
+    mechEngineer = "mechEngineer"
+
 
 
 

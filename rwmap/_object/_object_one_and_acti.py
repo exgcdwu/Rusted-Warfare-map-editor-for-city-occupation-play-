@@ -54,7 +54,7 @@ class TObject_Acti:
         if self._idTObject_One_s != None:
             op_dict.update({"id": self._idTObject_One_s._name}) 
         if self._isalltoacti:
-            op_dict.update({"allToActivate": "1"}) 
+            op_dict.update({"allToActivate": {"type": "bool", "value": "true"}}) 
         op_dict.update(utility.add_acti_pro("alsoactivate", self._alsoacti_s))
         op_dict.update(utility.add_acti_pro("activatedBy", self._actiBy_s))
         op_dict.update(utility.add_acti_pro("deactivatedBy", self._deactiBy_s))

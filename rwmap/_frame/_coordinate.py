@@ -37,6 +37,9 @@ class Coordinate:
     def transpose(self)->Coordinate:
         return Coordinate(self.y(), self.x(), self._content.dtype)
 
+    def changetype(self, dtype)->Coordinate:
+        return Coordinate(self.x(), self.y(), dtype)
+
     def __add__(self, other):
         if isinstance(other, Coordinate):
             return Coordinate(self.x() + other.x(), self.y() + other.y(), self._content.dtype)

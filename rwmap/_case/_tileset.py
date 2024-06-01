@@ -161,6 +161,20 @@ class TileSet(ElementOri):
             tileset_name = self._properties.returnDefaultProperty("source")
             tileset_name = utility.str_slash_to_dot(tileset_name)
         return tileset_name
+
+    def change_name(self, new_name:str)->None:
+        tileset_name = self._properties.returnDefaultProperty("name")
+        if tileset_name != None:
+            self._properties.assignDefaultProperty("name", new_name)
+
+        tileset_name = self._properties.returnDefaultProperty("source")
+        if tileset_name != None:
+            tileset_name_len = len(utility.str_slash_to_dot(tileset_name))
+            self._properties.assignDefaultProperty("source", tileset_name[0:-tileset_name_len-4] + new_name + ".tmx")
+
+        tileset_name = self._image_properties.returnDefaultProperty("source")
+        if tileset_name != None:
+            self._image_properties.assignDefaultProperty("source", tileset_name[0:-tileset_name_len-4] + new_name + ".png")
     
     def totalgid(self)->int:
         return self._size.x() * self._size.y()

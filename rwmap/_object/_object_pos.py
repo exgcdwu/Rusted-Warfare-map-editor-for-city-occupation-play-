@@ -14,13 +14,13 @@ class TObject_Pos:
 
     @classmethod
     def init_rectangle(cls, rect:frame.Rectangle):
-        default_properties = {"x": f"{rect.i().x():.0f}", "y": f"{rect.i().y():.0f}", 
-                              "width": f"{rect.a().x():.0f}", "height": f"{rect.a().y():.0f}"}
+        default_properties = {"x": f"{rect.i().x():.2f}", "y": f"{rect.i().y():.2f}", 
+                              "width": f"{rect.a().x():.2f}", "height": f"{rect.a().y():.2f}"}
         return cls(default_properties)
     
     @classmethod
     def init_polygon(cls, point_list:list[frame.Coordinate], midpos:frame.Coordinate):
-        default_properties = {"x": f"{midpos.x():.0f}", "y": f"{midpos.y():.0f}"}
+        default_properties = {"x": f"{midpos.x():.2f}", "y": f"{midpos.y():.2f}"}
         point_list_str = utility.point_list_to_str(point_list)
         other_properties = [et.Element("polygon", {"points": point_list_str})]
         return cls(default_properties, other_properties)
@@ -45,8 +45,8 @@ class TObject_Pos:
     def offset(self, offset:frame.Coordinate)->TObject_Pos:
         newtp = deepcopy(self)
         try:
-            newtp._default_properties["x"] = f"{float(self._default_properties["x"]) + offset.x():.0f}"
-            newtp._default_properties["y"] = f"{float(self._default_properties["y"]) + offset.y():.0f}"
+            newtp._default_properties["x"] = f"{float(self._default_properties["x"]) + offset.x():.2f}"
+            newtp._default_properties["y"] = f"{float(self._default_properties["y"]) + offset.y():.2f}"
         except KeyError:
             raise KeyError("Position: uninitialized")
         return newtp

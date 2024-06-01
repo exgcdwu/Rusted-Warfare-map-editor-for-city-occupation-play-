@@ -77,6 +77,13 @@ class RWmap(ElementOri):
         return frame.Coordinate(int(self._properties.returnDefaultProperty("tilewidth")), 
                                 int(self._properties.returnDefaultProperty("tileheight")))
     
+    def end_point_layer(self)->frame.Coordinate:
+        return frame.Coordinate(int(self._properties.returnDefaultProperty("height")), 
+                                int(self._properties.returnDefaultProperty("width")))
+    
+    def end_point_object(self)->frame.Coordinate:
+        return self.size() * self.tile_size()
+    
     def nextlayerid(self)->int:
         return int(self._properties.returnDefaultProperty("nextlayerid"))
     

@@ -5,5 +5,6 @@ from rwmap._data.tobject_group._city._city_text import CityText, CityTextNoTeam,
 from rwmap._data.tobject_group._city._normal_unit_add import NormalUnitAdd, NormalUnitAddInstant
 from rwmap._data.tobject_group._city._city_remove import unitRemoveAllTeam
 from rwmap._data.tobject_group._troop._troop_add import RefreshTroop
-from rwmap._data.tobject_group._count._flash import Flash
+from rwmap._data.tobject_group._count import *
+from rwmap._data.tobject_group._victory import *
 

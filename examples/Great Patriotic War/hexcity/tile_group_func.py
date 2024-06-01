@@ -233,3 +233,9 @@ def N_CWbool_to_direction_symbol(N_CW:list[bool])->str:
         strans.append("NW")
     return ",".join(strans)
 
+def border_state_N_CW_bool(border_matrix:list[list[str]], pos_square:rw.frame.Coordinate)->list[bool]:
+    border_now = str_to_NESbool(border_matrix[pos_square.x()][pos_square.y()])
+    border_NW = str_to_NESbool(border_matrix[pos_square.x()][pos_square.y() + 1])
+    border_W = str_to_NESbool(border_matrix[pos_square.x() - 1][pos_square.y()])
+    border_SW = str_to_NESbool(border_matrix[pos_square.x() - 1][pos_square.y() - 1])
+    return border_now + [border_SW[0], border_W[1], border_NW[2]]

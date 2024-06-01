@@ -34,6 +34,8 @@ class TObject_Type:
         otype = cls({"type": "unitDetect"}, {})
         otype._add_optional("team", team)
         otype._add_optional("unitType", unitType)
+        minUnits = None if minUnits == -1 else minUnits
+        maxUnits = None if maxUnits == -1 else maxUnits
         otype._add_optional("minUnits", minUnits)
         otype._add_optional("maxUnits", maxUnits)
         for only in onlyList:
