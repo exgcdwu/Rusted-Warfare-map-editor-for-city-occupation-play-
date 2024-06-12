@@ -3,7 +3,8 @@
 import os
 from setuptools import setup, find_packages
 
-__version__ = '1.5.2'
+__version__ = '1.5.3'
+
 
 def read_file(file:str):
     with open(file) as file:
@@ -11,7 +12,8 @@ def read_file(file:str):
 
 def readline_file(file:str):
     with open(file) as file:
-        return file.readline()
+        module_list = file.read().split("\n")
+    return [module for module in module_list if module != ""]
 
 DATA_PREFIX_MAPS = 'other_data/maps/'
 ARGPARSE_FILE = "auto"
