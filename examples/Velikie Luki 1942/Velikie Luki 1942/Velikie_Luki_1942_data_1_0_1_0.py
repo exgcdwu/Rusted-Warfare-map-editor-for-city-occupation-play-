@@ -293,7 +293,7 @@ for i, troop_now in enumerate(troop_add):
 
     troop_add[i] = [troop_pos_list, troop_team, troop_phase_start, troop_dict, troop_teamgroup]
 
-AV_need = 3
+AV_need = 2
 #SV_need = 12
 is_SV_advance = True
 is_AV_advance = False

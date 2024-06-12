@@ -21,8 +21,9 @@ def get_etElement_properties(root:et.Element)->dict[str,Union[str, dict[str, str
         if len(nproperty.attrib) == 2:
             dict_properties[nproperty.attrib['name']] = nproperty.attrib['value']
         else:
+            name_now = nproperty.attrib["name"]
             nproperty.attrib.pop('name')
-            dict_properties[nproperty.attrib['name']] = nproperty.attrib
+            dict_properties[name_now] = nproperty.attrib
     return dict_properties
 
 def output_etElement_properties(dict_properties:dict[str, Union[dict[str, str], str]])->et.Element:

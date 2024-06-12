@@ -31,8 +31,7 @@ class TObject(ElementProperties):
     def output_str(self)->str:
         str_ans = super().output_str()
         str_add = "other_properties:" + str(self._other_properties) + "\n"
-        str_add = utility.indentstr_Tab(str_ans)
-        str_ans = str_ans + str_add
+        str_ans = utility.indentstr_Tab(str_ans) + str_add
         return str_ans
     
     def __repr__(self)->str:

@@ -104,7 +104,7 @@ class RWmap(ElementOri):
     
     def objectgroup_name_list(self)->list[str]:
         return [objectgroup.name() for objectgroup in self._objectGroup_list]
-    
+
     def get_layer_s(self, name:str)->case.Layer:
         layer = utility.get_ElementOri_from_list_by_name_s(self._layer_list, name)
         if layer == None:
@@ -134,8 +134,8 @@ class RWmap(ElementOri):
             if tileset.isexist():
                 self.add_tileset_fromTileSet(tileset)
 
-    def add_tileset_fromMapFile(self, map_file:str)->None:
-        rwmap = RWmap.init_mapfile(map_file)
+    def add_tileset_fromMapPath(self, map_path:str)->None:
+        rwmap = RWmap.init_mapfile(map_path)
         self.add_tileset_fromMap(rwmap)
 
     def add_layer(self, layername:str, compression:str = "default")->None:
@@ -199,14 +199,20 @@ class RWmap(ElementOri):
     def write_file(self, map_file:str)->None:
         utility.output_file_from_etElement(self.output_etElement(), map_file)
 
-    def addObject_dict(self, objectGroup_name:str, default_properties:dict[str, str] = {}, optional_properties :dict[str, Union[str, dict[str, str]]] = {}, other_properties:list[et.Element] = [])->None:
-        objectGroup_now:case.ObjectGroup = utility.get_ElementOri_from_list_by_name_s(self._objectGroup_list, objectGroup_name)
-        if objectGroup_now == None:
-            raise KeyError("objectGroup name:" + objectGroup_name + " not found")
+
+    def addObject_type(self, tobject:case.TObject, objectGroup_name:str = const.NAME.Triggers):
+        objectGroup_now = self.get_objectgroup_s(objectGroup_name)
+        tobject.assignDefaultProperty("id", self._properties.returnDefaultProperty("nextobjectid"))
+        objectGroup_now.addObject_type(tobject)
+        str_nextobjectid = str(max(int(self._properties.returnDefaultProperty("nextobjectid")), int(tobject.returnDefaultProperty("id")) + 1))
+        self._properties.assignDefaultProperty("nextobjectid", str_nextobjectid)
+
+    def addObject_dict(self, objectGroup_name:str = const.NAME.Triggers, default_properties:dict[str, str] = {}, optional_properties :dict[str, Union[str, dict[str, str]]] = {}, other_properties:list[et.Element] = [])->None:
+        objectGroup_now = self.get_objectgroup_s(objectGroup_name)
         default_properties_n = deepcopy(default_properties)
         if default_properties_n.get("id") == None:
             default_properties_n["id"] = self._properties.returnDefaultProperty("nextobjectid")
-        objectGroup_now.addObject(default_properties_n, optional_properties, other_properties)
+        objectGroup_now.addObject_dict(default_properties_n, optional_properties, other_properties)
         str_nextobjectid = str(max(int(self._properties.returnDefaultProperty("nextobjectid")), int(default_properties_n["id"]) + 1))
         self._properties.assignDefaultProperty("nextobjectid", str_nextobjectid)
     
@@ -228,28 +234,30 @@ class RWmap(ElementOri):
         else:
             raise TypeError("The type of RWmap.addObject(tobject, ...) is wrong.")
 
-    def iterator_object_s(self, objectGroup_name:str, default_re:dict[str, str] = {}, optional_re:dict[str, str] = {})->Generator[case.TObject, None, None]:
-        objectGroup_now:case.ObjectGroup = utility.get_ElementOri_from_list_by_name_s(self._objectGroup_list, objectGroup_name)
-        if objectGroup_now == None:
-            raise KeyError("objectGroup name:" + objectGroup_name + " not found")
+    def iterator_object_s(self, objectGroup_name:str = const.NAME.Triggers, default_re:dict[str, str] = {}, optional_re:dict[str, str] = {})->Generator[case.TObject, None, None]:
+        objectGroup_now = self.get_objectgroup_s(objectGroup_name)
         for tobject in objectGroup_now._object_list:
             tobject_sas:bool = True
             for dname, dvalue in default_re.items():
-                if dvalue != "":
-                    if tobject.returnDefaultProperty(dname) == None or re.match(dvalue, tobject.returnDefaultProperty(dname)) == None:
-                        tobject_sas = False
-                        break
+                tname = tobject.returnDefaultProperty(dname) if tobject.returnDefaultProperty(dname) != None else ""
+                if re.match(dvalue, tname) == None:
+                    tobject_sas = False
+                    break
             if tobject_sas == False:
                 continue
             for dname, dvalue in optional_re.items():
-                if dvalue != "":
-                    if tobject.returnOptionalProperty(dname) == None or re.match(dvalue, tobject.returnOptionalProperty(dname)) == None:
-                        tobject_sas = False
-                        break
+                tname = tobject.returnOptionalProperty(dname) if tobject.returnOptionalProperty(dname) != None else ""
+                if re.match(dvalue, tname) == None:
+                    tobject_sas = False
+                    break
             if tobject_sas == False:
                 continue
             yield tobject
     
+    def delete_object_s(self, tobject:case.TObject, objectGroup_name:str = const.NAME.Triggers):
+        objectGroup_now = self.get_objectgroup_s(objectGroup_name)
+        objectGroup_now.deleteObject(tobject)
+
     def _tileplace_to_gid(self, tileplace:Union[int, tuple[str, int], frame.TagCoordinate])->int:
         if isinstance(tileplace, int):
             tileplace_now = tileplace

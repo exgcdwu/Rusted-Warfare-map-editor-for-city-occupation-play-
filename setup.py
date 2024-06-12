@@ -3,7 +3,7 @@
 import os
 from setuptools import setup, find_packages
 
-__version__ = '1.4.3'
+__version__ = '1.5.0'
 
 def read_file(file:str):
     with open(file) as file:
@@ -14,6 +14,10 @@ def readline_file(file:str):
         return file.readline()
 
 DATA_PREFIX_MAPS = 'other_data/maps/'
+ARGPARSE_FILE = "someargparse.auto"
+ARGPARSE_FUNC = {
+    "triggerauto": "auto_func"
+}
 
 setup(
     name = 'rwmapeditor_exgcdwu',
@@ -28,5 +32,8 @@ setup(
     package_data={'rwmap': ['other_data/*.txt', DATA_PREFIX_MAPS + '*.tsx', DATA_PREFIX_MAPS + 'bitmaps/*.png',
                              DATA_PREFIX_MAPS + 'ridges/*.tsx', DATA_PREFIX_MAPS + 'terrain/*.tsx']},
     python_requires = '>=3.6.0',
-    install_requires = readline_file("./rwmap/other_data/requirements.txt")
+    install_requires = readline_file("./rwmap/other_data/requirements.txt"), 
+    entry_points={
+        "console_scripts": [f"{name} = {ARGPARSE_FILE}:{value}" for name, value in ARGPARSE_FUNC.items()]
+    }
 )

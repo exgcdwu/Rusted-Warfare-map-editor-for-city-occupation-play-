@@ -60,6 +60,11 @@ class ObjectGroup(ElementOri):
             root.append(tobject_element)
         return root
     
-    def addObject(self, default_properties:dict[str, str] = {}, optional_properties:dict[str, Union[str, dict[str, str]]] = {}, other_properties:list[et.Element] = [])->None:
+    def addObject_type(self, tobject:TObject):
+        self._object_list.append(tobject)
+
+    def addObject_dict(self, default_properties:dict[str, str] = {}, optional_properties:dict[str, Union[str, dict[str, str]]] = {}, other_properties:list[et.Element] = [])->None:
         self._object_list.append(TObject("object", default_properties, optional_properties, other_properties))
 
+    def deleteObject(self, tobject:TObject):
+        self._object_list.remove(tobject)

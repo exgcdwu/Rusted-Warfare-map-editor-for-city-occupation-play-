@@ -23,9 +23,9 @@ from Velikie_Luki_1942_data_1_0_1_0 import *
 
 lukimap = rw.RWmap.init_map(map_size_tile, tile_size = tile_size)
 # 反攻大卢基空地图 
-lukimap.add_tileset_fromMapFile(f'{example_dir_path}\\template\\v3.tmx')
+lukimap.add_tileset_fromMapPath(f'{example_dir_path}\\template\\v3.tmx')
 # 添加V3模板地块集
-lukimap.add_tileset_fromMapFile(f'{example_dir_path}\\template\\city occupation(tile property).tmx')
+lukimap.add_tileset_fromMapPath(f'{example_dir_path}\\template\\city occupation(tile property).tmx')
 # 添加城夺地块集
 lukimap.write_png(f'{current_dir_path}')
 # 将地块集图片全部输出，以便使用Tiled观看
