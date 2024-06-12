@@ -6,6 +6,8 @@ ___一个铁锈战争 (Rusted Warfare) 地图编辑 python 库___
 
 [简易使用教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/Tutorial.md)
 
+[城夺宾语自动化命令行教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/someargparse/auto_tutorial.md)
+
 【教程已过时】
 
 [简单城夺地图代码例子](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/examples/example1/example1.py)
@@ -23,8 +25,6 @@ python实现铁锈地图文件地块编辑和宾语编辑。
 地块组框架已完成。
 
 宾语组框架已完成。
-
-该版本为临时版本，尽量不要直接使用。
 
 ## 安装
 

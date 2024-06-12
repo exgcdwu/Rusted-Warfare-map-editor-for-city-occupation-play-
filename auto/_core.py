@@ -9,6 +9,8 @@ package_dir = os.path.dirname(current_dir_path)
 sys.path.append(package_dir)
 import rwmap as rw
 
+from auto._data import *
+
 class AUTOKEY:
     info_args = "info_args"
     prefix = "prefix"
@@ -98,7 +100,7 @@ def auto_func():
                         help='The input path of RW map file.')
     parser.add_argument("-i", "--info", dest = "info", 
                         action = "store", metavar = "file", type = str, nargs = 1, 
-                        required = False, default = current_dir_path + "\\auto_data.py", 
+                        required = False, default = current_dir_path + "\\_data.py", 
                         help = "The file's path which has information's mode variable|current_file_path"
                         )
     parser.add_argument("-v", "--var", dest = "var", 
@@ -136,8 +138,6 @@ def auto_func():
                     ids_now_dict[info_dict_now[thing[0]]] = 1
                 info_dict[info_dict_now[AUTOKEY.prefix]] = info_dict_now
                 map_now.delete_object_s(tobject)
-    import pdb; pdb.set_trace()
-
 
 
     for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 

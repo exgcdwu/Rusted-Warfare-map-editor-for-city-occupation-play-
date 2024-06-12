@@ -54,7 +54,7 @@ cityname为城市名称，该城市名称会出现在显示文本中
 ### install
 
 ```console
-pip install rwmapeditor-exgcdwu==1.5.0
+pip install rwmapeditor-exgcdwu==1.5.1
 ```
 
 ### use
