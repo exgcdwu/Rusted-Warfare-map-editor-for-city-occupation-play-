@@ -119,7 +119,7 @@ def auto_func():
     map_now = rw.RWmap.init_mapfile(f'{args.map_path[0]}')
     output_path = args.map_path[0] if args.output_path == "|" else args.output_path[0]
     sys.path.append("".join(args.info.split("\\")[:-1]))
-    info_file = importlib.import_module(args.info.split("\\")[-1].split(".")[0])
+    info_file = importlib.import_module(".".join(".".join(args.info.split("\\")[-2:]).split(".")[:-1]))
     info_now = getattr(info_file, args.var, 'Not Found')
 
     info_dict = {}

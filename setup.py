@@ -3,7 +3,7 @@
 import os
 from setuptools import setup, find_packages
 
-__version__ = '1.5.1'
+__version__ = '1.5.2'
 
 def read_file(file:str):
     with open(file) as file:
