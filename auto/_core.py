@@ -27,7 +27,7 @@ class AUTOKEY:
     operation = "operation"
     tobject = "tobject"
     offset = "offset"
-    size = "size"
+    offsetsize = "offsetsize"
     name = "name"
     type = "type"
     optional = "optional"
@@ -51,7 +51,7 @@ def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, isr
         args_n = split_now[1:]
     else:
         args_n = [split_now[0][len(object_dict[AUTOKEY.prefix]):]] + split_now[1:]
-        
+    
     for index, thing in enumerate(info[AUTOKEY.args]):
         args_dict[thing[0]] = thing[1](args_n[index])
     
@@ -108,12 +108,13 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
         for death_now in operation[AUTOKEY.death]:
             if dict_name.get(death_now) != None and dict_name.get(death_now) == True:
                 return None
-    
+            
     offset = operation.get(AUTOKEY.offset)
     offset = offset if offset != None else rw.frame.Coordinate()
-    size = operation.get(AUTOKEY.size)
-    size = size if size != None else ori_size
+    offsetsize = operation.get(AUTOKEY.offsetsize)
+    offsetsize = offsetsize if offsetsize != None else rw.frame.Coordinate()
     pos = ori_pos + offset
+    size = ori_size + offsetsize
 
     default_pro = {
         rw.const.OBJECTDE.x: str(pos.x()), 
@@ -133,8 +134,15 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
 def mapvalue_to_value(value, ntype):
     if isinstance(value, dict):
         if value["type"] == "bool":
-            return ntype(True) if value["value"] == "true" else ntype(False) 
+            value_now = ntype(True) if value["value"] == "true" else ntype(False) 
+            if isinstance(value_now, str):
+                value_now = value_now.lower()
+            return value_now
     else:
+        if ntype == bool:
+            value_now = str(value)
+            value_now = True if value_now == "true" else False
+            return value_now
         return ntype(value)
 
 def value_to_mapvalue(value, ntype):
@@ -213,11 +221,9 @@ def auto_func():
     dtobject = []
 
     id_to_tobject = {}
-    id_to_index = {}
 
     for tobject in map_now.iterator_object_s():
         id_to_tobject[tobject.returnDefaultProperty("id")] = tobject
-        id_to_index[tobject.returnDefaultProperty("id")] = map_now.index_object_s(tobject)
                 
     for key, info in info_now.items():
         for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 

@@ -33,7 +33,7 @@ auto_func_arg = {
         }, 
         AUTOKEY.default_args:{
             "inaddWarmup": "0s", 
-            "mapTextName": "{cityname}", 
+            "mapTextName": "", 
             "unitAddName": "", 
             "inunitAddName": "{team}", 
             "unitDetectName": "检测 {idprefix0}"
@@ -83,7 +83,8 @@ auto_func_arg = {
             {
                 "exist": ["isinadd"], 
                 "death": ["isinshowOnMap"], 
-                "offset": rw.frame.Coordinate(), 
+                "offset": rw.frame.Coordinate(0, -20),
+                "offsetsize": rw.frame.Coordinate(0, 40), 
                 "name": "{inunitAddName}", 
                 "type": rw.const.OBJECTTYPE.unitAdd, 
                 "optional": {
@@ -94,7 +95,8 @@ auto_func_arg = {
             }, 
             {
                 "exist": ["isinadd", "isinshowOnMap"], 
-                "offset": rw.frame.Coordinate(), 
+                "offset": rw.frame.Coordinate(0, -20),
+                "offsetsize": rw.frame.Coordinate(0, 40), 
                 "name": "{inunitAddName}", 
                 "type": rw.const.OBJECTTYPE.unitAdd, 
                 "optional": {
@@ -106,7 +108,8 @@ auto_func_arg = {
             }, 
             {
                 "death": ["isonlybuilding"], 
-                "offset": rw.frame.Coordinate(), 
+                "offset": rw.frame.Coordinate(-20, 0),
+                "offsetsize": rw.frame.Coordinate(40, 0), 
                 "name": "{unitDetectName}", 
                 "type": rw.const.OBJECTTYPE.unitDetect, 
                 "optional": {
@@ -118,7 +121,8 @@ auto_func_arg = {
             }, 
             {
                 "exist": ["isonlybuilding"], 
-                "offset": rw.frame.Coordinate(), 
+                "offset": rw.frame.Coordinate(-20, 0),
+                "offsetsize": rw.frame.Coordinate(40, 0), 
                 "name": "{unitDetectName}", 
                 "type": rw.const.OBJECTTYPE.unitDetect, 
                 "optional": {

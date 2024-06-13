@@ -45,7 +45,7 @@ textColor：可选，当istext为是时，表示城市文本的颜色
 
 textSize：可选，当istext为是时，表示城市文本的字号
 
-isprefixseg: 可选，默认为否，启用时，prefix与cityname之间需要'.'隔开
+isprefixseg: 可选，默认为否，启用时，prefix与cityname之间需要'.'隔开。不要在不应该出现的地方出现'.'
 
 isshowOnMap: 可选，默认为否，启用时，城市生成时小地图显示
 
@@ -55,13 +55,15 @@ mapTextName：可选，默认为"{cityname}"，即城市名，当istext为是时
 
 unitAddName：可选，默认为""，建筑添加宾语名字
 
-inunitAddName：可选，默认为"{team}"，即队伍，建筑初始添加宾语名字
+inunitAddName：可选，默认为"{team}"，即队伍，当isinadd为是时，建筑初始添加宾语名字
 
 unitDetectName：可选，默认为"检测 {idprefix0}"，即检测id，建筑检测宾语名字
 
 ### city
 
-在任意处添加宾语，然后名称格式为{prefix}{cityname}(,t{number})（实际没有大括号和小括号）
+在任意处添加宾语，然后名称格式为{prefix}{cityname}(,t{number})（实际没有大括号和小括号）。
+
+为了地图编辑器观看效果，对宾语形状大小做稍许改动。
 
 prefix为前缀，表明使用的格式
 
@@ -73,12 +75,12 @@ cityname为城市名称，该城市名称会出现在显示文本中
 
 ### start
 
-下载任意一款python编译器
+下载任意一款python编译器。
 
 ### install
 
 ```console
-pip install rwmapeditor-exgcdwu==1.5.4
+pip install rwmapeditor-exgcdwu==1.5.5
 ```
 
 ### use
