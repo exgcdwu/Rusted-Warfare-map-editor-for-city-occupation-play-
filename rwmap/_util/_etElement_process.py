@@ -13,7 +13,7 @@ import rwmap._util._dict_util as dict_utility
 def get_etElement_properties(root:et.Element)->dict[str,Union[str, dict[str, str]]]:
     rootn = deepcopy(root)
     if rootn == None:
-        return None
+        return {}
     dict_properties = {}
     for nproperty in rootn:
         if nproperty.attrib.get('value') == None:

@@ -5,12 +5,15 @@ from typing import Union
 import rwmap._frame as frame
 import rwmap._util as utility
 from rwmap._frame._element_property import ElementProperties
-
+class TObject(ElementProperties):
+    pass
 class TObject(ElementProperties):
     def __init__(self, tag:str, default_properties:dict[str, str] = {}, optional_properties:dict[str, Union[str, dict[str, str]]] = {}, other_properties:list[et.Element] = [])->None:
         super().__init__(tag, default_properties, optional_properties)
         self._other_properties = deepcopy(other_properties)
-        
+
+    def copy(self, tobject:TObject):
+        self.__init__(tobject._tag, tobject._default_properties, tobject._optional_properties, tobject._other_properties)
     @classmethod
     def init_etElement(cls, root:et.Element):
         if root == None:

@@ -3265,8 +3265,11 @@
     <property name="textColor" value="white"/>
     <property name="textSize" value="7"/>
     <property name="unit" value="supplyDepot"/>
+    <property name="isprefixseg" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="405" name="c.实验城市-1" x="120" y="80" width="20" height="20"/>
+  <object id="405" name="c.实验城市1,t1" x="120" y="80" width="20" height="20"/>
+  <object id="406" name="c.实验城市2,t2" x="120" y="80" width="20" height="20"/>
+  <object id="407" name="c.实验城市3,t3" x="120" y="80" width="20" height="20"/>
  </objectgroup>
 </map>

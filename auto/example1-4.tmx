@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="20" tileheight="20" infinite="0" nextlayerid="5" nextobjectid="418">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="20" tileheight="20" infinite="0" nextlayerid="5" nextobjectid="421">
   <tileset firstgid="1" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/units.tsx"/>
   <tileset firstgid="262" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Deep Water.tsx"/>
   <tileset firstgid="263" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Dirt.tsx"/>
@@ -3250,9 +3250,8 @@
         <property name="addReset" value="20s"/>
         <property name="addWarmup" value="20s"/>
         <property name="detectReset" value="20s"/>
-        <property name="idprefix" value="c"/>
+        <property name="idprefix" value="p"/>
         <property name="inaddWarmup" value="5s"/>
-        <property name="isinadd" type="bool" value="true"/>
         <property name="isonlybuilding" type="bool" value="true"/>
         <property name="istext" type="bool" value="true"/>
         <property name="prefix" value="c"/>
@@ -3260,51 +3259,50 @@
         <property name="textSize" value="7"/>
         <property name="unit" value="supplyDepot"/>
         <property name="isprefixseg" type="bool" value="true"/>
+        <property name="isshowOnMap" type="bool" value="true"/>
+        <property name="isinshowOnMap" type="bool" value="true"/>
       </properties>
     </object>
-    <object id="405" name="c.实验城市1,t1" x="120" y="80" width="20" height="20">
+    <object id="405" name="c.实验城市1" x="120" y="80" width="20" height="20">
       <properties>
         <property name="c" value="c1"/>
-        <property name="IDs" value="406,407,408,409"/>
+        <property name="IDs" value="406,407,408"/>
+        <property name="p" value="p1"/>
       </properties>
     </object>
-    <object id="406" name="c.实验城市2,t2" x="120" y="80" width="20" height="20">
+    <object id="406" name="c.实验城市2" x="120" y="80" width="20" height="20">
       <properties>
         <property name="c" value="c2"/>
-        <property name="IDs" value="410,411,412,413"/>
+        <property name="IDs" value="410,411,412"/>
+        <property name="p" value="p2"/>
       </properties>
     </object>
-    <object id="407" name="c.实验城市3,t3" x="120" y="80" width="20" height="20">
+    <object id="407" name="c.实验城市3" x="120" y="80" width="20" height="20">
       <properties>
         <property name="c" value="c3"/>
-        <property name="IDs" value="414,415,416,417"/>
+        <property name="IDs" value="414,415,416"/>
+        <property name="p" value="p3"/>
       </properties>
     </object>
     <object x="120" y="80" width="20" height="20" name="" type="unitAdd" id="406">
       <properties>
         <property name="spawnUnits" value="supplyDepot"/>
-        <property name="activatedBy" value="c1"/>
+        <property name="activatedBy" value="p1"/>
         <property name="resetActivationAfter" value="20s"/>
         <property name="team" value="-1"/>
         <property name="warmup" value="20s"/>
+        <property name="showOnMap" value="true" type="bool"/>
       </properties>
     </object>
-    <object x="120" y="80" width="20" height="20" name="-1" type="unitAdd" id="407">
+    <object x="120" y="80" width="20" height="20" name="检测 p1" type="unitDetect" id="407">
       <properties>
-        <property name="spawnUnits" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-        <property name="warmup" value="5s"/>
-      </properties>
-    </object>
-    <object x="120" y="80" width="20" height="20" name="检测 c1" type="unitDetect" id="408">
-      <properties>
-        <property name="id" value="c1"/>
+        <property name="id" value="p1"/>
         <property name="maxUnits" value="0"/>
         <property name="resetActivationAfter" value="20s"/>
-        <property name="onlyBuildings" value="True" type="bool"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
       </properties>
     </object>
-    <object x="120" y="80" width="20" height="20" name="实验城市1" type="mapText" id="409">
+    <object x="120" y="80" width="20" height="20" name="实验城市1" type="mapText" id="408">
       <properties>
         <property name="text" value="实验城市1"/>
         <property name="textColor" value="white"/>
@@ -3314,28 +3312,22 @@
     <object x="120" y="80" width="20" height="20" name="" type="unitAdd" id="410">
       <properties>
         <property name="spawnUnits" value="supplyDepot"/>
-        <property name="activatedBy" value="c2"/>
+        <property name="activatedBy" value="p2"/>
         <property name="resetActivationAfter" value="20s"/>
         <property name="team" value="-1"/>
         <property name="warmup" value="20s"/>
+        <property name="showOnMap" value="true" type="bool"/>
       </properties>
     </object>
-    <object x="120" y="80" width="20" height="20" name="-1" type="unitAdd" id="411">
+    <object x="120" y="80" width="20" height="20" name="检测 p2" type="unitDetect" id="411">
       <properties>
-        <property name="spawnUnits" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-        <property name="warmup" value="5s"/>
-      </properties>
-    </object>
-    <object x="120" y="80" width="20" height="20" name="检测 c2" type="unitDetect" id="412">
-      <properties>
-        <property name="id" value="c2"/>
+        <property name="id" value="p2"/>
         <property name="maxUnits" value="0"/>
         <property name="resetActivationAfter" value="20s"/>
-        <property name="onlyBuildings" value="True" type="bool"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
       </properties>
     </object>
-    <object x="120" y="80" width="20" height="20" name="实验城市2" type="mapText" id="413">
+    <object x="120" y="80" width="20" height="20" name="实验城市2" type="mapText" id="412">
       <properties>
         <property name="text" value="实验城市2"/>
         <property name="textColor" value="white"/>
@@ -3345,28 +3337,22 @@
     <object x="120" y="80" width="20" height="20" name="" type="unitAdd" id="414">
       <properties>
         <property name="spawnUnits" value="supplyDepot"/>
-        <property name="activatedBy" value="c3"/>
+        <property name="activatedBy" value="p3"/>
         <property name="resetActivationAfter" value="20s"/>
         <property name="team" value="-1"/>
         <property name="warmup" value="20s"/>
+        <property name="showOnMap" value="true" type="bool"/>
       </properties>
     </object>
-    <object x="120" y="80" width="20" height="20" name="-1" type="unitAdd" id="415">
+    <object x="120" y="80" width="20" height="20" name="检测 p3" type="unitDetect" id="415">
       <properties>
-        <property name="spawnUnits" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-        <property name="warmup" value="5s"/>
-      </properties>
-    </object>
-    <object x="120" y="80" width="20" height="20" name="检测 c3" type="unitDetect" id="416">
-      <properties>
-        <property name="id" value="c3"/>
+        <property name="id" value="p3"/>
         <property name="maxUnits" value="0"/>
         <property name="resetActivationAfter" value="20s"/>
-        <property name="onlyBuildings" value="True" type="bool"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
       </properties>
     </object>
-    <object x="120" y="80" width="20" height="20" name="实验城市3" type="mapText" id="417">
+    <object x="120" y="80" width="20" height="20" name="实验城市3" type="mapText" id="416">
       <properties>
         <property name="text" value="实验城市3"/>
         <property name="textColor" value="white"/>

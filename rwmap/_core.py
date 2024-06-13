@@ -258,6 +258,10 @@ class RWmap(ElementOri):
         objectGroup_now = self.get_objectgroup_s(objectGroup_name)
         objectGroup_now.deleteObject(tobject)
 
+    def index_object_s(self, tobject:case.TObject, objectGroup_name:str = const.NAME.Triggers)->int:
+        objectGroup_now = self.get_objectgroup_s(objectGroup_name)
+        return objectGroup_now.index_object_s(tobject)
+
     def _tileplace_to_gid(self, tileplace:Union[int, tuple[str, int], frame.TagCoordinate])->int:
         if isinstance(tileplace, int):
             tileplace_now = tileplace

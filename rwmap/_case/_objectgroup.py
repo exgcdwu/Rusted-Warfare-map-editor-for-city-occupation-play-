@@ -68,3 +68,6 @@ class ObjectGroup(ElementOri):
 
     def deleteObject(self, tobject:TObject):
         self._object_list.remove(tobject)
+
+    def index_object_s(self, tobject:TObject)->int:
+        self._object_list.index(tobject)

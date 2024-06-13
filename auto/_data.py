@@ -6,29 +6,14 @@ package_dir = os.path.dirname(current_dir_path)
 sys.path.append(package_dir)
 import rwmap as rw
 
-class AUTOKEY:
-    info_args = "info_args"
-    prefix = "prefix"
-    info = "info"
-    args = "args"
-    seg = "seg"
-    opargs = "opargs"
-    opargs_seg = "opargs_seg"
-    opargs_prefix_len = "opargs_prefix_len"
-    ids = "ids"
-    operation = "operation"
-
-    offset = "offset", 
-    size = "size", 
-    name = "name", 
-    type = "type", 
-    optional = "optional"
+from auto._core import AUTOKEY
 
 auto_func_arg = {
     "city_info": {
         AUTOKEY.info_args:{
             "prefix": str, 
             "idprefix": str, 
+            "isprefixseg": bool, 
             "detectReset": str, 
             "addWarmup": str, 
             "addReset": str, 
@@ -38,8 +23,22 @@ auto_func_arg = {
             "isonlybuilding": bool, 
             "istext": bool, 
             "textColor": str, 
-            "textSize": str
+            "textSize": str, 
+            "mapTextName": str, 
+            "unitAddName": str, 
+            "inunitAddName": str, 
+            "unitDetectName": str, 
+            "isshowOnMap": bool, 
+            "isinshowOnMap": bool
         }, 
+        AUTOKEY.default_args:{
+            "inaddWarmup": "0s", 
+            "mapTextName": "{cityname}", 
+            "unitAddName": "", 
+            "inunitAddName": "{team}", 
+            "unitDetectName": "检测 {idprefix0}"
+        }, 
+        AUTOKEY.isprefixseg: "isprefixseg", 
         AUTOKEY.prefix: "prefix", 
         AUTOKEY.args: [
             ("cityname", str)
@@ -55,21 +54,37 @@ auto_func_arg = {
         ], 
         AUTOKEY.operation: [
             {
+                "death": ["isshowOnMap"], 
                 "offset": rw.frame.Coordinate(), 
-                "name": "{cityname}刷新", 
+                "name": "{unitAddName}", 
                 "type": rw.const.OBJECTTYPE.unitAdd, 
                 "optional": {
                     rw.const.OBJECTOP.spawnUnits: "{unit}", 
-                    rw.const.OBJECTOP.activatedBy: "{ids0}", 
+                    rw.const.OBJECTOP.activatedBy: "{idprefix0}", 
                     rw.const.OBJECTOP.resetActivationAfter: "{addReset}", 
                     rw.const.OBJECTOP.team: "-1", 
                     rw.const.OBJECTOP.warmup: "{addWarmup}"
                 }
             }, 
             {
-                "exist": "isinadd", 
+                "exist": ["isshowOnMap"], 
                 "offset": rw.frame.Coordinate(), 
-                "name": "{cityname}初始添加({team})", 
+                "name": "{unitAddName}", 
+                "type": rw.const.OBJECTTYPE.unitAdd, 
+                "optional": {
+                    rw.const.OBJECTOP.spawnUnits: "{unit}", 
+                    rw.const.OBJECTOP.activatedBy: "{idprefix0}", 
+                    rw.const.OBJECTOP.resetActivationAfter: "{addReset}", 
+                    rw.const.OBJECTOP.team: "-1", 
+                    rw.const.OBJECTOP.warmup: "{addWarmup}", 
+                    rw.const.OBJECTOP.showOnMap: True
+                }
+            }, 
+            {
+                "exist": ["isinadd"], 
+                "death": ["isinshowOnMap"], 
+                "offset": rw.frame.Coordinate(), 
+                "name": "{inunitAddName}", 
                 "type": rw.const.OBJECTTYPE.unitAdd, 
                 "optional": {
                     rw.const.OBJECTOP.spawnUnits: "{unit}", 
@@ -78,33 +93,45 @@ auto_func_arg = {
                 }
             }, 
             {
-                "death": "isonlybuilding", 
+                "exist": ["isinadd", "isinshowOnMap"], 
                 "offset": rw.frame.Coordinate(), 
-                "name": "{cityname}检测", 
+                "name": "{inunitAddName}", 
+                "type": rw.const.OBJECTTYPE.unitAdd, 
+                "optional": {
+                    rw.const.OBJECTOP.spawnUnits: "{unit}", 
+                    rw.const.OBJECTOP.team: "{team}", 
+                    rw.const.OBJECTOP.warmup: "{inaddWarmup}", 
+                    rw.const.OBJECTOP.showOnMap: True
+                }
+            }, 
+            {
+                "death": ["isonlybuilding"], 
+                "offset": rw.frame.Coordinate(), 
+                "name": "{unitDetectName}", 
                 "type": rw.const.OBJECTTYPE.unitDetect, 
                 "optional": {
-                    rw.const.OBJECTOP.id: "{ids0}", 
+                    rw.const.OBJECTOP.id: "{idprefix0}", 
                     rw.const.OBJECTOP.maxUnits: "0", 
                     rw.const.OBJECTOP.resetActivationAfter: "{detectReset}", 
                     rw.const.OBJECTOP.unitType: "{unit}"
                 }
             }, 
             {
-                "exist": "isonlybuilding", 
+                "exist": ["isonlybuilding"], 
                 "offset": rw.frame.Coordinate(), 
-                "name": "{cityname}检测", 
+                "name": "{unitDetectName}", 
                 "type": rw.const.OBJECTTYPE.unitDetect, 
                 "optional": {
-                    rw.const.OBJECTOP.id: "{ids0}", 
+                    rw.const.OBJECTOP.id: "{idprefix0}", 
                     rw.const.OBJECTOP.maxUnits: "0", 
                     rw.const.OBJECTOP.resetActivationAfter: "{detectReset}", 
-                    rw.const.OBJECTOP.onlyBuildings: {"type":"bool", "value":"true"}
+                    rw.const.OBJECTOP.onlyBuildings: True
                 }
             }, 
             {
-                "exist": "istext", 
+                "exist": ["istext"], 
                 "offset": rw.frame.Coordinate(), 
-                "name": "{cityname}文本", 
+                "name": "{mapTextName}", 
                 "type": rw.const.OBJECTTYPE.mapText, 
                 "optional": {
                     rw.const.OBJECTOP.text: "{cityname}", 

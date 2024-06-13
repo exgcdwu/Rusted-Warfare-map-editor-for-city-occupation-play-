@@ -22,9 +22,9 @@ class ElementProperties:
         
     def output_etElement(self, root:et.Element)->et.Element:
         etElement_ans = deepcopy(root)
-        etElement_ans.tag = self._tag
+        etElement_ans.tag = deepcopy(self._tag)
         if self._default_properties != {}:
-            etElement_ans.attrib = self._default_properties
+            etElement_ans.attrib = deepcopy(self._default_properties)
         if self._optional_properties != {}:
             etElement_ans.append(utility.output_etElement_properties(self._optional_properties))
         return etElement_ans
@@ -53,8 +53,21 @@ class ElementProperties:
         return deepcopy(self._optional_properties.get(name))
     
     def deleteDefaultProperty(self, name:str)->None:
-        self._default_properties.pop(name)
-    
+        if self._default_properties.get(name) != None:
+            self._default_properties.pop(name)
     def deleteOptionalProperty(self, name:str)->None:
-        self._optional_properties.pop(name)
+        if self._optional_properties.get(name) != None:
+            self._optional_properties.pop(name)
+    def deleteDefaultPropertySup(self, name_list:list[str])->None:
+        dict_now = {}
+        for name in name_list:
+            if self.returnDefaultProperty(name) != None:
+                dict_now[name] = self.returnDefaultProperty(name)
+        self._default_properties = dict_now
+    def deleteOptionalPropertySup(self, name_list:list[str])->None:
+        dict_now = {}
+        for name in name_list:
+            if self.returnOptionalProperty(name) != None:
+                dict_now[name] = self.returnOptionalProperty(name)
+        self._optional_properties = dict_now
     
