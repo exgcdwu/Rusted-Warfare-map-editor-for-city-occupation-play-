@@ -54,6 +54,16 @@ auto_func_arg = {
         ], 
         AUTOKEY.operation: [
             {
+                AUTOKEY.operation_type: AUTOKEY.goto, 
+                AUTOKEY.goto_index: 1
+            },
+            {
+                AUTOKEY.operation_type: AUTOKEY.typeif, 
+                AUTOKEY.ifvar: True, 
+                AUTOKEY.ifgoto_index: 2
+            }, 
+            {
+                AUTOKEY.operation_type: AUTOKEY.object, 
                 "death": ["isshowOnMap"], 
                 "offset": rw.frame.Coordinate(), 
                 "name": "{unitAddName}", 
@@ -67,6 +77,7 @@ auto_func_arg = {
                 }
             }, 
             {
+                AUTOKEY.operation_type: AUTOKEY.object, 
                 "exist": ["isshowOnMap"], 
                 "offset": rw.frame.Coordinate(), 
                 "name": "{unitAddName}", 
@@ -81,6 +92,7 @@ auto_func_arg = {
                 }
             }, 
             {
+                AUTOKEY.operation_type: AUTOKEY.object, 
                 "exist": ["isinadd"], 
                 "death": ["isinshowOnMap"], 
                 "offset": rw.frame.Coordinate(0, -20),
@@ -94,6 +106,7 @@ auto_func_arg = {
                 }
             }, 
             {
+                AUTOKEY.operation_type: AUTOKEY.object, 
                 "exist": ["isinadd", "isinshowOnMap"], 
                 "offset": rw.frame.Coordinate(0, -20),
                 "offsetsize": rw.frame.Coordinate(0, 40), 
@@ -107,6 +120,7 @@ auto_func_arg = {
                 }
             }, 
             {
+                AUTOKEY.operation_type: AUTOKEY.object, 
                 "death": ["isonlybuilding"], 
                 "offset": rw.frame.Coordinate(-20, 0),
                 "offsetsize": rw.frame.Coordinate(40, 0), 
@@ -120,6 +134,7 @@ auto_func_arg = {
                 }
             }, 
             {
+                AUTOKEY.operation_type: AUTOKEY.object, 
                 "exist": ["isonlybuilding"], 
                 "offset": rw.frame.Coordinate(-20, 0),
                 "offsetsize": rw.frame.Coordinate(40, 0), 
@@ -133,6 +148,7 @@ auto_func_arg = {
                 }
             }, 
             {
+                AUTOKEY.operation_type: AUTOKEY.object, 
                 "exist": ["istext"], 
                 "offset": rw.frame.Coordinate(), 
                 "name": "{mapTextName}", 

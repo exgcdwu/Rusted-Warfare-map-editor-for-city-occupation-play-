@@ -34,10 +34,23 @@ class AUTOKEY:
     exist = "exist"
     death = "death"
     isprefixseg = "isprefixseg"
+    isdelete_sym = "isdelete_sym"
+
+    operation_type = "operation_type"
+    object = "object"
+    goto = "goto"
+    setvar = "setvar"
+    typeif = "typeif"
+    goto_index = "goto_index"
+    ifvar = "ifvar"
+    ifgoto_index = "ifgoto_index"
     
     normal_city_nexist_re = ".*_"
     opargs_sys_seg = "|"
     IDs_seg = ","
+    delete_symbol = ".*,d"
+
+
 
 
 
@@ -79,6 +92,9 @@ def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, isr
         args_dict[AUTOKEY.IDs] = tobject_ids
 
     return args_dict
+
+def brace_translation(expression_b:str, dict_name:dict)->str:
+    pass
 
 def str_translation(value:Union[str, bool], dict_name:dict)->str:
     if isinstance(value, bool):
@@ -167,8 +183,9 @@ def IDs_update(tagged_tobject:rw.case.TObject, tobject_now:rw.case.TObject)->Non
 def IDs_balance(tobject_now:rw.case.TObject, tottob:int)->list:
     idsh = tobject_now.returnOptionalProperty(AUTOKEY.IDs)
     if idsh == None:
-        idsh = ""
-    idsh_list = idsh.split(",")
+        idsh_list = []
+    else:
+        idsh_list = idsh.split(",")
     idsh = ",".join(idsh_list[0:min(tottob, len(idsh_list))])
     tobject_now.assignOptionalProperty(
         AUTOKEY.IDs, 
@@ -177,7 +194,7 @@ def IDs_balance(tobject_now:rw.case.TObject, tottob:int)->list:
 
     id_delete = idsh_list[min(tottob, len(idsh_list)):]
     return id_delete
-        
+
 def auto_func():
     parser = argparse.ArgumentParser(
         description='Objects of Triggers are automatically processed by information\'s mode.')
@@ -199,9 +216,15 @@ def auto_func():
                         required = False, default = "|", 
                         help = "The output path of RW map file.|input path"
                         )
-    
+
     parser.add_argument("-d", "--delete", 
+                        action = 'store_true', help = 'Delete the info and tagged objects with ,d.')
+
+    parser.add_argument("-D", "--DeleteAllSym", 
                         action = 'store_true', help = 'Delete all info and tagged objects.')
+
+    parser.add_argument("--DeleteAll", 
+                        action = 'store_true', help = 'Delete all info, tagged objects and relative objects.')
 
     parser.add_argument("-r", "--reset", 
                         action = 'store_true', help = 'Reset the ids of objects.(not recommend)')
@@ -212,7 +235,9 @@ def auto_func():
     sys.path.append("".join(args.info.split("\\")[:-1]))
     info_file = importlib.import_module(".".join(".".join(args.info.split("\\")[-2:]).split(".")[:-1]))
     info_now = getattr(info_file, args.var, 'Not Found')
-    isdelete = args.delete
+    isdelete = args.DeleteAllSym
+    isdelete_d = args.delete
+    isdelete_all = args.DeleteAll
     isreset = args.reset
 
     info_dict = {}
@@ -222,14 +247,21 @@ def auto_func():
 
     id_to_tobject = {}
 
+    map_now.resetnextobjectid()
+
     for tobject in map_now.iterator_object_s():
         id_to_tobject[tobject.returnDefaultProperty("id")] = tobject
                 
     for key, info in info_now.items():
         for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                                rw.const.OBJECTDE.name: r".+"}):
-            if key == tobject.returnDefaultProperty(rw.const.OBJECTDE.name):
+            info_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
+            
+            if bool(re.match(key, info_name)):
+                
                 info_dict_now = {}
+                info_dict_now[AUTOKEY.isdelete_sym] = bool(re.match(AUTOKEY.delete_symbol, info_name))
+
                 for key_now, value in info[AUTOKEY.default_args].items():
                     info_dict_now[key_now] = mapvalue_to_value(value, info[AUTOKEY.info_args][key_now])
                 for key_now, ntype in info[AUTOKEY.info_args].items():
@@ -243,10 +275,11 @@ def auto_func():
                     idlist = IDs.split(AUTOKEY.IDs_seg)[1:]
                     info_dict_now[AUTOKEY.IDs] = idlist
                 info_dict[info_dict_now[AUTOKEY.prefix]] = info_dict_now
-                dtobject.append(tobject)
-    if isdelete:
-        for tobject in dtobject:
-            map_now.delete_object_s(tobject)
+                if isdelete_all or isdelete or (isdelete_d and info_dict_now[AUTOKEY.isdelete_sym]):
+                    dtobject.append(tobject)
+
+    for tobject in dtobject:
+        map_now.delete_object_s(tobject)
 
     for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                            rw.const.OBJECTDE.name: r".+"}):
@@ -283,6 +316,7 @@ def auto_func():
 
     dtobject = []
 
+    
 
     for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                            rw.const.OBJECTDE.name: r".+"}):
@@ -300,6 +334,9 @@ def auto_func():
                 ischange = True
                 break
         if ischange:
+            isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
+            if isdelete_all or isdelete or (isdelete_sym and isdelete_d):
+                dtobject.append(tobject)
             for thing in myinfo[AUTOKEY.ids]:
                 idprefix = object_dict[thing[0]]
                 idnow_list = tobject.returnOptionalProperty(idprefix)
@@ -323,27 +360,48 @@ def auto_func():
                 tobject.returnDefaultProperty(rw.const.OBJECTDE.width), 
                 tobject.returnDefaultProperty(rw.const.OBJECTDE.height)
             )
-            dtobject.append(tobject)
+            #import pdb;pdb.set_trace()
+            if isdelete_all or isdelete_sym:
+                if object_dict.get(AUTOKEY.IDs) != None:
+                    for ids in object_dict[AUTOKEY.IDs]:
+                        dtobject.append(id_to_tobject[ids])
+                continue
+            
+            
             tottobid = 0
-            for index, operation_now in enumerate(myinfo[AUTOKEY.operation]):
-                object_now = get_tobject(operation_now, object_dict, ori_pos, ori_size)
-                if object_now != None:
-                    if object_dict.get(AUTOKEY.IDs) != None and tottobid < len(object_dict[AUTOKEY.IDs]):
-                        object_now.assignDefaultProperty("id", object_dict[AUTOKEY.IDs][tottobid])
-                        id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]].copy(object_now)
-                    else:
-                        map_now.addObject_type(object_now)
-                        if not isdelete:
-                            IDs_update(tobject, object_now)
-                    tottobid = tottobid + 1
+            index = 0
+            while(index < len(myinfo[AUTOKEY.operation])):
+                #import pdb;pdb.set_trace()
+                operation_now = myinfo[AUTOKEY.operation][index]
+                if operation_now[AUTOKEY.operation_type] == AUTOKEY.object:
+                    object_now = get_tobject(operation_now, object_dict, ori_pos, ori_size)
+                    if object_now != None:
+                        #import pdb;pdb.set_trace()
+                        if object_dict.get(AUTOKEY.IDs) != None and tottobid < len(object_dict[AUTOKEY.IDs]):
+                            object_now.assignDefaultProperty("id", object_dict[AUTOKEY.IDs][tottobid])
+                            id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]].copy(object_now)
+                        else:
+                            map_now.addObject_type(object_now)
+                            if not isdelete:
+                                IDs_update(tobject, object_now)
+                        tottobid = tottobid + 1
+                    
+                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.goto:
+                    index = operation_now[AUTOKEY.goto_index]
+                    continue
+
+                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeif:
+                    pass
+                index = index + 1
 
             id_delete = IDs_balance(tobject, tottobid)
             for idnow in id_delete:
-                map_now.delete_object_s(id_to_tobject[idnow])
+                dtobject.append(id_to_tobject[idnow])
                     
-    if isdelete:
-        for tobject in dtobject:
-            map_now.delete_object_s(tobject)
+    for tobject in dtobject:
+        map_now.delete_object_s(tobject)
+
+    map_now.resetnextobjectid()
 
     map_now.write_file(output_path)
 

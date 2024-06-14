@@ -96,6 +96,12 @@ class RWmap(ElementOri):
     def changenextobjectid(self, layerid:int)->None:
         self._properties.assignDefaultProperty("nextobjectid", str(layerid))
 
+    def resetnextobjectid(self)->None:
+        maxid_now = self.nextobjectid()
+        for objectGroup in self._objectGroup_list:
+            maxid_now = max(maxid_now, objectGroup.max_id() + 1)
+        self.changenextobjectid(maxid_now)
+
     def tileset_name_list(self)->list[str]:
         return [tileset.name() for tileset in self._tileset_list if tileset.isexist()]
     

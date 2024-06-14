@@ -71,3 +71,9 @@ class ObjectGroup(ElementOri):
 
     def index_object_s(self, tobject:TObject)->int:
         self._object_list.index(tobject)
+
+    def max_id(self)->int:
+        max_now = 0
+        for tobject in self._object_list:
+            max_now = max(max_now, int(tobject.returnDefaultProperty("id")))
+        return max_now
