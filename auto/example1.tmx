@@ -3265,6 +3265,14 @@
     <property name="textColor" value="white"/>
     <property name="textSize" value="7"/>
     <property name="unit" value="supplyDepot"/>
+    <property name="isteamDetect" type="bool" value="true"/>
+    <property name="setTeam" value="0 2 4 6,1 3 5 7"/>
+    <property name="setidTeam" value="Ac,Bc"/>
+    <property name="teamDetectoffset" value="-20 0,20 0"/>
+    <property name="teamDetectoffsetsize" value="20 0,40 0"/>
+    <property name="teamDetectreset" value="5s"/>
+    <property name="isteamText" type="bool" value="true"/>
+    <property name="teamTextcolor" value="blue,red"/>
    </properties>
   </object>
   <object id="405" name="c实验城市1,t1" x="40" y="80" width="20" height="20"/>

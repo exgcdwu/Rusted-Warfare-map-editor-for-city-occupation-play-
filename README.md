@@ -8,7 +8,7 @@ ___一个铁锈战争 (Rusted Warfare) 地图编辑 python 库___
 
 【教程已过时】
 
-[城夺宾语自动化命令行教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/auto_tutorial.md)
+[城夺宾语自动化命令行教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/auto_tutotial.md)
 
 [简单城夺地图代码例子](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/examples/example1/example1.py)
 

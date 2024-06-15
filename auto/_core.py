@@ -1,10 +1,14 @@
 from typing import Union
 from copy import deepcopy
 import re
+import os
+from asteval import Interpreter
+from pprint import pprint
 import argparse
 import importlib
-import os
+
 import sys
+
 current_file_path = os.path.abspath(__file__)
 current_dir_path = os.path.dirname(current_file_path)
 package_dir = os.path.dirname(current_dir_path)
@@ -35,20 +39,33 @@ class AUTOKEY:
     death = "death"
     isprefixseg = "isprefixseg"
     isdelete_sym = "isdelete_sym"
+    info_prefix = "info_prefix"
 
     operation_type = "operation_type"
     object = "object"
     goto = "goto"
+    ifend_tag = "ifend_tag"
+    goto_tag = "goto_tag"
+    tag = "tag"
     setvar = "setvar"
     typeif = "typeif"
-    goto_index = "goto_index"
     ifvar = "ifvar"
-    ifgoto_index = "ifgoto_index"
+    typeset = "typeset"
+    typeset_id = "typeset_id"
+
+    changetype = "changetype"
+    totype = "totype"
+    typeset_expression = "typeset_expression"
+    typeset_exist = "typeset_exist"
+    keyname_list = "keyname_list"
+    id_operation = "id_operation"
+    real_idexp = "real_idexp"
     
     normal_city_nexist_re = ".*_"
     opargs_sys_seg = "|"
     IDs_seg = ","
     delete_symbol = ".*,d"
+    not_useful_char = "[^A-Za-z0-9_{}]"
 
 
 
@@ -93,8 +110,55 @@ def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, isr
 
     return args_dict
 
-def brace_translation(expression_b:str, dict_name:dict)->str:
-    pass
+def match_compare(match_value:list)->int:
+    return -match_value[0].start()
+
+def brace_translation(expression_b:str, dict_name:dict, prev:bool = True):
+    #import pdb;pdb.set_trace()
+    expression_b = " " + expression_b + " "
+    match_value_list = []
+    for key, value in dict_name.items():
+        match_list_now = [re_now for re_now in re.finditer(AUTOKEY.not_useful_char + key + AUTOKEY.not_useful_char, expression_b)]
+        match_value_list = match_value_list + [[match_now, str(value)] for match_now in match_list_now]
+    match_value_list.sort(key = match_compare)
+    #import pdb;pdb.set_trace()
+    for match_value in match_value_list:
+        match_now = match_value[0]
+        value_now = match_value[1]
+        expression_b = expression_b[:match_now.start() + 1] + value_now + expression_b[match_now.end() - 1:]
+
+    expression_b = expression_b[1:len(expression_b) - 1]
+    if len(match_value_list) == 0:
+        if prev:
+            expression_b = expression_translation(expression_b, dict_name, False)
+    else:
+        expression_b = expression_translation(expression_b, dict_name)
+
+
+    try:
+        expression_b_temp = aeval(expression_b)
+    except Exception as e:
+        return expression_b
+    else:
+        if expression_b_temp == None:
+            return expression_b
+        return expression_b_temp
+
+def expression_translation(expression_s:str, dict_name:dict, prev:bool = True):
+    lb_now = re.match(".*{", expression_s)
+    rb_now = re.match(".*}", expression_s)
+    if lb_now and rb_now:
+        translation_value = brace_translation(expression_s[lb_now.end():rb_now.end() - 1], dict_name)
+        expression_s = expression_s[:lb_now.end() - 1] + type_to_str(translation_value, get_type(translation_value)) + expression_s[rb_now.end(): ]
+        return expression_translation(expression_s, dict_name)
+    else:
+        if prev:
+            return brace_translation(expression_s, dict_name, False)
+        else:
+            return expression_s
+        
+    
+
 
 def str_translation(value:Union[str, bool], dict_name:dict)->str:
     if isinstance(value, bool):
@@ -108,7 +172,8 @@ def str_translation(value:Union[str, bool], dict_name:dict)->str:
     value_ans = value_list[0]
     for index in range(1, len(value_list)):
         value_list_now = value_list[index].split("}")
-        value_list_now[0] = dict_name[value_list_now[0]]
+        value_temp = brace_translation(value_list_now[0], dict_name)
+        value_list_now[0] = type_to_str(value_temp, get_type(value_temp))
         value_ans = value_ans + "".join(value_list_now)
     if bool(re.match(".*{", value_ans)):
         return str_translation(value_ans, dict_name)
@@ -124,11 +189,21 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
         for death_now in operation[AUTOKEY.death]:
             if dict_name.get(death_now) != None and dict_name.get(death_now) == True:
                 return None
-            
+    
     offset = operation.get(AUTOKEY.offset)
-    offset = offset if offset != None else rw.frame.Coordinate()
+    if offset != None:
+        offset = brace_translation(offset, dict_name)
+        offset = rw.frame.Coordinate(offset[0], offset[1])
+    else:
+        offset = rw.frame.Coordinate()
+
+    offsetsize = rw.frame.Coordinate()
     offsetsize = operation.get(AUTOKEY.offsetsize)
-    offsetsize = offsetsize if offsetsize != None else rw.frame.Coordinate()
+    if offsetsize != None:
+        offsetsize = brace_translation(offsetsize, dict_name)
+        offsetsize = rw.frame.Coordinate(offsetsize[0], offsetsize[1])
+    else:
+        offsetsize = rw.frame.Coordinate()
     pos = ori_pos + offset
     size = ori_size + offsetsize
 
@@ -159,13 +234,91 @@ def mapvalue_to_value(value, ntype):
             value_now = str(value)
             value_now = True if value_now == "true" else False
             return value_now
+        elif isinstance(ntype, tuple):
+            if ntype[0] == list:
+                if ntype[1] == str:
+                    value_now = value.split(",")
+                elif ntype[1] == int:
+                    value_now = value.split(" ")
+                    value_now = [int(value_now_i) for value_now_i in value_now]
+                elif ntype[1] == list:
+                    if ntype[2] == str:
+                        value_now = [value_i.split(",") for value_i in value.split(";")]
+                    elif ntype[2] == int:
+                        value_now = [[int(value_ij) for value_ij in value_i.split(" ")] for value_i in value.split(",")]
+            return value_now
         return ntype(value)
 
 def value_to_mapvalue(value, ntype):
     if ntype == bool:
         return {"value": str(bool(value)).lower(), "type": "bool"}
+    if isinstance(ntype, tuple):
+        if ntype[0] == list:
+            if ntype[1] == str:
+                value_now = value.join(",")
+            elif ntype[1] == int:
+                value = [str(value_i) for value_i in value]
+                value_now = value.join(" ")
+            elif ntype[1] == list:
+                if ntype[2] == str:
+                    value_now = ";".join([",".join(value_i) for value_i in value])
+                elif ntype[2] == int:
+                    value_now = [[str(value_ij) for value_ij in value_i] for value_i in value]
+                    value_now = ",".join([" ".join(value_i) for value_i in value_now])
+            return value_now
+        return ntype(value)
+
+def get_type(value):
+    if isinstance(value, list):
+        if len(value) == 0 or isinstance(value[0], str):
+            return (list, str)
+        elif isinstance(value[0], int):
+            return (list, int)
+        elif isinstance(value[0], list):
+            if len(value[0]) == 0 or isinstance(value[0][0], str):
+                return (list, list, str)
+            elif isinstance(value[0][0], int):
+                return (list, list, int)
+    else:
+        return type(value)
+
+def type_to_str(value, ntype):
+    if isinstance(ntype, tuple):
+        if ntype[0] == list:
+            if ntype[1] == str:
+                value_now = ",".join(value)
+            elif ntype[1] == int:
+                value = [str(value_i) for value_i in value]
+                value_now = " ".join(value)
+            elif ntype[1] == list:
+                if ntype[2] == str:
+                    value_now = ";".join([",".join(value_i) for value_i in value])
+                elif ntype[2] == int:
+                    value_now = [[str(value_ij) for value_ij in value_i] for value_i in value]
+                    value_now = ",".join([" ".join(value_i) for value_i in value_now])
+            return value_now
+    else:
+        return str(value)
+    
+def str_to_type(value, ntype):
+    if isinstance(ntype, tuple):
+        if ntype[0] == list:
+            if ntype[1] == str:
+                value_now = value.split(",")
+            elif ntype[1] == int:
+                value_now = value.split(" ")
+                value_now = [int(value_now_i) for value_now_i in value_now]
+            elif ntype[1] == list:
+                if ntype[2] == str:
+                    value_now = [value_i.split(",") for value_i in value.split(";")]
+                elif ntype[2] == int:
+                    value_now = [[int(value_ij) for value_ij in value_i.split(" ")] for value_i in value.split(",")]
+            return value_now
+    elif ntype == bool:
+        value_now = True if value == "True" else False
     else:
         return ntype(value)
+    
 
 def IDs_update(tagged_tobject:rw.case.TObject, tobject_now:rw.case.TObject)->None:
     idsh = tagged_tobject.returnOptionalProperty(AUTOKEY.IDs)
@@ -229,6 +382,14 @@ def auto_func():
     parser.add_argument("-r", "--reset", 
                         action = 'store_true', help = 'Reset the ids of objects.(not recommend)')
 
+    parser.add_argument("--debug", 
+                        action = 'store_true', help = 'Mode of debuging.')
+
+    dev_null = open(os.devnull, "w")
+    global aeval
+    aeval = Interpreter(err_writer = dev_null, writer = dev_null)
+
+
     args = parser.parse_args()
     map_now = rw.RWmap.init_mapfile(f'{args.map_path[0]}')
     output_path = args.map_path[0] if args.output == "|" else args.output[0]
@@ -239,7 +400,9 @@ def auto_func():
     isdelete_d = args.delete
     isdelete_all = args.DeleteAll
     isreset = args.reset
+    isdebug = args.debug
 
+    info_doids_dict = {}
     info_dict = {}
     ids_now_dict = {}
     
@@ -248,6 +411,8 @@ def auto_func():
     id_to_tobject = {}
 
     map_now.resetnextobjectid()
+
+    brace_translation("i + 1", {"i": "0"})
 
     for tobject in map_now.iterator_object_s():
         id_to_tobject[tobject.returnDefaultProperty("id")] = tobject
@@ -258,7 +423,6 @@ def auto_func():
             info_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
             
             if bool(re.match(key, info_name)):
-                
                 info_dict_now = {}
                 info_dict_now[AUTOKEY.isdelete_sym] = bool(re.match(AUTOKEY.delete_symbol, info_name))
 
@@ -267,16 +431,76 @@ def auto_func():
                 for key_now, ntype in info[AUTOKEY.info_args].items():
                     if tobject.returnOptionalProperty(key_now) != None:
                         info_dict_now[key_now] = mapvalue_to_value(tobject.returnOptionalProperty(key_now), ntype)
+
                 info_dict_now[AUTOKEY.prefix] = info_dict_now[info[AUTOKEY.prefix]]
-                info_dict_now[AUTOKEY.info] = key
+                info_doids_dict[info_dict_now[AUTOKEY.prefix]] = deepcopy(info)
+                info_dict_now[AUTOKEY.info] = info_dict_now[AUTOKEY.prefix]
+
                 info_dict_now[AUTOKEY.tobject] = tobject
-                IDs = tobject.returnOptionalProperty(AUTOKEY.IDs)
-                if IDs != None:
-                    idlist = IDs.split(AUTOKEY.IDs_seg)[1:]
-                    info_dict_now[AUTOKEY.IDs] = idlist
+                if info.get(AUTOKEY.info_prefix) != None and info_dict_now.get(info[AUTOKEY.info_prefix]) != None:
+                    info_dict_now[AUTOKEY.info_prefix] = info_dict_now[info[AUTOKEY.info_prefix]]
+
+                if info.get(AUTOKEY.id_operation) != None:
+                    operation_index = {}
+                    for index, operation_now in enumerate(info[AUTOKEY.id_operation]):
+                        if operation_now[AUTOKEY.operation_type] == AUTOKEY.tag:
+                            operation_index[operation_now[AUTOKEY.tag]] = index
+                    
+                    object_dict = deepcopy(info_dict_now)
+                    index = 0
+
+                    while(index < len(info[AUTOKEY.id_operation])):
+                        
+                        operation_now = info[AUTOKEY.id_operation][index]
+                            
+                        if operation_now[AUTOKEY.operation_type] == AUTOKEY.goto:
+                            index = operation_index[operation_now[str_translation(AUTOKEY.goto_tag, object_dict)]]
+                            continue
+
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeif:
+
+                            if not brace_translation(operation_now[AUTOKEY.ifvar], object_dict):
+                                index = operation_index[operation_now[str_translation(AUTOKEY.ifend_tag, object_dict)]]
+                        
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset:
+                            for key, value in operation_now.items():
+                                if key != AUTOKEY.operation_type and key != AUTOKEY.totype:
+                                    if operation_now.get(AUTOKEY.totype) == None:
+                                        object_dict[str_translation(key, object_dict)] = value
+                                    else:
+                                        object_dict[str_translation(key, object_dict)] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_expression:
+                            for key, value in operation_now.items():
+                                if key != AUTOKEY.operation_type:
+                                    object_dict[str_translation(key, object_dict)] = brace_translation(value, object_dict)
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.changetype:
+                            for key in operation_now[AUTOKEY.keyname_list]:
+                                str_trans = str_translation(key, object_dict)
+                                value = object_dict[str_trans]
+                                object_dict[str_trans] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_exist:
+                            for key, value in operation_now.items():
+                                if key != AUTOKEY.operation_type:
+                                    object_dict[str_translation(key, object_dict)] = object_dict.get(value) != None
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_id:
+
+                            for key, value in operation_now.items():
+                                if key != AUTOKEY.operation_type and key != AUTOKEY.real_idexp:
+                                    key_trans = str_translation(key, object_dict)
+                                    num = brace_translation(value, object_dict)
+                                    info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.ids].append([key_trans, num])
+                                    for i in range(num):
+                                        info_dict_now[key_trans] = mapvalue_to_value(str_translation(operation_now[AUTOKEY.real_idexp], object_dict), str)
+                        index = index + 1
+                    
+            
                 info_dict[info_dict_now[AUTOKEY.prefix]] = info_dict_now
                 if isdelete_all or isdelete or (isdelete_d and info_dict_now[AUTOKEY.isdelete_sym]):
                     dtobject.append(tobject)
+
+    info_now = info_doids_dict
+
+
 
     for tobject in dtobject:
         map_now.delete_object_s(tobject)
@@ -292,26 +516,28 @@ def auto_func():
                 info_key = info[AUTOKEY.info]
                 myinfo = info_now[info_key]
                 object_dict = get_args(myinfo, tobject_name, info, tobject, isreset, id_to_tobject, map_now)
-
+                
                 ischange = True
                 break
         if ischange:
+            
             for thing_prefix_num in myinfo[AUTOKEY.ids]:
-
-                tobject_prefix = tobject.returnDefaultProperty(thing_prefix_num[0])
+                tobject_prefix = tobject.returnOptionalProperty(thing_prefix_num[0])
                 if tobject_prefix != None:
                     tobject_prefix = tobject_prefix.split(",")
                 else:
                     tobject_prefix = []
                 if isreset:
                     tobject.deleteOptionalPropertySup([AUTOKEY.IDs])
-                
-                if ids_now_dict.get(thing_prefix_num[0]) == None:
-                    ids_now_dict[info[thing_prefix_num[0]]] = 1
+                    tobject_prefix = []
+
+                prefix_now = brace_translation(thing_prefix_num[0], info)
+                if ids_now_dict.get(prefix_now) == None:
+                    ids_now_dict[prefix_now] = 1
                 
                 for index in range(len(tobject_prefix)):
                     tobject_prefix[index] = int(tobject_prefix[index][len(thing_prefix_num[0]):])
-                    ids_now_dict[info[thing_prefix_num[0]]] = max(ids_now_dict[thing_prefix_num[0]], 
+                    ids_now_dict[prefix_now] = max(ids_now_dict[prefix_now], 
                                                             tobject_prefix[index])
 
     dtobject = []
@@ -331,14 +557,22 @@ def auto_func():
                 myinfo = info_now[info_key]
                 object_dict = get_args(myinfo, tobject_name, info, tobject, isreset, id_to_tobject, map_now)
                 object_dict.update(info)
+                if info.get(AUTOKEY.info_prefix) != None:
+                    for info_pre in info[AUTOKEY.info_prefix]:
+                        info_temp = info_dict[info_pre]
+                        object_dict.update(info_temp)
                 ischange = True
                 break
         if ischange:
+
             isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
             if isdelete_all or isdelete or (isdelete_sym and isdelete_d):
                 dtobject.append(tobject)
+
+
             for thing in myinfo[AUTOKEY.ids]:
-                idprefix = object_dict[thing[0]]
+                
+                idprefix = brace_translation(thing[0], object_dict)
                 idnow_list = tobject.returnOptionalProperty(idprefix)
                 if idnow_list == None:
                     idnow_list = []
@@ -352,6 +586,9 @@ def auto_func():
                     object_dict[thing[0] + str(i)] = id_now
                     ids_now_dict[idprefix] = ids_now_dict[idprefix] + 1
                 tobject.assignOptionalProperty(idprefix, ",".join(idnow_list))
+
+            
+            
             ori_pos = rw.frame.Coordinate(
                 tobject.returnDefaultProperty(rw.const.OBJECTDE.x), 
                 tobject.returnDefaultProperty(rw.const.OBJECTDE.y)
@@ -367,15 +604,41 @@ def auto_func():
                         dtobject.append(id_to_tobject[ids])
                 continue
             
-            
+            operation_index = {}
+            for index, operation_now in enumerate(myinfo[AUTOKEY.operation]):
+                if operation_now[AUTOKEY.operation_type] == AUTOKEY.tag:
+                    operation_index[operation_now[AUTOKEY.tag]] = index
+
             tottobid = 0
             index = 0
+
+            if isdebug:
+                pprint(tobject)
+                pprint(object_dict)
+
             while(index < len(myinfo[AUTOKEY.operation])):
-                #import pdb;pdb.set_trace()
+                
                 operation_now = myinfo[AUTOKEY.operation][index]
+
+                if isdebug:
+                    print(index)
+                    if index == 16:
+                        pprint(operation_now)
+                    elif index == 13:
+                        pprint(operation_now)
+                    elif index == 21:
+                        print("i = ", object_dict.get("i"))
+                        print("j = ", object_dict.get("j"))
+                        print("isi_eq_0 = ", object_dict.get("isi_eq_0"))
+                        print("teamDetectname = ", object_dict.get("teamDetectname"))
+
                 if operation_now[AUTOKEY.operation_type] == AUTOKEY.object:
                     object_now = get_tobject(operation_now, object_dict, ori_pos, ori_size)
+
                     if object_now != None:
+                        if isdebug:
+                            print(object_now)
+                            
                         #import pdb;pdb.set_trace()
                         if object_dict.get(AUTOKEY.IDs) != None and tottobid < len(object_dict[AUTOKEY.IDs]):
                             object_now.assignDefaultProperty("id", object_dict[AUTOKEY.IDs][tottobid])
@@ -387,12 +650,35 @@ def auto_func():
                         tottobid = tottobid + 1
                     
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.goto:
-                    index = operation_now[AUTOKEY.goto_index]
+                    index = operation_index[operation_now[str_translation(AUTOKEY.goto_tag, object_dict)]]
                     continue
 
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeif:
-                    pass
+                    if not brace_translation(operation_now[AUTOKEY.ifvar], object_dict):
+                        index = operation_index[operation_now[str_translation(AUTOKEY.ifend_tag, object_dict)]]
+                
+                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset:
+                    for key, value in operation_now.items():
+                        if key != AUTOKEY.operation_type and key != AUTOKEY.totype:
+                            if operation_now.get(AUTOKEY.totype) == None:
+                                object_dict[str_translation(key, object_dict)] = value
+                            else:
+                                object_dict[str_translation(key, object_dict)] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
+                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_expression:
+                    for key, value in operation_now.items():
+                        if key != AUTOKEY.operation_type:
+                            object_dict[str_translation(key, object_dict)] = brace_translation(value, object_dict)
+                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.changetype:
+                    for key in operation_now[AUTOKEY.keyname_list]:
+                        str_trans = str_translation(key, object_dict)
+                        value = object_dict[str_trans]
+                        object_dict[str_trans] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
+                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_exist:
+                    for key, value in operation_now.items():
+                        if key != AUTOKEY.operation_type:
+                            object_dict[str_translation(key, object_dict)] = object_dict.get(value) != None
                 index = index + 1
+                
 
             id_delete = IDs_balance(tobject, tottobid)
             for idnow in id_delete:
@@ -404,6 +690,7 @@ def auto_func():
     map_now.resetnextobjectid()
 
     map_now.write_file(output_path)
+    dev_null.close()
 
 if __name__ == "__main__":
     auto_func()        
