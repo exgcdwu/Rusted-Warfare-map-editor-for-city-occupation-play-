@@ -348,17 +348,32 @@ def IDs_balance(tobject_now:rw.case.TObject, tottob:int)->list:
     id_delete = idsh_list[min(tottob, len(idsh_list)):]
     return id_delete
 
+def standard_out(ifdo:bool, info_str)->None:
+    if ifdo:
+        if isinstance(info_str, str):
+            print(info_str)
+        else:
+            pprint(info_str)
+
+def standard_error(info_err, error_id)->None:
+    pprint(info_err, file=sys.stderr)
+    exit(error_id)
+
+def debug_dict(dict_now:dict, name:str):
+    if isdebug:
+        pprint(f"{name} = " + str(dict_now.get(name)))
+
 def auto_func():
     parser = argparse.ArgumentParser(
         description='Objects of Triggers are automatically processed by information\'s mode.')
     parser.add_argument('map_path', action = "store", metavar = 'file', type=str, nargs = 1, 
                         help='The input path of RW map file.')
-    parser.add_argument("-i", "--info", 
+    parser.add_argument("--infopath", 
                         action = "store", metavar = "file", type = str, nargs = 1, 
                         required = False, default = current_dir_path + "\\_data.py", 
                         help = "The file's path which has information's mode variable|current_file_path"
                         )
-    parser.add_argument("-v", "--var", 
+    parser.add_argument("--infovar", 
                         action = "store", metavar = "name", type = str, nargs = 1, 
                         required = False, default = "auto_func_arg", 
                         help = "The variable name of information\'s mode.|auto_func_arg"
@@ -382,6 +397,9 @@ def auto_func():
     parser.add_argument("-r", "--reset", 
                         action = 'store_true', help = 'Reset the ids of objects.(not recommend)')
 
+    parser.add_argument("-v", "--verbose", 
+                        action = 'store_true', help = 'Detailed output of the prompt message.')
+
     parser.add_argument("--debug", 
                         action = 'store_true', help = 'Mode of debuging.')
 
@@ -389,18 +407,26 @@ def auto_func():
     global aeval
     aeval = Interpreter(err_writer = dev_null, writer = dev_null)
 
-
     args = parser.parse_args()
-    map_now = rw.RWmap.init_mapfile(f'{args.map_path[0]}')
     output_path = args.map_path[0] if args.output == "|" else args.output[0]
-    sys.path.append("".join(args.info.split("\\")[:-1]))
-    info_file = importlib.import_module(".".join(".".join(args.info.split("\\")[-2:]).split(".")[:-1]))
-    info_now = getattr(info_file, args.var, 'Not Found')
+    sys.path.append("".join(args.infopath.split("\\")[:-1]))
+    info_file = importlib.import_module(".".join(".".join(args.infopath.split("\\")[-2:]).split(".")[:-1]))
+    info_now = getattr(info_file, args.infovar, 'Not Found')
     isdelete = args.DeleteAllSym
     isdelete_d = args.delete
     isdelete_all = args.DeleteAll
     isreset = args.reset
+    global isdebug
     isdebug = args.debug
+    isverbose = args.verbose
+
+    standard_out(isverbose, "\t\t\t\t------------------------------")
+    standard_out(isverbose, "\t\t\t\t--------Initialization--------")
+    standard_out(isverbose, "\t\t\t\t------------------------------")
+
+    standard_out(isverbose, "Map data is being imported...")
+
+    map_now = rw.RWmap.init_mapfile(f'{args.map_path[0]}')
 
     info_doids_dict = {}
     info_dict = {}
@@ -410,19 +436,24 @@ def auto_func():
 
     id_to_tobject = {}
 
+    standard_out(isverbose, "The maximum ID of object in RW maps is resetting...")
     map_now.resetnextobjectid()
 
-    brace_translation("i + 1", {"i": "0"})
-
+    standard_out(isverbose, "ID mapping is being established...")
     for tobject in map_now.iterator_object_s():
         id_to_tobject[tobject.returnDefaultProperty("id")] = tobject
-                
+    
+    standard_out(isverbose, "The info object is being processed...")
     for key, info in info_now.items():
         for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                                rw.const.OBJECTDE.name: r".+"}):
             info_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
-            
+
             if bool(re.match(key, info_name)):
+                standard_out(isverbose, f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{info_name}) has been identified as an info object. Initialization...")
+                if isdebug:
+                    #import pdb;pdb.set_trace()
+                    print(info_name + "|" + key)
                 info_dict_now = {}
                 info_dict_now[AUTOKEY.isdelete_sym] = bool(re.match(AUTOKEY.delete_symbol, info_name))
 
@@ -439,6 +470,7 @@ def auto_func():
                 info_dict_now[AUTOKEY.tobject] = tobject
                 if info.get(AUTOKEY.info_prefix) != None and info_dict_now.get(info[AUTOKEY.info_prefix]) != None:
                     info_dict_now[AUTOKEY.info_prefix] = info_dict_now[info[AUTOKEY.info_prefix]]
+            
 
                 if info.get(AUTOKEY.id_operation) != None:
                     operation_index = {}
@@ -448,8 +480,16 @@ def auto_func():
                     
                     object_dict = deepcopy(info_dict_now)
                     index = 0
-
+                    if isdebug:
+                        print(info_name + "|" + key)
+                        
                     while(index < len(info[AUTOKEY.id_operation])):
+                        if isdebug:
+                            print(index)
+                            if index % 3 == 0:
+                                import pdb;pdb.set_trace()
+                                debug_dict(object_dict, "i")
+                                debug_dict(object_dict, "setidTeam")
                         
                         operation_now = info[AUTOKEY.id_operation][index]
                             
@@ -458,53 +498,61 @@ def auto_func():
                             continue
 
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeif:
-
-                            if not brace_translation(operation_now[AUTOKEY.ifvar], object_dict):
+                            ifvar_exp = brace_translation(operation_now[AUTOKEY.ifvar], object_dict)
+                            if isinstance(ifvar_exp, str) or (not bool(ifvar_exp)):
                                 index = operation_index[operation_now[str_translation(AUTOKEY.ifend_tag, object_dict)]]
                         
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset:
-                            for key, value in operation_now.items():
-                                if key != AUTOKEY.operation_type and key != AUTOKEY.totype:
+                            for key_n, value in operation_now.items():
+                                if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.totype:
                                     if operation_now.get(AUTOKEY.totype) == None:
-                                        object_dict[str_translation(key, object_dict)] = value
+                                        object_dict[str_translation(key_n, object_dict)] = value
                                     else:
-                                        object_dict[str_translation(key, object_dict)] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
+                                        object_dict[str_translation(key_n, object_dict)] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_expression:
-                            for key, value in operation_now.items():
-                                if key != AUTOKEY.operation_type:
-                                    object_dict[str_translation(key, object_dict)] = brace_translation(value, object_dict)
+                            for key_n, value in operation_now.items():
+                                if key_n != AUTOKEY.operation_type:
+                                    object_dict[str_translation(key_n, object_dict)] = brace_translation(value, object_dict)
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.changetype:
-                            for key in operation_now[AUTOKEY.keyname_list]:
-                                str_trans = str_translation(key, object_dict)
+                            for key_n in operation_now[AUTOKEY.keyname_list]:
+                                str_trans = str_translation(key_n, object_dict)
                                 value = object_dict[str_trans]
                                 object_dict[str_trans] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_exist:
-                            for key, value in operation_now.items():
-                                if key != AUTOKEY.operation_type:
-                                    object_dict[str_translation(key, object_dict)] = object_dict.get(value) != None
+                            for key_n, value in operation_now.items():
+                                if key_n != AUTOKEY.operation_type:
+                                    object_dict[str_translation(key_n, object_dict)] = object_dict.get(value) != None
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_id:
 
-                            for key, value in operation_now.items():
-                                if key != AUTOKEY.operation_type and key != AUTOKEY.real_idexp:
-                                    key_trans = str_translation(key, object_dict)
+                            for key_n, value in operation_now.items():
+                                if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.real_idexp:
+                                    key_trans = str_translation(key_n, object_dict)
                                     num = brace_translation(value, object_dict)
                                     info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.ids].append([key_trans, num])
                                     for i in range(num):
                                         info_dict_now[key_trans] = mapvalue_to_value(str_translation(operation_now[AUTOKEY.real_idexp], object_dict), str)
                         index = index + 1
-                    
-            
+                
+                standard_out(isverbose, "Info object information is being output.")
+                if isverbose:
+                    temp_pri = deepcopy(info_dict_now)
+                    temp_pri.pop(AUTOKEY.tobject)
+                    standard_out(isverbose, temp_pri)
+
                 info_dict[info_dict_now[AUTOKEY.prefix]] = info_dict_now
                 if isdelete_all or isdelete or (isdelete_d and info_dict_now[AUTOKEY.isdelete_sym]):
                     dtobject.append(tobject)
 
     info_now = info_doids_dict
 
-
-
+    standard_out(isverbose and (isdelete_all or isdelete), "The info object is being deleted.")
+    standard_out(isverbose and (isdelete_d), "The info object is being deleted if eligible...")
     for tobject in dtobject:
         map_now.delete_object_s(tobject)
+        standard_out(isverbose, f"An info object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject.returnDefaultProperty(rw.const.OBJECTDE.name)}) has been deleted...")
 
+
+    standard_out(isverbose, "The ids of tagged objects are collecting...")
     for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                            rw.const.OBJECTDE.name: r".+"}):
         tobject_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
@@ -542,7 +590,9 @@ def auto_func():
 
     dtobject = []
 
-    
+    standard_out(isverbose, "\t\t\t\t------------------------------")
+    standard_out(isverbose, "\t\t\t\t----------Processing----------")
+    standard_out(isverbose, "\t\t\t\t------------------------------")
 
     for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                            rw.const.OBJECTDE.name: r".+"}):
@@ -564,11 +614,13 @@ def auto_func():
                 ischange = True
                 break
         if ischange:
-
             isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
             if isdelete_all or isdelete or (isdelete_sym and isdelete_d):
                 dtobject.append(tobject)
 
+            standard_out(isverbose and (not(isdelete_sym or isdelete_all)), f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object. Object generation...")
+            standard_out(isverbose and isdelete_sym, f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The object will not be generated...")
+            standard_out(isverbose and isdelete_all, f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object will be deleted...")
 
             for thing in myinfo[AUTOKEY.ids]:
                 
@@ -683,12 +735,15 @@ def auto_func():
             id_delete = IDs_balance(tobject, tottobid)
             for idnow in id_delete:
                 dtobject.append(id_to_tobject[idnow])
-                    
+
+    standard_out(isverbose and (isdelete_all or isdelete), "The tagged object is being deleted.")
+    standard_out(isverbose and (isdelete_d), "The tagged object is being deleted if eligible...")
     for tobject in dtobject:
         map_now.delete_object_s(tobject)
 
     map_now.resetnextobjectid()
 
+    standard_out(isverbose, "New RW map is being establishing...")
     map_now.write_file(output_path)
     dev_null.close()
 

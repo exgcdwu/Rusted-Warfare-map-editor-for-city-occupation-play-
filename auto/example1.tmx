@@ -3275,8 +3275,19 @@
     <property name="teamTextcolor" value="blue,red"/>
    </properties>
   </object>
-  <object id="405" name="c实验城市1,t1" x="40" y="80" width="20" height="20"/>
+  <object id="405" name="c实验城市1,t1,d" x="40" y="80" width="20" height="20"/>
   <object id="406" name="c实验城市2,t2" x="120" y="80" width="20" height="20"/>
-  <object id="407" name="c实验城市3,t3" x="200" y="80" width="20" height="20"/>
+  <object id="407" name="d实验城市3,t3,d" x="200" y="80" width="20" height="20"/>
+  <object id="408" name="d实验城市4,t4" x="200" y="80" width="20" height="20"/>
+  <object id="409" name="city_info,d" x="40" y="0" width="20" height="20">
+   <properties>
+    <property name="addReset" value="20s"/>
+    <property name="addWarmup" value="20s"/>
+    <property name="detectReset" value="20s"/>
+    <property name="idprefix" value="d"/>
+    <property name="prefix" value="d"/>
+    <property name="unit" value="supplyDepot"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -10,6 +10,8 @@ ___一个铁锈战争 (Rusted Warfare) 地图编辑 python 库___
 
 [城夺宾语自动化命令行教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/auto_tutotial.md)
 
+【一个结合Tiled或者notTiled共同使用的宾语生成器，使用命令行操作】
+
 [简单城夺地图代码例子](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/examples/example1/example1.py)
 
 ## 目标
@@ -25,6 +27,8 @@ python实现铁锈地图文件地块编辑和宾语编辑。
 地块组框架已完成。
 
 宾语组框架已完成。
+
+宾语自动化命令行系统正在添加。
 
 ## 安装
 

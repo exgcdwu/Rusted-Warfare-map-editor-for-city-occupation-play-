@@ -63,6 +63,7 @@ auto_func_arg = {
             "t": ("team|-1", str)
         }, 
         AUTOKEY.id_operation:[
+     
             {
                 AUTOKEY.operation_type: AUTOKEY.typeif, 
                 AUTOKEY.ifvar: "isteamDetect", 
@@ -370,6 +371,7 @@ auto_func_arg = {
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 "exist": ["isi_eq_0"], 
+                "death": ["isonlybuilding"], 
                 "offset": "teamDetectoffset[i]", 
                 "offsetsize": "teamDetectoffsetsize[i]", 
                 "name": "{teamDetectname[i]}", 
@@ -385,7 +387,7 @@ auto_func_arg = {
 
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
-                "death": ["isi_eq_0"], 
+                "death": ["isi_eq_0", "isonlybuilding"], 
                 "offset": "teamDetectoffset[i]", 
                 "offsetsize": "teamDetectoffsetsize[i]", 
                 "type": rw.const.OBJECTTYPE.unitDetect, 
@@ -394,6 +396,38 @@ auto_func_arg = {
                     rw.const.OBJECTOP.minUnits: "1", 
                     rw.const.OBJECTOP.resetActivationAfter: "{teamDetectreset}", 
                     rw.const.OBJECTOP.unitType: "{unit}", 
+                    rw.const.OBJECTOP.team: "{setTeam[i][j]}"
+                }
+            }, 
+
+            {
+                AUTOKEY.operation_type: AUTOKEY.object, 
+                "exist": ["isi_eq_0", "isonlybuilding"], 
+                "offset": "teamDetectoffset[i]", 
+                "offsetsize": "teamDetectoffsetsize[i]", 
+                "name": "{teamDetectname[i]}", 
+                "type": rw.const.OBJECTTYPE.unitDetect, 
+                "optional": {
+                    rw.const.OBJECTOP.id: "{id_temp}", 
+                    rw.const.OBJECTOP.minUnits: "1", 
+                    rw.const.OBJECTOP.resetActivationAfter: "{teamDetectreset}", 
+                    rw.const.OBJECTOP.onlyBuildings: True, 
+                    rw.const.OBJECTOP.team: "{setTeam[i][j]}"
+                }
+            }, 
+
+            {
+                AUTOKEY.operation_type: AUTOKEY.object, 
+                "death": ["isi_eq_0"], 
+                "exist": ["isonlybuilding"], 
+                "offset": "teamDetectoffset[i]", 
+                "offsetsize": "teamDetectoffsetsize[i]", 
+                "type": rw.const.OBJECTTYPE.unitDetect, 
+                "optional": {
+                    rw.const.OBJECTOP.id: "{id_temp}", 
+                    rw.const.OBJECTOP.minUnits: "1", 
+                    rw.const.OBJECTOP.resetActivationAfter: "{teamDetectreset}", 
+                    rw.const.OBJECTOP.onlyBuildings: True, 
                     rw.const.OBJECTOP.team: "{setTeam[i][j]}"
                 }
             }, 
