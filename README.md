@@ -4,23 +4,11 @@ ___一个铁锈战争 (Rusted Warfare) 地图编辑 python 库___
 
 ![released version](https://img.shields.io/pypi/v/rwmapeditor-exgcdwu.svg)
 
-[简易使用教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/Tutorial.md)
-
-【教程已过时】
-
-[城夺宾语自动化命令行教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/auto_tutotial.md)
-
-【一个结合Tiled或者notTiled共同使用的宾语生成器，使用命令行操作】
-
-[简单城夺地图代码例子](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/examples/example1/example1.py)
-
 ## 目标
 
 python实现铁锈地图文件地块编辑和宾语编辑。
 
-暂时不打算接触地块集。
-
-重点减轻城市争夺地图的宾语编辑工作量
+重点减轻城市争夺地图的宾语编辑工作量。
 
 基本框架已完成。
 
@@ -36,21 +24,19 @@ python实现铁锈地图文件地块编辑和宾语编辑。
 pip install rwmapeditor-exgcdwu
 ```
 
-## 使用之前
+## 教程
 
-### 1.使用地图编辑器(Tiled,notTiled)创建新地图
+[简易使用教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/Tutorial.md)
 
-地图格式：zlib、gzip、纯base64
+【python库的使用教程】
 
-渲染顺序：右下(right-down)
+[城夺地图代码](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/examples/)
 
-方向：orthogonal
+【正在开发的城夺地图和代码】
 
-#### 2.手动载入地块集
+[城夺宾语自动化命令行教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/auto_tutotial.md)
 
-#### 3.手动创建所需的地块层和宾语层
-
-#### 4.即可使用python库改变地块和宾语
+【一个结合Tiled或者notTiled共同使用的宾语生成器，使用命令行操作，基于该库开发】
 
 ## 其他
 

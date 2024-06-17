@@ -9,48 +9,190 @@ import rwmap as rw
 from auto._core import AUTOKEY
 
 auto_func_arg = {
-    "city_info": {
+    "inadd_info": {
         AUTOKEY.info_args:{
             "prefix": str, 
-            "idprefix": str, 
-            "isprefixseg": bool, 
-            "detectReset": str, 
-            "addWarmup": str, 
-            "addReset": str, 
+
             "isinadd": bool, 
             "inaddWarmup":str, 
-            "unit": str, 
-            "isonlybuilding": bool, 
-            "mapTextName": str, 
-            "unitAddName": str, 
-            "inunitAddName": str, 
-            "unitDetectName": str, 
-            "isshowOnMap": bool, 
             "isinshowOnMap": bool, 
-
-            "isteamDetect": bool, 
-            "setTeam": (list, list, int), 
-            "setidTeam": (list, str), 
-            "teamDetectoffset": (list, list, int), 
-            "teamDetectoffsetsize": (list, list, int), 
-            "teamDetectname": (list, str), 
-            "teamDetectreset": str, 
+            "inunitAddname": str, 
+            "inunitAddoffset": (list, int), 
+            "inunitAddoffsetsize": (list, int)
+        }, 
+        AUTOKEY.default_args:{
+            "inaddWarmup": "0s", 
+            "inunitAddname": "{team}", 
+            "isinadd": "true"
+        }, 
+        AUTOKEY.prefix: "prefix", 
+        AUTOKEY.isinfo_sub: True
+    }, 
+    "text_info": {
+        AUTOKEY.info_args:{
+            "prefix": str, 
 
             "istext": bool, 
             "textColor": str, 
             "textSize": str, 
-
-            "isteamText": bool, 
-            "teamTextcolor": (list, str), 
-            "teamTextreset": str
+            "mapTextname": str, 
+            "mapTextoffset": (list, int), 
+            "mapTextoffsetsize": (list, int), 
         }, 
         AUTOKEY.default_args:{
+            "istext": "true", 
+            "mapTextname": "", 
+            "mapTextoffset": "0 0", 
+            "mapTextoffsetsize": "0 0", 
+        }, 
+        AUTOKEY.prefix: "prefix", 
+        AUTOKEY.isinfo_sub: True
+    }, 
+    "teamDetect_info": {
+        AUTOKEY.info_args:{
+            "prefix": str, 
+            "isteamText": bool, 
+            "teamDetectreset": str, 
+            "setTeam": (list, list, int), 
+            "setidTeam": (list, str), 
+            "teamDetectname": (list, str), 
+            "teamDetectoffset": (list, list, int), 
+            "teamDetectoffsetsize": (list, list, int), 
+        }, 
+        AUTOKEY.default_args:{
+            "isteamText": "true", 
+            "teamDetectname": "[\"检测 setid\" + \"Team\" + str(ex) + \"_0\" for ex in range(lensetidTeam)]", 
+            "teamDetectoffset": "[[-10*ex, -10*lensetidTeam+10*ex] for ex in range(lensetidTeam)]", 
+            "teamDetectoffsetsize": "[[20*ex, 10*lensetidTeam-10*ex] for ex in range(lensetidTeam)]"
+        }, 
+        AUTOKEY.prefix: "prefix", 
+        AUTOKEY.isinfo_sub: True, 
+        AUTOKEY.initial_brace:{
+            "lensetidTeam": "len(setidTeam)"
+        }, 
+        AUTOKEY.default_brace:{
+            "teamDetectname", 
+            "teamDetectoffset", 
+            "teamDetectoffsetsize"
+        }, 
+    }, 
+    "teamText_info": {
+        AUTOKEY.info_args:{
+            "prefix": str, 
+            
+            "isteamText": bool, 
+            "teamTextreset": str, 
+            "teamTextcolor": (list, str), 
+            "teamTextname": (list, str), 
+            "teamTextoffset": (list, list, int), 
+            "teamTextoffsetsize": (list, list, int)
+        }, 
+        AUTOKEY.default_args:{
+            "isteamText": "true", 
+            "teamTextreset": "1s", 
+            "teamTextname": "[\"\"] * lensetidTeam", 
+            "teamTextoffset": "[[0, 0] for i in range(lensetidTeam)]", 
+            "teamTextoffsetsize": "[[0, 0] for i in range(lensetidTeam)]", 
+        }, 
+        AUTOKEY.prefix: "prefix", 
+        AUTOKEY.isinfo_sub: True, 
+        AUTOKEY.initial_brace:{
+            "lensetidTeam": "len(teamTextcolor)"
+        }, 
+        AUTOKEY.default_brace:{
+            "teamTextname", 
+            "teamTextoffset", 
+            "teamTextoffsetsize"
+        }, 
+    }, 
+    "city_info": {
+        AUTOKEY.info_args:{
+            "prefix": str, 
+            "idprefix": str, 
+            "detectReset": str, 
+            "addWarmup": str, 
+            "addReset": str, 
+            "unit": str, 
+
+            "isprefixseg": bool, 
+            "isonlybuilding": bool, 
+            "isshowOnMap": bool, 
+
+            "unitAddname": str, 
+            "unitAddoffset": (list, int), 
+            "unitAddoffsetsize": (list, int), 
+
+            "unitDetectname": str, 
+            "unitDetectoffset": (list, int), 
+            "unitDetectoffsetsize": (list, int), 
+
+            "isinadd": bool, 
+            "inaddWarmup":str, 
+            "isinshowOnMap": bool, 
+            "inunitAddname": str, 
+            "inunitAddoffset": (list, int), 
+            "inunitAddoffsetsize": (list, int), 
+
+            "istext": bool, 
+            "textColor": str, 
+            "textSize": str, 
+            "mapTextname": str, 
+            "mapTextoffset": (list, int), 
+            "mapTextoffsetsize": (list, int), 
+
+            "isteamDetect": bool, 
+            "teamDetectreset": str, 
+            "setTeam": (list, list, int), 
+            "setidTeam": (list, str), 
+            "teamDetectname": (list, str), 
+            "teamDetectoffset": (list, list, int), 
+            "teamDetectoffsetsize": (list, list, int), 
+
+            "isteamText": bool, 
+            "teamTextreset": str, 
+            "teamTextcolor": (list, str), 
+            "teamTextname": (list, str), 
+            "teamTextoffset": (list, list, int), 
+            "teamTextoffsetsize": (list, list, int)
+        }, 
+        AUTOKEY.default_args:{
+
+            "unitAddname": "", 
+            "unitAddoffset": "0 0", 
+            "unitAddoffsetsize": "0 0", 
+
+            "unitDetectname": "检测 {idprefix0}", 
+            "unitDetectoffset": "-10 0", 
+            "unitDetectoffsetsize": "20 0", 
+
             "inaddWarmup": "0s", 
-            "mapTextName": "", 
-            "unitAddName": "", 
-            "inunitAddName": "{team}", 
-            "unitDetectName": "检测 {idprefix0}", 
-            "teamTextreset": "1s"
+            "inunitAddname": "{team}", 
+            "inunitAddoffset": "0 -10", 
+            "inunitAddoffsetsize": "0 20", 
+
+            "mapTextname": "", 
+            "mapTextoffset": "0 0", 
+            "mapTextoffsetsize": "0 0", 
+
+            "teamDetectname": "[\"检测 setid\" + \"Team\" + str(ex) + \"_0\" for ex in range(lensetidTeam)]", 
+            "teamDetectoffset": "[\"[-10*ex, -10*lensetidTeam+10*ex]\" for ex in range(lensetidTeam)]", 
+            "teamDetectoffsetsize": "[\"[20*ex, 10*lensetidTeam-10*ex]\" for ex in range(lensetidTeam)]", 
+
+            "teamTextreset": "1s", 
+            "teamTextname": "[\"\"] * lensetidTeam", 
+            "teamTextoffset": "[[0, 0] for i in range(lensetidTeam)]", 
+            "teamTextoffsetsize": "[[0, 0] for i in range(lensetidTeam)]", 
+        }, 
+        AUTOKEY.initial_brace:{
+            "lensetidTeam": "len(setidTeam)"
+        }, 
+        AUTOKEY.default_brace:{
+            "teamDetectname", 
+            "teamDetectoffset", 
+            "teamDetectoffsetsize", 
+            "teamTextname", 
+            "teamTextoffset", 
+            "teamTextoffsetsize"
         }, 
         AUTOKEY.isprefixseg: "isprefixseg", 
         AUTOKEY.prefix: "prefix", 
@@ -61,6 +203,46 @@ auto_func_arg = {
         AUTOKEY.opargs_prefix_len:1, 
         AUTOKEY.opargs: {
             "t": ("team|-1", str)
+        }, 
+        AUTOKEY.info_prefix:{
+            "inadd_info": "inadd_prefix", 
+            "text_info": "text_prefix", 
+            "teamDetect_info": "teamDetect_prefix", 
+            "teamText_info": "teamText_prefix"
+        }, 
+        AUTOKEY.var_dependent:{
+            "inaddWarmup": "isinadd", 
+            "isinshowOnMap": "isinadd", 
+            "inunitAddname": "isinadd", 
+            "inunitAddoffset": "isinadd", 
+            "inunitAddoffsetsize": "isinadd", 
+            "textColor": "istext", 
+            "textSize": "istext", 
+            "mapTextname": "istext", 
+            "mapTextoffset": "istext", 
+            "mapTextoffsetsize": "istext", 
+            "teamDetectreset": "isteamDetect", 
+            "setTeam": "isteamDetect", 
+            "setidTeam": "isteamDetect", 
+            "teamDetectname": "isteamDetect", 
+            "teamDetectoffset": "isteamDetect", 
+            "teamDetectoffsetsize": "isteamDetect", 
+            "isteamText": "istext,isteamDetect", 
+            "teamTextreset": "isteamText", 
+            "teamTextcolor": "isteamText", 
+            "teamTextname": "isteamText", 
+            "teamTextoffset": "isteamText", 
+            "teamTextoffsetsize": "isteamText"
+        }, 
+        AUTOKEY.optional:{
+            "isprefixseg", 
+            "isonlybuilding", 
+            "isshowOnMap", 
+            "isinadd", 
+            "isinshowOnMap", 
+            "istext", 
+            "isteamDetect", 
+            "isteamText"
         }, 
         AUTOKEY.id_operation:[
      
@@ -114,6 +296,8 @@ auto_func_arg = {
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 "death": ["isshowOnMap"], 
+                "offset": "unitAddoffset", 
+                "offsetsize": "unitAddoffsetsize",                 
                 "name": "{unitAddName}", 
                 "type": rw.const.OBJECTTYPE.unitAdd, 
                 "optional": {
@@ -127,7 +311,9 @@ auto_func_arg = {
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 "exist": ["isshowOnMap"], 
-                "name": "{unitAddName}", 
+                "offset": "unitAddoffset", 
+                "offsetsize": "unitAddoffsetsize", 
+                "name": "{unitAddname}", 
                 "type": rw.const.OBJECTTYPE.unitAdd, 
                 "optional": {
                     rw.const.OBJECTOP.spawnUnits: "{unit}", 
@@ -142,9 +328,9 @@ auto_func_arg = {
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 "exist": ["isinadd"], 
                 "death": ["isinshowOnMap"], 
-                "offset": "[0, -20]",
-                "offsetsize": "[0, 40]", 
-                "name": "{inunitAddName}", 
+                "offset": "inunitAddoffset", 
+                "offsetsize": "inunitAddoffsetsize", 
+                "name": "{inunitAddname}", 
                 "type": rw.const.OBJECTTYPE.unitAdd, 
                 "optional": {
                     rw.const.OBJECTOP.spawnUnits: "{unit}", 
@@ -155,9 +341,9 @@ auto_func_arg = {
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 "exist": ["isinadd", "isinshowOnMap"], 
-                "offset": "[0, -20]",
-                "offsetsize": "[0, 40]", 
-                "name": "{inunitAddName}", 
+                "offset": "inunitAddoffset", 
+                "offsetsize": "inunitAddoffsetsize", 
+                "name": "{inunitAddname}", 
                 "type": rw.const.OBJECTTYPE.unitAdd, 
                 "optional": {
                     rw.const.OBJECTOP.spawnUnits: "{unit}", 
@@ -169,9 +355,9 @@ auto_func_arg = {
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 "death": ["isonlybuilding"], 
-                "offset": "[-20, 0]",
-                "offsetsize": "[40, 0]", 
-                "name": "{unitDetectName}", 
+                "offset": "unitDetectoffset", 
+                "offsetsize": "unitDetectoffsetsize", 
+                "name": "{unitDetectname}", 
                 "type": rw.const.OBJECTTYPE.unitDetect, 
                 "optional": {
                     rw.const.OBJECTOP.id: "{idprefix0}", 
@@ -183,9 +369,9 @@ auto_func_arg = {
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 "exist": ["isonlybuilding"], 
-                "offset": "[-20, 0]",
-                "offsetsize": "[40, 0]", 
-                "name": "{unitDetectName}", 
+                "offset": "unitDetectoffset", 
+                "offsetsize": "unitDetectoffsetsize", 
+                "name": "{unitDetectname}", 
                 "type": rw.const.OBJECTTYPE.unitDetect, 
                 "optional": {
                     rw.const.OBJECTOP.id: "{idprefix0}", 
@@ -221,7 +407,9 @@ auto_func_arg = {
 
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
-                "name": "{mapTextName}", 
+                "name": "{mapTextname}", 
+                "offset": "mapTextoffset", 
+                "offsetsize": "mapTextoffsetsize", 
                 "type": rw.const.OBJECTTYPE.mapText, 
                 "optional": {
                     rw.const.OBJECTOP.text: "{cityname}", 
@@ -244,7 +432,7 @@ auto_func_arg = {
 
             {
                 AUTOKEY.operation_type: AUTOKEY.typeif, 
-                AUTOKEY.ifvar: "i < len(setidTeam)", 
+                AUTOKEY.ifvar: "i < lensetidTeam", 
                 AUTOKEY.ifend_tag: "tag_end_text"
             }, 
 
@@ -252,10 +440,12 @@ auto_func_arg = {
                 AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
                 "id_temp": "setidTeam{i}_0"
             }, 
-
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 "type": rw.const.OBJECTTYPE.mapText, 
+                "name": "{teamTextname[i]}", 
+                "offset": "teamTextoffset[i]", 
+                "offsetsize": "teamTextoffsetsize[i]", 
                 "optional": {
                     rw.const.OBJECTOP.text: "{cityname}", 
                     rw.const.OBJECTOP.textColor: "{teamTextcolor[i]}", 
@@ -281,7 +471,9 @@ auto_func_arg = {
 ##
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
-                "name": "{mapTextName}", 
+                "name": "{mapTextname}", 
+                "offset": "mapTextoffset", 
+                "offsetsize": "mapTextoffsetsize", 
                 "type": rw.const.OBJECTTYPE.mapText, 
                 "optional": {
                     rw.const.OBJECTOP.text: "{cityname}", 
@@ -293,32 +485,6 @@ auto_func_arg = {
             {
                 AUTOKEY.operation_type: AUTOKEY.tag, 
                 AUTOKEY.tag: "tag_end_text"
-            }, 
-
-
-
-
-
-
-            {
-                AUTOKEY.operation_type: AUTOKEY.typeset_exist, 
-                "isteamDetectnameexist": "teamDetectname"
-            }, 
-
-            {
-                AUTOKEY.operation_type: AUTOKEY.typeif, 
-                AUTOKEY.ifvar: "not isteamDetectnameexist", 
-                AUTOKEY.ifend_tag: "tag_end_td"
-            }, 
-
-            {
-                AUTOKEY.operation_type: AUTOKEY.typeset_expression, 
-                "teamDetectname": "[\"检测 setid\" + \"Team\" + str(ex) + \"_0\" for ex in range(len(setidTeam))]"
-            }, 
-
-            {
-                AUTOKEY.operation_type: AUTOKEY.tag, 
-                AUTOKEY.tag: "tag_end_td"
             }, 
 
             {
@@ -338,7 +504,7 @@ auto_func_arg = {
 
             {
                 AUTOKEY.operation_type: AUTOKEY.typeif, 
-                AUTOKEY.ifvar: "i < len(setidTeam)", 
+                AUTOKEY.ifvar: "i < lensetidTeam", 
                 AUTOKEY.ifend_tag: "tag_end"
             }, 
 

@@ -2,12 +2,14 @@ from typing import Union
 from copy import deepcopy
 import re
 import os
-from asteval import Interpreter
 from pprint import pprint
 import argparse
 import importlib
-
+from collections import OrderedDict
 import sys
+import pdb
+
+from asteval import Interpreter
 
 current_file_path = os.path.abspath(__file__)
 current_dir_path = os.path.dirname(current_file_path)
@@ -21,6 +23,8 @@ class AUTOKEY:
     default_args = "default_args"
     prefix = "prefix"
     info = "info"
+    info_key = "info_key"
+    isinfo_sub = "isinfo_sub"
     args = "args"
     seg = "seg"
     opargs = "opargs"
@@ -40,6 +44,9 @@ class AUTOKEY:
     isprefixseg = "isprefixseg"
     isdelete_sym = "isdelete_sym"
     info_prefix = "info_prefix"
+    initial_brace = "initial_brace"
+    default_brace = "default_brace"
+    var_dependent = "var_dependent"
 
     operation_type = "operation_type"
     object = "object"
@@ -355,13 +362,25 @@ def standard_out(ifdo:bool, info_str)->None:
         else:
             pprint(info_str)
 
-def standard_error(info_err, error_id)->None:
-    pprint(info_err, file=sys.stderr)
+def standard_error(info_err, error_id:int, sub_info_error:str = None)->None:
+    print(info_err + f"(ERROR:{error_id})", file=sys.stderr)
+    if sub_info_error != None:
+        pprint(sub_info_error)
+    if isdebug:
+        import pdb;pdb.set_trace()
     exit(error_id)
 
 def debug_dict(dict_now:dict, name:str):
     if isdebug:
         pprint(f"{name} = " + str(dict_now.get(name)))
+
+def debug_pdb(thing = ""):
+    if isdebug:
+        if isinstance(thing, str):
+            print(thing)
+        else:
+            pprint(thing)
+        import pdb;pdb.set_trace()
 
 def auto_func():
     parser = argparse.ArgumentParser(
@@ -411,7 +430,7 @@ def auto_func():
     output_path = args.map_path[0] if args.output == "|" else args.output[0]
     sys.path.append("".join(args.infopath.split("\\")[:-1]))
     info_file = importlib.import_module(".".join(".".join(args.infopath.split("\\")[-2:]).split(".")[:-1]))
-    info_now = getattr(info_file, args.infovar, 'Not Found')
+    info_now_pre = getattr(info_file, args.infovar, 'Not Found')
     isdelete = args.DeleteAllSym
     isdelete_d = args.delete
     isdelete_all = args.DeleteAll
@@ -442,7 +461,48 @@ def auto_func():
     standard_out(isverbose, "ID mapping is being established...")
     for tobject in map_now.iterator_object_s():
         id_to_tobject[tobject.returnDefaultProperty("id")] = tobject
-    
+
+    standard_out(isverbose, "The info object is rearranging...")
+    num_info = len(info_now_pre)
+    info_now = OrderedDict()
+    while_i = 0
+    while(while_i < num_info + 1 and len(info_now) < num_info):
+        for key, info in info_now_pre.items():
+            isend = True
+            if info.get(AUTOKEY.info_prefix) != None:
+                for info_prefix_now in info[AUTOKEY.info_prefix].keys():
+                    if info_now.get(info_prefix_now) == None:
+                        isend = False
+                        break
+            if isend:
+                info_now[key] = deepcopy(info)
+        while_i = while_i + 1
+
+    standard_out(isdebug, f"{while_i}\n{info_now}")
+
+    if while_i == num_info + 1:
+        standard_error(f"External info import loop error.", 1)
+
+    for key, info in info_now.items():
+        infolen = len(info[AUTOKEY.info_args])
+        while_i = 0
+        info_args_temp = OrderedDict()
+        while(while_i < infolen + 1 and len(info_args_temp) < infolen):
+            for args_now, ntype in info[AUTOKEY.info_args].items():
+                if info.get(AUTOKEY.var_dependent) != None and info[AUTOKEY.var_dependent].get(args_now) != None:
+                    var_den_list = info[AUTOKEY.var_dependent][args_now].split(",")
+                    isend = True
+                    for var_den in var_den_list:
+                        if info_args_temp.get(var_den) == None:
+                            isend = False
+                            break
+                if isend:
+                    info_args_temp[args_now] = deepcopy(ntype)
+            while_i = while_i + 1
+        info[AUTOKEY.info_args] = info_args_temp
+        if while_i == infolen +1:
+            standard_error(f"Info input dependence loop error.({key})", 5)
+
     standard_out(isverbose, "The info object is being processed...")
     for key, info in info_now.items():
         for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
@@ -455,22 +515,90 @@ def auto_func():
                     #import pdb;pdb.set_trace()
                     print(info_name + "|" + key)
                 info_dict_now = {}
-                info_dict_now[AUTOKEY.isdelete_sym] = bool(re.match(AUTOKEY.delete_symbol, info_name))
 
+                # info_prefix
+                
+                tobject_temp = deepcopy(tobject)
+                if info.get(AUTOKEY.info_prefix) != None:
+                    for value_name in info[AUTOKEY.info_prefix].values():
+                        if tobject_temp.returnOptionalProperty(value_name) == None:
+                            continue
+                        info_dict_now[value_name] = mapvalue_to_value(tobject_temp.returnOptionalProperty(value_name), str)
+                        tobject_temp.deleteOptionalProperty(value_name)
+                    #debug_pdb("info_prefix end")
+                    for info_pre_now, value_name in info[AUTOKEY.info_prefix].items():
+                        if info_dict_now.get(value_name) != None:
+                            tar_info = info_dict[info_dict_now[value_name]]
+                            if info_dict.get(info_dict_now[value_name]) == None or info_pre_now != tar_info[AUTOKEY.info_key]:
+                                standard_error(f"External info import error(target_info:{info_pre_now},info_key:{value_name},info_prefix:{info_dict_now[value_name]}).", 0)
+                            info_dict_now.update(tar_info)
+
+                #debug_pdb("external info end")
+
+                # add default_args
+                info_dict_now[AUTOKEY.isdelete_sym] = bool(re.match(AUTOKEY.delete_symbol, info_name))
+                default_brace = deepcopy(info.get(AUTOKEY.default_brace))
                 for key_now, value in info[AUTOKEY.default_args].items():
-                    info_dict_now[key_now] = mapvalue_to_value(value, info[AUTOKEY.info_args][key_now])
+                    if info_dict_now.get(key_now) != None:
+                        continue
+                    if default_brace != None and default_brace.issuperset([key_now]):
+                        info_dict_now[key_now] = value
+                    else:
+                        info_dict_now[key_now] = mapvalue_to_value(value, info[AUTOKEY.info_args][key_now])
+
+                #debug_pdb("default_args end")
+
+                # add info_args
                 for key_now, ntype in info[AUTOKEY.info_args].items():
-                    if tobject.returnOptionalProperty(key_now) != None:
-                        info_dict_now[key_now] = mapvalue_to_value(tobject.returnOptionalProperty(key_now), ntype)
+                    if tobject_temp.returnOptionalProperty(key_now) != None:
+                        if info.get(AUTOKEY.var_dependent) != None and info[AUTOKEY.var_dependent].get(key_now) != None:
+                            for args_dependent in info[AUTOKEY.var_dependent][key_now].split(","):
+                                if info_dict_now.get(args_dependent) == None or info_dict_now[args_dependent] == False:
+                                    standard_error(f"Unuseful arguments in an info object.({key_now} exists but {args_dependent} is none or false.)", 4)
+
+                        info_dict_now[key_now] = mapvalue_to_value(tobject_temp.returnOptionalProperty(key_now), ntype)
+                        tobject_temp.deleteOptionalProperty(key_now)
+                        if default_brace != None and default_brace.issuperset([key_now]):
+                            default_brace.remove(key_now)
+
+                # required arguments check
+                for key_now, dep_str in info[AUTOKEY.var_dependent].items():
+                    dep_list = dep_str.split(",")
+                
+                for key_now, ntype in info[AUTOKEY.info_args].items():
+                    if info.get(AUTOKEY.optional) != None and info[AUTOKEY.optional].issuperset([key_now]):
+                        continue
+                    if info.get(AUTOKEY.var_dependent) != None and info[AUTOKEY.var_dependent].get(key_now) != None:
+                        var_dep_list = info[AUTOKEY.var_dependent][key_now].split(",")
+                        isend = True
+                        for var_dep in var_dep_list:
+                            if info_dict_now.get(var_dep) == None:
+                                isend = False
+                                break
+                        if not isend:
+                            continue
+                    if info_dict_now.get(key_now) == None:
+                        standard_error(f"A required argument is missing in an info object.({key_now})", 6)
+
+                
+                if len(tobject_temp._optional_properties) != 0:
+                    standard_error("Unknown arguments below in an info object.", 3, f"{tobject_temp._optional_properties}")
+                
+                if info.get(AUTOKEY.initial_brace) != None:
+                    for key_now, value in info[AUTOKEY.initial_brace].items():
+                        info_dict_now[key_now] = brace_translation(value, info_dict_now)
+                if default_brace != None:
+                    for key_now in default_brace:
+                        info_dict_now[key_now] = brace_translation(info_dict_now[key_now], info_dict_now)
+
+
 
                 info_dict_now[AUTOKEY.prefix] = info_dict_now[info[AUTOKEY.prefix]]
                 info_doids_dict[info_dict_now[AUTOKEY.prefix]] = deepcopy(info)
                 info_dict_now[AUTOKEY.info] = info_dict_now[AUTOKEY.prefix]
 
                 info_dict_now[AUTOKEY.tobject] = tobject
-                if info.get(AUTOKEY.info_prefix) != None and info_dict_now.get(info[AUTOKEY.info_prefix]) != None:
-                    info_dict_now[AUTOKEY.info_prefix] = info_dict_now[info[AUTOKEY.info_prefix]]
-            
+                info_dict_now[AUTOKEY.info_key] = key
 
                 if info.get(AUTOKEY.id_operation) != None:
                     operation_index = {}
@@ -484,12 +612,6 @@ def auto_func():
                         print(info_name + "|" + key)
                         
                     while(index < len(info[AUTOKEY.id_operation])):
-                        if isdebug:
-                            print(index)
-                            if index % 3 == 0:
-                                import pdb;pdb.set_trace()
-                                debug_dict(object_dict, "i")
-                                debug_dict(object_dict, "setidTeam")
                         
                         operation_now = info[AUTOKEY.id_operation][index]
                             
@@ -539,6 +661,8 @@ def auto_func():
                     temp_pri.pop(AUTOKEY.tobject)
                     standard_out(isverbose, temp_pri)
 
+
+
                 info_dict[info_dict_now[AUTOKEY.prefix]] = info_dict_now
                 if isdelete_all or isdelete or (isdelete_d and info_dict_now[AUTOKEY.isdelete_sym]):
                     dtobject.append(tobject)
@@ -568,7 +692,6 @@ def auto_func():
                 ischange = True
                 break
         if ischange:
-            
             for thing_prefix_num in myinfo[AUTOKEY.ids]:
                 tobject_prefix = tobject.returnOptionalProperty(thing_prefix_num[0])
                 if tobject_prefix != None:
@@ -614,6 +737,8 @@ def auto_func():
                 ischange = True
                 break
         if ischange:
+            if myinfo.get(AUTOKEY.isinfo_sub) != None and myinfo.get(AUTOKEY.isinfo_sub) == True:
+                standard_error(f"Incorrect use of the subordinate info object.(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name})", 2)
             isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
             if isdelete_all or isdelete or (isdelete_sym and isdelete_d):
                 dtobject.append(tobject)
@@ -672,18 +797,6 @@ def auto_func():
                 
                 operation_now = myinfo[AUTOKEY.operation][index]
 
-                if isdebug:
-                    print(index)
-                    if index == 16:
-                        pprint(operation_now)
-                    elif index == 13:
-                        pprint(operation_now)
-                    elif index == 21:
-                        print("i = ", object_dict.get("i"))
-                        print("j = ", object_dict.get("j"))
-                        print("isi_eq_0 = ", object_dict.get("isi_eq_0"))
-                        print("teamDetectname = ", object_dict.get("teamDetectname"))
-
                 if operation_now[AUTOKEY.operation_type] == AUTOKEY.object:
                     object_now = get_tobject(operation_now, object_dict, ori_pos, ori_size)
 
@@ -691,7 +804,6 @@ def auto_func():
                         if isdebug:
                             print(object_now)
                             
-                        #import pdb;pdb.set_trace()
                         if object_dict.get(AUTOKEY.IDs) != None and tottobid < len(object_dict[AUTOKEY.IDs]):
                             object_now.assignDefaultProperty("id", object_dict[AUTOKEY.IDs][tottobid])
                             id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]].copy(object_now)

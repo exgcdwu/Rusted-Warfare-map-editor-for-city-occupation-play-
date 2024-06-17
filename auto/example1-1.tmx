@@ -3304,7 +3304,7 @@
         <property name="unit" value="supplyDepot"/>
       </properties>
     </object>
-    <object x="120" y="80" width="20" height="20" name="" type="unitAdd" id="410">
+    <object x="120" y="80" width="20" height="20" name="unitAddName" type="unitAdd" id="410">
       <properties>
         <property name="spawnUnits" value="supplyDepot"/>
         <property name="activatedBy" value="c2"/>
@@ -3313,14 +3313,14 @@
         <property name="warmup" value="20s"/>
       </properties>
     </object>
-    <object x="120" y="60" width="20" height="60" name="-1" type="unitAdd" id="411">
+    <object x="120" y="70" width="20" height="40" name="-1" type="unitAdd" id="411">
       <properties>
         <property name="spawnUnits" value="supplyDepot"/>
         <property name="team" value="-1"/>
         <property name="warmup" value="5s"/>
       </properties>
     </object>
-    <object x="100" y="80" width="60" height="20" name="检测 c2" type="unitDetect" id="412">
+    <object x="110" y="80" width="40" height="20" name="检测 c2" type="unitDetect" id="412">
       <properties>
         <property name="id" value="c2"/>
         <property name="maxUnits" value="0"/>
@@ -3337,7 +3337,7 @@
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="120" y="80" width="20" height="20" type="mapText" id="414">
+    <object x="120" y="80" width="20" height="20" name="" type="mapText" id="414">
       <properties>
         <property name="text" value="实验城市2"/>
         <property name="textColor" value="blue"/>
@@ -3346,7 +3346,7 @@
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="120" y="80" width="20" height="20" type="mapText" id="415">
+    <object x="120" y="80" width="20" height="20" name="" type="mapText" id="415">
       <properties>
         <property name="text" value="实验城市2"/>
         <property name="textColor" value="red"/>

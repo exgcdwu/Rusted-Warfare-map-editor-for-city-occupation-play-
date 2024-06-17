@@ -1,0 +1,8 @@
+ERROR code:
+0: External info import error.
+1: External info import loop error.
+2: Incorrect use of the subordinate info object.
+3: Unknown arguments in an info object.
+4: Unuseful arguments in an info object.
+5: Info input dependence loop error.
+6: A required argument is missing in an info object.

@@ -1,47 +1,35 @@
 # Tutorials
 
 - [Tutorials](#tutorials)
-  - [使用之前](#使用之前)
-    - [1.使用地图编辑器(Tiled,notTiled)创建新地图](#1使用地图编辑器tilednottiled创建新地图)
-    - [2.手动载入地块集](#2手动载入地块集)
-    - [3.手动创建所需的地块层和宾语层](#3手动创建所需的地块层和宾语层)
-    - [4.即可使用python库改变地块和宾语](#4即可使用python库改变地块和宾语)
   - [基本操作命令](#基本操作命令)
-    - [地图载入](#地图载入)
-    - [地图输出（文本）](#地图输出文本)
-    - [地图载出](#地图载出)
+    - [地图输入输出](#地图输入输出)
+      - [原地图导入](#原地图导入)
+      - [创建新地图](#创建新地图)
+      - [地图输出（文本）](#地图输出文本)
+      - [地图载出](#地图载出)
+  - [地块集](#地块集)
+    - [地块集导入](#地块集导入)
+    - [地块集图片导出](#地块集图片导出)
   - [宾语](#宾语)
+    - [宾语层添加](#宾语层添加)
     - [宾语添加](#宾语添加)
       - [字典添加模式](#字典添加模式)
       - [分组宾语添加模式](#分组宾语添加模式)
       - [宾语组添加模式](#宾语组添加模式)
     - [宾语搜索与操作](#宾语搜索与操作)
   - [地块](#地块)
+    - [地块层添加](#地块层添加)
     - [地块添加](#地块添加)
       - [单个地块](#单个地块)
       - [矩形地块](#矩形地块)
       - [地块组](#地块组)
     - [地块组格式](#地块组格式)
 
-## 使用之前
-
-### 1.使用地图编辑器(Tiled,notTiled)创建新地图
-
-地图格式：zlib、gzip、纯base64
-
-渲染顺序：右下(right-down)
-
-方向：orthogonal
-
-### 2.手动载入地块集
-
-### 3.手动创建所需的地块层和宾语层
-
-### 4.即可使用python库改变地块和宾语
-
 ## 基本操作命令
 
-### 地图载入
+### 地图输入输出
+
+#### 原地图导入
 
 ```python
 import rwmap as rw
@@ -53,7 +41,16 @@ mymap = rw.RWmap.init_mapfile(map_dir + map_name)
 
 ```
 
-### 地图输出（文本）
+#### 创建新地图
+
+```python
+import rwmap as rw
+
+mymap = rw.RWmap.init_map(rw.Coordinate(100, 100))# 地图大小，x和y
+
+```
+
+#### 地图输出（文本）
 
 ```python
 
@@ -62,24 +59,44 @@ print(mymap.output_str(100, 100, rw.frame.Rectangle(rw.frame.Coordinate(0, 0), r
 
 ```
 
-### 地图载出
-
-注意，不建议输出到原地图文件，会造成文件覆盖。
-
-文件覆盖会带来以下后果：
-
-1.如果之后代码更改，将无法重新运行修改地图
-
-2.如果操作错误或者库出现bug，将没有备份补救
+#### 地图载出
 
 ```python
 
-map_name_out = '[p2]example_skirmish_(2p)(1).tmx'
-mymap.write_file(map_dir + map_name_out)
+map_name_out = 'D:/Game/steam/steamapps/common/Rusted Warfare/mods/maps/[p2]example_skirmish_(2p)(1).tmx'
+mymap.write_file(map_name_out)
+
+```
+
+## 地块集
+
+### 地块集导入
+
+```python
+
+mymap.add_tileset_fromMapPath(f'{example_dir_path}\\template\\city occupation(tile property).tmx')
+# 地块集导入
+
+```
+
+### 地块集图片导出
+
+```python
+
+mymap.write_png(f'{current_dir_path}')
+# 将地图中的地块集导出图片
 
 ```
 
 ## 宾语
+
+### 宾语层添加
+
+```python
+
+mymap.add_objectgroup(rw.const.NAME.Triggers)
+
+```
 
 ### 宾语添加
 
@@ -122,10 +139,6 @@ mymap.addObject_one(rw.tobject.TObject_One(rw.tobject.TObject_Type.init_unitAdd(
 
 使用现成的宾语组根据有限参数添加一组宾语。
 
-现已更新建筑刷新宾语组，城市刷新宾语组（添加mapText），二者均可以提供任意队伍的检测接口。
-
-已更新单位刷新宾语组，可以接受队伍检测接口。
-
 ```python
 
 mymap.addObject_group(
@@ -153,6 +166,14 @@ for tobject in mymap.iterator_object_s("Triggers", {"y": "1100"}):
 ```
 
 ## 地块
+
+### 地块层添加
+
+```python
+
+mymap.add_layer(rw.const.NAME.Ground)
+
+```
 
 ### 地块添加
 
