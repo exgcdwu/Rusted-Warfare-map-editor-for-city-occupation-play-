@@ -6,3 +6,7 @@ ERROR code:
 4: Unuseful arguments in an info object.
 5: Info input dependence loop error.
 6: A required argument is missing in an info object.
+7: Unknown optional arguments in a tagged object.
+8: Required arguments are missing below in a tagged object.
+9: Too many required arguments below in a tagged object.
+10: External info import error(The target info has \",d\")

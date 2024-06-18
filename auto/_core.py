@@ -76,7 +76,36 @@ class AUTOKEY:
 
 
 
+def standard_out(ifdo:bool, info_str)->None:
+    if ifdo:
+        if isinstance(info_str, str):
+            print(info_str)
+        else:
+            pprint(info_str)
 
+def standard_error(info_err, error_id:int, sub_info_error:str = None)->None:
+    print(info_err + f"(ERROR:{error_id})", file=sys.stderr)
+    if sub_info_error != None:
+        pprint(sub_info_error)
+    if isdebug:
+        import pdb;pdb.set_trace()
+    exit(error_id)
+
+def debug_dict(dict_now:dict, name:str):
+    if isdebug:
+        pprint(f"{name} = " + str(dict_now.get(name)))
+
+def debug_pdb(thing = ""):
+    if isdebug:
+        if isinstance(thing, str):
+            print(thing)
+        else:
+            pprint(thing)
+        import pdb;pdb.set_trace()
+
+def id_debug_pdb(tobject:rw.case.TObject, ID:int):
+    if isdebug and tobject.returnDefaultProperty("id") == str(ID):
+        import pdb;pdb.set_trace()
 
 
 def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, isreset:bool, id_to_tobject:dict, rwmap_now:rw.RWmap)->dict:
@@ -89,6 +118,13 @@ def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, isr
     else:
         args_n = [split_now[0][len(object_dict[AUTOKEY.prefix]):]] + split_now[1:]
     
+    if len(args_n) < len(info[AUTOKEY.args]):
+        info_args_temp = info[AUTOKEY.args][len(args_n):]
+        standard_error(f"Required arguments are missing below in a tagged object.(name:{name},need:{len(info[AUTOKEY.args])},reality({len(args_n)}))", 8, info_args_temp)
+    elif len(args_n) > len(info[AUTOKEY.args]):
+        info_args_temp = args_n[len(info[AUTOKEY.args]):]
+        standard_error(f"Too many required arguments below in a tagged object.(name:{name},need:{len(info[AUTOKEY.args])},reality({len(args_n)}))", 9, info_args_temp)
+
     for index, thing in enumerate(info[AUTOKEY.args]):
         args_dict[thing[0]] = thing[1](args_n[index])
     
@@ -100,6 +136,10 @@ def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, isr
         if info[AUTOKEY.opargs].get(prefix_now) != None:
             info_thing = info[AUTOKEY.opargs][prefix_now]
             args_dict[info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]] = info_thing[1](var_now)
+        else:
+            if prefix_now != "d":
+                standard_error(f"Unknown optional arguments in a tagged object.(name:{name}|,{prefix_now})", 7)
+
 
     for key, info_thing in info[AUTOKEY.opargs].items():
         args_dict[info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]] = \
@@ -355,33 +395,6 @@ def IDs_balance(tobject_now:rw.case.TObject, tottob:int)->list:
     id_delete = idsh_list[min(tottob, len(idsh_list)):]
     return id_delete
 
-def standard_out(ifdo:bool, info_str)->None:
-    if ifdo:
-        if isinstance(info_str, str):
-            print(info_str)
-        else:
-            pprint(info_str)
-
-def standard_error(info_err, error_id:int, sub_info_error:str = None)->None:
-    print(info_err + f"(ERROR:{error_id})", file=sys.stderr)
-    if sub_info_error != None:
-        pprint(sub_info_error)
-    if isdebug:
-        import pdb;pdb.set_trace()
-    exit(error_id)
-
-def debug_dict(dict_now:dict, name:str):
-    if isdebug:
-        pprint(f"{name} = " + str(dict_now.get(name)))
-
-def debug_pdb(thing = ""):
-    if isdebug:
-        if isinstance(thing, str):
-            print(thing)
-        else:
-            pprint(thing)
-        import pdb;pdb.set_trace()
-
 def auto_func():
     parser = argparse.ArgumentParser(
         description='Objects of Triggers are automatically processed by information\'s mode.')
@@ -478,8 +491,6 @@ def auto_func():
                 info_now[key] = deepcopy(info)
         while_i = while_i + 1
 
-    standard_out(isdebug, f"{while_i}\n{info_now}")
-
     if while_i == num_info + 1:
         standard_error(f"External info import loop error.", 1)
 
@@ -511,9 +522,6 @@ def auto_func():
 
             if bool(re.match(key, info_name)):
                 standard_out(isverbose, f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{info_name}) has been identified as an info object. Initialization...")
-                if isdebug:
-                    #import pdb;pdb.set_trace()
-                    print(info_name + "|" + key)
                 info_dict_now = {}
 
                 # info_prefix
@@ -528,9 +536,12 @@ def auto_func():
                     #debug_pdb("info_prefix end")
                     for info_pre_now, value_name in info[AUTOKEY.info_prefix].items():
                         if info_dict_now.get(value_name) != None:
-                            tar_info = info_dict[info_dict_now[value_name]]
-                            if info_dict.get(info_dict_now[value_name]) == None or info_pre_now != tar_info[AUTOKEY.info_key]:
+                            tar_info = info_dict.get(info_dict_now[value_name])
+                            if tar_info == None or info_pre_now != tar_info[AUTOKEY.info_key]:
                                 standard_error(f"External info import error(target_info:{info_pre_now},info_key:{value_name},info_prefix:{info_dict_now[value_name]}).", 0)
+                            info_temp = info_now[tar_info[AUTOKEY.info_key]]
+                            if tar_info[AUTOKEY.isdelete_sym] and (info_temp.get(AUTOKEY.isinfo_sub) != None and info_temp[AUTOKEY.isinfo_sub] == True):
+                                standard_error(f"External info import error(The target info has \",d\")(target_info:{info_pre_now},info_key:{value_name},info_prefix:{info_dict_now[value_name]}).", 10)
                             info_dict_now.update(tar_info)
 
                 #debug_pdb("external info end")
@@ -540,6 +551,8 @@ def auto_func():
                 default_brace = deepcopy(info.get(AUTOKEY.default_brace))
                 for key_now, value in info[AUTOKEY.default_args].items():
                     if info_dict_now.get(key_now) != None:
+                        if default_brace.issuperset([key_now]):
+                            default_brace.remove(key_now)
                         continue
                     if default_brace != None and default_brace.issuperset([key_now]):
                         info_dict_now[key_now] = value
@@ -562,8 +575,6 @@ def auto_func():
                             default_brace.remove(key_now)
 
                 # required arguments check
-                for key_now, dep_str in info[AUTOKEY.var_dependent].items():
-                    dep_list = dep_str.split(",")
                 
                 for key_now, ntype in info[AUTOKEY.info_args].items():
                     if info.get(AUTOKEY.optional) != None and info[AUTOKEY.optional].issuperset([key_now]):
@@ -572,7 +583,7 @@ def auto_func():
                         var_dep_list = info[AUTOKEY.var_dependent][key_now].split(",")
                         isend = True
                         for var_dep in var_dep_list:
-                            if info_dict_now.get(var_dep) == None:
+                            if info_dict_now.get(var_dep) == None or info_dict_now[var_dep] != True:
                                 isend = False
                                 break
                         if not isend:
@@ -608,8 +619,6 @@ def auto_func():
                     
                     object_dict = deepcopy(info_dict_now)
                     index = 0
-                    if isdebug:
-                        print(info_name + "|" + key)
                         
                     while(index < len(info[AUTOKEY.id_operation])):
                         
@@ -655,10 +664,29 @@ def auto_func():
                                         info_dict_now[key_trans] = mapvalue_to_value(str_translation(operation_now[AUTOKEY.real_idexp], object_dict), str)
                         index = index + 1
                 
-                standard_out(isverbose, "Info object information is being output.")
+                standard_out(isverbose, "Info object information is being output...")
                 if isverbose:
-                    temp_pri = deepcopy(info_dict_now)
-                    temp_pri.pop(AUTOKEY.tobject)
+                    temp_pri = OrderedDict()
+                    for args_now in info[AUTOKEY.info_args].keys():
+                        if info_dict_now.get(args_now) == None:
+                            continue
+                        value_now = info_dict_now[args_now]
+                        if value_now == False:
+                            continue
+                        if info.get(AUTOKEY.var_dependent) != None:
+                            var_dep_list = info[AUTOKEY.var_dependent].get(args_now)
+                            if var_dep_list == None:
+                                temp_pri[args_now] = value_now 
+                                continue
+                            var_dep_list = var_dep_list.split(",")
+                            isend = True
+                            for var_dep in var_dep_list:
+                                if info_dict_now.get(var_dep) == None or info_dict_now[var_dep] != True:
+                                    isend = False
+                                    break
+                            if not isend:
+                                continue
+                        temp_pri[args_now] = value_now 
                     standard_out(isverbose, temp_pri)
 
 
@@ -669,7 +697,7 @@ def auto_func():
 
     info_now = info_doids_dict
 
-    standard_out(isverbose and (isdelete_all or isdelete), "The info object is being deleted.")
+    standard_out(isverbose and (isdelete_all or isdelete), "The info object is being deleted...")
     standard_out(isverbose and (isdelete_d), "The info object is being deleted if eligible...")
     for tobject in dtobject:
         map_now.delete_object_s(tobject)
@@ -737,6 +765,7 @@ def auto_func():
                 ischange = True
                 break
         if ischange:
+            
             if myinfo.get(AUTOKEY.isinfo_sub) != None and myinfo.get(AUTOKEY.isinfo_sub) == True:
                 standard_error(f"Incorrect use of the subordinate info object.(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name})", 2)
             isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
@@ -744,8 +773,8 @@ def auto_func():
                 dtobject.append(tobject)
 
             standard_out(isverbose and (not(isdelete_sym or isdelete_all)), f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object. Object generation...")
-            standard_out(isverbose and isdelete_sym, f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The object will not be generated...")
-            standard_out(isverbose and isdelete_all, f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object will be deleted...")
+            standard_out(isverbose and isdelete_all, f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted...")
+            standard_out(isverbose and (isdelete_sym and(not isdelete_all)), f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The objects will not be generated, existing ones will also be deleted...")
 
             for thing in myinfo[AUTOKEY.ids]:
                 
@@ -789,20 +818,14 @@ def auto_func():
             tottobid = 0
             index = 0
 
-            if isdebug:
-                pprint(tobject)
-                pprint(object_dict)
-
             while(index < len(myinfo[AUTOKEY.operation])):
-                
+
                 operation_now = myinfo[AUTOKEY.operation][index]
 
                 if operation_now[AUTOKEY.operation_type] == AUTOKEY.object:
                     object_now = get_tobject(operation_now, object_dict, ori_pos, ori_size)
 
                     if object_now != None:
-                        if isdebug:
-                            print(object_now)
                             
                         if object_dict.get(AUTOKEY.IDs) != None and tottobid < len(object_dict[AUTOKEY.IDs]):
                             object_now.assignDefaultProperty("id", object_dict[AUTOKEY.IDs][tottobid])
@@ -848,7 +871,7 @@ def auto_func():
             for idnow in id_delete:
                 dtobject.append(id_to_tobject[idnow])
 
-    standard_out(isverbose and (isdelete_all or isdelete), "The tagged object is being deleted.")
+    standard_out(isverbose and (isdelete_all or isdelete), "The tagged object is being deleted...")
     standard_out(isverbose and (isdelete_d), "The tagged object is being deleted if eligible...")
     for tobject in dtobject:
         map_now.delete_object_s(tobject)

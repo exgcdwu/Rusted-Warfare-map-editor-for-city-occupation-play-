@@ -3251,8 +3251,20 @@
     <property name="warmup" value="20s"/>
    </properties>
   </object>
+  <object id="404" name="teamDetect_info" x="40" y="0" width="20" height="20">
+   <properties>
+    <property name="prefix" value="c"/>
+    <property name="isteamDetect" type="bool" value="true"/>
+    <property name="setTeam" value="0 2 4 6,1 3 5 7"/>
+    <property name="setidTeam" value="Ac,Bc"/>
+    <property name="teamDetectoffset" value="-20 0,20 0"/>
+    <property name="teamDetectoffsetsize" value="20 0,40 0"/>
+    <property name="teamDetectreset" value="5s"/>
+   </properties>
+  </object>
   <object id="404" name="city_info" x="40" y="0" width="20" height="20">
    <properties>
+    <property name="prefix" value="c"/>
     <property name="addReset" value="20s"/>
     <property name="addWarmup" value="20s"/>
     <property name="detectReset" value="20s"/>
@@ -3261,7 +3273,6 @@
     <property name="isinadd" value="true"/>
     <property name="isonlybuilding" type="bool" value="true"/>
     <property name="istext" value="true"/>
-    <property name="prefix" value="c"/>
     <property name="textColor" value="white"/>
     <property name="textSize" value="7"/>
     <property name="unit" value="supplyDepot"/>
@@ -3277,8 +3288,10 @@
   </object>
   <object id="405" name="c实验城市1,t1,d" x="40" y="80" width="20" height="20"/>
   <object id="406" name="c实验城市2,t2" x="120" y="80" width="20" height="20"/>
-  <object id="407" name="d实验城市3,t3,d" x="200" y="80" width="20" height="20"/>
-  <object id="408" name="d实验城市4,t4" x="200" y="80" width="20" height="20"/>
+  <object id="406" name="c实验城市3,t3" x="240" y="80" width="20" height="20"/>
+  <object id="406" name="c实验城市4,t4" x="300" y="80" width="20" height="20"/>
+  <object id="407" name="d实验城市5,t3,d" x="200" y="80" width="20" height="20"/>
+  <object id="408" name="d实验城市6,t4" x="200" y="80" width="20" height="20"/>
   <object id="409" name="city_info,d" x="40" y="0" width="20" height="20">
    <properties>
     <property name="addReset" value="20s"/>

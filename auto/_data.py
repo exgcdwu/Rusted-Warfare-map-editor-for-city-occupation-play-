@@ -1,5 +1,6 @@
 import os
 import sys
+from collections import OrderedDict
 current_file_path = os.path.abspath(__file__)
 current_dir_path = os.path.dirname(current_file_path)
 package_dir = os.path.dirname(current_dir_path)
@@ -8,18 +9,75 @@ import rwmap as rw
 
 from auto._core import AUTOKEY
 
+inadd_info_args_dict = OrderedDict()
+
+inadd_info_args_dict["prefix"] = str
+inadd_info_args_dict["isinadd"] = bool
+inadd_info_args_dict["inaddWarmup"] = str
+inadd_info_args_dict["isinshowOnMap"] = bool
+inadd_info_args_dict["inunitAddname"] = str
+inadd_info_args_dict["inunitAddoffset"] = (list, int)
+inadd_info_args_dict["inunitAddoffsetsize"] = (list, int)
+
+text_info_args_dict = OrderedDict()
+
+text_info_args_dict["prefix"] = str
+text_info_args_dict["istext"] = bool
+text_info_args_dict["textColor"] = str
+text_info_args_dict["textSize"] = str
+text_info_args_dict["mapTextname"] = str
+text_info_args_dict["mapTextoffset"] = (list, int)
+text_info_args_dict["mapTextoffsetsize"] = (list, int)
+
+teamDetect_info_args_dict = OrderedDict()
+
+teamDetect_info_args_dict["prefix"] = str
+teamDetect_info_args_dict["isteamDetect"] = bool
+teamDetect_info_args_dict["teamDetectreset"] = str
+teamDetect_info_args_dict["setTeam"] = (list, list, int)
+teamDetect_info_args_dict["setidTeam"] = (list, str)
+teamDetect_info_args_dict["teamDetectname"] = (list, str)
+teamDetect_info_args_dict["teamDetectoffset"] = (list, list, int)
+teamDetect_info_args_dict["teamDetectoffsetsize"] = (list, list, int)
+
+teamText_info_args_dict = OrderedDict()
+
+teamText_info_args_dict["prefix"] = str
+teamText_info_args_dict["isteamText"] = bool
+teamText_info_args_dict["teamTextreset"] = str
+teamText_info_args_dict["teamTextcolor"] = (list, str)
+teamText_info_args_dict["teamTextname"] = (list, str)
+teamText_info_args_dict["teamTextoffset"] = (list, list, int)
+teamText_info_args_dict["teamTextoffsetsize"] = (list, list, int)
+
+city_info_args_dict = OrderedDict()
+city_info_args_dict["prefix"] = str
+city_info_args_dict["idprefix"] = str
+city_info_args_dict["detectReset"] = str
+city_info_args_dict["addWarmup"] = str
+city_info_args_dict["addReset"] = str
+city_info_args_dict["unit"] = str
+
+city_info_args_dict["isprefixseg"] = bool
+city_info_args_dict["isonlybuilding"] = bool
+city_info_args_dict["isshowOnMap"] = bool
+
+city_info_args_dict["unitAddname"] = str
+city_info_args_dict["unitAddoffset"] = (list, int)
+city_info_args_dict["unitAddoffsetsize"] = (list, int)
+
+city_info_args_dict["unitDetectname"] = str
+city_info_args_dict["unitDetectoffset"] = (list, int)
+city_info_args_dict["unitDetectoffsetsize"] = (list, int)
+
+city_info_args_dict.update(inadd_info_args_dict)
+city_info_args_dict.update(text_info_args_dict)
+city_info_args_dict.update(teamDetect_info_args_dict)
+city_info_args_dict.update(teamText_info_args_dict)
+
 auto_func_arg = {
     "inadd_info": {
-        AUTOKEY.info_args:{
-            "prefix": str, 
-
-            "isinadd": bool, 
-            "inaddWarmup":str, 
-            "isinshowOnMap": bool, 
-            "inunitAddname": str, 
-            "inunitAddoffset": (list, int), 
-            "inunitAddoffsetsize": (list, int)
-        }, 
+        AUTOKEY.info_args:inadd_info_args_dict, 
         AUTOKEY.default_args:{
             "inaddWarmup": "0s", 
             "inunitAddname": "{team}", 
@@ -29,16 +87,7 @@ auto_func_arg = {
         AUTOKEY.isinfo_sub: True
     }, 
     "text_info": {
-        AUTOKEY.info_args:{
-            "prefix": str, 
-
-            "istext": bool, 
-            "textColor": str, 
-            "textSize": str, 
-            "mapTextname": str, 
-            "mapTextoffset": (list, int), 
-            "mapTextoffsetsize": (list, int), 
-        }, 
+        AUTOKEY.info_args:text_info_args_dict, 
         AUTOKEY.default_args:{
             "istext": "true", 
             "mapTextname": "", 
@@ -49,18 +98,9 @@ auto_func_arg = {
         AUTOKEY.isinfo_sub: True
     }, 
     "teamDetect_info": {
-        AUTOKEY.info_args:{
-            "prefix": str, 
-            "isteamText": bool, 
-            "teamDetectreset": str, 
-            "setTeam": (list, list, int), 
-            "setidTeam": (list, str), 
-            "teamDetectname": (list, str), 
-            "teamDetectoffset": (list, list, int), 
-            "teamDetectoffsetsize": (list, list, int), 
-        }, 
+        AUTOKEY.info_args:teamDetect_info_args_dict, 
         AUTOKEY.default_args:{
-            "isteamText": "true", 
+            "isteamDetect": "true", 
             "teamDetectname": "[\"检测 setid\" + \"Team\" + str(ex) + \"_0\" for ex in range(lensetidTeam)]", 
             "teamDetectoffset": "[[-10*ex, -10*lensetidTeam+10*ex] for ex in range(lensetidTeam)]", 
             "teamDetectoffsetsize": "[[20*ex, 10*lensetidTeam-10*ex] for ex in range(lensetidTeam)]"
@@ -77,16 +117,7 @@ auto_func_arg = {
         }, 
     }, 
     "teamText_info": {
-        AUTOKEY.info_args:{
-            "prefix": str, 
-            
-            "isteamText": bool, 
-            "teamTextreset": str, 
-            "teamTextcolor": (list, str), 
-            "teamTextname": (list, str), 
-            "teamTextoffset": (list, list, int), 
-            "teamTextoffsetsize": (list, list, int)
-        }, 
+        AUTOKEY.info_args:teamText_info_args_dict, 
         AUTOKEY.default_args:{
             "isteamText": "true", 
             "teamTextreset": "1s", 
@@ -106,55 +137,7 @@ auto_func_arg = {
         }, 
     }, 
     "city_info": {
-        AUTOKEY.info_args:{
-            "prefix": str, 
-            "idprefix": str, 
-            "detectReset": str, 
-            "addWarmup": str, 
-            "addReset": str, 
-            "unit": str, 
-
-            "isprefixseg": bool, 
-            "isonlybuilding": bool, 
-            "isshowOnMap": bool, 
-
-            "unitAddname": str, 
-            "unitAddoffset": (list, int), 
-            "unitAddoffsetsize": (list, int), 
-
-            "unitDetectname": str, 
-            "unitDetectoffset": (list, int), 
-            "unitDetectoffsetsize": (list, int), 
-
-            "isinadd": bool, 
-            "inaddWarmup":str, 
-            "isinshowOnMap": bool, 
-            "inunitAddname": str, 
-            "inunitAddoffset": (list, int), 
-            "inunitAddoffsetsize": (list, int), 
-
-            "istext": bool, 
-            "textColor": str, 
-            "textSize": str, 
-            "mapTextname": str, 
-            "mapTextoffset": (list, int), 
-            "mapTextoffsetsize": (list, int), 
-
-            "isteamDetect": bool, 
-            "teamDetectreset": str, 
-            "setTeam": (list, list, int), 
-            "setidTeam": (list, str), 
-            "teamDetectname": (list, str), 
-            "teamDetectoffset": (list, list, int), 
-            "teamDetectoffsetsize": (list, list, int), 
-
-            "isteamText": bool, 
-            "teamTextreset": str, 
-            "teamTextcolor": (list, str), 
-            "teamTextname": (list, str), 
-            "teamTextoffset": (list, list, int), 
-            "teamTextoffsetsize": (list, list, int)
-        }, 
+        AUTOKEY.info_args:city_info_args_dict, 
         AUTOKEY.default_args:{
 
             "unitAddname": "", 
@@ -165,19 +148,23 @@ auto_func_arg = {
             "unitDetectoffset": "-10 0", 
             "unitDetectoffsetsize": "20 0", 
 
+            "isinadd": "false", 
             "inaddWarmup": "0s", 
             "inunitAddname": "{team}", 
             "inunitAddoffset": "0 -10", 
             "inunitAddoffsetsize": "0 20", 
 
+            "istext": "false", 
             "mapTextname": "", 
             "mapTextoffset": "0 0", 
             "mapTextoffsetsize": "0 0", 
 
+            "isteamDetect": "false", 
             "teamDetectname": "[\"检测 setid\" + \"Team\" + str(ex) + \"_0\" for ex in range(lensetidTeam)]", 
             "teamDetectoffset": "[\"[-10*ex, -10*lensetidTeam+10*ex]\" for ex in range(lensetidTeam)]", 
             "teamDetectoffsetsize": "[\"[20*ex, 10*lensetidTeam-10*ex]\" for ex in range(lensetidTeam)]", 
 
+            "isteamText": "false", 
             "teamTextreset": "1s", 
             "teamTextname": "[\"\"] * lensetidTeam", 
             "teamTextoffset": "[[0, 0] for i in range(lensetidTeam)]", 
