@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="20" tileheight="20" infinite="0" nextlayerid="5" nextobjectid="500">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="20" tileheight="20" infinite="0" nextlayerid="5" nextobjectid="436">
   <tileset firstgid="1" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/units.tsx"/>
   <tileset firstgid="262" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Deep Water.tsx"/>
   <tileset firstgid="263" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Dirt.tsx"/>
@@ -3245,24 +3245,268 @@
         <property name="warmup" value="20s"/>
       </properties>
     </object>
-    <object id="404" name="teamDetect_info" x="40" y="0" width="20" height="20">
+    <object x="440" y="80" width="20" height="20" name="" type="unitAdd" id="404">
+      <properties>
+        <property name="spawnUnits" value="supplyDepot"/>
+        <property name="activatedBy" value="d1"/>
+        <property name="resetActivationAfter" value="20s"/>
+        <property name="team" value="-1"/>
+        <property name="warmup" value="20s"/>
+      </properties>
+    </object>
+    <object x="420" y="80" width="60" height="20" name="-1" type="unitAdd" id="405">
+      <properties>
+        <property name="spawnUnits" value="supplyDepot"/>
+        <property name="team" value="-1"/>
+        <property name="warmup" value="5s"/>
+      </properties>
+    </object>
+    <object x="430" y="80" width="40" height="20" name="检测 d1" type="unitDetect" id="406">
+      <properties>
+        <property name="id" value="d1"/>
+        <property name="maxUnits" value="0"/>
+        <property name="resetActivationAfter" value="20s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+      </properties>
+    </object>
+    <object x="440" y="80" width="20" height="20" name="" type="mapText" id="407">
+      <properties>
+        <property name="text" value="实验城市3"/>
+        <property name="textColor" value="white"/>
+        <property name="textSize" value="7"/>
+        <property name="deactivatedBy" value="Ac1,Bc1"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="440" y="80" width="20" height="20" name="" type="mapText" id="408">
+      <properties>
+        <property name="text" value="实验城市3"/>
+        <property name="textColor" value="blue"/>
+        <property name="textSize" value="7"/>
+        <property name="activatedBy" value="Ac1"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="440" y="80" width="20" height="20" name="" type="mapText" id="409">
+      <properties>
+        <property name="text" value="实验城市3"/>
+        <property name="textColor" value="red"/>
+        <property name="textSize" value="7"/>
+        <property name="activatedBy" value="Bc1"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="440" y="60" width="20" height="40" name="检测 Ac1" type="unitDetect" id="410">
+      <properties>
+        <property name="id" value="Ac1"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="440" y="60" width="20" height="40" type="unitDetect" id="411">
+      <properties>
+        <property name="id" value="Ac1"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="2"/>
+      </properties>
+    </object>
+    <object x="440" y="60" width="20" height="40" type="unitDetect" id="412">
+      <properties>
+        <property name="id" value="Ac1"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="4"/>
+      </properties>
+    </object>
+    <object x="440" y="60" width="20" height="40" type="unitDetect" id="413">
+      <properties>
+        <property name="id" value="Ac1"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="6"/>
+      </properties>
+    </object>
+    <object x="430" y="70" width="40" height="30" name="检测 Bc1" type="unitDetect" id="414">
+      <properties>
+        <property name="id" value="Bc1"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="1"/>
+      </properties>
+    </object>
+    <object x="430" y="70" width="40" height="30" type="unitDetect" id="415">
+      <properties>
+        <property name="id" value="Bc1"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="3"/>
+      </properties>
+    </object>
+    <object x="430" y="70" width="40" height="30" type="unitDetect" id="416">
+      <properties>
+        <property name="id" value="Bc1"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="5"/>
+      </properties>
+    </object>
+    <object x="430" y="70" width="40" height="30" type="unitDetect" id="417">
+      <properties>
+        <property name="id" value="Bc1"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="7"/>
+      </properties>
+    </object>
+    <object x="640" y="80" width="20" height="20" name="" type="unitAdd" id="418">
+      <properties>
+        <property name="spawnUnits" value="supplyDepot"/>
+        <property name="activatedBy" value="d2"/>
+        <property name="resetActivationAfter" value="20s"/>
+        <property name="team" value="-1"/>
+        <property name="warmup" value="20s"/>
+      </properties>
+    </object>
+    <object x="620" y="80" width="60" height="20" name="-1" type="unitAdd" id="419">
+      <properties>
+        <property name="spawnUnits" value="supplyDepot"/>
+        <property name="team" value="-1"/>
+        <property name="warmup" value="5s"/>
+      </properties>
+    </object>
+    <object x="630" y="80" width="40" height="20" name="检测 d2" type="unitDetect" id="420">
+      <properties>
+        <property name="id" value="d2"/>
+        <property name="maxUnits" value="0"/>
+        <property name="resetActivationAfter" value="20s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+      </properties>
+    </object>
+    <object x="640" y="80" width="20" height="20" name="" type="mapText" id="421">
+      <properties>
+        <property name="text" value="实验城市4"/>
+        <property name="textColor" value="white"/>
+        <property name="textSize" value="7"/>
+        <property name="deactivatedBy" value="Ac2,Bc2"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="640" y="80" width="20" height="20" name="" type="mapText" id="422">
+      <properties>
+        <property name="text" value="实验城市4"/>
+        <property name="textColor" value="blue"/>
+        <property name="textSize" value="7"/>
+        <property name="activatedBy" value="Ac2"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="640" y="80" width="20" height="20" name="" type="mapText" id="423">
+      <properties>
+        <property name="text" value="实验城市4"/>
+        <property name="textColor" value="red"/>
+        <property name="textSize" value="7"/>
+        <property name="activatedBy" value="Bc2"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="640" y="60" width="20" height="40" name="检测 Ac2" type="unitDetect" id="424">
+      <properties>
+        <property name="id" value="Ac2"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="640" y="60" width="20" height="40" type="unitDetect" id="425">
+      <properties>
+        <property name="id" value="Ac2"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="2"/>
+      </properties>
+    </object>
+    <object x="640" y="60" width="20" height="40" type="unitDetect" id="426">
+      <properties>
+        <property name="id" value="Ac2"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="4"/>
+      </properties>
+    </object>
+    <object x="640" y="60" width="20" height="40" type="unitDetect" id="427">
+      <properties>
+        <property name="id" value="Ac2"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="6"/>
+      </properties>
+    </object>
+    <object x="630" y="70" width="40" height="30" name="检测 Bc2" type="unitDetect" id="428">
+      <properties>
+        <property name="id" value="Bc2"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="1"/>
+      </properties>
+    </object>
+    <object x="630" y="70" width="40" height="30" type="unitDetect" id="429">
+      <properties>
+        <property name="id" value="Bc2"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="3"/>
+      </properties>
+    </object>
+    <object x="630" y="70" width="40" height="30" type="unitDetect" id="430">
+      <properties>
+        <property name="id" value="Bc2"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="5"/>
+      </properties>
+    </object>
+    <object x="630" y="70" width="40" height="30" type="unitDetect" id="431">
+      <properties>
+        <property name="id" value="Bc2"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="5s"/>
+        <property name="onlyBuildings" value="true" type="bool"/>
+        <property name="team" value="7"/>
+      </properties>
+    </object>
+    <object id="432" name="teamDetect_info" x="40" y="0" width="20" height="20">
       <properties>
         <property name="prefix" value="o"/>
         <property name="isteamDetect" type="bool" value="true"/>
         <property name="setTeam" value="0 2 4 6,1 3 5 7"/>
         <property name="setidTeam" value="Ac,Bc"/>
-        <property name="teamDetectoffset" value="-20 0,20 0"/>
-        <property name="teamDetectoffsetsize" value="20 0,40 0"/>
         <property name="teamDetectreset" value="5s"/>
       </properties>
     </object>
-    <object id="405" name="city_info" x="40" y="0" width="20" height="20">
+    <object id="433" name="city_info" x="40" y="0" width="20" height="20">
       <properties>
         <property name="prefix" value="c"/>
         <property name="addReset" value="20s"/>
         <property name="addWarmup" value="20s"/>
         <property name="detectReset" value="20s"/>
-        <property name="idprefix" value="c"/>
+        <property name="idprefix" value="d"/>
         <property name="inaddWarmup" value="5s"/>
         <property name="isinadd" value="true"/>
         <property name="isonlybuilding" type="bool" value="true"/>
@@ -3275,449 +3519,20 @@
         <property name="teamTextcolor" value="blue,red"/>
       </properties>
     </object>
-    <object id="406" name="c实验城市1,t1,d" x="40" y="80" width="20" height="20">
-      <properties>
-        <property name="c" value="c1"/>
-        <property name="Ac" value="Ac1"/>
-        <property name="Bc" value="Bc1"/>
-      </properties>
-    </object>
-    <object id="407" name="c实验城市2,t2" x="120" y="80" width="20" height="20">
-      <properties>
-        <property name="c" value="c2"/>
-        <property name="Ac" value="Ac2"/>
-        <property name="Bc" value="Bc2"/>
-        <property name="IDs" value="456,457,458,459,460,461,462,463,464,465,466,467,468,469"/>
-      </properties>
-    </object>
-    <object id="408" name="c实验城市3,t3,d" x="240" y="80" width="20" height="20">
-      <properties>
-        <property name="c" value="c3"/>
-        <property name="Ac" value="Ac3"/>
-        <property name="Bc" value="Bc3"/>
-      </properties>
-    </object>
-    <object id="409" name="c实验城市7,t7" x="360" y="80" width="20" height="20">
-      <properties>
-        <property name="c" value="c4"/>
-        <property name="Ac" value="Ac4"/>
-        <property name="Bc" value="Bc4"/>
-        <property name="IDs" value="470,471,472,473,474,475,476,477,478,479,480,481,482,483"/>
-      </properties>
-    </object>
-    <object id="452" name="c实验城市4,t4" x="300" y="80" width="20" height="20">
-      <properties>
-        <property name="c" value="c5"/>
-        <property name="Ac" value="Ac5"/>
-        <property name="Bc" value="Bc5"/>
-        <property name="IDs" value="484,485,486,487,488,489,490,491,492,493,494,495,496,497"/>
-      </properties>
-    </object>
-    <object id="453" name="d实验城市5,t3,d" x="200" y="80" width="20" height="20">
+    <object id="434" name="c实验城市3" x="440" y="80" width="20" height="20">
       <properties>
         <property name="d" value="d1"/>
+        <property name="Ac" value="Ac1"/>
+        <property name="Bc" value="Bc1"/>
+        <property name="IDs" value="404,405,406,407,408,409,410,411,412,413,414,415,416,417"/>
       </properties>
     </object>
-    <object id="454" name="d实验城市6,t4" x="200" y="80" width="20" height="20">
+    <object id="435" name="c实验城市4,t4" x="640" y="80" width="20" height="20">
       <properties>
         <property name="d" value="d2"/>
-        <property name="IDs" value="498,499"/>
-      </properties>
-    </object>
-    <object id="455" name="city_info" x="40" y="0" width="20" height="20">
-      <properties>
-        <property name="addReset" value="20s"/>
-        <property name="addWarmup" value="20s"/>
-        <property name="detectReset" value="20s"/>
-        <property name="idprefix" value="d"/>
-        <property name="prefix" value="d"/>
-        <property name="unit" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="120" y="80" width="20" height="20" name="unitAddName" type="unitAdd" id="456">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot"/>
-        <property name="activatedBy" value="c2"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="team" value="-1"/>
-        <property name="warmup" value="20s"/>
-      </properties>
-    </object>
-    <object x="120" y="70" width="20" height="40" name="-1" type="unitAdd" id="457">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-        <property name="warmup" value="5s"/>
-      </properties>
-    </object>
-    <object x="110" y="80" width="40" height="20" name="检测 c2" type="unitDetect" id="458">
-      <properties>
-        <property name="id" value="c2"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="120" y="80" width="20" height="20" name="" type="mapText" id="459">
-      <properties>
-        <property name="text" value="实验城市2"/>
-        <property name="textColor" value="white"/>
-        <property name="textSize" value="7"/>
-        <property name="deactivatedBy" value="Ac2,Bc2"/>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="120" y="80" width="20" height="20" name="" type="mapText" id="460">
-      <properties>
-        <property name="text" value="实验城市2"/>
-        <property name="textColor" value="blue"/>
-        <property name="textSize" value="7"/>
-        <property name="activatedBy" value="Ac2"/>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="120" y="80" width="20" height="20" name="" type="mapText" id="461">
-      <properties>
-        <property name="text" value="实验城市2"/>
-        <property name="textColor" value="red"/>
-        <property name="textSize" value="7"/>
-        <property name="activatedBy" value="Bc2"/>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="100" y="80" width="40" height="20" name="检测 Ac2" type="unitDetect" id="462">
-      <properties>
-        <property name="id" value="Ac2"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="100" y="80" width="40" height="20" type="unitDetect" id="463">
-      <properties>
-        <property name="id" value="Ac2"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="100" y="80" width="40" height="20" type="unitDetect" id="464">
-      <properties>
-        <property name="id" value="Ac2"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="100" y="80" width="40" height="20" type="unitDetect" id="465">
-      <properties>
-        <property name="id" value="Ac2"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="140" y="80" width="60" height="20" name="检测 Bc2" type="unitDetect" id="466">
-      <properties>
-        <property name="id" value="Bc2"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="140" y="80" width="60" height="20" type="unitDetect" id="467">
-      <properties>
-        <property name="id" value="Bc2"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="140" y="80" width="60" height="20" type="unitDetect" id="468">
-      <properties>
-        <property name="id" value="Bc2"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="140" y="80" width="60" height="20" type="unitDetect" id="469">
-      <properties>
-        <property name="id" value="Bc2"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="360" y="80" width="20" height="20" name="unitAddName" type="unitAdd" id="470">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot"/>
-        <property name="activatedBy" value="c4"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="team" value="-1"/>
-        <property name="warmup" value="20s"/>
-      </properties>
-    </object>
-    <object x="360" y="70" width="20" height="40" name="-1" type="unitAdd" id="471">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-        <property name="warmup" value="5s"/>
-      </properties>
-    </object>
-    <object x="350" y="80" width="40" height="20" name="检测 c4" type="unitDetect" id="472">
-      <properties>
-        <property name="id" value="c4"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="360" y="80" width="20" height="20" name="" type="mapText" id="473">
-      <properties>
-        <property name="text" value="实验城市7"/>
-        <property name="textColor" value="white"/>
-        <property name="textSize" value="7"/>
-        <property name="deactivatedBy" value="Ac4,Bc4"/>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="360" y="80" width="20" height="20" name="" type="mapText" id="474">
-      <properties>
-        <property name="text" value="实验城市7"/>
-        <property name="textColor" value="blue"/>
-        <property name="textSize" value="7"/>
-        <property name="activatedBy" value="Ac4"/>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="360" y="80" width="20" height="20" name="" type="mapText" id="475">
-      <properties>
-        <property name="text" value="实验城市7"/>
-        <property name="textColor" value="red"/>
-        <property name="textSize" value="7"/>
-        <property name="activatedBy" value="Bc4"/>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="340" y="80" width="40" height="20" name="检测 Ac4" type="unitDetect" id="476">
-      <properties>
-        <property name="id" value="Ac4"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="340" y="80" width="40" height="20" type="unitDetect" id="477">
-      <properties>
-        <property name="id" value="Ac4"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="340" y="80" width="40" height="20" type="unitDetect" id="478">
-      <properties>
-        <property name="id" value="Ac4"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="340" y="80" width="40" height="20" type="unitDetect" id="479">
-      <properties>
-        <property name="id" value="Ac4"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="380" y="80" width="60" height="20" name="检测 Bc4" type="unitDetect" id="480">
-      <properties>
-        <property name="id" value="Bc4"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="380" y="80" width="60" height="20" type="unitDetect" id="481">
-      <properties>
-        <property name="id" value="Bc4"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="380" y="80" width="60" height="20" type="unitDetect" id="482">
-      <properties>
-        <property name="id" value="Bc4"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="380" y="80" width="60" height="20" type="unitDetect" id="483">
-      <properties>
-        <property name="id" value="Bc4"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="300" y="80" width="20" height="20" name="unitAddName" type="unitAdd" id="484">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot"/>
-        <property name="activatedBy" value="c5"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="team" value="-1"/>
-        <property name="warmup" value="20s"/>
-      </properties>
-    </object>
-    <object x="300" y="70" width="20" height="40" name="-1" type="unitAdd" id="485">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-        <property name="warmup" value="5s"/>
-      </properties>
-    </object>
-    <object x="290" y="80" width="40" height="20" name="检测 c5" type="unitDetect" id="486">
-      <properties>
-        <property name="id" value="c5"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="300" y="80" width="20" height="20" name="" type="mapText" id="487">
-      <properties>
-        <property name="text" value="实验城市4"/>
-        <property name="textColor" value="white"/>
-        <property name="textSize" value="7"/>
-        <property name="deactivatedBy" value="Ac5,Bc5"/>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="300" y="80" width="20" height="20" name="" type="mapText" id="488">
-      <properties>
-        <property name="text" value="实验城市4"/>
-        <property name="textColor" value="blue"/>
-        <property name="textSize" value="7"/>
-        <property name="activatedBy" value="Ac5"/>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="300" y="80" width="20" height="20" name="" type="mapText" id="489">
-      <properties>
-        <property name="text" value="实验城市4"/>
-        <property name="textColor" value="red"/>
-        <property name="textSize" value="7"/>
-        <property name="activatedBy" value="Bc5"/>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="280" y="80" width="40" height="20" name="检测 Ac5" type="unitDetect" id="490">
-      <properties>
-        <property name="id" value="Ac5"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="280" y="80" width="40" height="20" type="unitDetect" id="491">
-      <properties>
-        <property name="id" value="Ac5"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="280" y="80" width="40" height="20" type="unitDetect" id="492">
-      <properties>
-        <property name="id" value="Ac5"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="280" y="80" width="40" height="20" type="unitDetect" id="493">
-      <properties>
-        <property name="id" value="Ac5"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="320" y="80" width="60" height="20" name="检测 Bc5" type="unitDetect" id="494">
-      <properties>
-        <property name="id" value="Bc5"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="320" y="80" width="60" height="20" type="unitDetect" id="495">
-      <properties>
-        <property name="id" value="Bc5"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="320" y="80" width="60" height="20" type="unitDetect" id="496">
-      <properties>
-        <property name="id" value="Bc5"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="320" y="80" width="60" height="20" type="unitDetect" id="497">
-      <properties>
-        <property name="id" value="Bc5"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="5s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="200" y="80" width="20" height="20" name="unitAddName" type="unitAdd" id="498">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot"/>
-        <property name="activatedBy" value="d2"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="team" value="-1"/>
-        <property name="warmup" value="20s"/>
-      </properties>
-    </object>
-    <object x="190" y="80" width="40" height="20" name="检测 d2" type="unitDetect" id="499">
-      <properties>
-        <property name="id" value="d2"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
+        <property name="Ac" value="Ac2"/>
+        <property name="Bc" value="Bc2"/>
+        <property name="IDs" value="418,419,420,421,422,423,424,425,426,427,428,429,430,431"/>
       </properties>
     </object>
   </objectgroup>

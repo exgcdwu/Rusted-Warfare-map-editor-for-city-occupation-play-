@@ -9,4 +9,5 @@ ERROR code:
 7: Unknown optional arguments in a tagged object.
 8: Required arguments are missing below in a tagged object.
 9: Too many required arguments below in a tagged object.
-10: External info import error(The target info has \",d\")
+10: External info import error(The target info has ",d")
+11: The IDs are coincident and the mapping cannot be performed.

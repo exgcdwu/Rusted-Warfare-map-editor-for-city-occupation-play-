@@ -96,8 +96,8 @@ class RWmap(ElementOri):
     def changenextobjectid(self, layerid:int)->None:
         self._properties.assignDefaultProperty("nextobjectid", str(layerid))
 
-    def resetnextobjectid(self)->None:
-        maxid_now = self.nextobjectid()
+    def resetnextobjectid(self, isaboutnextobjectid = True)->None:
+        maxid_now = self.nextobjectid() if isaboutnextobjectid else 1
         for objectGroup in self._objectGroup_list:
             maxid_now = max(maxid_now, objectGroup.max_id() + 1)
         self.changenextobjectid(maxid_now)
@@ -206,12 +206,14 @@ class RWmap(ElementOri):
         utility.output_file_from_etElement(self.output_etElement(), map_file)
 
 
-    def addObject_type(self, tobject:case.TObject, objectGroup_name:str = const.NAME.Triggers):
+    def addObject_type(self, tobject:case.TObject, objectGroup_name:str = const.NAME.Triggers, isresetid = True):
         objectGroup_now = self.get_objectgroup_s(objectGroup_name)
-        tobject.assignDefaultProperty("id", self._properties.returnDefaultProperty("nextobjectid"))
+        if isresetid:
+            tobject.assignDefaultProperty("id", self._properties.returnDefaultProperty("nextobjectid"))
+            str_nextobjectid = str(max(int(self._properties.returnDefaultProperty("nextobjectid")), int(tobject.returnDefaultProperty("id")) + 1))
+            self._properties.assignDefaultProperty("nextobjectid", str_nextobjectid)
         objectGroup_now.addObject_type(tobject)
-        str_nextobjectid = str(max(int(self._properties.returnDefaultProperty("nextobjectid")), int(tobject.returnDefaultProperty("id")) + 1))
-        self._properties.assignDefaultProperty("nextobjectid", str_nextobjectid)
+        
 
     def addObject_dict(self, objectGroup_name:str = const.NAME.Triggers, default_properties:dict[str, str] = {}, optional_properties :dict[str, Union[str, dict[str, str]]] = {}, other_properties:list[et.Element] = [])->None:
         objectGroup_now = self.get_objectgroup_s(objectGroup_name)

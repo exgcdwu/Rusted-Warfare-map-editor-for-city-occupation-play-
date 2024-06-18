@@ -108,7 +108,7 @@ def id_debug_pdb(tobject:rw.case.TObject, ID:int):
         import pdb;pdb.set_trace()
 
 
-def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, isreset:bool, id_to_tobject:dict, rwmap_now:rw.RWmap)->dict:
+def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, id_to_tobject:dict, rwmap_now:rw.RWmap)->dict:
     args_dict = {}
     split_now = name.split(info[AUTOKEY.opargs_seg])
     opargs = split_now[1:]
@@ -147,7 +147,7 @@ def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, isr
 
     tobject_ids = tobject.returnOptionalProperty(AUTOKEY.IDs)
     tobject_ids = tobject_ids.split(AUTOKEY.IDs_seg) if tobject_ids != None else []
-    if isreset:
+    if isresetid:
         tobject.deleteOptionalProperty(AUTOKEY.IDs)
         args_dict[AUTOKEY.IDs] = []
         for tobjectid in tobject_ids:
@@ -434,6 +434,9 @@ def auto_func():
 
     parser.add_argument("--debug", 
                         action = 'store_true', help = 'Mode of debuging.')
+    
+    parser.add_argument("--resetid", 
+                        action = 'store_true', help = 'Reset the IDs of objects.')
 
     dev_null = open(os.devnull, "w")
     global aeval
@@ -447,10 +450,14 @@ def auto_func():
     isdelete = args.DeleteAllSym
     isdelete_d = args.delete
     isdelete_all = args.DeleteAll
+    global isreset
     isreset = args.reset
     global isdebug
     isdebug = args.debug
     isverbose = args.verbose
+    global isresetid
+    isresetid = args.resetid
+
 
     standard_out(isverbose, "\t\t\t\t------------------------------")
     standard_out(isverbose, "\t\t\t\t--------Initialization--------")
@@ -467,6 +474,8 @@ def auto_func():
     dtobject = []
 
     id_to_tobject = {}
+
+    info_tagged_objects_exist = []
 
     standard_out(isverbose, "The maximum ID of object in RW maps is resetting...")
     map_now.resetnextobjectid()
@@ -514,7 +523,9 @@ def auto_func():
         if while_i == infolen +1:
             standard_error(f"Info input dependence loop error.({key})", 5)
 
-    standard_out(isverbose, "The info object is being processed...")
+    standard_out(isverbose, "\t\t\t\t--------------------------------------")
+    standard_out(isverbose, "\t\t\t\t--------Info objects procedure--------")
+    standard_out(isverbose, "\t\t\t\t--------------------------------------")
     for key, info in info_now.items():
         for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                                rw.const.OBJECTDE.name: r".+"}):
@@ -690,10 +701,11 @@ def auto_func():
                     standard_out(isverbose, temp_pri)
 
 
-
                 info_dict[info_dict_now[AUTOKEY.prefix]] = info_dict_now
                 if isdelete_all or isdelete or (isdelete_d and info_dict_now[AUTOKEY.isdelete_sym]):
                     dtobject.append(tobject)
+                else:
+                    info_tagged_objects_exist.append(tobject)
 
     info_now = info_doids_dict
 
@@ -703,6 +715,9 @@ def auto_func():
         map_now.delete_object_s(tobject)
         standard_out(isverbose, f"An info object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject.returnDefaultProperty(rw.const.OBJECTDE.name)}) has been deleted...")
 
+    standard_out(isverbose, "\t\t\t\t----------------------------------------")
+    standard_out(isverbose, "\t\t\t\t--------Tagged objects procedure--------")
+    standard_out(isverbose, "\t\t\t\t----------------------------------------")
 
     standard_out(isverbose, "The ids of tagged objects are collecting...")
     for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
@@ -715,11 +730,12 @@ def auto_func():
                 and (not re.match(AUTOKEY.normal_city_nexist_re, tobject_name)):
                 info_key = info[AUTOKEY.info]
                 myinfo = info_now[info_key]
-                object_dict = get_args(myinfo, tobject_name, info, tobject, isreset, id_to_tobject, map_now)
+                object_dict = get_args(myinfo, tobject_name, info, tobject, id_to_tobject, map_now)
                 
                 ischange = True
                 break
         if ischange:
+
             for thing_prefix_num in myinfo[AUTOKEY.ids]:
                 tobject_prefix = tobject.returnOptionalProperty(thing_prefix_num[0])
                 if tobject_prefix != None:
@@ -727,9 +743,8 @@ def auto_func():
                 else:
                     tobject_prefix = []
                 if isreset:
-                    tobject.deleteOptionalPropertySup([AUTOKEY.IDs])
                     tobject_prefix = []
-
+                    tobject.deleteOptionalPropertySup([AUTOKEY.IDs])
                 prefix_now = brace_translation(thing_prefix_num[0], info)
                 if ids_now_dict.get(prefix_now) == None:
                     ids_now_dict[prefix_now] = 1
@@ -740,10 +755,6 @@ def auto_func():
                                                             tobject_prefix[index])
 
     dtobject = []
-
-    standard_out(isverbose, "\t\t\t\t------------------------------")
-    standard_out(isverbose, "\t\t\t\t----------Processing----------")
-    standard_out(isverbose, "\t\t\t\t------------------------------")
 
     for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                            rw.const.OBJECTDE.name: r".+"}):
@@ -756,7 +767,7 @@ def auto_func():
             if prefix_now == tobject_name[0:len(prefix_now)] \
                 and (not re.match(AUTOKEY.normal_city_nexist_re, tobject_name)):
                 myinfo = info_now[info_key]
-                object_dict = get_args(myinfo, tobject_name, info, tobject, isreset, id_to_tobject, map_now)
+                object_dict = get_args(myinfo, tobject_name, info, tobject, id_to_tobject, map_now)
                 object_dict.update(info)
                 if info.get(AUTOKEY.info_prefix) != None:
                     for info_pre in info[AUTOKEY.info_prefix]:
@@ -771,9 +782,10 @@ def auto_func():
             isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
             if isdelete_all or isdelete or (isdelete_sym and isdelete_d):
                 dtobject.append(tobject)
-
+            else:
+                info_tagged_objects_exist.append(tobject)
             standard_out(isverbose and (not(isdelete_sym or isdelete_all)), f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object. Object generation...")
-            standard_out(isverbose and isdelete_all, f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted...")
+            standard_out(isverbose and (isdelete_all and (not isdelete_sym)), f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted...")
             standard_out(isverbose and (isdelete_sym and(not isdelete_all)), f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The objects will not be generated, existing ones will also be deleted...")
 
             for thing in myinfo[AUTOKEY.ids]:
@@ -790,6 +802,8 @@ def auto_func():
                     id_now = idprefix + str(ids_now_dict[idprefix])
                     idnow_list.append(id_now)
                     object_dict[thing[0] + str(i)] = id_now
+                    if (isdelete_sym or isdelete_all) and isreset:
+                        continue
                     ids_now_dict[idprefix] = ids_now_dict[idprefix] + 1
                 tobject.assignOptionalProperty(idprefix, ",".join(idnow_list))
 
@@ -876,7 +890,42 @@ def auto_func():
     for tobject in dtobject:
         map_now.delete_object_s(tobject)
 
-    map_now.resetnextobjectid()
+    
+    standard_out(isverbose, "Info and tagged objects are rearranging...")
+
+    info_tagged_idset = set()
+    for info_tag in info_tagged_objects_exist:
+        map_now.delete_object_s(info_tag)
+        info_tagged_idset.add(info_tag.returnDefaultProperty("id"))
+    for info_tag in info_tagged_objects_exist:
+        map_now.addObject_type(info_tag, isresetid = False)
+
+    standard_out(isverbose and isresetid, "The IDs are rearranging...")
+
+    if isresetid:
+
+        id_mapping = {}
+        id_now = 1
+        for tobject in map_now.iterator_object_s():
+            tobid = tobject.returnDefaultProperty("id")
+            if id_mapping.get(tobid) != None:
+                standard_error(f"The IDs are coincident and the mapping cannot be performed.(ID:{tobid})", 11)
+            
+            id_mapping[tobid] = str(id_now)
+            id_now = id_now + 1
+        id_now = 1
+        for tobject in map_now.iterator_object_s():
+            tobid = tobject.returnDefaultProperty("id")
+            if info_tagged_idset.issuperset([tobid]):
+                ids_now = tobject.returnOptionalProperty(AUTOKEY.IDs)
+                if ids_now != None:
+                    ids_now_l = ids_now.split(AUTOKEY.IDs_seg)
+                    ids_now_l = [id_mapping[ids_nown] for ids_nown in ids_now_l]
+                    ids_now = f"{AUTOKEY.IDs_seg}".join(ids_now_l)
+                    tobject.assignOptionalProperty(AUTOKEY.IDs, ids_now)
+            tobject.assignDefaultProperty("id", str(id_now))
+            id_now = id_now + 1
+        map_now.resetnextobjectid(isaboutnextobjectid = False)
 
     standard_out(isverbose, "New RW map is being establishing...")
     map_now.write_file(output_path)

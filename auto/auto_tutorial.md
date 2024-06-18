@@ -164,7 +164,7 @@ cityname为城市名称，该城市名称会出现在显示文本中（isprefixs
 
 ### install
 
-    pip install rwmapeditor-exgcdwu==1.5.8
+    pip install rwmapeditor-exgcdwu==1.5.9
 
 ### use
 
@@ -186,6 +186,8 @@ cityname为城市名称，该城市名称会出现在显示文本中（isprefixs
 
 --DeleteAll 命令会将所有info宾语、标记宾语和自动产生的宾语均删除，彻底除去使用痕迹。[取消使用该宾语格式]
 
+--resetid 命令将会将宾语ID重置为自然数列。
+
 -v 显示运行信息
 
 会检测info宾语和标记宾语的参数正确性，错误时返回错误信息。
@@ -193,3 +195,9 @@ cityname为城市名称，该城市名称会出现在显示文本中（isprefixs
 如果想要自定义的约定，请使用--infopath --infovar 命令，-infopath命令约定了.py文件路径，-infovar命令约定了变量名，随后程序会根据该变量来自动转换.
 
 [约定变量](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/_data.py)
+
+## troubleshooting
+
+### prefix
+
+不得使用e作为前缀，因为python会把它看成自然底数。

@@ -46,7 +46,7 @@ mymap = rw.RWmap.init_mapfile(map_dir + map_name)
 ```python
 import rwmap as rw
 
-mymap = rw.RWmap.init_map(rw.Coordinate(100, 100))# 地图大小，x和y
+mymap = rw.RWmap.init_map(rw.frame.Coordinate(100, 100))# 地图大小，x和y
 
 ```
 
