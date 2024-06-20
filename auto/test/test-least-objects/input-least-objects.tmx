@@ -3253,17 +3253,17 @@
   </object>
   <object id="405" name="city_info" x="40" y="0" width="20" height="20">
    <properties>
-    <property name="prefix" value="c"/>
+    <property name="prefix" value="e"/>
     <property name="addReset" value="20s"/>
     <property name="addWarmup" value="20s"/>
     <property name="detectReset" value="20s"/>
-    <property name="idprefix" value="c"/>
+    <property name="idprefix" value="e"/>
     <property name="unit" value="supplyDepot"/>
    </properties>
   </object>
-  <object id="406" name="c实验城市1,t1,d" x="40" y="80" width="20" height="20"/>
-  <object id="407" name="c实验城市2,d" x="240" y="80" width="20" height="20"/>
-  <object id="408" name="c实验城市3" x="440" y="80" width="20" height="20"/>
-  <object id="409" name="c实验城市4,t4" x="640" y="80" width="20" height="20"/>
+  <object id="406" name="e实验城市1,t1,d" x="40" y="80" width="20" height="20"/>
+  <object id="407" name="e实验城市2,d" x="240" y="80" width="20" height="20"/>
+  <object id="408" name="e实验城市3" x="440" y="80" width="20" height="20"/>
+  <object id="409" name="e实验城市4,t4" x="640" y="80" width="20" height="20"/>
  </objectgroup>
 </map>

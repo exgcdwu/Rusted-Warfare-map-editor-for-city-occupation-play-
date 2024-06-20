@@ -194,7 +194,7 @@ cityname为城市名称，该城市名称会出现在显示文本中（isprefixs
 
 -v 显示运行信息
 
--infopath命令约定了.py文件路径，-infovar命令约定了变量名，随后程序会根据该约定变量来自动转换。
+--infopath命令约定了.py文件路径，--infovar命令约定了变量名，随后程序会根据该约定变量来自动转换。
 默认会使用auto/_data.py中的auto_func_arg作为约定变量。可以自行修改约定变量来个性化自动转换模式。
 
 [约定变量](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/_data.py)
@@ -210,7 +210,3 @@ cityname为城市名称，该城市名称会出现在显示文本中（isprefixs
 和铁锈一样，team设置是从0开始的，-1中立，-2敌对。
 
 ## Troubleshooting
-
-### prefix
-
-不得使用e作为前缀，因为python会把它看成自然底数。

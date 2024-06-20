@@ -160,7 +160,7 @@ def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, id_
 def match_compare(match_value:list)->int:
     return -match_value[0].start()
 
-def brace_translation(expression_b:str, dict_name:dict, prev:bool = True):
+def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, ones:bool = False):
     #import pdb;pdb.set_trace()
     expression_b = " " + expression_b + " "
     match_value_list = []
@@ -175,13 +175,8 @@ def brace_translation(expression_b:str, dict_name:dict, prev:bool = True):
         expression_b = expression_b[:match_now.start() + 1] + value_now + expression_b[match_now.end() - 1:]
 
     expression_b = expression_b[1:len(expression_b) - 1]
-    if len(match_value_list) == 0:
-        if prev:
+    if (prev or len(match_value_list) != 0) and (not ones):
             expression_b = expression_translation(expression_b, dict_name, False)
-    else:
-        expression_b = expression_translation(expression_b, dict_name)
-
-
     try:
         expression_b_temp = aeval(expression_b)
     except Exception as e:
@@ -440,7 +435,7 @@ def auto_func():
 
     dev_null = open(os.devnull, "w")
     global aeval
-    aeval = Interpreter(err_writer = dev_null, writer = dev_null)
+    aeval = Interpreter(err_writer = dev_null, writer = dev_null, symtable = {})
 
     args = parser.parse_args()
     output_path = args.map_path[0] if args.output == "|" else args.output[0]
@@ -790,7 +785,9 @@ def auto_func():
 
             for thing in myinfo[AUTOKEY.ids]:
                 
-                idprefix = brace_translation(thing[0], object_dict)
+                idprefix = brace_translation(thing[0], object_dict, ones = True)
+                if isinstance(idprefix, float):
+                    debug_pdb()
                 idnow_list = tobject.returnOptionalProperty(idprefix)
                 if idnow_list == None:
                     idnow_list = []
@@ -889,7 +886,9 @@ def auto_func():
     standard_out(isverbose and (isdelete_d), "The tagged object is being deleted if eligible...")
     for tobject in dtobject:
         map_now.delete_object_s(tobject)
-
+    standard_out(isverbose, "\t\t\t\t----------------------------------------")
+    standard_out(isverbose, "\t\t\t\t--------Rearrangement and output--------")
+    standard_out(isverbose, "\t\t\t\t----------------------------------------")
     
     standard_out(isverbose, "Info and tagged objects are rearranging...")
 
