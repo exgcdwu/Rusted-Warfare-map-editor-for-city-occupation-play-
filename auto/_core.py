@@ -1118,6 +1118,9 @@ def auto_func():
 
     standard_out(isverbose, "New RW map is being establishing...")
     map_now.write_file(output_path)
+
+    debug_pdb()
+
     dev_null.close()
 
 if __name__ == "__main__":
