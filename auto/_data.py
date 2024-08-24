@@ -9,66 +9,123 @@ import rwmap as rw
 
 from auto._core import AUTOKEY
 
+class INFOKEY:
+    prefix = "prefix"
+    idprefix = "idprefix"
+    isprefixseg = "isprefixseg"
+
+    isinadd = "isinadd"
+    inaddWarmup = "inaddWarmup"
+    isinshowOnMap = "isinshowOnMap"
+    inunitAddname = "inunitAddname"
+    inunitAddoffset = "inunitAddoffset"
+    inunitAddoffsetsize = "inunitAddoffsetsize"
+
+    istext = "istext"
+    textColor = "textColor"
+    textSize = "textSize"
+    mapTextname = "mapTextname"
+    mapTextoffset = "mapTextoffset"
+    mapTextoffsetsize = "mapTextoffsetsize"
+
+    isteamDetect = "isteamDetect"
+    teamDetectreset = "teamDetectreset"
+    setTeam = "setTeam"
+    setidTeam = "setidTeam"
+    teamDetectname = "teamDetectname"
+    teamDetectoffset = "teamDetectoffset"
+    teamDetectoffsetsize = "teamDetectoffsetsize"
+
+    isteamText = "isteamText"
+    teamTextreset = "teamTextreset"
+    teamTextcolor = "teamTextcolor"
+    teamTextname = "teamTextname"
+    teamTextoffset = "teamTextoffset"
+    teamTextoffsetsize = "teamTextoffsetsize"
+
+    detectReset = "detectReset"
+    addWarmup = "addWarmup"
+    addReset  = "addReset"
+    unit = "unit"
+    isonlybuilding = "isonlybuilding"
+    isshowOnMap = "isshowOnMap"
+
+    iscity = "iscity"
+    unitAddname = "unitAddname"
+    unitAddoffset = "unitAddoffset"
+    unitAddoffsetsize = "unitAddoffsetsize"
+
+    unitDetectname = "unitDetectname"
+    unitDetectoffset = "unitDetectoffset"
+    unitDetectoffsetsize = "unitDetectoffsetsize"
+
+
+
 inadd_info_args_dict = OrderedDict()
 
-inadd_info_args_dict["prefix"] = str
-inadd_info_args_dict["isinadd"] = bool
-inadd_info_args_dict["inaddWarmup"] = str
-inadd_info_args_dict["isinshowOnMap"] = bool
-inadd_info_args_dict["inunitAddname"] = str
-inadd_info_args_dict["inunitAddoffset"] = (list, int)
-inadd_info_args_dict["inunitAddoffsetsize"] = (list, int)
+inadd_info_args_dict[INFOKEY.prefix] = str
+inadd_info_args_dict[INFOKEY.isprefixseg] = bool
+inadd_info_args_dict[INFOKEY.unit] = str
+inadd_info_args_dict[INFOKEY.isinadd] = bool
+inadd_info_args_dict[INFOKEY.inaddWarmup] = str
+inadd_info_args_dict[INFOKEY.isinshowOnMap] = bool
+inadd_info_args_dict[INFOKEY.inunitAddname] = str
+inadd_info_args_dict[INFOKEY.inunitAddoffset] = (list, int)
+inadd_info_args_dict[INFOKEY.inunitAddoffsetsize] = (list, int)
 
 text_info_args_dict = OrderedDict()
 
-text_info_args_dict["prefix"] = str
-text_info_args_dict["istext"] = bool
-text_info_args_dict["textColor"] = str
-text_info_args_dict["textSize"] = str
-text_info_args_dict["mapTextname"] = str
-text_info_args_dict["mapTextoffset"] = (list, int)
-text_info_args_dict["mapTextoffsetsize"] = (list, int)
+text_info_args_dict[INFOKEY.prefix] = str
+text_info_args_dict[INFOKEY.isprefixseg] = bool
+text_info_args_dict[INFOKEY.istext] = bool
+text_info_args_dict[INFOKEY.textColor] = str
+text_info_args_dict[INFOKEY.textSize] = str
+text_info_args_dict[INFOKEY.mapTextname] = str
+text_info_args_dict[INFOKEY.mapTextoffset] = (list, int)
+text_info_args_dict[INFOKEY.mapTextoffsetsize] = (list, int)
 
 teamDetect_info_args_dict = OrderedDict()
 
-teamDetect_info_args_dict["prefix"] = str
-teamDetect_info_args_dict["isteamDetect"] = bool
-teamDetect_info_args_dict["teamDetectreset"] = str
-teamDetect_info_args_dict["setTeam"] = (list, list, int)
-teamDetect_info_args_dict["setidTeam"] = (list, str)
-teamDetect_info_args_dict["teamDetectname"] = (list, str)
-teamDetect_info_args_dict["teamDetectoffset"] = (list, list, int)
-teamDetect_info_args_dict["teamDetectoffsetsize"] = (list, list, int)
+teamDetect_info_args_dict[INFOKEY.prefix] = str
+teamDetect_info_args_dict[INFOKEY.isprefixseg] = bool
+teamDetect_info_args_dict[INFOKEY.isteamDetect] = bool
+teamDetect_info_args_dict[INFOKEY.teamDetectreset] = str
+teamDetect_info_args_dict[INFOKEY.setTeam] = (list, list, int)
+teamDetect_info_args_dict[INFOKEY.setidTeam] = (list, str)
+teamDetect_info_args_dict[INFOKEY.teamDetectname] = (list, str)
+teamDetect_info_args_dict[INFOKEY.teamDetectoffset] = (list, list, int)
+teamDetect_info_args_dict[INFOKEY.teamDetectoffsetsize] = (list, list, int)
 
 teamText_info_args_dict = OrderedDict()
 
-teamText_info_args_dict["prefix"] = str
-teamText_info_args_dict["isteamText"] = bool
-teamText_info_args_dict["teamTextreset"] = str
-teamText_info_args_dict["teamTextcolor"] = (list, str)
-teamText_info_args_dict["teamTextname"] = (list, str)
-teamText_info_args_dict["teamTextoffset"] = (list, list, int)
-teamText_info_args_dict["teamTextoffsetsize"] = (list, list, int)
+teamText_info_args_dict[INFOKEY.prefix] = str
+teamText_info_args_dict[INFOKEY.isprefixseg] = bool
+teamText_info_args_dict[INFOKEY.isteamText] = bool
+teamText_info_args_dict[INFOKEY.teamTextreset] = str
+teamText_info_args_dict[INFOKEY.teamTextcolor] = (list, str)
+teamText_info_args_dict[INFOKEY.teamTextname] = (list, str)
+teamText_info_args_dict[INFOKEY.teamTextoffset] = (list, list, int)
+teamText_info_args_dict[INFOKEY.teamTextoffsetsize] = (list, list, int)
 
 city_info_args_dict = OrderedDict()
-city_info_args_dict["prefix"] = str
-city_info_args_dict["idprefix"] = str
-city_info_args_dict["detectReset"] = str
-city_info_args_dict["addWarmup"] = str
-city_info_args_dict["addReset"] = str
-city_info_args_dict["unit"] = str
+city_info_args_dict[INFOKEY.prefix] = str
+city_info_args_dict[INFOKEY.idprefix] = str
+city_info_args_dict[INFOKEY.detectReset] = str
+city_info_args_dict[INFOKEY.addWarmup] = str
+city_info_args_dict[INFOKEY.addReset] = str
+city_info_args_dict[INFOKEY.unit] = str
 
-city_info_args_dict["isprefixseg"] = bool
-city_info_args_dict["isonlybuilding"] = bool
-city_info_args_dict["isshowOnMap"] = bool
+city_info_args_dict[INFOKEY.isprefixseg] = bool
+city_info_args_dict[INFOKEY.isonlybuilding] = bool
+city_info_args_dict[INFOKEY.isshowOnMap] = bool
 
-city_info_args_dict["unitAddname"] = str
-city_info_args_dict["unitAddoffset"] = (list, int)
-city_info_args_dict["unitAddoffsetsize"] = (list, int)
+city_info_args_dict[INFOKEY.unitAddname] = str
+city_info_args_dict[INFOKEY.unitAddoffset] = (list, int)
+city_info_args_dict[INFOKEY.unitAddoffsetsize] = (list, int)
 
-city_info_args_dict["unitDetectname"] = str
-city_info_args_dict["unitDetectoffset"] = (list, int)
-city_info_args_dict["unitDetectoffsetsize"] = (list, int)
+city_info_args_dict[INFOKEY.unitDetectname] = str
+city_info_args_dict[INFOKEY.unitDetectoffset] = (list, int)
+city_info_args_dict[INFOKEY.unitDetectoffsetsize] = (list, int)
 
 city_info_args_dict.update(inadd_info_args_dict)
 city_info_args_dict.update(text_info_args_dict)
@@ -228,7 +285,11 @@ auto_func_arg = {
             "isteamDetect", 
             "isteamText"
         }, 
-        AUTOKEY.id_operation:[
+        AUTOKEY.opargs_seg: ",", 
+        AUTOKEY.ids: [
+            ["idprefix", 1]
+        ], 
+        AUTOKEY.operation_pre:[
      
             {
                 AUTOKEY.operation_type: AUTOKEY.typeif, 
@@ -271,10 +332,6 @@ auto_func_arg = {
                 AUTOKEY.operation_type: AUTOKEY.tag, 
                 AUTOKEY.tag: "tag_end"
             }
-        ], 
-        AUTOKEY.opargs_seg: ",", 
-        AUTOKEY.ids: [
-            ["idprefix", 1]
         ], 
         AUTOKEY.operation: [
             {

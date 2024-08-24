@@ -1,0 +1,27 @@
+import os
+import sys
+from collections import OrderedDict
+current_file_path = os.path.abspath(__file__)
+current_dir_path = os.path.dirname(current_file_path)
+auto_dir_path = os.path.dirname(current_dir_path)
+package_dir = os.path.dirname(current_dir_path)
+sys.path.append(package_dir)
+import rwmap as rw
+
+from auto._core import AUTOKEY
+from auto._data._object import object_info
+from auto._data._teamDetect import teamDetect_info
+from auto._data._multiText import multiText_info
+from auto._data._bdtext import bdtext_info
+from auto._data._inadd import inadd_info
+from auto._data._building import building_info
+from auto._data._numDetect import numDetect_info
+
+auto_func_arg = {}
+auto_func_arg.update(object_info)
+auto_func_arg.update(teamDetect_info)
+auto_func_arg.update(numDetect_info)
+auto_func_arg.update(multiText_info)
+auto_func_arg.update(bdtext_info)
+auto_func_arg.update(inadd_info)
+auto_func_arg.update(building_info)

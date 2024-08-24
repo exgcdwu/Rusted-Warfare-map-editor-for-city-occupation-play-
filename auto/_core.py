@@ -18,6 +18,16 @@ package_dir = os.path.dirname(current_dir_path)
 sys.path.append(package_dir)
 import rwmap as rw
 
+CLASS_DICT = {
+    "str": str, 
+    "bool": bool
+}
+
+def aeval_globals(name):
+    return CLASS_DICT[name]
+
+USER_SYMBOLS = {"aeval_globals": aeval_globals}
+
 class AUTOKEY:
     info_args = "info_args"
     default_args = "default_args"
@@ -47,6 +57,8 @@ class AUTOKEY:
     initial_brace = "initial_brace"
     default_brace = "default_brace"
     var_dependent = "var_dependent"
+    no_check = "no_check"
+    cite_name = "cite_name"
 
     operation_type = "operation_type"
     object = "object"
@@ -65,16 +77,28 @@ class AUTOKEY:
     typeset_expression = "typeset_expression"
     typeset_exist = "typeset_exist"
     keyname_list = "keyname_list"
-    id_operation = "id_operation"
+    operation_pre = "operation_pre"
     real_idexp = "real_idexp"
+    typeadd_args = "typeadd_args"
+    typeadd_opargs = "typeadd_opargs"
+    typedelete_optional = "typedelete_optional"
+    namedelete_optional = "namedelete_optional"
+    typeadd_optional = "typeadd_optional"
+    nameadd_optional = "nameadd_optional"
+    exist = "exist"
+    brace = "brace"
+    pdb_pause = "pdb_pause"
+    error = "error"
+    error_info = "error_info"
     
     normal_city_nexist_re = ".*_"
     opargs_sys_seg = "|"
     IDs_seg = ","
     delete_symbol = ".*,d"
     not_useful_char = "[^A-Za-z0-9_{}]"
+    not_useful_char_ad_point = "[^A-Za-z0-9_{}.]"
 
-
+cite_object_dict = {}
 
 def standard_out(ifdo:bool, info_str)->None:
     if ifdo:
@@ -96,7 +120,7 @@ def debug_dict(dict_now:dict, name:str):
         pprint(f"{name} = " + str(dict_now.get(name)))
 
 def debug_pdb(thing = ""):
-    if isdebug:
+    if isdebug: 
         if isinstance(thing, str):
             print(thing)
         else:
@@ -108,15 +132,15 @@ def id_debug_pdb(tobject:rw.case.TObject, ID:int):
         import pdb;pdb.set_trace()
 
 
-def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, id_to_tobject:dict, rwmap_now:rw.RWmap)->dict:
+def get_args(info:dict, name:str, tobject:rw.case.TObject, id_to_tobject:dict, rwmap_now:rw.RWmap)->dict:
     args_dict = {}
     split_now = name.split(info[AUTOKEY.opargs_seg])
     opargs = split_now[1:]
-    split_now = split_now[0].split(info[AUTOKEY.seg])
-    if object_dict.get(AUTOKEY.isprefixseg) != None and object_dict.get(AUTOKEY.isprefixseg) == True:
-        args_n = split_now[1:]
+
+    if split_now[0] == "":
+        args_n = []
     else:
-        args_n = [split_now[0][len(object_dict[AUTOKEY.prefix]):]] + split_now[1:]
+        args_n = split_now[0].split(info[AUTOKEY.seg])
     
     if len(args_n) < len(info[AUTOKEY.args]):
         info_args_temp = info[AUTOKEY.args][len(args_n):]
@@ -130,20 +154,23 @@ def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, id_
     
     prefix_len = info[AUTOKEY.opargs_prefix_len]
 
+    for info_thing in info[AUTOKEY.opargs].values():
+        if len(info_thing[0].split(AUTOKEY.opargs_sys_seg)) == 2:
+            args_dict[info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]] = \
+            mapvalue_to_value(info_thing[0].split(AUTOKEY.opargs_sys_seg)[1], info_thing[1])
+
     for oparg in opargs:
         prefix_now = oparg[0:prefix_len]
         var_now = oparg[prefix_len:]
         if info[AUTOKEY.opargs].get(prefix_now) != None:
             info_thing = info[AUTOKEY.opargs][prefix_now]
-            args_dict[info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]] = info_thing[1](var_now)
+            if info_thing[1] != bool:
+                args_dict[info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]] = info_thing[1](var_now)
+            else:
+                args_dict[info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]] = True
         else:
             if prefix_now != "d":
                 standard_error(f"Unknown optional arguments in a tagged object.(name:{name}|,{prefix_now})", 7)
-
-
-    for key, info_thing in info[AUTOKEY.opargs].items():
-        args_dict[info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]] = \
-        mapvalue_to_value(info_thing[0].split(AUTOKEY.opargs_sys_seg)[1], info_thing[1])
 
     tobject_ids = tobject.returnOptionalProperty(AUTOKEY.IDs)
     tobject_ids = tobject_ids.split(AUTOKEY.IDs_seg) if tobject_ids != None else []
@@ -160,23 +187,43 @@ def get_args(info:dict, name:str, object_dict:dict, tobject:rw.case.TObject, id_
 def match_compare(match_value:list)->int:
     return -match_value[0].start()
 
+def brace_one_translation(expression_b:str, dict_name:dict, seg_re:str)->str:
+    
+    expression_b = " " + expression_b + " "
+
+    expression_b_seg_index = [match_now.start() for match_now in re.finditer(seg_re, expression_b)]
+    match_now_list = [(expression_b_seg_index[index] + 1, expression_b_seg_index[index + 1]) for index in range(len(expression_b_seg_index) - 1)]
+    brace_one_list = [expression_b[match_now[0]:match_now[1]] for match_now in match_now_list]
+    brace_one_list = [brace_one if dict_name.get(brace_one) == None else str(dict_name[brace_one]) for brace_one in brace_one_list]
+    expression_b_ans = ""
+    for index in range(len(brace_one_list)):
+        expression_b_ans = expression_b_ans + expression_b[expression_b_seg_index[index]] + brace_one_list[index]
+    expression_b_ans = expression_b_ans[1:]
+    return expression_b_ans
+
 def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, ones:bool = False):
     #import pdb;pdb.set_trace()
-    expression_b = " " + expression_b + " "
-    match_value_list = []
-    for key, value in dict_name.items():
-        match_list_now = [re_now for re_now in re.finditer(AUTOKEY.not_useful_char + key + AUTOKEY.not_useful_char, expression_b)]
-        match_value_list = match_value_list + [[match_now, str(value)] for match_now in match_list_now]
-    match_value_list.sort(key = match_compare)
-    #import pdb;pdb.set_trace()
-    for match_value in match_value_list:
-        match_now = match_value[0]
-        value_now = match_value[1]
-        expression_b = expression_b[:match_now.start() + 1] + value_now + expression_b[match_now.end() - 1:]
+    expression_b_origin = expression_b
+    expression_b = brace_one_translation(expression_b, cite_object_dict, AUTOKEY.not_useful_char_ad_point)
+    expression_b_origin_now = expression_b
+    expression_b = brace_one_translation(expression_b, dict_name, AUTOKEY.not_useful_char)
+    while(True):
+        if expression_b_origin_now == expression_b:
+            break
+        expression_b_origin_now = expression_b
+        expression_b = brace_one_translation(expression_b, cite_object_dict, AUTOKEY.not_useful_char_ad_point)
+        if expression_b_origin_now == expression_b:
+            break
+        expression_b_origin_now = expression_b
+        expression_b = brace_one_translation(expression_b, dict_name, AUTOKEY.not_useful_char)
+    '''
+    expression_b_origin = expression_b
+    expression_b = brace_one_translation(expression_b, cite_object_dict, AUTOKEY.not_useful_char_ad_point)
+    expression_b = brace_one_translation(expression_b, dict_name, AUTOKEY.not_useful_char)
+    '''
 
-    expression_b = expression_b[1:len(expression_b) - 1]
-    if (prev or len(match_value_list) != 0) and (not ones):
-            expression_b = expression_translation(expression_b, dict_name, False)
+    if (prev or expression_b_origin != expression_b) and (not ones):
+        expression_b = expression_translation(expression_b, dict_name, False)
     try:
         expression_b_temp = aeval(expression_b)
     except Exception as e:
@@ -187,17 +234,11 @@ def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, ones:b
         return expression_b_temp
 
 def expression_translation(expression_s:str, dict_name:dict, prev:bool = True):
-    lb_now = re.match(".*{", expression_s)
-    rb_now = re.match(".*}", expression_s)
-    if lb_now and rb_now:
-        translation_value = brace_translation(expression_s[lb_now.end():rb_now.end() - 1], dict_name)
-        expression_s = expression_s[:lb_now.end() - 1] + type_to_str(translation_value, get_type(translation_value)) + expression_s[rb_now.end(): ]
-        return expression_translation(expression_s, dict_name)
+    expression_s_now = str_translation(expression_s, dict_name)
+    if prev or expression_s != expression_s_now:
+        return brace_translation(expression_s_now, dict_name, False)
     else:
-        if prev:
-            return brace_translation(expression_s, dict_name, False)
-        else:
-            return expression_s
+        return expression_s_now
         
     
 
@@ -207,19 +248,48 @@ def str_translation(value:Union[str, bool], dict_name:dict)->str:
         return value_to_mapvalue(value, bool)
     if isinstance(value, dict):
         return deepcopy(value)
-    if bool(re.match(".*{", value)):
-        if not bool(re.match(".*}", value)):
-            raise ValueError("The string have '{' but don't have'}'.")
-    value_list = value.split("{")
-    value_ans = value_list[0]
-    for index in range(1, len(value_list)):
-        value_list_now = value_list[index].split("}")
-        value_temp = brace_translation(value_list_now[0], dict_name)
-        value_list_now[0] = type_to_str(value_temp, get_type(value_temp))
-        value_ans = value_ans + "".join(value_list_now)
-    if bool(re.match(".*{", value_ans)):
-        return str_translation(value_ans, dict_name)
+    left_index = -1
+    left_brace = 0
+    index_list = []
+    for index in range(0, len(value)):
+        if value[index] == "{":
+            if left_index == -1:
+                left_index = index
+            left_brace = left_brace + 1
+        elif value[index] == "}":
+            left_brace = left_brace - 1
+            if left_brace == 0:
+                right_index = index
+                if left_index == -1:
+                    raise ValueError("The string have '{' but don't have'}'.")
+                index_list.append((left_index, right_index))
+                left_index = -1
+    if index_list == []:
+        return value
+    value_ans = value[0:index_list[0][0]]
+    index_list.append((len(value), len(value)))
+    for index in range(len(index_list) - 1):
+        value_ans = value_ans + type_to_str(brace_translation(value[index_list[index][0] + 1:index_list[index][1]], dict_name), str) + value[index_list[index][1] + 1:index_list[index + 1][0]]
     return value_ans
+
+def tobject_args_translation(key:str, value:str, dict_name:dict)->str:
+    if isinstance(value, tuple):
+        if value[2] == AUTOKEY.brace:
+            if brace_translation(value[1], dict_name) == True:
+                return {key:str_translation(value[0], dict_name)}
+        elif value[2] == AUTOKEY.exist:
+            value_list = value[1].split(",")
+            isend = True
+            for value_n in value_list:
+                if dict_name.get(value_n) == None:
+                    isend = False
+                    break
+            if isend:
+                return {key:str_translation(value[0], dict_name)}
+        
+    else:
+        return {key:str_translation(value, dict_name)}
+    return {}
 
 def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori_size:rw.frame.Coordinate)->rw.case.TObject:
     
@@ -256,11 +326,13 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
         rw.const.OBJECTDE.height: str(size.y())
     }
     if operation.get(AUTOKEY.name) != None:
-        default_pro[rw.const.OBJECTDE.name] = str_translation(operation[AUTOKEY.name], dict_name)
+        default_pro.update(tobject_args_translation(rw.const.OBJECTDE.name, operation[AUTOKEY.name], dict_name))
     if operation.get(AUTOKEY.type) != None:
-        default_pro[rw.const.OBJECTDE.type] = operation[AUTOKEY.type]
+        default_pro.update(tobject_args_translation(rw.const.OBJECTDE.type, operation[AUTOKEY.type], dict_name))
 
-    optional_pro = {key:str_translation(value, dict_name) for key, value in operation[AUTOKEY.optional].items()}
+    optional_pro = {}
+    for key, value in operation[AUTOKEY.optional].items():
+        optional_pro.update(tobject_args_translation(key, value, dict_name))
 
     return rw.case.TObject("object", default_pro, optional_pro)
 
@@ -309,6 +381,15 @@ def value_to_mapvalue(value, ntype):
                     value_now = ",".join([" ".join(value_i) for value_i in value_now])
             return value_now
         return ntype(value)
+    
+def mapvalue_to_value_basic(value):
+    if isinstance(value, dict):
+        return mapvalue_to_value(value, bool)
+    else:
+        return mapvalue_to_value(value, str)
+    
+def value_to_mapvalue_basic(value):
+    return value_to_mapvalue(value, get_type(value))
 
 def get_type(value):
     if isinstance(value, list):
@@ -397,7 +478,7 @@ def auto_func():
                         help='The input path of RW map file.')
     parser.add_argument("--infopath", 
                         action = "store", metavar = "file", type = str, nargs = 1, 
-                        required = False, default = current_dir_path + "\\_data.py", 
+                        required = False, default = current_dir_path + "\\_data",  
                         help = "The file's path which has information's mode variable|current_file_path"
                         )
     parser.add_argument("--infovar", 
@@ -432,16 +513,26 @@ def auto_func():
     
     parser.add_argument("--resetid", 
                         action = 'store_true', help = 'Reset the IDs of objects.')
+    
+    parser.add_argument("--citetrans", 
+                        action = 'store_true', help = 'Cite translation(other objects)')
 
     dev_null = open(os.devnull, "w")
     global aeval
-    aeval = Interpreter(err_writer = dev_null, writer = dev_null, symtable = {})
+
+    aeval = Interpreter(err_writer = dev_null, writer = dev_null, user_symbols = USER_SYMBOLS)
 
     args = parser.parse_args()
     output_path = args.map_path[0] if args.output == "|" else args.output[0]
-    sys.path.append("".join(args.infopath.split("\\")[:-1]))
-    info_file = importlib.import_module(".".join(".".join(args.infopath.split("\\")[-2:]).split(".")[:-1]))
+    sys.path.append("\\".join(args.infopath.split("\\")[:-1]))
+
+    module_name = ".".join(".".join(args.infopath.split("\\")[-2:]).split("."))
+    if module_name[-1] == "py":
+        module_name = module_name[:-1]
+    info_file = importlib.import_module(module_name)
+
     info_now_pre = getattr(info_file, args.infovar, 'Not Found')
+
     isdelete = args.DeleteAllSym
     isdelete_d = args.delete
     isdelete_all = args.DeleteAll
@@ -452,7 +543,7 @@ def auto_func():
     isverbose = args.verbose
     global isresetid
     isresetid = args.resetid
-
+    iscitetrans = args.citetrans
 
     standard_out(isverbose, "\t\t\t\t------------------------------")
     standard_out(isverbose, "\t\t\t\t--------Initialization--------")
@@ -504,9 +595,9 @@ def auto_func():
         info_args_temp = OrderedDict()
         while(while_i < infolen + 1 and len(info_args_temp) < infolen):
             for args_now, ntype in info[AUTOKEY.info_args].items():
+                isend = True
                 if info.get(AUTOKEY.var_dependent) != None and info[AUTOKEY.var_dependent].get(args_now) != None:
                     var_den_list = info[AUTOKEY.var_dependent][args_now].split(",")
-                    isend = True
                     for var_den in var_den_list:
                         if info_args_temp.get(var_den) == None:
                             isend = False
@@ -515,7 +606,7 @@ def auto_func():
                     info_args_temp[args_now] = deepcopy(ntype)
             while_i = while_i + 1
         info[AUTOKEY.info_args] = info_args_temp
-        if while_i == infolen +1:
+        if while_i == infolen + 1:
             standard_error(f"Info input dependence loop error.({key})", 5)
 
     standard_out(isverbose, "\t\t\t\t--------------------------------------")
@@ -527,7 +618,8 @@ def auto_func():
             info_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
 
             if bool(re.match(key, info_name)):
-                standard_out(isverbose, f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{info_name}) has been identified as an info object. Initialization...")
+                tobject_id = tobject.returnDefaultProperty("id")
+                standard_out(isverbose, f"An object(ID:{tobject_id}, name:{info_name}) has been identified as an info object. Initialization...")
                 info_dict_now = {}
 
                 # info_prefix
@@ -555,58 +647,37 @@ def auto_func():
                 # add default_args
                 info_dict_now[AUTOKEY.isdelete_sym] = bool(re.match(AUTOKEY.delete_symbol, info_name))
                 default_brace = deepcopy(info.get(AUTOKEY.default_brace))
-                for key_now, value in info[AUTOKEY.default_args].items():
-                    if info_dict_now.get(key_now) != None:
-                        if default_brace.issuperset([key_now]):
-                            default_brace.remove(key_now)
-                        continue
-                    if default_brace != None and default_brace.issuperset([key_now]):
-                        info_dict_now[key_now] = value
-                    else:
-                        info_dict_now[key_now] = mapvalue_to_value(value, info[AUTOKEY.info_args][key_now])
+                if info.get(AUTOKEY.default_args) != None:
+                    for key_now, value in info[AUTOKEY.default_args].items():
+                        if info_dict_now.get(key_now) != None:
+                            if default_brace.issuperset([key_now]):
+                                default_brace.remove(key_now)
+                            continue
+                        if default_brace != None and default_brace.issuperset([key_now]):
+                            info_dict_now[key_now] = value
+                        else:
+                            info_dict_now[key_now] = mapvalue_to_value(value, info[AUTOKEY.info_args][key_now])
 
                 #debug_pdb("default_args end")
 
                 # add info_args
                 for key_now, ntype in info[AUTOKEY.info_args].items():
                     if tobject_temp.returnOptionalProperty(key_now) != None:
-                        if info.get(AUTOKEY.var_dependent) != None and info[AUTOKEY.var_dependent].get(key_now) != None:
-                            for args_dependent in info[AUTOKEY.var_dependent][key_now].split(","):
-                                if info_dict_now.get(args_dependent) == None or info_dict_now[args_dependent] == False:
-                                    standard_error(f"Unuseful arguments in an info object.({key_now} exists but {args_dependent} is none or false.)", 4)
 
                         info_dict_now[key_now] = mapvalue_to_value(tobject_temp.returnOptionalProperty(key_now), ntype)
                         tobject_temp.deleteOptionalProperty(key_now)
                         if default_brace != None and default_brace.issuperset([key_now]):
                             default_brace.remove(key_now)
-
-                # required arguments check
-                
-                for key_now, ntype in info[AUTOKEY.info_args].items():
-                    if info.get(AUTOKEY.optional) != None and info[AUTOKEY.optional].issuperset([key_now]):
-                        continue
-                    if info.get(AUTOKEY.var_dependent) != None and info[AUTOKEY.var_dependent].get(key_now) != None:
-                        var_dep_list = info[AUTOKEY.var_dependent][key_now].split(",")
-                        isend = True
-                        for var_dep in var_dep_list:
-                            if info_dict_now.get(var_dep) == None or info_dict_now[var_dep] != True:
-                                isend = False
-                                break
-                        if not isend:
-                            continue
-                    if info_dict_now.get(key_now) == None:
-                        standard_error(f"A required argument is missing in an info object.({key_now})", 6)
-
-                
-                if len(tobject_temp._optional_properties) != 0:
-                    standard_error("Unknown arguments below in an info object.", 3, f"{tobject_temp._optional_properties}")
                 
                 if info.get(AUTOKEY.initial_brace) != None:
                     for key_now, value in info[AUTOKEY.initial_brace].items():
                         info_dict_now[key_now] = brace_translation(value, info_dict_now)
                 if default_brace != None:
                     for key_now in default_brace:
-                        info_dict_now[key_now] = brace_translation(info_dict_now[key_now], info_dict_now)
+                        info_dict_now[key_now] = brace_translation(info_dict_now[key_now], info_dict_now, ones = True)
+
+                info[AUTOKEY.no_check] = (info.get(AUTOKEY.no_check) != None and info[AUTOKEY.no_check])
+                info[AUTOKEY.isinfo_sub] = (info.get(AUTOKEY.isinfo_sub) != None and info[AUTOKEY.isinfo_sub])
 
 
 
@@ -617,19 +688,19 @@ def auto_func():
                 info_dict_now[AUTOKEY.tobject] = tobject
                 info_dict_now[AUTOKEY.info_key] = key
 
-                if info.get(AUTOKEY.id_operation) != None:
+                if info.get(AUTOKEY.operation_pre) != None:
                     operation_index = {}
-                    for index, operation_now in enumerate(info[AUTOKEY.id_operation]):
+                    for index, operation_now in enumerate(info[AUTOKEY.operation_pre]):
                         if operation_now[AUTOKEY.operation_type] == AUTOKEY.tag:
                             operation_index[operation_now[AUTOKEY.tag]] = index
                     
                     object_dict = deepcopy(info_dict_now)
                     index = 0
                         
-                    while(index < len(info[AUTOKEY.id_operation])):
+                    while(index < len(info[AUTOKEY.operation_pre])):
                         
-                        operation_now = info[AUTOKEY.id_operation][index]
-                            
+                        operation_now = info[AUTOKEY.operation_pre][index]
+                        
                         if operation_now[AUTOKEY.operation_type] == AUTOKEY.goto:
                             index = operation_index[operation_now[str_translation(AUTOKEY.goto_tag, object_dict)]]
                             continue
@@ -668,8 +739,87 @@ def auto_func():
                                     info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.ids].append([key_trans, num])
                                     for i in range(num):
                                         info_dict_now[key_trans] = mapvalue_to_value(str_translation(operation_now[AUTOKEY.real_idexp], object_dict), str)
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeadd_args:
+                            for key_n, value in operation_now.items():
+                                if key_n != AUTOKEY.operation_type:
+                                    value_brace = brace_translation(value, object_dict)
+                                    value_brace = aeval_globals(value_brace)
+                                    info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.args].append((str_translation(key_n, object_dict), value_brace))
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeadd_opargs:
+                            for key_n, value in operation_now.items():
+                                if key_n != AUTOKEY.operation_type:
+                                    value_brace = brace_translation(value, object_dict)
+                                    value_brace = (value_brace[0], aeval_globals(value_brace[1]))
+                                    info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.opargs][str_translation(key_n, object_dict)] = value_brace
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typedelete_optional:
+                            for key_n, value in operation_now.items():
+                                if key_n == AUTOKEY.namedelete_optional:
+                                    value_brace = brace_translation(value, object_dict)
+                                    for value_n in value_brace:
+                                        if info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.optional].issuperset([value_n]):
+                                            info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.optional].remove(value_n)
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeadd_optional:
+                            for key_n, value in operation_now.items():
+                                if key_n == AUTOKEY.nameadd_optional:
+                                    value_brace = brace_translation(value, object_dict)
+                                    for value_n in value_brace:
+                                        info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.optional].add(value_n)
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.error:
+                            standard_error(str_translation(operation_now[AUTOKEY.error_info]), -1)
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.pdb_pause:
+                            debug_pdb(object_dict)
                         index = index + 1
+
+                info = info_doids_dict[info_dict_now[AUTOKEY.prefix]]
+                args_dict = deepcopy(info_dict_now)
+
+                #args/opargs check
+                if info.get(AUTOKEY.args) != None:
+                    for key_n in info[AUTOKEY.args]:
+                        key_now = key_n[0]
+                        args_dict[key_n[0]] = key_n[1]
+                        if info[AUTOKEY.info_args].get(key_now) == None and info[AUTOKEY.no_check] == False:
+                            standard_error(f"An argument of the info object is invalid.(ID:{tobject_id}, name:{info_name}, arg:{key_now})", 12)
+
+                if info.get(AUTOKEY.opargs) != None:
+                    for value in info[AUTOKEY.opargs].values():
+                        args_now = value[0].split(AUTOKEY.opargs_sys_seg)
+                        if len(args_now) == 2:
+                            args_dict[args_now[0]] = value[1]
+                        args_now = args_now[0]
+                        if info[AUTOKEY.info_args].get(args_now) == None and info[AUTOKEY.no_check] == False:
+                            standard_error(f"An optional argument of the info object is invalid.(ID:{tobject_id}, name:{info_name}, arg:{args_now})", 13)
+
+                # var_dependent check
                 
+                for key_now, ntype in info[AUTOKEY.info_args].items():
+                    if tobject.returnOptionalProperty(key_now) != None:
+                        if info.get(AUTOKEY.var_dependent) != None and info[AUTOKEY.var_dependent].get(key_now) != None:
+                            for args_dependent in info[AUTOKEY.var_dependent][key_now].split(","):
+                                if (args_dict.get(args_dependent) == None or args_dict[args_dependent] == False):
+                                    standard_error(f"Unuseful arguments in an info object.({key_now} exists but {args_dependent} is none or false.)", 4)
+
+                # required arguments check
+                for key_now, ntype in info[AUTOKEY.info_args].items():
+                    if info.get(AUTOKEY.optional) != None and info[AUTOKEY.optional].issuperset([key_now]):
+                        continue
+                    if info.get(AUTOKEY.var_dependent) != None and info[AUTOKEY.var_dependent].get(key_now) != None:
+                        var_dep_list = info[AUTOKEY.var_dependent][key_now].split(",")
+                        isend = True
+                        for var_dep in var_dep_list:
+                            if args_dict.get(var_dep) == None or args_dict[var_dep] != True:
+                                isend = False
+                                break
+                        if not isend:
+                            continue
+                    if args_dict.get(key_now) == None and (not info[AUTOKEY.isinfo_sub]):
+                        standard_error(f"A required argument is missing in an info object.({key_now})", 6)
+                
+                if len(tobject_temp._optional_properties) != 0 and info[AUTOKEY.no_check] == False:
+                    standard_error("Unknown arguments below in an info object.", 3, f"{tobject_temp._optional_properties}")
+                
+
+
                 standard_out(isverbose, "Info object information is being output...")
                 if isverbose:
                     temp_pri = OrderedDict()
@@ -708,7 +858,8 @@ def auto_func():
     standard_out(isverbose and (isdelete_d), "The info object is being deleted if eligible...")
     for tobject in dtobject:
         map_now.delete_object_s(tobject)
-        standard_out(isverbose, f"An info object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject.returnDefaultProperty(rw.const.OBJECTDE.name)}) has been deleted...")
+        tobject_id = tobject.returnDefaultProperty("id")
+        standard_out(isverbose, f"An info object(ID:{tobject_id}, name:{tobject.returnDefaultProperty(rw.const.OBJECTDE.name)}) has been deleted...")
 
     standard_out(isverbose, "\t\t\t\t----------------------------------------")
     standard_out(isverbose, "\t\t\t\t--------Tagged objects procedure--------")
@@ -721,49 +872,65 @@ def auto_func():
         ischange = False
         for key, info in info_dict.items():
             prefix_now = info[AUTOKEY.prefix]
-            if prefix_now == tobject_name[0:len(prefix_now)] \
+            info_key = info[AUTOKEY.info]
+            myinfo = info_now[info_key]
+
+            if info.get(AUTOKEY.isprefixseg) != None and info.get(AUTOKEY.isprefixseg) == True:
+                prefix_to_match = tobject_name.split(myinfo[AUTOKEY.seg])[0]
+                tobject_name_to_solve = tobject_name[len(prefix_to_match) + 1:]
+            else:
+                prefix_to_match = tobject_name[0:len(prefix_now)]
+                tobject_name_to_solve = tobject_name[len(prefix_to_match):]
+
+            if prefix_now == prefix_to_match \
                 and (not re.match(AUTOKEY.normal_city_nexist_re, tobject_name)):
-                info_key = info[AUTOKEY.info]
-                myinfo = info_now[info_key]
-                object_dict = get_args(myinfo, tobject_name, info, tobject, id_to_tobject, map_now)
-                
                 ischange = True
                 break
         if ischange:
-
-            for thing_prefix_num in myinfo[AUTOKEY.ids]:
-                tobject_prefix = tobject.returnOptionalProperty(thing_prefix_num[0])
-                if tobject_prefix != None:
-                    tobject_prefix = tobject_prefix.split(",")
-                else:
-                    tobject_prefix = []
-                if isreset:
-                    tobject_prefix = []
-                    tobject.deleteOptionalPropertySup([AUTOKEY.IDs])
-                prefix_now = brace_translation(thing_prefix_num[0], info)
-                if ids_now_dict.get(prefix_now) == None:
-                    ids_now_dict[prefix_now] = 1
-                
-                for index in range(len(tobject_prefix)):
-                    tobject_prefix[index] = int(tobject_prefix[index][len(thing_prefix_num[0]):])
-                    ids_now_dict[prefix_now] = max(ids_now_dict[prefix_now], 
-                                                            tobject_prefix[index])
+            if myinfo.get(AUTOKEY.ids) != None:
+                for thing_prefix_num in myinfo[AUTOKEY.ids]:
+                    tobject_prefix = tobject.returnOptionalProperty(thing_prefix_num[0])
+                    if tobject_prefix != None:
+                        tobject_prefix = tobject_prefix.split(",")
+                    else:
+                        tobject_prefix = []
+                    if isreset:
+                        tobject_prefix = []
+                        tobject.deleteOptionalPropertySup([AUTOKEY.IDs])
+                    prefix_now = brace_translation(thing_prefix_num[0], info)
+                    if ids_now_dict.get(prefix_now) == None:
+                        ids_now_dict[prefix_now] = 1
+                    
+                    for index in range(len(tobject_prefix)):
+                        tobject_prefix[index] = int(tobject_prefix[index][len(thing_prefix_num[0]):])
+                        ids_now_dict[prefix_now] = max(ids_now_dict[prefix_now], 
+                                                                tobject_prefix[index])
 
     dtobject = []
 
     for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                            rw.const.OBJECTDE.name: r".+"}):
         tobject_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
+        tobject_id = tobject.returnDefaultProperty("id")
         ischange = False
         for key, info in info_dict.items():
             prefix_now = info[AUTOKEY.prefix]
             info_key = info[AUTOKEY.info]
             info_tobject:rw.case.TObject = info[AUTOKEY.tobject]
-            if prefix_now == tobject_name[0:len(prefix_now)] \
+            myinfo = info_now[info_key]
+
+            if info.get(AUTOKEY.isprefixseg) != None and info.get(AUTOKEY.isprefixseg) == True:
+                prefix_to_match = tobject_name.split(myinfo[AUTOKEY.seg])[0]
+                tobject_name_to_solve = tobject_name[len(prefix_to_match) + 1:]
+            else:
+                prefix_to_match = tobject_name[0:len(prefix_now)]
+                tobject_name_to_solve = tobject_name[len(prefix_to_match):]
+
+            if prefix_now == prefix_to_match \
                 and (not re.match(AUTOKEY.normal_city_nexist_re, tobject_name)):
-                myinfo = info_now[info_key]
-                object_dict = get_args(myinfo, tobject_name, info, tobject, id_to_tobject, map_now)
-                object_dict.update(info)
+                object_dict = deepcopy(info)
+                object_dict.update(get_args(myinfo, tobject_name_to_solve, tobject, id_to_tobject, map_now))
+                
                 if info.get(AUTOKEY.info_prefix) != None:
                     for info_pre in info[AUTOKEY.info_prefix]:
                         info_temp = info_dict[info_pre]
@@ -773,36 +940,34 @@ def auto_func():
         if ischange:
             
             if myinfo.get(AUTOKEY.isinfo_sub) != None and myinfo.get(AUTOKEY.isinfo_sub) == True:
-                standard_error(f"Incorrect use of the subordinate info object.(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name})", 2)
+                standard_error(f"Incorrect use of the subordinate info object.(ID:{tobject_id}, name:{tobject_name})", 2)
             isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
             if isdelete_all or isdelete or (isdelete_sym and isdelete_d):
                 dtobject.append(tobject)
             else:
                 info_tagged_objects_exist.append(tobject)
-            standard_out(isverbose and (not(isdelete_sym or isdelete_all)), f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object. Object generation...")
-            standard_out(isverbose and (isdelete_all and (not isdelete_sym)), f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted...")
-            standard_out(isverbose and (isdelete_sym and(not isdelete_all)), f"An object(ID:{tobject.returnDefaultProperty("id")}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The objects will not be generated, existing ones will also be deleted...")
-
-            for thing in myinfo[AUTOKEY.ids]:
-                
-                idprefix = brace_translation(thing[0], object_dict, ones = True)
-                if isinstance(idprefix, float):
-                    debug_pdb()
-                idnow_list = tobject.returnOptionalProperty(idprefix)
-                if idnow_list == None:
-                    idnow_list = []
-                else:
-                    idnow_list = idnow_list.split(",")
-                for i, idnow in enumerate(idnow_list):
-                    object_dict[thing[0] + str(i)] = idnow
-                for i in range(len(idnow_list), thing[1]):
-                    id_now = idprefix + str(ids_now_dict[idprefix])
-                    idnow_list.append(id_now)
-                    object_dict[thing[0] + str(i)] = id_now
-                    if (isdelete_sym or isdelete_all) and isreset:
-                        continue
-                    ids_now_dict[idprefix] = ids_now_dict[idprefix] + 1
-                tobject.assignOptionalProperty(idprefix, ",".join(idnow_list))
+            standard_out(isverbose and (not(isdelete_sym or isdelete_all)), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. Object generation...")
+            standard_out(isverbose and (isdelete_all and (not isdelete_sym)), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted...")
+            standard_out(isverbose and (isdelete_sym and(not isdelete_all)), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The objects will not be generated, existing ones will also be deleted...")
+            if myinfo.get(AUTOKEY.ids) != None:
+                for thing in myinfo[AUTOKEY.ids]:
+                    
+                    idprefix = brace_translation(thing[0], object_dict, ones = True)
+                    idnow_list = tobject.returnOptionalProperty(idprefix)
+                    if idnow_list == None:
+                        idnow_list = []
+                    else:
+                        idnow_list = idnow_list.split(",")
+                    for i, idnow in enumerate(idnow_list):
+                        object_dict[thing[0] + str(i)] = idnow
+                    for i in range(len(idnow_list), thing[1]):
+                        id_now = idprefix + str(ids_now_dict[idprefix])
+                        idnow_list.append(id_now)
+                        object_dict[thing[0] + str(i)] = id_now
+                        if (isdelete_sym or isdelete_all) and isreset:
+                            continue
+                        ids_now_dict[idprefix] = ids_now_dict[idprefix] + 1
+                    tobject.assignOptionalProperty(idprefix, ",".join(idnow_list))
 
             
             
@@ -824,6 +989,8 @@ def auto_func():
             operation_index = {}
             for index, operation_now in enumerate(myinfo[AUTOKEY.operation]):
                 if operation_now[AUTOKEY.operation_type] == AUTOKEY.tag:
+                    if operation_index.get(operation_now[AUTOKEY.tag]) != None:
+                        standard_error(f"operation tags are duplicated.({operation_now[AUTOKEY.tag]})", 15)
                     operation_index[operation_now[AUTOKEY.tag]] = index
 
             tottobid = 0
@@ -834,6 +1001,7 @@ def auto_func():
                 operation_now = myinfo[AUTOKEY.operation][index]
 
                 if operation_now[AUTOKEY.operation_type] == AUTOKEY.object:
+                    
                     object_now = get_tobject(operation_now, object_dict, ori_pos, ori_size)
 
                     if object_now != None:
@@ -875,17 +1043,39 @@ def auto_func():
                     for key, value in operation_now.items():
                         if key != AUTOKEY.operation_type:
                             object_dict[str_translation(key, object_dict)] = object_dict.get(value) != None
+                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.error:
+                    standard_error(str_translation(operation_now[AUTOKEY.error_info]), -1)
+                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.pdb_pause:
+                    debug_pdb(object_dict)
                 index = index + 1
                 
-
             id_delete = IDs_balance(tobject, tottobid)
             for idnow in id_delete:
                 dtobject.append(id_to_tobject[idnow])
+            if object_dict.get(AUTOKEY.cite_name) != None:
+                for key, value in object_dict.items():
+                    if cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + key) != None:
+                        standard_error(f"Reference tags are duplicated. An object(ID:{tobject_id}, name:{tobject_name}, Cite:{object_dict[AUTOKEY.cite_name]})", 14)
+                    cite_object_dict[object_dict[AUTOKEY.cite_name] + "." + key] = deepcopy(value)
+            
 
     standard_out(isverbose and (isdelete_all or isdelete), "The tagged object is being deleted...")
     standard_out(isverbose and (isdelete_d), "The tagged object is being deleted if eligible...")
     for tobject in dtobject:
         map_now.delete_object_s(tobject)
+
+    if iscitetrans:
+        standard_out(isverbose, "Other objects are being translated by cite.")
+        for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(.+)"}):
+            for key, value in tobject._default_properties.items():
+                value_now = mapvalue_to_value_basic(value)
+                if not isinstance(value_now, bool):
+                    tobject.assignDefaultProperty(key, brace_one_translation(value_now, cite_object_dict, AUTOKEY.not_useful_char_ad_point))
+            for key, value in tobject._optional_properties.items():
+                value_now = mapvalue_to_value_basic(value)
+                if not isinstance(value_now, bool):
+                    tobject.assignOptionalProperty(key, brace_one_translation(value_now, cite_object_dict, AUTOKEY.not_useful_char_ad_point))
+
     standard_out(isverbose, "\t\t\t\t----------------------------------------")
     standard_out(isverbose, "\t\t\t\t--------Rearrangement and output--------")
     standard_out(isverbose, "\t\t\t\t----------------------------------------")

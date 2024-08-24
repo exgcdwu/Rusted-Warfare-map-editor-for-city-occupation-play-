@@ -1,4 +1,5 @@
 ERROR code:
+-1: An error from operation.
 0: External info import error.
 1: External info import loop error.
 2: Incorrect use of the subordinate info object.
@@ -11,3 +12,7 @@ ERROR code:
 9: Too many required arguments below in a tagged object.
 10: External info import error(The target info has ",d")
 11: The IDs are coincident and the mapping cannot be performed.
+12: An argument of the info object is invalid.
+13: An optional argument of the info object is invalid.
+14: Reference tags are duplicated.
+15: operation tags are duplicated.
