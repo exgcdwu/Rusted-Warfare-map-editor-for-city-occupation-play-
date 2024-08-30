@@ -16,6 +16,8 @@ from auto._data._bdtext import bdtext_info
 from auto._data._inadd import inadd_info
 from auto._data._building import building_info
 from auto._data._numDetect import numDetect_info
+from auto._data._dictionary import dictionary_info
+from auto._data._multiRemove import multiRemove_info
 
 auto_func_arg = {}
 auto_func_arg.update(object_info)
@@ -25,3 +27,5 @@ auto_func_arg.update(multiText_info)
 auto_func_arg.update(bdtext_info)
 auto_func_arg.update(inadd_info)
 auto_func_arg.update(building_info)
+auto_func_arg.update(dictionary_info)
+auto_func_arg.update(multiRemove_info)

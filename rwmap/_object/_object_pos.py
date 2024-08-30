@@ -45,8 +45,8 @@ class TObject_Pos:
     def offset(self, offset:frame.Coordinate)->TObject_Pos:
         newtp = deepcopy(self)
         try:
-            newtp._default_properties["x"] = f"{float(self._default_properties["x"]) + offset.x():.2f}"
-            newtp._default_properties["y"] = f"{float(self._default_properties["y"]) + offset.y():.2f}"
+            newtp._default_properties["x"] = f"{float(self._default_properties['x']) + offset.x():.2f}"
+            newtp._default_properties["y"] = f"{float(self._default_properties['y']) + offset.y():.2f}"
         except KeyError:
             raise KeyError("Position: uninitialized")
         return newtp

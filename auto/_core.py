@@ -471,6 +471,52 @@ def IDs_balance(tobject_now:rw.case.TObject, tottob:int)->list:
     id_delete = idsh_list[min(tottob, len(idsh_list)):]
     return id_delete
 
+def is_tagged_tobject__newname__myinfo__info(tobject_name:str, info_dict, info_now):
+    ischange = False
+    for key, info in info_dict.items():
+        prefix_now = info[AUTOKEY.prefix]
+        info_key = info[AUTOKEY.info]
+        myinfo = info_now[info_key]
+
+        if info.get(AUTOKEY.isprefixseg) != None and info.get(AUTOKEY.isprefixseg) == True:
+            prefix_to_match = tobject_name.split(myinfo[AUTOKEY.seg])[0]
+            tobject_name_to_solve = tobject_name[len(prefix_to_match) + 1:]
+        else:
+            prefix_to_match = tobject_name[0:len(prefix_now)]
+            tobject_name_to_solve = tobject_name[len(prefix_to_match):]
+
+        if prefix_now == prefix_to_match \
+            and (not re.match(AUTOKEY.normal_city_nexist_re, tobject_name)):
+            ischange = True
+            break
+    return (ischange, tobject_name_to_solve, myinfo, info)
+
+def is_tagged_tobject(tobject:rw.case.TObject, info_dict, info_now):
+    tobject_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
+    ischange__newname__myinfo__info = is_tagged_tobject__newname__myinfo__info(tobject_name, info_dict, info_now)
+    ischange = ischange__newname__myinfo__info[0]
+    return ischange
+
+
+def tobject_ids_do(tobject:rw.case.TObject, myinfo, info, ids_now_dict, isreset):
+    for thing_prefix_num in myinfo[AUTOKEY.ids]:
+        tobject_prefix = tobject.returnOptionalProperty(thing_prefix_num[0])
+        if tobject_prefix != None:
+            tobject_prefix = tobject_prefix.split(",")
+        else:
+            tobject_prefix = []
+        if isreset:
+            tobject_prefix = []
+            tobject.deleteOptionalPropertySup([AUTOKEY.IDs])
+        prefix_now = brace_translation(thing_prefix_num[0], info)
+        if ids_now_dict.get(prefix_now) == None:
+            ids_now_dict[prefix_now] = 1
+        
+        for index in range(len(tobject_prefix)):
+            tobject_prefix[index] = int(tobject_prefix[index][len(thing_prefix_num[0]):])
+            ids_now_dict[prefix_now] = max(ids_now_dict[prefix_now], 
+                                                    tobject_prefix[index])
+
 def auto_func():
     parser = argparse.ArgumentParser(
         description='Objects of Triggers are automatically processed by information\'s mode.')
@@ -668,6 +714,12 @@ def auto_func():
                         tobject_temp.deleteOptionalProperty(key_now)
                         if default_brace != None and default_brace.issuperset([key_now]):
                             default_brace.remove(key_now)
+
+                info[AUTOKEY.no_check] = (info.get(AUTOKEY.no_check) != None and info[AUTOKEY.no_check])
+                if info[AUTOKEY.no_check]:
+                    for key_now in tobject_temp._optional_properties.keys():
+                        info_dict_now[key_now] = mapvalue_to_value_basic(tobject_temp.returnOptionalProperty(key_now))
+                    tobject_temp._optional_properties = {}
                 
                 if info.get(AUTOKEY.initial_brace) != None:
                     for key_now, value in info[AUTOKEY.initial_brace].items():
@@ -676,7 +728,7 @@ def auto_func():
                     for key_now in default_brace:
                         info_dict_now[key_now] = brace_translation(info_dict_now[key_now], info_dict_now, ones = True)
 
-                info[AUTOKEY.no_check] = (info.get(AUTOKEY.no_check) != None and info[AUTOKEY.no_check])
+
                 info[AUTOKEY.isinfo_sub] = (info.get(AUTOKEY.isinfo_sub) != None and info[AUTOKEY.isinfo_sub])
 
 
@@ -816,8 +868,7 @@ def auto_func():
                         standard_error(f"A required argument is missing in an info object.({key_now})", 6)
                 
                 if len(tobject_temp._optional_properties) != 0 and info[AUTOKEY.no_check] == False:
-                    standard_error("Unknown arguments below in an info object.", 3, f"{tobject_temp._optional_properties}")
-                
+                        standard_error("Unknown arguments below in an info object.", 3, f"{tobject_temp._optional_properties}")
 
 
                 standard_out(isverbose, "Info object information is being output...")
@@ -869,47 +920,25 @@ def auto_func():
     for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                            rw.const.OBJECTDE.name: r".+"}):
         tobject_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
-        ischange = False
-        for key, info in info_dict.items():
-            prefix_now = info[AUTOKEY.prefix]
-            info_key = info[AUTOKEY.info]
-            myinfo = info_now[info_key]
-
-            if info.get(AUTOKEY.isprefixseg) != None and info.get(AUTOKEY.isprefixseg) == True:
-                prefix_to_match = tobject_name.split(myinfo[AUTOKEY.seg])[0]
-                tobject_name_to_solve = tobject_name[len(prefix_to_match) + 1:]
-            else:
-                prefix_to_match = tobject_name[0:len(prefix_now)]
-                tobject_name_to_solve = tobject_name[len(prefix_to_match):]
-
-            if prefix_now == prefix_to_match \
-                and (not re.match(AUTOKEY.normal_city_nexist_re, tobject_name)):
-                ischange = True
-                break
+        ischange__newname__myinfo__info = is_tagged_tobject__newname__myinfo__info(tobject_name, info_dict, info_now)
+        ischange = ischange__newname__myinfo__info[0]
+        tobject_name_to_solve = ischange__newname__myinfo__info[1]
+        myinfo = ischange__newname__myinfo__info[2]
+        info = ischange__newname__myinfo__info[3]
         if ischange:
             if myinfo.get(AUTOKEY.ids) != None:
-                for thing_prefix_num in myinfo[AUTOKEY.ids]:
-                    tobject_prefix = tobject.returnOptionalProperty(thing_prefix_num[0])
-                    if tobject_prefix != None:
-                        tobject_prefix = tobject_prefix.split(",")
-                    else:
-                        tobject_prefix = []
-                    if isreset:
-                        tobject_prefix = []
-                        tobject.deleteOptionalPropertySup([AUTOKEY.IDs])
-                    prefix_now = brace_translation(thing_prefix_num[0], info)
-                    if ids_now_dict.get(prefix_now) == None:
-                        ids_now_dict[prefix_now] = 1
-                    
-                    for index in range(len(tobject_prefix)):
-                        tobject_prefix[index] = int(tobject_prefix[index][len(thing_prefix_num[0]):])
-                        ids_now_dict[prefix_now] = max(ids_now_dict[prefix_now], 
-                                                                tobject_prefix[index])
+                tobject_ids_do(tobject, myinfo, info, ids_now_dict, isreset)
 
     dtobject = []
+    
+    tobject_list = [tobject for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
+                                                           rw.const.OBJECTDE.name: r".+"})]
+    index_tobject = 0
+    while index_tobject < len(tobject_list):
+        tobject = tobject_list[index_tobject]
+        index_tobject = index_tobject + 1
+        print(index_tobject)
 
-    for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
-                                                           rw.const.OBJECTDE.name: r".+"}):
         tobject_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
         tobject_id = tobject.returnDefaultProperty("id")
         ischange = False
@@ -970,7 +999,6 @@ def auto_func():
                     tobject.assignOptionalProperty(idprefix, ",".join(idnow_list))
 
             
-            
             ori_pos = rw.frame.Coordinate(
                 tobject.returnDefaultProperty(rw.const.OBJECTDE.x), 
                 tobject.returnDefaultProperty(rw.const.OBJECTDE.y)
@@ -1005,9 +1033,10 @@ def auto_func():
                     object_now = get_tobject(operation_now, object_dict, ori_pos, ori_size)
 
                     if object_now != None:
-                            
+
                         if object_dict.get(AUTOKEY.IDs) != None and tottobid < len(object_dict[AUTOKEY.IDs]):
                             object_now.assignDefaultProperty("id", object_dict[AUTOKEY.IDs][tottobid])
+
                             id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]].copy(object_now)
                         else:
                             map_now.addObject_type(object_now)
@@ -1108,6 +1137,8 @@ def auto_func():
             if info_tagged_idset.issuperset([tobid]):
                 ids_now = tobject.returnOptionalProperty(AUTOKEY.IDs)
                 if ids_now != None:
+                    if ids_now == "":
+                        continue
                     ids_now_l = ids_now.split(AUTOKEY.IDs_seg)
                     ids_now_l = [id_mapping[ids_nown] for ids_nown in ids_now_l]
                     ids_now = f"{AUTOKEY.IDs_seg}".join(ids_now_l)

@@ -41,6 +41,7 @@ class INFOKEY:
     numDetect_info = "numDetect_info"
     numDetect_cite = "numDetect_cite"
     dictionary_info = "dictionary_info"
+    multiRemove_info = "multiRemove_info"
 
     setTeam = "setTeam"
     setidTeam = "setidTeam"
@@ -49,6 +50,7 @@ class INFOKEY:
     minUnits = "minUnits"
     maxUnits = "maxUnits"
     reset = "reset"
+    warmup = "warmup"
 
     color = "color"
     text = "text"

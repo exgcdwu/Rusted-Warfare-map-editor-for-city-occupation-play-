@@ -254,5 +254,3 @@ multiText_info = {
     }
 }
 
-from pprint import pprint
-pprint(multiText_info)

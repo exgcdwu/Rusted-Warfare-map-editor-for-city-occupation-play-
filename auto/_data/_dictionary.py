@@ -16,14 +16,26 @@ dictionary_info_args_dict = OrderedDict()
 
 dictionary_info_args_dict[INFOKEY.prefix] = str
 dictionary_info_args_dict[INFOKEY.cite_name] = str
+dictionary_info_args_dict[INFOKEY.isprefixseg] = bool
+
+dictionary_info_default_args_dict = {
+    INFOKEY.isprefixseg: "true", 
+}
 
 dictionary_info = {
     INFOKEY.dictionary_info:{
         AUTOKEY.info_args:dictionary_info_args_dict, 
+        AUTOKEY.default_args: dictionary_info_default_args_dict, 
         AUTOKEY.args: [
             ("cite_name", str)
         ], 
+        AUTOKEY.seg: ".", 
+        AUTOKEY.opargs_prefix_len:1, 
+        AUTOKEY.opargs: {}, 
+        AUTOKEY.opargs_seg: ",", 
         AUTOKEY.prefix: AUTOKEY.prefix, 
+        AUTOKEY.isprefixseg: AUTOKEY.isprefixseg, 
+        AUTOKEY.operation:[], 
         AUTOKEY.no_check: True
     }
 }
