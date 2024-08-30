@@ -563,14 +563,17 @@ def auto_func():
     parser.add_argument("--citetrans", 
                         action = 'store_true', help = 'Cite translation(other objects)')
 
-    debug_pdb()
-
     dev_null = open(os.devnull, "w")
     global aeval
 
     aeval = Interpreter(err_writer = dev_null, writer = dev_null, user_symbols = USER_SYMBOLS)
 
     args = parser.parse_args()
+
+    global isdebug
+    isdebug = args.debug
+    debug_pdb()
+
     output_path = args.map_path[0] if args.output == "|" else args.output[0]
     sys.path.append("\\".join(args.infopath.split("\\")[:-1]))
 
@@ -586,8 +589,6 @@ def auto_func():
     isdelete_all = args.DeleteAll
     global isreset
     isreset = args.reset
-    global isdebug
-    isdebug = args.debug
     isverbose = args.verbose
     global isresetid
     isresetid = args.resetid
