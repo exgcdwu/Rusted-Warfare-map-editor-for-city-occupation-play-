@@ -563,6 +563,8 @@ def auto_func():
     parser.add_argument("--citetrans", 
                         action = 'store_true', help = 'Cite translation(other objects)')
 
+    debug_pdb()
+
     dev_null = open(os.devnull, "w")
     global aeval
 
