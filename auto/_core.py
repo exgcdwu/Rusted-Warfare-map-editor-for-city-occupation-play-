@@ -524,7 +524,7 @@ def auto_func():
                         help='The input path of RW map file.')
     parser.add_argument("--infopath", 
                         action = "store", metavar = "file", type = str, nargs = 1, 
-                        required = False, default = current_dir_path + "\\_data",  
+                        required = False, default = current_file_path[:-8] + "_data",  
                         help = "The file's path which has information's mode variable|current_file_path"
                         )
     parser.add_argument("--infovar", 
@@ -575,11 +575,15 @@ def auto_func():
     debug_pdb()
 
     output_path = args.map_path[0] if args.output == "|" else args.output[0]
-    sys.path.append("\\".join(args.infopath.split("\\")[:-1]))
 
-    module_name = ".".join(".".join(args.infopath.split("\\")[-2:]).split("."))
-    if module_name[-1] == "py":
-        module_name = module_name[:-1]
+    module_fa = os.path.dirname(args.infopath)
+
+    module_name = os.path.basename(args.infopath)
+
+    sys.path.append(module_fa)
+
+    if module_name[-3:] == ".py":
+        module_name = module_name[:-3]
     info_file = importlib.import_module(module_name)
 
     info_now_pre = getattr(info_file, args.infovar, 'Not Found')
