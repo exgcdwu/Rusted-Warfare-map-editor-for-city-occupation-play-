@@ -473,6 +473,7 @@ def IDs_balance(tobject_now:rw.case.TObject, tottob:int)->list:
 
 def is_tagged_tobject__newname__myinfo__info(tobject_name:str, info_dict, info_now):
     ischange = False
+    tobject_name_to_solve = ""
     for key, info in info_dict.items():
         prefix_now = info[AUTOKEY.prefix]
         info_key = info[AUTOKEY.info]
