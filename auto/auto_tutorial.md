@@ -59,6 +59,27 @@
 [github Termux](https://github.com/termux/termux-app)
 [Termux下载](https://github.com/termux/termux-packages/releases/download/bootstrap-2024.08.18-r1%2Bapt-android-7/bootstrap-arm.zip)
 
+termux python环境及包下载（需要一段时间，保持网络畅通）：
+
+    pkg update -y
+    pkg install -y python
+    pkg install -y python-numpy
+    pkg install -y python-pillow
+    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple #（如果清华镜像不可以，换成别的镜像比如https://pypi.mirrors.ustc.edu.cn/simple也行）
+    pip install asteval
+    pip install rwmapeditor-exgcdwu==1.6.1 --no-deps
+
+需要获取读取存储权限：
+
+    termux-setup-storage
+
+之后就可以使用termux使用triggerauto处理地图文件了。
+
+如果想要更改版本，使用如下命令行。
+
+    pip uninstall -y rwmapeditor-exgcdwu
+    pip install rwmapeditor-exgcdwu==1.6.1 --no-deps #（新版本，大于等于1.6.1）
+
 ## info宾语介绍
 
 info宾语是执行一切自动转换的基础，地图作者需要将生成的不同组宾语中相同的参数放入info宾语，并将不同的参数设置为在标记宾语中才会填写的参数。
