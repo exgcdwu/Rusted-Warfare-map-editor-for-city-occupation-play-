@@ -57,9 +57,9 @@
 
 还可以使用Termux来在手机上操作python和命令行。
 [github Termux](https://github.com/termux/termux-app)
-[Termux下载](https://github.com/termux/termux-packages/releases/download/bootstrap-2024.08.18-r1%2Bapt-android-7/bootstrap-arm.zip)
 
-termux python环境及包下载（需要一段时间，保持网络畅通）：
+termux python环境及包下载（需要一段时间，保持网络畅通）（中间出现的提问选项，全部输入y再回车）：
+*感谢kend在使用termux安装python包方面的帮助*
 
     pkg update -y
     pkg install -y python

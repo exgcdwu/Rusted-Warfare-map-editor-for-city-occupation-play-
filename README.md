@@ -18,6 +18,8 @@ python实现铁锈地图文件地块编辑和宾语编辑。
 
 宾语自动化命令行系统正在添加。
 
+宾语自动化命令行系统app正在开发。
+
 ## 安装
 
 ```console
@@ -34,9 +36,13 @@ pip install rwmapeditor-exgcdwu
 
 【正在开发的城夺地图和代码】
 
-[城夺宾语自动化命令行教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/auto_tutorial.md)
+[宾语自动化命令行教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/auto_tutorial.md)
 
 【一个结合Tiled或者notTiled共同使用的宾语生成器，使用命令行操作，基于该库开发】
+
+[宾语自动化app](https://github.com/Delta-Water/RustedWarfare-Development-Tools)
+
+【宾语自动化命令行可能进行图形化，敬请期待。感谢print("")的帮助。】
 
 ## 其他
 
