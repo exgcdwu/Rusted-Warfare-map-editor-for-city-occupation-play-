@@ -76,6 +76,7 @@ inadd_info = {
         AUTOKEY.info_args:inadd_info_args_dict, 
         AUTOKEY.default_args:inadd_info_default_args_dict, 
         AUTOKEY.optional: inadd_info_optional_set, 
+        AUTOKEY.prefix: INFOKEY.prefix, 
         AUTOKEY.isinfo_sub: True, 
         AUTOKEY.no_check: True
     }

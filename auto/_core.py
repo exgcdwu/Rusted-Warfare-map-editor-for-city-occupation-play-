@@ -591,8 +591,6 @@ def auto_func():
 
     info_now_pre = getattr(info_file, args.infovar, 'Not Found')
 
-    debug_pdb()
-
     isdelete = args.DeleteAllSym
     isdelete_d = args.delete
     isdelete_all = args.DeleteAll
@@ -602,6 +600,8 @@ def auto_func():
     global isresetid
     isresetid = args.resetid
     iscitetrans = args.citetrans
+
+    debug_pdb()
 
     standard_out(isverbose, "\t\t\t\t------------------------------")
     standard_out(isverbose, "\t\t\t\t--------Initialization--------")
@@ -949,7 +949,6 @@ def auto_func():
     while index_tobject < len(tobject_list):
         tobject = tobject_list[index_tobject]
         index_tobject = index_tobject + 1
-        print(index_tobject)
 
         tobject_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
         tobject_id = tobject.returnDefaultProperty("id")

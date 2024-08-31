@@ -68,7 +68,7 @@ bdtext_info = {
         AUTOKEY.info_args:bdtext_info_args_dict, 
         AUTOKEY.default_args:bdtext_info_default_args_dict, 
         AUTOKEY.optional: bdtext_info_optional_set, 
-        AUTOKEY.prefix: AUTOKEY.prefix, 
+        AUTOKEY.prefix: INFOKEY.prefix, 
         AUTOKEY.isinfo_sub: True
     }
 }

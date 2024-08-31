@@ -200,7 +200,7 @@ multiRemove_info_operation_list = \
                 AUTOKEY.offset: "offset_now_{i}", 
                 AUTOKEY.offsetsize: "offsetsize_now_{i}", 
                 AUTOKEY.name: ("{name_now}", "name_now_exist", AUTOKEY.brace), 
-                AUTOKEY.type: rw.const.OBJECTTYPE.mapText, 
+                AUTOKEY.type: rw.const.OBJECTTYPE.unitRemove, 
                 AUTOKEY.optional: multiRemove_info_operation_optional
             }
         ] + \
