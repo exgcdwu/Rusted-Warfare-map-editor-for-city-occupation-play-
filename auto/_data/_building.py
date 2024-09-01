@@ -94,23 +94,6 @@ building_info_operation_list = \
     [
         {
             AUTOKEY.operation_type: AUTOKEY.object, 
-            AUTOKEY.offset: f"{INFOKEY.addoffset}", 
-            AUTOKEY.offsetsize: f"{INFOKEY.addoffsetsize}", 
-            AUTOKEY.name: "{" + f"{INFOKEY.addname}" + "}", 
-            AUTOKEY.type: rw.const.OBJECTTYPE.unitAdd, 
-            AUTOKEY.optional: {
-                rw.const.OBJECTOP.activatedBy: "{" + f"{INFOKEY.idprefix}" + "0}", 
-                rw.const.OBJECTOP.warmup: "{" + f"{INFOKEY.addWarmup}" + "}", 
-                rw.const.OBJECTOP.resetActivationAfter: "{" + f"{INFOKEY.addReset}" + "}", 
-                rw.const.OBJECTOP.spawnUnits: "{" + f"{INFOKEY.unit}" + "}*{" + f"{INFOKEY.spawnnum}" + "}", 
-                rw.const.OBJECTOP.team: "{" + f"{INFOKEY.team}" + "}", 
-                rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.isshowOnMap}", AUTOKEY.brace), 
-            }
-        }
-    ] + \
-    [
-        {
-            AUTOKEY.operation_type: AUTOKEY.object, 
             AUTOKEY.offset: f"{INFOKEY.detectoffset}", 
             AUTOKEY.offsetsize: f"{INFOKEY.detectoffsetsize}", 
             AUTOKEY.name: "{" + f"{INFOKEY.detectname}" + "}", 
@@ -123,6 +106,23 @@ building_info_operation_list = \
                 rw.const.OBJECTOP.onlyBuildings: ("{" + f"{INFOKEY.isonlybuilding}" + "}", f"{INFOKEY.isonlybuilding}", AUTOKEY.exist), 
                 rw.const.OBJECTOP.minUnits: "{" + f"{INFOKEY.minUnits}" + "}", 
                 rw.const.OBJECTOP.maxUnits: ("{" + f"{INFOKEY.maxUnits}" + "}", f"{INFOKEY.maxUnits}", AUTOKEY.exist), 
+            }
+        }
+    ] + \
+    [
+        {
+            AUTOKEY.operation_type: AUTOKEY.object, 
+            AUTOKEY.offset: f"{INFOKEY.addoffset}", 
+            AUTOKEY.offsetsize: f"{INFOKEY.addoffsetsize}", 
+            AUTOKEY.name: "{" + f"{INFOKEY.addname}" + "}", 
+            AUTOKEY.type: rw.const.OBJECTTYPE.unitAdd, 
+            AUTOKEY.optional: {
+                rw.const.OBJECTOP.activatedBy: "{" + f"{INFOKEY.idprefix}" + "0}", 
+                rw.const.OBJECTOP.warmup: "{" + f"{INFOKEY.addWarmup}" + "}", 
+                rw.const.OBJECTOP.resetActivationAfter: "{" + f"{INFOKEY.addReset}" + "}", 
+                rw.const.OBJECTOP.spawnUnits: "{" + f"{INFOKEY.unit}" + "}*{" + f"{INFOKEY.spawnnum}" + "}", 
+                rw.const.OBJECTOP.team: "{" + f"{INFOKEY.team}" + "}", 
+                rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.isshowOnMap}", AUTOKEY.brace), 
             }
         }
     ]

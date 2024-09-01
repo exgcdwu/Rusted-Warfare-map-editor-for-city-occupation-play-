@@ -18,6 +18,7 @@ from auto._data._building import building_info
 from auto._data._numDetect import numDetect_info
 from auto._data._dictionary import dictionary_info
 from auto._data._multiRemove import multiRemove_info
+from auto._data._tree import tree_info
 
 auto_func_arg = {}
 auto_func_arg.update(object_info)
@@ -29,3 +30,4 @@ auto_func_arg.update(inadd_info)
 auto_func_arg.update(building_info)
 auto_func_arg.update(dictionary_info)
 auto_func_arg.update(multiRemove_info)
+auto_func_arg.update(tree_info)

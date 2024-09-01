@@ -42,6 +42,8 @@ class AUTOKEY:
     opargs_prefix_len = "opargs_prefix_len"
     ids = "ids"
     IDs = "IDs"
+    IDfa = "IDfa"
+    IDdep = "IDdep"
     operation = "operation"
     tobject = "tobject"
     offset = "offset"
@@ -53,6 +55,7 @@ class AUTOKEY:
     death = "death"
     isprefixseg = "isprefixseg"
     isdelete_sym = "isdelete_sym"
+    isdelete_all_sym = "isdelete_all_sym"
     info_prefix = "info_prefix"
     initial_brace = "initial_brace"
     default_brace = "default_brace"
@@ -90,13 +93,18 @@ class AUTOKEY:
     pdb_pause = "pdb_pause"
     error = "error"
     error_info = "error_info"
-    
-    normal_city_nexist_re = ".*_"
+
     opargs_sys_seg = "|"
     IDs_seg = ","
+    delete_op = ",d"
+    delete_all_op = ",D"
+
+    normal_city_nexist_re = ".*_"
     delete_symbol = ".*,d"
+    delete_all_symbol = ".*,D"
     not_useful_char = "[^A-Za-z0-9_{}]"
     not_useful_char_ad_point = "[^A-Za-z0-9_{}.]"
+    not_useful_char_ad_point_for_cite = "[^A-Za-z0-9_{}.]"
 
 cite_object_dict = {}
 
@@ -169,7 +177,7 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, id_to_tobject:dict, r
             else:
                 args_dict[info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]] = True
         else:
-            if prefix_now != "d":
+            if prefix_now != "d" and prefix_now != 'D':
                 standard_error(f"Unknown optional arguments in a tagged object.(name:{name}|,{prefix_now})", 7)
 
     tobject_ids = tobject.returnOptionalProperty(AUTOKEY.IDs)
@@ -201,10 +209,17 @@ def brace_one_translation(expression_b:str, dict_name:dict, seg_re:str)->str:
     expression_b_ans = expression_b_ans[1:]
     return expression_b_ans
 
+def brace_one_translation_cycle(expression_b:str, dict_name:dict, seg_re:str)->str:
+    expression_b_temp = ""
+    while expression_b_temp != expression_b:
+        expression_b_temp = expression_b
+        expression_b = brace_one_translation(expression_b, dict_name, seg_re)
+    return expression_b
+
 def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, ones:bool = False):
     #import pdb;pdb.set_trace()
     expression_b_origin = expression_b
-    expression_b = brace_one_translation(expression_b, cite_object_dict, AUTOKEY.not_useful_char_ad_point)
+    expression_b = brace_one_translation_cycle(expression_b, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite)
     expression_b_origin_now = expression_b
     expression_b = brace_one_translation(expression_b, dict_name, AUTOKEY.not_useful_char)
     while(True):
@@ -331,8 +346,9 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
         default_pro.update(tobject_args_translation(rw.const.OBJECTDE.type, operation[AUTOKEY.type], dict_name))
 
     optional_pro = {}
-    for key, value in operation[AUTOKEY.optional].items():
-        optional_pro.update(tobject_args_translation(key, value, dict_name))
+    if operation.get(AUTOKEY.optional) != None:
+        for key, value in operation[AUTOKEY.optional].items():
+            optional_pro.update(tobject_args_translation(key, value, dict_name))
 
     return rw.case.TObject("object", default_pro, optional_pro)
 
@@ -520,6 +536,10 @@ def tobject_ids_do(tobject:rw.case.TObject, myinfo, info, ids_now_dict, isreset)
             ids_now_dict[prefix_now] = max(ids_now_dict[prefix_now], 
                                                     tobject_prefix[index])
 
+def is_tagged_object_simple(tobject:rw.case.TObject):
+    object_type = tobject.returnDefaultProperty(rw.const.OBJECTDE.type)
+    isnewtaggedobject = (object_type == None or re.match(r"(?!.+)", object_type))
+    return isnewtaggedobject
 def auto_func():
     parser = argparse.ArgumentParser(
         description='Objects of Triggers are automatically processed by information\'s mode.')
@@ -563,8 +583,8 @@ def auto_func():
     parser.add_argument("--resetid", 
                         action = 'store_true', help = 'Reset the IDs of objects.')
     
-    parser.add_argument("--citetrans", 
-                        action = 'store_true', help = 'Cite translation(other objects)')
+    parser.add_argument("-c", "--citetrans", 
+                        action = 'store_true', help = 'Cite translation.(other objects)')
 
     dev_null = open(os.devnull, "w")
     global aeval
@@ -575,7 +595,6 @@ def auto_func():
 
     global isdebug
     isdebug = args.debug
-    debug_pdb()
 
     output_path = args.map_path[0] if args.output == "|" else args.output[0]
 
@@ -704,6 +723,7 @@ def auto_func():
 
                 # add default_args
                 info_dict_now[AUTOKEY.isdelete_sym] = bool(re.match(AUTOKEY.delete_symbol, info_name))
+                info_dict_now[AUTOKEY.isdelete_all_sym] = bool(re.match(AUTOKEY.delete_all_symbol, info_name))
                 default_brace = deepcopy(info.get(AUTOKEY.default_brace))
                 if info.get(AUTOKEY.default_args) != None:
                     for key_now, value in info[AUTOKEY.default_args].items():
@@ -910,7 +930,7 @@ def auto_func():
 
 
                 info_dict[info_dict_now[AUTOKEY.prefix]] = info_dict_now
-                if isdelete_all or isdelete or (isdelete_d and info_dict_now[AUTOKEY.isdelete_sym]):
+                if isdelete_all or isdelete or info_dict_now[AUTOKEY.isdelete_all_sym] or (isdelete_d and info_dict_now[AUTOKEY.isdelete_sym]):
                     dtobject.append(tobject)
                 else:
                     info_tagged_objects_exist.append(tobject)
@@ -942,9 +962,8 @@ def auto_func():
                 tobject_ids_do(tobject, myinfo, info, ids_now_dict, isreset)
 
     dtobject = []
-    
     tobject_list = [tobject for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
-                                                           rw.const.OBJECTDE.name: r".+"})]
+                                                           rw.const.OBJECTDE.name: r".+"}) if is_tagged_object_simple(tobject) and (tobject.returnOptionalProperty(AUTOKEY.IDdep) == None or tobject.returnOptionalProperty(AUTOKEY.IDdep) == '0')]
     index_tobject = 0
     while index_tobject < len(tobject_list):
         tobject = tobject_list[index_tobject]
@@ -978,17 +997,24 @@ def auto_func():
                 ischange = True
                 break
         if ischange:
+
+            if tobject.returnOptionalProperty(AUTOKEY.IDdep) == None:
+                tobject.assignOptionalProperty(AUTOKEY.IDdep, "0")
+            tobject_IDdep = int(tobject.returnOptionalProperty(AUTOKEY.IDdep))
             
             if myinfo.get(AUTOKEY.isinfo_sub) != None and myinfo.get(AUTOKEY.isinfo_sub) == True:
                 standard_error(f"Incorrect use of the subordinate info object.(ID:{tobject_id}, name:{tobject_name})", 2)
             isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
-            if isdelete_all or isdelete or (isdelete_sym and isdelete_d):
+            isdelete_all_sym = bool(re.match(AUTOKEY.delete_all_symbol, tobject_name)) or info[AUTOKEY.isdelete_all_sym]
+            if isdelete_all or isdelete or isdelete_all_sym or (isdelete_sym and isdelete_d):
                 dtobject.append(tobject)
             else:
-                info_tagged_objects_exist.append(tobject)
-            standard_out(isverbose and (not(isdelete_sym or isdelete_all)), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. Object generation...")
-            standard_out(isverbose and (isdelete_all and (not isdelete_sym)), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted...")
-            standard_out(isverbose and (isdelete_sym and(not isdelete_all)), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The objects will not be generated, existing ones will also be deleted...")
+                if tobject.returnOptionalProperty(AUTOKEY.IDfa) == None:
+                    info_tagged_objects_exist.append(tobject)
+            standard_out(isverbose and (not(isdelete_sym or isdelete_all or isdelete_all_sym)), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. Object generation...")
+            standard_out(isverbose and (isdelete_all or isdelete_all_sym), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted...")
+            standard_out(isverbose and (isdelete_sym and(not (isdelete_all or isdelete_all_sym))), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The objects will not be generated, existing ones will also be deleted...")
+
             if myinfo.get(AUTOKEY.ids) != None:
                 for thing in myinfo[AUTOKEY.ids]:
                     
@@ -1004,7 +1030,7 @@ def auto_func():
                         id_now = idprefix + str(ids_now_dict[idprefix])
                         idnow_list.append(id_now)
                         object_dict[thing[0] + str(i)] = id_now
-                        if (isdelete_sym or isdelete_all) and isreset:
+                        if (isdelete_sym or isdelete_all_sym or isdelete_all) and isreset:
                             continue
                         ids_now_dict[idprefix] = ids_now_dict[idprefix] + 1
                     tobject.assignOptionalProperty(idprefix, ",".join(idnow_list))
@@ -1019,7 +1045,7 @@ def auto_func():
                 tobject.returnDefaultProperty(rw.const.OBJECTDE.height)
             )
             #import pdb;pdb.set_trace()
-            if isdelete_all or isdelete_sym:
+            if isdelete_all or isdelete_all_sym or isdelete_sym:
                 if object_dict.get(AUTOKEY.IDs) != None:
                     for ids in object_dict[AUTOKEY.IDs]:
                         dtobject.append(id_to_tobject[ids])
@@ -1044,10 +1070,28 @@ def auto_func():
                     object_now = get_tobject(operation_now, object_dict, ori_pos, ori_size)
 
                     if object_now != None:
+                        
+                        isnewtaggedobject = is_tagged_object_simple(object_now)
+                        if isnewtaggedobject:
+                            if isdelete_sym:
+                                object_now.assignDefaultProperty(rw.const.OBJECTDE.name, object_now.returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_op)
+                            if isdelete_all_sym:
+                                object_now.assignDefaultProperty(rw.const.OBJECTDE.name, object_now.returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
+                            object_now.assignOptionalProperty(AUTOKEY.IDfa, tobject_id)
+                            object_now.assignOptionalProperty(AUTOKEY.IDdep, str(tobject_IDdep + 1))
+                            tobject_list.append(object_now)
 
                         if object_dict.get(AUTOKEY.IDs) != None and tottobid < len(object_dict[AUTOKEY.IDs]):
                             object_now.assignDefaultProperty("id", object_dict[AUTOKEY.IDs][tottobid])
-
+                            idnow_object:rw.case.TObject = deepcopy(id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]])
+                            if isnewtaggedobject:
+                                if is_tagged_object_simple(idnow_object):
+                                    object_now._optional_properties = deepcopy(idnow_object._optional_properties)
+                            else:
+                                if is_tagged_object_simple(idnow_object):
+                                    idnow_object.assignDefaultProperty(rw.const.OBJECTDE.name, idnow_object.returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
+                                    tobject_list.append(idnow_object)
+                                    map_now.addObject_type(idnow_object, isresetid = True)
                             id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]].copy(object_now)
                         else:
                             map_now.addObject_type(object_now)
@@ -1091,13 +1135,18 @@ def auto_func():
                 
             id_delete = IDs_balance(tobject, tottobid)
             for idnow in id_delete:
-                dtobject.append(id_to_tobject[idnow])
+                if is_tagged_object_simple(id_to_tobject[idnow]):
+                    id_to_tobject[idnow].assignDefaultProperty(rw.const.OBJECTDE.name, id_to_tobject[idnow].returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
+                    tobject_list.append(id_to_tobject[idnow])
+                else:
+                    dtobject.append(id_to_tobject[idnow])
+
             if object_dict.get(AUTOKEY.cite_name) != None:
                 for key, value in object_dict.items():
                     if cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + key) != None:
                         standard_error(f"Reference tags are duplicated. An object(ID:{tobject_id}, name:{tobject_name}, Cite:{object_dict[AUTOKEY.cite_name]})", 14)
                     cite_object_dict[object_dict[AUTOKEY.cite_name] + "." + key] = deepcopy(value)
-            
+      
 
     standard_out(isverbose and (isdelete_all or isdelete), "The tagged object is being deleted...")
     standard_out(isverbose and (isdelete_d), "The tagged object is being deleted if eligible...")
@@ -1110,6 +1159,8 @@ def auto_func():
             for key, value in tobject._default_properties.items():
                 value_now = mapvalue_to_value_basic(value)
                 if not isinstance(value_now, bool):
+                    
+
                     tobject.assignDefaultProperty(key, brace_one_translation(value_now, cite_object_dict, AUTOKEY.not_useful_char_ad_point))
             for key, value in tobject._optional_properties.items():
                 value_now = mapvalue_to_value_basic(value)
@@ -1121,11 +1172,26 @@ def auto_func():
     standard_out(isverbose, "\t\t\t\t----------------------------------------")
     
     standard_out(isverbose, "Info and tagged objects are rearranging...")
+    
+    tagged_object_list:list[rw.case.TObject] = []
+    maxIDdep = -1
+    for tobject in map_now.iterator_object_s():
+        if is_tagged_object_simple(tobject):
+            if tobject.returnOptionalProperty(AUTOKEY.IDdep) != None:
+                tagged_object_list.append(tobject)
+                maxIDdep = max(maxIDdep, int(tobject.returnOptionalProperty(AUTOKEY.IDdep)))
+    
+    IDdep_now = maxIDdep
+    for IDdep_now in range(maxIDdep, 0, -1):
+        for tobject in tagged_object_list:
+            if int(tobject.returnOptionalProperty(AUTOKEY.IDdep)) == IDdep_now:
+                map_now.delete_object_s(tobject)
+        for tobject in tagged_object_list:
+            if int(tobject.returnOptionalProperty(AUTOKEY.IDdep)) == IDdep_now:
+                map_now.addObject_type(tobject, isresetid = False)
 
-    info_tagged_idset = set()
     for info_tag in info_tagged_objects_exist:
         map_now.delete_object_s(info_tag)
-        info_tagged_idset.add(info_tag.returnDefaultProperty("id"))
     for info_tag in info_tagged_objects_exist:
         map_now.addObject_type(info_tag, isresetid = False)
 
@@ -1145,7 +1211,7 @@ def auto_func():
         id_now = 1
         for tobject in map_now.iterator_object_s():
             tobid = tobject.returnDefaultProperty("id")
-            if info_tagged_idset.issuperset([tobid]):
+            if is_tagged_object_simple(tobject):
                 ids_now = tobject.returnOptionalProperty(AUTOKEY.IDs)
                 if ids_now != None:
                     if ids_now == "":
@@ -1154,8 +1220,14 @@ def auto_func():
                     ids_now_l = [id_mapping[ids_nown] for ids_nown in ids_now_l]
                     ids_now = f"{AUTOKEY.IDs_seg}".join(ids_now_l)
                     tobject.assignOptionalProperty(AUTOKEY.IDs, ids_now)
+                
+                idfa_now = tobject.returnOptionalProperty(AUTOKEY.IDfa)
+                if idfa_now != None:
+                    tobject.assignOptionalProperty(AUTOKEY.IDfa, id_mapping[idfa_now])
+
             tobject.assignDefaultProperty("id", str(id_now))
             id_now = id_now + 1
+
         map_now.resetnextobjectid(isaboutnextobjectid = False)
 
     standard_out(isverbose, "New RW map is being establishing...")

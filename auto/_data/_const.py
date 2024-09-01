@@ -42,6 +42,7 @@ class INFOKEY:
     numDetect_cite = "numDetect_cite"
     dictionary_info = "dictionary_info"
     multiRemove_info = "multiRemove_info"
+    tree_info = "tree_info"
 
     setTeam = "setTeam"
     setidTeam = "setidTeam"

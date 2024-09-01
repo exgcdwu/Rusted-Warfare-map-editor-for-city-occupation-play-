@@ -103,7 +103,7 @@ teamDetect_info_operation_optional.update(DETECT_OPTION_OPERATION_OPTIONAL)
 
 teamDetect_info_operation_list = \
     operation_cycle_start("i", "0", f"i < {INFOKEY.lenidTeam}", "teamDetect_cycle1") + \
-        operation_cycle_start("j", "0", f"j < len({INFOKEY.setidTeam}[i])", "teamDetect_cycle2") + \
+        operation_cycle_start("j", "0", f"j < len({INFOKEY.setTeam}[i])", "teamDetect_cycle2") + \
             [
                 {
                     AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
