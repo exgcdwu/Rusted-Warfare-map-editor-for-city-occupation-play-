@@ -34,6 +34,7 @@ multiText_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
 
 multiText_info_args_dict[INFOKEY.args] = (list, list, str)
 multiText_info_args_dict[INFOKEY.opargs] = (list, list, str)
+multiText_info_args_dict[INFOKEY.brace] = (list, str)
 
 multiText_info_default_args_dict = {
     INFOKEY.name: "", 
@@ -42,7 +43,7 @@ multiText_info_default_args_dict = {
     INFOKEY.reset: "1s"
 }
 
-multiText_info_optional_set = set()
+multiText_info_optional_set = {INFOKEY.brace}
 
 multiText_info_optional_set.add(INFOKEY.isprefixseg)
 multiText_info_optional_set.add(INFOKEY.teamDetect_cite)
@@ -144,19 +145,20 @@ multiText_info_operation_list = \
             "lenText": "0"
         }
     ] + \
+    operation_pdb() + \
     operation_exist_if(INFOKEY.teamDetect_cite, "multiText_exist_if_teamDetect_cite") + \
         operation_if(INFOKEY.isdefaultText, "multiText_if_isdefaultText") + \
             [
                 {
                     AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                    "lenText": f"max(lenText, {INFOKEY.teamDetect_cite}.{INFOKEY.lenidTeam} + 1)"
+                    "lenText": "max(lenText,{" +  f"{INFOKEY.teamDetect_cite}" + "}." + f"{INFOKEY.lenidTeam}" + " + 1)"
                 }
             ] + \
         operation_else("multiText_if_isdefaultText") + \
             [
                 {
                     AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                    "lenText": f"max(lenText, {INFOKEY.teamDetect_cite}.{INFOKEY.lenidTeam})"
+                    "lenText": "max(lenText,{" +  f"{INFOKEY.teamDetect_cite}" + "}." + f"{INFOKEY.lenidTeam}" + ")"
                 }
             ] + \
         operation_elseend("multiText_if_isdefaultText") + \
@@ -165,7 +167,7 @@ multiText_info_operation_list = \
         [
             {
                 AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                "lenText": f"max(lenText, {INFOKEY.numDetect_cite}.{INFOKEY.lenidNum})"
+                    "lenText": "max(lenText,{" +  f"{INFOKEY.numDetect_cite}" + "}." + f"{INFOKEY.lenidNum}" + ")"
             }
         ] + \
     operation_ifend("multiText_exist_if_numDetect_cite") + \
@@ -178,7 +180,7 @@ multiText_info_operation_list = \
         ] + \
         operation_list_join_quote(f"{INFOKEY.acti}", f"{INFOKEY.acti}") + \
     operation_ifend("multiText_exist_if_acti") + \
-    operation_exist_if(INFOKEY.acti,  "multiText_exist_if_deacti") + \
+    operation_exist_if(INFOKEY.deacti,  "multiText_exist_if_deacti") + \
         [
             {
                 AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
@@ -197,21 +199,21 @@ multiText_info_operation_list = \
         operation_list_assign(f"{INFOKEY.text}", "i", "text_now", "multiText") + \
         operation_list_assign(f"{INFOKEY.textsize}", "i", "textsize_now", "multiText") + \
         operation_exist_if(f"{INFOKEY.teamDetect_cite}", "multiText_exist_if_teamDetect_cite_assign") + \
-            operation_if(f"i < {INFOKEY.teamDetect_cite}.{INFOKEY.lenidTeam}", "multiText_if_teamDetect_cite_assign_acti", 1) + \
-                operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", f"{INFOKEY.teamDetect_cite}.{INFOKEY.setidTeam}" + "{i}_0", "multiText", "actiids_addteamDetect") + \
+            operation_if("i < {" + f"{INFOKEY.teamDetect_cite}" + "}." + f"{INFOKEY.lenidTeam}", "multiText_if_teamDetect_cite_assign_acti", 1) + \
+                operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{i}_0", "multiText", "actiids_addteamDetect") + \
                 operation_typeset_expression(f"{INFOKEY.acti}_now_exist", "True") + \
                 operation_typeset_expression(f"{INFOKEY.acti}_now", f"{INFOKEY.acti}_now_" + "{i}") + \
-            operation_elseif(f"i == {INFOKEY.teamDetect_cite}.{INFOKEY.lenidTeam}", "multiText_if_teamDetect_cite_assign_acti", 2) + \
-                operation_cycle_start("j", "0", f"j < {INFOKEY.teamDetect_cite}.{INFOKEY.lenidTeam}", "multiText_cycle_teamDetect_cite_assign_deacti") + \
-                    operation_ids_assign(f"{INFOKEY.deacti}_now_exist", f"{INFOKEY.deacti}_now_" + "{i}", f"{INFOKEY.teamDetect_cite}.{INFOKEY.setidTeam}" + "{j}_0", "multiText", "deactiids_addteamDetect") + \
+            operation_elseif("i == {" + f"{INFOKEY.teamDetect_cite}" + "}.{" + f"{INFOKEY.lenidTeam}" + "}", "multiText_if_teamDetect_cite_assign_acti", 2) + \
+                operation_cycle_start("j", "0", "j < {" + f"{INFOKEY.teamDetect_cite}" + "}." + f"{INFOKEY.lenidTeam}", "multiText_cycle_teamDetect_cite_assign_deacti") + \
+                    operation_ids_assign(f"{INFOKEY.deacti}_now_exist", f"{INFOKEY.deacti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{j}_0", "multiText", "deactiids_addteamDetect") + \
                     operation_typeset_expression(f"{INFOKEY.deacti}_now_exist", "True") + \
                     operation_typeset_expression(f"{INFOKEY.deacti}_now", f"{INFOKEY.deacti}_now_" + "{i}") + \
                 operation_cycle_end("j", "j + 1", "multiText_cycle_teamDetect_cite_assign_deacti") + \
             operation_ifend("multiText_if_teamDetect_cite_assign_acti", 3) + \
         operation_ifend("multiText_exist_if_teamDetect_cite_assign") + \
         operation_exist_if(f"{INFOKEY.numDetect_cite}", "multiText_exist_if_numDetect_cite_assign") + \
-            operation_if(f"i < {INFOKEY.numDetect_cite}.{INFOKEY.lenidNum}", "multiText_if_numDetect_cite_assign_acti") + \
-                operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", f"{INFOKEY.numDetect_cite}.{INFOKEY.setidNum}" + "{i}_0", "multiText", "actiids_addnumDetect") + \
+            operation_if("i < {" + f"{INFOKEY.numDetect_cite}" + "}" + f".{INFOKEY.lenidNum}", "multiText_if_numDetect_cite_assign_acti") + \
+                operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.numDetect_cite}" + "}" + f".{INFOKEY.setidNum}" + "{i}_0", "multiText", "actiids_addnumDetect") + \
                 operation_typeset_expression(f"{INFOKEY.acti}_now_exist", "True") + \
                 operation_typeset_expression(f"{INFOKEY.acti}_now", f"{INFOKEY.acti}_now_" + "{i}") + \
             operation_ifend("multiText_if_numDetect_cite_assign_acti") + \
@@ -226,7 +228,8 @@ multiText_info_operation_list = \
                 AUTOKEY.optional: multiText_info_operation_optional
             }
         ] + \
-    operation_cycle_end("i", "i + 1", "multiText_cycle_lenText")
+    operation_cycle_end("i", "i + 1", "multiText_cycle_lenText") + \
+    BRACE_OPERATION_END
 
 
 

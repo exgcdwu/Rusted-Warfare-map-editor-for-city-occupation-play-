@@ -224,12 +224,11 @@ city_info_ids = [
 ifvar
 ifend_tag:str
 
-### typeset
+### typedelete
 
-将其他键值对的值全部转换为totype类型，导入。键值对中的键将进行字符串翻译。
+将其他键值对的值全部进行表达式计算，导入。键值对中的键将进行字符串翻译。
 
 参数：
-totype
 其他参数
 
 ### typeset_expression
@@ -237,6 +236,7 @@ totype
 将其他键值对的值全部进行表达式计算，导入。键值对中的键将进行字符串翻译。
 
 参数：
+depth：键的翻译深度，不填默认1024层。
 其他参数
 
 ### changetype

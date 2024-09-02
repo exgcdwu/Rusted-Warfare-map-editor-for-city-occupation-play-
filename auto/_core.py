@@ -1,6 +1,6 @@
 from typing import Union
 from copy import deepcopy
-import re
+import regex as re
 import os
 from pprint import pprint
 import argparse
@@ -26,7 +26,8 @@ CLASS_DICT = {
 def aeval_globals(name):
     return CLASS_DICT[name]
 
-USER_SYMBOLS = {"aeval_globals": aeval_globals}
+USER_SYMBOLS = {"aeval_globals": aeval_globals, "e": "e", "id": "id"}
+MAXTRANSDEPTH = 1024
 
 class AUTOKEY:
     info_args = "info_args"
@@ -62,6 +63,7 @@ class AUTOKEY:
     var_dependent = "var_dependent"
     no_check = "no_check"
     cite_name = "cite_name"
+    depth = "depth"
 
     operation_type = "operation_type"
     object = "object"
@@ -104,7 +106,7 @@ class AUTOKEY:
     delete_all_symbol = ".*,D"
     not_useful_char = "[^A-Za-z0-9_{}]"
     not_useful_char_ad_point = "[^A-Za-z0-9_{}.]"
-    not_useful_char_ad_point_for_cite = "[^A-Za-z0-9_{}.]"
+    not_useful_char_ad_point_for_cite = "[^A-Za-z0-9_{}.]|(?<=[.][A-Za-z0-9_{}]*)[.]"
 
 cite_object_dict = {}
 
@@ -216,26 +218,27 @@ def brace_one_translation_cycle(expression_b:str, dict_name:dict, seg_re:str)->s
         expression_b = brace_one_translation(expression_b, dict_name, seg_re)
     return expression_b
 
-def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, ones:bool = False):
+def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, ones:bool = False, depth = MAXTRANSDEPTH):
     #import pdb;pdb.set_trace()
     expression_b_origin = expression_b
     expression_b = brace_one_translation_cycle(expression_b, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite)
     expression_b_origin_now = expression_b
-    expression_b = brace_one_translation(expression_b, dict_name, AUTOKEY.not_useful_char)
-    while(True):
+    expression_b = brace_one_translation(expression_b, dict_name, AUTOKEY.not_useful_char_ad_point)
+    trans_dep_now = 1
+    while(trans_dep_now < depth):
         if expression_b_origin_now == expression_b:
             break
         expression_b_origin_now = expression_b
-        expression_b = brace_one_translation(expression_b, cite_object_dict, AUTOKEY.not_useful_char_ad_point)
+        expression_b = brace_one_translation_cycle(expression_b, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite)
         if expression_b_origin_now == expression_b:
             break
         expression_b_origin_now = expression_b
-        expression_b = brace_one_translation(expression_b, dict_name, AUTOKEY.not_useful_char)
-    '''
-    expression_b_origin = expression_b
-    expression_b = brace_one_translation(expression_b, cite_object_dict, AUTOKEY.not_useful_char_ad_point)
-    expression_b = brace_one_translation(expression_b, dict_name, AUTOKEY.not_useful_char)
-    '''
+        expression_b = brace_one_translation(expression_b, dict_name, AUTOKEY.not_useful_char_ad_point)
+
+        trans_dep_now = trans_dep_now + 1
+
+    if trans_dep_now == MAXTRANSDEPTH:
+        standard_error(f"References occur in a loop(more than 1024).({expression_b})", 16)
 
     if (prev or expression_b_origin != expression_b) and (not ones):
         expression_b = expression_translation(expression_b, dict_name, False)
@@ -248,17 +251,17 @@ def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, ones:b
             return expression_b
         return expression_b_temp
 
-def expression_translation(expression_s:str, dict_name:dict, prev:bool = True):
-    expression_s_now = str_translation(expression_s, dict_name)
+def expression_translation(expression_s:str, dict_name:dict, prev:bool = True, depth = MAXTRANSDEPTH):
+    expression_s_now = str_translation(expression_s, dict_name, depth = depth)
     if prev or expression_s != expression_s_now:
-        return brace_translation(expression_s_now, dict_name, False)
+        return brace_translation(expression_s_now, dict_name, False, depth = depth)
     else:
         return expression_s_now
         
     
 
 
-def str_translation(value:Union[str, bool], dict_name:dict)->str:
+def str_translation(value:Union[str, bool], dict_name:dict, depth = MAXTRANSDEPTH)->str:
     if isinstance(value, bool):
         return value_to_mapvalue(value, bool)
     if isinstance(value, dict):
@@ -284,7 +287,7 @@ def str_translation(value:Union[str, bool], dict_name:dict)->str:
     value_ans = value[0:index_list[0][0]]
     index_list.append((len(value), len(value)))
     for index in range(len(index_list) - 1):
-        value_ans = value_ans + type_to_str(brace_translation(value[index_list[index][0] + 1:index_list[index][1]], dict_name), str) + value[index_list[index][1] + 1:index_list[index + 1][0]]
+        value_ans = value_ans + type_to_str(brace_translation(value[index_list[index][0] + 1:index_list[index][1]], dict_name, depth = depth), str) + value[index_list[index][1] + 1:index_list[index + 1][0]]
     return value_ans
 
 def tobject_args_translation(key:str, value:str, dict_name:dict)->str:
@@ -802,9 +805,10 @@ def auto_func():
                                     else:
                                         object_dict[str_translation(key_n, object_dict)] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_expression:
+                            depth_now = MAXTRANSDEPTH if operation_now.get(AUTOKEY.depth) == None else operation_now[AUTOKEY.depth]
                             for key_n, value in operation_now.items():
-                                if key_n != AUTOKEY.operation_type:
-                                    object_dict[str_translation(key_n, object_dict)] = brace_translation(value, object_dict)
+                                if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.depth:
+                                    object_dict[str_translation(key_n, object_dict, depth = depth_now)] = brace_translation(value, object_dict)
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.changetype:
                             for key_n in operation_now[AUTOKEY.keyname_list]:
                                 str_trans = str_translation(key_n, object_dict)
@@ -897,7 +901,7 @@ def auto_func():
                         if not isend:
                             continue
                     if args_dict.get(key_now) == None and (not info[AUTOKEY.isinfo_sub]):
-                        standard_error(f"A required argument is missing in an info object.({key_now})", 6)
+                        standard_error(f"A required argument is missing in an info object.({str(key_now)})", 6)
                 
                 if len(tobject_temp._optional_properties) != 0 and info[AUTOKEY.no_check] == False:
                         standard_error("Unknown arguments below in an info object.", 3, f"{tobject_temp._optional_properties}")
@@ -1115,9 +1119,10 @@ def auto_func():
                             else:
                                 object_dict[str_translation(key, object_dict)] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_expression:
-                    for key, value in operation_now.items():
-                        if key != AUTOKEY.operation_type:
-                            object_dict[str_translation(key, object_dict)] = brace_translation(value, object_dict)
+                            depth_now = MAXTRANSDEPTH if operation_now.get(AUTOKEY.depth) == None else operation_now[AUTOKEY.depth]
+                            for key_n, value in operation_now.items():
+                                if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.depth:
+                                    object_dict[str_translation(key_n, object_dict, depth = depth_now)] = brace_translation(value, object_dict)
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.changetype:
                     for key in operation_now[AUTOKEY.keyname_list]:
                         str_trans = str_translation(key, object_dict)
@@ -1132,7 +1137,7 @@ def auto_func():
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.pdb_pause:
                     debug_pdb(object_dict)
                 index = index + 1
-                
+
             id_delete = IDs_balance(tobject, tottobid)
             for idnow in id_delete:
                 if is_tagged_object_simple(id_to_tobject[idnow]):
@@ -1153,19 +1158,18 @@ def auto_func():
     for tobject in dtobject:
         map_now.delete_object_s(tobject)
 
+    debug_pdb()
     if iscitetrans:
         standard_out(isverbose, "Other objects are being translated by cite.")
         for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(.+)"}):
             for key, value in tobject._default_properties.items():
                 value_now = mapvalue_to_value_basic(value)
                 if not isinstance(value_now, bool):
-                    
-
-                    tobject.assignDefaultProperty(key, brace_one_translation(value_now, cite_object_dict, AUTOKEY.not_useful_char_ad_point))
+                    tobject.assignDefaultProperty(key, brace_one_translation_cycle(value_now, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite))
             for key, value in tobject._optional_properties.items():
                 value_now = mapvalue_to_value_basic(value)
                 if not isinstance(value_now, bool):
-                    tobject.assignOptionalProperty(key, brace_one_translation(value_now, cite_object_dict, AUTOKEY.not_useful_char_ad_point))
+                    tobject.assignOptionalProperty(key, brace_one_translation_cycle(value_now, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite))
 
     standard_out(isverbose, "\t\t\t\t----------------------------------------")
     standard_out(isverbose, "\t\t\t\t--------Rearrangement and output--------")
@@ -1232,8 +1236,6 @@ def auto_func():
 
     standard_out(isverbose, "New RW map is being establishing...")
     map_now.write_file(output_path)
-
-    debug_pdb()
 
     dev_null.close()
 

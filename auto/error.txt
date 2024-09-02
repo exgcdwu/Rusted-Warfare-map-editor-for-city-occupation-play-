@@ -16,3 +16,4 @@ ERROR code:
 13: An optional argument of the info object is invalid.
 14: Reference tags are duplicated.
 15: operation tags are duplicated.
+16：References occur in a loop.

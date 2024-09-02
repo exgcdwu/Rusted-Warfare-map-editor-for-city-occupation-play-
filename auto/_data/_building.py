@@ -45,6 +45,7 @@ building_info_args_dict[INFOKEY.cite_name] = str
 
 building_info_args_dict[INFOKEY.args] = (list, list, str)
 building_info_args_dict[INFOKEY.opargs] = (list, list, str)
+building_info_args_dict[INFOKEY.brace] = (list, str)
 
 building_info_args_dict.update(bdtext_info_args_dict)
 building_info_args_dict.update(inadd_info_args_dict)
@@ -68,7 +69,7 @@ building_info_default_args_dict.pop(f"{INFOKEY.isinadd}", "")
 building_info_optional_set = {
     INFOKEY.isprefixseg, INFOKEY.maxUnits, INFOKEY.args, INFOKEY.opargs, 
     INFOKEY.inadd_prefix, INFOKEY.bdtext_prefix, INFOKEY.isonlybuilding, 
-    INFOKEY.isshowOnMap, INFOKEY.cite_name
+    INFOKEY.isshowOnMap, INFOKEY.cite_name, INFOKEY.brace
 }
 
 building_info_optional_set.update(bdtext_info_optional_set)
@@ -125,7 +126,8 @@ building_info_operation_list = \
                 rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.isshowOnMap}", AUTOKEY.brace), 
             }
         }
-    ]
+    ] + \
+    BRACE_OPERATION_END
 
 building_info_operation_list = building_info_operation_list + bdtext_info_operation_list
 building_info_operation_list = building_info_operation_list + inadd_info_operation_list

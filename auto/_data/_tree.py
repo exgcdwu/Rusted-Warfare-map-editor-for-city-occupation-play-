@@ -24,6 +24,7 @@ tree_info_args_dict[INFOKEY.idprefix] = (list, list, str)
 tree_info_args_dict[INFOKEY.args] = (list, list, str)
 tree_info_args_dict[INFOKEY.opargs] = (list, list, str)
 tree_info_args_dict[INFOKEY.isprefixseg] = bool
+tree_info_args_dict[INFOKEY.brace] = (list, str)
 
 tree_info_default_args_dict = {
     INFOKEY.offset: "0 0", 
@@ -32,7 +33,7 @@ tree_info_default_args_dict = {
 
 tree_info_optional_set = {
     INFOKEY.cite_name, INFOKEY.offset, INFOKEY.offsetsize, INFOKEY.idprefix, 
-    INFOKEY.args, INFOKEY.opargs, INFOKEY.isprefixseg
+    INFOKEY.args, INFOKEY.opargs, INFOKEY.isprefixseg, INFOKEY.brace
 }
 
 IDPREFIX_PRE_OPERATION = \
@@ -64,7 +65,8 @@ tree_info_operation_list = \
                 }
             ] + \
         operation_cycle_end("i", "i + 1", "tree_operation_cycle_1") + \
-    operation_ifend("tree_operation_if_1")
+    operation_ifend("tree_operation_if_1") + \
+    BRACE_OPERATION_END
 
 tree_info = {
     INFOKEY.tree_info:{

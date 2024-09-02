@@ -31,6 +31,7 @@ multiRemove_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
 
 multiRemove_info_args_dict[INFOKEY.args] = (list, list, str)
 multiRemove_info_args_dict[INFOKEY.opargs] = (list, list, str)
+multiRemove_info_args_dict[INFOKEY.brace] = (list, str)
 
 multiRemove_info_default_args_dict = {
     INFOKEY.name: "", 
@@ -38,7 +39,7 @@ multiRemove_info_default_args_dict = {
     INFOKEY.offsetsize: "0 0"
 }
 
-multiRemove_info_optional_set = set()
+multiRemove_info_optional_set = {INFOKEY.brace}
 
 multiRemove_info_optional_set.add(INFOKEY.isprefixseg)
 multiRemove_info_optional_set.add(INFOKEY.teamDetect_cite)
@@ -141,7 +142,7 @@ multiRemove_info_operation_list = \
         [
             {
                 AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                "lenRemove": f"max(lenRemove, {INFOKEY.teamDetect_cite}.{INFOKEY.lenidTeam})"
+                "lenRemove": f"max(lenRemove, " + "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.lenidTeam})"
             }
         ] + \
     operation_ifend("multiRemove_exist_if_teamDetect_cite") + \
@@ -149,7 +150,7 @@ multiRemove_info_operation_list = \
         [
             {
                 AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                "lenRemove": f"max(lenRemove, {INFOKEY.numDetect_cite}.{INFOKEY.lenidNum})"
+                "lenRemove": f"max(lenRemove, " + "{" + f"{INFOKEY.numDetect_cite}" + "}" + f".{INFOKEY.lenidNum})"
             }
         ] + \
     operation_ifend("multiRemove_exist_if_numDetect_cite") + \
@@ -162,7 +163,7 @@ multiRemove_info_operation_list = \
         ] + \
         operation_list_join_quote(f"{INFOKEY.acti}", f"{INFOKEY.acti}") + \
     operation_ifend("multiRemove_exist_if_acti") + \
-    operation_exist_if(INFOKEY.acti,  "multiRemove_exist_if_deacti") + \
+    operation_exist_if(INFOKEY.deacti,  "multiRemove_exist_if_deacti") + \
         [
             {
                 AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
@@ -181,15 +182,15 @@ multiRemove_info_operation_list = \
         operation_list_assign(f"{INFOKEY.reset}", "i", "reset_now", "multiRemove") + \
         operation_list_assign(f"{INFOKEY.warmup}", "i", "warmup_now", "multiRemove") + \
         operation_exist_if(f"{INFOKEY.teamDetect_cite}", "multiRemove_exist_if_teamDetect_cite_assign") + \
-            operation_if(f"i < {INFOKEY.teamDetect_cite}.{INFOKEY.lenidTeam}", "multiRemove_if_teamDetect_cite_assign_acti") + \
-                operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", f"{INFOKEY.teamDetect_cite}.{INFOKEY.setidTeam}" + "{i}_0", "multiRemove", "actiids_addteamDetect") + \
+            operation_if(f"i < " + "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.lenidTeam}", "multiRemove_if_teamDetect_cite_assign_acti") + \
+                operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{i}_0", "multiRemove", "actiids_addteamDetect") + \
                 operation_typeset_expression(f"{INFOKEY.acti}_now_exist", "True") + \
                 operation_typeset_expression(f"{INFOKEY.acti}_now", f"{INFOKEY.acti}_now_" + "{i}") + \
             operation_ifend("multiRemove_if_teamDetect_cite_assign_acti") + \
         operation_ifend("multiRemove_exist_if_teamDetect_cite_assign") + \
         operation_exist_if(f"{INFOKEY.numDetect_cite}", "multiRemove_exist_if_numDetect_cite_assign") + \
-            operation_if(f"i < {INFOKEY.numDetect_cite}.{INFOKEY.lenidNum}", "multiRemove_if_numDetect_cite_assign_acti") + \
-                operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", f"{INFOKEY.numDetect_cite}.{INFOKEY.setidNum}" + "{i}_0", "multiRemove", "actiids_addnumDetect") + \
+            operation_if(f"i < " + "{" + f"{INFOKEY.numDetect_cite}" + "}" + f".{INFOKEY.lenidNum}", "multiRemove_if_numDetect_cite_assign_acti") + \
+                operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.numDetect_cite}" + "}" + f".{INFOKEY.setidNum}" + "{i}_0", "multiRemove", "actiids_addnumDetect") + \
                 operation_typeset_expression(f"{INFOKEY.acti}_now_exist", "True") + \
                 operation_typeset_expression(f"{INFOKEY.acti}_now", f"{INFOKEY.acti}_now_" + "{i}") + \
             operation_ifend("multiRemove_if_numDetect_cite_assign_acti") + \
@@ -204,7 +205,8 @@ multiRemove_info_operation_list = \
                 AUTOKEY.optional: multiRemove_info_operation_optional
             }
         ] + \
-    operation_cycle_end("i", "i + 1", "multiRemove_cycle_lenRemove")
+    operation_cycle_end("i", "i + 1", "multiRemove_cycle_lenRemove") + \
+    BRACE_OPERATION_END
 
 
 

@@ -12,6 +12,7 @@ sys.path.append(package_dir)
 import rwmap as rw
 
 from auto._core import AUTOKEY
+from auto._core import MAXTRANSDEPTH
 
 class INFOKEY:
     prefix = "prefix"
@@ -27,6 +28,7 @@ class INFOKEY:
     opargs = "opargs"
     acti = "acti"
     deacti = "deacti"
+    brace = "brace"
 
     object_info = "object_info"
     teamDetect_info = "teamDetect_info"
@@ -329,10 +331,18 @@ def operation_error(error_info:str):
         }
     ]
 
-def operation_typeset_expression(key:str, value:str):
+def operation_typeset_expression(key:str, value:str, depth:int = MAXTRANSDEPTH):
     return [
         {
             AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
+            AUTOKEY.depth:depth, 
             key: value
         }
     ]
+
+BRACE_OPERATION_END = \
+    operation_exist_if(f"{INFOKEY.brace}", "brace_operation_if_1") + \
+        operation_cycle_start("i", "0", f"i < len({INFOKEY.brace})", "brace_operation_cycle_1") + \
+            operation_typeset_expression("{" + f"{INFOKEY.brace}[i]" + "}", "{" + f"{INFOKEY.brace}[i]" + "}") + \
+        operation_cycle_end("i", "i + 1", "brace_operation_cycle_1") + \
+    operation_ifend("brace_operation_if_1")

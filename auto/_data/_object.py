@@ -21,13 +21,14 @@ object_info_args_dict[INFOKEY.offset] = (list, int)
 object_info_args_dict[INFOKEY.offsetsize] = (list, int)
 object_info_args_dict[INFOKEY.args] = (list, list, str)
 object_info_args_dict[INFOKEY.opargs] = (list, list, str)
+object_info_args_dict[INFOKEY.brace] = (list, str)
 
 object_info_default_args_dict = {
     INFOKEY.offset: "0 0", 
     INFOKEY.offsetsize: "0 0"
 }
 
-object_info_optional_set = set()
+object_info_optional_set = {INFOKEY.brace}
 
 object_info_optional_set.add(INFOKEY.isprefixseg)
 object_info_optional_set.add(INFOKEY.objectType)
@@ -99,7 +100,8 @@ object_info_operation_list = \
             AUTOKEY.type: ("{" + f"{INFOKEY.objectType}" + "}", AUTOKEY.type, AUTOKEY.exist), 
             AUTOKEY.optional: object_info_operation_list_optional
         }, 
-    ]
+    ] + \
+    BRACE_OPERATION_END
 
 object_info = {
     INFOKEY.object_info:{
