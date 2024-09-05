@@ -365,9 +365,14 @@ code {
           : 'default'
     });
   </script>
-<h1 id="%E5%AE%BE%E8%AF%AD%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E7%9A%84%E4%BE%8B%E5%AD%90">宾语自动添加的例子</h1>
+<style>
+    h2,h3{
+        page-break-before:always;
+    }
+</style>
+<h1 id="%E5%AE%BE%E8%AF%AD%E8%87%AA%E5%8A%A8%E5%8C%96%E7%AE%80%E6%98%93%E6%80%A5%E9%80%9F%E6%95%99%E7%A8%8B">宾语自动化简易急速教程</h1>
 <ul>
-<li><a href="#%E5%AE%BE%E8%AF%AD%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E7%9A%84%E4%BE%8B%E5%AD%90">宾语自动添加的例子</a>
+<li><a href="#%E5%AE%BE%E8%AF%AD%E8%87%AA%E5%8A%A8%E5%8C%96%E7%AE%80%E6%98%93%E6%80%A5%E9%80%9F%E6%95%99%E7%A8%8B">宾语自动化简易急速教程</a>
 <ul>
 <li><a href="#%E7%9B%AE%E6%A0%87">目标</a></li>
 <li><a href="#%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96%E6%89%8B%E6%9C%BA">下载与初始化（手机）</a></li>
@@ -397,6 +402,8 @@ code {
 <li><a href="#%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E7%89%88%E6%9C%AC164">城市+队伍检测（版本&gt;=1.6.4）</a>
 <ul>
 <li><a href="#info%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">info宾语-城市+队伍检测</a></li>
+<li><a href="#%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">标志宾语-城市+队伍检测</a></li>
+<li><a href="#%E5%BC%95%E7%94%A8%E7%9A%84%E8%AF%B4%E6%98%8E-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">引用的说明-城市+队伍检测</a></li>
 </ul>
 </li>
 <li><a href="#%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E5%9F%8E%E5%B8%82%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%98%E5%8C%96%E7%89%88%E6%9C%AC164">城市+队伍检测+城市文本颜色变化（版本&gt;=1.6.4）</a>
@@ -445,7 +452,7 @@ pkg install -y python-pillow
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple #（如果清华镜像不可以，换成别的镜像比如https://pypi.mirrors.ustc.edu.cn/simple也行）
 pip install asteval
 pip install regex # 1.6.3新加入
-pip install rwmapeditor-exgcdwu==1.6.3 --no-deps
+pip install rwmapeditor-exgcdwu==1.6.4 --no-deps
 </code></pre>
 <p>需要获取读取存储权限：</p>
 <pre><code>termux-setup-storage
@@ -563,6 +570,11 @@ pip install rwmapeditor-exgcdwu==1.6.1 --no-deps #（新版本，大于等于1.6
 <p>brace：&quot;a,b&quot; //最终翻译</p>
 <p>args：&quot;inaddteam,str;cite_name,str;cityname,str&quot; //参数导入</p>
 <p>// 通过tree将二者组合</p>
+<h4 id="%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">标志宾语-城市+队伍检测</h4>
+<p>名称：&quot;ctd{队伍}.{引用名字}.{城市名}&quot;。类型不填。
+属性不填。</p>
+<h4 id="%E5%BC%95%E7%94%A8%E7%9A%84%E8%AF%B4%E6%98%8E-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">引用的说明-城市+队伍检测</h4>
+<p>假如有一标志宾语为&quot;ctd3.ctd1.斯大林格勒&quot;。在其他宾语中出现&quot;ctd_t1.a&quot;或者&quot;ctd_t1.b&quot;会得到队伍检测的id。如果希望非自动化的宾语也执行这一功能，添加-c选项。</p>
 <h3 id="%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E5%9F%8E%E5%B8%82%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%98%E5%8C%96%E7%89%88%E6%9C%AC164">城市+队伍检测+城市文本颜色变化（版本&gt;=1.6.4）</h3>
 <h4 id="info%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E5%9F%8E%E5%B8%82%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%98%E5%8C%96">info宾语-城市+队伍检测+城市文本颜色变化</h4>
 <p>第一个info宾语。</p>
