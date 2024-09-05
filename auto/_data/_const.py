@@ -45,6 +45,9 @@ class INFOKEY:
     dictionary_info = "dictionary_info"
     multiRemove_info = "multiRemove_info"
     tree_info = "tree_info"
+    multiAdd_info = "multiAdd_info"
+    flash_info = "flash_info"
+    building_f_info = "building_f_info"
 
     setTeam = "setTeam"
     setidTeam = "setidTeam"
@@ -54,12 +57,15 @@ class INFOKEY:
     maxUnits = "maxUnits"
     reset = "reset"
     warmup = "warmup"
+    delay = "delay"
+    repeat = "repeat"
 
     color = "color"
     text = "text"
     setNum = "setNum"
     setidNum = "setidNum"
     lenidNum = "lenidNum"
+    lenTeam = "lenTeam"
 
     detectReset = "detectReset"
     addWarmup = "addWarmup"
@@ -92,6 +98,10 @@ class INFOKEY:
     inaddname = "inaddname"
     inaddoffset = "inaddoffset"
     inaddoffsetsize = "inaddoffsetsize"
+
+    spawnUnits = "spawnUnits"
+    initialtime = "initialtime"
+    periodtime = "periodtime"
 
 
 class OBJECT_ARGS:

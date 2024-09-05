@@ -29,6 +29,8 @@ inadd_info_args_dict[INFOKEY.inaddoffsetsize] = (list, int)
 inadd_info_default_args_dict = {
     INFOKEY.isinadd: "true", 
     INFOKEY.inaddspawnnum: "1", 
+    INFOKEY.inaddwarmup: "{" + f"{INFOKEY.addWarmup}" + "}", 
+    INFOKEY.inaddunit: "{" + f"{INFOKEY.unit}" + "}", 
     INFOKEY.inaddname: "", 
     INFOKEY.inaddoffset: "0 0", 
     INFOKEY.inaddoffsetsize: "0 0"

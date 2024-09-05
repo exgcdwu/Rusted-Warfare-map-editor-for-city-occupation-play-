@@ -145,7 +145,6 @@ multiText_info_operation_list = \
             "lenText": "0"
         }
     ] + \
-    operation_pdb() + \
     operation_exist_if(INFOKEY.teamDetect_cite, "multiText_exist_if_teamDetect_cite") + \
         operation_if(INFOKEY.isdefaultText, "multiText_if_isdefaultText") + \
             [

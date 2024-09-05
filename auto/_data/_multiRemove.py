@@ -25,6 +25,9 @@ multiRemove_info_args_dict[INFOKEY.numDetect_cite] = str
 multiRemove_info_args_dict[INFOKEY.team] = (list, str)
 multiRemove_info_args_dict[INFOKEY.reset] = (list, str)
 multiRemove_info_args_dict[INFOKEY.warmup] = (list, str)
+multiRemove_info_args_dict[INFOKEY.delay] = (list, str)
+multiRemove_info_args_dict[INFOKEY.repeat] = (list, str)
+
 multiRemove_info_args_dict[INFOKEY.name] = (list, str)
 multiRemove_info_args_dict[INFOKEY.offset] = (list, list, int)
 multiRemove_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
@@ -49,6 +52,8 @@ multiRemove_info_optional_set.add(INFOKEY.deacti)
 multiRemove_info_optional_set.add(INFOKEY.team)
 multiRemove_info_optional_set.add(INFOKEY.reset)
 multiRemove_info_optional_set.add(INFOKEY.warmup)
+multiRemove_info_optional_set.add(INFOKEY.delay)
+multiRemove_info_optional_set.add(INFOKEY.repeat)
 multiRemove_info_optional_set.add(INFOKEY.args)
 multiRemove_info_optional_set.add(INFOKEY.opargs)
 
@@ -66,6 +71,8 @@ multiRemove_info_operation_optional = {
     rw.const.OBJECTOP.team: ("{team_now}", "team_now_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.resetActivationAfter: ("{reset_now}", "reset_now_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.warmup: ("{warmup_now}", "warmup_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.repeatDelay: ("{repeat_now}", "repeat_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.delay: ("{delay_now}", "delay_now_exist", AUTOKEY.brace), 
 }
 
 def operation_join_quote(assign_name:str, info_args:str):
@@ -138,14 +145,6 @@ multiRemove_info_operation_list = \
             "lenRemove": "0"
         }
     ] + \
-    operation_exist_if(INFOKEY.teamDetect_cite, "multiRemove_exist_if_teamDetect_cite") + \
-        [
-            {
-                AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                "lenRemove": f"max(lenRemove, " + "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.lenidTeam})"
-            }
-        ] + \
-    operation_ifend("multiRemove_exist_if_teamDetect_cite") + \
     operation_exist_if(INFOKEY.numDetect_cite, "multiRemove_exist_if_numDetect_cite") + \
         [
             {
@@ -172,6 +171,15 @@ multiRemove_info_operation_list = \
         ] + \
         operation_list_join_quote(f"{INFOKEY.deacti}", f"{INFOKEY.deacti}") + \
     operation_ifend("multiRemove_exist_if_deacti") + \
+    operation_exist_if(INFOKEY.team,  "multiRemove_exist_if_team") + \
+        [
+            {
+                AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
+                "lenRemove": f"max(lenRemove, len({INFOKEY.team}))"
+            }
+        ] + \
+        operation_list_join_quote(f"{INFOKEY.team}", f"{INFOKEY.team}") + \
+    operation_ifend("multiRemove_exist_if_team") + \
     operation_cycle_start("i", "0", "i < lenRemove", "multiRemove_cycle_lenRemove") + \
         operation_list_assign(f"{INFOKEY.name}", "i", "name_now", "multiRemove") + \
         operation_list_assign(f"{INFOKEY.offset}", "i", "offset_now", "multiRemove", "[0, 0]") + \
@@ -181,12 +189,16 @@ multiRemove_info_operation_list = \
         operation_list_assign(f"{INFOKEY.team}", "i", "team_now", "multiRemove") + \
         operation_list_assign(f"{INFOKEY.reset}", "i", "reset_now", "multiRemove") + \
         operation_list_assign(f"{INFOKEY.warmup}", "i", "warmup_now", "multiRemove") + \
+        operation_list_assign(f"{INFOKEY.repeat}", "i", "repeat_now", "multiRemove") + \
+        operation_list_assign(f"{INFOKEY.delay}", "i", "delay_now", "multiRemove") + \
         operation_exist_if(f"{INFOKEY.teamDetect_cite}", "multiRemove_exist_if_teamDetect_cite_assign") + \
-            operation_if(f"i < " + "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.lenidTeam}", "multiRemove_if_teamDetect_cite_assign_acti") + \
-                operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{i}_0", "multiRemove", "actiids_addteamDetect") + \
-                operation_typeset_expression(f"{INFOKEY.acti}_now_exist", "True") + \
-                operation_typeset_expression(f"{INFOKEY.acti}_now", f"{INFOKEY.acti}_now_" + "{i}") + \
-            operation_ifend("multiRemove_if_teamDetect_cite_assign_acti") + \
+            operation_if("team_now_exist == True", "multiRemove_exist_if_teamDetect_cite_assign_team_exist") + \
+                operation_if("{" + f"{INFOKEY.teamDetect_cite}" + "}" + ".teamtoi.get(team_now) != None", "multiRemove_if_teamDetect_cite_assign_acti") + \
+                    operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{{" + f"{INFOKEY.teamDetect_cite}" + "}" + ".teamtoi[team_now]}_0", "multiRemove", "actiids_addteamDetect") + \
+                    operation_typeset_expression(f"{INFOKEY.acti}_now_exist", "True") + \
+                    operation_typeset_expression(f"{INFOKEY.acti}_now", f"{INFOKEY.acti}_now_" + "{i}") + \
+                operation_ifend("multiRemove_if_teamDetect_cite_assign_acti") + \
+            operation_ifend("multiRemove_exist_if_teamDetect_cite_assign_team_exist") + \
         operation_ifend("multiRemove_exist_if_teamDetect_cite_assign") + \
         operation_exist_if(f"{INFOKEY.numDetect_cite}", "multiRemove_exist_if_numDetect_cite_assign") + \
             operation_if(f"i < " + "{" + f"{INFOKEY.numDetect_cite}" + "}" + f".{INFOKEY.lenidNum}", "multiRemove_if_numDetect_cite_assign_acti") + \

@@ -101,12 +101,12 @@ class AUTOKEY:
     delete_op = ",d"
     delete_all_op = ",D"
 
-    normal_city_nexist_re = ".*_"
+    info_re = ".*_info"
     delete_symbol = ".*,d"
     delete_all_symbol = ".*,D"
-    not_useful_char = "[^A-Za-z0-9_{}]"
-    not_useful_char_ad_point = "[^A-Za-z0-9_{}.]"
-    not_useful_char_ad_point_for_cite = "[^A-Za-z0-9_{}.]|(?<=[.][A-Za-z0-9_{}]*)[.]"
+    not_useful_char = "[^\u4e00-\u9fa5A-Za-z0-9_{}]"
+    not_useful_char_ad_point = "[^\u4e00-\u9fa5A-Za-z0-9_{}.]"
+    not_useful_char_ad_point_for_cite = "[^\u4e00-\u9fa5A-Za-z0-9_{}.]|(?<=[.][\u4e00-\u9fa5A-Za-z0-9_{}]*)[.]"
 
 cite_object_dict = {}
 
@@ -188,6 +188,8 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, id_to_tobject:dict, r
         tobject.deleteOptionalProperty(AUTOKEY.IDs)
         args_dict[AUTOKEY.IDs] = []
         for tobjectid in tobject_ids:
+            if tobjectid == '415':
+                debug_pdb()
             rwmap_now.delete_object_s(id_to_tobject[tobjectid])
     else:
         args_dict[AUTOKEY.IDs] = tobject_ids
@@ -197,6 +199,17 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, id_to_tobject:dict, r
 def match_compare(match_value:list)->int:
     return -match_value[0].start()
 
+def brace_one_str(value):
+    if isinstance(value, dict):
+        value_list = [[v1, v2] for v1, v2 in value.items()]
+        return "dict(" + str(value_list) + ")"
+    else:
+        if isinstance(value, set):
+            value_list = [v1 for v1 in value]
+            return "set(" + str(value_list) + ")"
+        else:
+            return str(value)
+
 def brace_one_translation(expression_b:str, dict_name:dict, seg_re:str)->str:
     
     expression_b = " " + expression_b + " "
@@ -204,7 +217,7 @@ def brace_one_translation(expression_b:str, dict_name:dict, seg_re:str)->str:
     expression_b_seg_index = [match_now.start() for match_now in re.finditer(seg_re, expression_b)]
     match_now_list = [(expression_b_seg_index[index] + 1, expression_b_seg_index[index + 1]) for index in range(len(expression_b_seg_index) - 1)]
     brace_one_list = [expression_b[match_now[0]:match_now[1]] for match_now in match_now_list]
-    brace_one_list = [brace_one if dict_name.get(brace_one) == None else str(dict_name[brace_one]) for brace_one in brace_one_list]
+    brace_one_list = [brace_one if dict_name.get(brace_one) == None else brace_one_str(dict_name[brace_one]) for brace_one in brace_one_list]
     expression_b_ans = ""
     for index in range(len(brace_one_list)):
         expression_b_ans = expression_b_ans + expression_b[expression_b_seg_index[index]] + brace_one_list[index]
@@ -503,14 +516,16 @@ def is_tagged_tobject__newname__myinfo__info(tobject_name:str, info_dict, info_n
         if info.get(AUTOKEY.isprefixseg) != None and info.get(AUTOKEY.isprefixseg) == True:
             prefix_to_match = tobject_name.split(myinfo[AUTOKEY.seg])[0]
             tobject_name_to_solve = tobject_name[len(prefix_to_match) + 1:]
+            if prefix_now == prefix_to_match:
+                ischange = True
+                break
         else:
             prefix_to_match = tobject_name[0:len(prefix_now)]
             tobject_name_to_solve = tobject_name[len(prefix_to_match):]
-
-        if prefix_now == prefix_to_match \
-            and (not re.match(AUTOKEY.normal_city_nexist_re, tobject_name)):
-            ischange = True
-            break
+            if prefix_now == prefix_to_match \
+                and (not re.match(AUTOKEY.info_re, tobject_name)):
+                ischange = True
+                break
     return (ischange, tobject_name_to_solve, myinfo, info)
 
 def is_tagged_tobject(tobject:rw.case.TObject, info_dict, info_now):
@@ -770,6 +785,7 @@ def auto_func():
 
                 info_dict_now[AUTOKEY.prefix] = info_dict_now[info[AUTOKEY.prefix]]
                 info_doids_dict[info_dict_now[AUTOKEY.prefix]] = deepcopy(info)
+
                 info_dict_now[AUTOKEY.info] = info_dict_now[AUTOKEY.prefix]
 
                 info_dict_now[AUTOKEY.tobject] = tobject
@@ -858,41 +874,41 @@ def auto_func():
                             debug_pdb(object_dict)
                         index = index + 1
 
-                info = info_doids_dict[info_dict_now[AUTOKEY.prefix]]
+                info_new = info_doids_dict[info_dict_now[AUTOKEY.prefix]]
                 args_dict = deepcopy(info_dict_now)
 
                 #args/opargs check
-                if info.get(AUTOKEY.args) != None:
-                    for key_n in info[AUTOKEY.args]:
+                if info_new.get(AUTOKEY.args) != None:
+                    for key_n in info_new[AUTOKEY.args]:
                         key_now = key_n[0]
                         args_dict[key_n[0]] = key_n[1]
-                        if info[AUTOKEY.info_args].get(key_now) == None and info[AUTOKEY.no_check] == False:
+                        if info_new[AUTOKEY.info_args].get(key_now) == None and info_new[AUTOKEY.no_check] == False:
                             standard_error(f"An argument of the info object is invalid.(ID:{tobject_id}, name:{info_name}, arg:{key_now})", 12)
 
-                if info.get(AUTOKEY.opargs) != None:
-                    for value in info[AUTOKEY.opargs].values():
+                if info_new.get(AUTOKEY.opargs) != None:
+                    for value in info_new[AUTOKEY.opargs].values():
                         args_now = value[0].split(AUTOKEY.opargs_sys_seg)
                         if len(args_now) == 2:
                             args_dict[args_now[0]] = value[1]
                         args_now = args_now[0]
-                        if info[AUTOKEY.info_args].get(args_now) == None and info[AUTOKEY.no_check] == False:
+                        if info_new[AUTOKEY.info_args].get(args_now) == None and info_new[AUTOKEY.no_check] == False:
                             standard_error(f"An optional argument of the info object is invalid.(ID:{tobject_id}, name:{info_name}, arg:{args_now})", 13)
 
                 # var_dependent check
                 
-                for key_now, ntype in info[AUTOKEY.info_args].items():
+                for key_now, ntype in info_new[AUTOKEY.info_args].items():
                     if tobject.returnOptionalProperty(key_now) != None:
-                        if info.get(AUTOKEY.var_dependent) != None and info[AUTOKEY.var_dependent].get(key_now) != None:
-                            for args_dependent in info[AUTOKEY.var_dependent][key_now].split(","):
+                        if info_new.get(AUTOKEY.var_dependent) != None and info_new[AUTOKEY.var_dependent].get(key_now) != None:
+                            for args_dependent in info_new[AUTOKEY.var_dependent][key_now].split(","):
                                 if (args_dict.get(args_dependent) == None or args_dict[args_dependent] == False):
                                     standard_error(f"Unuseful arguments in an info object.({key_now} exists but {args_dependent} is none or false.)", 4)
 
                 # required arguments check
-                for key_now, ntype in info[AUTOKEY.info_args].items():
-                    if info.get(AUTOKEY.optional) != None and info[AUTOKEY.optional].issuperset([key_now]):
+                for key_now, ntype in info_new[AUTOKEY.info_args].items():
+                    if info_new.get(AUTOKEY.optional) != None and info_new[AUTOKEY.optional].issuperset([key_now]):
                         continue
-                    if info.get(AUTOKEY.var_dependent) != None and info[AUTOKEY.var_dependent].get(key_now) != None:
-                        var_dep_list = info[AUTOKEY.var_dependent][key_now].split(",")
+                    if info_new.get(AUTOKEY.var_dependent) != None and info_new[AUTOKEY.var_dependent].get(key_now) != None:
+                        var_dep_list = info_new[AUTOKEY.var_dependent][key_now].split(",")
                         isend = True
                         for var_dep in var_dep_list:
                             if args_dict.get(var_dep) == None or args_dict[var_dep] != True:
@@ -900,24 +916,24 @@ def auto_func():
                                 break
                         if not isend:
                             continue
-                    if args_dict.get(key_now) == None and (not info[AUTOKEY.isinfo_sub]):
+                    if args_dict.get(key_now) == None and (not info_new[AUTOKEY.isinfo_sub]):
                         standard_error(f"A required argument is missing in an info object.({str(key_now)})", 6)
                 
-                if len(tobject_temp._optional_properties) != 0 and info[AUTOKEY.no_check] == False:
+                if len(tobject_temp._optional_properties) != 0 and info_new[AUTOKEY.no_check] == False:
                         standard_error("Unknown arguments below in an info object.", 3, f"{tobject_temp._optional_properties}")
 
 
                 standard_out(isverbose, "Info object information is being output...")
                 if isverbose:
                     temp_pri = OrderedDict()
-                    for args_now in info[AUTOKEY.info_args].keys():
+                    for args_now in info_new[AUTOKEY.info_args].keys():
                         if info_dict_now.get(args_now) == None:
                             continue
                         value_now = info_dict_now[args_now]
                         if value_now == False:
                             continue
-                        if info.get(AUTOKEY.var_dependent) != None:
-                            var_dep_list = info[AUTOKEY.var_dependent].get(args_now)
+                        if info_new.get(AUTOKEY.var_dependent) != None:
+                            var_dep_list = info_new[AUTOKEY.var_dependent].get(args_now)
                             if var_dep_list == None:
                                 temp_pri[args_now] = value_now 
                                 continue
@@ -971,6 +987,7 @@ def auto_func():
     index_tobject = 0
     while index_tobject < len(tobject_list):
         tobject = tobject_list[index_tobject]
+        insert_index = index_tobject + 1
         index_tobject = index_tobject + 1
 
         tobject_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
@@ -990,7 +1007,7 @@ def auto_func():
                 tobject_name_to_solve = tobject_name[len(prefix_to_match):]
 
             if prefix_now == prefix_to_match \
-                and (not re.match(AUTOKEY.normal_city_nexist_re, tobject_name)):
+                and (not re.match(AUTOKEY.info_re, tobject_name)):
                 object_dict = deepcopy(info)
                 object_dict.update(get_args(myinfo, tobject_name_to_solve, tobject, id_to_tobject, map_now))
                 
@@ -1023,6 +1040,8 @@ def auto_func():
                 for thing in myinfo[AUTOKEY.ids]:
                     
                     idprefix = brace_translation(thing[0], object_dict, ones = True)
+                    if ids_now_dict.get(idprefix) == None:
+                        ids_now_dict[idprefix] = 1
                     idnow_list = tobject.returnOptionalProperty(idprefix)
                     if idnow_list == None:
                         idnow_list = []
@@ -1083,7 +1102,8 @@ def auto_func():
                                 object_now.assignDefaultProperty(rw.const.OBJECTDE.name, object_now.returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
                             object_now.assignOptionalProperty(AUTOKEY.IDfa, tobject_id)
                             object_now.assignOptionalProperty(AUTOKEY.IDdep, str(tobject_IDdep + 1))
-                            tobject_list.append(object_now)
+                            tobject_list.insert(insert_index, object_now)
+                            insert_index = insert_index + 1
 
                         if object_dict.get(AUTOKEY.IDs) != None and tottobid < len(object_dict[AUTOKEY.IDs]):
                             object_now.assignDefaultProperty("id", object_dict[AUTOKEY.IDs][tottobid])

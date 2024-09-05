@@ -36,6 +36,8 @@ building_info_args_dict[INFOKEY.detectoffsetsize] = (list, int)
 
 building_info_args_dict[INFOKEY.inadd_prefix] = str
 building_info_args_dict[INFOKEY.bdtext_prefix] = str
+building_info_args_dict[INFOKEY.acti] = (list, str)
+building_info_args_dict[INFOKEY.deacti] = (list, str)
 building_info_args_dict[INFOKEY.isonlybuilding] = bool
 building_info_args_dict[INFOKEY.isshowOnMap] = bool
 building_info_args_dict[INFOKEY.minUnits] = str
@@ -51,8 +53,9 @@ building_info_args_dict.update(bdtext_info_args_dict)
 building_info_args_dict.update(inadd_info_args_dict)
 
 building_info_default_args_dict = {
+    INFOKEY.isonlybuilding: "false", 
     INFOKEY.team: "-1", 
-    INFOKEY.minUnits: "1", 
+    INFOKEY.maxUnits: "0", 
     INFOKEY.spawnnum: "1", 
     INFOKEY.addname: "", 
     INFOKEY.addoffset: "0 0", 
@@ -60,16 +63,17 @@ building_info_default_args_dict = {
     INFOKEY.detectname: "", 
     INFOKEY.detectoffset: "0 0", 
     INFOKEY.detectoffsetsize: "0 0", 
+    INFOKEY.acti: "", 
 }
 building_info_default_args_dict.update(bdtext_info_default_args_dict)
 building_info_default_args_dict.update(inadd_info_default_args_dict)
-building_info_default_args_dict.pop(f"{INFOKEY.isbdtext}", "")
-building_info_default_args_dict.pop(f"{INFOKEY.isinadd}", "")
+building_info_default_args_dict[f"{INFOKEY.isbdtext}"] = "false"
+building_info_default_args_dict[f"{INFOKEY.isinadd}"] = "false"
 
 building_info_optional_set = {
-    INFOKEY.isprefixseg, INFOKEY.maxUnits, INFOKEY.args, INFOKEY.opargs, 
+    INFOKEY.isprefixseg, INFOKEY.minUnits, INFOKEY.args, INFOKEY.opargs, 
     INFOKEY.inadd_prefix, INFOKEY.bdtext_prefix, INFOKEY.isonlybuilding, 
-    INFOKEY.isshowOnMap, INFOKEY.cite_name, INFOKEY.brace
+    INFOKEY.isshowOnMap, INFOKEY.cite_name, INFOKEY.brace, INFOKEY.deacti, 
 }
 
 building_info_optional_set.update(bdtext_info_optional_set)
@@ -92,6 +96,8 @@ building_info_info_prefix_dict = {
 }
 
 building_info_operation_list = \
+    bdtext_info_operation_list + \
+    inadd_info_operation_list + \
     [
         {
             AUTOKEY.operation_type: AUTOKEY.object, 
@@ -104,8 +110,8 @@ building_info_operation_list = \
                 rw.const.OBJECTOP.unitType: ("{" + f"{INFOKEY.unit}" + "}", f"{INFOKEY.isonlybuilding} == False", AUTOKEY.brace), 
                 rw.const.OBJECTOP.team: ("{" + f"{INFOKEY.team}" + "}", f"{INFOKEY.team} != -1", AUTOKEY.brace), 
                 rw.const.OBJECTOP.id: "{" + f"{INFOKEY.idprefix}" + "0}", 
-                rw.const.OBJECTOP.onlyBuildings: ("{" + f"{INFOKEY.isonlybuilding}" + "}", f"{INFOKEY.isonlybuilding}", AUTOKEY.exist), 
-                rw.const.OBJECTOP.minUnits: "{" + f"{INFOKEY.minUnits}" + "}", 
+                rw.const.OBJECTOP.onlyBuildings: ("{" + f"{INFOKEY.isonlybuilding}" + "}", f"{INFOKEY.isonlybuilding}", AUTOKEY.brace), 
+                rw.const.OBJECTOP.minUnits: ("{" + f"{INFOKEY.minUnits}" + "}", f"{INFOKEY.minUnits}", AUTOKEY.exist), 
                 rw.const.OBJECTOP.maxUnits: ("{" + f"{INFOKEY.maxUnits}" + "}", f"{INFOKEY.maxUnits}", AUTOKEY.exist), 
             }
         }
@@ -118,9 +124,10 @@ building_info_operation_list = \
             AUTOKEY.name: "{" + f"{INFOKEY.addname}" + "}", 
             AUTOKEY.type: rw.const.OBJECTTYPE.unitAdd, 
             AUTOKEY.optional: {
-                rw.const.OBJECTOP.activatedBy: "{" + f"{INFOKEY.idprefix}" + "0}", 
+                rw.const.OBJECTOP.activatedBy: "{" + f"{INFOKEY.idprefix}" + "0}{',' + ','.join(acti) if acti != [''] else ''}", 
+                rw.const.OBJECTOP.deactivatedBy: ("{','.join(deacti)}", f"{INFOKEY.deacti}", AUTOKEY.exist), 
                 rw.const.OBJECTOP.warmup: "{" + f"{INFOKEY.addWarmup}" + "}", 
-                rw.const.OBJECTOP.resetActivationAfter: "{" + f"{INFOKEY.addReset}" + "}", 
+                rw.const.OBJECTOP.resetActivationAfter: ("{" + f"{INFOKEY.addReset}" + "}", f"{INFOKEY.addReset}", AUTOKEY.exist), 
                 rw.const.OBJECTOP.spawnUnits: "{" + f"{INFOKEY.unit}" + "}*{" + f"{INFOKEY.spawnnum}" + "}", 
                 rw.const.OBJECTOP.team: "{" + f"{INFOKEY.team}" + "}", 
                 rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.isshowOnMap}", AUTOKEY.brace), 
@@ -128,10 +135,6 @@ building_info_operation_list = \
         }
     ] + \
     BRACE_OPERATION_END
-
-building_info_operation_list = building_info_operation_list + bdtext_info_operation_list
-building_info_operation_list = building_info_operation_list + inadd_info_operation_list
-
 
 building_info = {
     INFOKEY.building_info:{

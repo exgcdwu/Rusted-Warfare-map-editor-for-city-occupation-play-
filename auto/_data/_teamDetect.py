@@ -51,7 +51,7 @@ teamDetect_info_args_dict.update(DETECT_OPTION_DICT)
 
 teamDetect_info_default_args_dict = {
     INFOKEY.minUnits: "1", 
-    INFOKEY.name: "[\"{'setid\" + \"Team\" + str(ex) + \"_0'[len(setidTeam[ex]):]}\" " + f"for ex in range({INFOKEY.lenidTeam})]", 
+    INFOKEY.name: "" + "[\"{'setid\" + \"Team\" + str(ex) + \"_0'[len(setidTeam[ex]):]}\" for ex in range(lenidTeam)]", # [\"{'setid\" + \"Team\" + str(ex) + \"_0'[len(setidTeam[ex]):]}\"
     INFOKEY.offset: f"[[0, 0] for ex in range({INFOKEY.lenidTeam})]", 
     INFOKEY.offsetsize: f"[[0, 0] for ex in range({INFOKEY.lenidTeam})]"
 }
@@ -103,8 +103,25 @@ teamDetect_info_operation_optional = {
 teamDetect_info_operation_optional.update(DETECT_OPTION_OPERATION_OPTIONAL)
 
 teamDetect_info_operation_list = \
+    operation_typeset_expression("setidTeam_id", "[]") + \
+    operation_typeset_expression("setidTeam_id_dep", "[]") + \
+    operation_typeset_expression("teamtoi", "dict()") + \
+    operation_typeset_expression("teamtoid", "dict()") + \
+    operation_typeset_expression("teamtoid_dep", "dict()") + \
+    operation_typeset_expression("lenTeam", "0") + \
+    operation_cycle_start("i", "0", f"i < {INFOKEY.lenidTeam}", "teamDetect_cycle3") + \
+        operation_typeset_expression("setidTeam_id", "setidTeam_id + ['setidTeam{i}_0']") + \
+    operation_cycle_end("i", "i + 1", "teamDetect_cycle3") + \
+    operation_cycle_start("i", "0", f"i < {INFOKEY.lenidTeam}", "teamDetect_cycle4") + \
+        operation_typeset_expression("setidTeam_id_now", "','.join([setidTeam_id[j] for j in range(len(setidTeam_id)) if j != i])") + \
+        operation_typeset_expression("setidTeam_id_dep", "setidTeam_id_dep + ['setidTeam_id_now']") + \
+    operation_cycle_end("i", "i + 1", "teamDetect_cycle4") + \
     operation_cycle_start("i", "0", f"i < {INFOKEY.lenidTeam}", "teamDetect_cycle1") + \
+        operation_typeset_expression("lenTeam", f"lenTeam + len({INFOKEY.setTeam}[i])") + \
         operation_cycle_start("j", "0", f"j < len({INFOKEY.setTeam}[i])", "teamDetect_cycle2") + \
+            operation_typeset_expression("teamtoi", "teamtoi | dict([[str(setTeam[i][j]),str(i)]])") + \
+            operation_typeset_expression("teamtoid", "teamtoid | dict([[str(setTeam[i][j]),str(setidTeam_id[i])]])") + \
+            operation_typeset_expression("teamtoid_dep", "teamtoid_dep | dict([[str(setTeam[i][j]), str(setidTeam_id_dep[i])]])") + \
             [
                 {
                     AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
@@ -170,7 +187,6 @@ teamDetect_info_operation_list = \
         operation_cycle_end("j", "j + 1", "teamDetect_cycle2") + \
     operation_cycle_end("i", "i + 1", "teamDetect_cycle1") + \
     BRACE_OPERATION_END
-
 
 
 teamDetect_info = {

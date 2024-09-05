@@ -97,7 +97,7 @@ object_info_operation_list = \
             AUTOKEY.offset: INFOKEY.offset, 
             AUTOKEY.offsetsize: INFOKEY.offsetsize,                 
             AUTOKEY.name: ("{" + f"{INFOKEY.name}" + "}", AUTOKEY.name, AUTOKEY.exist), 
-            AUTOKEY.type: ("{" + f"{INFOKEY.objectType}" + "}", AUTOKEY.type, AUTOKEY.exist), 
+            AUTOKEY.type: ("{" + f"{INFOKEY.objectType}" + "}", INFOKEY.objectType, AUTOKEY.exist), 
             AUTOKEY.optional: object_info_operation_list_optional
         }, 
     ] + \

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>auto_example.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E5%AE%BE%E8%AF%AD%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E7%9A%84%E4%BE%8B%E5%AD%90">宾语自动添加的例子</h1>
+<ul>
+<li><a href="#%E5%AE%BE%E8%AF%AD%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E7%9A%84%E4%BE%8B%E5%AD%90">宾语自动添加的例子</a>
+<ul>
+<li><a href="#%E7%9B%AE%E6%A0%87">目标</a></li>
+<li><a href="#%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96%E6%89%8B%E6%9C%BA">下载与初始化（手机）</a></li>
+<li><a href="#%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8">开始使用</a></li>
+<li><a href="#info%E5%AE%BE%E8%AF%AD%E5%92%8C%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D">info宾语和标志宾语简单介绍</a></li>
+<li><a href="#%E4%BE%8B%E5%AD%90">例子</a>
+<ul>
+<li><a href="#%E4%BA%A7%E7%94%9F%E5%BB%BA%E7%AD%91%E7%89%88%E6%9C%AC--164">产生建筑(版本 &gt;= 1.6.4)</a>
+<ul>
+<li><a href="#info%E5%AE%BE%E8%AF%AD-%E5%BB%BA%E7%AD%91">info宾语-建筑</a></li>
+<li><a href="#%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E5%BB%BA%E7%AD%91">标志宾语-建筑</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%A7%E7%94%9F%E5%9F%8E%E5%B8%82%E7%89%88%E6%9C%AC--164">产生城市(版本 &gt;= 1.6.4)</a>
+<ul>
+<li><a href="#info%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82">info宾语-城市</a></li>
+<li><a href="#%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82">标志宾语-城市</a></li>
+</ul>
+</li>
+<li><a href="#%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E6%A3%80%E6%B5%8B%E5%86%85%E5%AE%B9%E7%9B%B8%E5%90%8C%E4%BD%86%E6%A3%80%E6%B5%8B%E9%98%9F%E4%BC%8D%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC164">队伍检测（检测内容相同，但检测队伍不同）(版本&gt;=1.6.4)</a>
+<ul>
+<li><a href="#info%E5%AE%BE%E8%AF%AD-%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">info宾语-队伍检测</a></li>
+<li><a href="#%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">标志宾语-队伍检测</a></li>
+<li><a href="#%E5%BC%95%E7%94%A8%E7%9A%84%E8%AF%B4%E6%98%8E-%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">引用的说明-队伍检测</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E7%89%88%E6%9C%AC164">城市+队伍检测（版本&gt;=1.6.4）</a>
+<ul>
+<li><a href="#info%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">info宾语-城市+队伍检测</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E5%9F%8E%E5%B8%82%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%98%E5%8C%96%E7%89%88%E6%9C%AC164">城市+队伍检测+城市文本颜色变化（版本&gt;=1.6.4）</a>
+<ul>
+<li><a href="#info%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E5%9F%8E%E5%B8%82%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%98%E5%8C%96">info宾语-城市+队伍检测+城市文本颜色变化</a></li>
+<li><a href="#%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E5%9F%8E%E5%B8%82%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%98%E5%8C%96">标志宾语-城市+队伍检测+城市文本颜色变化</a></li>
+<li><a href="#%E5%BC%95%E7%94%A8%E7%9A%84%E8%AF%B4%E6%98%8E-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E5%9F%8E%E5%B8%82%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%98%E5%8C%96">引用的说明-城市+队伍检测+城市文本颜色变化</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%8E%E5%B8%82%E6%9C%AC%E5%9C%B0%E9%A2%9D%E5%A4%96%E5%A1%94%E9%98%B2%E7%89%88%E6%9C%AC164">城市+本地额外塔防（版本&gt;=1.6.4）</a>
+<ul>
+<li><a href="#%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82%E6%9C%AC%E5%9C%B0%E9%A2%9D%E5%A4%96%E5%A1%94%E9%98%B2">标志宾语-城市+本地额外塔防</a></li>
+<li><a href="#%E5%BC%95%E7%94%A8%E7%9A%84%E8%AF%B4%E6%98%8E-%E5%9F%8E%E5%B8%82%E6%9C%AC%E5%9C%B0%E9%A2%9D%E5%A4%96%E5%A1%94%E9%98%B2">引用的说明-城市+本地额外塔防</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8D%A0%E9%A2%86%E5%8C%BA%E5%88%B7%E5%85%B5%E7%89%88%E6%9C%AC164">占领区刷兵(版本&gt;=1.6.4)</a>
+<ul>
+<li><a href="#info%E5%AE%BE%E8%AF%AD-%E5%8D%A0%E9%A2%86%E5%8C%BA%E5%88%B7%E5%85%B5">info宾语-占领区刷兵</a></li>
+<li><a href="#%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E5%8D%A0%E9%A2%86%E5%8C%BA%E5%88%B7%E5%85%B5">标志宾语-占领区刷兵</a></li>
+<li><a href="#%E5%BC%95%E7%94%A8%E7%9A%84%E8%AF%B4%E6%98%8E-%E5%8D%A0%E9%A2%86%E5%8C%BA%E5%88%B7%E5%85%B5">引用的说明-占领区刷兵</a></li>
+<li><a href="#%E5%A6%82%E6%9E%9C%E5%BC%95%E7%94%A8%E7%9A%84%E4%B8%8D%E6%98%AFteamdetect_info%E8%80%8C%E6%98%AF%E5%86%85%E9%83%A8%E6%9C%89teamdetect_info%E7%9A%84tree_info">如果引用的不是teamDetect_info，而是内部有teamDetect_info的tree_info?</a></li>
+<li><a href="#%E5%A6%82%E6%9E%9C%E6%8D%A2%E6%88%90%E6%99%AE%E9%80%9A%E5%88%B7%E5%85%B5">如果换成普通刷兵？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">注意事项</a>
+<ul>
+<li><a href="#%E5%BC%95%E7%94%A8cite_name%E8%A6%81%E6%B1%82">引用(cite_name)要求</a></li>
+<li><a href="#%E9%94%AE%E5%80%BC%E8%A7%A6%E7%A2%B0%E5%85%B3%E9%94%AE%E8%AF%8D">键值触碰关键词</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="%E7%9B%AE%E6%A0%87">目标</h2>
+<p>宾语自动化的急速入门。</p>
+<h2 id="%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96%E6%89%8B%E6%9C%BA">下载与初始化（手机）</h2>
+<p>下载群文件中的 termux 并安装。打开后可以看到一个黑色的命令行界面，之后需要在这个界面操作。</p>
+<p>termux python环境及包下载（需要一段时间，保持网络畅通）（中间出现的提问选项，全部输入y再回车）：
+<em>感谢kend在使用termux安装python包方面的帮助</em></p>
+<pre><code>pkg update -y
+pkg install -y python
+pkg install -y python-numpy
+pkg install -y python-pillow
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple #（如果清华镜像不可以，换成别的镜像比如https://pypi.mirrors.ustc.edu.cn/simple也行）
+pip install asteval
+pip install regex # 1.6.3新加入
+pip install rwmapeditor-exgcdwu==1.6.3 --no-deps
+</code></pre>
+<p>需要获取读取存储权限：</p>
+<pre><code>termux-setup-storage
+</code></pre>
+<p>之后就可以使用termux使用triggerauto处理地图文件了。</p>
+<p>如果想要更改版本，使用如下命令行。</p>
+<pre><code>pip uninstall -y rwmapeditor-exgcdwu
+pip install rwmapeditor-exgcdwu==1.6.1 --no-deps #（新版本，大于等于1.6.1）
+</code></pre>
+<h2 id="%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8">开始使用</h2>
+<p>打开termux，输入如下指令：</p>
+<pre><code>triggerauto {输入地图路径} -o {输出地图路径}
+</code></pre>
+<p>该指令读入地图路径，将转换结果自动输出。如何查找地图的路径呢？可以使用mt浏览器查找地图路径复制并粘贴。长按并点击paste即可粘贴。更多参数见<a href="https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/auto_tutorial.md">宾语自动化命令行教程</a>。</p>
+<h2 id="info%E5%AE%BE%E8%AF%AD%E5%92%8C%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D">info宾语和标志宾语简单介绍</h2>
+<p>进行自动化，至少需要两种宾语。一种是info宾语，可以为自动化提供信息。一种是标志宾语，可以为自动化提供位置和更具体的信息。之后只需运行命令行即可。</p>
+<p>info宾语和标志宾语的类型都必须是空的。info宾语名字形如xxx_info，有不同info宾语可供选择。info宾语可以添加大量属性。标志宾语只用写名字即可。</p>
+<p>接下来将会给出常见自动化的info例子和标志宾语例子。如果想要更灵活的处理，请参见<a href="https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/auto_tutorial.md">宾语自动化命令行教程</a>。</p>
+<h2 id="%E4%BE%8B%E5%AD%90">例子</h2>
+<h3 id="%E4%BA%A7%E7%94%9F%E5%BB%BA%E7%AD%91%E7%89%88%E6%9C%AC--164">产生建筑(版本 &gt;= 1.6.4)</h3>
+<p>产生一个自动刷新建筑。</p>
+<h4 id="info%E5%AE%BE%E8%AF%AD-%E5%BB%BA%E7%AD%91">info宾语-建筑</h4>
+<p>名称：&quot;building_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;b&quot; //标志宾语使用前缀</p>
+<p>idprefix：&quot;city&quot; //检测的id前缀</p>
+<p>detectReset：&quot;20s&quot; //建筑检测的resetActivationAfter</p>
+<p>addWarmup：&quot;20s&quot; //建筑添加的warmup（也是初始建筑添加）</p>
+<p>addReset：&quot;20s&quot; //建筑添加的resetActivationAfter</p>
+<p>unit：&quot;turret&quot; //单位类型</p>
+<p>isonlybuilding：&quot;true&quot; //使用onlyBuildings检测，而不使用unitType检测。</p>
+<p>isinadd：&quot;true&quot; //允许初始建筑添加</p>
+<p>args：&quot;inaddteam,str&quot; //参数导入</p>
+<h4 id="%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E5%BB%BA%E7%AD%91">标志宾语-建筑</h4>
+<p>名称：&quot;b{队伍}&quot;，类型不填。</p>
+<p>属性不填。</p>
+<h3 id="%E4%BA%A7%E7%94%9F%E5%9F%8E%E5%B8%82%E7%89%88%E6%9C%AC--164">产生城市(版本 &gt;= 1.6.4)</h3>
+<p>产生一个自动刷新建筑。上面有名字。</p>
+<h4 id="info%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82">info宾语-城市</h4>
+<p>名称：&quot;building_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;c&quot; //标志宾语使用前缀</p>
+<p>idprefix：&quot;city&quot; //检测的id前缀</p>
+<p>detectReset：&quot;20s&quot; //建筑检测的resetActivationAfter</p>
+<p>addWarmup：&quot;20s&quot; //建筑添加的warmup</p>
+<p>addReset：&quot;20s&quot; //建筑添加的resetActivationAfter</p>
+<p>unit：&quot;supplyDepot&quot; //单位类型</p>
+<p>isbdtext：&quot;true&quot; //启用文本</p>
+<p>bdcolor：&quot;white&quot; //城市文本颜色</p>
+<p>bdtextsize：&quot;7&quot; //城市文本大小</p>
+<p>isinadd：&quot;true&quot; //允许初始建筑添加</p>
+<p>args：&quot;inaddteam,str;bdtext,str&quot; //参数导入</p>
+<h4 id="%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82">标志宾语-城市</h4>
+<p>名称：&quot;c{队伍}.{城市名}&quot;，类型不填。</p>
+<p>属性不填。</p>
+<h3 id="%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E6%A3%80%E6%B5%8B%E5%86%85%E5%AE%B9%E7%9B%B8%E5%90%8C%E4%BD%86%E6%A3%80%E6%B5%8B%E9%98%9F%E4%BC%8D%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC164">队伍检测（检测内容相同，但检测队伍不同）(版本&gt;=1.6.4)</h3>
+<p>产生若干队伍检测宾语。</p>
+<h4 id="info%E5%AE%BE%E8%AF%AD-%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">info宾语-队伍检测</h4>
+<p>名称：teamDetect_info，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;td&quot; //标志宾语使用前缀</p>
+<p>unit：&quot;supplyDepot&quot; //检测类型（或者使用onlyBuildings：&quot;true&quot; //检测建筑）</p>
+<p>reset：&quot;10s&quot; //检测的resetActivationAfter</p>
+<p>setidTeam：&quot;A_city,B_city&quot; //（检测前缀，巴巴罗萨举例）</p>
+<p>setTeam：&quot;0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17&quot; //（队伍从0开始，巴巴罗萨举例）</p>
+<p>a：&quot;{setidTeam0_0}&quot; // 简化引用</p>
+<p>b：&quot;{setidTeam1_0}&quot; // 简化引用</p>
+<p>brace：&quot;a,b&quot; //最终翻译</p>
+<p>args：&quot;cite_name,str&quot; //参数导入</p>
+<p>isprefixseg：&quot;true&quot; //前缀与必填参数之间需要&quot;.&quot;</p>
+<h4 id="%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">标志宾语-队伍检测</h4>
+<p>名称：&quot;td.{外部引用名}&quot;，类型不填。</p>
+<p>属性不填。</p>
+<h4 id="%E5%BC%95%E7%94%A8%E7%9A%84%E8%AF%B4%E6%98%8E-%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">引用的说明-队伍检测</h4>
+<p>假如有一标志宾语为&quot;td.td1&quot;。在其他宾语中出现&quot;td1.a&quot;或者&quot;td1.b&quot;会得到队伍检测的id。如果希望非自动化的宾语也执行这一功能，添加-c选项。</p>
+<h3 id="%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E7%89%88%E6%9C%AC164">城市+队伍检测（版本&gt;=1.6.4）</h3>
+<h4 id="info%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B">info宾语-城市+队伍检测</h4>
+<p>第一个info宾语。</p>
+<p>名称：&quot;building_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;c&quot; //标志宾语使用前缀</p>
+<p>idprefix：&quot;city&quot; //检测的id前缀</p>
+<p>detectReset：&quot;20s&quot; //建筑检测的resetActivationAfter</p>
+<p>addWarmup：&quot;20s&quot; //建筑添加的warmup</p>
+<p>addReset：&quot;20s&quot; //建筑添加的resetActivationAfter</p>
+<p>unit：&quot;supplyDepot&quot; //单位类型</p>
+<p>isbdtext：&quot;true&quot; //启用文本</p>
+<p>bdcolor：&quot;white&quot; //城市文本颜色</p>
+<p>bdtextsize：&quot;7&quot; //城市文本大小</p>
+<p>isinadd：&quot;true&quot; //允许初始建筑添加</p>
+<p>args：&quot;inaddteam,str;bdtext,str&quot; //参数导入</p>
+<p>// 一个常规城市标志宾语</p>
+<p>第二个info宾语。</p>
+<p>名称：&quot;teamDetect_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;td&quot; //标志宾语使用前缀</p>
+<p>unit：&quot;supplyDepot&quot; //检测类型（或者使用onlyBuildings：&quot;true&quot; //检测建筑）</p>
+<p>reset：&quot;10s&quot; //检测的resetActivationAfter</p>
+<p>setidTeam：&quot;A_city,B_city&quot; //（检测前缀，巴巴罗萨举例）</p>
+<p>setTeam：&quot;0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17&quot; //（队伍从0开始，巴巴罗萨举例）</p>
+<p>a：&quot;{setidTeam0_0}&quot; // 简化引用</p>
+<p>b：&quot;{setidTeam1_0}&quot; // 简化引用</p>
+<p>brace：&quot;a,b&quot; //最终翻译</p>
+<p>args：&quot;cite_name,str&quot; //参数导入</p>
+<p>isprefixseg：&quot;true&quot; //前缀与必填参数之间需要&quot;.&quot;</p>
+<p>// 一个队伍检测宾语</p>
+<p>第三个info宾语。</p>
+<p>名称：&quot;tree_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;ctd&quot; //标志宾语使用前缀</p>
+<p>idprefix：&quot;mtd,1&quot; //申请id做cite_name</p>
+<p>name：&quot;c{inaddteam}.{cityname};td.{idprefix0_0}&quot; //产生分支标志宾语的格式</p>
+<p>a：&quot;{idprefix0_0}.a&quot; // 简化引用</p>
+<p>b：&quot;{idprefix0_0}.b&quot; // 简化引用</p>
+<p>brace：&quot;a,b&quot; //最终翻译</p>
+<p>args：&quot;inaddteam,str;cite_name,str;cityname,str&quot; //参数导入</p>
+<p>// 通过tree将二者组合</p>
+<h3 id="%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E5%9F%8E%E5%B8%82%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%98%E5%8C%96%E7%89%88%E6%9C%AC164">城市+队伍检测+城市文本颜色变化（版本&gt;=1.6.4）</h3>
+<h4 id="info%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E5%9F%8E%E5%B8%82%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%98%E5%8C%96">info宾语-城市+队伍检测+城市文本颜色变化</h4>
+<p>第一个info宾语。</p>
+<p>名称：&quot;building_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;c&quot; //标志宾语使用前缀</p>
+<p>idprefix：&quot;city&quot; //检测的id前缀</p>
+<p>detectReset：&quot;20s&quot; //建筑检测的resetActivationAfter</p>
+<p>addWarmup：&quot;20s&quot; //建筑添加的warmup</p>
+<p>addReset：&quot;20s&quot; //建筑添加的resetActivationAfter</p>
+<p>unit：&quot;supplyDepot&quot; //单位类型</p>
+<p>isinadd：&quot;true&quot; //允许初始建筑添加</p>
+<p>args：&quot;inaddteam,str&quot; //参数导入</p>
+<p>// 一个常规城市标志宾语</p>
+<p>第二个info宾语。</p>
+<p>名称：&quot;teamDetect_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;td&quot; //标志宾语使用前缀</p>
+<p>unit：&quot;supplyDepot&quot; //检测类型（或者使用onlyBuildings：&quot;true&quot; //检测建筑）</p>
+<p>reset：&quot;10s&quot; //检测的resetActivationAfter</p>
+<p>setidTeam：&quot;A_city,B_city&quot; //（检测前缀，巴巴罗萨举例）</p>
+<p>setTeam：&quot;0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17&quot; //（队伍从0开始，巴巴罗萨举例）</p>
+<p>a：&quot;{setidTeam0_0}&quot; // 简化引用</p>
+<p>b：&quot;{setidTeam1_0}&quot; // 简化引用</p>
+<p>brace：&quot;a,b&quot; //最终翻译</p>
+<p>args：&quot;cite_name,str&quot; //参数导入</p>
+<p>isprefixseg：&quot;true&quot; //前缀与必填参数之间需要&quot;.&quot;</p>
+<p>// 一个队伍检测宾语</p>
+<p>第三个info宾语。</p>
+<p>名称：&quot;multiText_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;mt&quot; //标志宾语使用前缀</p>
+<p>color：&quot;red,blue,white&quot; //文本颜色</p>
+<p>isdefaultText：&quot;true&quot; //使用teamDetect时的可选项。</p>
+<p>text：&quot;{btext},{{xtext}},{{rtext}}&quot;</p>
+<p>textsize：&quot;{mytextsize}&quot;</p>
+<p>args：&quot;teamDetect_cite,str;btext,str&quot; //参数导入</p>
+<p>opargs：&quot;t,mytextsize,str,7;x,xtext,str,{btext};r,rtext,str,{btext}&quot; //文本大小，第二个文本</p>
+<p>isprefixseg：&quot;true&quot; //前缀与必填参数之间需要&quot;.&quot;</p>
+<p>// 多个文本宾语</p>
+<p>第四个info宾语。</p>
+<p>名称：&quot;tree_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;ctd_t&quot; //标志宾语使用前缀</p>
+<p>idprefix：&quot;mtd,1&quot; //申请id做cite_name</p>
+<p>name：&quot;c{inaddteam};td.{idprefix0_0};mt.{idprefix0_0}.{cityname},t{textsize},x{xtext},r{rtext}&quot; //产生分支标志宾语的格式</p>
+<p>a：&quot;{idprefix0_0}.a&quot; // 简化引用</p>
+<p>b：&quot;{idprefix0_0}.b&quot; // 简化引用</p>
+<p>brace：&quot;a,b&quot; //最终翻译</p>
+<p>args：&quot;inaddteam,str;cite_name,str;cityname,str&quot; //参数导入</p>
+<p>opargs：&quot;t,textsize,str,7;x,xtext,str,{cityname};r,rtext,str,{cityname}&quot; //文本大小，第二个文本变化（如果有）</p>
+<p>// 将其组合</p>
+<h4 id="%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E5%9F%8E%E5%B8%82%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%98%E5%8C%96">标志宾语-城市+队伍检测+城市文本颜色变化</h4>
+<p>名称：&quot;ctd_t{队伍}.{引用名字}.{城市名},t{文本大小，默认为7},x{B队文本，默认城市名},r{默认文本，默认城市名}&quot;。&quot;,&quot;为可选项，可以不填。类型不填。
+属性不填。</p>
+<h4 id="%E5%BC%95%E7%94%A8%E7%9A%84%E8%AF%B4%E6%98%8E-%E5%9F%8E%E5%B8%82%E9%98%9F%E4%BC%8D%E6%A3%80%E6%B5%8B%E5%9F%8E%E5%B8%82%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%98%E5%8C%96">引用的说明-城市+队伍检测+城市文本颜色变化</h4>
+<p>假如有一标志宾语为&quot;ctd_t3.ctd_t1.红斯大林格勒,t10,x蓝斯大林格勒,r白斯大林格勒&quot;。在其他宾语中出现&quot;ctd_t1.a&quot;或者&quot;ctd_t1.b&quot;会得到队伍检测的id。如果希望非自动化的宾语也执行这一功能，添加-c选项。</p>
+<h3 id="%E5%9F%8E%E5%B8%82%E6%9C%AC%E5%9C%B0%E9%A2%9D%E5%A4%96%E5%A1%94%E9%98%B2%E7%89%88%E6%9C%AC164">城市+本地额外塔防（版本&gt;=1.6.4）</h3>
+<p>第一个info宾语。</p>
+<p>名称：&quot;building_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;c&quot; //标志宾语使用前缀</p>
+<p>idprefix：&quot;city&quot; //检测的id前缀</p>
+<p>detectReset：&quot;20s&quot; //建筑检测的resetActivationAfter</p>
+<p>addWarmup：&quot;20s&quot; //建筑添加的warmup</p>
+<p>addReset：&quot;20s&quot; //建筑添加的resetActivationAfter</p>
+<p>unit：&quot;supplyDepot&quot; //单位类型</p>
+<p>isbdtext：&quot;true&quot; //启用文本</p>
+<p>bdcolor：&quot;white&quot; //城市文本颜色</p>
+<p>bdtextsize：&quot;7&quot; //城市文本大小</p>
+<p>isinadd：&quot;true&quot; //允许初始建筑添加</p>
+<p>args：&quot;inaddteam,str;bdtext,str&quot; //参数导入</p>
+<p>第二个info宾语。</p>
+<p>名称：&quot;teamDetect_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;td&quot; //标志宾语使用前缀</p>
+<p>unit：&quot;supplyDepot&quot; //检测类型（或者使用onlyBuildings：&quot;true&quot; //检测建筑）</p>
+<p>reset：&quot;10s&quot; //检测的resetActivationAfter</p>
+<p>setidTeam：&quot;A_city,B_city&quot; //（检测前缀，巴巴罗萨举例）</p>
+<p>setTeam：&quot;0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17&quot; //（队伍从0开始，巴巴罗萨举例）</p>
+<p>a：&quot;{setidTeam0_0}&quot; // 简化引用</p>
+<p>b：&quot;{setidTeam1_0}&quot; // 简化引用</p>
+<p>brace：&quot;a,b&quot; //最终翻译</p>
+<p>args：&quot;cite_name,str&quot; //参数导入</p>
+<p>isprefixseg：&quot;true&quot; //前缀与必填参数之间需要&quot;.&quot;</p>
+<p>第三个info宾语。</p>
+<p>名称：&quot;building_f_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;bbt&quot; //标志宾语使用前缀</p>
+<p>idprefix：&quot;bbt&quot; //检测的id前缀</p>
+<p>detectReset：&quot;3s&quot; //建筑检测的resetActivationAfter</p>
+<p>addWarmup：&quot;3s&quot; //建筑添加的warmup</p>
+<p>unit：&quot;bugTurret&quot; //单位类型</p>
+<p>isinadd：&quot;true&quot;  //允许初始建筑添加</p>
+<p>deacti：&quot;fd1.idprefix0,{{td_cite}.{teamtoid_dep}['inaddteam']}&quot; //闪烁器引用，队伍检测引用</p>
+<p>args：&quot;inaddteam,str;td_cite,str&quot; //参数导入</p>
+<p>前三个info宾语是城市+队伍检测+城防的模板。</p>
+<p>第四个info宾语。</p>
+<p>名称：&quot;tree_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;cbtd&quot; //标志宾语使用前缀</p>
+<p>idprefix：&quot;mtd,1&quot; //申请id做cite_name</p>
+<p>name：&quot;c{inaddteam}.{cityname};td.{idprefix0_0};bbt{inaddteam}.{idprefix0_0}&quot; //产生分支标志宾语的格式</p>
+<p>a：&quot;{idprefix0_0}.a&quot; // 简化引用</p>
+<p>b：&quot;{idprefix0_0}.b&quot; // 简化引用</p>
+<p>brace：&quot;a,b&quot; //最终翻译</p>
+<p>offset：&quot;0 0,0 0,-1 -1&quot;</p>
+<p>args：&quot;inaddteam,str;cite_name,str;cityname,str&quot; //参数导入</p>
+<p>此外，需要部署振荡器来帮助城防刷新。</p>
+<p>振荡器info。</p>
+<p>第五个info宾语。</p>
+<p>名称：&quot;flash_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;fd&quot; //标志宾语使用前缀</p>
+<p>idprefix：&quot;fd&quot; //申请id</p>
+<p>initialtime：&quot;20s&quot; //初始刷新</p>
+<p>periodtime： &quot;3s&quot; //刷新周期</p>
+<p>args：&quot;cite_name,str&quot; //参数导入</p>
+<p>isprefixseg：&quot;true&quot; //前缀与必填参数之间需要&quot;.&quot;</p>
+<p>部署振荡器，这样城防建筑可以使用。</p>
+<p>名称：&quot;fd.fd1&quot;，类型不填。</p>
+<h4 id="%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E5%9F%8E%E5%B8%82%E6%9C%AC%E5%9C%B0%E9%A2%9D%E5%A4%96%E5%A1%94%E9%98%B2">标志宾语-城市+本地额外塔防</h4>
+<p>名称：&quot;cbtd{队伍}.{引用名字}.{城市名}&quot;，类型不填。</p>
+<p>属性不填。</p>
+<h4 id="%E5%BC%95%E7%94%A8%E7%9A%84%E8%AF%B4%E6%98%8E-%E5%9F%8E%E5%B8%82%E6%9C%AC%E5%9C%B0%E9%A2%9D%E5%A4%96%E5%A1%94%E9%98%B2">引用的说明-城市+本地额外塔防</h4>
+<p>假如有一标志宾语为&quot;cbtd3.cbtd1.斯大林格勒&quot;。在其他宾语中出现&quot;cbtd1.a&quot;或者&quot;cbtd1.b&quot;会得到队伍检测的id。如果希望非自动化的宾语也执行这一功能，添加-c选项。</p>
+<h3 id="%E5%8D%A0%E9%A2%86%E5%8C%BA%E5%88%B7%E5%85%B5%E7%89%88%E6%9C%AC164">占领区刷兵(版本&gt;=1.6.4)</h3>
+<p>产生刷兵宾语。</p>
+<h4 id="info%E5%AE%BE%E8%AF%AD-%E5%8D%A0%E9%A2%86%E5%8C%BA%E5%88%B7%E5%85%B5">info宾语-占领区刷兵</h4>
+<p>名称：&quot;dictionary_info&quot;，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;d&quot;</p>
+<p>me：&quot;mechGun*1&quot;</p>
+<p>he：&quot;heavyTank*1&quot;...</p>
+<p>任意可以简化单位的写法。</p>
+<p>名称：&quot;d.d&quot;，类型属性不填。</p>
+<p>如此，在其他位置输入&quot;dd.me&quot;将会自动认为是&quot;mechGun*1&quot;...</p>
+<p>名称：object_info，类型不填。</p>
+<p>属性：</p>
+<p>prefix：&quot;oa&quot; //标志宾语使用前缀</p>
+<p>type：&quot;unitAdd&quot; //类型</p>
+<p>warmup：&quot;1s&quot; //防止振动器初始刷新</p>
+<p>deactivatedBy：&quot;fd1.idprefix0,{{td_cite}.{teamtoid_dep}['td_team']}&quot; //闪烁器引用，队伍检测引用</p>
+<p>team：&quot;-1&quot; //队伍，也可为&quot;{td_team}&quot;</p>
+<p>spawnUnits：&quot;d.{dc_unit}&quot;</p>
+<p>args：&quot;dc_unit,str;td_cite,str;td_team,str&quot; //参数导入</p>
+<p>isprefixseg：&quot;true&quot; //前缀与必填参数之间需要&quot;.&quot;</p>
+<p>需要有引用名为fd1的振荡器。需要一个teamDetect引用作为约束。</p>
+<h4 id="%E6%A0%87%E5%BF%97%E5%AE%BE%E8%AF%AD-%E5%8D%A0%E9%A2%86%E5%8C%BA%E5%88%B7%E5%85%B5">标志宾语-占领区刷兵</h4>
+<p>名称：&quot;oa.{刷新单位}.{teamDetect引用}.{队伍}&quot;，类型不填。
+属性不填。</p>
+<h4 id="%E5%BC%95%E7%94%A8%E7%9A%84%E8%AF%B4%E6%98%8E-%E5%8D%A0%E9%A2%86%E5%8C%BA%E5%88%B7%E5%85%B5">引用的说明-占领区刷兵</h4>
+<p>假如有一标志宾语为&quot;oa.me.td1.0&quot;。那么仅在td1检测阵营为与0相同时刷新，刷新频率跟随fd1振荡器。刷新单位为&quot;mechGun*1&quot;</p>
+<h4 id="%E5%A6%82%E6%9E%9C%E5%BC%95%E7%94%A8%E7%9A%84%E4%B8%8D%E6%98%AFteamdetectinfo%E8%80%8C%E6%98%AF%E5%86%85%E9%83%A8%E6%9C%89teamdetectinfo%E7%9A%84treeinfo">如果引用的不是teamDetect_info，而是内部有teamDetect_info的tree_info?</h4>
+<p>注意使用brace，然后外部调用哦。</p>
+<h4 id="%E5%A6%82%E6%9E%9C%E6%8D%A2%E6%88%90%E6%99%AE%E9%80%9A%E5%88%B7%E5%85%B5">如果换成普通刷兵？</h4>
+<p>需要对前面的占领刷兵info进行一定的修改。删除其中一部分参数。</p>
+<h2 id="%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">注意事项</h2>
+<h3 id="%E5%BC%95%E7%94%A8citename%E8%A6%81%E6%B1%82">引用(cite_name)要求</h3>
+<p>允许中英文和数字，不允许其他符号</p>
+<h3 id="%E9%94%AE%E5%80%BC%E8%A7%A6%E7%A2%B0%E5%85%B3%E9%94%AE%E8%AF%8D">键值触碰关键词</h3>
+<p>不可控，一般不会碰到，一般换一个就没问题。</p>
+
+</body>
+</html>
