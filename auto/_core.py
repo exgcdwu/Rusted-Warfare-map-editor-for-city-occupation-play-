@@ -556,7 +556,7 @@ def tobject_ids_do(tobject:rw.case.TObject, myinfo, info, ids_now_dict, isreset)
 
 def is_tagged_object_simple(tobject:rw.case.TObject):
     object_type = tobject.returnDefaultProperty(rw.const.OBJECTDE.type)
-    isnewtaggedobject = (object_type == None or re.match(r"(?!.+)", object_type))
+    isnewtaggedobject = (object_type == None or re.match("^$", object_type))
     return isnewtaggedobject
 def auto_func():
     parser = argparse.ArgumentParser(
