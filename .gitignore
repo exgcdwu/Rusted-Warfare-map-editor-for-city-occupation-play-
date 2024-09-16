@@ -3,7 +3,8 @@
 !.github/
 tests/
 github_publish.sh
-_app_try/
+_app/
+some-other-processes/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
