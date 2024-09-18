@@ -237,7 +237,7 @@ inaddteam：当isinadd为是时必选，表示单位添加的队伍。
 
 ### inadd_info可选参数
 
-inaddwarmup：当isinadd为是时可选，默认为{addWarmup}，表示单位添加的warmup。为0s时，不产生warmup属性。
+inaddwarmup：当isinadd为是时可选，默认为{addWarmup}，表示单位添加的warmup。为0s或addWarmup不存在时，不产生warmup属性。
 
 inaddunit：当isinadd为是时可选，默认{unit}，表示单位添加的类型。
 
@@ -286,8 +286,6 @@ idprefix: 表示所使用的id前缀，城市id在idprefix后将自动按照1,2.
 
 detectReset: 建筑检测的resetActivationAfter。
 
-addWarmup：建筑添加的warmup。
-
 unit：建筑单位类型。
 
 ### building_info可选参数
@@ -301,6 +299,8 @@ opargs：可选，默认没有，可选参数。（[info宾语默认参数](#inf
 cite_name：可选，默认没有，标志宾语标记。（[info宾语默认参数](#info宾语中基本参数介绍)）
 
 brace：可选，默认没有，外部引用翻译列表。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+addWarmup：可选，建筑添加的warmup。
 
 addReset：可选，建筑添加的resetActivationAfter。
 
@@ -611,7 +611,7 @@ idprefix0是振荡器输出的id。
 
 ### 安装
 
-    pip install rwmapeditor-exgcdwu==1.6.5
+    pip install rwmapeditor-exgcdwu==1.6.7
 
 ### 使用
 

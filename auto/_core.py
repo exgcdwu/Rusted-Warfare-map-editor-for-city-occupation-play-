@@ -183,16 +183,8 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, id_to_tobject:dict, r
                 standard_error(f"Unknown optional arguments in a tagged object.(name:{name}|,{prefix_now})", 7)
 
     tobject_ids = tobject.returnOptionalProperty(AUTOKEY.IDs)
-    tobject_ids = tobject_ids.split(AUTOKEY.IDs_seg) if tobject_ids != None else []
-    if isresetid:
-        tobject.deleteOptionalProperty(AUTOKEY.IDs)
-        args_dict[AUTOKEY.IDs] = []
-        for tobjectid in tobject_ids:
-            if tobjectid == '415':
-                debug_pdb()
-            rwmap_now.delete_object_s(id_to_tobject[tobjectid])
-    else:
-        args_dict[AUTOKEY.IDs] = tobject_ids
+    tobject_ids = tobject_ids.split(AUTOKEY.IDs_seg) if (tobject_ids != None and tobject_ids != '') else []
+    args_dict[AUTOKEY.IDs] = tobject_ids
 
     return args_dict
 
@@ -490,7 +482,7 @@ def IDs_update(tagged_tobject:rw.case.TObject, tobject_now:rw.case.TObject)->Non
 
 def IDs_balance(tobject_now:rw.case.TObject, tottob:int)->list:
     idsh = tobject_now.returnOptionalProperty(AUTOKEY.IDs)
-    if idsh == None:
+    if idsh == None or idsh == '':
         idsh_list = []
     else:
         idsh_list = idsh.split(",")
@@ -501,6 +493,7 @@ def IDs_balance(tobject_now:rw.case.TObject, tottob:int)->list:
     )
 
     id_delete = idsh_list[min(tottob, len(idsh_list)):]
+
     return id_delete
 
 def is_tagged_tobject__newname__myinfo__info(tobject_name:str, info_dict, info_now):
@@ -537,7 +530,8 @@ def is_tagged_tobject(tobject:rw.case.TObject, info_dict, info_now):
 
 def tobject_ids_do(tobject:rw.case.TObject, myinfo, info, ids_now_dict, isreset):
     for thing_prefix_num in myinfo[AUTOKEY.ids]:
-        tobject_prefix = tobject.returnOptionalProperty(thing_prefix_num[0])
+        prefix_now = brace_translation(thing_prefix_num[0], info)
+        tobject_prefix = tobject.returnOptionalProperty(prefix_now)
         if tobject_prefix != None:
             tobject_prefix = tobject_prefix.split(",")
         else:
@@ -545,19 +539,22 @@ def tobject_ids_do(tobject:rw.case.TObject, myinfo, info, ids_now_dict, isreset)
         if isreset:
             tobject_prefix = []
             tobject.deleteOptionalPropertySup([AUTOKEY.IDs])
-        prefix_now = brace_translation(thing_prefix_num[0], info)
         if ids_now_dict.get(prefix_now) == None:
             ids_now_dict[prefix_now] = 1
         
         for index in range(len(tobject_prefix)):
-            tobject_prefix[index] = int(tobject_prefix[index][len(thing_prefix_num[0]):])
+            tobject_prefix[index] = int(tobject_prefix[index][len(prefix_now):])
             ids_now_dict[prefix_now] = max(ids_now_dict[prefix_now], 
-                                                    tobject_prefix[index])
+                                                    tobject_prefix[index] + 1)
 
 def is_tagged_object_simple(tobject:rw.case.TObject):
     object_type = tobject.returnDefaultProperty(rw.const.OBJECTDE.type)
     isnewtaggedobject = (object_type == None or re.match("^$", object_type))
     return isnewtaggedobject
+
+def isdigit_str(s):
+    return s.isdigit() or (s[0] == '-' and s[1:].isdigit())
+
 def auto_func():
     parser = argparse.ArgumentParser(
         description='Objects of Triggers are automatically processed by information\'s mode.')
@@ -654,7 +651,7 @@ def auto_func():
     
     dtobject = []
 
-    id_to_tobject = {}
+    id_to_tobject:dict[int, rw.case.TObject] = {}
 
     info_tagged_objects_exist = []
 
@@ -948,7 +945,6 @@ def auto_func():
                         temp_pri[args_now] = value_now 
                     standard_out(isverbose, temp_pri)
 
-
                 info_dict[info_dict_now[AUTOKEY.prefix]] = info_dict_now
                 if isdelete_all or isdelete or info_dict_now[AUTOKEY.isdelete_all_sym] or (isdelete_d and info_dict_now[AUTOKEY.isdelete_sym]):
                     dtobject.append(tobject)
@@ -978,10 +974,12 @@ def auto_func():
         myinfo = ischange__newname__myinfo__info[2]
         info = ischange__newname__myinfo__info[3]
         if ischange:
-            if myinfo.get(AUTOKEY.ids) != None:
+            if myinfo.get(AUTOKEY.ids) != None and myinfo.get(AUTOKEY.ids) != '':
                 tobject_ids_do(tobject, myinfo, info, ids_now_dict, isreset)
 
-    dtobject = []
+    debug_pdb()
+
+    dtobject_id:set[str] = set()
     tobject_list = [tobject for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                            rw.const.OBJECTDE.name: r".+"}) if is_tagged_object_simple(tobject) and (tobject.returnOptionalProperty(AUTOKEY.IDdep) == None or tobject.returnOptionalProperty(AUTOKEY.IDdep) == '0')]
     index_tobject = 0
@@ -989,6 +987,7 @@ def auto_func():
         tobject = tobject_list[index_tobject]
         insert_index = index_tobject + 1
         index_tobject = index_tobject + 1
+
 
         tobject_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
         tobject_id = tobject.returnDefaultProperty("id")
@@ -1028,7 +1027,7 @@ def auto_func():
             isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
             isdelete_all_sym = bool(re.match(AUTOKEY.delete_all_symbol, tobject_name)) or info[AUTOKEY.isdelete_all_sym]
             if isdelete_all or isdelete or isdelete_all_sym or (isdelete_sym and isdelete_d):
-                dtobject.append(tobject)
+                dtobject_id.add(tobject_id)
             else:
                 if tobject.returnOptionalProperty(AUTOKEY.IDfa) == None:
                     info_tagged_objects_exist.append(tobject)
@@ -1071,7 +1070,8 @@ def auto_func():
             if isdelete_all or isdelete_all_sym or isdelete_sym:
                 if object_dict.get(AUTOKEY.IDs) != None:
                     for ids in object_dict[AUTOKEY.IDs]:
-                        dtobject.append(id_to_tobject[ids])
+                        if not is_tagged_object_simple(id_to_tobject[ids]):
+                            dtobject_id.add(ids)
                 continue
             
             operation_index = {}
@@ -1116,7 +1116,10 @@ def auto_func():
                                     idnow_object.assignDefaultProperty(rw.const.OBJECTDE.name, idnow_object.returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
                                     tobject_list.append(idnow_object)
                                     map_now.addObject_type(idnow_object, isresetid = True)
-                            id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]].copy(object_now)
+                                    
+                            id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]]._default_properties = object_now._default_properties
+                            id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]]._optional_properties = object_now._optional_properties
+                            id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]]._other_properties = object_now._other_properties
                         else:
                             map_now.addObject_type(object_now)
                             if not isdelete:
@@ -1164,7 +1167,8 @@ def auto_func():
                     id_to_tobject[idnow].assignDefaultProperty(rw.const.OBJECTDE.name, id_to_tobject[idnow].returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
                     tobject_list.append(id_to_tobject[idnow])
                 else:
-                    dtobject.append(id_to_tobject[idnow])
+                    if not (isdelete_all or isdelete_all_sym or isdelete_sym):
+                        dtobject_id.add(idnow)
 
             if object_dict.get(AUTOKEY.cite_name) != None:
                 for key, value in object_dict.items():
@@ -1175,10 +1179,10 @@ def auto_func():
 
     standard_out(isverbose and (isdelete_all or isdelete), "The tagged object is being deleted...")
     standard_out(isverbose and (isdelete_d), "The tagged object is being deleted if eligible...")
-    for tobject in dtobject:
-        map_now.delete_object_s(tobject)
+    for tobject in [tobject for tobject in map_now.iterator_object_s()]:
+        if dtobject_id.issuperset([tobject.returnDefaultProperty("id")]):
+            map_now.delete_object_s(tobject)
 
-    debug_pdb()
     if iscitetrans:
         standard_out(isverbose, "Other objects are being translated by cite.")
         for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(.+)"}):
@@ -1204,7 +1208,7 @@ def auto_func():
             if tobject.returnOptionalProperty(AUTOKEY.IDdep) != None:
                 tagged_object_list.append(tobject)
                 maxIDdep = max(maxIDdep, int(tobject.returnOptionalProperty(AUTOKEY.IDdep)))
-    
+
     IDdep_now = maxIDdep
     for IDdep_now in range(maxIDdep, 0, -1):
         for tobject in tagged_object_list:
@@ -1232,14 +1236,13 @@ def auto_func():
             
             id_mapping[tobid] = str(id_now)
             id_now = id_now + 1
+
         id_now = 1
         for tobject in map_now.iterator_object_s():
             tobid = tobject.returnDefaultProperty("id")
             if is_tagged_object_simple(tobject):
                 ids_now = tobject.returnOptionalProperty(AUTOKEY.IDs)
-                if ids_now != None:
-                    if ids_now == "":
-                        continue
+                if ids_now != None and ids_now != "":
                     ids_now_l = ids_now.split(AUTOKEY.IDs_seg)
                     ids_now_l = [id_mapping[ids_nown] for ids_nown in ids_now_l]
                     ids_now = f"{AUTOKEY.IDs_seg}".join(ids_now_l)
@@ -1253,6 +1256,8 @@ def auto_func():
             id_now = id_now + 1
 
         map_now.resetnextobjectid(isaboutnextobjectid = False)
+
+    map_now.resetnextobjectid()
 
     standard_out(isverbose, "New RW map is being establishing...")
     map_now.write_file(output_path)

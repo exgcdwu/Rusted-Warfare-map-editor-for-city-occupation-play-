@@ -53,6 +53,7 @@ building_f_info_args_dict.update(bdtext_info_args_dict)
 building_f_info_args_dict.update(inadd_info_args_dict)
 
 building_f_info_default_args_dict = {
+    INFOKEY.addWarmup: "0s", 
     INFOKEY.isonlybuilding: "false", 
     INFOKEY.team: "-1", 
     INFOKEY.minUnits: "1", 
@@ -127,7 +128,7 @@ building_f_info_operation_list = \
             AUTOKEY.optional: {
                 rw.const.OBJECTOP.deactivatedBy: "{" + f"{INFOKEY.idprefix}" + "0}{',' + ','.join(deacti) if deacti != [''] else ''}", 
                 rw.const.OBJECTOP.activatedBy: ("{','.join(acti)}", f"{INFOKEY.acti}", AUTOKEY.exist), 
-                rw.const.OBJECTOP.warmup: "{" + f"{INFOKEY.addWarmup}" + "}", 
+                rw.const.OBJECTOP.warmup: ("{" + f"{INFOKEY.addWarmup}" + "}", f"'{INFOKEY.addWarmup}' != '0s'", AUTOKEY.brace), 
                 rw.const.OBJECTOP.resetActivationAfter: ("{" + f"{INFOKEY.addReset}" + "}", f"{INFOKEY.addReset}", AUTOKEY.exist), 
                 rw.const.OBJECTOP.spawnUnits: "{" + f"{INFOKEY.unit}" + "}*{" + f"{INFOKEY.spawnnum}" + "}", 
                 rw.const.OBJECTOP.team: "{" + f"{INFOKEY.team}" + "}", 

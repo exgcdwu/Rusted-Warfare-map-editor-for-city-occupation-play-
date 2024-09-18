@@ -64,7 +64,7 @@ inadd_info_operation_list = \
                 AUTOKEY.optional: {
                     rw.const.OBJECTOP.spawnUnits: "{" + f"{INFOKEY.unit}" + "}*{" + f"{INFOKEY.inaddspawnnum}" + "}", 
                     rw.const.OBJECTOP.team: "{" + f"{INFOKEY.inaddteam}" + "}", 
-                    rw.const.OBJECTOP.warmup: ("{" + f"{INFOKEY.inaddwarmup}" + "}", f"{INFOKEY.inaddwarmup} == '0s'", AUTOKEY.brace), 
+                    rw.const.OBJECTOP.warmup: ("{" + f"{INFOKEY.inaddwarmup}" + "}", f"'{INFOKEY.inaddwarmup}' != '0s'", AUTOKEY.brace), 
                     rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.inaddisshowOnMap}", AUTOKEY.brace), 
                 }
             }
