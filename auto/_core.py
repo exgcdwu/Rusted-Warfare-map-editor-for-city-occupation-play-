@@ -538,7 +538,7 @@ def tobject_ids_do(tobject:rw.case.TObject, myinfo, info, ids_now_dict, isreset)
             tobject_prefix = []
         if isreset:
             tobject_prefix = []
-            tobject.deleteOptionalPropertySup([AUTOKEY.IDs])
+            tobject.deleteOptionalPropertySup([AUTOKEY.IDs, AUTOKEY.IDfa, AUTOKEY.IDdep])
         if ids_now_dict.get(prefix_now) == None:
             ids_now_dict[prefix_now] = 1
         
@@ -1052,7 +1052,7 @@ def auto_func():
                         id_now = idprefix + str(ids_now_dict[idprefix])
                         idnow_list.append(id_now)
                         object_dict[thing[0] + str(i)] = id_now
-                        if (isdelete_sym or isdelete_all_sym or isdelete_all) and isreset:
+                        if (isdelete_sym or isdelete_all_sym or isdelete_all):
                             continue
                         ids_now_dict[idprefix] = ids_now_dict[idprefix] + 1
                     tobject.assignOptionalProperty(idprefix, ",".join(idnow_list))
