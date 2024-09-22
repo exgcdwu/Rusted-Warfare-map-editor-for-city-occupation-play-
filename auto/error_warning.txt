@@ -1,0 +1,32 @@
+ERROR code:
+-1: An error from operation.
+0: External info import error.
+1: External info import loop error.
+2: Incorrect use of the subordinate info object.
+3: Unknown arguments in an info object.
+4: Unuseful arguments in an info object.
+5: Info input dependence loop error.
+6: A required argument is missing in an info object.
+7: Unknown optional arguments in a tagged object.
+8: Required arguments are missing below in a tagged object.
+9: Too many required arguments below in a tagged object.
+10: External info import error(The target info has ",d")
+11: The IDs are coincident and the mapping cannot be performed.
+12: An argument of the info object is invalid.
+13: An optional argument of the info object is invalid.
+14: Reference tags are duplicated.
+15: operation tags are duplicated.
+16：References occur in a loop.
+17：The depth of tagged objects is disordered.
+18：A tagged object can't find the object that was once created.(WARNING code:1)
+19：A tagged object created by tree tagged object can't find its parent object.(WARNING code:2)
+20：A tree tagged object can't find its child object, although the child object has its father, then this child object will be unavailable.(WARNING code:3)
+21：An object that needs to be deleted could not be found.(WARNING code:4)
+22：An info's prefix is the prefix of another.
+
+WARNING code:
+
+1：A tagged object can't find the object that was once created.(ERROR code:18)
+2：A tagged object created by tree tagged object can't find its parent object.(ERROR code:19)
+3：A tree tagged object can't find its child object, although the child object has its father, then this child object will be unavailable.(ERROR code:20)
+4：An object that needs to be deleted could not be found.(ERROR code:21)

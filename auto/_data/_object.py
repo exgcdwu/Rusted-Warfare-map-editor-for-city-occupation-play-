@@ -45,6 +45,22 @@ for key in OBJECT_ARGS_DICT.keys():
 ARGS_OPARGS_PRE_OPERATION = \
     operation_exist_if("args", "args_opargs_pre_if2") + \
         operation_cycle_start("i", "0", "i < len(args)", "args_opargs_pre_cycle1") + \
+            operation_if("len(args[i]) >= 3 or len(args[i]) <= 1", "args_opargs_pre_if_argserror") + \
+                [
+                    {
+                        AUTOKEY.operation_type: AUTOKEY.error, 
+                        AUTOKEY.error_info: "The number of arguments in {i + 1}-th args must be 2.(args:{args}, reality:{len(args[i])})"
+                    },
+                ] + \
+            operation_ifend("args_opargs_pre_if_argserror") + \
+            operation_if("'{args[i][1]}' != 'str' and '{args[i][1]}' != 'bool'", "args_opargs_pre_if_argserror_2") + \
+                [
+                    {
+                        AUTOKEY.operation_type: AUTOKEY.error, 
+                        AUTOKEY.error_info: "The 2ed of arguments in {i + 1}-th args must be str or bool.(args:{args}, reality:{args[i][1]})"
+                    },
+                ] + \
+            operation_ifend("args_opargs_pre_if_argserror_2") + \
             [
                 {
                     AUTOKEY.operation_type: AUTOKEY.typeadd_optional, 
@@ -59,6 +75,30 @@ ARGS_OPARGS_PRE_OPERATION = \
     operation_ifend("args_opargs_pre_if2") + \
     operation_exist_if("opargs", "args_opargs_pre_if3") + \
         operation_cycle_start("i", "0", "i < len(opargs)", "args_opargs_pre_cycle2") + \
+            operation_if("len(opargs[i]) >= 5 or len(opargs[i]) <= 2", "args_opargs_pre_if_opargserror") + \
+                [
+                    {
+                        AUTOKEY.operation_type: AUTOKEY.error, 
+                        AUTOKEY.error_info: "The number of arguments in {i + 1}-th opargs must be 3 or 4.(opargs:{opargs}, reality:{len(opargs[i])})"
+                    },
+                ] + \
+            operation_ifend("args_opargs_pre_if_opargserror") + \
+            operation_if("'{opargs[i][2]}' != 'str' and '{opargs[i][2]}' != 'bool'", "args_opargs_pre_if_opargserror_2") + \
+                [
+                    {
+                        AUTOKEY.operation_type: AUTOKEY.error, 
+                        AUTOKEY.error_info: "The 3th of arguments in {i + 1}-th opargs must be str or bool.(opargs:{opargs}, reality:{opargs[i][2]})"
+                    },
+                ] + \
+            operation_ifend("args_opargs_pre_if_opargserror_2") + \
+            operation_if("len(opargs[i][0]) != 1", "args_opargs_pre_if_opargserror_3") + \
+                [
+                    {
+                        AUTOKEY.operation_type: AUTOKEY.error, 
+                        AUTOKEY.error_info: "The length of first arguments in {i + 1}-th opargs must be 1.(opargs:{opargs}, reality:{len(opargs[i][0])})"
+                    },
+                ] + \
+            operation_ifend("args_opargs_pre_if_opargserror_3") + \
             operation_if("len(opargs[i]) == 3", "args_opargs_pre_if1") + \
                 [
                     {

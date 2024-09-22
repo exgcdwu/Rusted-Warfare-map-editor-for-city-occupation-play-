@@ -23,7 +23,7 @@ teamDetect_info_args_dict[INFOKEY.setidTeam] = (list, str)
 teamDetect_info_args_dict[INFOKEY.minUnits] = str
 teamDetect_info_args_dict[INFOKEY.maxUnits] = str
 
-teamDetect_info_args_dict[INFOKEY.unit] = str
+teamDetect_info_args_dict[INFOKEY.aunit] = str
 teamDetect_info_args_dict[INFOKEY.name] = (list, str)
 teamDetect_info_args_dict[INFOKEY.offset] = (list, list, int)
 teamDetect_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
@@ -94,10 +94,11 @@ DETECT_OPTION_OPERATION_OPTIONAL = {DETECT_KEY:(True, DETECT_KEY, AUTOKEY.brace)
 
 teamDetect_info_operation_optional = {
     rw.const.OBJECTOP.id: "{id_now}", 
+    rw.const.OBJECTOP.alsoActivate: "{id_now}", 
     rw.const.OBJECTOP.minUnits: "{" + INFOKEY.minUnits + "}", 
     rw.const.OBJECTOP.maxUnits: ("{" + INFOKEY.maxUnits + "}", INFOKEY.maxUnits, AUTOKEY.exist), 
     rw.const.OBJECTOP.resetActivationAfter: "{" + INFOKEY.reset + "}", 
-    rw.const.OBJECTOP.unitType: ("{" + f"{INFOKEY.unit}" + "}", INFOKEY.unit, AUTOKEY.exist), 
+    rw.const.OBJECTOP.unitType: ("{" + f"{INFOKEY.aunit}" + "}", INFOKEY.aunit, AUTOKEY.exist), 
     rw.const.OBJECTOP.team: "{" + f"{INFOKEY.setTeam}" + "[i][j]}"
 }
 teamDetect_info_operation_optional.update(DETECT_OPTION_OPERATION_OPTIONAL)

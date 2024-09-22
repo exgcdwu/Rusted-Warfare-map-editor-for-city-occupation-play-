@@ -64,6 +64,8 @@ class AUTOKEY:
     no_check = "no_check"
     cite_name = "cite_name"
     depth = "depth"
+    tobject_id = "tobject_id"
+    tobject_name = "tobject_name"
 
     operation_type = "operation_type"
     object = "object"
@@ -76,6 +78,7 @@ class AUTOKEY:
     ifvar = "ifvar"
     typeset = "typeset"
     typeset_id = "typeset_id"
+    info_name = "info_name"
 
     changetype = "changetype"
     totype = "totype"
@@ -124,6 +127,15 @@ def standard_error(info_err, error_id:int, sub_info_error:str = None)->None:
     if isdebug:
         import pdb;pdb.set_trace()
     exit(error_id)
+
+def standard_warning(info_warn, warn_id:int, error_id:int, sub_info_warn:str = None)->None:
+    print(info_warn + f"(WARNING:{warn_id})", file=sys.stdout)
+    if sub_info_warn != None:
+        pprint(sub_info_warn)
+    if isdebug:
+        import pdb;pdb.set_trace()
+    if not ignorewarning:
+        exit(error_id)
 
 def debug_dict(dict_now:dict, name:str):
     if isdebug:
@@ -528,7 +540,20 @@ def is_tagged_tobject(tobject:rw.case.TObject, info_dict, info_now):
     return ischange
 
 
-def tobject_ids_do(tobject:rw.case.TObject, myinfo, info, ids_now_dict, isreset):
+def tobject_ids_do(tobject:rw.case.TObject, myinfo, info, ids_now_dict, isreset, id_to_tobject):
+    iddep = tobject.returnOptionalProperty(AUTOKEY.IDdep)
+    idfa = tobject.returnOptionalProperty(AUTOKEY.IDfa)
+    id_now = tobject.returnDefaultProperty("id")
+    tobject_name = tobject.returnDefaultProperty("name")
+    if iddep != None and iddep != "0":
+        tobject_idfa:rw.case.TObject = id_to_tobject.get(idfa)
+        if tobject_idfa == None:
+            standard_warning(f"A tagged object created by tree tagged object can't find its parent object, then this tagged object will be unavailable.(ID:{id_now},name{tobject_name},parent ID:{idfa}, IDdep:{iddep})", 2, 19)
+        elif int(tobject_idfa.returnOptionalProperty(AUTOKEY.IDdep)) != int(iddep) - 1:
+            standard_error(f"The depth of tagged objects is disordered.(ID:{id_now},,parent ID:{idfa}, IDdep:{iddep}), parent IDdep:({tobject_idfa.returnOptionalProperty(AUTOKEY.IDdep)})", 17)
+        elif not id_now in tobject_idfa.returnOptionalProperty(AUTOKEY.IDs).split(","):
+            standard_warning(f"A tree tagged object can't find its child object, although the child object has its father, then this child object will be unavailable.(ID:{id_now},name{tobject_name},parent ID:{idfa}, child IDs:{tobject_idfa.returnOptionalProperty(AUTOKEY.IDs)})", 3, 20)
+        
     for thing_prefix_num in myinfo[AUTOKEY.ids]:
         prefix_now = brace_translation(thing_prefix_num[0], info)
         tobject_prefix = tobject.returnOptionalProperty(prefix_now)
@@ -594,6 +619,9 @@ def auto_func():
 
     parser.add_argument("--debug", 
                         action = 'store_true', help = 'Mode of debuging.')
+
+    parser.add_argument("--ignorewarning", 
+                        action = 'store_true', help = 'Warning would not exit.')
     
     parser.add_argument("--resetid", 
                         action = 'store_true', help = 'Reset the IDs of objects.')
@@ -610,6 +638,9 @@ def auto_func():
 
     global isdebug
     isdebug = args.debug
+
+    global ignorewarning
+    ignorewarning = args.ignorewarning
 
     output_path = args.map_path[0] if args.output == "|" else args.output[0]
 
@@ -787,6 +818,7 @@ def auto_func():
 
                 info_dict_now[AUTOKEY.tobject] = tobject
                 info_dict_now[AUTOKEY.info_key] = key
+                info_dict_now[AUTOKEY.info_name] = info_name
 
                 if info.get(AUTOKEY.operation_pre) != None:
                     operation_index = {}
@@ -866,7 +898,7 @@ def auto_func():
                                     for value_n in value_brace:
                                         info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.optional].add(value_n)
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.error:
-                            standard_error(str_translation(operation_now[AUTOKEY.error_info]), -1)
+                            standard_error(str_translation(operation_now[AUTOKEY.error_info], object_dict), -1)
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.pdb_pause:
                             debug_pdb(object_dict)
                         index = index + 1
@@ -944,6 +976,10 @@ def auto_func():
                                 continue
                         temp_pri[args_now] = value_now 
                     standard_out(isverbose, temp_pri)
+                
+                for key_now in info_dict.keys():
+                    if key_now.startswith(info_dict_now[AUTOKEY.prefix]) or info_dict_now[AUTOKEY.prefix].startswith(key_now):
+                        standard_error(f"An info's prefix is the prefix of another.(name1:({info_dict[key_now][AUTOKEY.info_name]}), prefix1({key_now}); name2:({info_dict_now[AUTOKEY.info_name]})), prefix2:({info_dict_now[AUTOKEY.prefix]})", 22)
 
                 info_dict[info_dict_now[AUTOKEY.prefix]] = info_dict_now
                 if isdelete_all or isdelete or info_dict_now[AUTOKEY.isdelete_all_sym] or (isdelete_d and info_dict_now[AUTOKEY.isdelete_sym]):
@@ -975,9 +1011,7 @@ def auto_func():
         info = ischange__newname__myinfo__info[3]
         if ischange:
             if myinfo.get(AUTOKEY.ids) != None and myinfo.get(AUTOKEY.ids) != '':
-                tobject_ids_do(tobject, myinfo, info, ids_now_dict, isreset)
-
-    debug_pdb()
+                tobject_ids_do(tobject, myinfo, info, ids_now_dict, isreset, id_to_tobject)
 
     dtobject_id:set[str] = set()
     tobject_list = [tobject for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
@@ -1008,6 +1042,8 @@ def auto_func():
             if prefix_now == prefix_to_match \
                 and (not re.match(AUTOKEY.info_re, tobject_name)):
                 object_dict = deepcopy(info)
+                object_dict[AUTOKEY.tobject_id] = tobject_id
+                object_dict[AUTOKEY.tobject_name] = tobject_name
                 object_dict.update(get_args(myinfo, tobject_name_to_solve, tobject, id_to_tobject, map_now))
                 
                 if info.get(AUTOKEY.info_prefix) != None:
@@ -1018,22 +1054,25 @@ def auto_func():
                 break
         if ischange:
 
+            isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
+            isdelete_all_sym = bool(re.match(AUTOKEY.delete_all_symbol, tobject_name)) or info[AUTOKEY.isdelete_all_sym]
+
+            standard_out(isverbose and (not(isdelete_sym or isdelete_all or isdelete_all_sym)), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. Object generation...")
+            standard_out(isverbose and (isdelete_all or isdelete_all_sym), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted...")
+            standard_out(isverbose and (isdelete_sym and(not (isdelete_all or isdelete_all_sym))), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The objects will not be generated, existing ones will also be deleted...")
+
+            if myinfo.get(AUTOKEY.isinfo_sub) != None and myinfo.get(AUTOKEY.isinfo_sub) == True:
+                standard_error(f"Incorrect use of the subordinate info object.(ID:{tobject_id}, name:{tobject_name})", 2)
+
             if tobject.returnOptionalProperty(AUTOKEY.IDdep) == None:
                 tobject.assignOptionalProperty(AUTOKEY.IDdep, "0")
             tobject_IDdep = int(tobject.returnOptionalProperty(AUTOKEY.IDdep))
-            
-            if myinfo.get(AUTOKEY.isinfo_sub) != None and myinfo.get(AUTOKEY.isinfo_sub) == True:
-                standard_error(f"Incorrect use of the subordinate info object.(ID:{tobject_id}, name:{tobject_name})", 2)
-            isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
-            isdelete_all_sym = bool(re.match(AUTOKEY.delete_all_symbol, tobject_name)) or info[AUTOKEY.isdelete_all_sym]
+
             if isdelete_all or isdelete or isdelete_all_sym or (isdelete_sym and isdelete_d):
                 dtobject_id.add(tobject_id)
             else:
                 if tobject.returnOptionalProperty(AUTOKEY.IDfa) == None:
                     info_tagged_objects_exist.append(tobject)
-            standard_out(isverbose and (not(isdelete_sym or isdelete_all or isdelete_all_sym)), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. Object generation...")
-            standard_out(isverbose and (isdelete_all or isdelete_all_sym), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted...")
-            standard_out(isverbose and (isdelete_sym and(not (isdelete_all or isdelete_all_sym))), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The objects will not be generated, existing ones will also be deleted...")
 
             if myinfo.get(AUTOKEY.ids) != None:
                 for thing in myinfo[AUTOKEY.ids]:
@@ -1070,7 +1109,9 @@ def auto_func():
             if isdelete_all or isdelete_all_sym or isdelete_sym:
                 if object_dict.get(AUTOKEY.IDs) != None:
                     for ids in object_dict[AUTOKEY.IDs]:
-                        if not is_tagged_object_simple(id_to_tobject[ids]):
+                        if id_to_tobject.get(ids) == None:
+                            standard_warning(f"An object that needs to be deleted could not be found.(ID:{ids},parent ID:{tobject_id})", 4, 21)
+                        elif not is_tagged_object_simple(id_to_tobject[ids]):
                             dtobject_id.add(ids)
                 continue
             
@@ -1107,19 +1148,20 @@ def auto_func():
 
                         if object_dict.get(AUTOKEY.IDs) != None and tottobid < len(object_dict[AUTOKEY.IDs]):
                             object_now.assignDefaultProperty("id", object_dict[AUTOKEY.IDs][tottobid])
-                            idnow_object:rw.case.TObject = deepcopy(id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]])
-                            if isnewtaggedobject:
-                                if is_tagged_object_simple(idnow_object):
-                                    object_now._optional_properties = deepcopy(idnow_object._optional_properties)
+                            if id_to_tobject.get(object_dict[AUTOKEY.IDs][tottobid]) == None:
+                                standard_warning(f"A tagged object can't find the object that was once created.(ID: {tobject_id},name: {tobject_name},child ID:{object_dict[AUTOKEY.IDs][tottobid]})", 1, 18)
+                                map_now.addObject_type(object_now, isresetid = False)
                             else:
-                                if is_tagged_object_simple(idnow_object):
-                                    idnow_object.assignDefaultProperty(rw.const.OBJECTDE.name, idnow_object.returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
-                                    tobject_list.append(idnow_object)
-                                    map_now.addObject_type(idnow_object, isresetid = True)
-                                    
-                            id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]]._default_properties = object_now._default_properties
-                            id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]]._optional_properties = object_now._optional_properties
-                            id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]]._other_properties = object_now._other_properties
+                                idnow_object:rw.case.TObject = deepcopy(id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]])
+                                if isnewtaggedobject:
+                                    if is_tagged_object_simple(idnow_object):
+                                        object_now._optional_properties = deepcopy(idnow_object._optional_properties)
+                                else:
+                                    if is_tagged_object_simple(idnow_object):
+                                        idnow_object.assignDefaultProperty(rw.const.OBJECTDE.name, idnow_object.returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
+                                        tobject_list.append(idnow_object)
+                                        map_now.addObject_type(idnow_object, isresetid = True)
+                            id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]] = deepcopy(object_now)
                         else:
                             map_now.addObject_type(object_now)
                             if not isdelete:
@@ -1163,17 +1205,22 @@ def auto_func():
 
             id_delete = IDs_balance(tobject, tottobid)
             for idnow in id_delete:
-                if is_tagged_object_simple(id_to_tobject[idnow]):
-                    id_to_tobject[idnow].assignDefaultProperty(rw.const.OBJECTDE.name, id_to_tobject[idnow].returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
-                    tobject_list.append(id_to_tobject[idnow])
+                if id_to_tobject.get(idnow) == None:
+                    standard_warning(f"An object that needs to be deleted could not be found.(ID:{idnow},parent ID:{tobject_id})", 4, 21)
                 else:
-                    if not (isdelete_all or isdelete_all_sym or isdelete_sym):
-                        dtobject_id.add(idnow)
+                    if is_tagged_object_simple(id_to_tobject[idnow]):
+                        id_to_tobject[idnow].assignDefaultProperty(rw.const.OBJECTDE.name, id_to_tobject[idnow].returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
+                        tobject_list.append(id_to_tobject[idnow])
+                    else:
+                        if not (isdelete_all or isdelete_all_sym or isdelete_sym):
+                            dtobject_id.add(idnow)
 
-            if object_dict.get(AUTOKEY.cite_name) != None:
+            if object_dict.get(AUTOKEY.cite_name) != None and (not (isdelete_all or isdelete_all_sym or isdelete_sym)):
                 for key, value in object_dict.items():
                     if cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + key) != None:
-                        standard_error(f"Reference tags are duplicated. An object(ID:{tobject_id}, name:{tobject_name}, Cite:{object_dict[AUTOKEY.cite_name]})", 14)
+                        origin_id = cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + AUTOKEY.tobject_id)
+                        origin_name = cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + AUTOKEY.tobject_name)
+                        standard_error(f"Reference tags are duplicated. An object(ID:({tobject_id}), name:({tobject_name}), original ID:({origin_id}), original name:({origin_name}), Cite:{object_dict[AUTOKEY.cite_name]})", 14)
                     cite_object_dict[object_dict[AUTOKEY.cite_name] + "." + key] = deepcopy(value)
       
 
@@ -1182,6 +1229,8 @@ def auto_func():
     for tobject in [tobject for tobject in map_now.iterator_object_s()]:
         if dtobject_id.issuperset([tobject.returnDefaultProperty("id")]):
             map_now.delete_object_s(tobject)
+
+    debug_pdb()
 
     if iscitetrans:
         standard_out(isverbose, "Other objects are being translated by cite.")

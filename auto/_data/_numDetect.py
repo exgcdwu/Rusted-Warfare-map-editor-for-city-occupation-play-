@@ -21,7 +21,7 @@ numDetect_info_args_dict[INFOKEY.setNum] = (list, list, int)
 numDetect_info_args_dict[INFOKEY.setidNum] = (list, str)
 
 numDetect_info_args_dict[INFOKEY.team] = str
-numDetect_info_args_dict[INFOKEY.unit] = str
+numDetect_info_args_dict[INFOKEY.aunit] = str
 numDetect_info_args_dict[INFOKEY.name] = (list, str)
 numDetect_info_args_dict[INFOKEY.offset] = (list, list, int)
 numDetect_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
@@ -56,7 +56,7 @@ numDetect_info_default_args_dict = {
 numDetect_info_optional_set = {INFOKEY.brace}
 
 numDetect_info_optional_set.add(INFOKEY.isprefixseg)
-numDetect_info_optional_set.add(INFOKEY.unit)
+numDetect_info_optional_set.add(INFOKEY.aunit)
 numDetect_info_optional_set.add(INFOKEY.team)
 numDetect_info_optional_set.add(INFOKEY.cite_name)
 numDetect_info_optional_set.add(INFOKEY.args)
@@ -92,10 +92,11 @@ DETECT_OPTION_OPERATION_OPTIONAL = {DETECT_KEY:(True, DETECT_KEY, AUTOKEY.brace)
 
 numDetect_info_operation_optional = {
     rw.const.OBJECTOP.id: "{id_now}", 
+    rw.const.OBJECTOP.alsoActivate: "{id_now}", 
     rw.const.OBJECTOP.minUnits: ("{minUnits_now}", "minUnits_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.maxUnits: ("{maxUnits_now}", "maxUnits_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.resetActivationAfter: "{" + INFOKEY.reset + "}", 
-    rw.const.OBJECTOP.unitType: ("{" + f"{INFOKEY.unit}" + "}", INFOKEY.unit, AUTOKEY.exist), 
+    rw.const.OBJECTOP.unitType: ("{" + f"{INFOKEY.aunit}" + "}", INFOKEY.aunit, AUTOKEY.exist), 
     rw.const.OBJECTOP.team: ("{" + f"{INFOKEY.team}" + "}", "team", AUTOKEY.exist)
 }
 numDetect_info_operation_optional.update(DETECT_OPTION_OPERATION_OPTIONAL)

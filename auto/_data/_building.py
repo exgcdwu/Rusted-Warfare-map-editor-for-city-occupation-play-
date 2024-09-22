@@ -24,7 +24,7 @@ building_info_args_dict[INFOKEY.detectReset] = str
 building_info_args_dict[INFOKEY.addWarmup] = str
 building_info_args_dict[INFOKEY.addReset] = str
 
-building_info_args_dict[INFOKEY.unit] = str
+building_info_args_dict[INFOKEY.aunit] = str
 building_info_args_dict[INFOKEY.spawnnum] = str
 building_info_args_dict[INFOKEY.team] = str
 building_info_args_dict[INFOKEY.addname] = str
@@ -108,7 +108,7 @@ building_info_operation_list = \
             AUTOKEY.type: rw.const.OBJECTTYPE.unitDetect, 
             AUTOKEY.optional: {
                 rw.const.OBJECTOP.resetActivationAfter: "{" + f"{INFOKEY.detectReset}" + "}", 
-                rw.const.OBJECTOP.unitType: ("{" + f"{INFOKEY.unit}" + "}", f"{INFOKEY.isonlybuilding} == False", AUTOKEY.brace), 
+                rw.const.OBJECTOP.unitType: ("{" + f"{INFOKEY.aunit}" + "}", f"{INFOKEY.isonlybuilding} == False", AUTOKEY.brace), 
                 rw.const.OBJECTOP.team: ("{" + f"{INFOKEY.team}" + "}", f"{INFOKEY.team} != -1", AUTOKEY.brace), 
                 rw.const.OBJECTOP.id: "{" + f"{INFOKEY.idprefix}" + "0}", 
                 rw.const.OBJECTOP.onlyBuildings: ("{" + f"{INFOKEY.isonlybuilding}" + "}", f"{INFOKEY.isonlybuilding}", AUTOKEY.brace), 
@@ -129,7 +129,7 @@ building_info_operation_list = \
                 rw.const.OBJECTOP.deactivatedBy: ("{','.join(deacti)}", f"{INFOKEY.deacti}", AUTOKEY.exist), 
                 rw.const.OBJECTOP.warmup: ("{" + f"{INFOKEY.addWarmup}" + "}", f"'{INFOKEY.addWarmup}' != '0s'", AUTOKEY.brace), 
                 rw.const.OBJECTOP.resetActivationAfter: ("{" + f"{INFOKEY.addReset}" + "}", f"{INFOKEY.addReset}", AUTOKEY.exist), 
-                rw.const.OBJECTOP.spawnUnits: "{" + f"{INFOKEY.unit}" + "}*{" + f"{INFOKEY.spawnnum}" + "}", 
+                rw.const.OBJECTOP.spawnUnits: "{" + f"{INFOKEY.aunit}" + "}*{" + f"{INFOKEY.spawnnum}" + "}", 
                 rw.const.OBJECTOP.team: "{" + f"{INFOKEY.team}" + "}", 
                 rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.isshowOnMap}", AUTOKEY.brace), 
             }

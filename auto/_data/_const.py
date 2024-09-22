@@ -29,6 +29,7 @@ class INFOKEY:
     acti = "acti"
     deacti = "deacti"
     brace = "brace"
+    exist = "exist"
 
     object_info = "object_info"
     teamDetect_info = "teamDetect_info"
@@ -52,7 +53,7 @@ class INFOKEY:
     setTeam = "setTeam"
     setidTeam = "setidTeam"
     lenidTeam = "lenidTeam"
-    unit = "unit"
+    aunit = "aunit"
     minUnits = "minUnits"
     maxUnits = "maxUnits"
     reset = "reset"
@@ -98,6 +99,7 @@ class INFOKEY:
     inaddname = "inaddname"
     inaddoffset = "inaddoffset"
     inaddoffsetsize = "inaddoffsetsize"
+    inaddisinitialunit = "inaddisinitialunit"
 
     spawnUnits = "spawnUnits"
     initialtime = "initialtime"

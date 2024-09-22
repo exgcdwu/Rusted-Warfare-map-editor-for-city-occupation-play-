@@ -114,7 +114,7 @@ class OBJECTOP:
     activateIds = "activateIds"
     whenActivatedIds = "whenActivatedIds"
     showOnMap = "showOnMap"
-    unit = "units"
+    unit = "unit"
 
 class MAPTYPE:
     skirmish = "skirmish"

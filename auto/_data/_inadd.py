@@ -18,6 +18,7 @@ inadd_info_args_dict = OrderedDict()
 inadd_info_args_dict[INFOKEY.isinadd] = bool
 inadd_info_args_dict[INFOKEY.prefix] = str
 inadd_info_args_dict[INFOKEY.inaddunit] = str
+inadd_info_args_dict[INFOKEY.inaddisinitialunit] = bool
 inadd_info_args_dict[INFOKEY.inaddspawnnum] = str
 inadd_info_args_dict[INFOKEY.inaddteam] = str
 inadd_info_args_dict[INFOKEY.inaddwarmup] = str
@@ -28,9 +29,10 @@ inadd_info_args_dict[INFOKEY.inaddoffsetsize] = (list, int)
 
 inadd_info_default_args_dict = {
     INFOKEY.isinadd: "true", 
+    INFOKEY.inaddisinitialunit: "false", 
     INFOKEY.inaddspawnnum: "1", 
     INFOKEY.inaddwarmup: "{" + f"{INFOKEY.addWarmup}" + "}", 
-    INFOKEY.inaddunit: "{" + f"{INFOKEY.unit}" + "}", 
+    INFOKEY.inaddunit: "{" + f"{INFOKEY.aunit}" + "}", 
     INFOKEY.inaddname: "", 
     INFOKEY.inaddoffset: "0 0", 
     INFOKEY.inaddoffsetsize: "0 0"
@@ -45,6 +47,7 @@ inadd_info_var_dependent_dict = {
     INFOKEY.inaddname: INFOKEY.isinadd, 
     INFOKEY.inaddoffset: INFOKEY.isinadd, 
     INFOKEY.inaddoffsetsize: INFOKEY.isinadd, 
+    INFOKEY.inaddisinitialunit: INFOKEY.isinadd
 }
 
 inadd_info_optional_set = {
@@ -62,10 +65,11 @@ inadd_info_operation_list = \
                 AUTOKEY.name: "{" + f"{INFOKEY.inaddname}" + "}", 
                 AUTOKEY.type: rw.const.OBJECTTYPE.unitAdd, 
                 AUTOKEY.optional: {
-                    rw.const.OBJECTOP.spawnUnits: "{" + f"{INFOKEY.unit}" + "}*{" + f"{INFOKEY.inaddspawnnum}" + "}", 
+                    rw.const.OBJECTOP.spawnUnits: ("{" + f"{INFOKEY.aunit}" + "}*{" + f"{INFOKEY.inaddspawnnum}" + "}", f"not {INFOKEY.inaddisinitialunit}", AUTOKEY.brace), 
+                    rw.const.OBJECTOP.unit: ("{" + f"{INFOKEY.aunit}" + "}", f"{INFOKEY.inaddisinitialunit}", AUTOKEY.brace), 
                     rw.const.OBJECTOP.team: "{" + f"{INFOKEY.inaddteam}" + "}", 
-                    rw.const.OBJECTOP.warmup: ("{" + f"{INFOKEY.inaddwarmup}" + "}", f"'{INFOKEY.inaddwarmup}' != '0s'", AUTOKEY.brace), 
-                    rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.inaddisshowOnMap}", AUTOKEY.brace), 
+                    rw.const.OBJECTOP.warmup: ("{" + f"{INFOKEY.inaddwarmup}" + "}", f"('{INFOKEY.inaddwarmup}' != '0s') and not({INFOKEY.inaddisinitialunit})", AUTOKEY.brace), 
+                    rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.inaddisshowOnMap} and not({INFOKEY.inaddisinitialunit})", AUTOKEY.brace), 
                 }
             }
         ] + \
