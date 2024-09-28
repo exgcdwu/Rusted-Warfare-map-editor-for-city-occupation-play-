@@ -12,8 +12,8 @@ import rwmap as rw
 from auto._core import AUTOKEY
 from auto._data._const import *
 from auto._data._object import *
-from auto._data._bdtext import *
-from auto._data._inadd import *
+from auto._data._multiText import *
+from auto._data._time import *
 
 flash_info_args_dict = OrderedDict()
 
@@ -23,38 +23,45 @@ flash_info_args_dict[INFOKEY.detectReset] = str
 flash_info_args_dict[INFOKEY.isprefixseg] = bool
 flash_info_args_dict[INFOKEY.initialtime] = (list, str)
 flash_info_args_dict[INFOKEY.periodtime] = (list, str)
+flash_info_args_dict[INFOKEY.initialacti] = (list, list, str)
+flash_info_args_dict[INFOKEY.initialdeacti] = (list, list, str)
+flash_info_args_dict[INFOKEY.periodacti] = (list, list, str)
+flash_info_args_dict[INFOKEY.perioddeacti] = (list, list, str)
 
 flash_info_args_dict[INFOKEY.cite_name] = str
-
-flash_info_args_dict[INFOKEY.args] = (list, list, str)
-flash_info_args_dict[INFOKEY.opargs] = (list, list, str)
-flash_info_args_dict[INFOKEY.brace] = (list, str)
 
 flash_info_default_args_dict = {
     INFOKEY.detectReset: '0.25s'
 }
 
 flash_info_optional_set = {
-    INFOKEY.isprefixseg, INFOKEY.args, INFOKEY.opargs, INFOKEY.cite_name, 
-    INFOKEY.brace, INFOKEY.periodtime
+    INFOKEY.isprefixseg, INFOKEY.cite_name, INFOKEY.periodtime, INFOKEY.initialacti, INFOKEY.periodacti, 
+    INFOKEY.initialdeacti, INFOKEY.perioddeacti
 }
+flash_info_optional_set.update(time_info_optional_set)
 
 flash_info_var_dependent_dict = {}
+flash_info_var_dependent_dict.update(time_info_var_dependent_dict)
 
 flash_info_initial_brace_dict = {}
 
 flash_info_default_brace_set = set()
 
-flash_info_operation_pre_list = \
-    deepcopy(ARGS_OPARGS_PRE_OPERATION)
+flash_info_operation_pre_list = []
+
+flash_info_info_prefix_dict = {}
 
 flash_info_operation_list = \
     operation_cycle_start("i", "0", f"i < len({INFOKEY.initialtime})", "flash_cycle_initialtime_add") + \
+        operation_list_assign(f"{INFOKEY.initialacti}", "i", "initialacti_now", "flash") + \
+        operation_list_assign(f"{INFOKEY.initialdeacti}", "i", "initialdeacti_now", "flash") + \
         [
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 AUTOKEY.type: rw.const.OBJECTTYPE.unitAdd, 
                 AUTOKEY.optional: {
+                    rw.const.OBJECTOP.activatedBy: ("{','.join(initialacti_now)}", "initialacti_now_exist", AUTOKEY.brace), 
+                    rw.const.OBJECTOP.deactivatedBy: ("{','.join(initialdeacti_now)}", "initialdeacti_now_exist", AUTOKEY.brace), 
                     rw.const.OBJECTOP.warmup: "{" + f"{INFOKEY.initialtime}[i]" + "}", 
                     rw.const.OBJECTOP.spawnUnits: "antiAirTurretFlak*1", 
                     rw.const.OBJECTOP.team: "-2", 
@@ -64,12 +71,16 @@ flash_info_operation_list = \
     operation_cycle_end("i", "i + 1", "flash_cycle_initialtime_add") + \
     operation_exist_if(INFOKEY.periodtime, "flash_existif_periodtime_add") + \
         operation_cycle_start("i", "0", f"i < len({INFOKEY.periodtime})", "flash_cycle_periodtime_add") + \
+            operation_list_assign(f"{INFOKEY.periodacti}", "i", "periodacti_now", "flash") + \
+            operation_list_assign(f"{INFOKEY.perioddeacti}", "i", "perioddeacti_now", "flash") + \
             [
                 {
                     AUTOKEY.operation_type: AUTOKEY.object, 
                     AUTOKEY.type: rw.const.OBJECTTYPE.unitAdd, 
                     AUTOKEY.optional: {
-                        rw.const.OBJECTOP.warmup: "{" + f"int({INFOKEY.initialtime}[len({INFOKEY.initialtime}) - 1][:-1]) + int({INFOKEY.periodtime}[i][:-1])" + "}s", 
+                        rw.const.OBJECTOP.activatedBy: ("{','.join(periodacti_now)}", "periodacti_now_exist", AUTOKEY.brace), 
+                        rw.const.OBJECTOP.deactivatedBy: ("{','.join(perioddeacti_now)}", "perioddeacti_now_exist", AUTOKEY.brace), 
+                        rw.const.OBJECTOP.warmup: "{" + f"float({INFOKEY.initialtime}[len({INFOKEY.initialtime}) - 1][:-1]) + float({INFOKEY.periodtime}[i][:-1])" + "}s", 
                         rw.const.OBJECTOP.resetActivationAfter: "{" + f"{INFOKEY.periodtime}[len({INFOKEY.periodtime}) - 1]" + "}", 
                         rw.const.OBJECTOP.spawnUnits: "antiAirTurretFlak*1", 
                         rw.const.OBJECTOP.team: "-2", 
@@ -107,14 +118,13 @@ flash_info_operation_list = \
                     AUTOKEY.operation_type: AUTOKEY.object, 
                     AUTOKEY.type: rw.const.OBJECTTYPE.unitRemove, 
                     AUTOKEY.optional: {
-                        rw.const.OBJECTOP.warmup: "{" + f"int({INFOKEY.initialtime}[len({INFOKEY.initialtime}) - 1][:-1]) + int({INFOKEY.periodtime}[i][:-1])" + "}s", 
+                        rw.const.OBJECTOP.warmup: "{" + f"float({INFOKEY.initialtime}[len({INFOKEY.initialtime}) - 1][:-1]) + float({INFOKEY.periodtime}[i][:-1])" + "}s", 
                         rw.const.OBJECTOP.resetActivationAfter: "{" + f"{INFOKEY.periodtime}[len({INFOKEY.periodtime}) - 1]" + "}", 
                     }
                 }
             ] + \
         operation_cycle_end("i", "i + 1", "flash_cycle_periodtime_remove") + \
-    operation_ifend("flash_existif_periodtime_remove") + \
-    BRACE_OPERATION_END
+    operation_ifend("flash_existif_periodtime_remove")
 
 flash_info = {
     INFOKEY.flash_info:{
@@ -124,6 +134,7 @@ flash_info = {
         AUTOKEY.optional:flash_info_optional_set, 
         AUTOKEY.initial_brace: flash_info_initial_brace_dict, 
         AUTOKEY.default_brace: flash_info_default_brace_set, 
+        AUTOKEY.info_prefix: flash_info_info_prefix_dict, 
 
         AUTOKEY.ids: [[INFOKEY.idprefix, 1]], 
         AUTOKEY.prefix: AUTOKEY.prefix, 
@@ -138,3 +149,7 @@ flash_info = {
         AUTOKEY.no_check: True
     }
 }
+
+flash_info = time_info_sub(flash_info, [], [INFOKEY.initialtime], [], [INFOKEY.periodtime])
+flash_info = brace_add_info(flash_info)
+flash_info = args_opargs_add_info(flash_info)

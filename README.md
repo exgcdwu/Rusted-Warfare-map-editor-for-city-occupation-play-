@@ -36,7 +36,13 @@ pip install rwmapeditor-exgcdwu
 
 【正在开发的城夺地图和代码】
 
-[宾语自动化命令行教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/auto_tutorial.md)
+[宾语自动化引导教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/readme/auto_guide.md)
+
+[宾语自动化地图示例](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/example/auto_example.tmx)
+
+[宾语自动化地图示例自动化结果](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/example/auto_example_answer.tmx)
+
+[宾语自动化参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/readme/auto_tutorial.md)
 
 【一个结合Tiled或者notTiled共同使用的宾语生成器，使用命令行操作，基于该库开发】
 
@@ -51,6 +57,6 @@ pip install rwmapeditor-exgcdwu
 本库使用了铁锈战争的默认地块集，存放在rwmap/other_data/maps/
 
 文件中存在一些地块集模版，存放在rwmap/examples/template/，包括
-notTiled的v3模板，城夺地块集模板（来自Xs）
+notTiled的v3模板，城夺地块集模板（来自Xs）。文件中的地图文件可能包括这些地块集。
 
 使用kivy库生成app时使用了支持中文的字体库，存放在auto/_app/。[字体链接](https://www.fonts.net.cn/font-35156113491.html)

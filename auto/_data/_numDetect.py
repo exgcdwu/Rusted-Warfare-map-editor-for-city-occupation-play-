@@ -28,10 +28,6 @@ numDetect_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
 
 numDetect_info_args_dict[INFOKEY.cite_name] = str
 
-numDetect_info_args_dict[INFOKEY.args] = (list, list, str)
-numDetect_info_args_dict[INFOKEY.opargs] = (list, list, str)
-numDetect_info_args_dict[INFOKEY.brace] = (list, str)
-
 DETECT_OPTION_DICT = {
     OBJECT_ARGS.onlyIdle:bool, 
     OBJECT_ARGS.onlyBuildings:bool, 
@@ -53,14 +49,12 @@ numDetect_info_default_args_dict = {
     INFOKEY.offsetsize: f"[[0, 0] for ex in range({INFOKEY.lenidNum})]"
 }
 
-numDetect_info_optional_set = {INFOKEY.brace}
+numDetect_info_optional_set = set()
 
 numDetect_info_optional_set.add(INFOKEY.isprefixseg)
 numDetect_info_optional_set.add(INFOKEY.aunit)
 numDetect_info_optional_set.add(INFOKEY.team)
 numDetect_info_optional_set.add(INFOKEY.cite_name)
-numDetect_info_optional_set.add(INFOKEY.args)
-numDetect_info_optional_set.add(INFOKEY.opargs)
 DETECT_OPTION_SET = set(DETECT_OPTION_DICT.keys())
 numDetect_info_optional_set.update(DETECT_OPTION_SET)
 
@@ -85,8 +79,7 @@ numDetect_info_operation_pre_list = \
                 AUTOKEY.real_idexp: "{" + f"{INFOKEY.setidNum}" + "[i]}"
             }, 
         ] + \
-    operation_cycle_end("i", "i + 1", "numDetect_pre_cycle1") + \
-    ARGS_OPARGS_PRE_OPERATION
+    operation_cycle_end("i", "i + 1", "numDetect_pre_cycle1")
 
 DETECT_OPTION_OPERATION_OPTIONAL = {DETECT_KEY:(True, DETECT_KEY, AUTOKEY.brace) if DEFECT_VALUE == bool else ("{" + DETECT_KEY + "}", DETECT_KEY, AUTOKEY.exist) for DETECT_KEY, DEFECT_VALUE in DETECT_OPTION_DICT.items()}
 
@@ -195,9 +188,7 @@ numDetect_info_operation_list = \
 
             ] + \
         operation_cycle_end("j", "j + 1", "numDetect_cycle2") + \
-    operation_cycle_end("i", "i + 1", "numDetect_cycle1") + \
-    BRACE_OPERATION_END
-
+    operation_cycle_end("i", "i + 1", "numDetect_cycle1")
 
 
 numDetect_info = {
@@ -222,3 +213,6 @@ numDetect_info = {
         AUTOKEY.no_check: True
     }
 }
+
+numDetect_info = brace_add_info(numDetect_info)
+numDetect_info = args_opargs_add_info(numDetect_info)

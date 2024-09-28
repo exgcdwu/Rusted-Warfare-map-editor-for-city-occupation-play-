@@ -17,11 +17,8 @@ dictionary_info_args_dict = OrderedDict()
 dictionary_info_args_dict[INFOKEY.prefix] = str
 dictionary_info_args_dict[INFOKEY.cite_name] = str
 dictionary_info_args_dict[INFOKEY.isprefixseg] = bool
-dictionary_info_args_dict[INFOKEY.brace] = (list, str)
 
-dictionary_info_optional_set = {
-    INFOKEY.brace
-}
+dictionary_info_optional_set = set()
 
 dictionary_info_default_args_dict = {
     INFOKEY.isprefixseg: "true", 
@@ -41,7 +38,9 @@ dictionary_info = {
         AUTOKEY.opargs_seg: ",", 
         AUTOKEY.prefix: AUTOKEY.prefix, 
         AUTOKEY.isprefixseg: AUTOKEY.isprefixseg, 
-        AUTOKEY.operation:BRACE_OPERATION_END, 
+        AUTOKEY.operation:[], 
         AUTOKEY.no_check: True
     }
 }
+
+dictionary_info = brace_add_info(dictionary_info)

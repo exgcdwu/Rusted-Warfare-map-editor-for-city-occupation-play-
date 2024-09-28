@@ -18,7 +18,7 @@ from rwmap._frame._element_property import ElementProperties
 class TileSet(ElementOri):
     def __init__(self, properties:ElementProperties, size:frame.Coordinate, image_properties:ElementProperties = None,
                   png_text:str = None, tilelist_properties:list[ElementProperties] = None, coo_to_tileid_matrix:np.ndarray = None, 
-                  tileid_to_coo_list:list[frame.Coordinate] = None)->None:
+                  tileid_to_coo_list:list[frame.Coordinate] = None, terrain:et.Element = None)->None:
         super().__init__(properties)
         self._size = deepcopy(size)
         self._image_properties = deepcopy(image_properties)
@@ -26,8 +26,10 @@ class TileSet(ElementOri):
         self._tilelist_properties = deepcopy(tilelist_properties)
         self._coo_to_tileid_matrix = deepcopy(coo_to_tileid_matrix)
         self._tileid_to_coo_list = deepcopy(tileid_to_coo_list)
+        self._terrain = terrain
     @classmethod
     def init_etElement(cls, root:et.Element, rwmaps_dir:str, istilesort:bool = True)->None:
+        terrain = utility.get_etElement_callable_from_tag_s(root, "terraintypes")
         png_text_pro = utility.get_etElement_callable_from_tag_s(root, "properties")
         png_text = utility.get_etElement_name_to_text_s(png_text_pro, "embedded_png")
         properties = ElementProperties.init_etElement(root)
@@ -103,10 +105,8 @@ class TileSet(ElementOri):
                 
                 for coo in size:
                     tileid_to_coo_list[coo_to_tileid_matrix[coo.x()][coo.y()]] = coo
-            
         
-
-        return cls(properties, size, image_properties, png_text, tilelist_properties, coo_to_tileid_matrix, tileid_to_coo_list)
+        return cls(properties, size, image_properties, png_text, tilelist_properties, coo_to_tileid_matrix, tileid_to_coo_list, terrain)
     
     def output_str(self, pngtextnum:int = -1, tilenum:int = -1)->str:
         str_ans = ""
@@ -144,6 +144,9 @@ class TileSet(ElementOri):
                 tile_element = et.Element("tile")
                 tile_element = tile.output_etElement(tile_element)
                 root.append(tile_element)
+        if self._terrain != None:
+            terrain_element = self._terrain
+            root.append(image_element)
         return root
     
     def write_png(self, dir:str)->None:

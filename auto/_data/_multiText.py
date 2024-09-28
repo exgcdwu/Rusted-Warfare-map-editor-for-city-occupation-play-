@@ -11,6 +11,7 @@ import rwmap as rw
 from auto._core import AUTOKEY
 from auto._data._const import *
 from auto._data._teamDetect import *
+from auto._data._time import *
 
 multiText_info_args_dict = OrderedDict()
 
@@ -31,11 +32,6 @@ multiText_info_args_dict[INFOKEY.text] = (list, str)
 multiText_info_args_dict[INFOKEY.offset] = (list, list, int)
 multiText_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
 
-
-multiText_info_args_dict[INFOKEY.args] = (list, list, str)
-multiText_info_args_dict[INFOKEY.opargs] = (list, list, str)
-multiText_info_args_dict[INFOKEY.brace] = (list, str)
-
 multiText_info_default_args_dict = {
     INFOKEY.name: "", 
     INFOKEY.offset: "0 0", 
@@ -43,7 +39,7 @@ multiText_info_default_args_dict = {
     INFOKEY.reset: "1s"
 }
 
-multiText_info_optional_set = {INFOKEY.brace}
+multiText_info_optional_set = set()
 
 multiText_info_optional_set.add(INFOKEY.isprefixseg)
 multiText_info_optional_set.add(INFOKEY.teamDetect_cite)
@@ -54,9 +50,6 @@ multiText_info_optional_set.add(INFOKEY.isdefaultText)
 multiText_info_optional_set.add(INFOKEY.textsize)
 multiText_info_optional_set.add(INFOKEY.color)
 multiText_info_optional_set.add(INFOKEY.name)
-multiText_info_optional_set.add(INFOKEY.text)
-multiText_info_optional_set.add(INFOKEY.args)
-multiText_info_optional_set.add(INFOKEY.opargs)
 
 multiText_info_var_dependent_dict = {INFOKEY.isdefaultText:INFOKEY.teamDetect_cite}
 
@@ -64,7 +57,7 @@ multiText_info_initial_brace_dict = {}
 
 multiText_info_default_brace_set = set()
 
-multiText_info_operation_pre_list = ARGS_OPARGS_PRE_OPERATION
+multiText_info_operation_pre_list = []
 
 multiText_info_operation_optional = {
     rw.const.OBJECTOP.activatedBy: ("{acti_now}", "acti_now_exist", AUTOKEY.brace), 
@@ -81,8 +74,9 @@ def operation_join_quote(assign_name:str, info_args:str):
 def operation_list_join_quote(assign_name:str, info_args:str):
     return operation_typeset_expression(assign_name, f"[\",\".join(info_args_now) for info_args_now in {info_args}]")
 
-def operation_list_assign(info_args:str, index:str, assign_name:str, info_tag:str, default_assign:str = None):
-    return operation_exist_if(f"{info_args}", info_tag + "_exist_if_" + assign_name) + \
+def operation_list_assign(info_args:str, index:str, assign_name:str, info_tag:str, default_assign:str = None, ):
+    return \
+    operation_exist_if(f"{info_args}", info_tag + "_exist_if_" + assign_name) + \
         operation_if(f"len({info_args}) == 1", info_tag + "_if_" + assign_name, 1) + \
             [
                 {
@@ -112,13 +106,13 @@ def operation_list_assign(info_args:str, index:str, assign_name:str, info_tag:st
     operation_elseend(info_tag + "_exist_if_" + assign_name)
 
 def operation_ids_assign(args_exist:str, args:str, add_args:str, info_tag:str, assign_tag:str):
-    return operation_typeset_expression("temp", args) + \
+    return \
     operation_if(args_exist, info_tag + f"_exist_if_temp_assign{assign_tag}") + \
-        operation_if(f"temp != \"\"", info_tag + f"_if_temp_assign{assign_tag}") + \
+        operation_if(f"'{args}' != ''", info_tag + f"_if_temp_assign{assign_tag}") + \
             [
                 {
                     AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                    args: f"\"temp\" + \",\" + \"{add_args}\""
+                    args: f"\"{args}\" + \",\" + \"{add_args}\""
                 }
             ] + \
         operation_else(info_tag + f"_if_temp_assign{assign_tag}") + \
@@ -202,7 +196,7 @@ multiText_info_operation_list = \
                 operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{i}_0", "multiText", "actiids_addteamDetect") + \
                 operation_typeset_expression(f"{INFOKEY.acti}_now_exist", "True") + \
                 operation_typeset_expression(f"{INFOKEY.acti}_now", f"{INFOKEY.acti}_now_" + "{i}") + \
-            operation_elseif("i == {" + f"{INFOKEY.teamDetect_cite}" + "}.{" + f"{INFOKEY.lenidTeam}" + "}", "multiText_if_teamDetect_cite_assign_acti", 2) + \
+            operation_elseif("i == {" + f"{INFOKEY.teamDetect_cite}" + "}.{" + f"{INFOKEY.lenidTeam}" + "} and isdefaultText", "multiText_if_teamDetect_cite_assign_acti", 2) + \
                 operation_cycle_start("j", "0", "j < {" + f"{INFOKEY.teamDetect_cite}" + "}." + f"{INFOKEY.lenidTeam}", "multiText_cycle_teamDetect_cite_assign_deacti") + \
                     operation_ids_assign(f"{INFOKEY.deacti}_now_exist", f"{INFOKEY.deacti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{j}_0", "multiText", "deactiids_addteamDetect") + \
                     operation_typeset_expression(f"{INFOKEY.deacti}_now_exist", "True") + \
@@ -227,8 +221,7 @@ multiText_info_operation_list = \
                 AUTOKEY.optional: multiText_info_operation_optional
             }
         ] + \
-    operation_cycle_end("i", "i + 1", "multiText_cycle_lenText") + \
-    BRACE_OPERATION_END
+    operation_cycle_end("i", "i + 1", "multiText_cycle_lenText")
 
 
 
@@ -256,3 +249,5 @@ multiText_info = {
     }
 }
 
+multiText_info = brace_add_info(multiText_info)
+multiText_info = args_opargs_add_info(multiText_info)

@@ -30,10 +30,6 @@ teamDetect_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
 
 teamDetect_info_args_dict[INFOKEY.cite_name] = str
 
-teamDetect_info_args_dict[INFOKEY.args] = (list, list, str)
-teamDetect_info_args_dict[INFOKEY.opargs] = (list, list, str)
-teamDetect_info_args_dict[INFOKEY.brace] = (list, str)
-
 DETECT_OPTION_DICT = {
     OBJECT_ARGS.onlyIdle:bool, 
     OBJECT_ARGS.onlyBuildings:bool, 
@@ -87,8 +83,7 @@ teamDetect_info_operation_pre_list = \
                 AUTOKEY.real_idexp: "{" + f"{INFOKEY.setidTeam}" + "[i]}"
             }, 
         ] + \
-    operation_cycle_end("i", "i + 1", "teamDetect_pre_cycle1") + \
-    ARGS_OPARGS_PRE_OPERATION
+    operation_cycle_end("i", "i + 1", "teamDetect_pre_cycle1")
 
 DETECT_OPTION_OPERATION_OPTIONAL = {DETECT_KEY:(True, DETECT_KEY, AUTOKEY.brace) if DEFECT_VALUE == bool else ("{" + DETECT_KEY + "}", DETECT_KEY, AUTOKEY.exist) for DETECT_KEY, DEFECT_VALUE in DETECT_OPTION_DICT.items()}
 
@@ -186,8 +181,7 @@ teamDetect_info_operation_list = \
 
             ] + \
         operation_cycle_end("j", "j + 1", "teamDetect_cycle2") + \
-    operation_cycle_end("i", "i + 1", "teamDetect_cycle1") + \
-    BRACE_OPERATION_END
+    operation_cycle_end("i", "i + 1", "teamDetect_cycle1")
 
 
 teamDetect_info = {
@@ -212,3 +206,6 @@ teamDetect_info = {
         AUTOKEY.no_check: True
     }
 }
+
+teamDetect_info = brace_add_info(teamDetect_info)
+teamDetect_info = args_opargs_add_info(teamDetect_info)

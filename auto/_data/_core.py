@@ -12,7 +12,7 @@ from auto._core import AUTOKEY
 from auto._data._object import object_info
 from auto._data._teamDetect import teamDetect_info
 from auto._data._multiText import multiText_info
-from auto._data._bdtext import bdtext_info
+from auto._data._mtext import mtext_info
 from auto._data._inadd import inadd_info
 from auto._data._building import building_info
 from auto._data._numDetect import numDetect_info
@@ -22,13 +22,16 @@ from auto._data._tree import tree_info
 from auto._data._multiAdd import multiAdd_info
 from auto._data._flash import flash_info
 from auto._data._building_f import building_f_info
+from auto._data._idcheck import idcheck_info
+from auto._data._time import time_info
+from auto._data._step import step_info
 
 auto_func_arg = {}
 auto_func_arg.update(object_info)
 auto_func_arg.update(teamDetect_info)
 auto_func_arg.update(numDetect_info)
 auto_func_arg.update(multiText_info)
-auto_func_arg.update(bdtext_info)
+auto_func_arg.update(mtext_info)
 auto_func_arg.update(inadd_info)
 auto_func_arg.update(building_info)
 auto_func_arg.update(dictionary_info)
@@ -37,3 +40,6 @@ auto_func_arg.update(tree_info)
 auto_func_arg.update(multiAdd_info)
 auto_func_arg.update(flash_info)
 auto_func_arg.update(building_f_info)
+auto_func_arg.update(idcheck_info)
+auto_func_arg.update(time_info)
+auto_func_arg.update(step_info)

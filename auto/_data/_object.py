@@ -10,6 +10,7 @@ import rwmap as rw
 
 from auto._core import AUTOKEY
 from auto._data._const import *
+from auto._data._time import *
 
 object_info_args_dict = OrderedDict()
 
@@ -19,22 +20,17 @@ object_info_args_dict[INFOKEY.objectType] = str
 object_info_args_dict[INFOKEY.name] = str
 object_info_args_dict[INFOKEY.offset] = (list, int)
 object_info_args_dict[INFOKEY.offsetsize] = (list, int)
-object_info_args_dict[INFOKEY.args] = (list, list, str)
-object_info_args_dict[INFOKEY.opargs] = (list, list, str)
-object_info_args_dict[INFOKEY.brace] = (list, str)
 
 object_info_default_args_dict = {
     INFOKEY.offset: "0 0", 
     INFOKEY.offsetsize: "0 0"
 }
 
-object_info_optional_set = {INFOKEY.brace}
+object_info_optional_set = set()
 
 object_info_optional_set.add(INFOKEY.isprefixseg)
 object_info_optional_set.add(INFOKEY.objectType)
 object_info_optional_set.add(INFOKEY.name)
-object_info_optional_set.add(INFOKEY.args)
-object_info_optional_set.add(INFOKEY.opargs)
 
 for key in OBJECT_ARGS_DICT.keys():
     if key.find("__") != -1:
@@ -42,82 +38,7 @@ for key in OBJECT_ARGS_DICT.keys():
     object_info_args_dict[key] = bool if OBJECT_ARGS_BOOL_DICT.get(key) != None else str
     object_info_optional_set.add(key)
 
-ARGS_OPARGS_PRE_OPERATION = \
-    operation_exist_if("args", "args_opargs_pre_if2") + \
-        operation_cycle_start("i", "0", "i < len(args)", "args_opargs_pre_cycle1") + \
-            operation_if("len(args[i]) >= 3 or len(args[i]) <= 1", "args_opargs_pre_if_argserror") + \
-                [
-                    {
-                        AUTOKEY.operation_type: AUTOKEY.error, 
-                        AUTOKEY.error_info: "The number of arguments in {i + 1}-th args must be 2.(args:{args}, reality:{len(args[i])})"
-                    },
-                ] + \
-            operation_ifend("args_opargs_pre_if_argserror") + \
-            operation_if("'{args[i][1]}' != 'str' and '{args[i][1]}' != 'bool'", "args_opargs_pre_if_argserror_2") + \
-                [
-                    {
-                        AUTOKEY.operation_type: AUTOKEY.error, 
-                        AUTOKEY.error_info: "The 2ed of arguments in {i + 1}-th args must be str or bool.(args:{args}, reality:{args[i][1]})"
-                    },
-                ] + \
-            operation_ifend("args_opargs_pre_if_argserror_2") + \
-            [
-                {
-                    AUTOKEY.operation_type: AUTOKEY.typeadd_optional, 
-                    AUTOKEY.nameadd_optional: "[args[i][0]]"
-                }, 
-                {
-                    AUTOKEY.operation_type: AUTOKEY.typeadd_args, 
-                    "{args[i][0]}": "args[i][1]"
-                }
-            ] + \
-        operation_cycle_end("i", "i + 1", "args_opargs_pre_cycle1") + \
-    operation_ifend("args_opargs_pre_if2") + \
-    operation_exist_if("opargs", "args_opargs_pre_if3") + \
-        operation_cycle_start("i", "0", "i < len(opargs)", "args_opargs_pre_cycle2") + \
-            operation_if("len(opargs[i]) >= 5 or len(opargs[i]) <= 2", "args_opargs_pre_if_opargserror") + \
-                [
-                    {
-                        AUTOKEY.operation_type: AUTOKEY.error, 
-                        AUTOKEY.error_info: "The number of arguments in {i + 1}-th opargs must be 3 or 4.(opargs:{opargs}, reality:{len(opargs[i])})"
-                    },
-                ] + \
-            operation_ifend("args_opargs_pre_if_opargserror") + \
-            operation_if("'{opargs[i][2]}' != 'str' and '{opargs[i][2]}' != 'bool'", "args_opargs_pre_if_opargserror_2") + \
-                [
-                    {
-                        AUTOKEY.operation_type: AUTOKEY.error, 
-                        AUTOKEY.error_info: "The 3th of arguments in {i + 1}-th opargs must be str or bool.(opargs:{opargs}, reality:{opargs[i][2]})"
-                    },
-                ] + \
-            operation_ifend("args_opargs_pre_if_opargserror_2") + \
-            operation_if("len(opargs[i][0]) != 1", "args_opargs_pre_if_opargserror_3") + \
-                [
-                    {
-                        AUTOKEY.operation_type: AUTOKEY.error, 
-                        AUTOKEY.error_info: "The length of first arguments in {i + 1}-th opargs must be 1.(opargs:{opargs}, reality:{len(opargs[i][0])})"
-                    },
-                ] + \
-            operation_ifend("args_opargs_pre_if_opargserror_3") + \
-            operation_if("len(opargs[i]) == 3", "args_opargs_pre_if1") + \
-                [
-                    {
-                        AUTOKEY.operation_type: AUTOKEY.typeadd_opargs, 
-                        "{opargs[i][0]}": "(opargs[i][1], opargs[i][2])"
-                    }
-                ] + \
-            operation_else("args_opargs_pre_if1") + \
-                [
-                    {
-                        AUTOKEY.operation_type: AUTOKEY.typeadd_opargs, 
-                        "{opargs[i][0]}": "(opargs[i][1] + \'|\' + opargs[i][3], opargs[i][2])"
-                    }
-                ] + \
-            operation_elseend("args_opargs_pre_if1") + \
-        operation_cycle_end("i", "i + 1", "args_opargs_pre_cycle2") + \
-    operation_ifend("args_opargs_pre_if3")
-
-object_info_operation_pre_list = ARGS_OPARGS_PRE_OPERATION
+object_info_operation_pre_list = []
 
 object_info_operation_list_optional = {}
 
@@ -140,8 +61,7 @@ object_info_operation_list = \
             AUTOKEY.type: ("{" + f"{INFOKEY.objectType}" + "}", INFOKEY.objectType, AUTOKEY.exist), 
             AUTOKEY.optional: object_info_operation_list_optional
         }, 
-    ] + \
-    BRACE_OPERATION_END
+    ]
 
 object_info = {
     INFOKEY.object_info:{
@@ -160,3 +80,8 @@ object_info = {
         AUTOKEY.no_check: True
     }
 }
+
+object_info = time_info_sub(object_info, [rw.const.OBJECTOP.warmup, rw.const.OBJECTOP.delay], [], 
+                            [rw.const.OBJECTOP.repeatDelay, rw.const.OBJECTOP.resetActivationAfter], [])
+object_info = brace_add_info(object_info)
+object_info = args_opargs_add_info(object_info)

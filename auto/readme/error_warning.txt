@@ -23,6 +23,7 @@ ERROR code:
 20：A tree tagged object can't find its child object, although the child object has its father, then this child object will be unavailable.(WARNING code:3)
 21：An object that needs to be deleted could not be found.(WARNING code:4)
 22：An info's prefix is the prefix of another.
+23: Language is not "ch" or "eg".|语言(--language)不是中文(ch)或者英文(eg)
 
 WARNING code:
 

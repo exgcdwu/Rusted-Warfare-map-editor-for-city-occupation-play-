@@ -3,6 +3,7 @@ from collections import OrderedDict
 
 import os
 import sys
+from copy import deepcopy
 
 current_file_path = os.path.abspath(__file__)
 current_dir_path = os.path.dirname(current_file_path)
@@ -37,10 +38,11 @@ class INFOKEY:
     teamDetect_cite = "teamDetect_cite"
     isdefaultText = "isdefaultText"
     building_info = "building_info"
-    bdtext_info = "bdtext_info"
+    mtext_info = "mtext_info"
     inadd_info = "inadd_info"
     inadd_prefix = "inadd_prefix"
-    bdtext_prefix = "bdtext_prefix"
+    mtext_prefix = "mtext_prefix"
+    time_prefix = "time_prefix"
     numDetect_info = "numDetect_info"
     numDetect_cite = "numDetect_cite"
     dictionary_info = "dictionary_info"
@@ -49,6 +51,9 @@ class INFOKEY:
     multiAdd_info = "multiAdd_info"
     flash_info = "flash_info"
     building_f_info = "building_f_info"
+    idcheck_info = "idcheck_info"
+    time_info = "time_info"
+    step_info = "step_info"
 
     setTeam = "setTeam"
     setidTeam = "setidTeam"
@@ -67,10 +72,12 @@ class INFOKEY:
     setidNum = "setidNum"
     lenidNum = "lenidNum"
     lenTeam = "lenTeam"
+    otherid = "otherid"
 
     detectReset = "detectReset"
     addWarmup = "addWarmup"
     addReset = "addReset"
+    removeReset = "removeReset"
     spawnnum = "spawnnum"
     team = "team"
     addname = "addname"
@@ -79,16 +86,20 @@ class INFOKEY:
     detectname = "detectname"
     detectoffset = "detectoffset"
     detectoffsetsize = "detectoffsetsize"
+    removename = "removename"
     isonlybuilding = "isonlybuilding"
     isshowOnMap = "isshowOnMap"
 
-    isbdtext = "isbdtext"
-    bdcolor = "bdcolor"
-    bdtextsize = "bdtextsize"
-    bdname = "bdname"
-    bdoffset = "bdoffset"
-    bdoffsetsize = "bdoffsetsize"
-    bdtext = "bdtext"
+    ismtext = "ismtext"
+    mcolor = "mcolor"
+    mtextsize = "mtextsize"
+    mname = "mname"
+    moffset = "moffset"
+    moffsetsize = "moffsetsize"
+    mtext = "mtext"
+    istime = "istime"
+    iscorrectwarmup = "iscorrectwarmup"
+    timeratio = "timeratio"
 
     isinadd = "isinadd"
     inaddunit = "inaddunit"
@@ -104,6 +115,14 @@ class INFOKEY:
     spawnUnits = "spawnUnits"
     initialtime = "initialtime"
     periodtime = "periodtime"
+    initialacti = "initialacti"
+    periodacti = "periodacti"
+    initialdeacti = "initialdeacti"
+    perioddeacti = "perioddeacti"
+    steptime = "steptime"
+    isactiend = "isactiend"
+    stepacti = "stepacti"
+    stepdeacti = "stepdeacti"
 
 
 class OBJECT_ARGS:
@@ -352,9 +371,138 @@ def operation_typeset_expression(key:str, value:str, depth:int = MAXTRANSDEPTH):
         }
     ]
 
+def br(str_now:str)->str:
+    return "{" + str_now + "}"
+
+ARGS_OPARGS_PRE_OPERATION = \
+    operation_exist_if("args", "args_opargs_pre_if2") + \
+        operation_cycle_start("i", "0", "i < len(args)", "args_opargs_pre_cycle1") + \
+            operation_if("len(args[i]) >= 3 or len(args[i]) <= 1", "args_opargs_pre_if_argserror") + \
+                [
+                    {
+                        AUTOKEY.operation_type: AUTOKEY.error, 
+                        AUTOKEY.error_info: "The number of arguments in {i + 1}-th args must be 2.(args:{args}, reality:{len(args[i])})|\
+                            第{i + 1}个必需参数(args)数量必须为2（参数名称、类型(str,bool)）。(args:{args}, 参数数量:{len(args[i])})"
+                    },
+                ] + \
+            operation_ifend("args_opargs_pre_if_argserror") + \
+            operation_if("'{args[i][1]}' != 'str' and '{args[i][1]}' != 'bool'", "args_opargs_pre_if_argserror_2") + \
+                [
+                    {
+                        AUTOKEY.operation_type: AUTOKEY.error, 
+                        AUTOKEY.error_info: "The 2ed of arguments in {i + 1}-th args must be str or bool.(args:{args}, reality:{args[i][1]})|\
+                        |第{i + 1}个必需参数的第二个参数必须是str或bool。(args:{args}, 参数类型:{args[i][1]})|"
+                    },
+                ] + \
+            operation_ifend("args_opargs_pre_if_argserror_2") + \
+            [
+                {
+                    AUTOKEY.operation_type: AUTOKEY.typeadd_optional, 
+                    AUTOKEY.nameadd_optional: "[args[i][0]]"
+                }, 
+                {
+                    AUTOKEY.operation_type: AUTOKEY.typeadd_args, 
+                    "{args[i][0]}": "args[i][1]"
+                }
+            ] + \
+        operation_cycle_end("i", "i + 1", "args_opargs_pre_cycle1") + \
+    operation_ifend("args_opargs_pre_if2") + \
+    operation_exist_if("opargs", "args_opargs_pre_if3") + \
+        operation_cycle_start("i", "0", "i < len(opargs)", "args_opargs_pre_cycle2") + \
+            operation_if("len(opargs[i]) >= 5 or len(opargs[i]) <= 2", "args_opargs_pre_if_opargserror") + \
+                [
+                    {
+                        AUTOKEY.operation_type: AUTOKEY.error, 
+                        AUTOKEY.error_info: "The number of arguments in {i + 1}-th opargs must be 3 or 4.(opargs:{opargs}, reality:{len(opargs[i])})\
+                        |第{i + 1}个选填参数(opargs)数量必须在3-4之间。(opargs:{opargs}, 参数数量:{len(opargs[i])})"
+                    },
+                ] + \
+            operation_ifend("args_opargs_pre_if_opargserror") + \
+            operation_if("'{opargs[i][2]}' != 'str' and '{opargs[i][2]}' != 'bool'", "args_opargs_pre_if_opargserror_2") + \
+                [
+                    {
+                        AUTOKEY.operation_type: AUTOKEY.error, 
+                        AUTOKEY.error_info: "The 3th of arguments in {i + 1}-th opargs must be str or bool.(opargs:{opargs}, reality:{opargs[i][2]})\
+                            |第{i + 1}个选填参数的第三个参数必须是str或bool。(opargs:{opargs}, 参数类型:{opargs[i][2]})"
+                    },
+                ] + \
+            operation_ifend("args_opargs_pre_if_opargserror_2") + \
+            operation_if("len(opargs[i][0]) != 1", "args_opargs_pre_if_opargserror_3") + \
+                [
+                    {
+                        AUTOKEY.operation_type: AUTOKEY.error, 
+                        AUTOKEY.error_info: "The length of first arguments in {i + 1}-th opargs must be 1.(opargs:{opargs}, reality:{len(opargs[i][0])})\
+                            |第{i + 1}个选填参数的第一个参数的长度必须为1。(opargs:{opargs}, 参数长度:{len(opargs[i][0])})"
+                    },
+                ] + \
+            operation_ifend("args_opargs_pre_if_opargserror_3") + \
+            operation_if("len(opargs[i]) == 3", "args_opargs_pre_if1") + \
+                [
+                    {
+                        AUTOKEY.operation_type: AUTOKEY.typeadd_opargs, 
+                        "{opargs[i][0]}": "(opargs[i][1], opargs[i][2])"
+                    }
+                ] + \
+            operation_else("args_opargs_pre_if1") + \
+                [
+                    {
+                        AUTOKEY.operation_type: AUTOKEY.typeadd_opargs, 
+                        "{opargs[i][0]}": "(opargs[i][1] + \'|\' + opargs[i][3], opargs[i][2])"
+                    }
+                ] + \
+            operation_elseend("args_opargs_pre_if1") + \
+        operation_cycle_end("i", "i + 1", "args_opargs_pre_cycle2") + \
+    operation_ifend("args_opargs_pre_if3")
+
 BRACE_OPERATION_END = \
     operation_exist_if(f"{INFOKEY.brace}", "brace_operation_if_1") + \
         operation_cycle_start("i", "0", f"i < len({INFOKEY.brace})", "brace_operation_cycle_1") + \
             operation_typeset_expression("{" + f"{INFOKEY.brace}[i]" + "}", "{" + f"{INFOKEY.brace}[i]" + "}") + \
         operation_cycle_end("i", "i + 1", "brace_operation_cycle_1") + \
     operation_ifend("brace_operation_if_1")
+    
+def args_opargs_add_info(info_dict:str)->dict:
+    info_dict_ans = deepcopy(info_dict)
+    for key, value in info_dict_ans.items():
+        value[AUTOKEY.info_args].update({AUTOKEY.args: (list, list, str), 
+                                         AUTOKEY.opargs: (list, list, str)})
+        if value.get(AUTOKEY.operation_pre) == None:
+            value[AUTOKEY.operation_pre] = []
+        value[AUTOKEY.operation_pre] = value[AUTOKEY.operation_pre] + ARGS_OPARGS_PRE_OPERATION
+        if value.get(AUTOKEY.default_args) == None:
+            value[AUTOKEY.default_args] = {}
+        value[AUTOKEY.default_args].update({})
+        if value.get(AUTOKEY.var_dependent) == None:
+            value[AUTOKEY.var_dependent] = {}
+        value[AUTOKEY.var_dependent].update({})
+        if value.get(AUTOKEY.optional) == None:
+            value[AUTOKEY.optional] = set()
+        value[AUTOKEY.optional].update({AUTOKEY.args, AUTOKEY.opargs})
+        if value.get(AUTOKEY.info_prefix) == None:
+            value[AUTOKEY.info_prefix] = {}
+        value[AUTOKEY.info_prefix].update({})
+    return info_dict_ans
+
+def brace_add_info(info_dict:str)->dict:
+    info_dict_ans = deepcopy(info_dict)
+    for key, value in info_dict_ans.items():
+        value[AUTOKEY.info_args].update({AUTOKEY.brace: (list,  str)})
+        if value.get(AUTOKEY.operation_pre) == None:
+            value[AUTOKEY.operation_pre] = []
+        value[AUTOKEY.operation_pre] = value[AUTOKEY.operation_pre]
+        if value.get(AUTOKEY.operation) == None:
+            value[AUTOKEY.operation] = []
+        value[AUTOKEY.operation] = value[AUTOKEY.operation] + BRACE_OPERATION_END
+        if value.get(AUTOKEY.default_args) == None:
+            value[AUTOKEY.default_args] = {}
+        value[AUTOKEY.default_args].update({})
+        if value.get(AUTOKEY.var_dependent) == None:
+            value[AUTOKEY.var_dependent] = {}
+        value[AUTOKEY.var_dependent].update({})
+        if value.get(AUTOKEY.optional) == None:
+            value[AUTOKEY.optional] = set()
+        value[AUTOKEY.optional].update({AUTOKEY.brace,})
+        if value.get(AUTOKEY.info_prefix) == None:
+            value[AUTOKEY.info_prefix] = {}
+        value[AUTOKEY.info_prefix].update({})
+    return info_dict_ans

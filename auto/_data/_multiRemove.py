@@ -11,6 +11,8 @@ import rwmap as rw
 from auto._core import AUTOKEY
 from auto._data._const import *
 from auto._data._teamDetect import *
+from auto._data._time import *
+from auto._data._multiText import *
 
 multiRemove_info_args_dict = OrderedDict()
 
@@ -32,17 +34,13 @@ multiRemove_info_args_dict[INFOKEY.name] = (list, str)
 multiRemove_info_args_dict[INFOKEY.offset] = (list, list, int)
 multiRemove_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
 
-multiRemove_info_args_dict[INFOKEY.args] = (list, list, str)
-multiRemove_info_args_dict[INFOKEY.opargs] = (list, list, str)
-multiRemove_info_args_dict[INFOKEY.brace] = (list, str)
-
 multiRemove_info_default_args_dict = {
     INFOKEY.name: "", 
     INFOKEY.offset: "0 0", 
     INFOKEY.offsetsize: "0 0"
 }
 
-multiRemove_info_optional_set = {INFOKEY.brace}
+multiRemove_info_optional_set = set()
 
 multiRemove_info_optional_set.add(INFOKEY.isprefixseg)
 multiRemove_info_optional_set.add(INFOKEY.teamDetect_cite)
@@ -54,8 +52,6 @@ multiRemove_info_optional_set.add(INFOKEY.reset)
 multiRemove_info_optional_set.add(INFOKEY.warmup)
 multiRemove_info_optional_set.add(INFOKEY.delay)
 multiRemove_info_optional_set.add(INFOKEY.repeat)
-multiRemove_info_optional_set.add(INFOKEY.args)
-multiRemove_info_optional_set.add(INFOKEY.opargs)
 
 multiRemove_info_var_dependent_dict = {}
 
@@ -63,7 +59,7 @@ multiRemove_info_initial_brace_dict = {}
 
 multiRemove_info_default_brace_set = set()
 
-multiRemove_info_operation_pre_list = ARGS_OPARGS_PRE_OPERATION
+multiRemove_info_operation_pre_list = []
 
 multiRemove_info_operation_optional = {
     rw.const.OBJECTOP.activatedBy: ("{acti_now}", "acti_now_exist", AUTOKEY.brace), 
@@ -74,69 +70,6 @@ multiRemove_info_operation_optional = {
     rw.const.OBJECTOP.repeatDelay: ("{repeat_now}", "repeat_now_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.delay: ("{delay_now}", "delay_now_exist", AUTOKEY.brace), 
 }
-
-def operation_join_quote(assign_name:str, info_args:str):
-    return operation_typeset_expression(assign_name, f"\",\".join({info_args})")
-
-def operation_list_join_quote(assign_name:str, info_args:str):
-    return operation_typeset_expression(assign_name, f"[\",\".join(info_args_now) for info_args_now in {info_args}]")
-
-def operation_list_assign(info_args:str, index:str, assign_name:str, info_tag:str, default_assign:str = None):
-    return operation_exist_if(f"{info_args}", info_tag + "_exist_if_" + assign_name) + \
-        operation_if(f"len({info_args}) == 1", info_tag + "_if_" + assign_name, 1) + \
-            [
-                {
-                    AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                    "{" + f"\"{assign_name}_\" + " + f"\"{index}\"" + "}": f"{info_args}[0]"
-                }
-            ] + \
-            operation_typeset_expression(f"{assign_name}_exist", "True") + \
-            operation_typeset_expression(f"{assign_name}", f"{assign_name}_" + "{" + f"{index}" + "}") + \
-        operation_elseif(f"{index} < len({info_args})", info_tag + "_if_" + assign_name, 2) + \
-            [
-                {
-                    AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                    "{" + f"\"{assign_name}_\" + " + f"\"{index}\"" + "}": f"{info_args}[{index}]"
-                }
-            ] + \
-            operation_typeset_expression(f"{assign_name}_exist", "True") + \
-            operation_typeset_expression(f"{assign_name}", f"{assign_name}_" + "{" + f"{index}" + "}") + \
-        operation_else(info_tag + "_if_" + assign_name, 3) + \
-            (operation_typeset_expression("{" + f"\"{assign_name}_\" + " + f"\"{index}\"" + "}", default_assign) + \
-            operation_typeset_expression(f"{assign_name}_exist", "True")
-            if default_assign != None else 
-            operation_typeset_expression(f"{assign_name}_exist", "False")) + \
-        operation_elseend(info_tag + "_if_" + assign_name) + \
-    operation_else(info_tag + "_exist_if_" + assign_name) + \
-        operation_typeset_expression(f"{assign_name}_exist", "False") + \
-    operation_elseend(info_tag + "_exist_if_" + assign_name)
-
-def operation_ids_assign(args_exist:str, args:str, add_args:str, info_tag:str, assign_tag:str):
-    return operation_typeset_expression("temp", args) + \
-    operation_if(args_exist, info_tag + f"_exist_if_temp_assign{assign_tag}") + \
-        operation_if(f"temp != \"\"", info_tag + f"_if_temp_assign{assign_tag}") + \
-            [
-                {
-                    AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                    args: f"\"temp\" + \",\" + \"{add_args}\""
-                }
-            ] + \
-        operation_else(info_tag + f"_if_temp_assign{assign_tag}") + \
-            [
-                {
-                    AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                    args: f"{add_args}"
-                }
-            ] + \
-        operation_elseend(info_tag + f"_if_temp_assign{assign_tag}") + \
-    operation_else(info_tag + f"_exist_if_temp_assign{assign_tag}") + \
-        [
-            {
-                AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                args: f"{add_args}"
-            }
-        ] + \
-    operation_elseend(info_tag + f"_exist_if_temp_assign{assign_tag}")
 
 multiRemove_info_operation_list = \
     [
@@ -217,9 +150,7 @@ multiRemove_info_operation_list = \
                 AUTOKEY.optional: multiRemove_info_operation_optional
             }
         ] + \
-    operation_cycle_end("i", "i + 1", "multiRemove_cycle_lenRemove") + \
-    BRACE_OPERATION_END
-
+    operation_cycle_end("i", "i + 1", "multiRemove_cycle_lenRemove")
 
 
 multiRemove_info = {
@@ -246,3 +177,6 @@ multiRemove_info = {
     }
 }
 
+multiRemove_info = time_info_sub(multiRemove_info, [], [INFOKEY.warmup, INFOKEY.delay], [], [INFOKEY.reset, INFOKEY.repeat])
+multiRemove_info = brace_add_info(multiRemove_info)
+multiRemove_info = args_opargs_add_info(multiRemove_info)

@@ -8,6 +8,7 @@ import importlib
 from collections import OrderedDict
 import sys
 import pdb
+import json
 
 from asteval import Interpreter
 
@@ -110,26 +111,69 @@ class AUTOKEY:
     not_useful_char = "[^\u4e00-\u9fa5A-Za-z0-9_{}]"
     not_useful_char_ad_point = "[^\u4e00-\u9fa5A-Za-z0-9_{}.]"
     not_useful_char_ad_point_for_cite = "[^\u4e00-\u9fa5A-Za-z0-9_{}.]|(?<=[.][\u4e00-\u9fa5A-Za-z0-9_{}]*)[.]"
+    language_seg = "|"
 
 cite_object_dict = {}
+
+language_dict = {"eg" : 0, "ch" : 1}
+language_set = set(language_dict.keys())
+
+full_screen = 48
+underline_even_num = 32
+
+def str_lang(info_str:str)->str:
+    language_index = language_dict[language]
+    info_list = info_str.split(AUTOKEY.language_seg)
+    if len(info_list) != len(language_set):
+        debug_pdb("standard print error(language).")
+    return info_list[language_index]
 
 def standard_out(ifdo:bool, info_str)->None:
     if ifdo:
         if isinstance(info_str, str):
-            print(info_str)
+            print(str_lang(info_str))
         else:
             pprint(info_str)
 
-def standard_error(info_err, error_id:int, sub_info_error:str = None)->None:
-    print(info_err + f"(ERROR:{error_id})", file=sys.stderr)
+def weighted_char_count(s):
+    weight = 0
+    for char in s:
+        if '\u4e00' <= char <= '\u9fff':  # 检测汉字的Unicode范围
+            weight += 2
+        else:
+            weight += 1
+    return weight
+
+def standard_out_underline(ifdo:bool, info_str:str)->None:
+    info_str_now = str_lang(info_str)
+    lenstr = weighted_char_count(info_str_now)
+    if ifdo:
+        if lenstr % 2 != 0:
+            info_str_now = info_str_now + "-"
+            lenstr = lenstr + 1
+
+        left_bk = int(full_screen / 2 - underline_even_num / 2)
+        left_ul = int(underline_even_num / 2 - lenstr / 2)
+        right_ul = left_ul
+
+        print(" " * left_bk + "-" * underline_even_num)
+        print(" " * left_bk + "-" * left_ul + info_str_now + "-" * right_ul)
+        print(" " * left_bk + "-" * underline_even_num)
+
+def standard_error(info_err, error_id:int, ID_now:str, name_now:str, x_now:str, y_now:str, sub_info_error:str = None)->None:
+    str_error_default = f"(ERROR:{error_id}, ID:{ID_now}, name:{name_now}, x:{x_now}, y:{y_now})" + \
+                        f"|(错误码:{error_id}, ID:{ID_now}, 名称:{name_now}, x:{x_now}, y:{y_now})"
+    print(str_lang(info_err) + str_lang(str_error_default), file=sys.stderr)
     if sub_info_error != None:
         pprint(sub_info_error)
     if isdebug:
         import pdb;pdb.set_trace()
     exit(error_id)
 
-def standard_warning(info_warn, warn_id:int, error_id:int, sub_info_warn:str = None)->None:
-    print(info_warn + f"(WARNING:{warn_id})", file=sys.stdout)
+def standard_warning(info_warn, warn_id:int, error_id:int, ID_now:str, name_now:str, x_now:str, y_now:str, sub_info_warn:str = None)->None:
+    str_warning_default = f"(WARNING:{error_id}, ID:{ID_now}, name:{name_now}, x:{x_now}, y:{y_now})" + \
+                          f"|(警告码:{error_id}, ID:{ID_now}, 名称:{name_now}, x:{x_now}, y:{y_now})"
+    print(str_lang(info_warn) + str_lang(str_warning_default), file=sys.stdout)
     if sub_info_warn != None:
         pprint(sub_info_warn)
     if isdebug:
@@ -154,7 +198,7 @@ def id_debug_pdb(tobject:rw.case.TObject, ID:int):
         import pdb;pdb.set_trace()
 
 
-def get_args(info:dict, name:str, tobject:rw.case.TObject, id_to_tobject:dict, rwmap_now:rw.RWmap)->dict:
+def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.TObject)->dict:
     args_dict = {}
     split_now = name.split(info[AUTOKEY.opargs_seg])
     opargs = split_now[1:]
@@ -164,12 +208,25 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, id_to_tobject:dict, r
     else:
         args_n = split_now[0].split(info[AUTOKEY.seg])
     
+    tobject_id = tobject.returnDefaultProperty("id")
+    tobject_name = tobject.returnDefaultProperty("name")
+    tobject_x = tobject.returnDefaultProperty("x")
+    tobject_y = tobject.returnDefaultProperty("y")
+    info_tobject_id = info_tobject.returnDefaultProperty("id")
+    info_tobject_name = info_tobject.returnDefaultProperty("name")
+    info_tobject_x = info_tobject.returnDefaultProperty("x")
+    info_tobject_y = info_tobject.returnDefaultProperty("y")
+    
     if len(args_n) < len(info[AUTOKEY.args]):
         info_args_temp = info[AUTOKEY.args][len(args_n):]
-        standard_error(f"Required arguments are missing below in a tagged object.(name:{name},need:{len(info[AUTOKEY.args])},reality({len(args_n)}))", 8, info_args_temp)
+        standard_error(f"Required arguments are missing below in a tagged object.(maybe \".\" is missing?)(name:{name},need:{info[AUTOKEY.args]},reality:{args_n})(info name:{info_tobject_name},info id:{info_tobject_id},info x:{info_tobject_x},info y:{info_tobject_y})" + \
+                       f"|标记宾语中的必需参数缺失。(也许\".\"缺失？)(扣除前缀后的名称:{name},必需参数要求:{info[AUTOKEY.args]},必需参数实际:{args_n})(info 名称:{info_tobject_name},info ID:{info_tobject_id},info x:{info_tobject_x},info y:{info_tobject_y})", 
+                       8, tobject_id, tobject_name, tobject_x, tobject_y, info_args_temp)
     elif len(args_n) > len(info[AUTOKEY.args]):
         info_args_temp = args_n[len(info[AUTOKEY.args]):]
-        standard_error(f"Too many required arguments below in a tagged object.(name:{name},need:{len(info[AUTOKEY.args])},reality({len(args_n)}))", 9, info_args_temp)
+        standard_error(f"Too many required arguments below in a tagged object.(name:{name},need:{info[AUTOKEY.args]},reality:{args_n})(info 名称:{info_tobject_name},info ID:{info_tobject_id},info x:{info_tobject_x},info y:{info_tobject_y})" + \
+                       f"|标记宾语中的必需参数过多。(扣除前缀后的名称:{name},必需参数要求:{info[AUTOKEY.args]},必需参数实际:{args_n})", 
+                       9, tobject_id, tobject_name, tobject_x, tobject_y, info_args_temp)
 
     for index, thing in enumerate(info[AUTOKEY.args]):
         args_dict[thing[0]] = thing[1](args_n[index])
@@ -192,7 +249,8 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, id_to_tobject:dict, r
                 args_dict[info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]] = True
         else:
             if prefix_now != "d" and prefix_now != 'D':
-                standard_error(f"Unknown optional arguments in a tagged object.(name:{name}|,{prefix_now})", 7)
+                standard_error(f"Unknown optional arguments in a tagged object.(name:{name}, optional tag:,{prefix_now})" + \
+                               f"|在标记宾语中出现的可选参数无法识别。(扣除前缀后的名称:{name}, 问题可选前缀:,{prefix_now})", 7, tobject_id, tobject_name, tobject_x, tobject_y)
 
     tobject_ids = tobject.returnOptionalProperty(AUTOKEY.IDs)
     tobject_ids = tobject_ids.split(AUTOKEY.IDs_seg) if (tobject_ids != None and tobject_ids != '') else []
@@ -254,8 +312,17 @@ def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, ones:b
 
         trans_dep_now = trans_dep_now + 1
 
+    if dict_name.get("tobject") == None:
+        debug_pdb()
+    tobject:rw.case.TObject = dict_name["tobject"]
+    tobject_id = tobject.returnDefaultProperty("id")
+    tobject_name = tobject.returnDefaultProperty("name")
+    tobject_x = tobject.returnDefaultProperty("x")
+    tobject_y = tobject.returnDefaultProperty("y")
+
     if trans_dep_now == MAXTRANSDEPTH:
-        standard_error(f"References occur in a loop(more than 1024).({expression_b})", 16)
+        standard_error(f"References occur in a loop(more than 1024).({expression_b})" + \
+                       f"|宾语内引用发生了循环(超过1024次)。({expression_b})", 16, tobject_id, tobject_name, tobject_x, tobject_y)
 
     if (prev or expression_b_origin != expression_b) and (not ones):
         expression_b = expression_translation(expression_b, dict_name, False)
@@ -545,14 +612,25 @@ def tobject_ids_do(tobject:rw.case.TObject, myinfo, info, ids_now_dict, isreset,
     idfa = tobject.returnOptionalProperty(AUTOKEY.IDfa)
     id_now = tobject.returnDefaultProperty("id")
     tobject_name = tobject.returnDefaultProperty("name")
+
+    tobject_id = tobject.returnDefaultProperty("id")
+    tobject_x = tobject.returnDefaultProperty("x")
+    tobject_y = tobject.returnDefaultProperty("y")
+
     if iddep != None and iddep != "0":
         tobject_idfa:rw.case.TObject = id_to_tobject.get(idfa)
         if tobject_idfa == None:
-            standard_warning(f"A tagged object created by tree tagged object can't find its parent object, then this tagged object will be unavailable.(ID:{id_now},name{tobject_name},parent ID:{idfa}, IDdep:{iddep})", 2, 19)
+            standard_warning(f"A tagged object created by tree tagged object can't find its parent object, then this tagged object will be unavailable.(parent ID:{idfa}, IDdep:{iddep})" + \
+                             f"|一个树标记宾语产生的标记宾语不能找到它父亲的宾语，然后该标记宾语无法使用。(父亲 ID:{idfa}, 高度:{iddep})", 
+                             2, 19, tobject_id, tobject_name, tobject_x, tobject_y)
         elif int(tobject_idfa.returnOptionalProperty(AUTOKEY.IDdep)) != int(iddep) - 1:
-            standard_error(f"The depth of tagged objects is disordered.(ID:{id_now},,parent ID:{idfa}, IDdep:{iddep}), parent IDdep:({tobject_idfa.returnOptionalProperty(AUTOKEY.IDdep)})", 17)
+            standard_error(f"The depth of tagged objects is disordered.(IDdep:{iddep}), parent ID:{idfa}, parent IDdep:({tobject_idfa.returnOptionalProperty(AUTOKEY.IDdep)})" + \
+                           f"|标记宾语在树中的高度出现错误。(高度:{iddep}), 父亲 ID:{idfa}, 父亲高度:({tobject_idfa.returnOptionalProperty(AUTOKEY.IDdep)})", 
+                           17, tobject_id, tobject_name, tobject_x, tobject_y)
         elif not id_now in tobject_idfa.returnOptionalProperty(AUTOKEY.IDs).split(","):
-            standard_warning(f"A tree tagged object can't find its child object, although the child object has its father, then this child object will be unavailable.(ID:{id_now},name{tobject_name},parent ID:{idfa}, child IDs:{tobject_idfa.returnOptionalProperty(AUTOKEY.IDs)})", 3, 20)
+            standard_warning(f"A tree tagged object can't find its child object, although the child object has its father, then this child object will be unavailable.(parent ID:{idfa}, child IDs:{tobject_idfa.returnOptionalProperty(AUTOKEY.IDs)})" + \
+                             f"|一个树标记宾语无法找到它的孩子标记宾语，虽然该孩子宾语有自己的父亲树宾语，然后该标记宾语无法使用。(父亲 ID:{idfa},孩子 IDs:{tobject_idfa.returnOptionalProperty(AUTOKEY.IDs)})", 
+                             3, 20, tobject_id, tobject_name, tobject_x, tobject_y)
         
     for thing_prefix_num in myinfo[AUTOKEY.ids]:
         prefix_now = brace_translation(thing_prefix_num[0], info)
@@ -582,52 +660,81 @@ def isdigit_str(s):
 
 def auto_func():
     parser = argparse.ArgumentParser(
-        description='Objects of Triggers are automatically processed by information\'s mode.')
-    parser.add_argument('map_path', action = "store", metavar = 'file', type=str, nargs = 1, 
-                        help='The input path of RW map file.')
+        description='Objects of Triggers are automatically processed by information\'s mode.\n' + \
+                    '触发器(Triggers)的宾语将会根据信息变量进行自动化处理。')
+    parser.add_argument('map_path', action = "store", metavar = 'file', type=str, 
+                        help='The input path of RW map file.\n' + \
+                            '铁锈地图文件的输入路径')
     parser.add_argument("--infopath", 
-                        action = "store", metavar = "file", type = str, nargs = 1, 
-                        required = False, default = current_file_path[:-8] + "_data",  
-                        help = "The file's path which has information's mode variable|current_file_path"
+                        action = "store", metavar = "file", type = str, nargs = "?", 
+                        required = False, default = current_file_path[:-8] + "_data", 
+                        const = current_file_path[:-8] + "_data", 
+                        help = "The file's path which has information's mode variable(python package with config.json)|auto/_data\n" + \
+                               "信息变量的文件路径（python包，内含config.json）|auto/_data"
                         )
     parser.add_argument("--infovar", 
-                        action = "store", metavar = "name", type = str, nargs = 1, 
+                        action = "store", metavar = "name", type = str, nargs = "?", 
                         required = False, default = "auto_func_arg", 
-                        help = "The variable name of information\'s mode.|auto_func_arg"
+                        const = "auto_func_arg", 
+                        help = "The variable name of information\'s mode.|auto_func_arg\n" + \
+                                "信息变量的名字。|auto_func_args"
                         )
     
     parser.add_argument("-o", "--output", 
-                        action = "store", metavar = "file", type = str, nargs = 1, 
+                        action = "store", metavar = "file", type = str, nargs = "?", 
                         required = False, default = "|", 
-                        help = "The output path of RW map file.|input path"
+                        const = "|", 
+                        help = "The output path of RW map file.|input path\n" + \
+                               "铁锈地图文件的输出路径"
                         )
 
     parser.add_argument("-d", "--delete", 
-                        action = 'store_true', help = 'Delete the info and tagged objects with ,d.')
+                        action = 'store_true', help = 'Delete the info and tagged objects with ,d.\n' + \
+                            "删除带,d标记的info和标记宾语。")
 
     parser.add_argument("-D", "--DeleteAllSym", 
-                        action = 'store_true', help = 'Delete all info and tagged objects.')
+                        action = 'store_true', help = 'Delete all info and tagged objects.\n' + \
+                            "删除所有info宾语和标记宾语。")
 
     parser.add_argument("--DeleteAll", 
-                        action = 'store_true', help = 'Delete all info, tagged objects and relative objects.')
+                        action = 'store_true', help = 'Delete all info, tagged objects and relative objects.\n' + \
+                            "删除所有info宾语和标记宾语，以及它们产生的宾语。")
 
     parser.add_argument("-r", "--reset", 
-                        action = 'store_true', help = 'Reset the ids of objects.(not recommend)')
+                        action = 'store_true', help = 'Reset the ids of objects.(not recommend)\n' + \
+                            "重置宾语的检测id。（非必要不推荐）")
 
     parser.add_argument("-v", "--verbose", 
-                        action = 'store_true', help = 'Detailed output of the prompt message.')
+                        action = 'store_true', help = 'Detailed output of the prompt message.\n' + \
+                            "提供运行信息。")
 
     parser.add_argument("--debug", 
-                        action = 'store_true', help = 'Mode of debuging.')
+                        action = 'store_true', help = 'Mode of debuging.\n' + \
+                            "进入python debug模式。")
 
     parser.add_argument("--ignorewarning", 
-                        action = 'store_true', help = 'Warning would not exit.')
+                        action = 'store_true', help = 'Warning would not exit.\n' + \
+                            "警告将不会退出。")
     
     parser.add_argument("--resetid", 
-                        action = 'store_true', help = 'Reset the IDs of objects.')
+                        action = 'store_true', help = 'Reset the IDs of objects.\n' + \
+                            "重置宾语ID。")
     
     parser.add_argument("-c", "--citetrans", 
-                        action = 'store_true', help = 'Cite translation.(other objects)')
+                        action = 'store_true', help = 'Cite translation.(other objects)\n' + \
+                            "对普通宾语进行引用翻译")
+    
+    parser.add_argument("-y", "--isyes", 
+                        action = 'store_true', help = 'Requests are always y.\n' + \
+                            "所有输入请求默认为y，继续执行。")
+    
+    parser.add_argument("--language", 
+                        action = "store", metavar = "language", type = str, nargs = "?", 
+                        required = False, default = "default", 
+                        const = "default", 
+                        help = "The language of prompt(ch/eg). The language configuration will be stored.(auto/_data/config.json)\n" + \
+                        "命令行提示的语言(中文(ch),英文(eg))。语言设置将会被存储。(config.json)"
+                        )
 
     dev_null = open(os.devnull, "w")
     global aeval
@@ -642,7 +749,8 @@ def auto_func():
     global ignorewarning
     ignorewarning = args.ignorewarning
 
-    output_path = args.map_path[0] if args.output == "|" else args.output[0]
+    output_path = args.map_path if args.output == "|" else args.output
+    input_path = args.map_path
 
     module_fa = os.path.dirname(args.infopath)
 
@@ -650,8 +758,6 @@ def auto_func():
 
     sys.path.append(module_fa)
 
-    if module_name[-3:] == ".py":
-        module_name = module_name[:-3]
     info_file = importlib.import_module(module_name)
 
     info_now_pre = getattr(info_file, args.infovar, 'Not Found')
@@ -665,16 +771,46 @@ def auto_func():
     global isresetid
     isresetid = args.resetid
     iscitetrans = args.citetrans
+    isyes = args.isyes
+    global language
+    language = args.language
+
+    if not (language_set.issuperset([language]) or language == "default"):
+        print(f"Language is not \"ch\" or \"eg\".({language})\n" + 
+              f"语言(--language)不是中文(ch)或者英文(eg)({language})", file=sys.stderr)
+        if isdebug:
+            import pdb;pdb.set_trace()
+        exit(23)
+
+    cf_seg = current_file_path[-9]
+    with open(f'{args.infopath}{cf_seg}config.json', 'r') as f:
+        config_dict = json.load(f)
+    if language != "default":
+        config_dict["language"] = language
+    else:
+        language = config_dict["language"]
+    with open(f'{args.infopath}{cf_seg}config.json', 'w') as f:
+        json.dump(config_dict, f)
 
     debug_pdb()
+    standard_out_underline(isverbose, "Initialization|初始化")
 
-    standard_out(isverbose, "\t\t\t\t------------------------------")
-    standard_out(isverbose, "\t\t\t\t--------Initialization--------")
-    standard_out(isverbose, "\t\t\t\t------------------------------")
+    standard_out(isverbose, "Map data is being imported...|地图数据载入...")
 
-    standard_out(isverbose, "Map data is being imported...")
+    while(input_path == output_path and not isyes):
+        ispathsame = input(str_lang("The input path is the same as output path. The source file will be overwritten. Do you want to continue?(y/n)" + \
+                           "|输入地图路径和输出地图路径相同。原文件将被覆盖。是否要继续？(y/n)"))
+        if ispathsame == "n":
+            standard_out("Termination of Program.|程序终止")
+            exit(0)
+        elif ispathsame != "y":
+            standard_out(True, "Identification error, please re-enter.(y/n)|识别错误，请重新输入。(y/n)")
+            continue
+        else:
+            break
 
-    map_now = rw.RWmap.init_mapfile(f'{args.map_path[0]}')
+
+    map_now = rw.RWmap.init_mapfile(f'{input_path}')
 
     info_doids_dict = {}
     info_dict = {}
@@ -686,14 +822,24 @@ def auto_func():
 
     info_tagged_objects_exist = []
 
-    standard_out(isverbose, "The maximum ID of object in RW maps is resetting...")
+    standard_out(isverbose, "The maximum ID of object in RW maps is resetting...|铁锈地图宾语最大ID重置中...")
     map_now.resetnextobjectid()
 
-    standard_out(isverbose, "ID mapping is being established...")
+    standard_out(isverbose, "ID mapping is being established...|宾语ID映射正在建立...")
     for tobject in map_now.iterator_object_s():
-        id_to_tobject[tobject.returnDefaultProperty("id")] = tobject
+        tobid = tobject.returnDefaultProperty("id")
+        if id_to_tobject.get(tobid) != None:
+            ox = id_to_tobject.get(tobid).returnDefaultProperty("x")
+            oy = id_to_tobject.get(tobid).returnDefaultProperty("y")
+            oname = id_to_tobject.get(tobid).returnDefaultProperty("name")
+            tobject_x = tobject.returnDefaultProperty("x")
+            tobject_y = tobject.returnDefaultProperty("y")
+            tobject_name = tobject.returnDefaultProperty("name")
+            standard_error(f"The IDs are coincident and the mapping cannot be performed.(original name:{oname}, original x:{ox}, original y:{oy})" + 
+                           f"|宾语ID发生重合，ID映射无法进行。(重合 名称:{oname}, 重合 x:{ox}, 重合 y:{oy})", 11, tobid, tobject_name, tobject_x, tobject_y)
+        id_to_tobject[tobid] = tobject
 
-    standard_out(isverbose, "The info object is rearranging...")
+    standard_out(isverbose, "The info object is rearranging...|info宾语重排中...")
     num_info = len(info_now_pre)
     info_now = OrderedDict()
     while_i = 0
@@ -710,7 +856,7 @@ def auto_func():
         while_i = while_i + 1
 
     if while_i == num_info + 1:
-        standard_error(f"External info import loop error.", 1)
+        standard_error(f"External info import loop error.|info宾语引用循环。", 1, None, None, None, None)
 
     for key, info in info_now.items():
         infolen = len(info[AUTOKEY.info_args])
@@ -730,11 +876,10 @@ def auto_func():
             while_i = while_i + 1
         info[AUTOKEY.info_args] = info_args_temp
         if while_i == infolen + 1:
-            standard_error(f"Info input dependence loop error.({key})", 5)
+            standard_error(f"Info input dependence loop error.({key})|info宾语独立性发生循环。({key})", 5, None, None, None, None)
 
-    standard_out(isverbose, "\t\t\t\t--------------------------------------")
-    standard_out(isverbose, "\t\t\t\t--------Info objects procedure--------")
-    standard_out(isverbose, "\t\t\t\t--------------------------------------")
+    standard_out_underline(isverbose, "Info objects precedure|info宾语处理")
+
     for key, info in info_now.items():
         for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                                rw.const.OBJECTDE.name: r".+"}):
@@ -742,9 +887,12 @@ def auto_func():
 
             if bool(re.match(key, info_name)):
                 tobject_id = tobject.returnDefaultProperty("id")
-                standard_out(isverbose, f"An object(ID:{tobject_id}, name:{info_name}) has been identified as an info object. Initialization...")
+                tobject_x = tobject.returnDefaultProperty("x")
+                tobject_y = tobject.returnDefaultProperty("y")
+                standard_out(isverbose, f"An object(ID:{tobject_id}, name:{info_name}) has been identified as an info object. Initialization..." + 
+                             f"|一个宾语(ID:{tobject_id}, 名称:{info_name})已被确认为info宾语。初始化...")
                 info_dict_now = {}
-
+                info_dict_now[AUTOKEY.tobject] = tobject
                 # info_prefix
                 
                 tobject_temp = deepcopy(tobject)
@@ -759,10 +907,14 @@ def auto_func():
                         if info_dict_now.get(value_name) != None:
                             tar_info = info_dict.get(info_dict_now[value_name])
                             if tar_info == None or info_pre_now != tar_info[AUTOKEY.info_key]:
-                                standard_error(f"External info import error(target_info:{info_pre_now},info_key:{value_name},info_prefix:{info_dict_now[value_name]}).", 0)
+                                standard_error(f"External info import error(target_info:{info_pre_now},info_key:{value_name},info_prefix:{info_dict_now[value_name]})." + 
+                                               f"|info宾语导入循环(目标info:{info_pre_now},info类型:{value_name},info导入前缀:{info_dict_now[value_name]})。", 
+                                               0, tobject_id, info_name, tobject_x, tobject_y)
                             info_temp = info_now[tar_info[AUTOKEY.info_key]]
                             if tar_info[AUTOKEY.isdelete_sym] and (info_temp.get(AUTOKEY.isinfo_sub) != None and info_temp[AUTOKEY.isinfo_sub] == True):
-                                standard_error(f"External info import error(The target info has \",d\")(target_info:{info_pre_now},info_key:{value_name},info_prefix:{info_dict_now[value_name]}).", 10)
+                                standard_error(f"External info import error(The target info has \",d\")(target_info:{info_pre_now},info_key:{value_name},info_prefix:{info_dict_now[value_name]})." + 
+                                               f"|info宾语导入循环(目标info:{info_pre_now},info类型:{value_name},info导入前缀:{info_dict_now[value_name]})。", 
+                                               10, tobject_id, info_name, tobject_x, tobject_y)
                             info_dict_now.update(tar_info)
 
                 #debug_pdb("external info end")
@@ -816,7 +968,6 @@ def auto_func():
 
                 info_dict_now[AUTOKEY.info] = info_dict_now[AUTOKEY.prefix]
 
-                info_dict_now[AUTOKEY.tobject] = tobject
                 info_dict_now[AUTOKEY.info_key] = key
                 info_dict_now[AUTOKEY.info_name] = info_name
 
@@ -875,13 +1026,13 @@ def auto_func():
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeadd_args:
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type:
-                                    value_brace = brace_translation(value, object_dict)
+                                    value_brace = brace_translation(value, object_dict, ones = True)
                                     value_brace = aeval_globals(value_brace)
                                     info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.args].append((str_translation(key_n, object_dict), value_brace))
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeadd_opargs:
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type:
-                                    value_brace = brace_translation(value, object_dict)
+                                    value_brace = brace_translation(value, object_dict, ones = True)
                                     value_brace = (value_brace[0], aeval_globals(value_brace[1]))
                                     info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.opargs][str_translation(key_n, object_dict)] = value_brace
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typedelete_optional:
@@ -898,7 +1049,7 @@ def auto_func():
                                     for value_n in value_brace:
                                         info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.optional].add(value_n)
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.error:
-                            standard_error(str_translation(operation_now[AUTOKEY.error_info], object_dict), -1)
+                            standard_error(str_translation(operation_now[AUTOKEY.error_info], object_dict), -1, tobject_id, info_name, tobject_x, tobject_y)
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.pdb_pause:
                             debug_pdb(object_dict)
                         index = index + 1
@@ -912,7 +1063,9 @@ def auto_func():
                         key_now = key_n[0]
                         args_dict[key_n[0]] = key_n[1]
                         if info_new[AUTOKEY.info_args].get(key_now) == None and info_new[AUTOKEY.no_check] == False:
-                            standard_error(f"An argument of the info object is invalid.(ID:{tobject_id}, name:{info_name}, arg:{key_now})", 12)
+                            standard_error(f"An argument of the info object is invalid.(arg:{key_now})" +
+                                           f"|info宾语的一个必需参数不合法。(参数:{key_now})", 
+                                           12, tobject_id, info_name, tobject_x, tobject_y)
 
                 if info_new.get(AUTOKEY.opargs) != None:
                     for value in info_new[AUTOKEY.opargs].values():
@@ -921,7 +1074,8 @@ def auto_func():
                             args_dict[args_now[0]] = value[1]
                         args_now = args_now[0]
                         if info_new[AUTOKEY.info_args].get(args_now) == None and info_new[AUTOKEY.no_check] == False:
-                            standard_error(f"An optional argument of the info object is invalid.(ID:{tobject_id}, name:{info_name}, arg:{args_now})", 13)
+                            standard_error(f"An optional argument of the info object is invalid.(arg:{args_now})" + 
+                                           f"|info宾语的一个可选参数不合法。(参数:{args_now})", 13, tobject_id, info_name, tobject_x, tobject_y)
 
                 # var_dependent check
                 
@@ -930,7 +1084,9 @@ def auto_func():
                         if info_new.get(AUTOKEY.var_dependent) != None and info_new[AUTOKEY.var_dependent].get(key_now) != None:
                             for args_dependent in info_new[AUTOKEY.var_dependent][key_now].split(","):
                                 if (args_dict.get(args_dependent) == None or args_dict[args_dependent] == False):
-                                    standard_error(f"Unuseful arguments in an info object.({key_now} exists but {args_dependent} is none or false.)", 4)
+                                    standard_error(f"Unuseful arguments in an info object.({key_now} exists but {args_dependent} is none or not \"true\".)" + 
+                                                   f"|info宾语中出现无用参数({key_now}出现但是{args_dependent}没有或者不为\"true\")。", 
+                                                   4, tobject_id, info_name, tobject_x, tobject_y)
 
                 # required arguments check
                 for key_now, ntype in info_new[AUTOKEY.info_args].items():
@@ -946,40 +1102,50 @@ def auto_func():
                         if not isend:
                             continue
                     if args_dict.get(key_now) == None and (not info_new[AUTOKEY.isinfo_sub]):
-                        standard_error(f"A required argument is missing in an info object.({str(key_now)})", 6)
+                        standard_error(f"A required argument is missing in an info object.({str(key_now)})" + 
+                                       f"|info宾语中的一个必需参数缺失。({str(key_now)})", 
+                                       6, tobject_id, info_name, tobject_x, tobject_y)
                 
                 if len(tobject_temp._optional_properties) != 0 and info_new[AUTOKEY.no_check] == False:
-                        standard_error("Unknown arguments below in an info object.", 3, f"{tobject_temp._optional_properties}")
+                        standard_error(f"Unknown arguments below in an info object." +
+                                       f"|未知参数出现在了info宾语中。", 
+                                       3, f"{tobject_temp._optional_properties}", tobject_id, info_name, tobject_x, tobject_y)
 
 
-                standard_out(isverbose, "Info object information is being output...")
+                standard_out(isverbose, "Info object information is being output..." + 
+                             "|info宾语信息正在输出...")
                 if isverbose:
                     temp_pri = OrderedDict()
-                    for args_now in info_new[AUTOKEY.info_args].keys():
-                        if info_dict_now.get(args_now) == None:
-                            continue
-                        value_now = info_dict_now[args_now]
-                        if value_now == False:
-                            continue
-                        if info_new.get(AUTOKEY.var_dependent) != None:
-                            var_dep_list = info_new[AUTOKEY.var_dependent].get(args_now)
-                            if var_dep_list == None:
-                                temp_pri[args_now] = value_now 
+                    if info_new.get(AUTOKEY.no_check) == None or info_new[AUTOKEY.no_check] == False:
+                        for args_now in info_new[AUTOKEY.info_args].keys():
+                            if info_dict_now.get(args_now) == None:
                                 continue
-                            var_dep_list = var_dep_list.split(",")
-                            isend = True
-                            for var_dep in var_dep_list:
-                                if info_dict_now.get(var_dep) == None or info_dict_now[var_dep] != True:
-                                    isend = False
-                                    break
-                            if not isend:
+                            value_now = info_dict_now[args_now]
+                            if value_now == False:
                                 continue
-                        temp_pri[args_now] = value_now 
+                            if info_new.get(AUTOKEY.var_dependent) != None:
+                                var_dep_list = info_new[AUTOKEY.var_dependent].get(args_now)
+                                if var_dep_list == None:
+                                    temp_pri[args_now] = value_now 
+                                    continue
+                                var_dep_list = var_dep_list.split(",")
+                                isend = True
+                                for var_dep in var_dep_list:
+                                    if info_dict_now.get(var_dep) == None or info_dict_now[var_dep] != True:
+                                        isend = False
+                                        break
+                                if not isend:
+                                    continue
+                            temp_pri[args_now] = value_now 
+                    else:
+                        temp_pri = OrderedDict(info_dict_now)
+                        temp_pri.pop("tobject")
                     standard_out(isverbose, temp_pri)
                 
                 for key_now in info_dict.keys():
                     if key_now.startswith(info_dict_now[AUTOKEY.prefix]) or info_dict_now[AUTOKEY.prefix].startswith(key_now):
-                        standard_error(f"An info's prefix is the prefix of another.(name1:({info_dict[key_now][AUTOKEY.info_name]}), prefix1({key_now}); name2:({info_dict_now[AUTOKEY.info_name]})), prefix2:({info_dict_now[AUTOKEY.prefix]})", 22)
+                        standard_error(f"An info's prefix is the prefix of another.(name1:({info_dict[key_now][AUTOKEY.info_name]}), prefix1({key_now}); name2:({info_dict_now[AUTOKEY.info_name]})), prefix2:({info_dict_now[AUTOKEY.prefix]})" + 
+                                       f"|一个info宾语的前缀是另一个info宾语的前缀。(名称1:({info_dict[key_now][AUTOKEY.info_name]}), 前缀1({key_now}); 名称2:({info_dict_now[AUTOKEY.info_name]})), 前缀2:({info_dict_now[AUTOKEY.prefix]})", 22, tobject_id, info_name, tobject_x, tobject_y)
 
                 info_dict[info_dict_now[AUTOKEY.prefix]] = info_dict_now
                 if isdelete_all or isdelete or info_dict_now[AUTOKEY.isdelete_all_sym] or (isdelete_d and info_dict_now[AUTOKEY.isdelete_sym]):
@@ -989,18 +1155,17 @@ def auto_func():
 
     info_now = info_doids_dict
 
-    standard_out(isverbose and (isdelete_all or isdelete), "The info object is being deleted...")
-    standard_out(isverbose and (isdelete_d), "The info object is being deleted if eligible...")
+    standard_out(isverbose and (isdelete_all or isdelete), "The info object is being deleted...|info宾语正在全部删除...")
+    standard_out(isverbose and (isdelete_d), "The info object is being deleted if eligible...|打删除标记的info宾语正在全部删除...")
     for tobject in dtobject:
         map_now.delete_object_s(tobject)
         tobject_id = tobject.returnDefaultProperty("id")
-        standard_out(isverbose, f"An info object(ID:{tobject_id}, name:{tobject.returnDefaultProperty(rw.const.OBJECTDE.name)}) has been deleted...")
+        standard_out(isverbose, f"An info object(ID:{tobject_id}, name:{tobject.returnDefaultProperty(rw.const.OBJECTDE.name)}) has been deleted..." + 
+                     f"|一个info宾语(ID:{tobject_id}, 名称:{tobject.returnDefaultProperty(rw.const.OBJECTDE.name)})已经删除了")
 
-    standard_out(isverbose, "\t\t\t\t----------------------------------------")
-    standard_out(isverbose, "\t\t\t\t--------Tagged objects procedure--------")
-    standard_out(isverbose, "\t\t\t\t----------------------------------------")
+    standard_out_underline(isverbose, "Tagged objects procedure|标记宾语处理")
 
-    standard_out(isverbose, "The ids of tagged objects are collecting...")
+    standard_out(isverbose, "The ids of tagged objects are collecting...|标记宾语检测id正在收集...")
     for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                            rw.const.OBJECTDE.name: r".+"}):
         tobject_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
@@ -1025,6 +1190,8 @@ def auto_func():
 
         tobject_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
         tobject_id = tobject.returnDefaultProperty("id")
+        tobject_x = tobject.returnDefaultProperty("x")
+        tobject_y = tobject.returnDefaultProperty("y")
         ischange = False
         for key, info in info_dict.items():
             prefix_now = info[AUTOKEY.prefix]
@@ -1044,7 +1211,8 @@ def auto_func():
                 object_dict = deepcopy(info)
                 object_dict[AUTOKEY.tobject_id] = tobject_id
                 object_dict[AUTOKEY.tobject_name] = tobject_name
-                object_dict.update(get_args(myinfo, tobject_name_to_solve, tobject, id_to_tobject, map_now))
+
+                object_dict.update(get_args(myinfo, tobject_name_to_solve, tobject, info_tobject))
                 
                 if info.get(AUTOKEY.info_prefix) != None:
                     for info_pre in info[AUTOKEY.info_prefix]:
@@ -1057,12 +1225,19 @@ def auto_func():
             isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
             isdelete_all_sym = bool(re.match(AUTOKEY.delete_all_symbol, tobject_name)) or info[AUTOKEY.isdelete_all_sym]
 
-            standard_out(isverbose and (not(isdelete_sym or isdelete_all or isdelete_all_sym)), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. Object generation...")
-            standard_out(isverbose and (isdelete_all or isdelete_all_sym), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted...")
-            standard_out(isverbose and (isdelete_sym and(not (isdelete_all or isdelete_all_sym))), f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The objects will not be generated, existing ones will also be deleted...")
+            standard_out(isverbose and (not(isdelete_sym or isdelete_all or isdelete_all_sym)), 
+                         f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. Object generation..." + 
+                         f"|一个宾语(ID:{tobject_id}, 名称:{tobject_name})已经被确认为标记宾语。宾语生成中...")
+            standard_out(isverbose and (isdelete_all or isdelete_all_sym), 
+                         f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted..." + 
+                         f"|一个宾语(ID:{tobject_id}, 名称:{tobject_name})已经被确认为标记宾语。所有该标记宾语产生的宾语和自身都将被删除...")
+            standard_out(isverbose and (isdelete_sym and(not (isdelete_all or isdelete_all_sym))), 
+                         f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The objects will not be generated, existing ones will also be deleted..." +
+                         f"|一个宾语(ID:{tobject_id}, 名称:{tobject_name})已经被确认为有删除标记的标记宾语. 将不会新产生宾语，之前产生的宾语也将全部删除...")
 
             if myinfo.get(AUTOKEY.isinfo_sub) != None and myinfo.get(AUTOKEY.isinfo_sub) == True:
-                standard_error(f"Incorrect use of the subordinate info object.(ID:{tobject_id}, name:{tobject_name})", 2)
+                standard_error(f"Incorrect use of the subordinate info object.|" + 
+                               f"附属宾语的不正确使用。", 2, tobject_id, tobject_name, tobject_x, tobject_y)
 
             if tobject.returnOptionalProperty(AUTOKEY.IDdep) == None:
                 tobject.assignOptionalProperty(AUTOKEY.IDdep, "0")
@@ -1110,7 +1285,9 @@ def auto_func():
                 if object_dict.get(AUTOKEY.IDs) != None:
                     for ids in object_dict[AUTOKEY.IDs]:
                         if id_to_tobject.get(ids) == None:
-                            standard_warning(f"An object that needs to be deleted could not be found.(ID:{ids},parent ID:{tobject_id})", 4, 21)
+                            standard_warning(f"An object that needs to be deleted could not be found.(parent ID:{tobject_id})" + 
+                                             f"|一个需要被删除的宾语无法找到。(父亲 ID:{tobject_id})", 
+                                             4, 21, tobject_id, tobject_name, tobject_x, tobject_y)
                         elif not is_tagged_object_simple(id_to_tobject[ids]):
                             dtobject_id.add(ids)
                 continue
@@ -1119,7 +1296,9 @@ def auto_func():
             for index, operation_now in enumerate(myinfo[AUTOKEY.operation]):
                 if operation_now[AUTOKEY.operation_type] == AUTOKEY.tag:
                     if operation_index.get(operation_now[AUTOKEY.tag]) != None:
-                        standard_error(f"operation tags are duplicated.({operation_now[AUTOKEY.tag]})", 15)
+                        standard_error(f"operation tags are duplicated.({operation_now[AUTOKEY.tag]})" + 
+                                       f"|命令标记发生重合。({operation_now[AUTOKEY.tag]})", 
+                                       15, tobject_id, tobject_name, tobject_x, tobject_y)
                     operation_index[operation_now[AUTOKEY.tag]] = index
 
             tottobid = 0
@@ -1149,7 +1328,8 @@ def auto_func():
                         if object_dict.get(AUTOKEY.IDs) != None and tottobid < len(object_dict[AUTOKEY.IDs]):
                             object_now.assignDefaultProperty("id", object_dict[AUTOKEY.IDs][tottobid])
                             if id_to_tobject.get(object_dict[AUTOKEY.IDs][tottobid]) == None:
-                                standard_warning(f"A tagged object can't find the object that was once created.(ID: {tobject_id},name: {tobject_name},child ID:{object_dict[AUTOKEY.IDs][tottobid]})", 1, 18)
+                                standard_warning(f"A tagged object can't find the object that was once created.(child ID:{object_dict[AUTOKEY.IDs][tottobid]})" + 
+                                                 f"|一个标记宾语不能找到它曾经产生的宾语。(儿子 ID:{object_dict[AUTOKEY.IDs][tottobid]})", 1, 18, tobject_id, tobject_name, tobject_x, tobject_y)
                                 map_now.addObject_type(object_now, isresetid = False)
                             else:
                                 idnow_object:rw.case.TObject = deepcopy(id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]])
@@ -1173,7 +1353,8 @@ def auto_func():
                     continue
 
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeif:
-                    if not brace_translation(operation_now[AUTOKEY.ifvar], object_dict):
+                    ifvar_exp = brace_translation(operation_now[AUTOKEY.ifvar], object_dict)
+                    if isinstance(ifvar_exp, str) or (not bool(ifvar_exp)):
                         index = operation_index[operation_now[str_translation(AUTOKEY.ifend_tag, object_dict)]]
                 
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset:
@@ -1198,7 +1379,7 @@ def auto_func():
                         if key != AUTOKEY.operation_type:
                             object_dict[str_translation(key, object_dict)] = object_dict.get(value) != None
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.error:
-                    standard_error(str_translation(operation_now[AUTOKEY.error_info]), -1)
+                    standard_error(str_translation(operation_now[AUTOKEY.error_info]), -1, tobject_id, tobject_name, tobject_x, tobject_y)
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.pdb_pause:
                     debug_pdb(object_dict)
                 index = index + 1
@@ -1206,7 +1387,9 @@ def auto_func():
             id_delete = IDs_balance(tobject, tottobid)
             for idnow in id_delete:
                 if id_to_tobject.get(idnow) == None:
-                    standard_warning(f"An object that needs to be deleted could not be found.(ID:{idnow},parent ID:{tobject_id})", 4, 21)
+                    standard_warning(f"An object that needs to be deleted could not be found.(parent ID:{tobject_id})" + 
+                                     f"|一个需要被删除的宾语不能找到。(父亲 ID:{tobject_id})", 
+                                     4, 21, tobject_id, tobject_name, tobject_x, tobject_y)
                 else:
                     if is_tagged_object_simple(id_to_tobject[idnow]):
                         id_to_tobject[idnow].assignDefaultProperty(rw.const.OBJECTDE.name, id_to_tobject[idnow].returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
@@ -1220,12 +1403,14 @@ def auto_func():
                     if cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + key) != None:
                         origin_id = cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + AUTOKEY.tobject_id)
                         origin_name = cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + AUTOKEY.tobject_name)
-                        standard_error(f"Reference tags are duplicated. An object(ID:({tobject_id}), name:({tobject_name}), original ID:({origin_id}), original name:({origin_name}), Cite:{object_dict[AUTOKEY.cite_name]})", 14)
+                        standard_error(f"Reference tags(cite_name) are duplicated。(original ID:({origin_id}), original name:({origin_name}), Cite:{object_dict[AUTOKEY.cite_name]})" + \
+                                       f"|标记宾语引用(cite_name)发生重合。(重合 ID:({origin_id}), 重合名称:({origin_name}), 引用名称(cite_name):{object_dict[AUTOKEY.cite_name]})", 
+                                       14, tobject_id, tobject_name, tobject_x, tobject_y)
                     cite_object_dict[object_dict[AUTOKEY.cite_name] + "." + key] = deepcopy(value)
       
 
-    standard_out(isverbose and (isdelete_all or isdelete), "The tagged object is being deleted...")
-    standard_out(isverbose and (isdelete_d), "The tagged object is being deleted if eligible...")
+    standard_out(isverbose and (isdelete_all or isdelete), "Some objects are being deleted...|需要被删除的宾语正在回收...")
+    standard_out(isverbose and (isdelete_d), "Some objects are being deleted if eligible...|需要被删除的宾语正在回收，如有必要...")
     for tobject in [tobject for tobject in map_now.iterator_object_s()]:
         if dtobject_id.issuperset([tobject.returnDefaultProperty("id")]):
             map_now.delete_object_s(tobject)
@@ -1233,7 +1418,7 @@ def auto_func():
     debug_pdb()
 
     if iscitetrans:
-        standard_out(isverbose, "Other objects are being translated by cite.")
+        standard_out(isverbose, "Other objects are being translated by cite.|其他普通宾语正在被引用翻译...")
         for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(.+)"}):
             for key, value in tobject._default_properties.items():
                 value_now = mapvalue_to_value_basic(value)
@@ -1244,11 +1429,9 @@ def auto_func():
                 if not isinstance(value_now, bool):
                     tobject.assignOptionalProperty(key, brace_one_translation_cycle(value_now, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite))
 
-    standard_out(isverbose, "\t\t\t\t----------------------------------------")
-    standard_out(isverbose, "\t\t\t\t--------Rearrangement and output--------")
-    standard_out(isverbose, "\t\t\t\t----------------------------------------")
+    standard_out_underline(isverbose, "Rearrangement and output|宾语重排和地图输出")
     
-    standard_out(isverbose, "Info and tagged objects are rearranging...")
+    standard_out(isverbose, "Info and tagged objects are rearranging...|info宾语和标记宾语正在重排...")
     
     tagged_object_list:list[rw.case.TObject] = []
     maxIDdep = -1
@@ -1272,16 +1455,18 @@ def auto_func():
     for info_tag in info_tagged_objects_exist:
         map_now.addObject_type(info_tag, isresetid = False)
 
-    standard_out(isverbose and isresetid, "The IDs are rearranging...")
-
     if isresetid:
-
+        standard_out(isverbose and isresetid, "The IDs are rearranging...|ID正在重排...")
         id_mapping = {}
         id_now = 1
         for tobject in map_now.iterator_object_s():
             tobid = tobject.returnDefaultProperty("id")
+            tobject_x = tobject.returnDefaultProperty("x")
+            tobject_y = tobject.returnDefaultProperty("y")
             if id_mapping.get(tobid) != None:
-                standard_error(f"The IDs are coincident and the mapping cannot be performed.(ID:{tobid})", 11)
+                standard_error(f"The IDs are coincident and the mapping cannot be performed." + 
+                               f"|宾语ID发生重合，ID映射无法进行。", 
+                               11, tobid, tobject_name, tobject_x, tobject_y)
             
             id_mapping[tobid] = str(id_now)
             id_now = id_now + 1
@@ -1308,7 +1493,7 @@ def auto_func():
 
     map_now.resetnextobjectid()
 
-    standard_out(isverbose, "New RW map is being establishing...")
+    standard_out(isverbose, "New RW map is being establishing...|新的铁锈地图正在建立...")
     map_now.write_file(output_path)
 
     dev_null.close()

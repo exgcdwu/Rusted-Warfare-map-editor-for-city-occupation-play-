@@ -12,8 +12,9 @@ import rwmap as rw
 from auto._core import AUTOKEY
 from auto._data._const import *
 from auto._data._object import *
-from auto._data._bdtext import *
+from auto._data._mtext import *
 from auto._data._inadd import *
+from auto._data._time import *
 
 building_f_info_args_dict = OrderedDict()
 
@@ -34,8 +35,6 @@ building_f_info_args_dict[INFOKEY.detectname] = str
 building_f_info_args_dict[INFOKEY.detectoffset] = (list, int)
 building_f_info_args_dict[INFOKEY.detectoffsetsize] = (list, int)
 
-building_f_info_args_dict[INFOKEY.inadd_prefix] = str
-building_f_info_args_dict[INFOKEY.bdtext_prefix] = str
 building_f_info_args_dict[INFOKEY.acti] = (list, str)
 building_f_info_args_dict[INFOKEY.deacti] = (list, str)
 building_f_info_args_dict[INFOKEY.isonlybuilding] = bool
@@ -44,13 +43,6 @@ building_f_info_args_dict[INFOKEY.minUnits] = str
 building_f_info_args_dict[INFOKEY.maxUnits] = str
 
 building_f_info_args_dict[INFOKEY.cite_name] = str
-
-building_f_info_args_dict[INFOKEY.args] = (list, list, str)
-building_f_info_args_dict[INFOKEY.opargs] = (list, list, str)
-building_f_info_args_dict[INFOKEY.brace] = (list, str)
-
-building_f_info_args_dict.update(bdtext_info_args_dict)
-building_f_info_args_dict.update(inadd_info_args_dict)
 
 building_f_info_default_args_dict = {
     INFOKEY.addWarmup: "0s", 
@@ -66,40 +58,24 @@ building_f_info_default_args_dict = {
     INFOKEY.detectoffsetsize: "0 0", 
     INFOKEY.deacti: "", 
 }
-building_f_info_default_args_dict.update(bdtext_info_default_args_dict)
-building_f_info_default_args_dict.update(inadd_info_default_args_dict)
-building_f_info_default_args_dict[f"{INFOKEY.isbdtext}"] = "false"
-building_f_info_default_args_dict[f"{INFOKEY.isinadd}"] = "false"
 
 building_f_info_optional_set = {
-    INFOKEY.isprefixseg, INFOKEY.maxUnits, INFOKEY.args, INFOKEY.opargs, 
-    INFOKEY.inadd_prefix, INFOKEY.bdtext_prefix, INFOKEY.isonlybuilding, 
-    INFOKEY.isshowOnMap, INFOKEY.cite_name, INFOKEY.brace, INFOKEY.acti, 
+    INFOKEY.isprefixseg, INFOKEY.maxUnits, INFOKEY.isonlybuilding, 
+    INFOKEY.isshowOnMap, INFOKEY.cite_name, INFOKEY.acti, 
     INFOKEY.addReset
 }
 
-building_f_info_optional_set.update(bdtext_info_optional_set)
-building_f_info_optional_set.update(inadd_info_optional_set)
-
 building_f_info_var_dependent_dict = {}
-building_f_info_var_dependent_dict.update(bdtext_info_var_dependent_dict)
-building_f_info_var_dependent_dict.update(inadd_info_var_dependent_dict)
-#
 
 building_f_info_initial_brace_dict = {}
 
 building_f_info_default_brace_set = set()
 
-building_f_info_operation_pre_list = deepcopy(ARGS_OPARGS_PRE_OPERATION)
+building_f_info_operation_pre_list = []
 
-building_f_info_info_prefix_dict = {
-    INFOKEY.bdtext_info: INFOKEY.bdtext_prefix, 
-    INFOKEY.inadd_info: INFOKEY.inadd_prefix
-}
+building_f_info_info_prefix_dict = {}
 
 building_f_info_operation_list = \
-    bdtext_info_operation_list + \
-    inadd_info_operation_list + \
     [
         {
             AUTOKEY.operation_type: AUTOKEY.object, 
@@ -128,15 +104,14 @@ building_f_info_operation_list = \
             AUTOKEY.optional: {
                 rw.const.OBJECTOP.deactivatedBy: "{" + f"{INFOKEY.idprefix}" + "0}{',' + ','.join(deacti) if deacti != [''] else ''}", 
                 rw.const.OBJECTOP.activatedBy: ("{','.join(acti)}", f"{INFOKEY.acti}", AUTOKEY.exist), 
-                rw.const.OBJECTOP.warmup: ("{" + f"{INFOKEY.addWarmup}" + "}", f"'{INFOKEY.addWarmup}' != '0s'", AUTOKEY.brace), 
+                rw.const.OBJECTOP.warmup: ("{" + f"{INFOKEY.addWarmup}" + "}", f"'{INFOKEY.addWarmup}' != '0s' and '{INFOKEY.addWarmup}' != '0.0s'", AUTOKEY.brace), 
                 rw.const.OBJECTOP.resetActivationAfter: ("{" + f"{INFOKEY.addReset}" + "}", f"{INFOKEY.addReset}", AUTOKEY.exist), 
                 rw.const.OBJECTOP.spawnUnits: "{" + f"{INFOKEY.aunit}" + "}*{" + f"{INFOKEY.spawnnum}" + "}", 
                 rw.const.OBJECTOP.team: "{" + f"{INFOKEY.team}" + "}", 
                 rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.isshowOnMap}", AUTOKEY.brace), 
             }
         }
-    ] + \
-    BRACE_OPERATION_END
+    ]
 
 building_f_info = {
     INFOKEY.building_f_info:{
@@ -161,3 +136,9 @@ building_f_info = {
         AUTOKEY.no_check: True
     }
 }
+
+building_f_info = mtext_info_sub(building_f_info)
+building_f_info = inadd_info_sub(building_f_info)
+building_f_info = time_info_sub(building_f_info, [INFOKEY.addWarmup, INFOKEY.inaddwarmup], [], [INFOKEY.addReset, INFOKEY.detectReset], [])
+building_f_info = brace_add_info(building_f_info)
+building_f_info = args_opargs_add_info(building_f_info)

@@ -2,7 +2,17 @@
 
 ## Objective
 
-命令行工具可以通过--infopath --infovar来确定宾语自动化的格式。这里提供一份简要说明。
+命令行工具可以通过--infopath --infovar来确定宾语自动化的格式。这里提供一份简要说明。格式包括自动化处理的变量和设置。
+
+## config.json
+
+形如
+
+```json
+{
+    "language" : "ch" // 仅允许"ch"和"eg"，命令返回语言
+}
+```
 
 ## The variable
 
@@ -236,7 +246,7 @@ ifend_tag:str
 将其他键值对的值全部进行表达式计算，导入。键值对中的键将进行字符串翻译。
 
 参数：
-depth：键的翻译深度，不填默认1024层。
+depth：键的最大翻译深度，不填默认1024层。
 其他参数
 
 ### changetype
@@ -275,6 +285,7 @@ real_idexp
 ### typeadd_args(only operation_pre)
 
 其他参数作为键值对导入args。键做字符串翻译，值做表达式翻译，值再对应翻译为类型。
+表达式翻译不会进一步翻译{}了。
 
 参数：
 其他参数
@@ -282,6 +293,7 @@ real_idexp
 ### typeadd_opargs(only operation_pre)
 
 其他参数作为键值对导入opargs。键做字符串翻译，值做表达式翻译，再将值第二项翻译为类型。
+表达式翻译不会进一步翻译{}了。
 
 参数：
 其他参数
