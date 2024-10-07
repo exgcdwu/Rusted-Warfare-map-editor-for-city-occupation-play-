@@ -54,21 +54,19 @@ def bool_list_operation_list(key:str):
     return operation_typeset_expression(f"{key}", f"[True if operation_key == 'true' else operation_key for operation_key in {key}]")
 
 tree_info_operation_list = \
-    operation_list_join_quote("name", "name") + \
     bool_list_operation_list("exist") + \
     operation_exist_if("name", "tree_operation_if_1") + \
         operation_cycle_start("i", "0", "i < len(name)", "tree_operation_cycle_1") + \
             operation_list_assign(f"{INFOKEY.offset}", "i", "offset_now", "tree", "[0, 0]") + \
             operation_list_assign(f"{INFOKEY.offsetsize}", "i", "offsetsize_now", "tree", "[0, 0]") + \
             operation_list_assign(f"{INFOKEY.exist}", "i", "exist_now", "tree", "True") + \
-            operation_typeset_expression("name_now", "name[i]") + \
             operation_if("exist_now_{i}", "tree_operation_if_exist_now") + \
                 [
                     {
                         AUTOKEY.operation_type: AUTOKEY.object, 
                         AUTOKEY.offset: "offset_now_{i}", 
                         AUTOKEY.offsetsize: "offsetsize_now_{i}", 
-                        AUTOKEY.name: "{name_now}"
+                        AUTOKEY.name: "{','.join(name[i])}&12"
                     }
                 ] + \
             operation_ifend("tree_operation_if_exist_now") + \

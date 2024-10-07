@@ -31,6 +31,7 @@ class INFOKEY:
     deacti = "deacti"
     brace = "brace"
     exist = "exist"
+    neutralindex = "neutralindex"
 
     object_info = "object_info"
     teamDetect_info = "teamDetect_info"
@@ -89,6 +90,7 @@ class INFOKEY:
     removename = "removename"
     isonlybuilding = "isonlybuilding"
     isshowOnMap = "isshowOnMap"
+    isdetectdeacti = "isdetectdeacti"
 
     ismtext = "ismtext"
     mcolor = "mcolor"
@@ -288,6 +290,14 @@ def operation_if(condition:str, tag:str, elseif_num:int = 1):
         }
     ]
 
+def operation_errorif(tag:str, elseif_num:int = 1):
+    return [
+        {
+            AUTOKEY.operation_type: AUTOKEY.errorif, 
+            AUTOKEY.ifend_tag: "tag_ifnext_" + str(elseif_num) + tag
+        }
+    ]
+
 def operation_exist_if(key:str, tag:str, elseif_num:int = 1):
     return [
         {
@@ -362,11 +372,12 @@ def operation_error(error_info:str):
         }
     ]
 
-def operation_typeset_expression(key:str, value:str, depth:int = MAXTRANSDEPTH):
+def operation_typeset_expression(key:str, value:str, depth:int = MAXTRANSDEPTH, brace_exp_depth:int = MAXTRANSDEPTH):
     return [
         {
             AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
             AUTOKEY.depth:depth, 
+            AUTOKEY.brace_exp_depth: brace_exp_depth, 
             key: value
         }
     ]
@@ -381,8 +392,8 @@ ARGS_OPARGS_PRE_OPERATION = \
                 [
                     {
                         AUTOKEY.operation_type: AUTOKEY.error, 
-                        AUTOKEY.error_info: "The number of arguments in {i + 1}-th args must be 2.(args:{args}, reality:{len(args[i])})|\
-                            第{i + 1}个必需参数(args)数量必须为2（参数名称、类型(str,bool)）。(args:{args}, 参数数量:{len(args[i])})"
+                        AUTOKEY.error_info: "The number of arguments in {i + 1}-th args must be 2.(args:{args}, reality:{len(args[i])})" + \
+                            "|第{i + 1}个必需参数(args)数量必须为2（参数名称、类型(str,bool)）。(args:{args}, 参数数量:{len(args[i])})"
                     },
                 ] + \
             operation_ifend("args_opargs_pre_if_argserror") + \
@@ -390,8 +401,8 @@ ARGS_OPARGS_PRE_OPERATION = \
                 [
                     {
                         AUTOKEY.operation_type: AUTOKEY.error, 
-                        AUTOKEY.error_info: "The 2ed of arguments in {i + 1}-th args must be str or bool.(args:{args}, reality:{args[i][1]})|\
-                        |第{i + 1}个必需参数的第二个参数必须是str或bool。(args:{args}, 参数类型:{args[i][1]})|"
+                        AUTOKEY.error_info: "The 2ed of arguments in {i + 1}-th args must be str or bool.(args:{args}, reality:{args[i][1]})" + \
+                        "|第{i + 1}个必需参数的第二个参数必须是str或bool。(args:{args}, 参数类型:{args[i][1]})"
                     },
                 ] + \
             operation_ifend("args_opargs_pre_if_argserror_2") + \
@@ -413,8 +424,8 @@ ARGS_OPARGS_PRE_OPERATION = \
                 [
                     {
                         AUTOKEY.operation_type: AUTOKEY.error, 
-                        AUTOKEY.error_info: "The number of arguments in {i + 1}-th opargs must be 3 or 4.(opargs:{opargs}, reality:{len(opargs[i])})\
-                        |第{i + 1}个选填参数(opargs)数量必须在3-4之间。(opargs:{opargs}, 参数数量:{len(opargs[i])})"
+                        AUTOKEY.error_info: "The number of arguments in {i + 1}-th opargs must be 3 or 4.(opargs:{opargs}, reality:{len(opargs[i])})" + \
+                        "|第{i + 1}个选填参数(opargs)数量必须在3-4之间。(opargs:{opargs}, 参数数量:{len(opargs[i])})"
                     },
                 ] + \
             operation_ifend("args_opargs_pre_if_opargserror") + \
@@ -422,8 +433,8 @@ ARGS_OPARGS_PRE_OPERATION = \
                 [
                     {
                         AUTOKEY.operation_type: AUTOKEY.error, 
-                        AUTOKEY.error_info: "The 3th of arguments in {i + 1}-th opargs must be str or bool.(opargs:{opargs}, reality:{opargs[i][2]})\
-                            |第{i + 1}个选填参数的第三个参数必须是str或bool。(opargs:{opargs}, 参数类型:{opargs[i][2]})"
+                        AUTOKEY.error_info: "The 3th of arguments in {i + 1}-th opargs must be str or bool.(opargs:{opargs}, reality:{opargs[i][2]})" + \
+                            "|第{i + 1}个选填参数的第三个参数必须是str或bool。(opargs:{opargs}, 参数类型:{opargs[i][2]})"
                     },
                 ] + \
             operation_ifend("args_opargs_pre_if_opargserror_2") + \
@@ -431,8 +442,8 @@ ARGS_OPARGS_PRE_OPERATION = \
                 [
                     {
                         AUTOKEY.operation_type: AUTOKEY.error, 
-                        AUTOKEY.error_info: "The length of first arguments in {i + 1}-th opargs must be 1.(opargs:{opargs}, reality:{len(opargs[i][0])})\
-                            |第{i + 1}个选填参数的第一个参数的长度必须为1。(opargs:{opargs}, 参数长度:{len(opargs[i][0])})"
+                        AUTOKEY.error_info: "The length of first arguments in {i + 1}-th opargs must be 1.(opargs:{opargs}, reality:{len(opargs[i][0])})" + \
+                            "|第{i + 1}个选填参数的第一个参数的长度必须为1。(opargs:{opargs}, 参数长度:{len(opargs[i][0])})"
                     },
                 ] + \
             operation_ifend("args_opargs_pre_if_opargserror_3") + \
@@ -440,14 +451,14 @@ ARGS_OPARGS_PRE_OPERATION = \
                 [
                     {
                         AUTOKEY.operation_type: AUTOKEY.typeadd_opargs, 
-                        "{opargs[i][0]}": "(opargs[i][1], opargs[i][2])"
+                        "{opargs[i][0]}&12": "(opargs[i][1], opargs[i][2])"
                     }
                 ] + \
             operation_else("args_opargs_pre_if1") + \
                 [
                     {
                         AUTOKEY.operation_type: AUTOKEY.typeadd_opargs, 
-                        "{opargs[i][0]}": "(opargs[i][1] + \'|\' + opargs[i][3], opargs[i][2])"
+                        "{opargs[i][0]}&12": "(opargs[i][1] + \'|\' + opargs[i][3], opargs[i][2])"
                     }
                 ] + \
             operation_elseend("args_opargs_pre_if1") + \
@@ -506,3 +517,42 @@ def brace_add_info(info_dict:str)->dict:
             value[AUTOKEY.info_prefix] = {}
         value[AUTOKEY.info_prefix].update({})
     return info_dict_ans
+
+def check_minmaxUnits_operation(info_tag:str)->list:
+    return \
+    operation_exist_if(f"{INFOKEY.minUnits}", info_tag + "_existifminUnits_error") + \
+        operation_if(f"{INFOKEY.minUnits} <= 0", info_tag + "_if_minUnits_error") + \
+            operation_error("minUnits({minUnits}) <= 0, please check your " + info_tag + " or tagged object." + \
+                            "|minUnits({minUnits}) <= 0, 请查看对应 " + info_tag + " 和标记宾语是否出错") + \
+        operation_ifend(info_tag + "_if_minUnits_error") + \
+    operation_ifend(info_tag + "_existifminUnits_error") + \
+    operation_exist_if(f"{INFOKEY.maxUnits}", info_tag + "_existifmaxUnits_error") + \
+        operation_if(f"{INFOKEY.maxUnits} < 0", info_tag + "_if_maxUnits_error") + \
+            operation_error("maxUnits({maxUnits}) < 0, please check your " + info_tag + " or tagged object." + \
+                            "|maxUnits({maxUnits}) < 0, 请查看对应 " + info_tag + " 和标记宾语是否出错") + \
+        operation_ifend(info_tag + "_if_maxUnits_error") + \
+        operation_exist_if(f"{INFOKEY.minUnits}", info_tag + "_existifminUnits_error2") + \
+            operation_if(f"{INFOKEY.minUnits} > {INFOKEY.maxUnits}", info_tag + "_if_minmaxUnits_error") + \
+                operation_error("minUnits({minUnits}) > maxUnits({maxUnits}), please check your " + info_tag + " or tagged object." + \
+                                "|minUnits({minUnits}) > maxUnits({maxUnits}), 请查看对应 " + info_tag + " 和标记宾语是否出错") + \
+            operation_ifend(info_tag + "_if_minmaxUnits_error") + \
+        operation_ifend(info_tag + "_existifminUnits_error2") + \
+    operation_ifend(info_tag + "_existifmaxUnits_error")
+
+def check_aunit_operation(info_tag:str)->list:
+    return \
+    operation_exist_if(f"{INFOKEY.aunit}", info_tag + "_existifaunit_error") + \
+        operation_if(f"'*' in '{INFOKEY.aunit}' or ',' in '{INFOKEY.aunit}'", info_tag + "_if_aunit_error") + \
+            operation_error("aunit({aunit}) is not allowed to have '*' or ',', aunit is the name of unit(no number, no variety), please check your " + info_tag + " or tagged object." + \
+                            "|aunit({aunit})不许有'*'或',', 没有数目和多种, 请查看对应 " + info_tag + " 和标记宾语是否出错") + \
+        operation_ifend(info_tag + "_if_aunit_error") + \
+    operation_ifend(info_tag + "_existifaunit_error")
+
+error_brace_index = 0
+
+def error_brace(operation_list:list)->list:
+    global error_brace_index
+    error_brace_index = error_brace_index + 1
+    return operation_errorif("operation_error_if" + str(error_brace_index) + "t") + \
+           operation_list + \
+           operation_ifend("operation_error_if" + str(error_brace_index) + "t")

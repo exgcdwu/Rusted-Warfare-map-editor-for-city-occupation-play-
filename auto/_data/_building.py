@@ -34,6 +34,7 @@ building_info_args_dict[INFOKEY.addoffsetsize] = (list, int)
 building_info_args_dict[INFOKEY.detectname] = str
 building_info_args_dict[INFOKEY.detectoffset] = (list, int)
 building_info_args_dict[INFOKEY.detectoffsetsize] = (list, int)
+building_info_args_dict[INFOKEY.isdetectdeacti] = bool
 
 building_info_args_dict[INFOKEY.acti] = (list, str)
 building_info_args_dict[INFOKEY.deacti] = (list, str)
@@ -48,7 +49,6 @@ building_info_default_args_dict = {
     INFOKEY.addWarmup: "0s", 
     INFOKEY.isonlybuilding: "false", 
     INFOKEY.team: "-1", 
-    INFOKEY.maxUnits: "0", 
     INFOKEY.spawnnum: "1", 
     INFOKEY.addname: "", 
     INFOKEY.addoffset: "0 0", 
@@ -57,10 +57,12 @@ building_info_default_args_dict = {
     INFOKEY.detectoffset: "0 0", 
     INFOKEY.detectoffsetsize: "0 0", 
     INFOKEY.acti: "", 
+    INFOKEY.deacti: "", 
+    INFOKEY.isdetectdeacti: "false"
 }
 
 building_info_optional_set = {
-    INFOKEY.isprefixseg, INFOKEY.minUnits, 
+    INFOKEY.isprefixseg, INFOKEY.minUnits, INFOKEY.maxUnits, INFOKEY.addReset, 
     INFOKEY.isonlybuilding, INFOKEY.isshowOnMap, INFOKEY.cite_name, INFOKEY.deacti, 
 }
 
@@ -75,6 +77,14 @@ building_info_operation_pre_list = []
 building_info_info_prefix_dict = {}
 
 building_info_operation_list = \
+    error_brace(
+        check_minmaxUnits_operation("building_info") + \
+        check_aunit_operation("building_info") + \
+        operation_if(f"{INFOKEY.team} <= -3", "building_if_setTeam_error") + \
+            operation_error("team({team}) <= -3, please check your building_info or tagged object." + \
+                            "|team({team}) <= -3, 请查看对应 building_info 和标记宾语是否出错") + \
+        operation_ifend("building_if_setTeam_error")
+    ) + \
     [
         {
             AUTOKEY.operation_type: AUTOKEY.object, 
@@ -101,8 +111,8 @@ building_info_operation_list = \
             AUTOKEY.name: "{" + f"{INFOKEY.addname}" + "}", 
             AUTOKEY.type: rw.const.OBJECTTYPE.unitAdd, 
             AUTOKEY.optional: {
-                rw.const.OBJECTOP.activatedBy: "{" + f"{INFOKEY.idprefix}" + "0}{',' + ','.join(acti) if acti != [''] else ''}", 
-                rw.const.OBJECTOP.deactivatedBy: ("{','.join(deacti)}", f"{INFOKEY.deacti}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.activatedBy: ("{'" + f"{INFOKEY.idprefix}" + "0' if not isdetectdeacti else ''}{',' if (not isdetectdeacti) and (acti != ['']) else ''}{','.join(acti) if acti != [''] else ''}", "not isdetectdeacti or (acti != [''])", AUTOKEY.brace), 
+                rw.const.OBJECTOP.deactivatedBy: ("{'" + f"{INFOKEY.idprefix}" + "0' if isdetectdeacti else ''}{',' if isdetectdeacti and (deacti != ['']) else ''}{','.join(deacti) if deacti != [''] else ''}", "isdetectdeacti or (deacti != [''])", AUTOKEY.brace), 
                 rw.const.OBJECTOP.warmup: ("{" + f"{INFOKEY.addWarmup}" + "}", f"'{INFOKEY.addWarmup}' != '0s' and '{INFOKEY.addWarmup}' != '0.0s'", AUTOKEY.brace), 
                 rw.const.OBJECTOP.resetActivationAfter: ("{" + f"{INFOKEY.addReset}" + "}", f"{INFOKEY.addReset}", AUTOKEY.exist), 
                 rw.const.OBJECTOP.spawnUnits: "{" + f"{INFOKEY.aunit}" + "}*{" + f"{INFOKEY.spawnnum}" + "}", 

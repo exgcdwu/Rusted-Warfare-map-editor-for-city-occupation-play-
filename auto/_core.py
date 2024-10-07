@@ -9,6 +9,9 @@ from collections import OrderedDict
 import sys
 import pdb
 import json
+import xml.etree.ElementTree as et
+import time
+import shutil
 
 from asteval import Interpreter
 
@@ -67,6 +70,8 @@ class AUTOKEY:
     depth = "depth"
     tobject_id = "tobject_id"
     tobject_name = "tobject_name"
+    brace_exp_depth = "brace_exp_depth"
+    errorif = "errorif"
 
     operation_type = "operation_type"
     object = "object"
@@ -118,8 +123,8 @@ cite_object_dict = {}
 language_dict = {"eg" : 0, "ch" : 1}
 language_set = set(language_dict.keys())
 
-full_screen = 48
-underline_even_num = 32
+full_screen = int(shutil.get_terminal_size().columns / 2) * 2
+underline_even_num = int(full_screen * 3 / 8) * 2
 
 def str_lang(info_str:str)->str:
     language_index = language_dict[language]
@@ -160,20 +165,26 @@ def standard_out_underline(ifdo:bool, info_str:str)->None:
         print(" " * left_bk + "-" * left_ul + info_str_now + "-" * right_ul)
         print(" " * left_bk + "-" * underline_even_num)
 
-def standard_error(info_err, error_id:int, ID_now:str, name_now:str, x_now:str, y_now:str, sub_info_error:str = None)->None:
-    str_error_default = f"(ERROR:{error_id}, ID:{ID_now}, name:{name_now}, x:{x_now}, y:{y_now})" + \
-                        f"|(错误码:{error_id}, ID:{ID_now}, 名称:{name_now}, x:{x_now}, y:{y_now})"
-    print(str_lang(info_err) + str_lang(str_error_default), file=sys.stderr)
+def standard_error(info_err, error_id:int, ID_now:str = None, name_now:str = None, x_now:str = None, y_now:str = None, sub_info_error:str = None)->None:
+    ID_now_l = str_lang(f", ID:{ID_now}|, ID:{ID_now}") if ID_now != None else ""
+    name_now_l = str_lang(f", name:{name_now}|, 名称:{name_now}") if name_now != None else ""
+    xy_now_l = str_lang(f", coordinate:({x_now}, {y_now})|, 坐标:({x_now}, {y_now})") if x_now != None else ""
+    error_l = str_lang(f", ERROR:{error_id}|, 错误码:{error_id}")
+    str_error_default = "(" + f"{ID_now_l}{name_now_l}{xy_now_l}{error_l}"[2:] + ")"
+    print(str_lang(info_err) + str_error_default, file=sys.stderr)
     if sub_info_error != None:
         pprint(sub_info_error)
     if isdebug:
         import pdb;pdb.set_trace()
     exit(error_id)
 
-def standard_warning(info_warn, warn_id:int, error_id:int, ID_now:str, name_now:str, x_now:str, y_now:str, sub_info_warn:str = None)->None:
-    str_warning_default = f"(WARNING:{error_id}, ID:{ID_now}, name:{name_now}, x:{x_now}, y:{y_now})" + \
-                          f"|(警告码:{error_id}, ID:{ID_now}, 名称:{name_now}, x:{x_now}, y:{y_now})"
-    print(str_lang(info_warn) + str_lang(str_warning_default), file=sys.stdout)
+def standard_warning(info_warn, warn_id:int, error_id:int, ID_now:str = None, name_now:str = None, x_now:str = None, y_now:str = None, sub_info_warn:str = None)->None:
+    ID_now_l = str_lang(f", ID:{ID_now}|, ID:{ID_now}") if ID_now != None else ""
+    name_now_l = str_lang(f", name:{name_now}|, 名称:{name_now}") if name_now != None else ""
+    xy_now_l = str_lang(f", coordinate:({x_now}, {y_now})|, 坐标:({x_now}, {y_now})") if x_now != None else ""
+    warn_l = str_lang(f", WARNING:{warn_id}|, 警告码:{warn_id}")
+    str_warning_default = "(" + f"{ID_now_l}{name_now_l}{xy_now_l}{warn_l}"[2:] + ")"
+    print(str_lang(info_warn) + str_warning_default, file=sys.stdout)
     if sub_info_warn != None:
         pprint(sub_info_warn)
     if isdebug:
@@ -198,7 +209,7 @@ def id_debug_pdb(tobject:rw.case.TObject, ID:int):
         import pdb;pdb.set_trace()
 
 
-def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.TObject)->dict:
+def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.TObject, object_dict:dict)->dict:
     args_dict = {}
     split_now = name.split(info[AUTOKEY.opargs_seg])
     opargs = split_now[1:]
@@ -219,13 +230,13 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.
     
     if len(args_n) < len(info[AUTOKEY.args]):
         info_args_temp = info[AUTOKEY.args][len(args_n):]
-        standard_error(f"Required arguments are missing below in a tagged object.(maybe \".\" is missing?)(name:{name},need:{info[AUTOKEY.args]},reality:{args_n})(info name:{info_tobject_name},info id:{info_tobject_id},info x:{info_tobject_x},info y:{info_tobject_y})" + \
-                       f"|标记宾语中的必需参数缺失。(也许\".\"缺失？)(扣除前缀后的名称:{name},必需参数要求:{info[AUTOKEY.args]},必需参数实际:{args_n})(info 名称:{info_tobject_name},info ID:{info_tobject_id},info x:{info_tobject_x},info y:{info_tobject_y})", 
+        standard_error(f"Required arguments are missing below in a tagged object.(maybe \".\" is missing?)(name:{name},need:{info[AUTOKEY.args]},reality:{args_n})(info name:{info_tobject_name},info id:{info_tobject_id},info coordinate:({info_tobject_x}, {info_tobject_y}))" + \
+                       f"|标记宾语中的必需参数缺失。(也许\".\"缺失？)(扣除前缀后的名称:{name},必需参数要求:{info[AUTOKEY.args]},必需参数实际:{args_n})(info 名称:{info_tobject_name},info ID:{info_tobject_id},info 坐标:({info_tobject_x}, {info_tobject_y}))", 
                        8, tobject_id, tobject_name, tobject_x, tobject_y, info_args_temp)
     elif len(args_n) > len(info[AUTOKEY.args]):
         info_args_temp = args_n[len(info[AUTOKEY.args]):]
-        standard_error(f"Too many required arguments below in a tagged object.(name:{name},need:{info[AUTOKEY.args]},reality:{args_n})(info 名称:{info_tobject_name},info ID:{info_tobject_id},info x:{info_tobject_x},info y:{info_tobject_y})" + \
-                       f"|标记宾语中的必需参数过多。(扣除前缀后的名称:{name},必需参数要求:{info[AUTOKEY.args]},必需参数实际:{args_n})", 
+        standard_error(f"Too many required arguments below in a tagged object.(name:{name},need:{info[AUTOKEY.args]},reality:{args_n})(info name:{info_tobject_name},info id:{info_tobject_id},info coordinate:({info_tobject_x}, {info_tobject_y}))" + \
+                       f"|标记宾语中的必需参数过多。(扣除前缀后的名称:{name},必需参数要求:{info[AUTOKEY.args]},必需参数实际:{args_n})(info 名称:{info_tobject_name},info ID:{info_tobject_id},info 坐标:({info_tobject_x}, {info_tobject_y}))", 
                        9, tobject_id, tobject_name, tobject_x, tobject_y, info_args_temp)
 
     for index, thing in enumerate(info[AUTOKEY.args]):
@@ -235,18 +246,29 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.
 
     for info_thing in info[AUTOKEY.opargs].values():
         if len(info_thing[0].split(AUTOKEY.opargs_sys_seg)) == 2:
-            args_dict[info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]] = \
-            mapvalue_to_value(info_thing[0].split(AUTOKEY.opargs_sys_seg)[1], info_thing[1])
+            key_now = info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]
+            opdefault_now = info_thing[0].split(AUTOKEY.opargs_sys_seg)[1]
+            type_now = info_thing[1]
+            if object_dict.get(key_now) != None:
+                continue
+            args_dict[key_now] = mapvalue_to_value(opdefault_now, type_now)
+
 
     for oparg in opargs:
         prefix_now = oparg[0:prefix_len]
         var_now = oparg[prefix_len:]
         if info[AUTOKEY.opargs].get(prefix_now) != None:
             info_thing = info[AUTOKEY.opargs][prefix_now]
-            if info_thing[1] != bool:
-                args_dict[info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]] = info_thing[1](var_now)
+            key_now = info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]
+            type_now = info_thing[1]
+
+            if type_now == bool:
+                deal_bool = True if var_now == "" else mapvalue_to_value(var_now, type_now)
+                args_dict[key_now] = (deal_bool ^ object_dict[key_now]) if object_dict.get(key_now) != None else deal_bool
             else:
-                args_dict[info_thing[0].split(AUTOKEY.opargs_sys_seg)[0]] = True
+                if var_now == "None":
+                    continue
+                args_dict[key_now] = type_now(var_now)
         else:
             if prefix_now != "d" and prefix_now != 'D':
                 standard_error(f"Unknown optional arguments in a tagged object.(name:{name}, optional tag:,{prefix_now})" + \
@@ -293,7 +315,9 @@ def brace_one_translation_cycle(expression_b:str, dict_name:dict, seg_re:str)->s
         expression_b = brace_one_translation(expression_b, dict_name, seg_re)
     return expression_b
 
-def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, ones:bool = False, depth = MAXTRANSDEPTH):
+def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, depth = MAXTRANSDEPTH, brace_exp_depth:int = MAXTRANSDEPTH):
+    if brace_exp_depth == 0:
+        return expression_b
     #import pdb;pdb.set_trace()
     expression_b_origin = expression_b
     expression_b = brace_one_translation_cycle(expression_b, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite)
@@ -312,8 +336,6 @@ def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, ones:b
 
         trans_dep_now = trans_dep_now + 1
 
-    if dict_name.get("tobject") == None:
-        debug_pdb()
     tobject:rw.case.TObject = dict_name["tobject"]
     tobject_id = tobject.returnDefaultProperty("id")
     tobject_name = tobject.returnDefaultProperty("name")
@@ -324,8 +346,8 @@ def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, ones:b
         standard_error(f"References occur in a loop(more than 1024).({expression_b})" + \
                        f"|宾语内引用发生了循环(超过1024次)。({expression_b})", 16, tobject_id, tobject_name, tobject_x, tobject_y)
 
-    if (prev or expression_b_origin != expression_b) and (not ones):
-        expression_b = expression_translation(expression_b, dict_name, False)
+    if (prev or expression_b_origin != expression_b):
+        expression_b = expression_translation(expression_b, dict_name, False, brace_exp_depth = brace_exp_depth - 1)
     try:
         expression_b_temp = aeval(expression_b)
     except Exception as e:
@@ -335,17 +357,19 @@ def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, ones:b
             return expression_b
         return expression_b_temp
 
-def expression_translation(expression_s:str, dict_name:dict, prev:bool = True, depth = MAXTRANSDEPTH):
-    expression_s_now = str_translation(expression_s, dict_name, depth = depth)
-    if prev or expression_s != expression_s_now:
-        return brace_translation(expression_s_now, dict_name, False, depth = depth)
+def expression_translation(expression_s:str, dict_name:dict, prev:bool = True, depth = MAXTRANSDEPTH, brace_exp_depth:int = MAXTRANSDEPTH):
+    if brace_exp_depth == 0:
+        return expression_s
+    expression_s_now = str_translation(expression_s, dict_name)
+    if (prev or expression_s != expression_s_now):
+        return brace_translation(expression_s_now, dict_name, False, depth = depth, brace_exp_depth = brace_exp_depth - 1)
     else:
         return expression_s_now
         
     
 
 
-def str_translation(value:Union[str, bool], dict_name:dict, depth = MAXTRANSDEPTH)->str:
+def str_translation(value:Union[str, bool], dict_name:dict)->str:
     if isinstance(value, bool):
         return value_to_mapvalue(value, bool)
     if isinstance(value, dict):
@@ -354,6 +378,8 @@ def str_translation(value:Union[str, bool], dict_name:dict, depth = MAXTRANSDEPT
     left_brace = 0
     index_list = []
     for index in range(0, len(value)):
+        if left_brace == -1:
+            raise ValueError("The string have '}' but don't have '{'.")
         if value[index] == "{":
             if left_index == -1:
                 left_index = index
@@ -362,23 +388,45 @@ def str_translation(value:Union[str, bool], dict_name:dict, depth = MAXTRANSDEPT
             left_brace = left_brace - 1
             if left_brace == 0:
                 right_index = index
-                if left_index == -1:
-                    raise ValueError("The string have '{' but don't have'}'.")
-                index_list.append((left_index, right_index))
+                if index + 1 < len(value) and value[index + 1] == '&':
+                    depth = int(value[index + 2])
+                    brace_exp_brace = int(value[index + 3])
+                    index_list.append((left_index, right_index, depth, brace_exp_brace))
+                else:
+                    index_list.append((left_index, right_index))
                 left_index = -1
+    if left_brace > 0:
+        raise ValueError("The string have '{' but don't have '}'.")
     if index_list == []:
         return value
     value_ans = value[0:index_list[0][0]]
     index_list.append((len(value), len(value)))
     for index in range(len(index_list) - 1):
-        value_ans = value_ans + type_to_str(brace_translation(value[index_list[index][0] + 1:index_list[index][1]], dict_name, depth = depth), str) + value[index_list[index][1] + 1:index_list[index + 1][0]]
+        if len(index_list[index]) == 2:
+            value_ans = value_ans + type_to_str(brace_translation(value[index_list[index][0] + 1:index_list[index][1]], dict_name), str) + value[index_list[index][1] + 1:index_list[index + 1][0]]
+        else:
+            value_ans = value_ans + type_to_str(brace_translation(value[index_list[index][0] + 1:index_list[index][1]], dict_name, depth = index_list[index][2], brace_exp_depth = index_list[index][3]), str) + value[index_list[index][1] + 4:index_list[index + 1][0]]
     return value_ans
 
-def tobject_args_translation(key:str, value:str, dict_name:dict)->str:
+lower_bool_dict = {
+    "True": True, 
+    "False": False, 
+    "true": True, 
+    "false": False
+}
+
+def lower_bool(value:str)->str:
+    if lower_bool_dict.get(value) != None:
+        return value_to_mapvalue(lower_bool_dict[value], bool)
+    else:
+        return value
+
+def tobject_args_translation(key:str, value:str, dict_name:dict)->dict:
+    dict_ans = {}
     if isinstance(value, tuple):
         if value[2] == AUTOKEY.brace:
             if brace_translation(value[1], dict_name) == True:
-                return {key:str_translation(value[0], dict_name)}
+                dict_ans = {key:str_translation(value[0], dict_name)}
         elif value[2] == AUTOKEY.exist:
             value_list = value[1].split(",")
             isend = True
@@ -387,11 +435,15 @@ def tobject_args_translation(key:str, value:str, dict_name:dict)->str:
                     isend = False
                     break
             if isend:
-                return {key:str_translation(value[0], dict_name)}
+                dict_ans = {key:str_translation(value[0], dict_name)}
         
     else:
-        return {key:str_translation(value, dict_name)}
-    return {}
+        dict_ans =  {key:str_translation(value, dict_name)}
+
+    for key, value in dict_ans.items():
+        dict_ans[key] = lower_bool(value)
+
+    return dict_ans
 
 def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori_size:rw.frame.Coordinate)->rw.case.TObject:
     
@@ -442,14 +494,14 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
 def mapvalue_to_value(value, ntype):
     if isinstance(value, dict):
         if value["type"] == "bool":
-            value_now = ntype(True) if value["value"] == "true" else ntype(False) 
+            value_now = ntype(True) if (value["value"] == "true" or value["value"] == "True") else ntype(False) 
             if isinstance(value_now, str):
                 value_now = value_now.lower()
             return value_now
     else:
         if ntype == bool:
             value_now = str(value)
-            value_now = True if value_now == "true" else False
+            value_now = True if (value_now == "true" or value_now == "True") else False
             return value_now
         elif isinstance(ntype, tuple):
             if ntype[0] == list:
@@ -658,19 +710,158 @@ def is_tagged_object_simple(tobject:rw.case.TObject):
 def isdigit_str(s):
     return s.isdigit() or (s[0] == '-' and s[1:].isdigit())
 
+def langstr_add_str(langstr:str, str_now:str):
+    return "|".join([langstr + str_now for langstr in langstr.split("|")])
+
+def langstrlist_add(langstr_list:list):
+    langstr_matrix = [langstr.split("|") for langstr in langstr_list]
+    max_lang = max([len(langstr_list) for langstr_list in langstr_matrix])
+    langstr_ans = "|".join([''.join([langstr_matrix[i][j] for i in range(len(langstr_matrix)) if j < len(langstr_matrix[i])]) for j in range(max_lang)])
+    return langstr_ans
+
+def question(condition:bool, tip:str, chosen_list:list, break_list:set, chosen_dict:dict, isauto = False, auto = None)->bool:
+    chosen_set = set(chosen_list)
+    break_set = set(break_list)
+    chosen = "(" +  "/".join(chosen_list) + ")"
+    break_n = "(" +  "/".join(break_list) + ")"
+    break_langstr = "Otherwise the program will be terminated.|否则程序终止。"
+    tip_now = langstr_add_str(tip, chosen)
+    if len(break_list) != 0:
+        tip_now = langstrlist_add([tip_now, break_langstr])
+        tip_now = langstr_add_str(tip_now, break_n)
+    error_langstr = "Identification error, please re-enter.|识别错误，请重新输入。"
+    error_langstr = langstr_add_str(error_langstr, chosen)
+    if len(break_list) != 0:
+        error_langstr = langstrlist_add([error_langstr, break_langstr])
+        error_langstr = langstr_add_str(error_langstr, break_n)
+    while(condition):
+        if isauto:
+            standard_out(True, tip_now)
+            standard_out(True, f"Automatically enter {auto}.|自动输入{auto}。")
+            ispathsame = auto
+        else:
+            ispathsame = input(str_lang(tip_now))
+        
+        if chosen_set.issuperset([ispathsame]):
+            if chosen_dict.get(ispathsame) != None:
+                standard_out(True, chosen_dict[ispathsame])
+            if break_set.issuperset([ispathsame]):
+                standard_out(True, "Termination of Program.|程序终止。")
+                exit(0)
+            return ispathsame
+        else:
+            standard_out(True, error_langstr)
+
+def try_to_deal_id_coincide(map_now:rw.RWmap):
+    id_now = 1
+    id_mapping = {}
+    for objectGroup in map_now._objectGroup_list:
+        for tobject in objectGroup._object_list:
+            tobject_id = tobject.returnDefaultProperty("id")
+            if id_mapping.get(tobject_id) == None:
+                id_mapping[tobject_id] = [[tobject, id_now]]
+            else:
+                id_mapping[tobject_id] = id_mapping[tobject_id] + [[tobject, id_now]]
+            id_now = id_now + 1
+    map_now.resetnextobjectid(isaboutnextobjectid = False)
+
+    id_coincide_num = 0
+    id_coincide_dict = {}
+    for objectGroup in map_now._objectGroup_list:
+        for tobject in objectGroup._object_list:
+            tobject_id = tobject.returnDefaultProperty("id")
+            IDs = tobject.returnOptionalProperty(AUTOKEY.IDs)
+            IDfa = tobject.returnOptionalProperty(AUTOKEY.IDfa)
+            id_temp_list = []
+            if IDfa != None:
+                id_temp_list.append(IDfa)
+            if IDs != None:
+                ID_list = IDs.split(",")
+                for index, ID_now in enumerate(ID_list):
+                    new_ID_list = id_mapping.get(ID_now)
+                    if new_ID_list == None:
+                        continue
+                    elif len(new_ID_list) == 1:
+                        continue
+                    else:
+                        id_temp_list.append(ID_now)
+            id_coincide_num = id_coincide_num + len(id_temp_list)    
+            if id_temp_list != []:
+                    id_coincide_dict[tobject_id] = id_temp_list
+    if id_coincide_num == 0:
+        standard_out(True, f"Some confusing IDs are coincident to zero and do not need to be adjusted." + 
+            f"|混淆ID重合为0，无需调整，正常重排ID。")
+    else:
+        standard_out(True, f"Some confusing IDs are being outputing." + 
+            f"|混淆ID正在输出。")
+        for key, value in id_coincide_dict.items():
+            print(f"{key}:{value}")
+        question(True, f"Some confusing IDs have coincidence, the number:{id_coincide_num}(If the number is too large, it is recommended to fix them manually.). Do you want to correct coincidence?" + 
+            f"|混淆ID存在重合，数量为{id_coincide_num}（如果数量很多(比如几百个)，建议外部手动修复）。是否开始解决混淆？", ["y", "n"], ["n"], {}, isyes, "y")
+
+
+    id_coincide_now = 1
+    for objectGroup in map_now._objectGroup_list:
+        for tobject in objectGroup._object_list:
+            IDs = tobject.returnOptionalProperty(AUTOKEY.IDs)
+            IDfa = tobject.returnOptionalProperty(AUTOKEY.IDfa)
+            ID_list = []
+            if IDfa != None:
+                ID_list.append(IDfa)
+            if IDs != None:
+                ID_list = ID_list + IDs.split(",")
+            for index, ID_now in enumerate(ID_list):
+                new_ID_list = id_mapping.get(ID_now)
+                if new_ID_list == None:
+                    ID_list[index] = "999999"
+                elif len(new_ID_list) == 1:
+                    ID_list[index] = str(new_ID_list[0][1])
+                else:
+                    
+                    chosen_set = [str(num + 1) for num in range(len(new_ID_list))] + ["n"]
+                    chosen_dict = dict([[chosen_one, f"{chosen_one}th object has been chosen." + \
+                                            f"|第{chosen_one}个宾语已选择。"] for chosen_one in chosen_set])
+                    standard_out(True, "Tagged Objects|标记宾语:")
+                    print(tobject)
+                    standard_out(True, "objects ID Coincide|ID混淆的宾语:")
+                    for index_coi in range(len(new_ID_list)):
+                        standard_out(True, f"{index_coi + 1}th object|第{index_coi + 1}个混淆宾语:")
+                        print(new_ID_list[index_coi][0])
+                    chosen_one = question(True, 
+                                    f"({id_coincide_now}/{id_coincide_num})Please choose which object is generated by this tagged object.(ID:{ID_now})" + \
+                                    f"|({id_coincide_now}/{id_coincide_num})尝试选择哪一个宾语是该标记宾语产生的宾语。(ID:{ID_now})", 
+                                    chosen_set, ["n"], chosen_dict)
+                    ID_list[index] = str(new_ID_list[int(chosen_one) - 1][1])
+                    id_coincide_now = id_coincide_now + 1
+
+                ID_l = 0
+                if IDfa != None:
+                    IDfa_now = ID_list[0]
+                    tobject.assignOptionalProperty(AUTOKEY.IDfa, IDfa_now)
+                    ID_l = 1
+                if IDs != None:
+                    IDs_now = ",".join(ID_list[ID_l:])
+                    tobject.assignOptionalProperty(AUTOKEY.IDs, IDs_now)
+
+    id_now = 1
+    for objectGroup in map_now._objectGroup_list:
+        for tobject in objectGroup._object_list:
+            tobject.assignDefaultProperty("id", str(id_now))
+            id_now = id_now + 1
+
 def auto_func():
     parser = argparse.ArgumentParser(
         description='Objects of Triggers are automatically processed by information\'s mode.\n' + \
                     '触发器(Triggers)的宾语将会根据信息变量进行自动化处理。')
     parser.add_argument('map_path', action = "store", metavar = 'file', type=str, 
                         help='The input path of RW map file.\n' + \
-                            '铁锈地图文件的输入路径')
+                            '铁锈地图文件的输入路径。')
     parser.add_argument("--infopath", 
                         action = "store", metavar = "file", type = str, nargs = "?", 
                         required = False, default = current_file_path[:-8] + "_data", 
                         const = current_file_path[:-8] + "_data", 
                         help = "The file's path which has information's mode variable(python package with config.json)|auto/_data\n" + \
-                               "信息变量的文件路径（python包，内含config.json）|auto/_data"
+                               "信息变量的文件路径。（python包，内含config.json）|auto/_data"
                         )
     parser.add_argument("--infovar", 
                         action = "store", metavar = "name", type = str, nargs = "?", 
@@ -685,7 +876,7 @@ def auto_func():
                         required = False, default = "|", 
                         const = "|", 
                         help = "The output path of RW map file.|input path\n" + \
-                               "铁锈地图文件的输出路径"
+                               "铁锈地图文件的输出路径。"
                         )
 
     parser.add_argument("-d", "--delete", 
@@ -722,11 +913,15 @@ def auto_func():
     
     parser.add_argument("-c", "--citetrans", 
                         action = 'store_true', help = 'Cite translation.(other objects)\n' + \
-                            "对普通宾语进行引用翻译")
+                            "对普通宾语进行引用翻译。")
     
     parser.add_argument("-y", "--isyes", 
                         action = 'store_true', help = 'Requests are always y.\n' + \
                             "所有输入请求默认为y，继续执行。")
+    
+    parser.add_argument("--check", 
+                        action = 'store_true', help = 'Perform a detailed inspection. This option has a great impact on performance\n' + \
+                            "进行细致的检查，对性能有很大影响。")
     
     parser.add_argument("--language", 
                         action = "store", metavar = "language", type = str, nargs = "?", 
@@ -737,6 +932,9 @@ def auto_func():
                         )
 
     dev_null = open(os.devnull, "w")
+
+    time_all_i = time.time()
+
     global aeval
 
     aeval = Interpreter(err_writer = dev_null, writer = dev_null, user_symbols = USER_SYMBOLS)
@@ -771,9 +969,12 @@ def auto_func():
     global isresetid
     isresetid = args.resetid
     iscitetrans = args.citetrans
+    global isyes
     isyes = args.isyes
     global language
     language = args.language
+    global isquick
+    isquick = not args.check
 
     if not (language_set.issuperset([language]) or language == "default"):
         print(f"Language is not \"ch\" or \"eg\".({language})\n" + 
@@ -793,24 +994,22 @@ def auto_func():
         json.dump(config_dict, f)
 
     debug_pdb()
+
+    time_ini_i = time.time()
+
     standard_out_underline(isverbose, "Initialization|初始化")
 
     standard_out(isverbose, "Map data is being imported...|地图数据载入...")
 
-    while(input_path == output_path and not isyes):
-        ispathsame = input(str_lang("The input path is the same as output path. The source file will be overwritten. Do you want to continue?(y/n)" + \
-                           "|输入地图路径和输出地图路径相同。原文件将被覆盖。是否要继续？(y/n)"))
-        if ispathsame == "n":
-            standard_out("Termination of Program.|程序终止")
-            exit(0)
-        elif ispathsame != "y":
-            standard_out(True, "Identification error, please re-enter.(y/n)|识别错误，请重新输入。(y/n)")
-            continue
-        else:
-            break
+    question(input_path == output_path, "The input path is the same as output path. The source file will be overwritten. Do you want to continue?" + \
+             "|输入地图路径和输出地图路径相同。原文件将被覆盖。是否要继续？", ["y", "n"], ["n"], {}, isyes, "y")
 
-
-    map_now = rw.RWmap.init_mapfile(f'{input_path}')
+    try:
+        map_now = rw.RWmap.init_mapfile(f'{input_path}')
+    except FileNotFoundError:
+        standard_error("RW map file is not found, please check your input path.|铁锈输入地图文件未找到，请仔细检查地图路径。", 24)
+    except et.ParseError:
+        standard_error("File parsing error, the file may not be XML file. Maybe it's not RW map file.|地图文件解析错误，不符合xml格式。也许导入的不是铁锈地图。", 25)
 
     info_doids_dict = {}
     info_dict = {}
@@ -818,26 +1017,62 @@ def auto_func():
     
     dtobject = []
 
-    id_to_tobject:dict[int, rw.case.TObject] = {}
-
     info_tagged_objects_exist = []
 
     standard_out(isverbose, "The maximum ID of object in RW maps is resetting...|铁锈地图宾语最大ID重置中...")
-    map_now.resetnextobjectid()
+    map_now.resetnextobjectid(isaboutnextobjectid = False)
 
     standard_out(isverbose, "ID mapping is being established...|宾语ID映射正在建立...")
-    for tobject in map_now.iterator_object_s():
-        tobid = tobject.returnDefaultProperty("id")
-        if id_to_tobject.get(tobid) != None:
-            ox = id_to_tobject.get(tobid).returnDefaultProperty("x")
-            oy = id_to_tobject.get(tobid).returnDefaultProperty("y")
-            oname = id_to_tobject.get(tobid).returnDefaultProperty("name")
-            tobject_x = tobject.returnDefaultProperty("x")
-            tobject_y = tobject.returnDefaultProperty("y")
-            tobject_name = tobject.returnDefaultProperty("name")
-            standard_error(f"The IDs are coincident and the mapping cannot be performed.(original name:{oname}, original x:{ox}, original y:{oy})" + 
-                           f"|宾语ID发生重合，ID映射无法进行。(重合 名称:{oname}, 重合 x:{ox}, 重合 y:{oy})", 11, tobid, tobject_name, tobject_x, tobject_y)
-        id_to_tobject[tobid] = tobject
+    
+    id_to_tobject_do = True
+    debug_do_num = 0
+    while(id_to_tobject_do):
+        if debug_do_num == 2:
+            print("程序出现bug，请联系作者。")
+            exit(0)
+        id_to_tobject_do = False
+        id_to_tobject:dict[int, rw.case.TObject] = {}
+        for tobject in map_now.iterator_object_s():
+            tobid = tobject.returnDefaultProperty("id")
+            if id_to_tobject.get(tobid) != None:
+                ox = id_to_tobject.get(tobid).returnDefaultProperty("x")
+                oy = id_to_tobject.get(tobid).returnDefaultProperty("y")
+                oname = id_to_tobject.get(tobid).returnDefaultProperty("name")
+                tobject_x = tobject.returnDefaultProperty("x")
+                tobject_y = tobject.returnDefaultProperty("y")
+                tobject_name = tobject.returnDefaultProperty("name")
+
+
+                istriggerauto = False
+                for tobject in map_now.iterator_object_s():
+                    if tobject.returnOptionalProperty(AUTOKEY.IDs) != None:
+                        istriggerauto = True
+                        break
+
+                if not istriggerauto:
+                    question(True, "The IDs are coincident and the mapping cannot be performed. And the map has not executed triggerauto. Would you want to rearrange ID?" + \
+                            "|宾语ID发生重合，ID映射无法进行。且尚未自动化。是否重排ID？", ["y", "n"], ["n"], {}, 
+                            isyes, "y")
+                    standard_out(isverbose, "IDs are arranging in the map...|铁锈地图宾语ID重排中...")
+                    map_now.resetid()
+                else:
+                    standard_out(True, f"The IDs are coincident and the mapping cannot be performed. And the map has executed triggerauto. Maybe object ID adjustment is required." + 
+                                f"|宾语ID发生重合，ID映射无法进行。且已经进行过宾语自动化。可能需要手动调整。")
+                    try_to_deal_id_coincide(map_now)
+
+                if input_path != output_path:
+                    isrestore = question(True, "Is the map saved back to the input path after the objects ID is rearranged?" + \
+                                            "|宾语ID重排后的地图是否保存回原文件？", ["y", "n"], [], 
+                                            {"n": "The map doesn't save in input path. Continue.|原文件未保存，程序继续。"}, 
+                                            isyes, "y")
+                    if isrestore == "y":
+                        standard_out(isverbose, "The map which objects ID is rearranged is restoring...|ID重排地图正在保存中...")
+                        map_now.write_file(input_path)
+                
+                id_to_tobject_do = True
+                break
+            id_to_tobject[tobid] = tobject
+        debug_do_num = debug_do_num + 1
 
     standard_out(isverbose, "The info object is rearranging...|info宾语重排中...")
     num_info = len(info_now_pre)
@@ -877,6 +1112,11 @@ def auto_func():
         info[AUTOKEY.info_args] = info_args_temp
         if while_i == infolen + 1:
             standard_error(f"Info input dependence loop error.({key})|info宾语独立性发生循环。({key})", 5, None, None, None, None)
+
+    time_ini_e = time.time()
+    time_ini = time_ini_e - time_ini_i
+
+    time_allinfo_i = time.time()
 
     standard_out_underline(isverbose, "Info objects precedure|info宾语处理")
 
@@ -939,8 +1179,12 @@ def auto_func():
                 # add info_args
                 for key_now, ntype in info[AUTOKEY.info_args].items():
                     if tobject_temp.returnOptionalProperty(key_now) != None:
-
-                        info_dict_now[key_now] = mapvalue_to_value(tobject_temp.returnOptionalProperty(key_now), ntype)
+                        try:
+                            info_dict_now[key_now] = mapvalue_to_value(tobject_temp.returnOptionalProperty(key_now), ntype)
+                        except ValueError:
+                            standard_error(f"An argument of info is wrong, maybe not a number.(key:{key_now}, value:\"{tobject_temp.returnOptionalProperty(key_now)}\", type:{ntype})" + \
+                                           f"|info 数据读取错误，可能是本来填数字的地方不是数字。(参数:{key_now}, 参数内容:\"{tobject_temp.returnOptionalProperty(key_now)}\", 类型:{ntype})", 
+                                           27, tobject_id, info_name, tobject_x, tobject_y)
                         tobject_temp.deleteOptionalProperty(key_now)
                         if default_brace != None and default_brace.issuperset([key_now]):
                             default_brace.remove(key_now)
@@ -956,7 +1200,7 @@ def auto_func():
                         info_dict_now[key_now] = brace_translation(value, info_dict_now)
                 if default_brace != None:
                     for key_now in default_brace:
-                        info_dict_now[key_now] = brace_translation(info_dict_now[key_now], info_dict_now, ones = True)
+                        info_dict_now[key_now] = brace_translation(info_dict_now[key_now], info_dict_now, brace_exp_depth = 1)
 
 
                 info[AUTOKEY.isinfo_sub] = (info.get(AUTOKEY.isinfo_sub) != None and info[AUTOKEY.isinfo_sub])
@@ -992,7 +1236,12 @@ def auto_func():
                             ifvar_exp = brace_translation(operation_now[AUTOKEY.ifvar], object_dict)
                             if isinstance(ifvar_exp, str) or (not bool(ifvar_exp)):
                                 index = operation_index[operation_now[str_translation(AUTOKEY.ifend_tag, object_dict)]]
-                        
+
+                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.errorif:
+                            if isquick:
+                                index = operation_index[operation_now[str_translation(AUTOKEY.ifend_tag, object_dict)]]
+                
+
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset:
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.totype:
@@ -1002,9 +1251,10 @@ def auto_func():
                                         object_dict[str_translation(key_n, object_dict)] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_expression:
                             depth_now = MAXTRANSDEPTH if operation_now.get(AUTOKEY.depth) == None else operation_now[AUTOKEY.depth]
+                            brace_exp_depth_now = MAXTRANSDEPTH if operation_now.get(AUTOKEY.brace_exp_depth) == None else operation_now[AUTOKEY.brace_exp_depth]
                             for key_n, value in operation_now.items():
-                                if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.depth:
-                                    object_dict[str_translation(key_n, object_dict, depth = depth_now)] = brace_translation(value, object_dict)
+                                if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.depth and key_n != AUTOKEY.brace_exp_depth:
+                                    object_dict[str_translation(key_n, object_dict)] = brace_translation(value, object_dict, depth = depth_now, brace_exp_depth = brace_exp_depth_now)
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.changetype:
                             for key_n in operation_now[AUTOKEY.keyname_list]:
                                 str_trans = str_translation(key_n, object_dict)
@@ -1015,7 +1265,6 @@ def auto_func():
                                 if key_n != AUTOKEY.operation_type:
                                     object_dict[str_translation(key_n, object_dict)] = object_dict.get(value) != None
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_id:
-
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.real_idexp:
                                     key_trans = str_translation(key_n, object_dict)
@@ -1026,13 +1275,13 @@ def auto_func():
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeadd_args:
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type:
-                                    value_brace = brace_translation(value, object_dict, ones = True)
+                                    value_brace = brace_translation(value, object_dict, brace_exp_depth = 1)
                                     value_brace = aeval_globals(value_brace)
                                     info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.args].append((str_translation(key_n, object_dict), value_brace))
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeadd_opargs:
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type:
-                                    value_brace = brace_translation(value, object_dict, ones = True)
+                                    value_brace = brace_translation(value, object_dict, brace_exp_depth = 1)
                                     value_brace = (value_brace[0], aeval_globals(value_brace[1]))
                                     info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.opargs][str_translation(key_n, object_dict)] = value_brace
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typedelete_optional:
@@ -1141,9 +1390,10 @@ def auto_func():
                         temp_pri = OrderedDict(info_dict_now)
                         temp_pri.pop("tobject")
                     standard_out(isverbose, temp_pri)
-                
+
                 for key_now in info_dict.keys():
-                    if key_now.startswith(info_dict_now[AUTOKEY.prefix]) or info_dict_now[AUTOKEY.prefix].startswith(key_now):
+                    if (key_now.startswith(info_dict_now[AUTOKEY.prefix]) and not info_dict_now[AUTOKEY.isprefixseg]) or \
+                        (info_dict_now[AUTOKEY.prefix].startswith(key_now) and not info_dict[key_now][AUTOKEY.isprefixseg]):
                         standard_error(f"An info's prefix is the prefix of another.(name1:({info_dict[key_now][AUTOKEY.info_name]}), prefix1({key_now}); name2:({info_dict_now[AUTOKEY.info_name]})), prefix2:({info_dict_now[AUTOKEY.prefix]})" + 
                                        f"|一个info宾语的前缀是另一个info宾语的前缀。(名称1:({info_dict[key_now][AUTOKEY.info_name]}), 前缀1({key_now}); 名称2:({info_dict_now[AUTOKEY.info_name]})), 前缀2:({info_dict_now[AUTOKEY.prefix]})", 22, tobject_id, info_name, tobject_x, tobject_y)
 
@@ -1162,6 +1412,11 @@ def auto_func():
         tobject_id = tobject.returnDefaultProperty("id")
         standard_out(isverbose, f"An info object(ID:{tobject_id}, name:{tobject.returnDefaultProperty(rw.const.OBJECTDE.name)}) has been deleted..." + 
                      f"|一个info宾语(ID:{tobject_id}, 名称:{tobject.returnDefaultProperty(rw.const.OBJECTDE.name)})已经删除了")
+
+
+    time_allinfo_e = time.time()
+    time_allinfo = time_allinfo_e - time_allinfo_i
+    time_tagged_i = time.time()
 
     standard_out_underline(isverbose, "Tagged objects procedure|标记宾语处理")
 
@@ -1182,17 +1437,21 @@ def auto_func():
     tobject_list = [tobject for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                            rw.const.OBJECTDE.name: r".+"}) if is_tagged_object_simple(tobject) and (tobject.returnOptionalProperty(AUTOKEY.IDdep) == None or tobject.returnOptionalProperty(AUTOKEY.IDdep) == '0')]
     index_tobject = 0
+
+    time_dif_info = {}
+    time_info = {}
+
     while index_tobject < len(tobject_list):
         tobject = tobject_list[index_tobject]
         insert_index = index_tobject + 1
         index_tobject = index_tobject + 1
-
 
         tobject_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
         tobject_id = tobject.returnDefaultProperty("id")
         tobject_x = tobject.returnDefaultProperty("x")
         tobject_y = tobject.returnDefaultProperty("y")
         ischange = False
+
         for key, info in info_dict.items():
             prefix_now = info[AUTOKEY.prefix]
             info_key = info[AUTOKEY.info]
@@ -1212,7 +1471,7 @@ def auto_func():
                 object_dict[AUTOKEY.tobject_id] = tobject_id
                 object_dict[AUTOKEY.tobject_name] = tobject_name
 
-                object_dict.update(get_args(myinfo, tobject_name_to_solve, tobject, info_tobject))
+                object_dict.update(get_args(myinfo, tobject_name_to_solve, tobject, info_tobject, object_dict))
                 
                 if info.get(AUTOKEY.info_prefix) != None:
                     for info_pre in info[AUTOKEY.info_prefix]:
@@ -1220,8 +1479,18 @@ def auto_func():
                         object_dict.update(info_temp)
                 ischange = True
                 break
+        
+        if not ischange and (tobject.returnOptionalProperty(AUTOKEY.IDdep) != None and int(tobject.returnOptionalProperty(AUTOKEY.IDdep)) > 0):
+            tobject_info = id_to_tobject[tobject.returnOptionalProperty(AUTOKEY.IDfa)]
+            info_id = tobject_info.returnDefaultProperty("id")
+            info_name = tobject_info.returnDefaultProperty("name")
+            info_x = tobject_info.returnDefaultProperty("x")
+            info_y = tobject_info.returnDefaultProperty("y")
+            standard_error(f"A tree tagged object produced by tree tagged object cannot match any info. Please check if the prefix is corret in the name(properties) of tree_info.(father ID:{info_id}, father name:{info_name}, father coordinate({info_x}, {info_y}))" + 
+                           f"|生成的标记宾语无法匹配，请查找对应tree_info name中前缀是否正确。(上级 ID:{info_id}, 上级 名称:{info_name}, 上级 坐标({info_x}, {info_y}))", 
+                           26, tobject_id, tobject_name, tobject_x, tobject_y)
         if ischange:
-
+            time_tag_i = time.time()
             isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
             isdelete_all_sym = bool(re.match(AUTOKEY.delete_all_symbol, tobject_name)) or info[AUTOKEY.isdelete_all_sym]
 
@@ -1252,7 +1521,7 @@ def auto_func():
             if myinfo.get(AUTOKEY.ids) != None:
                 for thing in myinfo[AUTOKEY.ids]:
                     
-                    idprefix = brace_translation(thing[0], object_dict, ones = True)
+                    idprefix = brace_translation(thing[0], object_dict, brace_exp_depth = 1)
                     if ids_now_dict.get(idprefix) == None:
                         ids_now_dict[idprefix] = 1
                     idnow_list = tobject.returnOptionalProperty(idprefix)
@@ -1310,6 +1579,7 @@ def auto_func():
 
                 if operation_now[AUTOKEY.operation_type] == AUTOKEY.object:
                     
+
                     object_now = get_tobject(operation_now, object_dict, ori_pos, ori_size)
 
                     if object_now != None:
@@ -1356,7 +1626,9 @@ def auto_func():
                     ifvar_exp = brace_translation(operation_now[AUTOKEY.ifvar], object_dict)
                     if isinstance(ifvar_exp, str) or (not bool(ifvar_exp)):
                         index = operation_index[operation_now[str_translation(AUTOKEY.ifend_tag, object_dict)]]
-                
+                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.errorif:
+                    if isquick:
+                        index = operation_index[operation_now[str_translation(AUTOKEY.ifend_tag, object_dict)]]
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset:
                     for key, value in operation_now.items():
                         if key != AUTOKEY.operation_type and key != AUTOKEY.totype:
@@ -1366,9 +1638,10 @@ def auto_func():
                                 object_dict[str_translation(key, object_dict)] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_expression:
                             depth_now = MAXTRANSDEPTH if operation_now.get(AUTOKEY.depth) == None else operation_now[AUTOKEY.depth]
+                            brace_exp_depth_now = MAXTRANSDEPTH if operation_now.get(AUTOKEY.brace_exp_depth) == None else operation_now[AUTOKEY.brace_exp_depth]
                             for key_n, value in operation_now.items():
-                                if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.depth:
-                                    object_dict[str_translation(key_n, object_dict, depth = depth_now)] = brace_translation(value, object_dict)
+                                if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.depth and key_n != AUTOKEY.brace_exp_depth:
+                                    object_dict[str_translation(key_n, object_dict)] = brace_translation(value, object_dict, depth = depth_now, brace_exp_depth = brace_exp_depth_now)
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.changetype:
                     for key in operation_now[AUTOKEY.keyname_list]:
                         str_trans = str_translation(key, object_dict)
@@ -1379,7 +1652,7 @@ def auto_func():
                         if key != AUTOKEY.operation_type:
                             object_dict[str_translation(key, object_dict)] = object_dict.get(value) != None
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.error:
-                    standard_error(str_translation(operation_now[AUTOKEY.error_info]), -1, tobject_id, tobject_name, tobject_x, tobject_y)
+                    standard_error(str_translation(operation_now[AUTOKEY.error_info], object_dict), -1, tobject_id, tobject_name, tobject_x, tobject_y)
                 elif operation_now[AUTOKEY.operation_type] == AUTOKEY.pdb_pause:
                     debug_pdb(object_dict)
                 index = index + 1
@@ -1399,6 +1672,7 @@ def auto_func():
                             dtobject_id.add(idnow)
 
             if object_dict.get(AUTOKEY.cite_name) != None and (not (isdelete_all or isdelete_all_sym or isdelete_sym)):
+                
                 for key, value in object_dict.items():
                     if cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + key) != None:
                         origin_id = cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + AUTOKEY.tobject_id)
@@ -1407,7 +1681,11 @@ def auto_func():
                                        f"|标记宾语引用(cite_name)发生重合。(重合 ID:({origin_id}), 重合名称:({origin_name}), 引用名称(cite_name):{object_dict[AUTOKEY.cite_name]})", 
                                        14, tobject_id, tobject_name, tobject_x, tobject_y)
                     cite_object_dict[object_dict[AUTOKEY.cite_name] + "." + key] = deepcopy(value)
-      
+            
+            time_tag_e = time.time()
+            time_tag = time_tag_e - time_tag_i
+            time_dif_info[prefix_now] = time_tag + (time_dif_info[prefix_now] if time_dif_info.get(prefix_now) != None else 0)
+            time_info[info[AUTOKEY.info_key]] = time_tag + (time_info[info[AUTOKEY.info_key]] if time_info.get(info[AUTOKEY.info_key]) != None else 0)
 
     standard_out(isverbose and (isdelete_all or isdelete), "Some objects are being deleted...|需要被删除的宾语正在回收...")
     standard_out(isverbose and (isdelete_d), "Some objects are being deleted if eligible...|需要被删除的宾语正在回收，如有必要...")
@@ -1428,6 +1706,10 @@ def auto_func():
                 value_now = mapvalue_to_value_basic(value)
                 if not isinstance(value_now, bool):
                     tobject.assignOptionalProperty(key, brace_one_translation_cycle(value_now, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite))
+
+    time_tagged_e = time.time()
+    time_tagged = time_tagged_e - time_tagged_i
+    time_rea_i = time.time()
 
     standard_out_underline(isverbose, "Rearrangement and output|宾语重排和地图输出")
     
@@ -1467,7 +1749,7 @@ def auto_func():
                 standard_error(f"The IDs are coincident and the mapping cannot be performed." + 
                                f"|宾语ID发生重合，ID映射无法进行。", 
                                11, tobid, tobject_name, tobject_x, tobject_y)
-            
+
             id_mapping[tobid] = str(id_now)
             id_now = id_now + 1
 
@@ -1481,20 +1763,49 @@ def auto_func():
                     ids_now_l = [id_mapping[ids_nown] for ids_nown in ids_now_l]
                     ids_now = f"{AUTOKEY.IDs_seg}".join(ids_now_l)
                     tobject.assignOptionalProperty(AUTOKEY.IDs, ids_now)
-                
+
                 idfa_now = tobject.returnOptionalProperty(AUTOKEY.IDfa)
+
                 if idfa_now != None:
                     tobject.assignOptionalProperty(AUTOKEY.IDfa, id_mapping[idfa_now])
 
             tobject.assignDefaultProperty("id", str(id_now))
             id_now = id_now + 1
 
-        map_now.resetnextobjectid(isaboutnextobjectid = False)
+    map_now.resetnextobjectid(isaboutnextobjectid = False)
 
-    map_now.resetnextobjectid()
+    time_rea_e = time.time()
+    time_rea = time_rea_e - time_rea_i
+
+
 
     standard_out(isverbose, "New RW map is being establishing...|新的铁锈地图正在建立...")
     map_now.write_file(output_path)
+
+    time_all_e = time.time()
+    time_all = time_all_e - time_all_i
+
+    standard_out_underline(isverbose, "Time statistics|时间统计")
+
+    standard_out(isverbose, f"Total time:{time_all:.1f}s|运行总时间:{time_all:.1f}s")
+    standard_out(isverbose, f"Initialization time:{time_ini:.1f}s|初始化处理时间:{time_ini:.1f}s")
+    standard_out(isverbose, f"Info objects process time:{time_allinfo:.1f}s|info宾语处理时间:{time_allinfo:.1f}s")
+    standard_out(isverbose, f"Tagged objects process time:{time_tagged:.1f}s|标记宾语处理时间:{time_tagged:.1f}s")
+    standard_out(isverbose, f"Objects rearrangement time:{time_rea:.1f}s|宾语重组时间:{time_rea:.1f}s")
+
+    standard_out(isverbose, f"Tagged objects time with different prefix:|不同前缀标记宾语的运行时间:")
+
+    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in time_info.items()]
+    langstr_time = langstrlist_add(langstr_time_list)
+    langstr_time = "|".join(["(" + langtime[:-2] + ")" for langtime in langstr_time.split("|")])
+    standard_out(isverbose, langstr_time)
+
+    standard_out(isverbose, f"Tagged objects time with different prefix:|不同前缀标记宾语的运行时间:")
+
+    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in time_dif_info.items()]
+    langstr_time = langstrlist_add(langstr_time_list)
+    langstr_time = "|".join(["(" + langtime[:-2] + ")" for langtime in langstr_time.split("|")])
+    standard_out(isverbose, langstr_time)
 
     dev_null.close()
 

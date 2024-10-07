@@ -205,6 +205,10 @@ class TagRectangle(Rectangle):
 
     def tag(self)->str:
         return self._tag
+
+    @classmethod
+    def init_ae(cls, tag:str, initialCoordinate:Coordinate, endCoordinate:Coordinate):
+        return cls(tag, Rectangle.init_ae(initialCoordinate, endCoordinate))
     
     def rectangle(self)->Rectangle:
         return Rectangle(deepcopy(self._initialCoordinate), deepcopy(self._addCoordinate))

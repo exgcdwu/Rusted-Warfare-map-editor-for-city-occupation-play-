@@ -102,6 +102,18 @@ class RWmap(ElementOri):
             maxid_now = max(maxid_now, objectGroup.max_id() + 1)
         self.changenextobjectid(maxid_now)
 
+    def resetid(self)->None:
+        id_to_tobject = {}
+        id_now = 1
+        for objectGroup in self._objectGroup_list:
+            for tobject in objectGroup._object_list:
+                if id_to_tobject.get(tobject.returnDefaultProperty("id")) != None:
+                    print("coincide ID|重合 ID:" + tobject.returnDefaultProperty("id"))
+                id_to_tobject[tobject.returnDefaultProperty("id")] = tobject
+                tobject.assignDefaultProperty("id", str(id_now))
+                id_now = id_now + 1
+        self.resetnextobjectid(isaboutnextobjectid = False)
+
     def tileset_name_list(self)->list[str]:
         return [tileset.name() for tileset in self._tileset_list if tileset.isexist()]
     
@@ -113,20 +125,14 @@ class RWmap(ElementOri):
 
     def get_layer_s(self, name:str)->case.Layer:
         layer = utility.get_ElementOri_from_list_by_name_s(self._layer_list, name)
-        if layer == None:
-            raise KeyError("layer name:" + name + " not found")
         return layer
         
     def get_tileset_s(self, name:str)->case.TileSet:
         tileset = utility.get_ElementOri_from_list_by_name_s(self._tileset_list, name)
-        if tileset == None:
-            raise KeyError("tileset name:" + name + " not found")
         return tileset
         
     def get_objectgroup_s(self, name:str)->case.ObjectGroup:
         objectgroup = utility.get_ElementOri_from_list_by_name_s(self._objectGroup_list, name)
-        if objectgroup == None:
-            raise KeyError("objectgroup name:" + name + " not found")
         return objectgroup
     
     def add_tileset_fromTileSet(self, tileset:case.TileSet)->None:

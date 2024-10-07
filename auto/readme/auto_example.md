@@ -2,617 +2,558 @@
 
 - [宾语自动化示例说明](#宾语自动化示例说明)
   - [目标](#目标)
-  - [下载与初始化（手机）](#下载与初始化手机)
-  - [开始使用](#开始使用)
-  - [info宾语和标志宾语简单介绍](#info宾语和标志宾语简单介绍)
-  - [例子](#例子)
-    - [产生建筑(版本 \>= 1.6.5)](#产生建筑版本--165)
-      - [info宾语-建筑](#info宾语-建筑)
-      - [标志宾语-建筑](#标志宾语-建筑)
-    - [产生城市(版本 \>= 1.6.5)](#产生城市版本--165)
-      - [info宾语-城市](#info宾语-城市)
-      - [标志宾语-城市](#标志宾语-城市)
-    - [队伍检测（检测内容相同，但检测队伍不同）(版本\>=1.6.5)](#队伍检测检测内容相同但检测队伍不同版本165)
-      - [info宾语-队伍检测](#info宾语-队伍检测)
-      - [标志宾语-队伍检测](#标志宾语-队伍检测)
-      - [引用的说明-队伍检测](#引用的说明-队伍检测)
-    - [城市+队伍检测（版本\>=1.6.5）](#城市队伍检测版本165)
-      - [info宾语-城市+队伍检测](#info宾语-城市队伍检测)
-      - [标志宾语-城市+队伍检测](#标志宾语-城市队伍检测)
-      - [引用的说明-城市+队伍检测](#引用的说明-城市队伍检测)
-    - [城市+队伍检测+城市文本颜色变化（版本\>=1.6.5）](#城市队伍检测城市文本颜色变化版本165)
-      - [info宾语-城市+队伍检测+城市文本颜色变化](#info宾语-城市队伍检测城市文本颜色变化)
-      - [标志宾语-城市+队伍检测+城市文本颜色变化](#标志宾语-城市队伍检测城市文本颜色变化)
-      - [引用的说明-城市+队伍检测+城市文本颜色变化](#引用的说明-城市队伍检测城市文本颜色变化)
-    - [城市+本地额外塔防（版本\>=1.6.5）](#城市本地额外塔防版本165)
-      - [标志宾语-城市+本地额外塔防](#标志宾语-城市本地额外塔防)
-      - [引用的说明-城市+本地额外塔防](#引用的说明-城市本地额外塔防)
-    - [占领区刷兵(版本\>=1.6.5)](#占领区刷兵版本165)
-      - [info宾语-占领区刷兵](#info宾语-占领区刷兵)
-      - [标志宾语-占领区刷兵](#标志宾语-占领区刷兵)
-      - [引用的说明-占领区刷兵](#引用的说明-占领区刷兵)
-      - [如果引用的不是teamDetect\_info，而是内部有teamDetect\_info的tree\_info?](#如果引用的不是teamdetect_info而是内部有teamdetect_info的tree_info)
-      - [如果换成普通刷兵？](#如果换成普通刷兵)
+  - [地图示例格式](#地图示例格式)
+  - [万能速查](#万能速查)
+  - [1.塔防建筑，无文本](#1塔防建筑无文本)
+    - [所需info和标记-塔防建筑](#所需info和标记-塔防建筑)
+    - [前缀-塔防建筑](#前缀-塔防建筑)
+    - [必填参数-塔防建筑](#必填参数-塔防建筑)
+    - [选填参数-塔防建筑](#选填参数-塔防建筑)
+    - [info中可改变的参数-塔防建筑](#info中可改变的参数-塔防建筑)
+    - [示例-塔防建筑](#示例-塔防建筑)
+  - [2.城市建筑，有文本](#2城市建筑有文本)
+    - [所需info和标记-城市建筑](#所需info和标记-城市建筑)
+    - [前缀-城市建筑](#前缀-城市建筑)
+    - [必填参数-城市建筑](#必填参数-城市建筑)
+    - [选填参数-城市建筑](#选填参数-城市建筑)
+    - [info中可改变的参数-城市建筑](#info中可改变的参数-城市建筑)
+    - [示例-城市建筑](#示例-城市建筑)
+  - [3.城市建筑，有队伍检测，有文本](#3城市建筑有队伍检测有文本)
+    - [所需info和标记-城市队伍](#所需info和标记-城市队伍)
+    - [前缀-城市队伍](#前缀-城市队伍)
+    - [必填参数-城市队伍](#必填参数-城市队伍)
+    - [选填参数-城市队伍](#选填参数-城市队伍)
+    - [info中可改变的参数-城市队伍](#info中可改变的参数-城市队伍)
+    - [示例-城市队伍](#示例-城市队伍)
+  - [4.附属建筑](#4附属建筑)
+    - [所需info和标记-附属建筑](#所需info和标记-附属建筑)
+    - [前缀-附属建筑](#前缀-附属建筑)
+    - [必填参数-附属建筑](#必填参数-附属建筑)
+    - [选填参数-附属建筑](#选填参数-附属建筑)
+    - [info中可改变的参数-附属建筑](#info中可改变的参数-附属建筑)
+    - [示例-附属建筑](#示例-附属建筑)
+  - [5.多文本城市](#5多文本城市)
+    - [所需info和标记-多文本城市](#所需info和标记-多文本城市)
+    - [前缀-多文本城市](#前缀-多文本城市)
+    - [必填参数-多文本城市](#必填参数-多文本城市)
+    - [选填参数-多文本城市](#选填参数-多文本城市)
+    - [info中可改变的参数-多文本城市](#info中可改变的参数-多文本城市)
+    - [示例-多文本城市](#示例-多文本城市)
   - [注意事项](#注意事项)
-    - [引用(cite\_name)要求](#引用cite_name要求)
-    - [键值触碰关键词](#键值触碰关键词)
+    - [team](#team)
+    - [时间](#时间)
 
 ## 目标
 
-宾语自动化的急速入门。
+提供可在地图中直接复制粘贴的info宾语及其用法，为[宾语自动化地图示例](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/example/auto_example.tmx)提供注释。
 
-## 下载与初始化（手机）
+如果想学习宾语自动化，请阅读[宾语自动化引导教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/readme/auto_guide.md)。
 
-下载群文件中的 termux 并安装。打开后可以看到一个黑色的命令行界面，之后需要在这个界面操作。
+如果想阅读宾语自动化的所有具体参数和详细注意事项，请阅读[宾语自动化参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/readme/auto_tutorial.md)。
 
-termux python环境及包下载（需要一段时间，保持网络畅通）（中间出现的提问选项，全部输入y再回车）：
-`感谢kend在使用termux安装python包方面的帮助`
+## 地图示例格式
 
-    pkg update -y
-    pkg install -y python
-    pkg install -y python-numpy
-    pkg install -y python-pillow
-    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple #（如果清华镜像不可以，换成别的镜像比如https://pypi.mirrors.ustc.edu.cn/simple也行）
-    pip install asteval
-    pip install regex # 1.6.3新加入
-    pip install rwmapeditor-exgcdwu==1.6.8 --no-deps
+地图触发层宾语分为行和列进行处理。每一行都声明了一种宾语自动化格式。同一列只能放置同一种info或者放置标记宾语。当不同行发生共用info宾语时，该行对应列写明行号(mapText)，表明要用的info宾语的行号。第一行第一列有序号。第二列有该行自动化格式的名称。mapText名称简单介绍作用和参数。第二行有该info的名称，或者该列的意义。列号会有重合，需要进一步明确宾语类型。分为i(info宾语)/控（控制台标记宾语，不可操作）/附（附属标记宾语，可操作）/标（标记宾语，实际效果）。因此"i/控/附/标(行号, 列号)"是该info或标记宾语的坐标。
 
-需要获取读取存储权限：
+如果想将某一行的info导入，请导入所有该行的info，并将该行对应列表明序号的对应行的info一并复制（如果对应info有多个，可以有第三个坐标表示取走第几个）。可以将所有info复制下来放入地图，这样可以使用所有自动化模式。info宾语并不会追求简洁，将尽力将所有可能的城夺自动化情况纳入考虑，主要用于实际使用。下文并不会详细解释这些info的原理，仅介绍用法和可能修改的必要参数。想要了解原理请阅读[引导教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/readme/auto_guide.md)。如果想对参数进行细致修改，请查找[参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/readme/auto_tutorial.md)。
 
-    termux-setup-storage
+想要获得实际地图，必须添加-c选项。建议添加-D选项。
 
-之后就可以使用termux使用triggerauto处理地图文件了。
+## 万能速查
 
-如果想要更改版本，使用如下命令行。
+塔防t(必填参数:建筑的初始队伍，选填参数:,i建筑初始刷新，默认0s，,r建筑刷新速度，默认20s，,c文本颜色，默认white，,s文本大小，默认为7)(要求i小于r，时间必须以s为单位)
 
-    pip uninstall -y rwmapeditor-exgcdwu
-    pip install rwmapeditor-exgcdwu==1.6.1 --no-deps #（新版本，大于等于1.6.1）
+万能城市c(必填参数:城市初始队伍，城市队伍检测引用，城市名称，选填参数:,i建筑初始刷新，默认0s，,r建筑刷新时间，默认20s，,u城市单位，默认为补给站，,s文本大小，默认为7，,e队伍检测刷新时间，默认1s，,c启用多个城市颜色，,x启用多个城市颜色，A队的文本(可以没有)，v启用多个城市颜色，B队的文本(可以没有)，,g是否有城防，,f城防刷新的f_cite，,n城防中立时是否刷新，,o是否启动onlyBuildings检测，,h城防的单位，默认为虫塔，,w城防一次性，,m不再添加队伍检测（除虫塔外功能丢失），,y城防是否被抑制，,b设定城防的初始玩家)(要求i小于r，时间必须以s为单位)
 
-## 开始使用
+万能刷兵a(必填参数:刷兵单位（在dictionary中），控制振荡器；可选参数：,t刷新队伍，默认-1；，,c城市（要有队伍检测），,s什么阵营占领该城市会刷新，,w兵力从哪个城市撤退。要么csw参数都没有，要么只有cs参数，要么csw参数都有。，,n城市中立时也刷新单位（并且不撤退）)
 
-打开termux，输入如下指令：
+附属建筑b(必填参数:附属建筑队伍，依附城市；可选参数：,u建筑单位，默认为虫塔，,n城市中立时也刷新，,f选用特别的flash引用(fd/fi)，应与,w匹配，,w 附属建筑一次性，,y不受依附城市控制)
 
-    triggerauto {输入地图路径} -o {输出地图路径}
+## 1.塔防建筑，无文本
 
-该指令读入地图路径，将转换结果自动输出。如何查找地图的路径呢？可以使用mt浏览器查找地图路径复制并粘贴。长按并点击paste即可粘贴。更多参数见[宾语自动化参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/readme/auto_tutorial.md)。
+### 所需info和标记-塔防建筑
 
-地图路径需要使用英文双引号。添加-D选项可删除info宾语和标志宾语。添加-v选项可知道详细信息。
+  info: "dictionary_info_d" [i(1, 3)]
+  info: "building_info_t" [i(1, 6)]
+  标记: "d.d" [控(1, 1)]
 
-地图制作正常流程是在原地图修改完info宾语或者标志宾语后，添加-D选项，并输出到其他地图路径。再打开游玩或者发布。
+### 前缀-塔防建筑
 
-## info宾语和标志宾语简单介绍
+  "t"
 
-进行自动化，至少需要两种宾语。一种是info宾语，可以为自动化提供信息。一种是标志宾语，可以为自动化提供位置和更具体的信息。之后只需运行命令行即可。
+### 必填参数-塔防建筑
 
-info宾语和标志宾语的类型都必须是空的。info宾语名字形如xxx_info，有不同info宾语可供选择。info宾语可以添加大量属性。标志宾语只用写名字即可。
+  建筑的初始队伍(team)
 
-接下来将会给出常见自动化的info例子和标志宾语例子。如果想要更灵活的处理，请参见[宾语自动化参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/auto/readme/auto_tutorial.md)。
+### 选填参数-塔防建筑
 
-## 例子
+  ",i": 建筑初始刷新，默认0s。
 
-### 产生建筑(版本 >= 1.6.5)
+  ",r": 建筑刷新速度，默认20s。要求i <= r。
 
-产生一个自动刷新建筑。
+  ",u": 建筑单位类型，默认为炮塔。还可以添加其他建筑单位，比如su(supplyDepot补给站)等，具体可以在dictionary_info_d 参数里面查看简化情况。
 
-#### info宾语-建筑
+  ",t": 建筑刷新队伍，默认-1.
 
-名称："building_info"，类型不填。
+  ",o": 是否改变默认的isonlybuilding 选项。isonlybuilding开启时，使用onlyBuildings检测单位，而不是使用unitType。
+  
+### info中可改变的参数-塔防建筑
 
-属性：
+  info : "dictionary_info_d" [i(1, 3)]
 
-prefix："b" //标志宾语使用前缀
+    su : "supplyDepot" // 简化补给站翻译
 
-idprefix："city" //检测的id前缀
+    bt : "bugTurret" // 简化虫塔翻译
 
-detectReset："20s" //建筑检测的resetActivationAfter
+    tu : "turret" // 简化炮塔翻译
 
-addWarmup："20s" //建筑添加的warmup（也是初始建筑添加）
+    ...可以添加更多建筑翻译供,u使用。
 
-addReset："20s" //建筑添加的resetActivationAfter
+  info : "building_info_t" [i(1, 6)]
 
-aunit："turret" //单位类型
+    aunit_now : "turret" // 默认单位类型，可修改成其他建筑，示例中默认为炮塔。
 
-isonlybuilding："true" //使用onlyBuildings检测，而不使用unitType检测。
+    reset : "20s" // 默认建筑刷新速度
 
-isinadd："true" //允许初始建筑添加
+    inaddwarmup : "0s" // 建筑初始刷新时间，应当小于reset_now
 
-args："inaddteam,str" //参数导入
+    team : "-1" // 默认建筑刷新队伍
 
-#### 标志宾语-建筑
+    isonlybuilding : "true" // 如果该建筑可升级，必须使该项为true，但建筑不得重叠。如果该建筑不可升级，则应当使该项为false。
 
-名称："b{队伍}"，类型不填。
+### 示例-塔防建筑
 
-属性不填。
+  标记 : "t-2" [标(1, 1)] // 初始敌对建筑
 
-### 产生城市(版本 >= 1.6.5)
+  标记 : "t-1" [标(1, 2)] // 初始中立建筑
 
-产生一个自动刷新建筑。上面有名字。
+  标记 : "t0,r1s" [标(1, 3)] // 初始玩家1，刷新速度为1s
 
-#### info宾语-城市
+  标记 : "t0,i10s" [标(1, 4)] // 初始玩家1，初始刷新10s
 
-名称："building_info"，类型不填。
+  标记 : "t0,i20s" [标(1, 5)] // 初始玩家1，初始刷新20s
 
-属性：
+  标记 : "t0,usu,o" [标(1, 6)] // 初始玩家1，单位为补给站(supplyDepot)，转换为unitType检测
 
-prefix："c" //标志宾语使用前缀
+  标记 : "t0,ubt,o" [标(1, 7)] // 初始玩家1，单位为虫塔(bugTurret)，转换为unitType检测
 
-idprefix："city" //检测的id前缀
+  标记 : "t0,t0" [标(1, 8)] // 初始玩家1，刷新玩家也为1(必然给1刷新)。
 
-detectReset："20s" //建筑检测的resetActivationAfter
+  标记 : "t1,t1" [标(1, 9)] // 初始玩家2，刷新玩家也为2(必然给2刷新)。
 
-addWarmup："20s" //建筑添加的warmup
+## 2.城市建筑，有文本
 
-addReset："20s" //建筑添加的resetActivationAfter
+### 所需info和标记-城市建筑
 
-aunit："supplyDepot" //单位类型
+  info: "dictionary_info_d" [i(1, 3)]
+  info: "building_info_zci" [i(2, 6)]
+  标记: "d.d" [控(1, 1)]
 
-isbdtext："true" //启用文本
+### 前缀-城市建筑
 
-bdcolor："white" //城市文本颜色
+  "zci"
 
-bdtextsize："7" //城市文本大小
+### 必填参数-城市建筑
 
-isinadd："true" //允许初始建筑添加
+  城市的初始队伍(team)
 
-args："inaddteam,str;bdtext,str" //参数导入
+  城市名称(cityname)
 
-#### 标志宾语-城市
+### 选填参数-城市建筑
 
-名称："c{队伍}.{城市名}"，类型不填。
+  ",i": 建筑初始刷新，默认0s。
 
-属性不填。
+  ",r": 建筑刷新速度，默认20s。要求i <= r。
 
-### 队伍检测（检测内容相同，但检测队伍不同）(版本>=1.6.5)
+  ",u": 建筑单位类型，默认为炮塔。还可以添加其他建筑单位，比如su(supplyDepot补给站)等，具体可以在dictionary_info_d 参数里面查看简化情况。
 
-产生若干队伍检测宾语。
+  ",t": 建筑刷新队伍，默认-1。
 
-#### info宾语-队伍检测
+  ",c": 城市文本颜色，默认white。
 
-名称：teamDetect_info，类型不填。
+  ",s": 城市文本大小，默认7。
 
-属性：
+  ",o": 是否改变默认的isonlybuilding 选项。isonlybuilding开启时，使用onlyBuildings检测单位，而不是使用unitType。
+  
+### info中可改变的参数-城市建筑
 
-prefix："td" //标志宾语使用前缀
+  info : "dictionary_info_d" [i(1, 3)]
 
-aunit："supplyDepot" //检测类型（或者使用onlyBuildings："true" //检测建筑）
+    su : "supplyDepot" // 简化补给站翻译
 
-reset："10s" //检测的resetActivationAfter
+    bt : "bugTurret" // 简化虫塔翻译
 
-setidTeam："A_city,B_city" //（检测前缀，巴巴罗萨举例）
+    tu : "turret" // 简化炮塔翻译
 
-setTeam："0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17" //（队伍从0开始，巴巴罗萨举例）
+    ...可以添加更多建筑翻译供,u使用。
 
-a："{setidTeam0_0}" // 简化引用
+  info : "building_info_zci" [i(1, 6)]
 
-b："{setidTeam1_0}" // 简化引用
+    aunit_now : "supplyDepot" // 默认单位类型，可修改成其他建筑，示例中默认为炮塔。
 
-brace："a,b" //最终翻译
+    reset : "20s" // 默认建筑刷新速度
 
-args："cite_name,str" //参数导入
+    inaddwarmup : "0s" // 建筑初始刷新时间，应当小于reset_now
 
-isprefixseg："true" //前缀与必填参数之间需要"."
+    team : "-1" // 默认建筑刷新队伍
 
-#### 标志宾语-队伍检测
+    mcolor : "white" // 默认城市名称颜色
 
-名称："td.{外部引用名}"，类型不填。
+    mtextsize : "7" // 默认城市名称大小
 
-属性不填。
+    isonlybuilding : "false" // 如果该建筑可升级，必须使该项为true，但建筑不得重叠。如果该建筑不可升级，则应当使该项为false。
 
-#### 引用的说明-队伍检测
+### 示例-城市建筑
 
-假如有一标志宾语为"td.td1"。在其他宾语中出现"td1.a"或者"td1.b"会得到队伍检测的id。如果希望非自动化的宾语也执行这一功能，添加-c选项。
+  标记 : "zci-2.城1" [标(2, 1)] // 初始敌对城市
 
-### 城市+队伍检测（版本>=1.6.5）
+  标记 : "zci-1.城2" [标(2, 2)] // 初始中立城市
 
-#### info宾语-城市+队伍检测
+  标记 : "zci0.城3,r1s" [标(2, 3)] // 初始玩家1，刷新速度为1s
 
-第一个info宾语。
+  标记 : "zci0.城4,i10s" [标(2, 4)] // 初始玩家1，初始刷新10s
 
-名称："building_info"，类型不填。
+  标记 : "zci0.城5,i20s" [标(2, 5)] // 初始玩家1，初始刷新20s
 
-属性：
+  标记 : "zci0.城6,utu,o" [标(2, 6)] // 初始玩家1，单位为炮塔(turret)，转换为使用onlyBuildings检测。
 
-prefix："c" //标志宾语使用前缀
+  标记 : "zci0.城7,ubt" [标(2, 7)] // 初始玩家1，单位为虫塔(bugTurret)
 
-idprefix："city" //检测的id前缀
+  标记 : "zci0.城8,t0" [标(2, 8)] // 初始玩家1，刷新玩家也为1(必然给1刷新)。
 
-detectReset："20s" //建筑检测的resetActivationAfter
+  标记 : "zci1.城9,t1" [标(2, 9)] // 初始玩家2，刷新玩家也为2(必然给2刷新)。
 
-addWarmup："20s" //建筑添加的warmup
+  标记 : "zci0.城10,cred" [标(2, 10)] // 初始玩家1，城市颜色红色。
 
-addReset："20s" //建筑添加的resetActivationAfter
+  标记 : "zci0.城11,s12" [标(2, 11)] // 初始玩家1，城市文本大小为12。
 
-aunit："supplyDepot" //单位类型
+## 3.城市建筑，有队伍检测，有文本
 
-isbdtext："true" //启用文本
+### 所需info和标记-城市队伍
 
-bdcolor："white" //城市文本颜色
+  info: "dictionary_info_d" [i(1, 3)]
+  info: "building_info_zci" [i(2, 6)]
+  info: "teamDetect_info_ztdo" [i(3, 7)]
+  info: "tree_info_zcto" [i(3, 1)]
+  标记: "d.d" [控(1, 1)]
 
-bdtextsize："7" //城市文本大小
+### 前缀-城市队伍
 
-isinadd："true" //允许初始建筑添加
+  "zcto"
 
-args："inaddteam,str;bdtext,str" //参数导入
+### 必填参数-城市队伍
 
-// 一个常规城市标志宾语
+  城市的初始队伍(team)
 
-第二个info宾语。
+  城市引用(cite_name)
 
-名称："teamDetect_info"，类型不填。
+  城市名称(cityname)
 
-属性：
+### 选填参数-城市队伍
 
-prefix："td" //标志宾语使用前缀
+  ",i": 建筑初始刷新，默认0s。
 
-aunit："supplyDepot" //检测类型（或者使用onlyBuildings："true" //检测建筑）
+  ",r": 建筑刷新速度，默认20s。要求i <= r。
 
-reset："10s" //检测的resetActivationAfter
+  ",u": 建筑单位类型，默认为炮塔。还可以添加其他建筑单位，比如su(supplyDepot补给站)等，具体可以在dictionary_info_d 参数里面查看简化情况。
 
-setidTeam："A_city,B_city" //（检测前缀，巴巴罗萨举例）
+  ",t": 建筑刷新队伍，默认-1。
 
-setTeam："0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17" //（队伍从0开始，巴巴罗萨举例）
+  ",c": 城市文本颜色，默认white。
 
-a："{setidTeam0_0}" // 简化引用
+  ",s": 城市文本大小，默认7。
 
-b："{setidTeam1_0}" // 简化引用
+  ",e": 城市队伍检测刷新时间，默认1s。
 
-brace："a,b" //最终翻译
+  ",o": 是否改变默认的isonlybuilding 选项。isonlybuilding开启时，使用onlyBuildings检测单位，而不是使用unitType。
+  
+### info中可改变的参数-城市队伍
 
-args："cite_name,str" //参数导入
+  info : "dictionary_info_d" [i(1, 3)]
 
-isprefixseg："true" //前缀与必填参数之间需要"."
+    su : "supplyDepot" // 简化补给站翻译
 
-// 一个队伍检测宾语
+    bt : "bugTurret" // 简化虫塔翻译
 
-第三个info宾语。
+    tu : "turret" // 简化炮塔翻译
 
-名称："tree_info"，类型不填。
+    ...可以添加更多建筑翻译供,u使用。
 
-属性：
+  info : "building_info_ci" [i(1, 6)]
 
-prefix："ctd" //标志宾语使用前缀
+    aunit_now : "supplyDepot" // 默认单位类型，可修改成其他建筑，示例中默认为炮塔。
 
-idprefix："mtd,1" //申请id做cite_name
+    reset : "20s" // 默认建筑刷新速度
 
-name："c{inaddteam}.{cityname};td.{idprefix0_0}" //产生分支标志宾语的格式
+    inaddwarmup : "0s" // 建筑初始刷新时间，应当小于reset_now
 
-a："{idprefix0_0}.a" // 简化引用
+    team : "-1" // 默认建筑刷新队伍
 
-b："{idprefix0_0}.b" // 简化引用
+    mcolor : "white" // 默认城市名称颜色
 
-brace："a,b" //最终翻译
+    mtextsize : "7" // 默认城市名称大小
 
-args："inaddteam,str;cite_name,str;cityname,str" //参数导入
+    isonlybuilding : "false" // 如果该建筑可升级，必须使该项为true，但建筑不得重叠。如果该建筑不可升级，则应当使该项为false。
 
-// 通过tree将二者组合
+  info : "teamDetect_info_ztdo" [i(3, 8)]
 
-#### 标志宾语-城市+队伍检测
+    reset : "1s" // 默认队伍检测刷新时间
 
-名称："ctd{队伍}.{引用名字}.{城市名}"。类型不填。
-属性不填。
+    isonlybuilding : "false" // 如果该建筑可升级，必须使该项为true，但建筑不得重叠。如果该建筑不可升级，则应当使该项为false。
 
-#### 引用的说明-城市+队伍检测
+    setTeam : "0 2 4 6 8,1 3 5 7 9,-3 -2 -1" // 第一组代表a队，第二组代表b队，第三组(n)代表未被占领(-3是建筑未刷新)
 
-假如有一标志宾语为"ctd3.ctd1.斯大林格勒"。在其他宾语中出现"ctd_t1.a"或者"ctd_t1.b"会得到队伍检测的id。如果希望非自动化的宾语也执行这一功能，添加-c选项。
+    setidTeam : "Ac,Bc,Nc" // 三个对应检测id前缀，数目与setTeam的组数保持一致
 
-### 城市+队伍检测+城市文本颜色变化（版本>=1.6.5）
+    a : "{setidTeam0_0}" // 得到对应a队id(第一组)，供引用使用
 
-#### info宾语-城市+队伍检测+城市文本颜色变化
+    b : "{setidTeam1_0}" // 得到对应b队id(第二组)，供引用使用
 
-第一个info宾语。
+    n : "{setidTeam2_0}" // 得到对应未占领id(第三组)，供引用使用
 
-名称："building_info"，类型不填。
+    brace : "a,b,n" // 队伍检测供外部引用
 
-属性：
+  info : "tree_info_zcto" [i(3, 1)]
 
-prefix："c" //标志宾语使用前缀
+    a : "{idprefix0_0}.a" // 从队伍检测得到对应a队id(第一组)，供引用使用
 
-idprefix："city" //检测的id前缀
+    b : "{idprefix0_0}.b" // 从队伍检测得到对应b队id(第二组)，供引用使用
 
-detectReset："20s" //建筑检测的resetActivationAfter
+    n : "{idprefix0_0}.n" // 从队伍检测得到对应未占领id(第三组)，供引用使用
 
-addWarmup："20s" //建筑添加的warmup
+    brace : "a,b,n" // 城市队伍检测供外部引用
 
-addReset："20s" //建筑添加的resetActivationAfter
+### 示例-城市队伍
 
-aunit："supplyDepot" //单位类型
+  标记 : "zcto-2.zcto城1.城1" [标(3, 1)] // 初始敌对城市
 
-isinadd："true" //允许初始建筑添加
+  标记 : "zcto-1.zcto城2.城2" [标(3, 2)] // 初始中立城市
 
-args："inaddteam,str" //参数导入
+  标记 : "zcto0.zcto城3.城3,r1s" [标(3, 3)] // 初始玩家1，刷新速度为1s
 
-// 一个常规城市标志宾语
+  标记 : "zcto0.zcto城4.城4,i10s" [标(3, 4)] // 初始玩家1，初始刷新10s
 
-第二个info宾语。
+  标记 : "zcto0.zcto城5.城5,i20s" [标(3, 5)] // 初始玩家1，初始刷新20s
 
-名称："teamDetect_info"，类型不填。
+  标记 : "zcto0.zcto城6.城6,utu,o" [标(3, 6)] // 初始玩家1，单位为炮塔(turret)，转换为使用onlyBuildings检测。
 
-属性：
+  标记 : "zcto0.zcto城7.城7,ubt" [标(3, 7)] // 初始玩家1，单位为虫塔(bugTurret)
 
-prefix："td" //标志宾语使用前缀
+  标记 : "zcto0.zcto城8.城8,t0" [标(3, 8)] // 初始玩家1，刷新玩家也为1(必然给1刷新)。
 
-aunit："supplyDepot" //检测类型（或者使用onlyBuildings："true" //检测建筑）
+  标记 : "zcto1.zcto城9.城9,t1" [标(3, 9)] // 初始玩家2，刷新玩家也为2(必然给2刷新)。
 
-reset："10s" //检测的resetActivationAfter
+  标记 : "zcto0.zcto城10.城10,cred" [标(3, 8)] // 初始玩家1，城市颜色红色。
 
-setidTeam："A_city,B_city" //（检测前缀，巴巴罗萨举例）
+  标记 : "zcto0.zcto城11.城11,s12" [标(3, 9)] // 初始玩家1，城市文本大小为12。
 
-setTeam："0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17" //（队伍从0开始，巴巴罗萨举例）
+  标记 : "zcto0.zcto城12.城12,e20s" [标(3, 9)] // 初始玩家1，队伍检测刷新速度为20s。
 
-a："{setidTeam0_0}" // 简化引用
+标记宾语上下有使用引用的mapText。例如"zcto城1.a"引用将会被-c选项翻译为该城被A队占领的检测，"zcto城1.b"为B队占领，
+"zcto城1.n"为中立。
 
-b："{setidTeam1_0}" // 简化引用
+## 4.附属建筑
 
-brace："a,b" //最终翻译
+### 所需info和标记-附属建筑
 
-args："cite_name,str" //参数导入
+  info: "dictionary_info_d" [i(1, 3)]
+  info: "building_info_zci" [i(2, 6)]
+  info: "teamDetect_info_ztdo" [i(3, 7)]
+  info: "tree_info_zcto" [i(3, 1)]
+  info: "flash_info_fd" [i(4, 12, 1)]
+  info: "flash_info_fi" [i(4, 12, 2)]
+  info: "building_info_b" [i(4, 6)]
+  标记: "d.d" [控(1, 1)]
+  标记: "fd.fd6_3.12s.6s" [控(4, 2, 1)]
+  标记: "fd.fd12_6.12s.6s" [控(4, 2, 2)]
+  标记: "fi.fi6.6s" [控(4, 2, 3)]
+  标记: "zcto-2.zbt测1.测1" [附(4, 1)]
+  标记: "zcto0.zbt测2.测2" [附(4, 2)]
+  标记: "zcto3.zbt测3.测3" [附(4, 3)]
 
-isprefixseg："true" //前缀与必填参数之间需要"."
+### 前缀-附属建筑
 
-// 一个队伍检测宾语
+  "b"
 
-第三个info宾语。
+### 必填参数-附属建筑
 
-名称："multiText_info"，类型不填。
+  附属建筑的所属队伍(team)
 
-属性：
+  附属建筑所依附的城市(ctd_cite)
 
-prefix："mt" //标志宾语使用前缀
+### 选填参数-附属建筑
 
-color："red,blue,white" //文本颜色
+  ",u": 建筑单位类型，默认为虫塔。还可以添加其他建筑单位，比如su(supplyDepot补给站)等，具体可以在dictionary_info_d 参数里面查看简化情况。
 
-isdefaultText："true" //使用teamDetect时的可选项。
+  ",n": 是否改变默认的isneutralspawn 选项。
 
-text："{btext},{{xtext}},{{rtext}}"
+  ",w": 是否改变默认的isbugdisposable 选项。
 
-textsize："{mytextsize}"
+  ",f": 使用其他非默认的flash标记刷新附属建筑。如果为fd系列的flash_info，请确保isbugdisposable 开启。如果是fi系列的flash_info，请确保isbugdisposable 关闭。
 
-args："teamDetect_cite,str;btext,str" //参数导入
+  ",o": 是否改变默认的isonlybuilding 选项。isonlybuilding开启时，使用onlyBuildings检测单位，而不是使用unitType。
 
-opargs："t,mytextsize,str,7;x,xtext,str,{btext};r,rtext,str,{btext}" //文本大小，第二个文本
+  ",y": 是否改变默认的isbugTurretdeacti 选项。
+  
+### info中可改变的参数-附属建筑
 
-isprefixseg："true" //前缀与必填参数之间需要"."
+  info : "dictionary_info_d" [i(1, 3)]
 
-// 多个文本宾语
+    su : "supplyDepot" // 简化补给站翻译
 
-第四个info宾语。
+    bt : "bugTurret" // 简化虫塔翻译
 
-名称："tree_info"，类型不填。
+    tu : "turret" // 简化炮塔翻译
 
-属性：
+    ...可以添加更多建筑翻译供,u使用。
 
-prefix："ctd_t" //标志宾语使用前缀
+  info : "building_info_b" [i(4, 6)]
 
-idprefix："mtd,1" //申请id做cite_name
+    aunit_now : "bugTurret" // 默认单位类型，可修改成其他建筑，示例中默认为虫塔。
 
-name："c{inaddteam};td.{idprefix0_0};mt.{idprefix0_0}.{cityname},t{textsize},x{xtext},r{rtext}" //产生分支标志宾语的格式
+    isbugTurretdeacti : "true" // isbugTurretdeacti关闭时，附属建筑不再依附。（持续刷新，不受控制）。
 
-a："{idprefix0_0}.a" // 简化引用
+    isneutralspawn : "true" // isneutralspawn开启时，附属建筑在依附城市中立或不存在时也会刷新。
 
-b："{idprefix0_0}.b" // 简化引用
+    isbugdisposable : "true" // isbugdisposable开启时，附属建筑是重复刷新的，将会启用"fd6_3"(初始6s，每3s刷新一次)，否则启动"fi6"(初始6s后不再刷新)。
 
-brace："a,b" //最终翻译
+    fd_cite : "fd6_3" // 已部署的flash_info_fd标记，表明该建筑默认下开局6s刷新，3s再刷新一次(isbugdisposable 开启)
 
-args："inaddteam,str;cite_name,str;cityname,str" //参数导入
+    fi_cite : "fd6_3" // 已部署的flash_info_fi标记，表明该建筑默认下仅开局6s刷新(isbugdisposable 关闭)
 
-opargs："t,textsize,str,7;x,xtext,str,{cityname};r,rtext,str,{cityname}" //文本大小，第二个文本变化（如果有）
+### 示例-附属建筑
 
-// 将其组合
+  标记 : "b-2.b测1" [标(4, 1)] // "b测1"中立建筑刷附属建筑，附属建筑为敌对
 
-#### 标志宾语-城市+队伍检测+城市文本颜色变化
+  标记 : "b-1.b测1" [标(4, 2)] // "b测1"中立建筑刷附属建筑，附属建筑为中立
 
-名称："ctd_t{队伍}.{引用名字}.{城市名},t{文本大小，默认为7},x{B队文本，默认城市名},r{默认文本，默认城市名}"。","为可选项，可以不填。类型不填。
-属性不填。
+  标记 : "b0.b测2" [标(4, 3)] // "b测2"A队建筑或中立建筑刷附属建筑，附属建筑为1号
 
-#### 引用的说明-城市+队伍检测+城市文本颜色变化
+  标记 : "b3.b测3" [标(4, 4)] // "b测3"B队建筑或中立建筑刷附属建筑，附属建筑为4号
 
-假如有一标志宾语为"ctd_t3.ctd_t1.红斯大林格勒,t10,x蓝斯大林格勒,r白斯大林格勒"。在其他宾语中出现"ctd_t1.a"或者"ctd_t1.b"会得到队伍检测的id。如果希望非自动化的宾语也执行这一功能，添加-c选项。
+  标记 : "b0.b测2,ffd12_6" [标(4, 5)] // "b测2"A队建筑或中立建筑刷附属建筑，附属建筑为1号，刷新改为初始12s，持续6s
 
-### 城市+本地额外塔防（版本>=1.6.5）
+  标记 : "b0.b测2,usu" [标(4, 6)] // "b测2"A队建筑或中立建筑刷附属建筑，附属建筑为1号，单位为补给站
 
-第一个info宾语。
+  标记 : "b0.b测2,utu,o" [标(4, 7)] // "b测2"A队建筑或中立建筑刷附属建筑，附属建筑为1号，单位为炮塔，转换为使用onlyBuildings检测。
 
-名称："building_info"，类型不填。
+  标记 : "b0.b测2,ure" [标(4, 8)] // "b测2"A队建筑或中立建筑刷附属建筑，附属建筑为1号，单位为修复湾
 
-属性：
+  标记 : "b-2.b测1,n" [标(4, 9)] // "b测1"中立建筑刷附属建筑，附属建筑为敌对
 
-prefix："c" //标志宾语使用前缀
+  标记 : "b0.b测2,n" [标(4, 8)] // "b测2"A队建筑刷附属建筑，附属建筑为1号
 
-idprefix："city" //检测的id前缀
+  标记 : "b3.b测3,n" [标(4, 9)] // "b测3"B队建筑刷附属建筑，附属建筑为4号
 
-detectReset："20s" //建筑检测的resetActivationAfter
+  标记 : "b3.b测3,w" [标(4, 9)] // "b测3"B队建筑或中立建筑刷附属建筑，附属建筑为4号。仅初始刷新（切换为"fi6""）
 
-addWarmup："20s" //建筑添加的warmup
+  标记 : "b3.b测3,y" [标(4, 9)] // 初始6s，持续3s刷新，不受控制。
 
-addReset："20s" //建筑添加的resetActivationAfter
+## 5.多文本城市
 
-aunit："supplyDepot" //单位类型
+### 所需info和标记-多文本城市
 
-isbdtext："true" //启用文本
+  info: "dictionary_info_d" [i(1, 3)]
+  info: "building_info_zci" [i(2, 6)]
+  info: "teamDetect_info_ztdo" [i(3, 7)]
+  info: "tree_info_zcto" [i(3, 1)]
+  info: "flash_info_fd" [i(4, 12, 1)]
+  info: "flash_info_fi" [i(4, 12, 2)]
+  info: "building_info_b" [i(4, 6)]
+  标记: "d.d" [控(1, 1)]
+  标记: "fd.fd6_3.12s.6s" [控(4, 2, 1)]
+  标记: "fd.fd12_6.12s.6s" [控(4, 2, 2)]
+  标记: "fi.fi6.6s" [控(4, 2, 3)]
+  标记: "zcto-2.zbt测1.测1" [附(4, 1)]
+  标记: "zcto0.zbt测2.测2" [附(4, 2)]
+  标记: "zcto3.zbt测3.测3" [附(4, 3)]
 
-bdcolor："white" //城市文本颜色
+### 前缀-多文本城市
 
-bdtextsize："7" //城市文本大小
+  "b"
 
-isinadd："true" //允许初始建筑添加
+### 必填参数-多文本城市
 
-args："inaddteam,str;bdtext,str" //参数导入
+  附属建筑的所属队伍(team)
 
-第二个info宾语。
+  附属建筑所依附的城市(ctd_cite)
 
-名称："teamDetect_info"，类型不填。
+### 选填参数-多文本城市
 
-属性：
+  ",u": 建筑单位类型，默认为虫塔。还可以添加其他建筑单位，比如su(supplyDepot补给站)等，具体可以在dictionary_info_d 参数里面查看简化情况。
 
-prefix："td" //标志宾语使用前缀
+  ",n": 是否改变默认的isneutralspawn 选项。
 
-aunit："supplyDepot" //检测类型（或者使用onlyBuildings："true" //检测建筑）
+  ",w": 是否改变默认的isbugdisposable 选项。
 
-reset："10s" //检测的resetActivationAfter
+  ",f": 使用其他非默认的flash标记刷新附属建筑。如果为fd系列的flash_info，请确保isbugdisposable 开启。如果是fi系列的flash_info，请确保isbugdisposable 关闭。
 
-setidTeam："A_city,B_city" //（检测前缀，巴巴罗萨举例）
+  ",o": 是否改变默认的isonlybuilding 选项。isonlybuilding开启时，使用onlyBuildings检测单位，而不是使用unitType。
 
-setTeam："0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17" //（队伍从0开始，巴巴罗萨举例）
+  ",y": 是否改变默认的isbugTurretdeacti 选项。
+  
+### info中可改变的参数-多文本城市
 
-a："{setidTeam0_0}" // 简化引用
+  info : "dictionary_info_d" [i(1, 3)]
 
-b："{setidTeam1_0}" // 简化引用
+    su : "supplyDepot" // 简化补给站翻译
 
-brace："a,b" //最终翻译
+    bt : "bugTurret" // 简化虫塔翻译
 
-args："cite_name,str" //参数导入
+    tu : "turret" // 简化炮塔翻译
 
-isprefixseg："true" //前缀与必填参数之间需要"."
+    ...可以添加更多建筑翻译供,u使用。
 
-第三个info宾语。
+  info : "building_info_b" [i(4, 6)]
 
-名称："building_f_info"，类型不填。
+    aunit_now : "bugTurret" // 默认单位类型，可修改成其他建筑，示例中默认为虫塔。
 
-属性：
+    isbugTurretdeacti : "true" // isbugTurretdeacti关闭时，附属建筑不再依附。（持续刷新，不受控制）。
 
-prefix："bbt" //标志宾语使用前缀
+    isneutralspawn : "true" // isneutralspawn开启时，附属建筑在依附城市中立或不存在时也会刷新。
 
-idprefix："bbt" //检测的id前缀
+    isbugdisposable : "true" // isbugdisposable开启时，附属建筑是重复刷新的，将会启用"fd6_3"(初始6s，每3s刷新一次)，否则启动"fi6"(初始6s后不再刷新)。
 
-detectReset："3s" //建筑检测的resetActivationAfter
+    fd_cite : "fd6_3" // 已部署的flash_info_fd标记，表明该建筑默认下开局6s刷新，3s再刷新一次(isbugdisposable 开启)
 
-addWarmup："3s" //建筑添加的warmup
+    fi_cite : "fd6_3" // 已部署的flash_info_fi标记，表明该建筑默认下仅开局6s刷新(isbugdisposable 关闭)
 
-aunit："bugTurret" //单位类型
+### 示例-多文本城市
 
-isinadd："true"  //允许初始建筑添加
+  标记 : "b-2.b测1" [标(3, 1)] // "b测1"中立建筑刷附属建筑，附属建筑为敌对
 
-deacti："fd1.idprefix0,{{td_cite}.{teamtoid_dep}\['inaddteam'\]}" //闪烁器引用，队伍检测引用
+  标记 : "b-1.b测1" [标(3, 2)] // "b测1"中立建筑刷附属建筑，附属建筑为中立
 
-args："inaddteam,str;td_cite,str" //参数导入
+  标记 : "b0.b测2" [标(3, 3)] // "b测2"A队建筑或中立建筑刷附属建筑，附属建筑为1号
 
-前三个info宾语是城市+队伍检测+城防的模板。
+  标记 : "b3.b测3" [标(3, 4)] // "b测3"B队建筑或中立建筑刷附属建筑，附属建筑为4号
 
-第四个info宾语。
+  标记 : "b0.b测2,ffd12_6" [标(3, 5)] // "b测2"A队建筑或中立建筑刷附属建筑，附属建筑为1号，刷新改为初始12s，持续6s
 
-名称："tree_info"，类型不填。
+  标记 : "b0.b测2,usu" [标(3, 6)] // "b测2"A队建筑或中立建筑刷附属建筑，附属建筑为1号，单位为补给站
 
-属性：
+  标记 : "b0.b测2,utu,o" [标(3, 7)] // "b测2"A队建筑或中立建筑刷附属建筑，附属建筑为1号，单位为炮塔，转换为使用onlyBuildings检测。
 
-prefix："cbtd" //标志宾语使用前缀
+  标记 : "b0.b测2,ure" [标(3, 8)] // "b测2"A队建筑或中立建筑刷附属建筑，附属建筑为1号，单位为修复湾
 
-idprefix："mtd,1" //申请id做cite_name
+  标记 : "b-2.b测1,n" [标(3, 9)] // "b测1"中立建筑刷附属建筑，附属建筑为敌对
 
-name："c{inaddteam}.{cityname};td.{idprefix0_0};bbt{inaddteam}.{idprefix0_0}" //产生分支标志宾语的格式
+  标记 : "b0.b测2,n" [标(3, 8)] // "b测2"A队建筑刷附属建筑，附属建筑为1号
 
-a："{idprefix0_0}.a" // 简化引用
+  标记 : "b3.b测3,n" [标(3, 9)] // "b测3"B队建筑刷附属建筑，附属建筑为4号
 
-b："{idprefix0_0}.b" // 简化引用
+  标记 : "b3.b测3,w" [标(3, 9)] // "b测3"B队建筑或中立建筑刷附属建筑，附属建筑为4号。仅初始刷新（切换为"fi6""）
 
-brace："a,b" //最终翻译
-
-offset："0 0,0 0,-1 -1"
-
-args："inaddteam,str;cite_name,str;cityname,str" //参数导入
-
-此外，需要部署振荡器来帮助城防刷新。
-
-振荡器info。
-
-第五个info宾语。
-
-名称："flash_info"，类型不填。
-
-属性：
-
-prefix："fd" //标志宾语使用前缀
-
-idprefix："fd" //申请id
-
-initialtime："20s" //初始刷新
-
-periodtime： "3s" //刷新周期
-
-args："cite_name,str" //参数导入
-
-isprefixseg："true" //前缀与必填参数之间需要"."
-
-部署振荡器，这样城防建筑可以使用。
-
-名称："fd.fd1"，类型不填。
-
-#### 标志宾语-城市+本地额外塔防
-
-名称："cbtd{队伍}.{引用名字}.{城市名}"，类型不填。
-
-属性不填。
-
-#### 引用的说明-城市+本地额外塔防
-
-假如有一标志宾语为"cbtd3.cbtd1.斯大林格勒"。在其他宾语中出现"cbtd1.a"或者"cbtd1.b"会得到队伍检测的id。如果希望非自动化的宾语也执行这一功能，添加-c选项。
-
-### 占领区刷兵(版本>=1.6.5)
-
-产生刷兵宾语。
-
-#### info宾语-占领区刷兵
-
-名称："dictionary_info"，类型不填。
-
-属性：
-
-prefix："d"
-
-me："mechGun*1"
-
-he："heavyTank*1"...
-
-任意可以简化单位的写法。
-
-名称："d.d"，类型属性不填。
-
-如此，在其他位置输入"d.me"将会自动认为是"mechGun*1"...
-
-名称：object_info，类型不填。
-
-属性：
-
-prefix："oa" //标志宾语使用前缀
-
-objectType："unitAdd" //类型
-
-warmup："1s" //防止振动器初始刷新
-
-deactivatedBy："fd1.idprefix0,{{td_cite}.{teamtoid_dep}\['td_team'\]}" //闪烁器引用，队伍检测引用
-
-team："-1" //队伍，也可为"{td_team}"
-
-spawnUnits："d.{dc_unit}"
-
-args："dc_unit,str;td_cite,str;td_team,str" //参数导入
-
-isprefixseg："true" //前缀与必填参数之间需要"."
-
-需要有引用名为fd1的振荡器。需要一个teamDetect引用作为约束。
-
-#### 标志宾语-占领区刷兵
-
-名称："oa.{刷新单位}.{teamDetect引用}.{队伍}"，类型不填。
-属性不填。
-
-#### 引用的说明-占领区刷兵
-
-假如有一标志宾语为"oa.me.td1.0"。那么仅在td1检测阵营为与0相同时刷新，刷新频率跟随fd1振荡器。刷新单位为"mechGun*1"
-
-#### 如果引用的不是teamDetect_info，而是内部有teamDetect_info的tree_info?
-
-注意使用brace，然后外部调用哦。
-
-#### 如果换成普通刷兵？
-
-需要对前面的占领刷兵info进行一定的修改。删除其中一部分参数。
+  标记 : "b3.b测3,y" [标(3, 9)] // 初始6s，持续3s刷新，不受控制。
 
 ## 注意事项
 
-### 引用(cite_name)要求
+### team
 
-允许中英文和数字，不允许其他符号
+-2为敌对，-1为中立，玩家从0开始，0代表1号玩家。
 
-### 键值触碰关键词
+### 时间
 
-不可控，一般不会碰到，一般换一个就没问题。
+所有时间必须以s为单位。
+
+所有时间必须大于等于0s

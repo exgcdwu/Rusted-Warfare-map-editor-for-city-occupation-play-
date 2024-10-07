@@ -71,10 +71,10 @@ multiText_info_operation_optional = {
 def operation_join_quote(assign_name:str, info_args:str):
     return operation_typeset_expression(assign_name, f"\",\".join({info_args})")
 
-def operation_list_join_quote(assign_name:str, info_args:str):
-    return operation_typeset_expression(assign_name, f"[\",\".join(info_args_now) for info_args_now in {info_args}]")
+def operation_list_join_quote(assign_name:str, info_args:str, depth:int = MAXTRANSDEPTH):
+    return operation_typeset_expression(assign_name, f"[\",\".join(info_args_now) for info_args_now in {info_args}]", depth = depth)
 
-def operation_list_assign(info_args:str, index:str, assign_name:str, info_tag:str, default_assign:str = None, ):
+def operation_list_assign(info_args:str, index:str, assign_name:str, info_tag:str, default_assign:str = None):
     return \
     operation_exist_if(f"{info_args}", info_tag + "_exist_if_" + assign_name) + \
         operation_if(f"len({info_args}) == 1", info_tag + "_if_" + assign_name, 1) + \

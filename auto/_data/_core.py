@@ -21,7 +21,6 @@ from auto._data._multiRemove import multiRemove_info
 from auto._data._tree import tree_info
 from auto._data._multiAdd import multiAdd_info
 from auto._data._flash import flash_info
-from auto._data._building_f import building_f_info
 from auto._data._idcheck import idcheck_info
 from auto._data._time import time_info
 from auto._data._step import step_info
@@ -39,7 +38,6 @@ auto_func_arg.update(multiRemove_info)
 auto_func_arg.update(tree_info)
 auto_func_arg.update(multiAdd_info)
 auto_func_arg.update(flash_info)
-auto_func_arg.update(building_f_info)
 auto_func_arg.update(idcheck_info)
 auto_func_arg.update(time_info)
 auto_func_arg.update(step_info)
