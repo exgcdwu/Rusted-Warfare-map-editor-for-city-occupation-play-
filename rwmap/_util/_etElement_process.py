@@ -18,6 +18,8 @@ def get_etElement_properties(root:et.Element)->dict[str,Union[str, dict[str, str
     for nproperty in rootn:
         if nproperty.attrib.get('value') == None:
             nproperty.attrib['value'] = ""
+        if nproperty.text != None and nproperty.text != "":
+            nproperty.attrib['text'] = nproperty.text
         if len(nproperty.attrib) == 2:
             dict_properties[nproperty.attrib['name']] = nproperty.attrib['value']
         else:
@@ -31,8 +33,14 @@ def output_etElement_properties(dict_properties:dict[str, Union[dict[str, str], 
     if dict_properties != None:
         for name, value in dict_properties.items():
             dict_n = {"name":name}
-            dict_n.update(dict_utility.udictstr_to_dict(value))
-            nproperty = et.Element("property", dict_n)
+            value_n = dict_utility.udictstr_to_dict(value)
+            if isinstance(value_n, list):
+                dict_n.update(value_n[0])
+                nproperty = et.Element("property", dict_n)
+                nproperty.text = value_n[1]
+            else:
+                dict_n.update(value_n)
+                nproperty = et.Element("property", dict_n)
             root.append(nproperty)
     return root
 

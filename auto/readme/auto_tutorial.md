@@ -802,7 +802,7 @@ iscorrectwarmup：可选，默认为否。如果为是，将会把该info的warm
 
 ### 安装
 
-    pip install rwmapeditor-exgcdwu==1.7.0
+    pip install rwmapeditor-exgcdwu==1.7.1
 
 ### 使用
 
