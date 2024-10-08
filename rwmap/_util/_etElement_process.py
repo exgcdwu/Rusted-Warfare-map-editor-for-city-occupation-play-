@@ -16,10 +16,14 @@ def get_etElement_properties(root:et.Element)->dict[str,Union[str, dict[str, str
         return {}
     dict_properties = {}
     for nproperty in rootn:
+        if nproperty.text != None and nproperty.text != "":
+            if nproperty.attrib.get('value') == None:
+                nproperty.attrib['value'] = nproperty.text
+            else:
+                nproperty.attrib['text'] = nproperty.text
+
         if nproperty.attrib.get('value') == None:
             nproperty.attrib['value'] = ""
-        if nproperty.text != None and nproperty.text != "":
-            nproperty.attrib['text'] = nproperty.text
         if len(nproperty.attrib) == 2:
             dict_properties[nproperty.attrib['name']] = nproperty.attrib['value']
         else:

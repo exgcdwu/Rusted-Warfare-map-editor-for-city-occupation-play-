@@ -23284,7 +23284,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <object id="1" name="map_info" x="0" y="0" width="20" height="20">
       <properties>
         <property name="fog" value="los"/>
-        <property name="introText" value="">宾语自动化示例，建议沙盒下实验。从示例产生结果需要使用-D -c选项。</property>
+        <property name="introText" value="宾语自动化示例，建议沙盒下实验。从示例产生结果需要使用-D -c选项。"/>
         <property name="type" value="skirmish"/>
         <property name="winCondition" value="commandCenter"/>
       </properties>
