@@ -127,7 +127,7 @@ multiRemove_info_operation_list = \
         operation_exist_if(f"{INFOKEY.teamDetect_cite}", "multiRemove_exist_if_teamDetect_cite_assign") + \
             operation_if("team_now_exist == True", "multiRemove_exist_if_teamDetect_cite_assign_team_exist") + \
                 operation_if("{" + f"{INFOKEY.teamDetect_cite}" + "}" + ".teamtoi.get(team_now) != None", "multiRemove_if_teamDetect_cite_assign_acti") + \
-                    operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{{" + f"{INFOKEY.teamDetect_cite}" + "}" + ".teamtoi[team_now]}_0", "multiRemove", "actiids_addteamDetect") + \
+                    operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{{" + f"{INFOKEY.teamDetect_cite}" + "}" + ".teamtoi[team_now]}_0_0", "multiRemove", "actiids_addteamDetect") + \
                     operation_typeset_expression(f"{INFOKEY.acti}_now_exist", "True") + \
                     operation_typeset_expression(f"{INFOKEY.acti}_now", f"{INFOKEY.acti}_now_" + "{i}") + \
                 operation_ifend("multiRemove_if_teamDetect_cite_assign_acti") + \

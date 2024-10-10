@@ -193,12 +193,12 @@ multiText_info_operation_list = \
         operation_list_assign(f"{INFOKEY.textsize}", "i", "textsize_now", "multiText") + \
         operation_exist_if(f"{INFOKEY.teamDetect_cite}", "multiText_exist_if_teamDetect_cite_assign") + \
             operation_if("i < {" + f"{INFOKEY.teamDetect_cite}" + "}." + f"{INFOKEY.lenidTeam}", "multiText_if_teamDetect_cite_assign_acti", 1) + \
-                operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{i}_0", "multiText", "actiids_addteamDetect") + \
+                operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{i}_0_0", "multiText", "actiids_addteamDetect") + \
                 operation_typeset_expression(f"{INFOKEY.acti}_now_exist", "True") + \
                 operation_typeset_expression(f"{INFOKEY.acti}_now", f"{INFOKEY.acti}_now_" + "{i}") + \
             operation_elseif("i == {" + f"{INFOKEY.teamDetect_cite}" + "}.{" + f"{INFOKEY.lenidTeam}" + "} and isdefaultText", "multiText_if_teamDetect_cite_assign_acti", 2) + \
                 operation_cycle_start("j", "0", "j < {" + f"{INFOKEY.teamDetect_cite}" + "}." + f"{INFOKEY.lenidTeam}", "multiText_cycle_teamDetect_cite_assign_deacti") + \
-                    operation_ids_assign(f"{INFOKEY.deacti}_now_exist", f"{INFOKEY.deacti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{j}_0", "multiText", "deactiids_addteamDetect") + \
+                    operation_ids_assign(f"{INFOKEY.deacti}_now_exist", f"{INFOKEY.deacti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{j}_0_0", "multiText", "deactiids_addteamDetect") + \
                     operation_typeset_expression(f"{INFOKEY.deacti}_now_exist", "True") + \
                     operation_typeset_expression(f"{INFOKEY.deacti}_now", f"{INFOKEY.deacti}_now_" + "{i}") + \
                 operation_cycle_end("j", "j + 1", "multiText_cycle_teamDetect_cite_assign_deacti") + \

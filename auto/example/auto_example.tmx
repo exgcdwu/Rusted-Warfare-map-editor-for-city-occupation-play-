@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="600" height="500" tilewidth="20" tileheight="20" infinite="0" nextlayerid="4" nextobjectid="353">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="600" height="500" tilewidth="20" tileheight="20" infinite="0" nextlayerid="4" nextobjectid="381">
  <tileset firstgid="1" name="export_ground" tilewidth="20" tileheight="20" tilecount="341" columns="12">
   <properties>
    <property name="embedded_png">
@@ -23290,7 +23290,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
   <object id="1" name="map_info" x="0" y="0" width="20" height="20">
    <properties>
     <property name="fog" value="los"/>
-    <property name="introText">宾语自动化示例，建议沙盒下实验。从示例产生结果需要使用-D -c选项。</property>
+    <property name="introText" value="宾语自动化示例，建议沙盒下实验。从示例产生结果需要使用-D -c选项。"/>
     <property name="type" value="skirmish"/>
     <property name="winCondition" value="commandCenter"/>
    </properties>
@@ -24063,9 +24063,11 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
   <object id="141" name="tree_info_zcto" x="600" y="1000" width="20" height="20">
    <properties>
     <property name="a" value="{idprefix0_0}.a"/>
+    <property name="a1" value="{idprefix0_0}.a1"/>
+    <property name="a2" value="{idprefix0_0}.a2"/>
     <property name="args" value="inaddteam,str;cite_name,str;cityname,str"/>
     <property name="b" value="{idprefix0_0}.b"/>
-    <property name="brace" value="a,b,n"/>
+    <property name="brace" value="a,b,n,a1,a2"/>
     <property name="idprefix" value="mtd,1"/>
     <property name="isonlybuilding" type="bool" value="false"/>
     <property name="n" value="{idprefix0_0}.n"/>
@@ -24077,23 +24079,25 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
   </object>
   <object id="142" name="teamDetect_info_ztdo" x="1800" y="1000" width="20" height="20">
    <properties>
-    <property name="a" value="{setidTeam0_0}"/>
+    <property name="a" value="{setidTeam0_0_0}"/>
+    <property name="a1" value="{setidTeam0_1_0}"/>
+    <property name="a2" value="{setidTeam1_1_0}"/>
     <property name="args" value="cite_name,str"/>
-    <property name="aunit" value="{None if isonlybuilding else ('aunit_now' if 'dunit_op' == 'None' else 'd.{dunit_op}')}"/>
+    <property name="aunit" value="{'None' if isonlybuilding else ('aunit_now' if 'dunit_op' == 'None' else 'd.{dunit_op}')}"/>
     <property name="aunit_now" value="supplyDepot"/>
-    <property name="b" value="{setidTeam1_0}"/>
-    <property name="brace" value="a,b,n"/>
+    <property name="b" value="{setidTeam2_0_0}"/>
+    <property name="brace" value="a1,a2,a,n,b"/>
     <property name="isonlybuilding" type="bool" value="false"/>
     <property name="isprefixseg" type="bool" value="true"/>
     <property name="minUnits" value="1"/>
-    <property name="n" value="{setidTeam2_0}"/>
+    <property name="n" value="{setidTeam3_0_0}"/>
     <property name="neutralindex" value="2"/>
     <property name="onlyBuildings" value="{isonlybuilding}"/>
-    <property name="opargs" value="r,reset,str;u,dunit_op,str,None;o,isonlybuilding,bool"/>
+    <property name="opargs" value="r,reset,str;u,dunit_op,str,None;o,isonlybuilding,bool,false"/>
     <property name="prefix" value="ztdo"/>
     <property name="reset" value="1s"/>
-    <property name="setTeam" value="0 2 4 6 8,1 3 5 7 9,-3 -2 -1"/>
-    <property name="setidTeam" value="Ac,Bc,Nc"/>
+    <property name="setTeam" value="0 2 4,6 8,1 3 5 7 9,-3 -2 -1"/>
+    <property name="setidTeam" value="Ac,A1c;Ac,A2c;Bc;Nc"/>
    </properties>
   </object>
   <object id="143" name="-&gt;2" type="mapText" x="1600" y="1000" width="20" height="20">
@@ -24137,7 +24141,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城1.a"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="1a"/>
-    <property name="textColor" value="#191970"/>
+    <property name="textColor" value="#FF7700"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24159,7 +24163,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城2.a"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="2a"/>
-    <property name="textColor" value="#191970"/>
+    <property name="textColor" value="#FF7700"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24169,7 +24173,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城3.a"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="3a"/>
-    <property name="textColor" value="#191970"/>
+    <property name="textColor" value="#FF7700"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24179,7 +24183,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城4.a"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="4a"/>
-    <property name="textColor" value="#191970"/>
+    <property name="textColor" value="#FF7700"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24189,7 +24193,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城5.a"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="5a"/>
-    <property name="textColor" value="#191970"/>
+    <property name="textColor" value="#FF7700"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24199,7 +24203,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城6.a"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="6a"/>
-    <property name="textColor" value="#191970"/>
+    <property name="textColor" value="#FF7700"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24209,7 +24213,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城7.a"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="7a"/>
-    <property name="textColor" value="#191970"/>
+    <property name="textColor" value="#FF7700"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24219,7 +24223,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城8.a"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="8a"/>
-    <property name="textColor" value="#191970"/>
+    <property name="textColor" value="#FF7700"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24229,7 +24233,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城9.a"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="9a"/>
-    <property name="textColor" value="#191970"/>
+    <property name="textColor" value="#FF7700"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24239,7 +24243,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城10.a"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="10a"/>
-    <property name="textColor" value="#191970"/>
+    <property name="textColor" value="#FF7700"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24249,7 +24253,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城11.a"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="11a"/>
-    <property name="textColor" value="#191970"/>
+    <property name="textColor" value="#FF7700"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24259,7 +24263,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城12.a"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="12a"/>
-    <property name="textColor" value="#191970"/>
+    <property name="textColor" value="#FF7700"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24269,7 +24273,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城1.b"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="1b"/>
-    <property name="textColor" value="#FF2200"/>
+    <property name="textColor" value="#191970"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24279,7 +24283,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城2.b"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="2b"/>
-    <property name="textColor" value="#FF2200"/>
+    <property name="textColor" value="#191970"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24289,7 +24293,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城3.b"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="3b"/>
-    <property name="textColor" value="#FF2200"/>
+    <property name="textColor" value="#191970"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24299,7 +24303,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城4.b"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="4b"/>
-    <property name="textColor" value="#FF2200"/>
+    <property name="textColor" value="#191970"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24309,7 +24313,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城5.b"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="5b"/>
-    <property name="textColor" value="#FF2200"/>
+    <property name="textColor" value="#191970"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24319,7 +24323,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城6.b"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="6b"/>
-    <property name="textColor" value="#FF2200"/>
+    <property name="textColor" value="#191970"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24329,7 +24333,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城7.b"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="7b"/>
-    <property name="textColor" value="#FF2200"/>
+    <property name="textColor" value="#191970"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24339,7 +24343,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城8.b"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="8b"/>
-    <property name="textColor" value="#FF2200"/>
+    <property name="textColor" value="#191970"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24349,7 +24353,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城9.b"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="9b"/>
-    <property name="textColor" value="#FF2200"/>
+    <property name="textColor" value="#191970"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24359,7 +24363,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城10.b"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="10b"/>
-    <property name="textColor" value="#FF2200"/>
+    <property name="textColor" value="#191970"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24369,7 +24373,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城11.b"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="11b"/>
-    <property name="textColor" value="#FF2200"/>
+    <property name="textColor" value="#191970"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24379,7 +24383,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="activatedBy" value="zcto城12.b"/>
     <property name="resetActivationAfter" value="1s"/>
     <property name="text" value="12b"/>
-    <property name="textColor" value="#FF2200"/>
+    <property name="textColor" value="#191970"/>
     <property name="textSize" value="6"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -24561,9 +24565,9 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="prefix" value="fd"/>
    </properties>
   </object>
-  <object id="205" name="zcto0.zbt测2.测2" x="6600" y="1200" width="20" height="20"/>
-  <object id="206" name="zcto-2.zbt测1.测1" x="6400" y="1200" width="20" height="20"/>
-  <object id="207" name="zcto3.zbt测3.测3" x="6800" y="1200" width="20" height="20"/>
+  <object id="205" name="zcto0.b测2.测2" x="6600" y="1200" width="20" height="20"/>
+  <object id="206" name="zcto-2.b测1.测1" x="6400" y="1200" width="20" height="20"/>
+  <object id="207" name="zcto3.b测3.测3" x="6800" y="1200" width="20" height="20"/>
   <object id="208" name="b-1.b测1" x="7800" y="1200" width="20" height="20"/>
   <object id="209" name="b0.b测2,ffd12_6" x="8400" y="1200" width="20" height="20"/>
   <object id="210" name="b-2.b测1" x="7600" y="1200" width="20" height="20"/>
@@ -24574,16 +24578,16 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
   <object id="215" name="fd.fd12_6.12s.6s" x="5400" y="1240" width="40" height="40"/>
   <object id="216" name="multiText_info_zmt" x="2200" y="1400" width="20" height="20">
    <properties>
-    <property name="args" value="teamDetect_cite,str;mtext,str"/>
+    <property name="acti" value="{td_cite}.a1;{td_cite}.a2;{td_cite}.b;{td_cite}.n"/>
+    <property name="args" value="td_cite,str;mtext,str"/>
     <property name="atext" value="{mtext}"/>
     <property name="btext" value="{mtext}"/>
-    <property name="color" value="#FF2200,#191970,#FFFFFF"/>
-    <property name="isdefaultText" type="bool" value="false"/>
+    <property name="color" value="#FFDD00,#FF2200,#191970,#FFFFFF"/>
     <property name="isprefixseg" type="bool" value="true"/>
     <property name="mtextsize" value="7"/>
     <property name="opargs" value="s,mtextsize,str;a,atext,str;b,btext,str"/>
     <property name="prefix" value="zmt"/>
-    <property name="text" value="{atext},{btext},{mtext}"/>
+    <property name="text" value="{atext},{atext},{btext},{mtext}"/>
     <property name="textsize" value="{mtextsize}"/>
    </properties>
   </object>
@@ -24608,9 +24612,11 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
   <object id="220" name="tree_info_zcco" x="600" y="1400" width="20" height="20">
    <properties>
     <property name="a" value="{idprefix0_0}.a"/>
+    <property name="a1" value="{idprefix0_0}.a1"/>
+    <property name="a2" value="{idprefix0_0}.a2"/>
     <property name="args" value="inaddteam,str;cite_name,str;cityname,str"/>
     <property name="b" value="{idprefix0_0}.b"/>
-    <property name="brace" value="a,b,n"/>
+    <property name="brace" value="a,b,n,a1,a2"/>
     <property name="dunit_op" value="su"/>
     <property name="idprefix" value="mtd,1"/>
     <property name="n" value="{idprefix0_0}.n"/>
@@ -24687,16 +24693,18 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
   <object id="245" name="tree_info_c" x="600" y="1600" width="20" height="20">
    <properties>
     <property name="a" value="{idprefix0_0}.a"/>
+    <property name="a1" value="{idprefix0_0}.a1"/>
+    <property name="a2" value="{idprefix0_0}.a2"/>
     <property name="args" value="inaddteam,str;cite_name,str;cityname,str"/>
     <property name="b" value="{idprefix0_0}.b"/>
-    <property name="brace" value="a,b,n"/>
+    <property name="brace" value="a,b,n,a1,a2"/>
     <property name="btteam" value="{inaddteam}"/>
     <property name="dunit_op" value="su"/>
     <property name="exist" value="{ismultiText or (not isteamdetect)},{not ismultiText and isteamdetect},{isteamdetect},{ismultiText and isteamdetect},{isbugTurret and isteamdetect}"/>
     <property name="idprefix" value="mtd,1"/>
     <property name="isbugTurret" type="bool" value="false"/>
     <property name="ismultiText" type="bool" value="false"/>
-    <property name="isonlybuilding" type="bool" value="true"/>
+    <property name="isonlybuilding" type="bool" value="false"/>
     <property name="isteamdetect" type="bool" value="true"/>
     <property name="n" value="{idprefix0_0}.n"/>
     <property name="name" value="t{inaddteam},i{inaddwarmup},r{reset},u{dunit_op},t{team},o{isonlybuilding};zci{inaddteam}.{cityname},s{mtextsize},i{inaddwarmup},r{reset},u{dunit_op},t{team},o{isonlybuilding};ztdo.{idprefix0_0},u{dunit_op},r{teamreset},o{isonlybuilding};zmt.{idprefix0_0}.{cityname},s{mtextsize},a{atext},b{btext};b{btteam}.{idprefix0_0},p,f{f_cite},n{isneutralspawn},u{btdunit_op},w{isbugdisposable},y{isbugTurretdeacti}"/>
@@ -24880,6 +24888,263 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
    <properties>
     <property name="text" value="万能城市"/>
     <property name="textSize" value="12"/>
+   </properties>
+  </object>
+  <object id="353" name="multiAdd_info_zma" x="2600" y="3000" width="20" height="20">
+   <properties>
+    <property name="args" value="td_cite,str;dunit_op_n,str"/>
+    <property name="deacti" value="{td_cite}.n,{td_cite}.b;{td_cite}.n,{td_cite}.a;{td_cite}.a,{td_cite}.b"/>
+    <property name="isneutralspawn" type="bool" value="false"/>
+    <property name="isprefixseg" type="bool" value="true"/>
+    <property name="opargs" value="n,isneutralspawn,bool,false;u,dunit_op_a,str,{dunit_op_n};v,dunit_op_b,str,{dunit_op_n};a,{team_a},str;b,{team_b},str;w,{wdctd_cite},str;s,{side},str"/>
+    <property name="prefix" value="zma"/>
+    <property name="spawnUnits" value="d.{dunit_op_a};d.{dunit_op_b};{unitn}"/>
+    <property name="team" value="{team_a},{team_b},-1"/>
+    <property name="team_a" value="-1"/>
+    <property name="team_b" value="-1"/>
+    <property name="unitn" value="{'d.{dunit_op_n}' if isneutralspawn else ''}"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="355" name="fi.fi30.30s" x="5400" y="2600" width="40" height="40"/>
+  <object id="357" name="1a1" type="mapText" x="7560" y="980" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城1.a1"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="1a1"/>
+    <property name="textColor" value="#FFDD00"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="358" name="1a2" type="mapText" x="7560" y="1020" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城1.a2"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="1a2"/>
+    <property name="textColor" value="#FF2200"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="359" name="2a1" type="mapText" x="7760" y="980" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城2.a1"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="2a1"/>
+    <property name="textColor" value="#FFDD00"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="360" name="2a2" type="mapText" x="7760" y="1020" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城2.a2"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="2a2"/>
+    <property name="textColor" value="#FF2200"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="361" name="3a1" type="mapText" x="7960" y="980" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城3.a1"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="3a1"/>
+    <property name="textColor" value="#FFDD00"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="362" name="3a2" type="mapText" x="7960" y="1020" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城3.a2"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="3a2"/>
+    <property name="textColor" value="#FF2200"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="363" name="4a1" type="mapText" x="8160" y="980" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城4.a1"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="4a1"/>
+    <property name="textColor" value="#FFDD00"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="364" name="4a2" type="mapText" x="8160" y="1020" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城4.a2"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="4a2"/>
+    <property name="textColor" value="#FF2200"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="365" name="5a1" type="mapText" x="8360" y="980" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城5.a1"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="5a1"/>
+    <property name="textColor" value="#FFDD00"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="366" name="5a2" type="mapText" x="8360" y="1020" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城5.a2"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="5a2"/>
+    <property name="textColor" value="#FF2200"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="367" name="6a1" type="mapText" x="8560" y="980" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城6.a1"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="6a1"/>
+    <property name="textColor" value="#FFDD00"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="368" name="6a2" type="mapText" x="8560" y="1020" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城6.a2"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="6a2"/>
+    <property name="textColor" value="#FF2200"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="369" name="7a1" type="mapText" x="8760" y="980" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城7.a1"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="7a1"/>
+    <property name="textColor" value="#FFDD00"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="370" name="7a2" type="mapText" x="8760" y="1020" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城7.a2"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="7a2"/>
+    <property name="textColor" value="#FF2200"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="371" name="8a1" type="mapText" x="8960" y="980" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城8.a1"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="8a1"/>
+    <property name="textColor" value="#FFDD00"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="372" name="8a2" type="mapText" x="8960" y="1020" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城8.a2"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="8a2"/>
+    <property name="textColor" value="#FF2200"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="373" name="9a1" type="mapText" x="9160" y="980" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城9.a1"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="9a1"/>
+    <property name="textColor" value="#FFDD00"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="374" name="9a2" type="mapText" x="9160" y="1020" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城9.a2"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="9a2"/>
+    <property name="textColor" value="#FF2200"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="375" name="10a1" type="mapText" x="9360" y="980" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城10.a1"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="10a1"/>
+    <property name="textColor" value="#FFDD00"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="376" name="10a2" type="mapText" x="9360" y="1020" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城10.a2"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="10a2"/>
+    <property name="textColor" value="#FF2200"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="377" name="11a1" type="mapText" x="9560" y="980" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城11.a1"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="11a1"/>
+    <property name="textColor" value="#FFDD00"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="378" name="11a2" type="mapText" x="9560" y="1020" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城11.a2"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="11a2"/>
+    <property name="textColor" value="#FF2200"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="379" name="12a1" type="mapText" x="9760" y="980" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城12.a1"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="12a1"/>
+    <property name="textColor" value="#FFDD00"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="380" name="12a2" type="mapText" x="9760" y="1020" width="20" height="20">
+   <properties>
+    <property name="activatedBy" value="zcto城12.a2"/>
+    <property name="resetActivationAfter" value="1s"/>
+    <property name="text" value="12a2"/>
+    <property name="textColor" value="#FF2200"/>
+    <property name="textSize" value="6"/>
+    <property name="warmup" value="1s"/>
    </properties>
   </object>
  </objectgroup>

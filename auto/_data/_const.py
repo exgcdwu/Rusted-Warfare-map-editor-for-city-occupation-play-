@@ -223,7 +223,7 @@ for name, value in inspect.getmembers(OBJECT_ARGS_BOOL):
 def operation_cycle_start(var_name:str, var_initial:str, var_condition:str, tag:str):
     return [
         {
-            AUTOKEY.operation_type: AUTOKEY.typeset, 
+            AUTOKEY.operation_type: AUTOKEY.typeset_expression, 
             var_name: var_initial
         }, 
 
@@ -278,6 +278,14 @@ def operation_goto(tag:str):
         {
             AUTOKEY.operation_type: AUTOKEY.goto, 
             AUTOKEY.goto_tag: "tag_goto_" + tag 
+        }
+    ]
+
+def operation_gototag(tag:str):
+    return [
+        {
+            AUTOKEY.operation_type: AUTOKEY.tag, 
+            AUTOKEY.tag: "tag_goto_" + tag 
         }
     ]
 

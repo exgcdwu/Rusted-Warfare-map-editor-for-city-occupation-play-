@@ -18,7 +18,7 @@ teamDetect_info_args_dict[INFOKEY.prefix] = str
 teamDetect_info_args_dict[INFOKEY.isprefixseg] = bool
 teamDetect_info_args_dict[INFOKEY.reset] = str
 teamDetect_info_args_dict[INFOKEY.setTeam] = (list, list, int)
-teamDetect_info_args_dict[INFOKEY.setidTeam] = (list, str)
+teamDetect_info_args_dict[INFOKEY.setidTeam] = (list, list, str)
 teamDetect_info_args_dict[INFOKEY.neutralindex] = str
 
 teamDetect_info_args_dict[INFOKEY.minUnits] = str
@@ -47,7 +47,7 @@ DETECT_OPTION_DICT = {
 teamDetect_info_args_dict.update(DETECT_OPTION_DICT)
 
 teamDetect_info_default_args_dict = {
-    INFOKEY.name: "" + "[\"{'setid\" + \"Team\" + str(ex) + \"_0'[len(setidTeam[ex]):]}\" for ex in range(lenidTeam)]", # [\"{'setid\" + \"Team\" + str(ex) + \"_0'[len(setidTeam[ex]):]}\"
+    INFOKEY.name: "" + "[\"{'setid\" + \"Team\" + str(ex) + \"_0_0'[len(seti\" + \"dTeam[\" + str(ex) + \"][0]):]}\" for ex in range(lenidTeam)]", # [\"{'setid\" + \"Team\" + str(ex) + \"_0'[len(setidTeam[ex]):]}\"
     INFOKEY.offset: f"[[0, 0] for ex in range({INFOKEY.lenidTeam})]", 
     INFOKEY.offsetsize: f"[[0, 0] for ex in range({INFOKEY.lenidTeam})]", 
     INFOKEY.neutralindex: "-1"
@@ -78,20 +78,22 @@ teamDetect_info_default_brace_set = {
 
 teamDetect_info_operation_pre_list = \
     operation_cycle_start("i", "0", f"i < {INFOKEY.lenidTeam}", "teamDetect_pre_cycle1") + \
+        operation_cycle_start("j", "0", f"j < len({INFOKEY.setidTeam}[i])", "teamDetect_pre_cycle2") + \
         [
             {
                 AUTOKEY.operation_type: AUTOKEY.typeset_id, 
-                f"{INFOKEY.setidTeam}" + "{i}_": "1", 
-                AUTOKEY.real_idexp: "{" + f"{INFOKEY.setidTeam}" + "[i]}"
+                f"{INFOKEY.setidTeam}" + "{i}_{j}_": "1", 
+                AUTOKEY.real_idexp: "{" + f"{INFOKEY.setidTeam}" + "[i][j]}"
             }, 
         ] + \
+        operation_cycle_end("j", "j + 1", "teamDetect_pre_cycle2") + \
     operation_cycle_end("i", "i + 1", "teamDetect_pre_cycle1")
 
 DETECT_OPTION_OPERATION_OPTIONAL = {DETECT_KEY:(True, DETECT_KEY, AUTOKEY.brace) if DEFECT_VALUE == bool else ("{" + DETECT_KEY + "}", DETECT_KEY, AUTOKEY.exist) for DETECT_KEY, DEFECT_VALUE in DETECT_OPTION_DICT.items()}
 
 teamDetect_info_operation_optional = {
-    rw.const.OBJECTOP.id: ("{id_now}", "j == 0", AUTOKEY.brace), 
-    rw.const.OBJECTOP.alsoActivate: "{id_now}", 
+    rw.const.OBJECTOP.id: ("{id_now}", "{id_now_exist}", AUTOKEY.brace), 
+    rw.const.OBJECTOP.alsoActivate: "{alsoactivate_now}", 
     rw.const.OBJECTOP.minUnits: ("{" + INFOKEY.minUnits + "}", INFOKEY.minUnits, AUTOKEY.exist), 
     rw.const.OBJECTOP.maxUnits: ("{" + INFOKEY.maxUnits + "}", INFOKEY.maxUnits, AUTOKEY.exist), 
     rw.const.OBJECTOP.resetActivationAfter: "{" + INFOKEY.reset + "}", 
@@ -128,23 +130,55 @@ teamDetect_info_operation_list = \
         operation_cycle_end("i", "i + 1", "teamDetect_cycle_check1")
     ) + \
     operation_typeset_expression("setidTeam_id", "[]") + \
+    operation_typeset_expression("setidTeam_id_all", "[]") + \
     operation_cycle_start("i", "0", f"i < {INFOKEY.lenidTeam}", "teamDetect_cycle3") + \
-        operation_typeset_expression("setidTeam_id", "setidTeam_id + ['setidTeam{i}_0']") + \
+        operation_typeset_expression("setidTeam_id", "setidTeam_id + ['setidTeam{i}_0_0']") + \
+        operation_cycle_start("j", "0", f"j < len({INFOKEY.setidTeam}[i])", "teamDetect_cycle2_setidall") + \
+            operation_typeset_expression("setidTeam_id_all", "setidTeam_id_all + ['setidTeam{i}_{j}_0']") + \
+        operation_cycle_end("j", "j + 1", "teamDetect_cycle2_setidall") + \
     operation_cycle_end("i", "i + 1", "teamDetect_cycle3") + \
-    operation_typeset_expression("setidTeam_id_depn", "[','.join([setidTeam_id[j] for j in range(lenidTeam) if j != ti]) for ti in range(lenidTeam)]") + \
-    operation_typeset_expression("setidTeam_id_dep", "[','.join([setidTeam_id[j] for j in range(lenidTeam) if j != ti and j != int(neutralindex)]) for ti in range(lenidTeam)]") + \
-    operation_typeset_expression("teamtoi", "dict([[str(setTeam[ti][j]),str(ti)] for j in range(len(setTeam[ti])) for ti in range(lenidTeam)])") + \
-    operation_typeset_expression("teamtoid", "dict([[str(setTeam[ti][j]),str(setidTeam_id[ti])] for j in range(len(setTeam[ti])) for ti in range(lenidTeam)])") + \
-    operation_typeset_expression("teamtoid_depn", "dict([[str(setTeam[ti][j]), str(setidTeam_id_depn[ti])] for j in range(len(setTeam[ti])) for ti in range(lenidTeam)])") + \
-    operation_typeset_expression("teamtoid_dep", "dict([[str(setTeam[ti][j]), str(setidTeam_id_dep[ti])] for j in range(len(setTeam[ti])) for ti in range(lenidTeam)])") + \
+    operation_typeset_expression("setidTeam_set", "set(setidTeam_id)") + \
+    operation_typeset_expression("setidTeam_id_all_set_list", "list(set(setidTeam_id_all))") + \
+    operation_typeset_expression("setidTeam_id_depn", "[','.join([myid for myid in setidTeam_set if myid != setidTeam_id[ti]]) for ti in range(lenidTeam)]") + \
+    operation_typeset_expression("setidTeam_id_dep", "[','.join([myid for myid in setidTeam_set if myid != setidTeam_id[ti] and myid != setidTeam_id[neutralindex]]) for ti in range(lenidTeam)]") + \
+    operation_typeset_expression("teamtoi", "dict([[str(setTeam[ti][tj]),str(ti)] for tj in range(len(setTeam[ti])) for ti in range(lenidTeam)])") + \
+    operation_typeset_expression("teamtoid", "dict([[str(setTeam[ti][tj]),str(setidTeam_id[ti])] for tj in range(len(setTeam[ti])) for ti in range(lenidTeam)])") + \
+    operation_typeset_expression("teamtoid_depn", "dict([[str(setTeam[ti][tj]), str(setidTeam_id_depn[ti])] for tj in range(len(setTeam[ti])) for ti in range(lenidTeam)])") + \
+    operation_typeset_expression("teamtoid_dep", "dict([[str(setTeam[ti][tj]), str(setidTeam_id_dep[ti])] for tj in range(len(setTeam[ti])) for ti in range(lenidTeam)])") + \
     operation_typeset_expression("lenTeam", f"sum(len({INFOKEY.setTeam}[ti]) for ti in range(lenidTeam))") + \
+    operation_cycle_start("i", "0", f"i < len(setidTeam_id_all_set_list)", "teamDetect_cycle2_basic") + \
+        [
+            {
+                AUTOKEY.operation_type: AUTOKEY.object, 
+                AUTOKEY.type: rw.const.OBJECTTYPE.basic, 
+                AUTOKEY.name: "{setidTeam_id_all_set_list[i]}", 
+                AUTOKEY.optional: {
+                    rw.const.OBJECTOP.resetActivationAfter: "{" + INFOKEY.reset + "}"
+                }
+            }
+        ] + \
+    operation_cycle_end("i", "i + 1", "teamDetect_cycle2_basic") + \
+    [
+        {
+            AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
+            "id_now_exist": "False"
+        }, 
+    ] + \
     operation_cycle_start("i", "0", f"i < {INFOKEY.lenidTeam}", "teamDetect_cycle1") + \
         [
             {
                 AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-                "id_now": f"{INFOKEY.setidTeam}" + "{i}_0"
+                "alsoactivate_now": f"'{INFOKEY.setidTeam}" + "{i}_0_0'"
             }, 
         ] + \
+        operation_cycle_start("j", "1", f"j < len({INFOKEY.setidTeam}[i])", "teamDetect_cycle2_alsoacti") + \
+            [
+                {
+                    AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
+                    "alsoactivate_now": f"'alsoactivate_now' + ',' + '{INFOKEY.setidTeam}" + "{i}_{j}_0'"
+                }, 
+            ] + \
+        operation_cycle_end("j", "j + 1", "teamDetect_cycle2_alsoacti") + \
         operation_if(f"len({INFOKEY.name}) != 1", "teamDetect_if2") + \
             [
                 {
@@ -230,6 +264,16 @@ teamDetect_info_operation_list = \
         operation_cycle_end("j", "j + 1", "teamDetect_cycle2") + \
     operation_cycle_end("i", "i + 1", "teamDetect_cycle1")
 
+teamDetect_info_is_cite_white_list = [
+    "setidTeam_id", 
+    "setidTeam_id_depn", 
+    "setidTeam_id_dep", 
+    "teamtoi", 
+    "teamtoid", 
+    "teamtoid_depn", 
+    "teamtoid_dep", 
+    "lenTeam"
+]
 
 teamDetect_info = {
     INFOKEY.teamDetect_info:{
@@ -250,7 +294,8 @@ teamDetect_info = {
         AUTOKEY.opargs_seg: ",", 
         AUTOKEY.operation_pre:teamDetect_info_operation_pre_list, 
         AUTOKEY.operation:teamDetect_info_operation_list, 
-        AUTOKEY.no_check: True
+        AUTOKEY.no_check: True, 
+        AUTOKEY.is_cite_white_list: teamDetect_info_is_cite_white_list
     }
 }
 

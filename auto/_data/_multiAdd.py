@@ -64,8 +64,8 @@ multiAdd_info_operation_pre_list = []
 multiAdd_info_operation_optional = {
     rw.const.OBJECTOP.activatedBy: ("{acti_now}", "acti_now_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.deactivatedBy: ("{deacti_now}", "deacti_now_exist", AUTOKEY.brace), 
-    rw.const.OBJECTOP.team: ("{team_now}", "team_now_exist", AUTOKEY.brace), 
-    rw.const.OBJECTOP.spawnUnits: ("{spawnUnits_now}", "spawnUnits_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.team: ("{team_now}", "team_now_exist and 'team_now' != ''", AUTOKEY.brace), 
+    rw.const.OBJECTOP.spawnUnits: ("{spawnUnits_now}", "spawnUnits_now_exist and 'spawnUnits_now' != ''", AUTOKEY.brace), 
     rw.const.OBJECTOP.resetActivationAfter: ("{reset_now}", "reset_now_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.warmup: ("{warmup_now}", "warmup_now_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.repeatDelay: ("{repeat_now}", "repeat_now_exist", AUTOKEY.brace), 
@@ -145,7 +145,7 @@ multiAdd_info_operation_list = \
         operation_exist_if(f"{INFOKEY.teamDetect_cite}", "multiAdd_exist_if_teamDetect_cite_assign") + \
             operation_if("team_now_exist == True", "multiAdd_exist_if_teamDetect_cite_assign_team_exist") + \
                 operation_if("{" + f"{INFOKEY.teamDetect_cite}" + "}" + ".teamtoi.get('team_now') != None", "multiAdd_if_teamDetect_cite_assign_acti") + \
-                    operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{{" + f"{INFOKEY.teamDetect_cite}" + "}" + ".teamtoi['team_now']}_0", "multiAdd", "actiids_addteamDetect") + \
+                    operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{{" + f"{INFOKEY.teamDetect_cite}" + "}" + ".teamtoi['team_now']}_0_0", "multiAdd", "actiids_addteamDetect") + \
                     operation_typeset_expression(f"{INFOKEY.acti}_now_exist", "True") + \
                     operation_typeset_expression(f"{INFOKEY.acti}_now", f"{INFOKEY.acti}_now_" + "{i}") + \
                 operation_ifend("multiAdd_if_teamDetect_cite_assign_acti") + \

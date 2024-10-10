@@ -104,6 +104,8 @@ class AUTOKEY:
     pdb_pause = "pdb_pause"
     error = "error"
     error_info = "error_info"
+    isnot_cite_check = "isnot_cite_check"
+    is_cite_white_list = "is_cite_white_list"
 
     opargs_sys_seg = "|"
     IDs_seg = ","
@@ -125,6 +127,13 @@ language_set = set(language_dict.keys())
 
 full_screen = int(shutil.get_terminal_size().columns / 2) * 2
 underline_even_num = int(full_screen * 3 / 8) * 2
+
+def search_cite(prefix):
+    results = {}
+    for key in cite_object_dict:
+        if key.startswith(prefix):
+            results[key] = cite_object_dict[key]
+    return results
 
 def str_lang(info_str:str)->str:
     language_index = language_dict[language]
@@ -416,7 +425,7 @@ lower_bool_dict = {
 }
 
 def lower_bool(value:str)->str:
-    if lower_bool_dict.get(value) != None:
+    if not isinstance(value, dict) and lower_bool_dict.get(value) != None:
         return value_to_mapvalue(lower_bool_dict[value], bool)
     else:
         return value
@@ -431,7 +440,7 @@ def tobject_args_translation(key:str, value:str, dict_name:dict)->dict:
             value_list = value[1].split(",")
             isend = True
             for value_n in value_list:
-                if dict_name.get(value_n) == None:
+                if dict_name.get(value_n) == None or str_translation("{" + value_n + "}", dict_name) == 'None':
                     isend = False
                     break
             if isend:
@@ -440,8 +449,8 @@ def tobject_args_translation(key:str, value:str, dict_name:dict)->dict:
     else:
         dict_ans =  {key:str_translation(value, dict_name)}
 
-    for key, value in dict_ans.items():
-        dict_ans[key] = lower_bool(value)
+    for key_d, value_d in dict_ans.items():
+        dict_ans[key_d] = lower_bool(value_d)
 
     return dict_ans
 
@@ -501,7 +510,12 @@ def mapvalue_to_value(value, ntype):
     else:
         if ntype == bool:
             value_now = str(value)
-            value_now = True if (value_now == "true" or value_now == "True") else False
+            if (value_now == "true" or value_now == "True"):
+                value_now = True
+            elif (value_now == "false" or value_now == "False"):
+                value_now = False
+            else:
+                value_now = value_now
             return value_now
         elif isinstance(ntype, tuple):
             if ntype[0] == list:
@@ -524,10 +538,10 @@ def value_to_mapvalue(value, ntype):
     if isinstance(ntype, tuple):
         if ntype[0] == list:
             if ntype[1] == str:
-                value_now = value.join(",")
+                    value_now = ",".join(value)
             elif ntype[1] == int:
                 value = [str(value_i) for value_i in value]
-                value_now = value.join(" ")
+                value_now = " ".join(value)
             elif ntype[1] == list:
                 if ntype[2] == str:
                     value_now = ";".join([",".join(value_i) for value_i in value])
@@ -1270,8 +1284,7 @@ def auto_func():
                                     key_trans = str_translation(key_n, object_dict)
                                     num = brace_translation(value, object_dict)
                                     info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.ids].append([key_trans, num])
-                                    for i in range(num):
-                                        info_dict_now[key_trans] = mapvalue_to_value(str_translation(operation_now[AUTOKEY.real_idexp], object_dict), str)
+                                    info_dict_now[key_trans] = mapvalue_to_value(str_translation(operation_now[AUTOKEY.real_idexp], object_dict), str)
                         elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeadd_args:
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type:
@@ -1670,17 +1683,27 @@ def auto_func():
                     else:
                         if not (isdelete_all or isdelete_all_sym or isdelete_sym):
                             dtobject_id.add(idnow)
-
+            
             if object_dict.get(AUTOKEY.cite_name) != None and (not (isdelete_all or isdelete_all_sym or isdelete_sym)):
+                cite_dict = OrderedDict([[info_nowp, str] for info_nowp in info[AUTOKEY.brace]]) if info.get(AUTOKEY.brace) != None else OrderedDict()
+                cite_dict.update(OrderedDict([[info_nowp, str] for info_nowp in myinfo[AUTOKEY.is_cite_white_list]]) if myinfo.get(AUTOKEY.is_cite_white_list) != None else OrderedDict())
+                cite_dict.update(OrderedDict(myinfo[AUTOKEY.args]) if myinfo.get(AUTOKEY.args) != None else OrderedDict())
+                cite_dict.update(OrderedDict([[info_nowp[0].split("|")[0], info_nowp[1]] for info_nowp in myinfo[AUTOKEY.opargs].values()]) if myinfo.get(AUTOKEY.opargs) != None else OrderedDict())
+                cite_dict.update(myinfo[AUTOKEY.info_args] if myinfo.get(AUTOKEY.info_args) != None else OrderedDict())
+                cite_dict.update(OrderedDict([[info_one[0] + str(ti), str] for info_one in myinfo[AUTOKEY.ids] for ti in range(info_one[1])] + [[info_one[0], str] for info_one in myinfo[AUTOKEY.ids]]) if myinfo.get(AUTOKEY.ids) != None else OrderedDict())
                 
                 for key, value in object_dict.items():
+                    
+                    if (not (myinfo.get(AUTOKEY.isnot_cite_check) != None and myinfo[AUTOKEY.isnot_cite_check])) and cite_dict.get(key) == None:
+                        continue
+                    
                     if cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + key) != None:
                         origin_id = cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + AUTOKEY.tobject_id)
                         origin_name = cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + AUTOKEY.tobject_name)
                         standard_error(f"Reference tags(cite_name) are duplicated。(original ID:({origin_id}), original name:({origin_name}), Cite:{object_dict[AUTOKEY.cite_name]})" + \
                                        f"|标记宾语引用(cite_name)发生重合。(重合 ID:({origin_id}), 重合名称:({origin_name}), 引用名称(cite_name):{object_dict[AUTOKEY.cite_name]})", 
                                        14, tobject_id, tobject_name, tobject_x, tobject_y)
-                    cite_object_dict[object_dict[AUTOKEY.cite_name] + "." + key] = deepcopy(value)
+                    cite_object_dict[object_dict[AUTOKEY.cite_name] + "." + key] = value
             
             time_tag_e = time.time()
             time_tag = time_tag_e - time_tag_i

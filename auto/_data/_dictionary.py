@@ -39,7 +39,8 @@ dictionary_info = {
         AUTOKEY.prefix: AUTOKEY.prefix, 
         AUTOKEY.isprefixseg: AUTOKEY.isprefixseg, 
         AUTOKEY.operation:[], 
-        AUTOKEY.no_check: True
+        AUTOKEY.no_check: True, 
+        AUTOKEY.isnot_cite_check: True
     }
 }
 

@@ -212,6 +212,18 @@ city_info_ids = [
 ]
 ```
 
+## isnot_cite_check
+
+如果存在且为True。那么引用过滤将会取消。引用过滤即仅允许以下部分可被引用。
+    args
+    opargs
+    brace
+    ids产生的id
+
+## is_cite_white_list
+
+如果存在，那么将会特别地允许内部的参数可以引用。
+
 ## operation_pre / operation
 
 类型为list(dict)。表明一系列操作。operation_pre 是 info宾语执行的operation序列。operation 是 标记宾语执行的operation序列。以下将说明所有操作及适应范围。所有operation字典必须有一个键为operation_type，该键值对决定了operation的类型，接下来将说明所有operation_type的作用及其他参数。
@@ -320,13 +332,20 @@ nameadd_optional
 标记宾语要添加一个宾语。接下来会提供详细格式要求。
 
 参数：
+
 exist:list 所有参数必须存在且为true，才会添加宾语
+
 death:list 所有参数必须不存在或者为false，才会添加宾语
+
 offset: 表达式计算，前两项为宾语xy偏移
+
 offsetsize：表达式计算，前两项为宾语大小xy偏移
-name: 字符串翻译后为宾语名称。如果为tuple，第三项为brace时，第二项表达式为True允许产生该条目；第三项为exist时，exist内所有条目（用","分割，分割后进行字符串翻译）均必须存在且不为None，允许产生该条目。
-type: 字符串翻译后为宾语类型。如果为tuple，第三项为brace时，第二项表达式为True允许产生该条目；第三项为exist时，exist内所有条目（用","分割，分割后进行字符串翻译）均必须存在且不为None，允许产生该条目。
-optional: dict 宾语可选项键值对，值进行字符串翻译。值如果为tuple，第三项为brace时，第二项表达式为True允许产生该条目；第三项为exist时，exist内所有条目（用","分割，分割后进行字符串翻译）均必须存在且不为None，允许产生该条目。
+
+name: 字符串翻译后为宾语名称。如果为tuple，第三项为brace时，第二项表达式为True允许产生该条目；第三项为exist时，exist内所有条目（用","分割，分割后进行字符串翻译）均必须存在且不为'None'，允许产生该条目。
+
+type: 字符串翻译后为宾语类型。如果为tuple，第三项为brace时，第二项表达式为True允许产生该条目；第三项为exist时，exist内所有条目（用","分割，分割后进行字符串翻译）均必须存在且不为'None'，允许产生该条目。
+
+optional: dict 宾语可选项键值对，值进行字符串翻译。值如果为tuple，第三项为brace时，第二项表达式为True允许产生该条目；第三项为exist时，exist内所有条目（用","分割，分割后进行字符串翻译）均必须存在且不为'None'，允许产生该条目。
 
 ## Notations
 
