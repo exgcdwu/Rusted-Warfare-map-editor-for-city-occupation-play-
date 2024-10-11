@@ -129,23 +129,28 @@ teamDetect_info_operation_list = \
             operation_cycle_end("j", "j + 1", "teamDetect_cycle_check2") + \
         operation_cycle_end("i", "i + 1", "teamDetect_cycle_check1")
     ) + \
+    operation_typeset_expression("setidTeam_len", "[len(setTeam[ti]) for ti in range(lenidTeam)]") + \
     operation_typeset_expression("setidTeam_id", "[]") + \
     operation_typeset_expression("setidTeam_id_all", "[]") + \
+    operation_typeset_expression("iti", "[]") + \
+    operation_typeset_expression("itj", "[]") + \
     operation_cycle_start("i", "0", f"i < {INFOKEY.lenidTeam}", "teamDetect_cycle3") + \
         operation_typeset_expression("setidTeam_id", "setidTeam_id + ['setidTeam{i}_0_0']") + \
+        operation_typeset_expression("iti", "iti + [i] * setidTeam_len[i]") + \
+        operation_typeset_expression("itj", "itj + [tj for tj in range(setidTeam_len[i])]") + \
         operation_cycle_start("j", "0", f"j < len({INFOKEY.setidTeam}[i])", "teamDetect_cycle2_setidall") + \
             operation_typeset_expression("setidTeam_id_all", "setidTeam_id_all + ['setidTeam{i}_{j}_0']") + \
         operation_cycle_end("j", "j + 1", "teamDetect_cycle2_setidall") + \
     operation_cycle_end("i", "i + 1", "teamDetect_cycle3") + \
+    operation_typeset_expression("lenTeam", f"sum([len({INFOKEY.setTeam}[ti]) for ti in range(lenidTeam)])") + \
     operation_typeset_expression("setidTeam_set", "set(setidTeam_id)") + \
     operation_typeset_expression("setidTeam_id_all_set_list", "list(set(setidTeam_id_all))") + \
     operation_typeset_expression("setidTeam_id_depn", "[','.join([myid for myid in setidTeam_set if myid != setidTeam_id[ti]]) for ti in range(lenidTeam)]") + \
     operation_typeset_expression("setidTeam_id_dep", "[','.join([myid for myid in setidTeam_set if myid != setidTeam_id[ti] and myid != setidTeam_id[neutralindex]]) for ti in range(lenidTeam)]") + \
-    operation_typeset_expression("teamtoi", "dict([[str(setTeam[ti][tj]),str(ti)] for tj in range(len(setTeam[ti])) for ti in range(lenidTeam)])") + \
-    operation_typeset_expression("teamtoid", "dict([[str(setTeam[ti][tj]),str(setidTeam_id[ti])] for tj in range(len(setTeam[ti])) for ti in range(lenidTeam)])") + \
-    operation_typeset_expression("teamtoid_depn", "dict([[str(setTeam[ti][tj]), str(setidTeam_id_depn[ti])] for tj in range(len(setTeam[ti])) for ti in range(lenidTeam)])") + \
-    operation_typeset_expression("teamtoid_dep", "dict([[str(setTeam[ti][tj]), str(setidTeam_id_dep[ti])] for tj in range(len(setTeam[ti])) for ti in range(lenidTeam)])") + \
-    operation_typeset_expression("lenTeam", f"sum(len({INFOKEY.setTeam}[ti]) for ti in range(lenidTeam))") + \
+    operation_typeset_expression("teamtoi", "dict([[str(setTeam[iti[ind]][itj[ind]]),str(iti[ind])] for ind in range(lenTeam)])") + \
+    operation_typeset_expression("teamtoid", "dict([[str(setTeam[iti[ind]][itj[ind]]),str(setidTeam_id[iti[ind]])] for ind in range(lenTeam)])") + \
+    operation_typeset_expression("teamtoid_depn", "dict([[str(setTeam[iti[ind]][itj[ind]]),str(setidTeam_id_depn[iti[ind]])] for ind in range(lenTeam)])") + \
+    operation_typeset_expression("teamtoid_dep", "dict([[str(setTeam[iti[ind]][itj[ind]]),str(setidTeam_id_dep[iti[ind]])] for ind in range(lenTeam)])") + \
     operation_cycle_start("i", "0", f"i < len(setidTeam_id_all_set_list)", "teamDetect_cycle2_basic") + \
         [
             {

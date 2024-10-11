@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="600" height="500" tilewidth="20" tileheight="20" infinite="0" nextlayerid="4" nextobjectid="1742">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="600" height="500" tilewidth="20" tileheight="20" infinite="0" nextlayerid="4" nextobjectid="1770">
   <tileset firstgid="1" name="export_ground" tilewidth="20" tileheight="20" tilecount="341" columns="12">
     <properties>
       <property name="embedded_png">
@@ -25286,27 +25286,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7800" y="1000" width="20" height="20" name="Nc1" type="basic" id="276">
+    <object x="7800" y="1000" width="20" height="20" name="Bc1" type="basic" id="276">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7800" y="1000" width="20" height="20" name="Bc1" type="basic" id="277">
+    <object x="7800" y="1000" width="20" height="20" name="A2c1" type="basic" id="277">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7800" y="1000" width="20" height="20" name="A1c1" type="basic" id="278">
+    <object x="7800" y="1000" width="20" height="20" name="Nc1" type="basic" id="278">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7800" y="1000" width="20" height="20" name="Ac1" type="basic" id="279">
+    <object x="7800" y="1000" width="20" height="20" name="A1c1" type="basic" id="279">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7800" y="1000" width="20" height="20" name="A2c1" type="basic" id="280">
+    <object x="7800" y="1000" width="20" height="20" name="Ac1" type="basic" id="280">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -25462,17 +25462,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7600" y="1000" width="20" height="20" name="Nc2" type="basic" id="299">
+    <object x="7600" y="1000" width="20" height="20" name="Ac2" type="basic" id="299">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7600" y="1000" width="20" height="20" name="A2c2" type="basic" id="300">
+    <object x="7600" y="1000" width="20" height="20" name="Nc2" type="basic" id="300">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7600" y="1000" width="20" height="20" name="Ac2" type="basic" id="301">
+    <object x="7600" y="1000" width="20" height="20" name="A2c2" type="basic" id="301">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -25628,22 +25628,22 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8000" y="1000" width="20" height="20" name="Ac3" type="basic" id="320">
+    <object x="8000" y="1000" width="20" height="20" name="A1c3" type="basic" id="320">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8000" y="1000" width="20" height="20" name="Nc3" type="basic" id="321">
+    <object x="8000" y="1000" width="20" height="20" name="Bc3" type="basic" id="321">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8000" y="1000" width="20" height="20" name="Bc3" type="basic" id="322">
+    <object x="8000" y="1000" width="20" height="20" name="Nc3" type="basic" id="322">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8000" y="1000" width="20" height="20" name="A1c3" type="basic" id="323">
+    <object x="8000" y="1000" width="20" height="20" name="Ac3" type="basic" id="323">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -25800,17 +25800,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8200" y="1000" width="20" height="20" name="Ac4" type="basic" id="342">
+    <object x="8200" y="1000" width="20" height="20" name="A1c4" type="basic" id="342">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8200" y="1000" width="20" height="20" name="Nc4" type="basic" id="343">
+    <object x="8200" y="1000" width="20" height="20" name="Bc4" type="basic" id="343">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8200" y="1000" width="20" height="20" name="Bc4" type="basic" id="344">
+    <object x="8200" y="1000" width="20" height="20" name="Nc4" type="basic" id="344">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -25820,7 +25820,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8200" y="1000" width="20" height="20" name="A1c4" type="basic" id="346">
+    <object x="8200" y="1000" width="20" height="20" name="Ac4" type="basic" id="346">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -25971,27 +25971,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8600" y="1000" width="20" height="20" name="Nc5" type="basic" id="364">
+    <object x="8600" y="1000" width="20" height="20" name="Ac5" type="basic" id="364">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8600" y="1000" width="20" height="20" name="A1c5" type="basic" id="365">
+    <object x="8600" y="1000" width="20" height="20" name="Nc5" type="basic" id="365">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8600" y="1000" width="20" height="20" name="Bc5" type="basic" id="366">
+    <object x="8600" y="1000" width="20" height="20" name="A2c5" type="basic" id="366">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8600" y="1000" width="20" height="20" name="A2c5" type="basic" id="367">
+    <object x="8600" y="1000" width="20" height="20" name="A1c5" type="basic" id="367">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8600" y="1000" width="20" height="20" name="Ac5" type="basic" id="368">
+    <object x="8600" y="1000" width="20" height="20" name="Bc5" type="basic" id="368">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -26142,27 +26142,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8800" y="1000" width="20" height="20" name="A2c6" type="basic" id="386">
+    <object x="8800" y="1000" width="20" height="20" name="A1c6" type="basic" id="386">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8800" y="1000" width="20" height="20" name="Nc6" type="basic" id="387">
+    <object x="8800" y="1000" width="20" height="20" name="Bc6" type="basic" id="387">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8800" y="1000" width="20" height="20" name="Ac6" type="basic" id="388">
+    <object x="8800" y="1000" width="20" height="20" name="A2c6" type="basic" id="388">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8800" y="1000" width="20" height="20" name="Bc6" type="basic" id="389">
+    <object x="8800" y="1000" width="20" height="20" name="Nc6" type="basic" id="389">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8800" y="1000" width="20" height="20" name="A1c6" type="basic" id="390">
+    <object x="8800" y="1000" width="20" height="20" name="Ac6" type="basic" id="390">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -26319,12 +26319,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9000" y="1000" width="20" height="20" name="Ac7" type="basic" id="409">
+    <object x="9000" y="1000" width="20" height="20" name="A2c7" type="basic" id="409">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9000" y="1000" width="20" height="20" name="A2c7" type="basic" id="410">
+    <object x="9000" y="1000" width="20" height="20" name="Ac7" type="basic" id="410">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -26486,12 +26486,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="1"/>
       </properties>
     </object>
-    <object x="9200" y="1000" width="20" height="20" name="A1c8" type="basic" id="430">
+    <object x="9200" y="1000" width="20" height="20" name="Nc8" type="basic" id="430">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9200" y="1000" width="20" height="20" name="Nc8" type="basic" id="431">
+    <object x="9200" y="1000" width="20" height="20" name="Bc8" type="basic" id="431">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -26501,12 +26501,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9200" y="1000" width="20" height="20" name="A2c8" type="basic" id="433">
+    <object x="9200" y="1000" width="20" height="20" name="A1c8" type="basic" id="433">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9200" y="1000" width="20" height="20" name="Bc8" type="basic" id="434">
+    <object x="9200" y="1000" width="20" height="20" name="A2c8" type="basic" id="434">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -26668,17 +26668,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8400" y="1000" width="20" height="20" name="Nc9" type="basic" id="454">
+    <object x="8400" y="1000" width="20" height="20" name="A2c9" type="basic" id="454">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8400" y="1000" width="20" height="20" name="Bc9" type="basic" id="455">
+    <object x="8400" y="1000" width="20" height="20" name="Nc9" type="basic" id="455">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8400" y="1000" width="20" height="20" name="A2c9" type="basic" id="456">
+    <object x="8400" y="1000" width="20" height="20" name="Bc9" type="basic" id="456">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -26829,27 +26829,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9400" y="1000" width="20" height="20" name="A1c10" type="basic" id="474">
+    <object x="9400" y="1000" width="20" height="20" name="Bc10" type="basic" id="474">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9400" y="1000" width="20" height="20" name="A2c10" type="basic" id="475">
+    <object x="9400" y="1000" width="20" height="20" name="Nc10" type="basic" id="475">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9400" y="1000" width="20" height="20" name="Ac10" type="basic" id="476">
+    <object x="9400" y="1000" width="20" height="20" name="A2c10" type="basic" id="476">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9400" y="1000" width="20" height="20" name="Nc10" type="basic" id="477">
+    <object x="9400" y="1000" width="20" height="20" name="Ac10" type="basic" id="477">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9400" y="1000" width="20" height="20" name="Bc10" type="basic" id="478">
+    <object x="9400" y="1000" width="20" height="20" name="A1c10" type="basic" id="478">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -27000,27 +27000,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9600" y="1000" width="20" height="20" name="Ac11" type="basic" id="496">
+    <object x="9600" y="1000" width="20" height="20" name="A1c11" type="basic" id="496">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9600" y="1000" width="20" height="20" name="A2c11" type="basic" id="497">
+    <object x="9600" y="1000" width="20" height="20" name="Nc11" type="basic" id="497">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9600" y="1000" width="20" height="20" name="Nc11" type="basic" id="498">
+    <object x="9600" y="1000" width="20" height="20" name="Bc11" type="basic" id="498">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9600" y="1000" width="20" height="20" name="A1c11" type="basic" id="499">
+    <object x="9600" y="1000" width="20" height="20" name="A2c11" type="basic" id="499">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9600" y="1000" width="20" height="20" name="Bc11" type="basic" id="500">
+    <object x="9600" y="1000" width="20" height="20" name="Ac11" type="basic" id="500">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -27176,17 +27176,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9800" y="1000" width="20" height="20" name="Ac12" type="basic" id="519">
+    <object x="9800" y="1000" width="20" height="20" name="A2c12" type="basic" id="519">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9800" y="1000" width="20" height="20" name="Bc12" type="basic" id="520">
+    <object x="9800" y="1000" width="20" height="20" name="Ac12" type="basic" id="520">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9800" y="1000" width="20" height="20" name="A2c12" type="basic" id="521">
+    <object x="9800" y="1000" width="20" height="20" name="Bc12" type="basic" id="521">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
@@ -27375,27 +27375,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6600" y="1200" width="20" height="20" name="A2c13" type="basic" id="545">
+    <object x="6600" y="1200" width="20" height="20" name="A1c13" type="basic" id="545">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="1200" width="20" height="20" name="Ac13" type="basic" id="546">
+    <object x="6600" y="1200" width="20" height="20" name="Bc13" type="basic" id="546">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="1200" width="20" height="20" name="Bc13" type="basic" id="547">
+    <object x="6600" y="1200" width="20" height="20" name="Ac13" type="basic" id="547">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="1200" width="20" height="20" name="A1c13" type="basic" id="548">
+    <object x="6600" y="1200" width="20" height="20" name="Nc13" type="basic" id="548">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="1200" width="20" height="20" name="Nc13" type="basic" id="549">
+    <object x="6600" y="1200" width="20" height="20" name="A2c13" type="basic" id="549">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -27546,7 +27546,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6400" y="1200" width="20" height="20" name="Nc14" type="basic" id="567">
+    <object x="6400" y="1200" width="20" height="20" name="A1c14" type="basic" id="567">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -27561,7 +27561,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="1200" width="20" height="20" name="A1c14" type="basic" id="570">
+    <object x="6400" y="1200" width="20" height="20" name="Nc14" type="basic" id="570">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -27717,27 +27717,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6800" y="1200" width="20" height="20" name="Bc15" type="basic" id="589">
+    <object x="6800" y="1200" width="20" height="20" name="A2c15" type="basic" id="589">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="1200" width="20" height="20" name="A2c15" type="basic" id="590">
+    <object x="6800" y="1200" width="20" height="20" name="Bc15" type="basic" id="590">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="1200" width="20" height="20" name="Ac15" type="basic" id="591">
+    <object x="6800" y="1200" width="20" height="20" name="A1c15" type="basic" id="591">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="1200" width="20" height="20" name="Nc15" type="basic" id="592">
+    <object x="6800" y="1200" width="20" height="20" name="Ac15" type="basic" id="592">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="1200" width="20" height="20" name="A1c15" type="basic" id="593">
+    <object x="6800" y="1200" width="20" height="20" name="Nc15" type="basic" id="593">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -27868,7 +27868,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7800" y="1200" width="20" height="20" name="" type="unitAdd" id="608">
       <properties>
-        <property name="deactivatedBy" value="su27,fd1',dict([['0', 'Nc14'], ['6', 'Nc14'], ['1', 'Ac14,Nc14'], ['-3', 'Ac14'], ['2', 'Nc14'], ['8', 'Nc14'], ['3', 'Ac14,Nc14'], ['-2', 'Ac14']])['-1'] if not False else b测1.teamtoid_dep['-1']' if True else ''"/>
+        <property name="deactivatedBy" value="su27,fd1',dict([['0', 'Bc14'], ['6', 'Bc14'], ['1', 'Ac14'], ['-3', 'Bc14,Ac14'], ['2', 'Bc14'], ['8', 'Bc14'], ['3', 'Ac14'], ['-2', 'Bc14,Ac14']])['-1'] if not False else b测1.teamtoid_dep['-1']' if True else ''"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="-1"/>
@@ -27885,7 +27885,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8400" y="1200" width="20" height="20" name="" type="unitAdd" id="610">
       <properties>
-        <property name="deactivatedBy" value="su28,fd2,Nc13"/>
+        <property name="deactivatedBy" value="su28,fd2,Bc13"/>
         <property name="warmup" value="12s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="0"/>
@@ -27902,7 +27902,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7600" y="1200" width="20" height="20" name="" type="unitAdd" id="612">
       <properties>
-        <property name="deactivatedBy" value="su29,fd1,Ac14"/>
+        <property name="deactivatedBy" value="su29,fd1,Bc14,Ac14"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="-2"/>
@@ -27919,7 +27919,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8600" y="1200" width="20" height="20" name="" type="unitAdd" id="614">
       <properties>
-        <property name="deactivatedBy" value="su30,fd1,Nc13"/>
+        <property name="deactivatedBy" value="su30,fd1,Bc13"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="supplyDepot*1"/>
         <property name="team" value="0"/>
@@ -27936,7 +27936,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8800" y="1200" width="20" height="20" name="" type="unitAdd" id="616">
       <properties>
-        <property name="deactivatedBy" value="su31,fd1,Nc13"/>
+        <property name="deactivatedBy" value="su31,fd1,Bc13"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="turret*1"/>
         <property name="team" value="0"/>
@@ -27953,7 +27953,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8000" y="1200" width="20" height="20" name="" type="unitAdd" id="618">
       <properties>
-        <property name="deactivatedBy" value="su32,fd1,Nc13"/>
+        <property name="deactivatedBy" value="su32,fd1,Bc13"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="0"/>
@@ -27970,7 +27970,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8200" y="1200" width="20" height="20" name="" type="unitAdd" id="620">
       <properties>
-        <property name="deactivatedBy" value="su33,fd1,Ac15,Nc15"/>
+        <property name="deactivatedBy" value="su33,fd1,Ac15"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="3"/>
@@ -28020,7 +28020,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9200" y="1200" width="20" height="20" name="" type="unitAdd" id="627">
       <properties>
-        <property name="deactivatedBy" value="su34,fd1,Ac14,Bc14"/>
+        <property name="deactivatedBy" value="su34,fd1,Bc14,Ac14"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="-2"/>
@@ -28037,7 +28037,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9400" y="1200" width="20" height="20" name="" type="unitAdd" id="629">
       <properties>
-        <property name="deactivatedBy" value="su35,fd1,Bc13,Nc13"/>
+        <property name="deactivatedBy" value="su35,fd1,Nc13,Bc13"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="0"/>
@@ -28054,7 +28054,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9600" y="1200" width="20" height="20" name="" type="unitAdd" id="631">
       <properties>
-        <property name="deactivatedBy" value="su36,fd1,Ac15,Nc15"/>
+        <property name="deactivatedBy" value="su36,fd1,Nc15,Ac15"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="3"/>
@@ -28083,27 +28083,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7800" y="1400" width="20" height="20" name="A1c16" type="basic" id="635">
+    <object x="7800" y="1400" width="20" height="20" name="Nc16" type="basic" id="635">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7800" y="1400" width="20" height="20" name="A2c16" type="basic" id="636">
+    <object x="7800" y="1400" width="20" height="20" name="Bc16" type="basic" id="636">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7800" y="1400" width="20" height="20" name="Ac16" type="basic" id="637">
+    <object x="7800" y="1400" width="20" height="20" name="A1c16" type="basic" id="637">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7800" y="1400" width="20" height="20" name="Nc16" type="basic" id="638">
+    <object x="7800" y="1400" width="20" height="20" name="A2c16" type="basic" id="638">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7800" y="1400" width="20" height="20" name="Bc16" type="basic" id="639">
+    <object x="7800" y="1400" width="20" height="20" name="Ac16" type="basic" id="639">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28283,27 +28283,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7600" y="1400" width="20" height="20" name="Bc17" type="basic" id="660">
+    <object x="7600" y="1400" width="20" height="20" name="Ac17" type="basic" id="660">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7600" y="1400" width="20" height="20" name="Nc17" type="basic" id="661">
+    <object x="7600" y="1400" width="20" height="20" name="Bc17" type="basic" id="661">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7600" y="1400" width="20" height="20" name="A2c17" type="basic" id="662">
+    <object x="7600" y="1400" width="20" height="20" name="Nc17" type="basic" id="662">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7600" y="1400" width="20" height="20" name="A1c17" type="basic" id="663">
+    <object x="7600" y="1400" width="20" height="20" name="A2c17" type="basic" id="663">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7600" y="1400" width="20" height="20" name="Ac17" type="basic" id="664">
+    <object x="7600" y="1400" width="20" height="20" name="A1c17" type="basic" id="664">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28483,27 +28483,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8000" y="1400" width="20" height="20" name="Bc18" type="basic" id="685">
+    <object x="8000" y="1400" width="20" height="20" name="Nc18" type="basic" id="685">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8000" y="1400" width="20" height="20" name="A1c18" type="basic" id="686">
+    <object x="8000" y="1400" width="20" height="20" name="A2c18" type="basic" id="686">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8000" y="1400" width="20" height="20" name="A2c18" type="basic" id="687">
+    <object x="8000" y="1400" width="20" height="20" name="Ac18" type="basic" id="687">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8000" y="1400" width="20" height="20" name="Ac18" type="basic" id="688">
+    <object x="8000" y="1400" width="20" height="20" name="A1c18" type="basic" id="688">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8000" y="1400" width="20" height="20" name="Nc18" type="basic" id="689">
+    <object x="8000" y="1400" width="20" height="20" name="Bc18" type="basic" id="689">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28689,22 +28689,22 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8200" y="1400" width="20" height="20" name="A1c19" type="basic" id="711">
+    <object x="8200" y="1400" width="20" height="20" name="A2c19" type="basic" id="711">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8200" y="1400" width="20" height="20" name="A2c19" type="basic" id="712">
+    <object x="8200" y="1400" width="20" height="20" name="Bc19" type="basic" id="712">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8200" y="1400" width="20" height="20" name="Bc19" type="basic" id="713">
+    <object x="8200" y="1400" width="20" height="20" name="Ac19" type="basic" id="713">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8200" y="1400" width="20" height="20" name="Ac19" type="basic" id="714">
+    <object x="8200" y="1400" width="20" height="20" name="A1c19" type="basic" id="714">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28884,12 +28884,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8600" y="1400" width="20" height="20" name="Ac20" type="basic" id="735">
+    <object x="8600" y="1400" width="20" height="20" name="A1c20" type="basic" id="735">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8600" y="1400" width="20" height="20" name="A1c20" type="basic" id="736">
+    <object x="8600" y="1400" width="20" height="20" name="Nc20" type="basic" id="736">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28899,7 +28899,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8600" y="1400" width="20" height="20" name="Nc20" type="basic" id="738">
+    <object x="8600" y="1400" width="20" height="20" name="Ac20" type="basic" id="738">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29084,17 +29084,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8800" y="1400" width="20" height="20" name="A1c21" type="basic" id="760">
+    <object x="8800" y="1400" width="20" height="20" name="Ac21" type="basic" id="760">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8800" y="1400" width="20" height="20" name="Bc21" type="basic" id="761">
+    <object x="8800" y="1400" width="20" height="20" name="Nc21" type="basic" id="761">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8800" y="1400" width="20" height="20" name="Ac21" type="basic" id="762">
+    <object x="8800" y="1400" width="20" height="20" name="A1c21" type="basic" id="762">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29104,7 +29104,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8800" y="1400" width="20" height="20" name="Nc21" type="basic" id="764">
+    <object x="8800" y="1400" width="20" height="20" name="Bc21" type="basic" id="764">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29290,7 +29290,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9000" y="1400" width="20" height="20" name="A2c22" type="basic" id="786">
+    <object x="9000" y="1400" width="20" height="20" name="Bc22" type="basic" id="786">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29300,12 +29300,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9000" y="1400" width="20" height="20" name="Nc22" type="basic" id="788">
+    <object x="9000" y="1400" width="20" height="20" name="A2c22" type="basic" id="788">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9000" y="1400" width="20" height="20" name="Bc22" type="basic" id="789">
+    <object x="9000" y="1400" width="20" height="20" name="Nc22" type="basic" id="789">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29486,12 +29486,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="1"/>
       </properties>
     </object>
-    <object x="9200" y="1400" width="20" height="20" name="A1c23" type="basic" id="810">
+    <object x="9200" y="1400" width="20" height="20" name="Ac23" type="basic" id="810">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9200" y="1400" width="20" height="20" name="Ac23" type="basic" id="811">
+    <object x="9200" y="1400" width="20" height="20" name="A2c23" type="basic" id="811">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29506,7 +29506,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9200" y="1400" width="20" height="20" name="A2c23" type="basic" id="814">
+    <object x="9200" y="1400" width="20" height="20" name="A1c23" type="basic" id="814">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29687,12 +29687,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8400" y="1400" width="20" height="20" name="A1c24" type="basic" id="835">
+    <object x="8400" y="1400" width="20" height="20" name="Nc24" type="basic" id="835">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8400" y="1400" width="20" height="20" name="Nc24" type="basic" id="836">
+    <object x="8400" y="1400" width="20" height="20" name="Bc24" type="basic" id="836">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29702,12 +29702,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8400" y="1400" width="20" height="20" name="Bc24" type="basic" id="838">
+    <object x="8400" y="1400" width="20" height="20" name="A2c24" type="basic" id="838">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8400" y="1400" width="20" height="20" name="A2c24" type="basic" id="839">
+    <object x="8400" y="1400" width="20" height="20" name="A1c24" type="basic" id="839">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29892,17 +29892,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9600" y="1400" width="20" height="20" name="A2c25" type="basic" id="861">
+    <object x="9600" y="1400" width="20" height="20" name="Nc25" type="basic" id="861">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9600" y="1400" width="20" height="20" name="Nc25" type="basic" id="862">
+    <object x="9600" y="1400" width="20" height="20" name="A1c25" type="basic" id="862">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9600" y="1400" width="20" height="20" name="A1c25" type="basic" id="863">
+    <object x="9600" y="1400" width="20" height="20" name="A2c25" type="basic" id="863">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30087,7 +30087,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9400" y="1400" width="20" height="20" name="Bc26" type="basic" id="885">
+    <object x="9400" y="1400" width="20" height="20" name="A2c26" type="basic" id="885">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
@@ -30097,17 +30097,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9400" y="1400" width="20" height="20" name="Ac26" type="basic" id="887">
+    <object x="9400" y="1400" width="20" height="20" name="Bc26" type="basic" id="887">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9400" y="1400" width="20" height="20" name="A2c26" type="basic" id="888">
+    <object x="9400" y="1400" width="20" height="20" name="Nc26" type="basic" id="888">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9400" y="1400" width="20" height="20" name="Nc26" type="basic" id="889">
+    <object x="9400" y="1400" width="20" height="20" name="Ac26" type="basic" id="889">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
@@ -30287,7 +30287,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9800" y="1400" width="20" height="20" name="A1c27" type="basic" id="910">
+    <object x="9800" y="1400" width="20" height="20" name="A2c27" type="basic" id="910">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30297,17 +30297,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9800" y="1400" width="20" height="20" name="Nc27" type="basic" id="912">
+    <object x="9800" y="1400" width="20" height="20" name="A1c27" type="basic" id="912">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9800" y="1400" width="20" height="20" name="A2c27" type="basic" id="913">
+    <object x="9800" y="1400" width="20" height="20" name="Ac27" type="basic" id="913">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9800" y="1400" width="20" height="20" name="Ac27" type="basic" id="914">
+    <object x="9800" y="1400" width="20" height="20" name="Nc27" type="basic" id="914">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30492,12 +30492,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10000" y="1400" width="20" height="20" name="A2c28" type="basic" id="936">
+    <object x="10000" y="1400" width="20" height="20" name="A1c28" type="basic" id="936">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10000" y="1400" width="20" height="20" name="Bc28" type="basic" id="937">
+    <object x="10000" y="1400" width="20" height="20" name="A2c28" type="basic" id="937">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30507,7 +30507,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10000" y="1400" width="20" height="20" name="A1c28" type="basic" id="939">
+    <object x="10000" y="1400" width="20" height="20" name="Bc28" type="basic" id="939">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30694,27 +30694,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7800" y="1600" width="20" height="20" name="A2c29" type="basic" id="961">
+    <object x="7800" y="1600" width="20" height="20" name="Nc29" type="basic" id="961">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7800" y="1600" width="20" height="20" name="Nc29" type="basic" id="962">
+    <object x="7800" y="1600" width="20" height="20" name="Bc29" type="basic" id="962">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7800" y="1600" width="20" height="20" name="A1c29" type="basic" id="963">
+    <object x="7800" y="1600" width="20" height="20" name="Ac29" type="basic" id="963">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7800" y="1600" width="20" height="20" name="Bc29" type="basic" id="964">
+    <object x="7800" y="1600" width="20" height="20" name="A2c29" type="basic" id="964">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7800" y="1600" width="20" height="20" name="Ac29" type="basic" id="965">
+    <object x="7800" y="1600" width="20" height="20" name="A1c29" type="basic" id="965">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30870,7 +30870,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7600" y="1600" width="20" height="20" name="Nc30" type="basic" id="984">
+    <object x="7600" y="1600" width="20" height="20" name="A2c30" type="basic" id="984">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30880,12 +30880,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7600" y="1600" width="20" height="20" name="Ac30" type="basic" id="986">
+    <object x="7600" y="1600" width="20" height="20" name="Nc30" type="basic" id="986">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7600" y="1600" width="20" height="20" name="A2c30" type="basic" id="987">
+    <object x="7600" y="1600" width="20" height="20" name="Ac30" type="basic" id="987">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -31036,17 +31036,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8000" y="1600" width="20" height="20" name="A1c31" type="basic" id="1005">
+    <object x="8000" y="1600" width="20" height="20" name="A2c31" type="basic" id="1005">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8000" y="1600" width="20" height="20" name="Bc31" type="basic" id="1006">
+    <object x="8000" y="1600" width="20" height="20" name="A1c31" type="basic" id="1006">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8000" y="1600" width="20" height="20" name="A2c31" type="basic" id="1007">
+    <object x="8000" y="1600" width="20" height="20" name="Bc31" type="basic" id="1007">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -31208,7 +31208,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8200" y="1600" width="20" height="20" name="Ac32" type="basic" id="1027">
+    <object x="8200" y="1600" width="20" height="20" name="Bc32" type="basic" id="1027">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -31228,7 +31228,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8200" y="1600" width="20" height="20" name="Bc32" type="basic" id="1031">
+    <object x="8200" y="1600" width="20" height="20" name="Ac32" type="basic" id="1031">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -31379,27 +31379,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8600" y="1600" width="20" height="20" name="Ac33" type="basic" id="1049">
+    <object x="8600" y="1600" width="20" height="20" name="A2c33" type="basic" id="1049">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8600" y="1600" width="20" height="20" name="A2c33" type="basic" id="1050">
+    <object x="8600" y="1600" width="20" height="20" name="A1c33" type="basic" id="1050">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8600" y="1600" width="20" height="20" name="Bc33" type="basic" id="1051">
+    <object x="8600" y="1600" width="20" height="20" name="Ac33" type="basic" id="1051">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8600" y="1600" width="20" height="20" name="A1c33" type="basic" id="1052">
+    <object x="8600" y="1600" width="20" height="20" name="Nc33" type="basic" id="1052">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8600" y="1600" width="20" height="20" name="Nc33" type="basic" id="1053">
+    <object x="8600" y="1600" width="20" height="20" name="Bc33" type="basic" id="1053">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -31550,27 +31550,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8800" y="1600" width="20" height="20" name="Ac34" type="basic" id="1071">
+    <object x="8800" y="1600" width="20" height="20" name="A1c34" type="basic" id="1071">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8800" y="1600" width="20" height="20" name="Nc34" type="basic" id="1072">
+    <object x="8800" y="1600" width="20" height="20" name="A2c34" type="basic" id="1072">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8800" y="1600" width="20" height="20" name="A1c34" type="basic" id="1073">
+    <object x="8800" y="1600" width="20" height="20" name="Bc34" type="basic" id="1073">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8800" y="1600" width="20" height="20" name="A2c34" type="basic" id="1074">
+    <object x="8800" y="1600" width="20" height="20" name="Ac34" type="basic" id="1074">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8800" y="1600" width="20" height="20" name="Bc34" type="basic" id="1075">
+    <object x="8800" y="1600" width="20" height="20" name="Nc34" type="basic" id="1075">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -31722,27 +31722,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="0"/>
       </properties>
     </object>
-    <object x="9000" y="1600" width="20" height="20" name="Bc35" type="basic" id="1093">
+    <object x="9000" y="1600" width="20" height="20" name="A1c35" type="basic" id="1093">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9000" y="1600" width="20" height="20" name="Nc35" type="basic" id="1094">
+    <object x="9000" y="1600" width="20" height="20" name="Ac35" type="basic" id="1094">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9000" y="1600" width="20" height="20" name="Ac35" type="basic" id="1095">
+    <object x="9000" y="1600" width="20" height="20" name="Nc35" type="basic" id="1095">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9000" y="1600" width="20" height="20" name="A2c35" type="basic" id="1096">
+    <object x="9000" y="1600" width="20" height="20" name="Bc35" type="basic" id="1096">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9000" y="1600" width="20" height="20" name="A1c35" type="basic" id="1097">
+    <object x="9000" y="1600" width="20" height="20" name="A2c35" type="basic" id="1097">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -31899,22 +31899,22 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9200" y="1600" width="20" height="20" name="A1c36" type="basic" id="1116">
+    <object x="9200" y="1600" width="20" height="20" name="Bc36" type="basic" id="1116">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9200" y="1600" width="20" height="20" name="Nc36" type="basic" id="1117">
+    <object x="9200" y="1600" width="20" height="20" name="A2c36" type="basic" id="1117">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9200" y="1600" width="20" height="20" name="A2c36" type="basic" id="1118">
+    <object x="9200" y="1600" width="20" height="20" name="Nc36" type="basic" id="1118">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9200" y="1600" width="20" height="20" name="Bc36" type="basic" id="1119">
+    <object x="9200" y="1600" width="20" height="20" name="A1c36" type="basic" id="1119">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32071,7 +32071,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8400" y="1600" width="20" height="20" name="Bc37" type="basic" id="1138">
+    <object x="8400" y="1600" width="20" height="20" name="Ac37" type="basic" id="1138">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32081,12 +32081,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8400" y="1600" width="20" height="20" name="Ac37" type="basic" id="1140">
+    <object x="8400" y="1600" width="20" height="20" name="Nc37" type="basic" id="1140">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8400" y="1600" width="20" height="20" name="Nc37" type="basic" id="1141">
+    <object x="8400" y="1600" width="20" height="20" name="Bc37" type="basic" id="1141">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32237,7 +32237,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9600" y="1600" width="20" height="20" name="A1c38" type="basic" id="1159">
+    <object x="9600" y="1600" width="20" height="20" name="Ac38" type="basic" id="1159">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32247,17 +32247,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9600" y="1600" width="20" height="20" name="Bc38" type="basic" id="1161">
+    <object x="9600" y="1600" width="20" height="20" name="A1c38" type="basic" id="1161">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9600" y="1600" width="20" height="20" name="Ac38" type="basic" id="1162">
+    <object x="9600" y="1600" width="20" height="20" name="Nc38" type="basic" id="1162">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9600" y="1600" width="20" height="20" name="Nc38" type="basic" id="1163">
+    <object x="9600" y="1600" width="20" height="20" name="Bc38" type="basic" id="1163">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32413,22 +32413,22 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9400" y="1600" width="20" height="20" name="A2c39" type="basic" id="1182">
+    <object x="9400" y="1600" width="20" height="20" name="Ac39" type="basic" id="1182">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9400" y="1600" width="20" height="20" name="Nc39" type="basic" id="1183">
+    <object x="9400" y="1600" width="20" height="20" name="Bc39" type="basic" id="1183">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9400" y="1600" width="20" height="20" name="Ac39" type="basic" id="1184">
+    <object x="9400" y="1600" width="20" height="20" name="A2c39" type="basic" id="1184">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9400" y="1600" width="20" height="20" name="Bc39" type="basic" id="1185">
+    <object x="9400" y="1600" width="20" height="20" name="Nc39" type="basic" id="1185">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
@@ -32572,12 +32572,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="11400" y="1600" width="20" height="20" name="A1c40" type="basic" id="1202">
+    <object x="11400" y="1600" width="20" height="20" name="Bc40" type="basic" id="1202">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11400" y="1600" width="20" height="20" name="Nc40" type="basic" id="1203">
+    <object x="11400" y="1600" width="20" height="20" name="A1c40" type="basic" id="1203">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32587,7 +32587,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11400" y="1600" width="20" height="20" name="Bc40" type="basic" id="1205">
+    <object x="11400" y="1600" width="20" height="20" name="Nc40" type="basic" id="1205">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32772,27 +32772,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="11600" y="1600" width="20" height="20" name="A1c41" type="basic" id="1227">
+    <object x="11600" y="1600" width="20" height="20" name="Nc41" type="basic" id="1227">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11600" y="1600" width="20" height="20" name="Ac41" type="basic" id="1228">
+    <object x="11600" y="1600" width="20" height="20" name="Bc41" type="basic" id="1228">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11600" y="1600" width="20" height="20" name="Nc41" type="basic" id="1229">
+    <object x="11600" y="1600" width="20" height="20" name="A1c41" type="basic" id="1229">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11600" y="1600" width="20" height="20" name="A2c41" type="basic" id="1230">
+    <object x="11600" y="1600" width="20" height="20" name="Ac41" type="basic" id="1230">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11600" y="1600" width="20" height="20" name="Bc41" type="basic" id="1231">
+    <object x="11600" y="1600" width="20" height="20" name="A2c41" type="basic" id="1231">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32972,12 +32972,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="11200" y="1600" width="20" height="20" name="Ac42" type="basic" id="1252">
+    <object x="11200" y="1600" width="20" height="20" name="A2c42" type="basic" id="1252">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11200" y="1600" width="20" height="20" name="A2c42" type="basic" id="1253">
+    <object x="11200" y="1600" width="20" height="20" name="Ac42" type="basic" id="1253">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32987,12 +32987,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11200" y="1600" width="20" height="20" name="Nc42" type="basic" id="1255">
+    <object x="11200" y="1600" width="20" height="20" name="A1c42" type="basic" id="1255">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11200" y="1600" width="20" height="20" name="A1c42" type="basic" id="1256">
+    <object x="11200" y="1600" width="20" height="20" name="Nc42" type="basic" id="1256">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -33184,7 +33184,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9800" y="1600" width="20" height="20" name="Ac43" type="basic" id="1279">
+    <object x="9800" y="1600" width="20" height="20" name="A1c43" type="basic" id="1279">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -33194,7 +33194,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9800" y="1600" width="20" height="20" name="A1c43" type="basic" id="1281">
+    <object x="9800" y="1600" width="20" height="20" name="Ac43" type="basic" id="1281">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -33331,7 +33331,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9801" y="1601" width="20" height="20" name="" type="unitAdd" id="1297">
       <properties>
-        <property name="deactivatedBy" value="su49,fd1,Nc43"/>
+        <property name="deactivatedBy" value="su49,fd1,Bc43"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="0"/>
@@ -33367,27 +33367,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="10000" y="1600" width="20" height="20" name="Nc44" type="basic" id="1302">
+    <object x="10000" y="1600" width="20" height="20" name="A2c44" type="basic" id="1302">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10000" y="1600" width="20" height="20" name="A2c44" type="basic" id="1303">
+    <object x="10000" y="1600" width="20" height="20" name="Bc44" type="basic" id="1303">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10000" y="1600" width="20" height="20" name="Bc44" type="basic" id="1304">
+    <object x="10000" y="1600" width="20" height="20" name="A1c44" type="basic" id="1304">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10000" y="1600" width="20" height="20" name="Ac44" type="basic" id="1305">
+    <object x="10000" y="1600" width="20" height="20" name="Nc44" type="basic" id="1305">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10000" y="1600" width="20" height="20" name="A1c44" type="basic" id="1306">
+    <object x="10000" y="1600" width="20" height="20" name="Ac44" type="basic" id="1306">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -33519,7 +33519,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="10001" y="1601" width="20" height="20" name="" type="unitAdd" id="1321">
       <properties>
-        <property name="deactivatedBy" value="su51,fd2,Nc44"/>
+        <property name="deactivatedBy" value="su51,fd2,Bc44"/>
         <property name="warmup" value="12s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="0"/>
@@ -33555,7 +33555,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="10200" y="1600" width="20" height="20" name="Nc45" type="basic" id="1326">
+    <object x="10200" y="1600" width="20" height="20" name="Ac45" type="basic" id="1326">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -33565,7 +33565,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10200" y="1600" width="20" height="20" name="A2c45" type="basic" id="1328">
+    <object x="10200" y="1600" width="20" height="20" name="Nc45" type="basic" id="1328">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -33575,7 +33575,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10200" y="1600" width="20" height="20" name="Ac45" type="basic" id="1330">
+    <object x="10200" y="1600" width="20" height="20" name="A2c45" type="basic" id="1330">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -33743,27 +33743,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="10400" y="1600" width="20" height="20" name="A1c46" type="basic" id="1350">
+    <object x="10400" y="1600" width="20" height="20" name="Nc46" type="basic" id="1350">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10400" y="1600" width="20" height="20" name="Bc46" type="basic" id="1351">
+    <object x="10400" y="1600" width="20" height="20" name="Ac46" type="basic" id="1351">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10400" y="1600" width="20" height="20" name="Ac46" type="basic" id="1352">
+    <object x="10400" y="1600" width="20" height="20" name="Bc46" type="basic" id="1352">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10400" y="1600" width="20" height="20" name="A2c46" type="basic" id="1353">
+    <object x="10400" y="1600" width="20" height="20" name="A1c46" type="basic" id="1353">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10400" y="1600" width="20" height="20" name="Nc46" type="basic" id="1354">
+    <object x="10400" y="1600" width="20" height="20" name="A2c46" type="basic" id="1354">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -33895,7 +33895,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="10401" y="1601" width="20" height="20" name="" type="unitAdd" id="1369">
       <properties>
-        <property name="deactivatedBy" value="su55,fd1,Nc46"/>
+        <property name="deactivatedBy" value="su55,fd1,Bc46"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="repairbay*1"/>
         <property name="team" value="0"/>
@@ -33912,7 +33912,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9800" y="1200" width="20" height="20" name="" type="unitAdd" id="1371">
       <properties>
-        <property name="deactivatedBy" value="su56,fd4,Ac15,Nc15"/>
+        <property name="deactivatedBy" value="su56,fd4,Ac15"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="3"/>
@@ -33948,17 +33948,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="10600" y="1600" width="20" height="20" name="A2c47" type="basic" id="1376">
+    <object x="10600" y="1600" width="20" height="20" name="Bc47" type="basic" id="1376">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10600" y="1600" width="20" height="20" name="Bc47" type="basic" id="1377">
+    <object x="10600" y="1600" width="20" height="20" name="A2c47" type="basic" id="1377">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10600" y="1600" width="20" height="20" name="A1c47" type="basic" id="1378">
+    <object x="10600" y="1600" width="20" height="20" name="Nc47" type="basic" id="1378">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -33968,7 +33968,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10600" y="1600" width="20" height="20" name="Nc47" type="basic" id="1380">
+    <object x="10600" y="1600" width="20" height="20" name="A1c47" type="basic" id="1380">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -34100,7 +34100,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="10601" y="1601" width="20" height="20" name="" type="unitAdd" id="1395">
       <properties>
-        <property name="deactivatedBy" value="su58,fd4,Nc47"/>
+        <property name="deactivatedBy" value="su58,fd4,Bc47"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="0"/>
@@ -34136,27 +34136,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="10800" y="1600" width="20" height="20" name="A1c48" type="basic" id="1400">
+    <object x="10800" y="1600" width="20" height="20" name="Bc48" type="basic" id="1400">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10800" y="1600" width="20" height="20" name="Ac48" type="basic" id="1401">
+    <object x="10800" y="1600" width="20" height="20" name="A2c48" type="basic" id="1401">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10800" y="1600" width="20" height="20" name="Nc48" type="basic" id="1402">
+    <object x="10800" y="1600" width="20" height="20" name="A1c48" type="basic" id="1402">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10800" y="1600" width="20" height="20" name="Bc48" type="basic" id="1403">
+    <object x="10800" y="1600" width="20" height="20" name="Ac48" type="basic" id="1403">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="10800" y="1600" width="20" height="20" name="A2c48" type="basic" id="1404">
+    <object x="10800" y="1600" width="20" height="20" name="Nc48" type="basic" id="1404">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -34288,7 +34288,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="10801" y="1601" width="20" height="20" name="" type="unitAdd" id="1419">
       <properties>
-        <property name="deactivatedBy" value="su60,fd3,Nc48"/>
+        <property name="deactivatedBy" value="su60,fd3,Bc48"/>
         <property name="warmup" value="12s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="0"/>
@@ -34379,27 +34379,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="11000" y="1600" width="20" height="20" name="A1c49" type="basic" id="1432">
+    <object x="11000" y="1600" width="20" height="20" name="A2c49" type="basic" id="1432">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11000" y="1600" width="20" height="20" name="A2c49" type="basic" id="1433">
+    <object x="11000" y="1600" width="20" height="20" name="Ac49" type="basic" id="1433">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11000" y="1600" width="20" height="20" name="Ac49" type="basic" id="1434">
+    <object x="11000" y="1600" width="20" height="20" name="Nc49" type="basic" id="1434">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11000" y="1600" width="20" height="20" name="Bc49" type="basic" id="1435">
+    <object x="11000" y="1600" width="20" height="20" name="A1c49" type="basic" id="1435">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11000" y="1600" width="20" height="20" name="Nc49" type="basic" id="1436">
+    <object x="11000" y="1600" width="20" height="20" name="Bc49" type="basic" id="1436">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -34548,7 +34548,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9000" y="1200" width="20" height="20" name="" type="unitAdd" id="1453">
       <properties>
-        <property name="deactivatedBy" value="su64,fd1,Nc13"/>
+        <property name="deactivatedBy" value="su64,fd1,Bc13"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="repairbay*1"/>
         <property name="team" value="0"/>
@@ -34584,27 +34584,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6400" y="2400" width="20" height="20" name="Nc50" type="basic" id="1458">
+    <object x="6400" y="2400" width="20" height="20" name="Ac50" type="basic" id="1458">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="2400" width="20" height="20" name="Ac50" type="basic" id="1459">
+    <object x="6400" y="2400" width="20" height="20" name="A2c50" type="basic" id="1459">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="2400" width="20" height="20" name="A2c50" type="basic" id="1460">
+    <object x="6400" y="2400" width="20" height="20" name="A1c50" type="basic" id="1460">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="2400" width="20" height="20" name="Bc50" type="basic" id="1461">
+    <object x="6400" y="2400" width="20" height="20" name="Nc50" type="basic" id="1461">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="2400" width="20" height="20" name="A1c50" type="basic" id="1462">
+    <object x="6400" y="2400" width="20" height="20" name="Bc50" type="basic" id="1462">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -34755,7 +34755,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6600" y="2400" width="20" height="20" name="A1c51" type="basic" id="1480">
+    <object x="6600" y="2400" width="20" height="20" name="Bc51" type="basic" id="1480">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -34765,17 +34765,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="2400" width="20" height="20" name="Nc51" type="basic" id="1482">
+    <object x="6600" y="2400" width="20" height="20" name="A2c51" type="basic" id="1482">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="2400" width="20" height="20" name="A2c51" type="basic" id="1483">
+    <object x="6600" y="2400" width="20" height="20" name="A1c51" type="basic" id="1483">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="2400" width="20" height="20" name="Bc51" type="basic" id="1484">
+    <object x="6600" y="2400" width="20" height="20" name="Nc51" type="basic" id="1484">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -34926,27 +34926,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6800" y="2400" width="20" height="20" name="Ac52" type="basic" id="1502">
+    <object x="6800" y="2400" width="20" height="20" name="A2c52" type="basic" id="1502">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="2400" width="20" height="20" name="Bc52" type="basic" id="1503">
+    <object x="6800" y="2400" width="20" height="20" name="Ac52" type="basic" id="1503">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="2400" width="20" height="20" name="A2c52" type="basic" id="1504">
+    <object x="6800" y="2400" width="20" height="20" name="Nc52" type="basic" id="1504">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="2400" width="20" height="20" name="A1c52" type="basic" id="1505">
+    <object x="6800" y="2400" width="20" height="20" name="Bc52" type="basic" id="1505">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="2400" width="20" height="20" name="Nc52" type="basic" id="1506">
+    <object x="6800" y="2400" width="20" height="20" name="A1c52" type="basic" id="1506">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -35293,27 +35293,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6400" y="2600" width="20" height="20" name="A1c53" type="basic" id="1550">
+    <object x="6400" y="2600" width="20" height="20" name="Ac53" type="basic" id="1550">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="2600" width="20" height="20" name="Nc53" type="basic" id="1551">
+    <object x="6400" y="2600" width="20" height="20" name="Bc53" type="basic" id="1551">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="2600" width="20" height="20" name="Bc53" type="basic" id="1552">
+    <object x="6400" y="2600" width="20" height="20" name="A2c53" type="basic" id="1552">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="2600" width="20" height="20" name="A2c53" type="basic" id="1553">
+    <object x="6400" y="2600" width="20" height="20" name="A1c53" type="basic" id="1553">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="2600" width="20" height="20" name="Ac53" type="basic" id="1554">
+    <object x="6400" y="2600" width="20" height="20" name="Nc53" type="basic" id="1554">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -35464,12 +35464,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6600" y="2600" width="20" height="20" name="Bc54" type="basic" id="1572">
+    <object x="6600" y="2600" width="20" height="20" name="A2c54" type="basic" id="1572">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="2600" width="20" height="20" name="A2c54" type="basic" id="1573">
+    <object x="6600" y="2600" width="20" height="20" name="A1c54" type="basic" id="1573">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -35479,12 +35479,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="2600" width="20" height="20" name="Nc54" type="basic" id="1575">
+    <object x="6600" y="2600" width="20" height="20" name="Bc54" type="basic" id="1575">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="2600" width="20" height="20" name="A1c54" type="basic" id="1576">
+    <object x="6600" y="2600" width="20" height="20" name="Nc54" type="basic" id="1576">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -35635,17 +35635,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6800" y="2600" width="20" height="20" name="A2c55" type="basic" id="1594">
+    <object x="6800" y="2600" width="20" height="20" name="Bc55" type="basic" id="1594">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="2600" width="20" height="20" name="A1c55" type="basic" id="1595">
+    <object x="6800" y="2600" width="20" height="20" name="Ac55" type="basic" id="1595">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="2600" width="20" height="20" name="Ac55" type="basic" id="1596">
+    <object x="6800" y="2600" width="20" height="20" name="A1c55" type="basic" id="1596">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -35655,7 +35655,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="2600" width="20" height="20" name="Bc55" type="basic" id="1598">
+    <object x="6800" y="2600" width="20" height="20" name="A2c55" type="basic" id="1598">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -35974,27 +35974,27 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6400" y="2800" width="20" height="20" name="Bc56" type="basic" id="1637">
+    <object x="6400" y="2800" width="20" height="20" name="Nc56" type="basic" id="1637">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="2800" width="20" height="20" name="A1c56" type="basic" id="1638">
+    <object x="6400" y="2800" width="20" height="20" name="A2c56" type="basic" id="1638">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="2800" width="20" height="20" name="Ac56" type="basic" id="1639">
+    <object x="6400" y="2800" width="20" height="20" name="A1c56" type="basic" id="1639">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="2800" width="20" height="20" name="Nc56" type="basic" id="1640">
+    <object x="6400" y="2800" width="20" height="20" name="Bc56" type="basic" id="1640">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="2800" width="20" height="20" name="A2c56" type="basic" id="1641">
+    <object x="6400" y="2800" width="20" height="20" name="Ac56" type="basic" id="1641">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -36145,22 +36145,22 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6600" y="2800" width="20" height="20" name="Ac57" type="basic" id="1659">
+    <object x="6600" y="2800" width="20" height="20" name="A2c57" type="basic" id="1659">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="2800" width="20" height="20" name="A2c57" type="basic" id="1660">
+    <object x="6600" y="2800" width="20" height="20" name="Nc57" type="basic" id="1660">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="2800" width="20" height="20" name="Nc57" type="basic" id="1661">
+    <object x="6600" y="2800" width="20" height="20" name="A1c57" type="basic" id="1661">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6600" y="2800" width="20" height="20" name="A1c57" type="basic" id="1662">
+    <object x="6600" y="2800" width="20" height="20" name="Ac57" type="basic" id="1662">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -36316,17 +36316,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6800" y="2800" width="20" height="20" name="Ac58" type="basic" id="1681">
+    <object x="6800" y="2800" width="20" height="20" name="A1c58" type="basic" id="1681">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="2800" width="20" height="20" name="Bc58" type="basic" id="1682">
+    <object x="6800" y="2800" width="20" height="20" name="A2c58" type="basic" id="1682">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="2800" width="20" height="20" name="A1c58" type="basic" id="1683">
+    <object x="6800" y="2800" width="20" height="20" name="Ac58" type="basic" id="1683">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -36336,7 +36336,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6800" y="2800" width="20" height="20" name="A2c58" type="basic" id="1685">
+    <object x="6800" y="2800" width="20" height="20" name="Bc58" type="basic" id="1685">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -36630,12 +36630,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11800" y="1600" width="20" height="20" name="Bc59" type="basic" id="1722">
+    <object x="11800" y="1600" width="20" height="20" name="A2c59" type="basic" id="1722">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11800" y="1600" width="20" height="20" name="A2c59" type="basic" id="1723">
+    <object x="11800" y="1600" width="20" height="20" name="Bc59" type="basic" id="1723">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -36767,7 +36767,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11801" y="1601" width="20" height="20" name="" type="unitAdd" id="1738">
       <properties>
-        <property name="deactivatedBy" value="su75,fd1,Ac59"/>
+        <property name="deactivatedBy" value="su75,fd1,Bc59,Ac59"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="-2"/>
@@ -36790,6 +36790,228 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <object x="5400" y="2600" width="40" height="40" type="unitRemove" id="1741">
       <properties>
         <property name="warmup" value="30s"/>
+      </properties>
+    </object>
+    <object x="7600" y="3000" width="20" height="20" name="" type="unitAdd" id="1742">
+      <properties>
+        <property name="deactivatedBy" value="Bc60,fd5,Nc60,wdctd_cite_a.a"/>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="mechGun"/>
+        <property name="warmup" value="1s"/>
+      </properties>
+    </object>
+    <object x="7600" y="3000" width="20" height="20" name="" type="unitAdd" id="1743">
+      <properties>
+        <property name="deactivatedBy" value="Ac60,fd5,Nc60,wdctd_cite_b.b"/>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="mechGun"/>
+        <property name="warmup" value="1s"/>
+      </properties>
+    </object>
+    <object x="7600" y="3000" width="20" height="20" name="" type="unitAdd" id="1744">
+      <properties>
+        <property name="deactivatedBy" value="Ac60,Bc60,fd5"/>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="mechGun"/>
+        <property name="warmup" value="1s"/>
+      </properties>
+    </object>
+    <object x="7600" y="3000" width="20" height="20" name="" type="mapText" id="1745">
+      <properties>
+        <property name="deactivatedBy" value="Bc60,Nc60,wdctd_cite_a.a"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="textColor" value="#FF7700"/>
+        <property name="textSize" value="7"/>
+        <property name="text" value="j"/>
+      </properties>
+    </object>
+    <object x="7600" y="3000" width="20" height="20" name="" type="mapText" id="1746">
+      <properties>
+        <property name="deactivatedBy" value="Ac60,Nc60,wdctd_cite_b.b"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="textColor" value="#191970"/>
+        <property name="textSize" value="7"/>
+        <property name="text" value="mg"/>
+      </properties>
+    </object>
+    <object x="7600" y="3000" width="20" height="20" name="" type="mapText" id="1747">
+      <properties>
+        <property name="deactivatedBy" value="Ac60,Bc60"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="textColor" value="#FFFFFF"/>
+        <property name="textSize" value="7"/>
+        <property name="text" value="j"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="" type="unitAdd" id="1748">
+      <properties>
+        <property name="spawnUnits" value="supplyDepot*1"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="" type="mapText" id="1749">
+      <properties>
+        <property name="text" value="城1"/>
+        <property name="textColor" value="white"/>
+        <property name="textSize" value="7"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="" type="unitDetect" id="1750">
+      <properties>
+        <property name="resetActivationAfter" value="20s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="id" value="su76"/>
+        <property name="maxUnits" value="0"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="" type="unitAdd" id="1751">
+      <properties>
+        <property name="activatedBy" value="su76"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+        <property name="spawnUnits" value="supplyDepot*1"/>
+        <property name="team" value="-1"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="A1c60" type="basic" id="1752">
+      <properties>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="Nc60" type="basic" id="1753">
+      <properties>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="Ac60" type="basic" id="1754">
+      <properties>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="A2c60" type="basic" id="1755">
+      <properties>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="Bc60" type="basic" id="1756">
+      <properties>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="60" type="unitDetect" id="1757">
+      <properties>
+        <property name="alsoActivate" value="Ac60,A1c60"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" type="unitDetect" id="1758">
+      <properties>
+        <property name="alsoActivate" value="Ac60,A1c60"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="team" value="2"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" type="unitDetect" id="1759">
+      <properties>
+        <property name="alsoActivate" value="Ac60,A1c60"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="team" value="4"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="60" type="unitDetect" id="1760">
+      <properties>
+        <property name="alsoActivate" value="Ac60,A2c60"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="team" value="6"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" type="unitDetect" id="1761">
+      <properties>
+        <property name="alsoActivate" value="Ac60,A2c60"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="team" value="8"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="60" type="unitDetect" id="1762">
+      <properties>
+        <property name="alsoActivate" value="Bc60"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="team" value="1"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" type="unitDetect" id="1763">
+      <properties>
+        <property name="alsoActivate" value="Bc60"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="team" value="3"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" type="unitDetect" id="1764">
+      <properties>
+        <property name="alsoActivate" value="Bc60"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="team" value="5"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" type="unitDetect" id="1765">
+      <properties>
+        <property name="alsoActivate" value="Bc60"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="team" value="7"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" type="unitDetect" id="1766">
+      <properties>
+        <property name="alsoActivate" value="Bc60"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="team" value="9"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" name="60" type="unitDetect" id="1767">
+      <properties>
+        <property name="alsoActivate" value="Nc60"/>
+        <property name="maxUnits" value="0"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" type="unitDetect" id="1768">
+      <properties>
+        <property name="alsoActivate" value="Nc60"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="20" height="20" type="unitDetect" id="1769">
+      <properties>
+        <property name="alsoActivate" value="Nc60"/>
+        <property name="minUnits" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+        <property name="unitType" value="supplyDepot"/>
+        <property name="team" value="-1"/>
       </properties>
     </object>
   </objectgroup>
