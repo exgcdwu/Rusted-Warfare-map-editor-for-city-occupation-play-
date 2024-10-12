@@ -151,18 +151,6 @@ teamDetect_info_operation_list = \
     operation_typeset_expression("teamtoid", "dict([[str(setTeam[iti[ind]][itj[ind]]),str(setidTeam_id[iti[ind]])] for ind in range(lenTeam)])") + \
     operation_typeset_expression("teamtoid_depn", "dict([[str(setTeam[iti[ind]][itj[ind]]),str(setidTeam_id_depn[iti[ind]])] for ind in range(lenTeam)])") + \
     operation_typeset_expression("teamtoid_dep", "dict([[str(setTeam[iti[ind]][itj[ind]]),str(setidTeam_id_dep[iti[ind]])] for ind in range(lenTeam)])") + \
-    operation_cycle_start("i", "0", f"i < len(setidTeam_id_all_set_list)", "teamDetect_cycle2_basic") + \
-        [
-            {
-                AUTOKEY.operation_type: AUTOKEY.object, 
-                AUTOKEY.type: rw.const.OBJECTTYPE.basic, 
-                AUTOKEY.name: "{setidTeam_id_all_set_list[i]}", 
-                AUTOKEY.optional: {
-                    rw.const.OBJECTOP.resetActivationAfter: "{" + INFOKEY.reset + "}"
-                }
-            }
-        ] + \
-    operation_cycle_end("i", "i + 1", "teamDetect_cycle2_basic") + \
     [
         {
             AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
@@ -267,7 +255,19 @@ teamDetect_info_operation_list = \
                 operation_ifend("teamDetect_existifmaxUnits") + \
             operation_elseend("teamDetect_ifteam-3_object") + \
         operation_cycle_end("j", "j + 1", "teamDetect_cycle2") + \
-    operation_cycle_end("i", "i + 1", "teamDetect_cycle1")
+    operation_cycle_end("i", "i + 1", "teamDetect_cycle1") + \
+    operation_cycle_start("i", "0", f"i < len(setidTeam_id_all_set_list)", "teamDetect_cycle2_basic") + \
+        [
+            {
+                AUTOKEY.operation_type: AUTOKEY.object, 
+                AUTOKEY.type: rw.const.OBJECTTYPE.basic, 
+                AUTOKEY.name: "{setidTeam_id_all_set_list[i]}", 
+                AUTOKEY.optional: {
+                    rw.const.OBJECTOP.resetActivationAfter: "{" + INFOKEY.reset + "}"
+                }
+            }
+        ] + \
+    operation_cycle_end("i", "i + 1", "teamDetect_cycle2_basic")
 
 teamDetect_info_is_cite_white_list = [
     "setidTeam_id", 

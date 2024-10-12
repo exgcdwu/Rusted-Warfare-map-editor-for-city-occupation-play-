@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="600" height="500" tilewidth="20" tileheight="20" infinite="0" nextlayerid="4" nextobjectid="391">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="600" height="500" tilewidth="20" tileheight="20" infinite="0" nextlayerid="4" nextobjectid="408">
  <tileset firstgid="1" name="export_ground" tilewidth="20" tileheight="20" tilecount="341" columns="12">
   <properties>
    <property name="embedded_png">
@@ -23883,7 +23883,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="textSize" value="12"/>
    </properties>
   </object>
-  <object id="101" name="塔防建筑，无文本(必填参数:建筑的初始队伍，选填参数:,i建筑初始刷新，默认0s，,r建筑刷新速度，默认20s，,c文本颜色，默认white，,s文本大小，默认为7)(要求i小于r，时间必须以s为单位)" type="mapText" x="400" y="600" width="20" height="20">
+  <object id="101" name="塔防建筑，无文本(必填参数:建筑的初始队伍，选填参数:,i建筑初始刷新，默认0s，,r建筑刷新速度，默认20s，,c文本颜色，默认white，,s文本大小，默认为7)(要求i小于r，时间必须以s为单位)" type="mapText" x="400" y="560" width="20" height="20">
    <properties>
     <property name="text" value="塔防建筑，无文本"/>
     <property name="textSize" value="8"/>
@@ -23913,7 +23913,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
   <object id="104" name="t0,r1s" x="8000" y="600" width="20" height="20"/>
   <object id="105" name="t0,i10s" x="8200" y="600" width="20" height="20"/>
   <object id="106" name="t-2" x="7600" y="600" width="20" height="20"/>
-  <object id="107" name="城市建筑，有文本(必填参数:城市初始队伍，城市名称，选填参数:,i建筑初始刷新，默认0s，,r建筑刷新时间，默认20s，,c文本颜色，默认white，,s文本大小，默认为7)(要求i小于r，时间必须以s为单位)" type="mapText" x="400" y="800" width="20" height="20">
+  <object id="107" name="城市建筑，有文本(必填参数:城市初始队伍，城市名称，选填参数:,i建筑初始刷新，默认0s，,r建筑刷新时间，默认20s，,c文本颜色，默认white，,s文本大小，默认为7)(要求i小于r，时间必须以s为单位)" type="mapText" x="400" y="760" width="20" height="20">
    <properties>
     <property name="text" value="城市建筑，有文本"/>
     <property name="textSize" value="8"/>
@@ -23932,13 +23932,13 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="mh2" value="mechGun*2,heavyTank*2"/>
     <property name="mm" value="mechMissile"/>
     <property name="ms" value="missileShip"/>
-    <property name="prefix" value="dt"/>
+    <property name="prefix" value="dd"/>
     <property name="re" value="repairbay"/>
     <property name="su" value="supplyDepot"/>
     <property name="tu" value="turret"/>
    </properties>
   </object>
-  <object id="109" name="dt.d" x="5200" y="600" width="20" height="20"/>
+  <object id="109" name="dd.d" x="5200" y="600" width="20" height="20"/>
   <object id="110" name="6" type="mapText" x="8600" y="200" width="20" height="20">
    <properties>
     <property name="text" value="6"/>
@@ -24121,7 +24121,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="textSize" value="7"/>
    </properties>
   </object>
-  <object id="146" name="城市建筑，有队伍检测，有文本(必填参数:城市初始队伍，城市队伍检测引用，城市名称，选填参数:,i建筑初始刷新，默认0s，,r建筑刷新时间，默认20s，,c文本颜色，默认white，,s文本大小，默认为7，,e队伍检测刷新时间，默认1s)(要求i小于r，时间必须以s为单位)" type="mapText" x="400" y="1000" width="20" height="20">
+  <object id="146" name="城市建筑，有队伍检测，有文本(必填参数:城市初始队伍，城市队伍检测引用，城市名称，选填参数:,i建筑初始刷新，默认0s，,r建筑刷新时间，默认20s，,c文本颜色，默认white，,s文本大小，默认为7，,e队伍检测刷新时间，默认1s)(要求i小于r，时间必须以s为单位)" type="mapText" x="400" y="960" width="20" height="20">
    <properties>
     <property name="text" value="城市建筑，有队伍检测，有文本"/>
     <property name="textSize" value="8"/>
@@ -24881,13 +24881,13 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
   <object id="348" name="a.mg.fd5_10,cc城2a,sa,wc城1a,n" x="11000" y="2800" width="20" height="20"/>
   <object id="349" name="a.mg.fd5_10,cc城3a,sa,wc城2a,n" x="11200" y="2800" width="20" height="20"/>
   <object id="350" name="c0.c城22.城22,g,b-2" x="11800" y="1600" width="20" height="20"/>
-  <object id="351" name="万能城市(必填参数:城市初始队伍，城市队伍检测引用，城市名称，选填参数:,i建筑初始刷新，默认0s，,r建筑刷新时间，默认20s，,u城市单位，默认为补给站，,s文本大小，默认为7，,e队伍检测刷新时间，默认1s，,c启用多个城市颜色，,x启用多个城市颜色，A队的文本(可以没有)，v启用多个城市颜色，B队的文本(可以没有)，,g是否有城防，,f城防刷新的f_cite，,n城防中立时是否刷新，,o是否启动onlyBuildings检测，,h城防的单位，默认为虫塔，,w城防一次性，,m不再添加队伍检测（除虫塔外功能丢失），,y城防是否被抑制，,b设定城防的初始玩家)(要求i小于r，时间必须以s为单位)" type="mapText" x="400" y="1600" width="20" height="20">
+  <object id="351" name="万能城市(必填参数:城市初始队伍，城市队伍检测引用，城市名称，选填参数:,i建筑初始刷新，默认0s，,r建筑刷新时间，默认20s，,u城市单位，默认为补给站，,s文本大小，默认为7，,e队伍检测刷新时间，默认1s，,c启用多个城市颜色，,x启用多个城市颜色，A队的文本(可以没有)，v启用多个城市颜色，B队的文本(可以没有)，,g是否有城防，,f城防刷新的f_cite，,n城防中立时是否刷新，,o是否启动onlyBuildings检测，,h城防的单位，默认为虫塔，,w城防一次性，,m不再添加队伍检测（除虫塔外功能丢失），,y城防是否被抑制，,b设定城防的初始玩家)(要求i小于r，时间必须以s为单位)" type="mapText" x="400" y="1560" width="20" height="20">
    <properties>
     <property name="text" value="万能城市"/>
     <property name="textSize" value="12"/>
    </properties>
   </object>
-  <object id="352" name="万能刷兵(必填参数:刷兵单位（在dictionary中），控制振荡器；可选参数：,t刷新队伍，默认-1；，,c城市（要有队伍检测），,s什么阵营占领该城市会刷新，,w兵力从哪个城市撤退。要么csw参数都没有，要么只有cs参数，要么csw参数都有。，,n城市中立时也刷新单位（并且不撤退）)" type="mapText" x="400" y="2800" width="20" height="20">
+  <object id="352" name="万能刷兵(必填参数:刷兵单位（在dictionary中），控制振荡器；可选参数：,t刷新队伍，默认-1；，,c城市（要有队伍检测），,s什么阵营占领该城市会刷新，,w兵力从哪个城市撤退。要么csw参数都没有，要么只有cs参数，要么csw参数都有。，,n城市中立时也刷新单位（并且不撤退）)" type="mapText" x="400" y="2760" width="20" height="20">
    <properties>
     <property name="text" value="万能城市"/>
     <property name="textSize" value="12"/>
@@ -25156,9 +25156,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
   <object id="381" name="tree_info_zt" x="600" y="3000" width="20" height="20">
    <properties>
     <property name="args" value="td_cite,str;dunit_op_n,str;fd_cite,str"/>
+    <property name="exist" value="true,{isemoji},{isemoji},{ischaractor}"/>
+    <property name="ischaractor" type="bool" value="true"/>
+    <property name="isemoji" type="bool" value="false"/>
     <property name="isprefixseg" type="bool" value="true"/>
-    <property name="name" value="zma.{td_cite}.{dunit_op_n}.{fd_cite},n{isneutralspawn},u{dunit_op_a},v{dunit_op_b},a{team_a},b{team_b},e{wdctd_cite_a},f{wdctd_cite_b};zamt.{td_cite}.{dunit_op_n},n{isneutralspawn},u{dunit_op_a},v{dunit_op_b},e{wdctd_cite_a},f{wdctd_cite_b},s{mtextsize}"/>
-    <property name="opargs" value="n,isneutralspawn,bool,false;u,dunit_op_a,str,None;v,dunit_op_b,str,None;a,team_a,str,None;b,team_b,str,None;e,wdctd_cite_a,str,None;f,wdctd_cite_b,str,None;s,mtextsize,str,None"/>
+    <property name="name" value="zma.{td_cite}.{dunit_op_n}.{fd_cite},n{isneutralspawn},u{dunit_op_a},v{dunit_op_b},a{team_a},b{team_b},e{wdctd_cite_a},f{wdctd_cite_b};zamj.{td_cite},n{isneutralspawn},e{wdctd_cite_a},f{wdctd_cite_b},s{mtextsize};zamt.{td_cite}.{dunit_op_n},n{isneutralspawn},u{dunit_op_a},v{dunit_op_b},e{wdctd_cite_a},f{wdctd_cite_b},s{mtextsize};zamf.{td_cite}.{dunit_op_n},n{isneutralspawn},u{dunit_op_a},v{dunit_op_b},e{wdctd_cite_a},f{wdctd_cite_b},s{mtextsize},i{dict_cite}"/>
+    <property name="opargs" value="n,isneutralspawn,bool,false;u,dunit_op_a,str,None;v,dunit_op_b,str,None;a,team_a,str,None;b,team_b,str,None;e,wdctd_cite_a,str,None;f,wdctd_cite_b,str,None;s,mtextsize,str,None;m,isemoji,bool,false;h,ischaractor,bool,false;i,dict_cite,str,None"/>
     <property name="prefix" value="zt"/>
    </properties>
   </object>
@@ -25170,7 +25173,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="color" value="#FF7700,#191970,#FFFFFF"/>
     <property name="deacti" value="{td_cite}.b{tdn}{a_withdraw};{td_cite}.a{tdn}{b_withdraw};{td_cite}.a,{td_cite}.b"/>
     <property name="isprefixseg" type="bool" value="true"/>
-    <property name="mtextsize" value="7"/>
+    <property name="mtextsize" value="8"/>
     <property name="opargs" value="n,isneutralspawn,bool,false;u,dunit_op_a,str,{dunit_op_n};v,dunit_op_b,str,{dunit_op_n};e,wdctd_cite_a,str,_0_;f,wdctd_cite_b,str,_0_;s,mtextsize,str"/>
     <property name="prefix" value="zamt"/>
     <property name="tdn" value="{,{td_cite}.n}"/>
@@ -25178,23 +25181,152 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="textsize" value="{mtextsize}"/>
    </properties>
   </object>
-  <object id="384" name="dictionary_info_j" x="1000" y="3000" width="20" height="20">
+  <object id="384" name="dictionary_info_ddj" x="1000" y="3000" width="20" height="20">
    <properties>
-    <property name="ar" value="🪖"/>
+    <property name="a" value="🟧"/>
+    <property name="ar" value="💥"/>
+    <property name="b" value="⬛"/>
     <property name="bb" value="✈️"/>
     <property name="hc" value="🚣"/>
-    <property name="ht" value="🪖"/>
+    <property name="ht" value="🥌"/>
     <property name="mg" value="🪖"/>
-    <property name="mm" value="🪖"/>
+    <property name="mh" value="🪖🥌"/>
+    <property name="mh2">🪖🥌
+🪖🥌</property>
+    <property name="mm" value="🚀"/>
     <property name="ms" value="🚢"/>
-    <property name="prefix" value="de"/>
+    <property name="n" value="⬜"/>
+    <property name="prefix" value="ddj"/>
    </properties>
   </object>
-  <object id="385" name="zt.c城1m.bb.fd5_10,ec城1m" x="7600" y="3000" width="20" height="20"/>
+  <object id="385" name="zt.c城1m.bb.fd5_10" x="7600" y="3000" width="20" height="20"/>
   <object id="386" name="c-2.c城1m.城1" x="6400" y="3000" width="20" height="20"/>
-  <object id="387" name="de.j" x="5200" y="3000" width="20" height="20"/>
-  <object id="388" name="zt.c城1m.mg.fd5_10,ec城1m" x="7800" y="3000" width="20" height="20"/>
-  <object id="389" name="zt.c城1m.hc.fd5_10,ec城1m" x="8000" y="3000" width="20" height="20"/>
-  <object id="390" name="zt.c城1m.ms.fd5_10,ec城1m" x="8200" y="3000" width="20" height="20"/>
+  <object id="387" name="ddj.dj" x="5200" y="3000" width="20" height="20"/>
+  <object id="388" name="zt.c城1m.mg.fd5_10" x="7800" y="3000" width="20" height="20"/>
+  <object id="389" name="zt.c城1m.hc.fd5_10" x="8000" y="3000" width="20" height="20"/>
+  <object id="390" name="zt.c城1m.ms.fd5_10" x="8200" y="3000" width="20" height="20"/>
+  <object id="391" name="zt.c城1m.mm.fd5_10" x="8400" y="3000" width="20" height="20"/>
+  <object id="392" name="zt.c城1m.ar.fd5_10" x="8600" y="3000" width="20" height="20"/>
+  <object id="393" name="zt.c城1m.ht.fd5_10" x="8800" y="3000" width="20" height="20"/>
+  <object id="394" name="zt.c城1m.mh.fd5_10" x="9000" y="3000" width="20" height="20"/>
+  <object id="395" name="dictionary_info_emojistore" x="1000" y="3040" width="20" height="20">
+   <properties>
+    <property name="car" value="🚗"/>
+    <property name="collision" value="💥"/>
+    <property name="color" value="🟥🟧🟨🟩🟦🟪🟫⬛⬜"/>
+    <property name="curling_stone" value="🥌"/>
+    <property name="factory" value="🏭"/>
+    <property name="helmet" value="🪖"/>
+    <property name="money" value="💰"/>
+    <property name="oil" value="🛢"/>
+    <property name="plane" value="✈️🛦🛧🛨"/>
+    <property name="prefix" value="emojistore"/>
+    <property name="rice" value="🌾🎑"/>
+    <property name="rocket" value="🚀"/>
+    <property name="ship" value="🚢🚣"/>
+    <property name="shipyard" value="⚓"/>
+   </properties>
+  </object>
+  <object id="396" name="zt.c城1m.mg.fd5_10,uht,vmh" x="9400" y="3000" width="20" height="20"/>
+  <object id="397" name="multiText_info_zamj" x="2200" y="3040" width="20" height="20">
+   <properties>
+    <property name="a_withdraw" value="{',{wdctd_cite_a}.a' if 'wdctd_cite_a' != '_0_' else ''}"/>
+    <property name="args" value="td_cite,str"/>
+    <property name="b_withdraw" value="{',{wdctd_cite_b}.b' if 'wdctd_cite_b' != '_0_' else ''}"/>
+    <property name="color" value="#FF7700,#191970,#FFFFFF"/>
+    <property name="deacti" value="{td_cite}.b{tdn}{a_withdraw};{td_cite}.a{tdn}{b_withdraw};{td_cite}.a,{td_cite}.b"/>
+    <property name="isprefixseg" type="bool" value="true"/>
+    <property name="mtextsize" value="7"/>
+    <property name="opargs" value="n,isneutralspawn,bool,false;e,wdctd_cite_a,str,_0_;f,wdctd_cite_b,str,_0_;s,mtextsize,str"/>
+    <property name="prefix" value="zamj"/>
+    <property name="tdn" value="{,{td_cite}.n}"/>
+    <property name="text" value="{dj.a},{dj.b},{dj.n}"/>
+    <property name="textsize" value="{mtextsize}"/>
+   </properties>
+  </object>
+  <object id="399" name="dictionary_info_ddf" x="1000" y="3080" width="20" height="20">
+   <properties>
+    <property name="ar" value="⊥"/>
+    <property name="bb" value="∮"/>
+    <property name="ht" value="♁"/>
+    <property name="mg" value="⌆"/>
+    <property name="mh" value="⌆♁"/>
+    <property name="mh2">⌆♁
+⌆♁</property>
+    <property name="mm" value="꧉"/>
+    <property name="prefix" value="ddf"/>
+   </properties>
+  </object>
+  <object id="400" name="ddf.df" x="5200" y="3040" width="20" height="20"/>
+  <object id="401" name="multiText_info_zamf" x="2200" y="3080" width="20" height="20">
+   <properties>
+    <property name="a_withdraw" value="{',{wdctd_cite_a}.a' if 'wdctd_cite_a' != '_0_' else ''}"/>
+    <property name="args" value="td_cite,str;dunit_op_n,str"/>
+    <property name="b_withdraw" value="{',{wdctd_cite_b}.b' if 'wdctd_cite_b' != '_0_' else ''}"/>
+    <property name="color" value="#FF7700,#191970,#FFFFFF"/>
+    <property name="deacti" value="{td_cite}.b{tdn}{a_withdraw};{td_cite}.a{tdn}{b_withdraw};{td_cite}.a,{td_cite}.b"/>
+    <property name="dict_cite" value="dh"/>
+    <property name="isprefixseg" type="bool" value="true"/>
+    <property name="mtextsize" value="8"/>
+    <property name="opargs" value="n,isneutralspawn,bool,false;u,dunit_op_a,str,{dunit_op_n};v,dunit_op_b,str,{dunit_op_n};e,wdctd_cite_a,str,_0_;f,wdctd_cite_b,str,_0_;s,mtextsize,str;i,dict_cite,str"/>
+    <property name="prefix" value="zamf"/>
+    <property name="tdn" value="{,{td_cite}.n}"/>
+    <property name="text" value="{{dict_cite}.{dunit_op_a}},{{dict_cite}.{dunit_op_b}},{{dict_cite}.{dunit_op_n}}"/>
+    <property name="textsize" value="{mtextsize}"/>
+   </properties>
+  </object>
+  <object id="402" name="dictionary_info_ddc" x="1000" y="3120" width="20" height="20">
+   <properties>
+    <property name="ar" value="A"/>
+    <property name="bb" value="P"/>
+    <property name="ht" value="T"/>
+    <property name="mg" value="I"/>
+    <property name="mh" value="IT"/>
+    <property name="mh2" value="I₂ T₂ "/>
+    <property name="mm" value="M"/>
+    <property name="prefix" value="ddc"/>
+    <property name="temp">上标字符
+⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹ ⁺ ⁻ ⁼ ⁽ ⁾ ⁿ º ˙
+ᵃ ᵇ ᶜ ᵈ ᵉ ᵍ ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ ᵒ⃒ ʳ ˢ ᵗ ᵘ ᵛ ʷ ˣ ʸ ᙆ ᴬ ᴮ ᒼ ᴰ ᴱ ᴳ ᴴ ᴵ ᴶ ᴷ ᴸ ᴹ ᴺ ᴼ ᴾ ᴼ̴ ᴿ ˢ ᵀ ᵁ ᵂ ˣ ᵞ ᙆ ꝰ ˀ ˁ ˤ ꟸ ꭜ ʱ ꭝ ꭞ ʴ ʵ ʶ ꭟ ˠ ꟹ ᴭ ᴯ ᴲ ᴻ ᴽ ᵄ ᵅ ᵆ ᵊ ᵋ ᵌ ᵑ ᵓ ᵚ ᵝ ᵞ ᵟ ᵠ ᵡ ᵎ ᵔ ᵕ ᵙ ᵜ ᶛ ᶜ ᶝ ᶞ ᶟ ᶡ ᶣ ᶤ ᶥ ᶦ ᶧ ᶨ ᶩ ᶪ ᶫ ᶬ ᶭ ᶮ ᶯ ᶰ ᶱ ᶲ ᶳ ᶴ ᶵ ᶶ ᶷ ᶸ ᶹ ᶺ ᶼ ᶽ ᶾ ᶿ ꚜ ꚝ ჼ ᒃ ᕻ ᑦ ᒄ ᕪ ᑋ ᑊ ᔿ ᐢ ᣕ ᐤ ᣖ ᣴ ᣗ ᔆ ᙚ ᐡ ᘁ ᐜ ᕽ ᙆ ᙇ ᒼ ᣳ ᒢ ᒻ ᔿ ᐤ ᣖ ᣵ ᙚ ᐪ ᓑ ᘁ ᐜ ᕽ ᙆ ᙇ ⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹ ⁺ ⁻ ⁼ ˂ ˃ ⁽ ⁾ ˙ * º
+ 
+下标字符
+₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉ ₊ ₋ ₌ ₍ ₎ ₐ ₑ ₒ ₓ ₔ ₕ ₖ ₗ ₘ ₙ ₚ ₛ ₜ
+ₐ ₔ ₑ ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ ᵣ ₛ ₜ ᵤ ᵥ ₓ ᙮ ᵤ ᵩ ᵦ ₗ ˪ ៳ ៷ ₒ ᵨ ₛ ៴ ᵤ ᵪ ᵧ
+ 
+中文上标
+㆒㆓㆔㆕㆖㆗㆘㆙㆚㆛㆜㆝㆞㆟</property>
+   </properties>
+  </object>
+  <object id="403" name="ddc.dc" x="5200" y="3080" width="20" height="20"/>
+  <object id="404" name="dictionary_info_ddl" x="1000" y="3160" width="20" height="20">
+   <properties>
+    <property name="ar" value="𝙰"/>
+    <property name="bb" value="𝙿"/>
+    <property name="ht" value="𝚃"/>
+    <property name="mg" value="𝙸"/>
+    <property name="mh" value="𝙸𝚃"/>
+    <property name="mh2" value="𝙸₂ 𝚃₂ "/>
+    <property name="mm" value="𝙼"/>
+    <property name="prefix" value="ddl"/>
+    <property name="temp">𝙰𝙱𝙲𝙳𝙴𝙵𝙶𝙷𝙸𝙹𝙺𝙻𝙼𝙽𝙾𝙿𝚀𝚁𝚂𝚃𝚄𝚅𝚆𝚇𝚈𝚉
+𝚊𝚋𝚌𝚍𝚎𝚏𝚐𝚑𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚙𝚚𝚛𝚜𝚝𝚞𝚟𝚠𝚡𝚢𝚣</property>
+   </properties>
+  </object>
+  <object id="405" name="ddl.dl" x="5200" y="3120" width="20" height="20"/>
+  <object id="406" name="dictionary_info_ddh" x="1000" y="3200" width="20" height="20">
+   <properties>
+    <property name="ar" value="𝐀"/>
+    <property name="bb" value="𝐏"/>
+    <property name="ht" value="𝐓"/>
+    <property name="mg" value="𝐈"/>
+    <property name="mh" value="𝐈𝐓"/>
+    <property name="mh2" value="𝐈₂𝐓 ₂ "/>
+    <property name="mm" value="𝐌"/>
+    <property name="prefix" value="ddh"/>
+    <property name="temp">𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙
+𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳</property>
+   </properties>
+  </object>
+  <object id="407" name="ddh.dh" x="5200" y="3160" width="20" height="20"/>
  </objectgroup>
 </map>

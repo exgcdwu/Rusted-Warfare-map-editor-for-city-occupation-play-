@@ -530,7 +530,8 @@ def mapvalue_to_value(value, ntype):
                     elif ntype[2] == int:
                         value_now = [[int(value_ij) for value_ij in value_i.split(" ")] for value_i in value.split(",")]
             return value_now
-        return ntype(value)
+        value_now = lower_bool_dict.get(value)
+        return value_now if value_now != None else value
 
 def value_to_mapvalue(value, ntype):
     if ntype == bool:
@@ -549,7 +550,7 @@ def value_to_mapvalue(value, ntype):
                     value_now = [[str(value_ij) for value_ij in value_i] for value_i in value]
                     value_now = ",".join([" ".join(value_i) for value_i in value_now])
             return value_now
-        return ntype(value)
+        return value
     
 def mapvalue_to_value_basic(value):
     if isinstance(value, dict):
