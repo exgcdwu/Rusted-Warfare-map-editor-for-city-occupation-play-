@@ -92,8 +92,8 @@ teamDetect_info_operation_pre_list = \
 DETECT_OPTION_OPERATION_OPTIONAL = {DETECT_KEY:(True, DETECT_KEY, AUTOKEY.brace) if DEFECT_VALUE == bool else ("{" + DETECT_KEY + "}", DETECT_KEY, AUTOKEY.exist) for DETECT_KEY, DEFECT_VALUE in DETECT_OPTION_DICT.items()}
 
 teamDetect_info_operation_optional = {
-    rw.const.OBJECTOP.id: ("{id_now}", "{id_now_exist}", AUTOKEY.brace), 
-    rw.const.OBJECTOP.alsoActivate: "{alsoactivate_now}", 
+    rw.const.OBJECTOP.id: ("{alsoactivate_now}", "{id_now_exist}", AUTOKEY.brace), 
+    rw.const.OBJECTOP.alsoActivate: ("{alsoactivate_now}", "{not id_now_exist}", AUTOKEY.brace), 
     rw.const.OBJECTOP.minUnits: ("{" + INFOKEY.minUnits + "}", INFOKEY.minUnits, AUTOKEY.exist), 
     rw.const.OBJECTOP.maxUnits: ("{" + INFOKEY.maxUnits + "}", INFOKEY.maxUnits, AUTOKEY.exist), 
     rw.const.OBJECTOP.resetActivationAfter: "{" + INFOKEY.reset + "}", 
@@ -129,42 +129,45 @@ teamDetect_info_operation_list = \
             operation_cycle_end("j", "j + 1", "teamDetect_cycle_check2") + \
         operation_cycle_end("i", "i + 1", "teamDetect_cycle_check1")
     ) + \
-    operation_typeset_expression("setidTeam_len", "[len(setTeam[ti]) for ti in range(lenidTeam)]") + \
+    operation_typeset_expression("setTeam_len", "[len(setTeam[ti]) for ti in range(lenidTeam)]") + \
+    operation_typeset_expression("setidTeam_len", "[len(setidTeam[ti]) for ti in range(lenidTeam)]") + \
     operation_typeset_expression("setidTeam_id", "[]") + \
-    operation_typeset_expression("setidTeam_id_all", "[]") + \
+    operation_typeset_expression("setidTeam_id_all_basic", "[]") + \
     operation_typeset_expression("iti", "[]") + \
     operation_typeset_expression("itj", "[]") + \
     operation_cycle_start("i", "0", f"i < {INFOKEY.lenidTeam}", "teamDetect_cycle3") + \
         operation_typeset_expression("setidTeam_id", "setidTeam_id + ['setidTeam{i}_0_0']") + \
-        operation_typeset_expression("iti", "iti + [i] * setidTeam_len[i]") + \
-        operation_typeset_expression("itj", "itj + [tj for tj in range(setidTeam_len[i])]") + \
-        operation_cycle_start("j", "0", f"j < len({INFOKEY.setidTeam}[i])", "teamDetect_cycle2_setidall") + \
-            operation_typeset_expression("setidTeam_id_all", "setidTeam_id_all + ['setidTeam{i}_{j}_0']") + \
-        operation_cycle_end("j", "j + 1", "teamDetect_cycle2_setidall") + \
+        operation_typeset_expression("setidTeam_len_now", "setidTeam_len[i]") + \
+        operation_typeset_expression("setTeam_len_now", "setTeam_len[i]") + \
+        operation_typeset_expression("iti", "iti + [i] * setTeam_len_now") + \
+        operation_typeset_expression("itj", "itj + [tj for tj in range(setTeam_len_now)]") + \
+        operation_if("setidTeam_len_now != 1", "teamDetect_if_isdoid") + \
+            operation_cycle_start("j", "0", f"j < setidTeam_len_now", "teamDetect_cycle2_setidall") + \
+                operation_typeset_expression("setidTeam_id_all_basic", "setidTeam_id_all_basic + ['setidTeam{i}_{j}_0']") + \
+            operation_cycle_end("j", "j + 1", "teamDetect_cycle2_setidall") + \
+        operation_ifend("teamDetect_if_isdoid") + \
     operation_cycle_end("i", "i + 1", "teamDetect_cycle3") + \
-    operation_typeset_expression("lenTeam", f"sum([len({INFOKEY.setTeam}[ti]) for ti in range(lenidTeam)])") + \
+    operation_typeset_expression("lenTeam", f"sum(setTeam_len)") + \
     operation_typeset_expression("setidTeam_set", "set(setidTeam_id)") + \
-    operation_typeset_expression("setidTeam_id_all_set_list", "list(set(setidTeam_id_all))") + \
+    operation_typeset_expression("setidTeam_id_all_basic_set", "set(setidTeam_id_all_basic)") + \
+    operation_typeset_expression("setidTeam_id_all_basic_set_list", "list(setidTeam_id_all_basic_set)") + \
     operation_typeset_expression("setidTeam_id_depn", "[','.join([myid for myid in setidTeam_set if myid != setidTeam_id[ti]]) for ti in range(lenidTeam)]") + \
     operation_typeset_expression("setidTeam_id_dep", "[','.join([myid for myid in setidTeam_set if myid != setidTeam_id[ti] and myid != setidTeam_id[neutralindex]]) for ti in range(lenidTeam)]") + \
     operation_typeset_expression("teamtoi", "dict([[str(setTeam[iti[ind]][itj[ind]]),str(iti[ind])] for ind in range(lenTeam)])") + \
     operation_typeset_expression("teamtoid", "dict([[str(setTeam[iti[ind]][itj[ind]]),str(setidTeam_id[iti[ind]])] for ind in range(lenTeam)])") + \
     operation_typeset_expression("teamtoid_depn", "dict([[str(setTeam[iti[ind]][itj[ind]]),str(setidTeam_id_depn[iti[ind]])] for ind in range(lenTeam)])") + \
     operation_typeset_expression("teamtoid_dep", "dict([[str(setTeam[iti[ind]][itj[ind]]),str(setidTeam_id_dep[iti[ind]])] for ind in range(lenTeam)])") + \
-    [
-        {
-            AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
-            "id_now_exist": "False"
-        }, 
-    ] + \
     operation_cycle_start("i", "0", f"i < {INFOKEY.lenidTeam}", "teamDetect_cycle1") + \
+        operation_typeset_expression("setidTeam_len_now", "setidTeam_len[i]") + \
+        operation_typeset_expression("setTeam_len_now", "setTeam_len[i]") + \
+        operation_typeset_expression("id_now_exist", "setidTeam_len_now == 1 and 'setidTeam{i}_0_0' not in setidTeam_id_all_basic_set") + \
         [
             {
                 AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
                 "alsoactivate_now": f"'{INFOKEY.setidTeam}" + "{i}_0_0'"
             }, 
         ] + \
-        operation_cycle_start("j", "1", f"j < len({INFOKEY.setidTeam}[i])", "teamDetect_cycle2_alsoacti") + \
+        operation_cycle_start("j", "1", f"j < setidTeam_len_now", "teamDetect_cycle2_alsoacti") + \
             [
                 {
                     AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
@@ -217,7 +220,10 @@ teamDetect_info_operation_list = \
                 }
             ] + \
         operation_elseend("teamDetect_if4") + \
-        operation_cycle_start("j", "0", f"j < len({INFOKEY.setTeam}[i])", "teamDetect_cycle2") + \
+        operation_cycle_start("j", "0", f"j < setTeam_len_now", "teamDetect_cycle2") + \
+            operation_if("j == 1", "teamDetect_closeaddid") + \
+                operation_typeset_expression("id_now_exist", "False") + \
+            operation_ifend("teamDetect_closeaddid") + \
             operation_if(f"{INFOKEY.setTeam}[i][j] != -3", "teamDetect_ifteam-3_object") + \
                 [
                     {
@@ -256,12 +262,13 @@ teamDetect_info_operation_list = \
             operation_elseend("teamDetect_ifteam-3_object") + \
         operation_cycle_end("j", "j + 1", "teamDetect_cycle2") + \
     operation_cycle_end("i", "i + 1", "teamDetect_cycle1") + \
-    operation_cycle_start("i", "0", f"i < len(setidTeam_id_all_set_list)", "teamDetect_cycle2_basic") + \
+    operation_typeset_expression("setidTeam_id_all_basic_set_list_len", "len(setidTeam_id_all_basic_set_list)") + \
+    operation_cycle_start("i", "0", f"i < setidTeam_id_all_basic_set_list_len", "teamDetect_cycle2_basic") + \
         [
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 AUTOKEY.type: rw.const.OBJECTTYPE.basic, 
-                AUTOKEY.name: "{setidTeam_id_all_set_list[i]}", 
+                AUTOKEY.name: "{setidTeam_id_all_basic_set_list[i]}", 
                 AUTOKEY.optional: {
                     rw.const.OBJECTOP.resetActivationAfter: "{" + INFOKEY.reset + "}"
                 }

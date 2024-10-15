@@ -118,6 +118,7 @@ class AUTOKEY:
     not_useful_char = "[^\u4e00-\u9fa5A-Za-z0-9_{}]"
     not_useful_char_ad_point = "[^\u4e00-\u9fa5A-Za-z0-9_{}.]"
     not_useful_char_ad_point_for_cite = "[^\u4e00-\u9fa5A-Za-z0-9_{}.]|(?<=[.][\u4e00-\u9fa5A-Za-z0-9_{}]*)[.]"
+    # re.finditer
     language_seg = "|"
 
 cite_object_dict = {}
@@ -217,6 +218,18 @@ def id_debug_pdb(tobject:rw.case.TObject, ID:int):
     if isdebug and tobject.returnDefaultProperty("id") == str(ID):
         import pdb;pdb.set_trace()
 
+def standard_error_get_args(tobject:rw.case.TObject, info_tobject:rw.case.TObject, info_err, error_id:int, sub_info_error:str = None)->None:
+    tobject_id = tobject.returnDefaultProperty("id")
+    tobject_name = tobject.returnDefaultProperty("name")
+    tobject_x = tobject.returnDefaultProperty("x")
+    tobject_y = tobject.returnDefaultProperty("y")
+    info_tobject_id = info_tobject.returnDefaultProperty("id")
+    info_tobject_name = info_tobject.returnDefaultProperty("name")
+    info_tobject_x = info_tobject.returnDefaultProperty("x")
+    info_tobject_y = info_tobject.returnDefaultProperty("y")
+    info_err_now = langstrlist_add([info_err, f"(info name:{info_tobject_name},info id:{info_tobject_id},info coordinate:({info_tobject_x}, {info_tobject_y}))" + \
+                    f"|(info 名称:{info_tobject_name},info ID:{info_tobject_id},info 坐标:({info_tobject_x}, {info_tobject_y}))"])
+    standard_error(info_err_now, error_id, tobject_id, tobject_name, tobject_x, tobject_y, sub_info_error)
 
 def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.TObject, object_dict:dict)->dict:
     args_dict = {}
@@ -228,27 +241,25 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.
     else:
         args_n = split_now[0].split(info[AUTOKEY.seg])
     
-    tobject_id = tobject.returnDefaultProperty("id")
-    tobject_name = tobject.returnDefaultProperty("name")
-    tobject_x = tobject.returnDefaultProperty("x")
-    tobject_y = tobject.returnDefaultProperty("y")
-    info_tobject_id = info_tobject.returnDefaultProperty("id")
-    info_tobject_name = info_tobject.returnDefaultProperty("name")
-    info_tobject_x = info_tobject.returnDefaultProperty("x")
-    info_tobject_y = info_tobject.returnDefaultProperty("y")
-    
     if len(args_n) < len(info[AUTOKEY.args]):
         info_args_temp = info[AUTOKEY.args][len(args_n):]
-        standard_error(f"Required arguments are missing below in a tagged object.(maybe \".\" is missing?)(name:{name},need:{info[AUTOKEY.args]},reality:{args_n})(info name:{info_tobject_name},info id:{info_tobject_id},info coordinate:({info_tobject_x}, {info_tobject_y}))" + \
-                       f"|标记宾语中的必需参数缺失。(也许\".\"缺失？)(扣除前缀后的名称:{name},必需参数要求:{info[AUTOKEY.args]},必需参数实际:{args_n})(info 名称:{info_tobject_name},info ID:{info_tobject_id},info 坐标:({info_tobject_x}, {info_tobject_y}))", 
-                       8, tobject_id, tobject_name, tobject_x, tobject_y, info_args_temp)
+        standard_error_get_args(tobject, info_tobject, 
+                        f"Required arguments are missing below in a tagged object.(maybe \".\" is missing?)(name:'{name}',need:{info[AUTOKEY.args]},reality:{args_n})" + \
+                       f"|标记宾语中的必需参数缺失。(也许\".\"缺失？)(扣除前缀后的名称:'{name}',必需参数要求:{info[AUTOKEY.args]},必需参数实际:{args_n})", 
+                       8, info_args_temp)
     elif len(args_n) > len(info[AUTOKEY.args]):
         info_args_temp = args_n[len(info[AUTOKEY.args]):]
-        standard_error(f"Too many required arguments below in a tagged object.(name:{name},need:{info[AUTOKEY.args]},reality:{args_n})(info name:{info_tobject_name},info id:{info_tobject_id},info coordinate:({info_tobject_x}, {info_tobject_y}))" + \
-                       f"|标记宾语中的必需参数过多。(扣除前缀后的名称:{name},必需参数要求:{info[AUTOKEY.args]},必需参数实际:{args_n})(info 名称:{info_tobject_name},info ID:{info_tobject_id},info 坐标:({info_tobject_x}, {info_tobject_y}))", 
-                       9, tobject_id, tobject_name, tobject_x, tobject_y, info_args_temp)
+        standard_error_get_args(tobject, info_tobject, 
+                                f"Too many required arguments below in a tagged object.(name:'{name}',need:{info[AUTOKEY.args]},reality:{args_n})" + \
+                       f"|标记宾语中的必需参数过多。(扣除前缀后的名称:'{name}',必需参数要求:{info[AUTOKEY.args]},必需参数实际:{args_n})", 
+                       9, info_args_temp)
 
     for index, thing in enumerate(info[AUTOKEY.args]):
+        if args_n[index] == '':
+            standard_error_get_args(tobject, info_tobject, 
+                                f"One of args is empty.(name:'{name}',index:{index + 1})" + \
+                           f"|标记宾语的必填参数出现空。(扣除前缀后的名称:'{name}'，第几个必填参数:{index + 1})", 
+                           29)
         args_dict[thing[0]] = thing[1](args_n[index])
     
     prefix_len = info[AUTOKEY.opargs_prefix_len]
@@ -275,13 +286,17 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.
                 deal_bool = True if var_now == "" else mapvalue_to_value(var_now, type_now)
                 args_dict[key_now] = (deal_bool ^ object_dict[key_now]) if object_dict.get(key_now) != None else deal_bool
             else:
-                if var_now == "None":
+                if var_now == '':
+                    standard_error_get_args(tobject, info_tobject, f"One of opargs(not bool) is empty.(name:'{name}',op:',{prefix_now}')" + \
+                                            f"|标记宾语的选填参数(不为bool)出现空。(扣除前缀后的名称:'{name}'，选填参数:',{prefix_now}')", 
+                                            28)
+                elif var_now == "None":
                     continue
                 args_dict[key_now] = type_now(var_now)
         else:
             if prefix_now != "d" and prefix_now != 'D':
-                standard_error(f"Unknown optional arguments in a tagged object.(name:{name}, optional tag:,{prefix_now})" + \
-                               f"|在标记宾语中出现的可选参数无法识别。(扣除前缀后的名称:{name}, 问题可选前缀:,{prefix_now})", 7, tobject_id, tobject_name, tobject_x, tobject_y)
+                standard_error_get_args(tobject, info_tobject, f"Unknown optional arguments in a tagged object.(name:'{name}', optional tag:,{prefix_now})" + \
+                               f"|在标记宾语中出现的可选参数无法识别。(扣除前缀后的名称:'{name}', 问题可选前缀:,{prefix_now})", 7)
 
     tobject_ids = tobject.returnOptionalProperty(AUTOKEY.IDs)
     tobject_ids = tobject_ids.split(AUTOKEY.IDs_seg) if (tobject_ids != None and tobject_ids != '') else []
@@ -304,17 +319,18 @@ def brace_one_str(value):
             return str(value)
 
 def brace_one_translation(expression_b:str, dict_name:dict, seg_re:str)->str:
-    
+
     expression_b = " " + expression_b + " "
 
     expression_b_seg_index = [match_now.start() for match_now in re.finditer(seg_re, expression_b)]
-    match_now_list = [(expression_b_seg_index[index] + 1, expression_b_seg_index[index + 1]) for index in range(len(expression_b_seg_index) - 1)]
-    brace_one_list = [expression_b[match_now[0]:match_now[1]] for match_now in match_now_list]
-    brace_one_list = [brace_one if dict_name.get(brace_one) == None else brace_one_str(dict_name[brace_one]) for brace_one in brace_one_list]
-    expression_b_ans = ""
+    brace_one_list = [expression_b[expression_b_seg_index[index] + 1:expression_b_seg_index[index + 1]] for index in range(len(expression_b_seg_index) - 1)]
+    
     for index in range(len(brace_one_list)):
-        expression_b_ans = expression_b_ans + expression_b[expression_b_seg_index[index]] + brace_one_list[index]
-    expression_b_ans = expression_b_ans[1:]
+        brace_one_ans = dict_name.get(brace_one_list[index])
+        if brace_one_ans != None:
+            brace_one_list[index] = brace_one_ans
+    
+    expression_b_ans = "".join([expression_b[expression_b_seg_index[index]] + brace_one_str(brace_one_list[index]) for index in range(len(brace_one_list))])[1:]
     return expression_b_ans
 
 def brace_one_translation_cycle(expression_b:str, dict_name:dict, seg_re:str)->str:
@@ -324,10 +340,14 @@ def brace_one_translation_cycle(expression_b:str, dict_name:dict, seg_re:str)->s
         expression_b = brace_one_translation(expression_b, dict_name, seg_re)
     return expression_b
 
+def brace_one_translation_quick_for_trans(expression_b:str, dict_name:dict)->str:
+    # not_useful_char_ad_point = "[^\u4e00-\u9fa5A-Za-z0-9_{}.]"
+    return expression_b
+
 def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, depth = MAXTRANSDEPTH, brace_exp_depth:int = MAXTRANSDEPTH):
     if brace_exp_depth == 0:
         return expression_b
-    #import pdb;pdb.set_trace()
+    
     expression_b_origin = expression_b
     expression_b = brace_one_translation_cycle(expression_b, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite)
     expression_b_origin_now = expression_b
@@ -345,13 +365,12 @@ def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, depth 
 
         trans_dep_now = trans_dep_now + 1
 
-    tobject:rw.case.TObject = dict_name["tobject"]
-    tobject_id = tobject.returnDefaultProperty("id")
-    tobject_name = tobject.returnDefaultProperty("name")
-    tobject_x = tobject.returnDefaultProperty("x")
-    tobject_y = tobject.returnDefaultProperty("y")
-
     if trans_dep_now == MAXTRANSDEPTH:
+        tobject:rw.case.TObject = dict_name["tobject"]
+        tobject_id = tobject.returnDefaultProperty("id")
+        tobject_name = tobject.returnDefaultProperty("name")
+        tobject_x = tobject.returnDefaultProperty("x")
+        tobject_y = tobject.returnDefaultProperty("y")
         standard_error(f"References occur in a loop(more than 1024).({expression_b})" + \
                        f"|宾语内引用发生了循环(超过1024次)。({expression_b})", 16, tobject_id, tobject_name, tobject_x, tobject_y)
 
@@ -362,9 +381,7 @@ def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, depth 
     except Exception as e:
         return expression_b
     else:
-        if expression_b_temp == None:
-            return expression_b
-        return expression_b_temp
+        return expression_b if expression_b_temp == None else expression_b_temp
 
 def expression_translation(expression_s:str, dict_name:dict, prev:bool = True, depth = MAXTRANSDEPTH, brace_exp_depth:int = MAXTRANSDEPTH):
     if brace_exp_depth == 0:
@@ -450,7 +467,10 @@ def tobject_args_translation(key:str, value:str, dict_name:dict)->dict:
         dict_ans =  {key:str_translation(value, dict_name)}
 
     for key_d, value_d in dict_ans.items():
-        dict_ans[key_d] = lower_bool(value_d)
+        if value_d == '':
+            return {}
+        else:
+            dict_ans[key_d] = lower_bool(value_d)
 
     return dict_ans
 
@@ -864,6 +884,10 @@ def try_to_deal_id_coincide(map_now:rw.RWmap):
             tobject.assignDefaultProperty("id", str(id_now))
             id_now = id_now + 1
 
+operation_dict = {
+
+}
+
 def auto_func():
     parser = argparse.ArgumentParser(
         description='Objects of Triggers are automatically processed by information\'s mode.\n' + \
@@ -1007,8 +1031,6 @@ def auto_func():
         language = config_dict["language"]
     with open(f'{args.infopath}{cf_seg}config.json', 'w') as f:
         json.dump(config_dict, f)
-
-    debug_pdb()
 
     time_ini_i = time.time()
 
@@ -1242,78 +1264,78 @@ def auto_func():
                     while(index < len(info[AUTOKEY.operation_pre])):
                         
                         operation_now = info[AUTOKEY.operation_pre][index]
-                        
-                        if operation_now[AUTOKEY.operation_type] == AUTOKEY.goto:
+                        operation_now_type = operation_now[AUTOKEY.operation_type]
+                        if operation_now_type == AUTOKEY.goto:
                             index = operation_index[operation_now[str_translation(AUTOKEY.goto_tag, object_dict)]]
                             continue
 
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeif:
+                        elif operation_now_type == AUTOKEY.typeif:
                             ifvar_exp = brace_translation(operation_now[AUTOKEY.ifvar], object_dict)
                             if isinstance(ifvar_exp, str) or (not bool(ifvar_exp)):
                                 index = operation_index[operation_now[str_translation(AUTOKEY.ifend_tag, object_dict)]]
 
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.errorif:
+                        elif operation_now_type == AUTOKEY.errorif:
                             if isquick:
                                 index = operation_index[operation_now[str_translation(AUTOKEY.ifend_tag, object_dict)]]
                 
 
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset:
+                        elif operation_now_type == AUTOKEY.typeset:
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.totype:
                                     if operation_now.get(AUTOKEY.totype) == None:
                                         object_dict[str_translation(key_n, object_dict)] = value
                                     else:
                                         object_dict[str_translation(key_n, object_dict)] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_expression:
+                        elif operation_now_type == AUTOKEY.typeset_expression:
                             depth_now = MAXTRANSDEPTH if operation_now.get(AUTOKEY.depth) == None else operation_now[AUTOKEY.depth]
                             brace_exp_depth_now = MAXTRANSDEPTH if operation_now.get(AUTOKEY.brace_exp_depth) == None else operation_now[AUTOKEY.brace_exp_depth]
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.depth and key_n != AUTOKEY.brace_exp_depth:
                                     object_dict[str_translation(key_n, object_dict)] = brace_translation(value, object_dict, depth = depth_now, brace_exp_depth = brace_exp_depth_now)
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.changetype:
+                        elif operation_now_type == AUTOKEY.changetype:
                             for key_n in operation_now[AUTOKEY.keyname_list]:
                                 str_trans = str_translation(key_n, object_dict)
                                 value = object_dict[str_trans]
                                 object_dict[str_trans] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_exist:
+                        elif operation_now_type == AUTOKEY.typeset_exist:
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type:
                                     object_dict[str_translation(key_n, object_dict)] = object_dict.get(value) != None
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_id:
+                        elif operation_now_type == AUTOKEY.typeset_id:
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.real_idexp:
                                     key_trans = str_translation(key_n, object_dict)
                                     num = brace_translation(value, object_dict)
                                     info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.ids].append([key_trans, num])
                                     info_dict_now[key_trans] = mapvalue_to_value(str_translation(operation_now[AUTOKEY.real_idexp], object_dict), str)
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeadd_args:
+                        elif operation_now_type == AUTOKEY.typeadd_args:
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type:
                                     value_brace = brace_translation(value, object_dict, brace_exp_depth = 1)
                                     value_brace = aeval_globals(value_brace)
                                     info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.args].append((str_translation(key_n, object_dict), value_brace))
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeadd_opargs:
+                        elif operation_now_type == AUTOKEY.typeadd_opargs:
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type:
                                     value_brace = brace_translation(value, object_dict, brace_exp_depth = 1)
                                     value_brace = (value_brace[0], aeval_globals(value_brace[1]))
                                     info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.opargs][str_translation(key_n, object_dict)] = value_brace
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typedelete_optional:
+                        elif operation_now_type == AUTOKEY.typedelete_optional:
                             for key_n, value in operation_now.items():
                                 if key_n == AUTOKEY.namedelete_optional:
                                     value_brace = brace_translation(value, object_dict)
                                     for value_n in value_brace:
                                         if info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.optional].issuperset([value_n]):
                                             info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.optional].remove(value_n)
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeadd_optional:
+                        elif operation_now_type == AUTOKEY.typeadd_optional:
                             for key_n, value in operation_now.items():
                                 if key_n == AUTOKEY.nameadd_optional:
                                     value_brace = brace_translation(value, object_dict)
                                     for value_n in value_brace:
                                         info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.optional].add(value_n)
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.error:
+                        elif operation_now_type == AUTOKEY.error:
                             standard_error(str_translation(operation_now[AUTOKEY.error_info], object_dict), -1, tobject_id, info_name, tobject_x, tobject_y)
-                        elif operation_now[AUTOKEY.operation_type] == AUTOKEY.pdb_pause:
+                        elif operation_now_type == AUTOKEY.pdb_pause:
                             debug_pdb(object_dict)
                         index = index + 1
 
@@ -1407,7 +1429,8 @@ def auto_func():
 
                 for key_now in info_dict.keys():
                     if (key_now.startswith(info_dict_now[AUTOKEY.prefix]) and not info_dict_now[AUTOKEY.isprefixseg]) or \
-                        (info_dict_now[AUTOKEY.prefix].startswith(key_now) and not info_dict[key_now][AUTOKEY.isprefixseg]):
+                        (info_dict_now[AUTOKEY.prefix].startswith(key_now) and not info_dict[key_now][AUTOKEY.isprefixseg]) or \
+                            (key_now == info_dict_now[AUTOKEY.prefix]):
                         standard_error(f"An info's prefix is the prefix of another.(name1:({info_dict[key_now][AUTOKEY.info_name]}), prefix1({key_now}); name2:({info_dict_now[AUTOKEY.info_name]})), prefix2:({info_dict_now[AUTOKEY.prefix]})" + 
                                        f"|一个info宾语的前缀是另一个info宾语的前缀。(名称1:({info_dict[key_now][AUTOKEY.info_name]}), 前缀1({key_now}); 名称2:({info_dict_now[AUTOKEY.info_name]})), 前缀2:({info_dict_now[AUTOKEY.prefix]})", 22, tobject_id, info_name, tobject_x, tobject_y)
 
@@ -1454,6 +1477,9 @@ def auto_func():
 
     time_dif_info = {}
     time_info = {}
+    time_dif_info_step = [{}, {}, {}]
+    time_info_step = [{}, {}, {}]
+    time_operation_type = {}
 
     while index_tobject < len(tobject_list):
         tobject = tobject_list[index_tobject]
@@ -1481,16 +1507,6 @@ def auto_func():
 
             if prefix_now == prefix_to_match \
                 and (not re.match(AUTOKEY.info_re, tobject_name)):
-                object_dict = deepcopy(info)
-                object_dict[AUTOKEY.tobject_id] = tobject_id
-                object_dict[AUTOKEY.tobject_name] = tobject_name
-
-                object_dict.update(get_args(myinfo, tobject_name_to_solve, tobject, info_tobject, object_dict))
-                
-                if info.get(AUTOKEY.info_prefix) != None:
-                    for info_pre in info[AUTOKEY.info_prefix]:
-                        info_temp = info_dict[info_pre]
-                        object_dict.update(info_temp)
                 ischange = True
                 break
         
@@ -1504,19 +1520,30 @@ def auto_func():
                            f"|生成的标记宾语无法匹配，请查找对应tree_info name中前缀是否正确。(上级 ID:{info_id}, 上级 名称:{info_name}, 上级 坐标({info_x}, {info_y}))", 
                            26, tobject_id, tobject_name, tobject_x, tobject_y)
         if ischange:
-            time_tag_i = time.time()
+
+            time_tag_i1 = time.time()
             isdelete_sym = bool(re.match(AUTOKEY.delete_symbol, tobject_name)) or info[AUTOKEY.isdelete_sym]
             isdelete_all_sym = bool(re.match(AUTOKEY.delete_all_symbol, tobject_name)) or info[AUTOKEY.isdelete_all_sym]
-
             standard_out(isverbose and (not(isdelete_sym or isdelete_all or isdelete_all_sym)), 
-                         f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. Object generation..." + 
-                         f"|一个宾语(ID:{tobject_id}, 名称:{tobject_name})已经被确认为标记宾语。宾语生成中...")
+                        f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. Object generation..." + 
+                        f"|一个宾语(ID:{tobject_id}, 名称:{tobject_name})已经被确认为标记宾语。宾语生成中...")
             standard_out(isverbose and (isdelete_all or isdelete_all_sym), 
-                         f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted..." + 
-                         f"|一个宾语(ID:{tobject_id}, 名称:{tobject_name})已经被确认为标记宾语。所有该标记宾语产生的宾语和自身都将被删除...")
+                        f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object. All objects generated by this tagged object and itself will be deleted..." + 
+                        f"|一个宾语(ID:{tobject_id}, 名称:{tobject_name})已经被确认为标记宾语。所有该标记宾语产生的宾语和自身都将被删除...")
             standard_out(isverbose and (isdelete_sym and(not (isdelete_all or isdelete_all_sym))), 
-                         f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The objects will not be generated, existing ones will also be deleted..." +
-                         f"|一个宾语(ID:{tobject_id}, 名称:{tobject_name})已经被确认为有删除标记的标记宾语. 将不会新产生宾语，之前产生的宾语也将全部删除...")
+                        f"An object(ID:{tobject_id}, name:{tobject_name}) has been identified as a tagged object with deleted tag. The objects will not be generated, existing ones will also be deleted..." +
+                        f"|一个宾语(ID:{tobject_id}, 名称:{tobject_name})已经被确认为有删除标记的标记宾语. 将不会新产生宾语，之前产生的宾语也将全部删除...")
+            
+            object_dict = deepcopy(info)
+            object_dict[AUTOKEY.tobject_id] = tobject_id
+            object_dict[AUTOKEY.tobject_name] = tobject_name
+
+            object_dict.update(get_args(myinfo, tobject_name_to_solve, tobject, info_tobject, object_dict))
+            
+            if info.get(AUTOKEY.info_prefix) != None:
+                for info_pre in info[AUTOKEY.info_prefix]:
+                    info_temp = info_dict[info_pre]
+                    object_dict.update(info_temp)
 
             if myinfo.get(AUTOKEY.isinfo_sub) != None and myinfo.get(AUTOKEY.isinfo_sub) == True:
                 standard_error(f"Incorrect use of the subordinate info object.|" + 
@@ -1586,14 +1613,15 @@ def auto_func():
 
             tottobid = 0
             index = 0
-
+            time_tag_i2 = time.time()
             while(index < len(myinfo[AUTOKEY.operation])):
 
                 operation_now = myinfo[AUTOKEY.operation][index]
+                operation_now_type = operation_now[AUTOKEY.operation_type]
+                time_operation_one_i = time.time()
 
-                if operation_now[AUTOKEY.operation_type] == AUTOKEY.object:
+                if operation_now_type == AUTOKEY.object:
                     
-
                     object_now = get_tobject(operation_now, object_dict, ori_pos, ori_size)
 
                     if object_now != None:
@@ -1632,44 +1660,51 @@ def auto_func():
                                 IDs_update(tobject, object_now)
                         tottobid = tottobid + 1
                     
-                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.goto:
+                elif operation_now_type == AUTOKEY.goto:
                     index = operation_index[operation_now[str_translation(AUTOKEY.goto_tag, object_dict)]]
-                    continue
 
-                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeif:
+                elif operation_now_type == AUTOKEY.typeif:
                     ifvar_exp = brace_translation(operation_now[AUTOKEY.ifvar], object_dict)
                     if isinstance(ifvar_exp, str) or (not bool(ifvar_exp)):
                         index = operation_index[operation_now[str_translation(AUTOKEY.ifend_tag, object_dict)]]
-                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.errorif:
+                elif operation_now_type == AUTOKEY.errorif:
                     if isquick:
                         index = operation_index[operation_now[str_translation(AUTOKEY.ifend_tag, object_dict)]]
-                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset:
+                elif operation_now_type == AUTOKEY.typeset:
                     for key, value in operation_now.items():
                         if key != AUTOKEY.operation_type and key != AUTOKEY.totype:
                             if operation_now.get(AUTOKEY.totype) == None:
                                 object_dict[str_translation(key, object_dict)] = value
                             else:
                                 object_dict[str_translation(key, object_dict)] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
-                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_expression:
+                elif operation_now_type == AUTOKEY.typeset_expression:
                             depth_now = MAXTRANSDEPTH if operation_now.get(AUTOKEY.depth) == None else operation_now[AUTOKEY.depth]
                             brace_exp_depth_now = MAXTRANSDEPTH if operation_now.get(AUTOKEY.brace_exp_depth) == None else operation_now[AUTOKEY.brace_exp_depth]
                             for key_n, value in operation_now.items():
                                 if key_n != AUTOKEY.operation_type and key_n != AUTOKEY.depth and key_n != AUTOKEY.brace_exp_depth:
                                     object_dict[str_translation(key_n, object_dict)] = brace_translation(value, object_dict, depth = depth_now, brace_exp_depth = brace_exp_depth_now)
-                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.changetype:
+                elif operation_now_type == AUTOKEY.changetype:
                     for key in operation_now[AUTOKEY.keyname_list]:
                         str_trans = str_translation(key, object_dict)
                         value = object_dict[str_trans]
                         object_dict[str_trans] = str_to_type(type_to_str(value, get_type(value)), operation_now[AUTOKEY.totype])
-                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.typeset_exist:
+                elif operation_now_type == AUTOKEY.typeset_exist:
                     for key, value in operation_now.items():
                         if key != AUTOKEY.operation_type:
                             object_dict[str_translation(key, object_dict)] = object_dict.get(value) != None
-                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.error:
+                elif operation_now_type == AUTOKEY.error:
                     standard_error(str_translation(operation_now[AUTOKEY.error_info], object_dict), -1, tobject_id, tobject_name, tobject_x, tobject_y)
-                elif operation_now[AUTOKEY.operation_type] == AUTOKEY.pdb_pause:
+                elif operation_now_type == AUTOKEY.pdb_pause:
                     debug_pdb(object_dict)
+
+                time_operation_one_e = time.time()
+                if time_operation_type.get(operation_now_type) == None:
+                    time_operation_type[operation_now_type] = 0
+                time_operation_type[operation_now_type] = time_operation_type[operation_now_type] + time_operation_one_e - time_operation_one_i 
+                
                 index = index + 1
+            
+            time_tag_i3 = time.time()
 
             id_delete = IDs_balance(tobject, tottobid)
             for idnow in id_delete:
@@ -1706,10 +1741,21 @@ def auto_func():
                                        14, tobject_id, tobject_name, tobject_x, tobject_y)
                     cite_object_dict[object_dict[AUTOKEY.cite_name] + "." + key] = value
             
+
             time_tag_e = time.time()
-            time_tag = time_tag_e - time_tag_i
+            time_tag = time_tag_e - time_tag_i1
+            time_tag1 = time_tag_i2 - time_tag_i1
+            time_tag2 = time_tag_i3 - time_tag_i2
+            time_tag3 = time_tag_e - time_tag_i3
             time_dif_info[prefix_now] = time_tag + (time_dif_info[prefix_now] if time_dif_info.get(prefix_now) != None else 0)
             time_info[info[AUTOKEY.info_key]] = time_tag + (time_info[info[AUTOKEY.info_key]] if time_info.get(info[AUTOKEY.info_key]) != None else 0)
+            
+            time_dif_info_step[0][prefix_now] = time_tag1 + (time_dif_info_step[0][prefix_now] if time_dif_info_step[0].get(prefix_now) != None else 0)
+            time_info_step[0][info[AUTOKEY.info_key]] = time_tag1 + (time_info_step[0][info[AUTOKEY.info_key]] if time_info_step[0].get(info[AUTOKEY.info_key]) != None else 0)
+            time_dif_info_step[1][prefix_now] = time_tag2 + (time_dif_info_step[1][prefix_now] if time_dif_info_step[1].get(prefix_now) != None else 0)
+            time_info_step[1][info[AUTOKEY.info_key]] = time_tag2 + (time_info_step[1][info[AUTOKEY.info_key]] if time_info_step[1].get(info[AUTOKEY.info_key]) != None else 0)
+            time_dif_info_step[2][prefix_now] = time_tag3 + (time_dif_info_step[2][prefix_now] if time_dif_info_step[2].get(prefix_now) != None else 0)
+            time_info_step[2][info[AUTOKEY.info_key]] = time_tag3 + (time_info_step[2][info[AUTOKEY.info_key]] if time_info_step[2].get(info[AUTOKEY.info_key]) != None else 0)
 
     standard_out(isverbose and (isdelete_all or isdelete), "Some objects are being deleted...|需要被删除的宾语正在回收...")
     standard_out(isverbose and (isdelete_d), "Some objects are being deleted if eligible...|需要被删除的宾语正在回收，如有必要...")
@@ -1817,12 +1863,19 @@ def auto_func():
     standard_out(isverbose, f"Tagged objects process time:{time_tagged:.1f}s|标记宾语处理时间:{time_tagged:.1f}s")
     standard_out(isverbose, f"Objects rearrangement time:{time_rea:.1f}s|宾语重组时间:{time_rea:.1f}s")
 
-    standard_out(isverbose, f"Tagged objects time with different prefix:|不同前缀标记宾语的运行时间:")
+    standard_out(isverbose, f"Tagged objects time with different info:|不同info标记宾语的运行时间:")
 
     langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in time_info.items()]
     langstr_time = langstrlist_add(langstr_time_list)
     langstr_time = "|".join(["(" + langtime[:-2] + ")" for langtime in langstr_time.split("|")])
     standard_out(isverbose, langstr_time)
+
+    standard_out(isverbose and isdebug, f"Tagged objects time with different info(operation):|不同info标记宾语的运行时间(operation):")
+
+    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in time_info_step[1].items()]
+    langstr_time = langstrlist_add(langstr_time_list)
+    langstr_time = "|".join(["(" + langtime[:-2] + ")" for langtime in langstr_time.split("|")])
+    standard_out(isverbose and isdebug, langstr_time)
 
     standard_out(isverbose, f"Tagged objects time with different prefix:|不同前缀标记宾语的运行时间:")
 
@@ -1830,6 +1883,20 @@ def auto_func():
     langstr_time = langstrlist_add(langstr_time_list)
     langstr_time = "|".join(["(" + langtime[:-2] + ")" for langtime in langstr_time.split("|")])
     standard_out(isverbose, langstr_time)
+
+    standard_out(isverbose and isdebug, f"Tagged objects time with different prefix(operation):|不同前缀标记宾语的运行时间(operation):")
+
+    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in time_dif_info_step[1].items()]
+    langstr_time = langstrlist_add(langstr_time_list)
+    langstr_time = "|".join(["(" + langtime[:-2] + ")" for langtime in langstr_time.split("|")])
+    standard_out(isverbose and isdebug, langstr_time)
+
+    standard_out(isverbose and isdebug, f"Tagged objects time with different operation:|不同operation的运行时间(标记宾语):")
+
+    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in time_operation_type.items()]
+    langstr_time = langstrlist_add(langstr_time_list)
+    langstr_time = "|".join(["(" + langtime[:-2] + ")" for langtime in langstr_time.split("|")])
+    standard_out(isverbose and isdebug, langstr_time)
 
     dev_null.close()
 
