@@ -3,6 +3,7 @@
 !.github/
 tests/
 github_publish.sh
+sh/
 _app/
 some-other-processes/
 
