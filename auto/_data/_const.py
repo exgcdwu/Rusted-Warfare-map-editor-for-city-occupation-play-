@@ -60,6 +60,7 @@ class INFOKEY:
     setidTeam = "setidTeam"
     lenidTeam = "lenidTeam"
     aunit = "aunit"
+    aunitbrace = "aunitbrace"
     minUnits = "minUnits"
     maxUnits = "maxUnits"
     reset = "reset"
@@ -91,6 +92,8 @@ class INFOKEY:
     isonlybuilding = "isonlybuilding"
     isshowOnMap = "isshowOnMap"
     isdetectdeacti = "isdetectdeacti"
+    basicoffset = "basicoffset"
+    basicoffsetsize = "basicoffsetsize"
 
     ismtext = "ismtext"
     mcolor = "mcolor"
@@ -365,12 +368,19 @@ def operation_ifend(tag:str, elseif_num:int = 2):
     return operation_else(tag, elseif_num) + \
     operation_elseend(tag)
 
-def operation_pdb():
-    return [
+def operation_pdb(ID:str = None, name:str = None, print:str = None):
+    operation_pdb_now = \
         {
             AUTOKEY.operation_type: AUTOKEY.pdb_pause
         }
-    ]
+    
+    if ID != None:
+        operation_pdb_now[AUTOKEY.ID] = ID
+    if name != None:
+        operation_pdb_now[AUTOKEY.name] = name
+    if print != None:
+        operation_pdb_now[AUTOKEY.print] = print
+    return [operation_pdb_now]
 
 def operation_error(error_info:str):
     return [
@@ -392,6 +402,9 @@ def operation_typeset_expression(key:str, value:str, depth:int = MAXTRANSDEPTH, 
 
 def br(str_now:str)->str:
     return "{" + str_now + "}"
+
+def nbr(str_now:str)->str:
+    return f"u\'\\u{AUTOKEY.left_brace}\' + \'{str_now}\' + u\'\\u{AUTOKEY.right_brace}\'"
 
 ARGS_OPARGS_PRE_OPERATION = \
     operation_exist_if("args", "args_opargs_pre_if2") + \

@@ -10,7 +10,7 @@ import rwmap as rw
 
 from auto._core import AUTOKEY
 from auto._data._const import *
-from auto._data._time import *
+from auto._data._time import time_info_sub
 
 object_info_args_dict = OrderedDict()
 

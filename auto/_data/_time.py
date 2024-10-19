@@ -38,18 +38,18 @@ def self_assign_operation_list(key:str, info_tag:str):
     return \
     operation_exist_if(f"{key}", info_tag + "_existif_selfassign_" + key) + \
         operation_typeset_expression(f"{key}", f"{key}") + \
-    operation_ifend(info_tag + "_existif_" + key)
+    operation_ifend(info_tag + "_existif_selfassign_" + key)
 
 def time_ratio_operation_list(key:str, info_tag:str):
     return \
     operation_exist_if(f"{key}", info_tag + "_existif_time_" + key) + \
-        operation_typeset_expression(f"{key}", br(f"float('{key}'[:-1]) * {INFOKEY.timeratio}") + "s") + \
+        operation_typeset_expression(f"{key}", "(" + nbr(":.2f") + f").format(float('{key}'[:-1]) * {INFOKEY.timeratio}) + 's'") + \
     operation_ifend(info_tag + "_existif_time_" + key)
 
 def time_list_ratio_operation_list(key:str, info_tag:str):
     return \
     operation_exist_if(f"{key}", info_tag + "_existif_time_list_" + key) + \
-        operation_typeset_expression(f"{key}", f"[str(float(timeratio_now[:-1]) * {INFOKEY.timeratio}) + 's' for timeratio_now in {key}]") + \
+        operation_typeset_expression(f"{key}", "[(" + nbr(":.2f") + ").format((float(timeratio_now[:-1]) * timeratio)) + 's' " + f"for timeratio_now in {key}]") + \
     operation_ifend(info_tag + "_existif_time_list_" + key)
 
 def sum_list(list_now:list):
@@ -61,18 +61,18 @@ def sum_list(list_now:list):
 def time_operation_list(info_tag:str, warmup_keylist:list, warmuplist_keylist:list, reset_keylist:list, resetlist_keylist:list):
     return \
     operation_if(f"{INFOKEY.istime}", info_tag + "_if_istime") + \
+        operation_if(INFOKEY.iscorrectwarmup, info_tag + "_if_assign_iscorrectwarmup") + \
         sum_list([self_assign_operation_list(warmup, info_tag) for warmup in warmup_keylist]) + \
         sum_list([self_assign_operation_list(warmuplist, info_tag) for warmuplist in warmuplist_keylist]) + \
-        operation_if(INFOKEY.iscorrectwarmup, info_tag + "_if_assign_iscorrectwarmup") + \
+        operation_ifend(info_tag + "_if_assign_iscorrectwarmup") + \
             sum_list([self_assign_operation_list(reset, info_tag) for reset in reset_keylist]) + \
             sum_list([self_assign_operation_list(resetlist, info_tag) for resetlist in resetlist_keylist]) + \
-        operation_ifend(info_tag + "_if_assign_iscorrectwarmup") + \
+        operation_if(INFOKEY.iscorrectwarmup, info_tag + "_if_iscorrectwarmup") + \
         sum_list([time_ratio_operation_list(warmup, info_tag) for warmup in warmup_keylist]) + \
         sum_list([time_list_ratio_operation_list(warmuplist, info_tag) for warmuplist in warmuplist_keylist]) + \
-        operation_if(INFOKEY.iscorrectwarmup, info_tag + "_if_iscorrectwarmup") + \
+        operation_ifend(info_tag + "_if_iscorrectwarmup") + \
             sum_list([time_ratio_operation_list(reset, info_tag) for reset in reset_keylist]) + \
             sum_list([time_list_ratio_operation_list(resetlist, info_tag) for resetlist in resetlist_keylist]) + \
-        operation_ifend(info_tag + "_if_iscorrectwarmup") + \
     operation_ifend(info_tag + "_if_istime")
 
 def time_info_sub(info_dict:str, warmup_keylist:list, warmuplist_keylist:list, reset_keylist:list, resetlist_keylist:list)->dict:

@@ -288,6 +288,10 @@ error_info:str
 ### pdb_pause
 
 pdb调试暂停
+参数：
+ID:str 可选，ID要求
+name:str 可选，name前缀要求
+print:str 可选，输出内容，否则输出object_dict
 
 ### typeset_id(only operation_pre)
 

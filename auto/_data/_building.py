@@ -26,6 +26,7 @@ building_info_args_dict[INFOKEY.addWarmup] = str
 building_info_args_dict[INFOKEY.addReset] = str
 
 building_info_args_dict[INFOKEY.aunit] = str
+building_info_args_dict[INFOKEY.aunitbrace] = str
 building_info_args_dict[INFOKEY.spawnnum] = str
 building_info_args_dict[INFOKEY.team] = str
 building_info_args_dict[INFOKEY.addname] = str
@@ -58,7 +59,8 @@ building_info_default_args_dict = {
     INFOKEY.detectoffsetsize: "0 0", 
     INFOKEY.acti: "", 
     INFOKEY.deacti: "", 
-    INFOKEY.isdetectdeacti: "false"
+    INFOKEY.isdetectdeacti: "false", 
+    INFOKEY.aunitbrace: ""
 }
 
 building_info_optional_set = {
@@ -115,7 +117,7 @@ building_info_operation_list = \
                 rw.const.OBJECTOP.deactivatedBy: ("{'" + f"{INFOKEY.idprefix}" + "0' if isdetectdeacti else ''}{',' if isdetectdeacti and (deacti != ['']) else ''}{','.join(deacti) if deacti != [''] else ''}", "isdetectdeacti or (deacti != [''])", AUTOKEY.brace), 
                 rw.const.OBJECTOP.warmup: ("{" + f"{INFOKEY.addWarmup}" + "}", f"'{INFOKEY.addWarmup}' != '0s' and '{INFOKEY.addWarmup}' != '0.0s'", AUTOKEY.brace), 
                 rw.const.OBJECTOP.resetActivationAfter: ("{" + f"{INFOKEY.addReset}" + "}", f"{INFOKEY.addReset}", AUTOKEY.exist), 
-                rw.const.OBJECTOP.spawnUnits: "{" + f"{INFOKEY.aunit}" + "}*{" + f"{INFOKEY.spawnnum}" + "}", 
+                rw.const.OBJECTOP.spawnUnits: br(f"{INFOKEY.aunit}")+ "*" + br(f"{INFOKEY.spawnnum}") + br(f"{INFOKEY.aunitbrace}") , 
                 rw.const.OBJECTOP.team: "{" + f"{INFOKEY.team}" + "}", 
                 rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.isshowOnMap}", AUTOKEY.brace), 
             }

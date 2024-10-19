@@ -103,7 +103,8 @@ def operation_list_assign(info_args:str, index:str, assign_name:str, info_tag:st
         operation_elseend(info_tag + "_if_" + assign_name) + \
     operation_else(info_tag + "_exist_if_" + assign_name) + \
         operation_typeset_expression(f"{assign_name}_exist", "False") + \
-    operation_elseend(info_tag + "_exist_if_" + assign_name)
+    operation_elseend(info_tag + "_exist_if_" + assign_name) + \
+[]
 
 def operation_ids_assign(args_exist:str, args:str, add_args:str, info_tag:str, assign_tag:str):
     return \
@@ -214,6 +215,7 @@ multiText_info_operation_list = \
         [
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
+                AUTOKEY.exist: ["text_now_exist"], 
                 AUTOKEY.offset: "offset_now_{i}", 
                 AUTOKEY.offsetsize: "offsetsize_now_{i}", 
                 AUTOKEY.name: ("{name_now}", "name_now_exist", AUTOKEY.brace), 

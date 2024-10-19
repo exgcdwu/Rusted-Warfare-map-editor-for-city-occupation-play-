@@ -16,9 +16,9 @@ import pdb
 
 import rwmap as rw
 
-bb_map = rw.RWmap.init_mapfile(f'{example_dir_path}\\' + "auto_example-temp2.tmx")
+bb_map = rw.RWmap.init_mapfile(f'{example_dir_path}\\' + "auto_example.tmx")
 map_x = 500
-map_y = 600
+map_y = 800
 map_now = rw.RWmap.init_map(rw.frame.Coordinate(map_y, map_x))
 
 map_now.add_tileset_fromMapPath(f'{work_dir_path}\\examples\\template\\v3.tmx')
@@ -29,7 +29,7 @@ map_now.add_layer(rw.const.NAME.Units)
 map_now.addTile_square(rw.frame.TagRectangle.init_ae("Ground", rw.frame.Coordinate(0, 0), rw.frame.Coordinate(map_x, map_y)), 
                        rw.frame.TagCoordinate.init_xy("export_ground", 7, 4))
 
-red_x_list = [i for i in range(90, 100)]
+red_x_list = [i for i in range(90, 100)] + [i for i in range(130, 140)] + [i for i in range(170, 180)] + [i for i in range(210, 220)]
 
 for i in red_x_list:
     for j in range(map_y):
@@ -41,6 +41,11 @@ for i in range(map_x):
     for j in red_y_list:
         map_now.addTile(rw.frame.TagCoordinate.init_xy("Ground", i, j), rw.frame.TagCoordinate.init_xy("export_ground", 25, 4))
 
+map_now.addTile_square(rw.frame.TagRectangle.init_ae("Ground", rw.frame.Coordinate(140, 460), rw.frame.Coordinate(170, map_y)), 
+                       rw.frame.TagCoordinate.init_xy("export_ground", 25, 4))
+
 map_now._objectGroup_list = bb_map._objectGroup_list
 
-map_now.write_file(f'{example_dir_path}\\' + "auto_example-temp2.tmx")
+map_now.write_file(f'{example_dir_path}\\' + "auto_example.tmx")
+
+

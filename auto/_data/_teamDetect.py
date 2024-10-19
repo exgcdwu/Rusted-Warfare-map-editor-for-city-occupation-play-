@@ -25,6 +25,9 @@ teamDetect_info_args_dict[INFOKEY.minUnits] = str
 teamDetect_info_args_dict[INFOKEY.maxUnits] = str
 
 teamDetect_info_args_dict[INFOKEY.aunit] = str
+teamDetect_info_args_dict[INFOKEY.basicoffset] = (list, int)
+teamDetect_info_args_dict[INFOKEY.basicoffsetsize] = (list, int)
+
 teamDetect_info_args_dict[INFOKEY.name] = (list, str)
 teamDetect_info_args_dict[INFOKEY.offset] = (list, list, int)
 teamDetect_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
@@ -47,10 +50,12 @@ DETECT_OPTION_DICT = {
 teamDetect_info_args_dict.update(DETECT_OPTION_DICT)
 
 teamDetect_info_default_args_dict = {
-    INFOKEY.name: "" + "[\"{'setid\" + \"Team\" + str(ex) + \"_0_0'[len(seti\" + \"dTeam[\" + str(ex) + \"][0]):]}\" for ex in range(lenidTeam)]", # [\"{'setid\" + \"Team\" + str(ex) + \"_0'[len(setidTeam[ex]):]}\"
+    INFOKEY.name: "" + "[\"{'setid\" + \"Team\" + str(ex) + \"_0_0'[len('setid\" + \"Team\" + str(ex) + \"_0_'):]}\" for ex in range(lenidTeam)]", # [\"{'setid\" + \"Team\" + str(ex) + \"_0'[len(setidTeam[ex]):]}\"
     INFOKEY.offset: f"[[0, 0] for ex in range({INFOKEY.lenidTeam})]", 
     INFOKEY.offsetsize: f"[[0, 0] for ex in range({INFOKEY.lenidTeam})]", 
-    INFOKEY.neutralindex: "-1"
+    INFOKEY.neutralindex: "-1", 
+    INFOKEY.basicoffset: "-10 10", 
+    INFOKEY.basicoffsetsize: "20 0", 
 }
 
 teamDetect_info_optional_set = {INFOKEY.brace}
@@ -268,6 +273,8 @@ teamDetect_info_operation_list = \
             {
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 AUTOKEY.type: rw.const.OBJECTTYPE.basic, 
+                AUTOKEY.offset: f"{INFOKEY.basicoffset}", 
+                AUTOKEY.offsetsize: f"{INFOKEY.basicoffsetsize}", 
                 AUTOKEY.name: "{setidTeam_id_all_basic_set_list[i]}", 
                 AUTOKEY.optional: {
                     rw.const.OBJECTOP.resetActivationAfter: "{" + INFOKEY.reset + "}"

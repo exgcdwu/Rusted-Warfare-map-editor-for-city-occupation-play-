@@ -47,6 +47,7 @@ class AUTOKEY:
     opargs_prefix_len = "opargs_prefix_len"
     ids = "ids"
     IDs = "IDs"
+    ID = "ID"
     IDfa = "IDfa"
     IDdep = "IDdep"
     operation = "operation"
@@ -72,6 +73,9 @@ class AUTOKEY:
     tobject_name = "tobject_name"
     brace_exp_depth = "brace_exp_depth"
     errorif = "errorif"
+    print = "print"
+    left_brace = "007B"
+    right_brace = "007D"
 
     operation_type = "operation_type"
     object = "object"
@@ -1203,7 +1207,7 @@ def auto_func():
                 if info.get(AUTOKEY.default_args) != None:
                     for key_now, value in info[AUTOKEY.default_args].items():
                         if info_dict_now.get(key_now) != None:
-                            if default_brace.issuperset([key_now]):
+                            if default_brace != None and default_brace.issuperset([key_now]):
                                 default_brace.remove(key_now)
                             continue
                         if default_brace != None and default_brace.issuperset([key_now]):
@@ -1219,8 +1223,8 @@ def auto_func():
                         try:
                             info_dict_now[key_now] = mapvalue_to_value(tobject_temp.returnOptionalProperty(key_now), ntype)
                         except ValueError:
-                            standard_error(f"An argument of info is wrong, maybe not a number.(key:{key_now}, value:\"{tobject_temp.returnOptionalProperty(key_now)}\", type:{ntype})" + \
-                                           f"|info 数据读取错误，可能是本来填数字的地方不是数字。(参数:{key_now}, 参数内容:\"{tobject_temp.returnOptionalProperty(key_now)}\", 类型:{ntype})", 
+                            standard_error(f"An argument of info is wrong, maybe not a number(extra space or strange letters and characters).(key:{key_now}, value:\"{tobject_temp.returnOptionalProperty(key_now)}\", type:{ntype})" + \
+                                           f"|info 数据读取错误，可能是本来填数字的地方不是数字（也许出现多余的空格、奇怪的字母和字符）。(参数:{key_now}, 参数内容:\"{tobject_temp.returnOptionalProperty(key_now)}\", 类型:{ntype})", 
                                            27, tobject_id, info_name, tobject_x, tobject_y)
                         tobject_temp.deleteOptionalProperty(key_now)
                         if default_brace != None and default_brace.issuperset([key_now]):
@@ -1336,7 +1340,25 @@ def auto_func():
                         elif operation_now_type == AUTOKEY.error:
                             standard_error(str_translation(operation_now[AUTOKEY.error_info], object_dict), -1, tobject_id, info_name, tobject_x, tobject_y)
                         elif operation_now_type == AUTOKEY.pdb_pause:
-                            debug_pdb(object_dict)
+                            ispdb = True
+                            print_pdb = None
+                            for key, value in operation_now.items():
+                                if key != AUTOKEY.operation_type:
+                                    if key == AUTOKEY.ID:
+                                        if value != tobject_id:
+                                            ispdb = False
+                                            break
+                                    if key == AUTOKEY.name:
+                                        if not tobject_name.startswith(value):
+                                            ispdb = False
+                                            break
+                                    if key == AUTOKEY.print:
+                                        print_pdb = value
+                            if ispdb:
+                                if print_pdb == None:
+                                    debug_pdb(object_dict)
+                                else:
+                                    debug_pdb(print_pdb)
                         index = index + 1
 
                 info_new = info_doids_dict[info_dict_now[AUTOKEY.prefix]]
@@ -1426,14 +1448,14 @@ def auto_func():
                         temp_pri = OrderedDict(info_dict_now)
                         temp_pri.pop("tobject")
                     standard_out(isverbose, temp_pri)
-
+                
                 for key_now in info_dict.keys():
-                    if (key_now.startswith(info_dict_now[AUTOKEY.prefix]) and not info_dict_now[AUTOKEY.isprefixseg]) or \
-                        (info_dict_now[AUTOKEY.prefix].startswith(key_now) and not info_dict[key_now][AUTOKEY.isprefixseg]) or \
+                        if (key_now.startswith(info_dict_now[AUTOKEY.prefix]) and ((info_new.get(AUTOKEY.isinfo_sub) != True) and (info_dict_now.get(AUTOKEY.isprefixseg) != True))) or \
+                            (info_dict_now[AUTOKEY.prefix].startswith(key_now) and ((info_doids_dict[key_now].get(AUTOKEY.isinfo_sub) != True) and (info_dict[key_now].get(AUTOKEY.isprefixseg) != True))) or \
                             (key_now == info_dict_now[AUTOKEY.prefix]):
-                        standard_error(f"An info's prefix is the prefix of another.(name1:({info_dict[key_now][AUTOKEY.info_name]}), prefix1({key_now}); name2:({info_dict_now[AUTOKEY.info_name]})), prefix2:({info_dict_now[AUTOKEY.prefix]})" + 
-                                       f"|一个info宾语的前缀是另一个info宾语的前缀。(名称1:({info_dict[key_now][AUTOKEY.info_name]}), 前缀1({key_now}); 名称2:({info_dict_now[AUTOKEY.info_name]})), 前缀2:({info_dict_now[AUTOKEY.prefix]})", 22, tobject_id, info_name, tobject_x, tobject_y)
-
+                            standard_error(f"An info's prefix is the prefix of another.(name1:({info_dict[key_now][AUTOKEY.info_name]}), prefix1({key_now}); name2:({info_dict_now[AUTOKEY.info_name]})), prefix2:({info_dict_now[AUTOKEY.prefix]})" + 
+                                        f"|一个info宾语的前缀是另一个info宾语的前缀。(名称1:({info_dict[key_now][AUTOKEY.info_name]}), 前缀1({key_now}); 名称2:({info_dict_now[AUTOKEY.info_name]})), 前缀2:({info_dict_now[AUTOKEY.prefix]})", 22, tobject_id, info_name, tobject_x, tobject_y)
+                
                 info_dict[info_dict_now[AUTOKEY.prefix]] = info_dict_now
                 if isdelete_all or isdelete or info_dict_now[AUTOKEY.isdelete_all_sym] or (isdelete_d and info_dict_now[AUTOKEY.isdelete_sym]):
                     dtobject.append(tobject)
@@ -1614,6 +1636,7 @@ def auto_func():
             tottobid = 0
             index = 0
             time_tag_i2 = time.time()
+
             while(index < len(myinfo[AUTOKEY.operation])):
 
                 operation_now = myinfo[AUTOKEY.operation][index]
@@ -1695,7 +1718,25 @@ def auto_func():
                 elif operation_now_type == AUTOKEY.error:
                     standard_error(str_translation(operation_now[AUTOKEY.error_info], object_dict), -1, tobject_id, tobject_name, tobject_x, tobject_y)
                 elif operation_now_type == AUTOKEY.pdb_pause:
-                    debug_pdb(object_dict)
+                    ispdb = True
+                    print_pdb = None
+                    for key, value in operation_now.items():
+                        if key != AUTOKEY.operation_type:
+                            if key == AUTOKEY.ID:
+                                if value != tobject_id:
+                                    ispdb = False
+                                    break
+                            if key == AUTOKEY.name:
+                                if not tobject_name.startswith(value):
+                                    ispdb = False
+                                    break
+                            if key == AUTOKEY.print:
+                                print_pdb = value
+                    if ispdb:
+                        if print_pdb == None:
+                            debug_pdb(object_dict)
+                        else:
+                            debug_pdb(print_pdb)
 
                 time_operation_one_e = time.time()
                 if time_operation_type.get(operation_now_type) == None:
@@ -1865,35 +1906,35 @@ def auto_func():
 
     standard_out(isverbose, f"Tagged objects time with different info:|不同info标记宾语的运行时间:")
 
-    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in time_info.items()]
+    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in sorted(time_info.items(), key=lambda item: item[1], reverse = True)]
     langstr_time = langstrlist_add(langstr_time_list)
     langstr_time = "|".join(["(" + langtime[:-2] + ")" for langtime in langstr_time.split("|")])
     standard_out(isverbose, langstr_time)
 
     standard_out(isverbose and isdebug, f"Tagged objects time with different info(operation):|不同info标记宾语的运行时间(operation):")
 
-    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in time_info_step[1].items()]
+    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in sorted(time_info_step[1].items(), key=lambda item: item[1], reverse = True)]
     langstr_time = langstrlist_add(langstr_time_list)
     langstr_time = "|".join(["(" + langtime[:-2] + ")" for langtime in langstr_time.split("|")])
     standard_out(isverbose and isdebug, langstr_time)
 
     standard_out(isverbose, f"Tagged objects time with different prefix:|不同前缀标记宾语的运行时间:")
 
-    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in time_dif_info.items()]
+    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in sorted(time_dif_info.items(), key=lambda item: item[1], reverse = True)]
     langstr_time = langstrlist_add(langstr_time_list)
     langstr_time = "|".join(["(" + langtime[:-2] + ")" for langtime in langstr_time.split("|")])
     standard_out(isverbose, langstr_time)
 
     standard_out(isverbose and isdebug, f"Tagged objects time with different prefix(operation):|不同前缀标记宾语的运行时间(operation):")
 
-    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in time_dif_info_step[1].items()]
+    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in sorted(time_dif_info_step[1].items(), key=lambda item: item[1], reverse = True)]
     langstr_time = langstrlist_add(langstr_time_list)
     langstr_time = "|".join(["(" + langtime[:-2] + ")" for langtime in langstr_time.split("|")])
     standard_out(isverbose and isdebug, langstr_time)
 
     standard_out(isverbose and isdebug, f"Tagged objects time with different operation:|不同operation的运行时间(标记宾语):")
 
-    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in time_operation_type.items()]
+    langstr_time_list = [f"{key}:{value:.1f}s, |{key}:{value:.1f}s, " for key, value in sorted(time_operation_type.items(), key=lambda item: item[1], reverse = True)]
     langstr_time = langstrlist_add(langstr_time_list)
     langstr_time = "|".join(["(" + langtime[:-2] + ")" for langtime in langstr_time.split("|")])
     standard_out(isverbose and isdebug, langstr_time)

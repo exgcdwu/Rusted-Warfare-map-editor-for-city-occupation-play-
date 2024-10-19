@@ -67,7 +67,7 @@ step_info_operation_list = \
                     rw.const.OBJECTOP.activatedBy: ("{','.join(stepacti_now)}", "stepacti_now_exist", AUTOKEY.brace), 
                     rw.const.OBJECTOP.deactivatedBy: ("{','.join(stepdeacti_now)}", "stepdeacti_now_exist", AUTOKEY.brace), 
                     rw.const.OBJECTOP.warmup: ("{" + f"{INFOKEY.steptime}[i]" + "}", "steptime[i] != '0s' and steptime[i] != '0.0s'", AUTOKEY.brace), 
-                    rw.const.OBJECTOP.spawnUnits: "{" + f"{INFOKEY.aunit}" + "}*{" + f"{INFOKEY.spawnnum}" + "}", 
+                    rw.const.OBJECTOP.spawnUnits: ("{" + f"{INFOKEY.aunit}" + "}*{" + f"{INFOKEY.spawnnum}" + "}", "'type_now' == 'unitAdd'", AUTOKEY.brace), 
                     rw.const.OBJECTOP.team: "{" + f"{INFOKEY.team}" + "}", 
                 }
             }
