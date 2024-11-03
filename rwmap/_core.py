@@ -42,7 +42,7 @@ class RWmap(ElementOri):
         properties = ElementProperties.init_etElement(root)
 
         tileset_list = [case.TileSet(ElementProperties("tileset", {"firstgid": const.KEY.empty_tile, "name": "empty"}), frame.Coordinate(1, 1))]
-        tileset_list = tileset_list + [case.TileSet.init_etElement(tileset, rwmaps_dir) for tileset in root if tileset.tag == "tileset"]
+        tileset_list = tileset_list + [case.TileSet.init_etElement(map_file, tileset, rwmaps_dir) for tileset in root if tileset.tag == "tileset"]
         layer_list = [case.Layer.init_etElement(layer) for layer in root if layer.tag == "layer"]
         objectGroup_list = [case.ObjectGroup.init_etElement(objectGroup) for objectGroup in root if objectGroup.tag == "objectgroup"]  
         
@@ -211,6 +211,11 @@ class RWmap(ElementOri):
     def write_file(self, map_file:str)->None:
         utility.output_file_from_etElement(self.output_etElement(), map_file)
 
+    def tileset_dependent(self, rwmaps_dir = RWMAP_MAPS)->None:
+        if self._tileset_list != None:
+            for index, tileset in enumerate(self._tileset_list):
+                if tileset.isexist():
+                    self._tileset_list[index] = tileset.dependent(rwmaps_dir)
 
     def addObject_type(self, tobject:case.TObject, objectGroup_name:str = const.NAME.Triggers, isresetid = True):
         objectGroup_now = self.get_objectgroup_s(objectGroup_name)
@@ -248,25 +253,26 @@ class RWmap(ElementOri):
         else:
             raise TypeError("The type of RWmap.addObject(tobject, ...) is wrong.")
 
-    def iterator_object_s(self, objectGroup_name:str = const.NAME.Triggers, default_re:dict[str, str] = {}, optional_re:dict[str, str] = {})->Generator[case.TObject, None, None]:
-        objectGroup_now = self.get_objectgroup_s(objectGroup_name)
-        for tobject in objectGroup_now._object_list:
-            tobject_sas:bool = True
-            for dname, dvalue in default_re.items():
-                tname = tobject.returnDefaultProperty(dname) if tobject.returnDefaultProperty(dname) != None else ""
-                if re.match(dvalue, tname) == None:
-                    tobject_sas = False
-                    break
-            if tobject_sas == False:
-                continue
-            for dname, dvalue in optional_re.items():
-                tname = tobject.returnOptionalProperty(dname) if tobject.returnOptionalProperty(dname) != None else ""
-                if re.match(dvalue, tname) == None:
-                    tobject_sas = False
-                    break
-            if tobject_sas == False:
-                continue
-            yield tobject
+    def iterator_object_s(self, objectGroup_re:str = const.NAME.Triggers, default_re:dict[str, str] = {}, optional_re:dict[str, str] = {})->Generator[case.TObject, None, None]:
+        for objectGroup_now in self._objectGroup_list:
+            if re.match(objectGroup_re, objectGroup_now.name()):
+                for tobject in objectGroup_now._object_list:
+                    tobject_sas:bool = True
+                    for dname, dvalue in default_re.items():
+                        tname = tobject.returnDefaultProperty(dname) if tobject.returnDefaultProperty(dname) != None else ""
+                        if re.match(dvalue, tname) == None:
+                            tobject_sas = False
+                            break
+                    if tobject_sas == False:
+                        continue
+                    for dname, dvalue in optional_re.items():
+                        tname = tobject.returnOptionalProperty(dname) if tobject.returnOptionalProperty(dname) != None else ""
+                        if re.match(dvalue, tname) == None:
+                            tobject_sas = False
+                            break
+                    if tobject_sas == False:
+                        continue
+                    yield tobject
     
     def delete_object_s(self, tobject:case.TObject, objectGroup_name:str = const.NAME.Triggers):
         objectGroup_now = self.get_objectgroup_s(objectGroup_name)

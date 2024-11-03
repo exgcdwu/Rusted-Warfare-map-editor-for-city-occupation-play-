@@ -87,6 +87,21 @@ def get_etElement_callable_from_tag_s(root:et.Element, tag:str)->et.Element:
         return None
     tag_list = tag.split(",")
     return get_etElement_callable_from_taglist_s(root, tag_list)
+        
+def get_etElement_callable_from_taglist_sup_s(root:et.Element, tag_set:set[str])->list[et.Element]:
+    if root == None:
+        return []
+    et_list = []
+    for etchild in root:
+        if not etchild.tag in tag_set:
+            et_list.append(etchild)
+    return et_list
+
+def get_etElement_callable_from_tag_sup_s(root:et.Element, tag:str)->list[et.Element]:
+    if root == None:
+        return []
+    tag_set = set(tag.split(","))
+    return get_etElement_callable_from_taglist_sup_s(root, tag_set)
 
 def output_file_from_etElement(root:et.Element, file:str)->None:
     dom = minidom.parseString(et.tostring(root, encoding='utf-8'))

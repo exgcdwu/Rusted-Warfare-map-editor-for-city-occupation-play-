@@ -3,7 +3,7 @@
 import os
 from setuptools import setup, find_packages
 
-__version__ = '1.7.7'
+__version__ = '1.7.8'
 
 
 def read_file(file:str):
@@ -16,9 +16,11 @@ def readline_file(file:str):
     return [module for module in module_list if module != ""]
 
 DATA_PREFIX_MAPS = 'other_data/maps/'
-ARGPARSE_FILE = "auto"
+ARGPARSE_FILE = "command"
 ARGPARSE_FUNC = {
-    "triggerauto": "triggerauto"
+    "triggerauto": "triggerauto", 
+    "tsindep": "tsindep", 
+    "idrearrange": "idrearrange"
 }
 
 setup(
