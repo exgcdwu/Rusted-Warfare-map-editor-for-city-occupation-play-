@@ -16,7 +16,7 @@ import pdb
 
 import rwmap as rw
 
-bb_map = rw.RWmap.init_mapfile(f'{example_dir_path}\\' + "auto_example.tmx")
+bb_map = rw.RWmap.init_mapfile(os.path.join(example_dir_path, "auto_example.tmx"))
 map_x = 500
 map_y = 800
 map_now = rw.RWmap.init_map(rw.frame.Coordinate(map_y, map_x))
@@ -46,6 +46,6 @@ map_now.addTile_square(rw.frame.TagRectangle.init_ae("Ground", rw.frame.Coordina
 
 map_now._objectGroup_list = bb_map._objectGroup_list
 
-map_now.write_file(f'{example_dir_path}\\' + "auto_example.tmx")
+map_now.write_file(os.path.join(example_dir_path, "auto_example.tmx"))
 
 

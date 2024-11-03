@@ -24506,7 +24506,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="isprefixseg" type="bool" value="true"/>
     <property name="periodtime" value="{period}"/>
     <property name="prefix" value="fd"/>
-    <property name="time_prefix" value="gt"/>
    </properties>
   </object>
   <object id="198" name="zcto0.b测2.测2" x="6600" y="1200" width="40" height="40"/>
@@ -24678,7 +24677,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="team" value="{team_a},{team_b},-1"/>
     <property name="team_a" value="-1"/>
     <property name="team_b" value="-1"/>
-    <property name="time_prefix" value="gt"/>
     <property name="unitn" value="{'d.{dunit_op_n}' if isneutralspawn else 'None'}"/>
     <property name="warmup" value="1s"/>
    </properties>
@@ -25150,7 +25148,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="spawnUnits" value="d.{dc_unit}"/>
     <property name="stepdeacti" value="{',{step_cite}.idprefix0' if 'step_cite' != '_0_' else ''}"/>
     <property name="team" value="-1"/>
-    <property name="time_prefix" value="gt"/>
     <property name="warmup" value="1s"/>
     <property name="wdctddeacti" value="{',{wdctd_cite}.{side}' if iswdctd else ''}"/>
    </properties>
@@ -25162,7 +25159,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="default_dict_cite_emoji" value="dj"/>
     <property name="dict_cite_n" value="{'dict_cite' if 'dict_cite' != 'None' else ('default_dict_cite_character' if ischaracter else 'default_dict_cite_emoji')}"/>
     <property name="exist" value="{not ismultiAdd},{not ismultiAdd and (ischaracter or isemoji)},{ismultiAdd},{ismultiAdd and isemoji and (not ischaracter)},{ismultiAdd and isemoji and (not ischaracter)},{ismultiAdd and ischaracter}"/>
-    <property name="ischaracter" type="bool" value="true"/>
+    <property name="ischaracter" type="bool" value="false"/>
     <property name="isemoji" type="bool" value="false"/>
     <property name="ismultiAdd" type="bool" value="false"/>
     <property name="isneutralspawn" type="bool" value="false"/>
@@ -25237,7 +25234,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="opargs" value="a,isactiend,bool,false"/>
     <property name="prefix" value="si"/>
     <property name="steptime" value="0s,{step}"/>
-    <property name="time_prefix" value="gt"/>
    </properties>
   </object>
   <object id="346" name="si.si100.100s" x="5600" y="2200" width="40" height="40"/>
@@ -25288,7 +25284,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="objectType" value="mapText"/>
     <property name="opargs" value="c,globalMessage_textColor,str;p,globalMessage_delayPerChar,str;w,warmup,str,1s;r,resetActivationAfter,str;l,alsoActivate,bool;a,activatedBy,str;e,deactivatedBy,str"/>
     <property name="prefix" value="m"/>
-    <property name="time_prefix" value="gt"/>
    </properties>
   </object>
   <object id="360" name="time_info_gt" x="3400" y="600" width="20" height="20">

@@ -3,7 +3,7 @@
 import os
 from setuptools import setup, find_packages
 
-__version__ = '1.7.8'
+__version__ = '1.7.9'
 
 
 def read_file(file:str):
@@ -35,7 +35,7 @@ setup(
     packages = find_packages(exclude=["tests", "examples"]),
     package_data = {'rwmap': ['other_data/*.txt', DATA_PREFIX_MAPS + '*.tsx', DATA_PREFIX_MAPS + 'bitmaps/*.png',
                              DATA_PREFIX_MAPS + 'ridges/*.tsx', DATA_PREFIX_MAPS + 'terrain/*.tsx'], 
-                    'auto': ['_data/*.json']},
+                    'command': ['*.json']},
     python_requires = '>=3.6.0',
     install_requires = readline_file("./rwmap/other_data/requirements.txt"), 
     entry_points={

@@ -122,7 +122,7 @@ full_screen = int(shutil.get_terminal_size().columns / 2) * 2
 underline_even_num = int(full_screen * 3 / 8) * 2
 
 def get_language()->str:
-    with open(f'{command_dir_path}\\config.json', 'r') as f:
+    with open(os.path.join(command_dir_path, 'config.json'), 'r') as f:
         config_dict = json.load(f)
         return config_dict['language']
 
@@ -223,13 +223,13 @@ def input_language(isdebug:bool, language:str)->str:
             import pdb;pdb.set_trace()
         exit(23)
 
-    with open(f'{command_dir_path}\\config.json', 'r') as f:
+    with open(os.path.join(command_dir_path, 'config.json'), 'r') as f:
         config_dict = json.load(f)
     if language != "default":
         config_dict["language"] = language
     else:
         language = config_dict["language"]
-    with open(f'{command_dir_path}\\config.json', 'w') as f:
+    with open(os.path.join(command_dir_path, 'config.json'), 'w') as f:
         json.dump(config_dict, f)
     
     return deepcopy(language)
