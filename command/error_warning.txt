@@ -1,0 +1,45 @@
+ERROR code:
+-1: An error from operation.
+0: External info import error.
+1: External info import loop error.
+2: Incorrect use of the subordinate info object.
+3: Unknown arguments in an info object.
+4: Unuseful arguments in an info object.
+5: Info input dependence loop error.
+6: A required argument is missing in an info object.
+7: Unknown optional arguments in a tagged object.
+8: Required arguments are missing below in a tagged object.
+9: Too many required arguments below in a tagged object.
+10: External info import error(The target info has ",d")
+11: The IDs are coincident and the mapping cannot be performed.
+12: An argument of the info object is invalid.
+13: An optional argument of the info object is invalid.
+14: Reference tags are duplicated.
+15: operation tags are duplicated.
+16：References occur in a loop.
+17：The depth of tagged objects is disordered.
+18：A tagged object can't find the object that was once created.(WARNING code:1)
+19：A tagged object created by tree tagged object can't find its parent object.(WARNING code:2)
+20：A tree tagged object can't find its child object, although the child object has its father, then this child object will be unavailable.(WARNING code:3)
+21：An object that needs to be deleted could not be found.(WARNING code:4)
+22：An info's prefix is the prefix of another.
+23: Language is not "ch" or "eg".|语言(--language)不是中文(ch)或者英文(eg)
+24: RW map file is not found, please check your input path.|铁锈输入地图文件未找到，请仔细检查地图路径。
+25: File parsing error, the file may not be XML file. Maybe it's not RW map file.|地图文件解析错误，不符合xml格式。也许导入的不是铁锈地图。
+26: A tree tagged object produced by tree tagged object cannot match any info. Please check if the prefix is corret in the name(properties) of tree_info.|生成的标记宾语无法匹配，请查找tree_info name中前缀是否正确。
+27: An argument of info is wrong, maybe not a number.|info 数据读取错误，可能是本来填数字的地方不是数字。
+28: One of opargs is empty.|标记宾语的选填参数出现空。
+29: One of args is empty.|标记宾语的必填参数出现空。
+30: There's a dir on the output path.|输出路径是一个目录。
+31: Error of map outputting.|地图文件输出错误。
+32: There's no imagelayer name(with the num is less than 1) and can't sure about the imagelayer.|没有图像层名称(且图像层数目不为1)，因此无法确定图像层。
+33: The name of imagelayer is wrong.|图像层名称错误。
+34: The function's name of fitcompare is wrong.|图像比对函数名称错误。
+Failure of tile auto.|图块自动化失败。
+
+WARNING code:
+
+1：A tagged object can't find the object that was once created.(ERROR code:18)
+2：A tagged object created by tree tagged object can't find its parent object.(ERROR code:19)
+3：A tree tagged object can't find its child object, although the child object has its father, then this child object will be unavailable.(ERROR code:20)
+4：An object that needs to be deleted could not be found.(ERROR code:21)

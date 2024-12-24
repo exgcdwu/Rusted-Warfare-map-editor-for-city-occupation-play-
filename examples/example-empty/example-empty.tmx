@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="20" tileheight="20" infinite="0" nextlayerid="5" nextobjectid="1">
+ <tileset firstgid="1" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/units.tsx"/>
+ <tileset firstgid="262" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Deep Water.tsx"/>
+ <tileset firstgid="263" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Dirt.tsx"/>
+ <tileset firstgid="273" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Ice.tsx"/>
+ <tileset firstgid="283" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Lava.tsx"/>
+ <tileset firstgid="298" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Long Grass.tsx"/>
+ <tileset firstgid="348" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Mountain.tsx"/>
+ <tileset firstgid="383" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Sand.tsx"/>
+ <tileset firstgid="425" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Shallow Water.tsx"/>
+ <tileset firstgid="431" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Short Grass.tsx"/>
+ <tileset firstgid="432" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Snow.tsx"/>
+ <tileset firstgid="512" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Stone.tsx"/>
+ <tileset firstgid="548" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Water.tsx"/>
+ <layer id="1" name="Ground" width="200" height="200">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwGcR4AAQ==
+  </data>
+ </layer>
+ <layer id="2" name="Items" width="200" height="200">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwGcR4AAQ==
+  </data>
+ </layer>
+ <layer id="3" name="Units" width="200" height="200">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwGcR4AAQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Triggers"/>
+</map>

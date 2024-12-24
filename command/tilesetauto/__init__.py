@@ -1,0 +1,1 @@
+from command.tilesetauto._core import auto_func as tilesetauto

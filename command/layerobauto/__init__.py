@@ -1,0 +1,1 @@
+from command.layerobauto._core import auto_func as layerobauto

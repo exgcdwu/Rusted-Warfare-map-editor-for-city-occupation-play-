@@ -1,0 +1,3281 @@
+<?xml version="1.0" ?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="20" tileheight="20" infinite="0" nextlayerid="5" nextobjectid="404">
+  <properties/>
+  <tileset firstgid="1" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/units.tsx">
+    <properties/>
+  </tileset>
+  <tileset firstgid="262" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Deep Water.tsx">
+    <properties/>
+  </tileset>
+  <tileset firstgid="263" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Dirt.tsx">
+    <properties/>
+  </tileset>
+  <tileset firstgid="273" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Ice.tsx">
+    <properties/>
+  </tileset>
+  <tileset firstgid="283" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Lava.tsx">
+    <properties/>
+  </tileset>
+  <tileset firstgid="298" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Long Grass.tsx">
+    <properties/>
+  </tileset>
+  <tileset firstgid="348" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Mountain.tsx">
+    <properties/>
+  </tileset>
+  <tileset firstgid="383" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Sand.tsx">
+    <properties/>
+  </tileset>
+  <tileset firstgid="425" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Shallow Water.tsx">
+    <properties/>
+  </tileset>
+  <tileset firstgid="431" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Short Grass.tsx">
+    <properties/>
+  </tileset>
+  <tileset firstgid="432" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Snow.tsx">
+    <properties/>
+  </tileset>
+  <tileset firstgid="512" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Stone.tsx">
+    <properties/>
+  </tileset>
+  <tileset firstgid="548" source="../../../../../Game/steam/steamapps/common/Rusted Warfare/mods/maps/terrain/Water.tsx">
+    <properties/>
+  </tileset>
+  <layer id="1" name="Ground" width="200" height="200">
+    <properties/>
+    <data encoding="base64" compression="zlib">eJztwwENAAAMAiDfP4wVrfAAsNFLqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr6OCDCckY=</data>
+  </layer>
+  <layer id="2" name="Items" width="200" height="200">
+    <properties/>
+    <data encoding="base64" compression="zlib">eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwGcR4AAQ==</data>
+  </layer>
+  <layer id="3" name="Units" width="200" height="200">
+    <properties/>
+    <data encoding="base64" compression="zlib">eJzt20ENgwAABEF+RRD1b60WSOBxzc4IWAd7HAAAAAAAAADAXZ+Xe6feI1+9qR4AAAAAAAAAAAAAAAAAAJSs/9i13vqPXesBAAAAAAAAAAAAAAAAAEDJ+o9d663/2LUeAAAAAAAAAAAAAAAAAACUrP/Ytd76j13rAQAAAAAAAAAAAAAAAABAyfqPXeut/9i1HgAAAAAAAAAAAAAAAAAAlKz/2LXe+o9d6wEAAAAAAAAAAAAAAAAAQMn6j13rrf/YtR4AAAAAAAAAAAAAAAAAAJSs/9i13vqPXesBAAAAAAAAAAAAAAAAAEDJ+o9d663/2LUeAAAAAAAAAAAAAAAAAACUrP/Ytd76j73eu17uAQAAAAAAAP/vB4VeC+k=</data>
+  </layer>
+  <objectgroup id="4" name="Triggers">
+    <properties/>
+    <object x="0" y="0" width="20" height="20" name="map_info" id="1">
+      <properties>
+        <property name="type" value="skirmish"/>
+        <property name="fog" value="los"/>
+        <property name="introText" value="本地图宾语完全由宾语自动化完成。此为城夺刷兵地图例子1。
+                                                    使用普通的城市宾语组。"/>
+        <property name="winCondition" value="commandCenter"/>
+      </properties>
+    </object>
+    <object x="0" y="0" width="20" height="20" type="changeCredits" id="2">
+      <properties>
+        <property name="set" value="0"/>
+        <property name="team" value="0"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="0" y="0" width="20" height="20" type="changeCredits" id="3">
+      <properties>
+        <property name="set" value="0"/>
+        <property name="team" value="1"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="210" y="210" width="20" height="20" type="unitAdd" id="4">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="210" width="20" height="20" type="unitDetect" id="5">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu1"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="210" width="20" height="20" type="mapText" id="6">
+      <properties>
+        <property name="text" value="城市(10,10)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="230" y="230" width="20" height="20" type="unitAdd" id="7">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="210" y="610" width="20" height="20" type="unitAdd" id="8">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu2"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="610" width="20" height="20" type="unitDetect" id="9">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu2"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="610" width="20" height="20" type="mapText" id="10">
+      <properties>
+        <property name="text" value="城市(10,30)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="230" y="630" width="20" height="20" type="unitAdd" id="11">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="210" y="1010" width="20" height="20" type="unitAdd" id="12">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu3"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="1010" width="20" height="20" type="unitDetect" id="13">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu3"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="1010" width="20" height="20" type="mapText" id="14">
+      <properties>
+        <property name="text" value="城市(10,50)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="230" y="1030" width="20" height="20" type="unitAdd" id="15">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="210" y="1410" width="20" height="20" type="unitAdd" id="16">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu4"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="1410" width="20" height="20" type="unitDetect" id="17">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu4"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="1410" width="20" height="20" type="mapText" id="18">
+      <properties>
+        <property name="text" value="城市(10,70)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="230" y="1430" width="20" height="20" type="unitAdd" id="19">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="210" y="1810" width="20" height="20" type="unitAdd" id="20">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu5"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="1810" width="20" height="20" type="unitDetect" id="21">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu5"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="1810" width="20" height="20" type="mapText" id="22">
+      <properties>
+        <property name="text" value="城市(10,90)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="230" y="1830" width="20" height="20" type="unitAdd" id="23">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="210" y="2210" width="20" height="20" type="unitAdd" id="24">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu6"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="2210" width="20" height="20" type="unitDetect" id="25">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu6"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="2210" width="20" height="20" type="mapText" id="26">
+      <properties>
+        <property name="text" value="城市(10,110)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="230" y="2230" width="20" height="20" type="unitAdd" id="27">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="210" y="2610" width="20" height="20" type="unitAdd" id="28">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu7"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="2610" width="20" height="20" type="unitDetect" id="29">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu7"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="2610" width="20" height="20" type="mapText" id="30">
+      <properties>
+        <property name="text" value="城市(10,130)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="230" y="2630" width="20" height="20" type="unitAdd" id="31">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="210" y="3010" width="20" height="20" type="unitAdd" id="32">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu8"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="3010" width="20" height="20" type="unitDetect" id="33">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu8"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="3010" width="20" height="20" type="mapText" id="34">
+      <properties>
+        <property name="text" value="城市(10,150)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="230" y="3030" width="20" height="20" type="unitAdd" id="35">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="210" y="3410" width="20" height="20" type="unitAdd" id="36">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu9"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="3410" width="20" height="20" type="unitDetect" id="37">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu9"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="3410" width="20" height="20" type="mapText" id="38">
+      <properties>
+        <property name="text" value="城市(10,170)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="230" y="3430" width="20" height="20" type="unitAdd" id="39">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="210" y="3810" width="20" height="20" type="unitAdd" id="40">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu10"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="3810" width="20" height="20" type="unitDetect" id="41">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu10"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="210" y="3810" width="20" height="20" type="mapText" id="42">
+      <properties>
+        <property name="text" value="城市(10,190)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="230" y="3830" width="20" height="20" type="unitAdd" id="43">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="610" y="210" width="20" height="20" type="unitAdd" id="44">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu11"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="210" width="20" height="20" type="unitDetect" id="45">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu11"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="210" width="20" height="20" type="mapText" id="46">
+      <properties>
+        <property name="text" value="城市(30,10)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="630" y="230" width="20" height="20" type="unitAdd" id="47">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="610" y="610" width="20" height="20" type="unitAdd" id="48">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu12"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="610" width="20" height="20" type="unitDetect" id="49">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu12"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="610" width="20" height="20" type="mapText" id="50">
+      <properties>
+        <property name="text" value="城市(30,30)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="630" y="630" width="20" height="20" type="unitAdd" id="51">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="610" y="1010" width="20" height="20" type="unitAdd" id="52">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu13"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="1010" width="20" height="20" type="unitDetect" id="53">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu13"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="1010" width="20" height="20" type="mapText" id="54">
+      <properties>
+        <property name="text" value="城市(30,50)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="630" y="1030" width="20" height="20" type="unitAdd" id="55">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="610" y="1410" width="20" height="20" type="unitAdd" id="56">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu14"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="1410" width="20" height="20" type="unitDetect" id="57">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu14"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="1410" width="20" height="20" type="mapText" id="58">
+      <properties>
+        <property name="text" value="城市(30,70)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="630" y="1430" width="20" height="20" type="unitAdd" id="59">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="610" y="1810" width="20" height="20" type="unitAdd" id="60">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu15"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="1810" width="20" height="20" type="unitDetect" id="61">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu15"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="1810" width="20" height="20" type="mapText" id="62">
+      <properties>
+        <property name="text" value="城市(30,90)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="630" y="1830" width="20" height="20" type="unitAdd" id="63">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="610" y="2210" width="20" height="20" type="unitAdd" id="64">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu16"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="2210" width="20" height="20" type="unitDetect" id="65">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu16"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="2210" width="20" height="20" type="mapText" id="66">
+      <properties>
+        <property name="text" value="城市(30,110)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="630" y="2230" width="20" height="20" type="unitAdd" id="67">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="610" y="2610" width="20" height="20" type="unitAdd" id="68">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu17"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="2610" width="20" height="20" type="unitDetect" id="69">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu17"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="2610" width="20" height="20" type="mapText" id="70">
+      <properties>
+        <property name="text" value="城市(30,130)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="630" y="2630" width="20" height="20" type="unitAdd" id="71">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="610" y="3010" width="20" height="20" type="unitAdd" id="72">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu18"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="3010" width="20" height="20" type="unitDetect" id="73">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu18"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="3010" width="20" height="20" type="mapText" id="74">
+      <properties>
+        <property name="text" value="城市(30,150)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="630" y="3030" width="20" height="20" type="unitAdd" id="75">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="610" y="3410" width="20" height="20" type="unitAdd" id="76">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu19"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="3410" width="20" height="20" type="unitDetect" id="77">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu19"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="3410" width="20" height="20" type="mapText" id="78">
+      <properties>
+        <property name="text" value="城市(30,170)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="630" y="3430" width="20" height="20" type="unitAdd" id="79">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="610" y="3810" width="20" height="20" type="unitAdd" id="80">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu20"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="3810" width="20" height="20" type="unitDetect" id="81">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu20"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="610" y="3810" width="20" height="20" type="mapText" id="82">
+      <properties>
+        <property name="text" value="城市(30,190)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="630" y="3830" width="20" height="20" type="unitAdd" id="83">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1010" y="210" width="20" height="20" type="unitAdd" id="84">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu21"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="210" width="20" height="20" type="unitDetect" id="85">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu21"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="210" width="20" height="20" type="mapText" id="86">
+      <properties>
+        <property name="text" value="城市(50,10)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1030" y="230" width="20" height="20" type="unitAdd" id="87">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1010" y="610" width="20" height="20" type="unitAdd" id="88">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu22"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="610" width="20" height="20" type="unitDetect" id="89">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu22"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="610" width="20" height="20" type="mapText" id="90">
+      <properties>
+        <property name="text" value="城市(50,30)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1030" y="630" width="20" height="20" type="unitAdd" id="91">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1010" y="1010" width="20" height="20" type="unitAdd" id="92">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu23"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="1010" width="20" height="20" type="unitDetect" id="93">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu23"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="1010" width="20" height="20" type="mapText" id="94">
+      <properties>
+        <property name="text" value="城市(50,50)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1030" y="1030" width="20" height="20" type="unitAdd" id="95">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1010" y="1410" width="20" height="20" type="unitAdd" id="96">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu24"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="1410" width="20" height="20" type="unitDetect" id="97">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu24"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="1410" width="20" height="20" type="mapText" id="98">
+      <properties>
+        <property name="text" value="城市(50,70)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1030" y="1430" width="20" height="20" type="unitAdd" id="99">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1010" y="1810" width="20" height="20" type="unitAdd" id="100">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu25"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="1810" width="20" height="20" type="unitDetect" id="101">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu25"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="1810" width="20" height="20" type="mapText" id="102">
+      <properties>
+        <property name="text" value="城市(50,90)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1030" y="1830" width="20" height="20" type="unitAdd" id="103">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1010" y="2210" width="20" height="20" type="unitAdd" id="104">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu26"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="2210" width="20" height="20" type="unitDetect" id="105">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu26"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="2210" width="20" height="20" type="mapText" id="106">
+      <properties>
+        <property name="text" value="城市(50,110)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1030" y="2230" width="20" height="20" type="unitAdd" id="107">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1010" y="2610" width="20" height="20" type="unitAdd" id="108">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu27"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="2610" width="20" height="20" type="unitDetect" id="109">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu27"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="2610" width="20" height="20" type="mapText" id="110">
+      <properties>
+        <property name="text" value="城市(50,130)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1030" y="2630" width="20" height="20" type="unitAdd" id="111">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1010" y="3010" width="20" height="20" type="unitAdd" id="112">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu28"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="3010" width="20" height="20" type="unitDetect" id="113">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu28"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="3010" width="20" height="20" type="mapText" id="114">
+      <properties>
+        <property name="text" value="城市(50,150)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1030" y="3030" width="20" height="20" type="unitAdd" id="115">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1010" y="3410" width="20" height="20" type="unitAdd" id="116">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu29"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="3410" width="20" height="20" type="unitDetect" id="117">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu29"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="3410" width="20" height="20" type="mapText" id="118">
+      <properties>
+        <property name="text" value="城市(50,170)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1030" y="3430" width="20" height="20" type="unitAdd" id="119">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1010" y="3810" width="20" height="20" type="unitAdd" id="120">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu30"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="3810" width="20" height="20" type="unitDetect" id="121">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu30"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1010" y="3810" width="20" height="20" type="mapText" id="122">
+      <properties>
+        <property name="text" value="城市(50,190)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1030" y="3830" width="20" height="20" type="unitAdd" id="123">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1410" y="210" width="20" height="20" type="unitAdd" id="124">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu31"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="210" width="20" height="20" type="unitDetect" id="125">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu31"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="210" width="20" height="20" type="mapText" id="126">
+      <properties>
+        <property name="text" value="城市(70,10)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1430" y="230" width="20" height="20" type="unitAdd" id="127">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1410" y="610" width="20" height="20" type="unitAdd" id="128">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu32"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="610" width="20" height="20" type="unitDetect" id="129">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu32"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="610" width="20" height="20" type="mapText" id="130">
+      <properties>
+        <property name="text" value="城市(70,30)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1430" y="630" width="20" height="20" type="unitAdd" id="131">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1410" y="1010" width="20" height="20" type="unitAdd" id="132">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu33"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="1010" width="20" height="20" type="unitDetect" id="133">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu33"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="1010" width="20" height="20" type="mapText" id="134">
+      <properties>
+        <property name="text" value="城市(70,50)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1430" y="1030" width="20" height="20" type="unitAdd" id="135">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1410" y="1410" width="20" height="20" type="unitAdd" id="136">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu34"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="1410" width="20" height="20" type="unitDetect" id="137">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu34"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="1410" width="20" height="20" type="mapText" id="138">
+      <properties>
+        <property name="text" value="城市(70,70)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1430" y="1430" width="20" height="20" type="unitAdd" id="139">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1410" y="1810" width="20" height="20" type="unitAdd" id="140">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu35"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="1810" width="20" height="20" type="unitDetect" id="141">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu35"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="1810" width="20" height="20" type="mapText" id="142">
+      <properties>
+        <property name="text" value="城市(70,90)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1430" y="1830" width="20" height="20" type="unitAdd" id="143">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1410" y="2210" width="20" height="20" type="unitAdd" id="144">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu36"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="2210" width="20" height="20" type="unitDetect" id="145">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu36"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="2210" width="20" height="20" type="mapText" id="146">
+      <properties>
+        <property name="text" value="城市(70,110)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1430" y="2230" width="20" height="20" type="unitAdd" id="147">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1410" y="2610" width="20" height="20" type="unitAdd" id="148">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu37"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="2610" width="20" height="20" type="unitDetect" id="149">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu37"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="2610" width="20" height="20" type="mapText" id="150">
+      <properties>
+        <property name="text" value="城市(70,130)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1430" y="2630" width="20" height="20" type="unitAdd" id="151">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1410" y="3010" width="20" height="20" type="unitAdd" id="152">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu38"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="3010" width="20" height="20" type="unitDetect" id="153">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu38"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="3010" width="20" height="20" type="mapText" id="154">
+      <properties>
+        <property name="text" value="城市(70,150)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1430" y="3030" width="20" height="20" type="unitAdd" id="155">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1410" y="3410" width="20" height="20" type="unitAdd" id="156">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu39"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="3410" width="20" height="20" type="unitDetect" id="157">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu39"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="3410" width="20" height="20" type="mapText" id="158">
+      <properties>
+        <property name="text" value="城市(70,170)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1430" y="3430" width="20" height="20" type="unitAdd" id="159">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1410" y="3810" width="20" height="20" type="unitAdd" id="160">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu40"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="3810" width="20" height="20" type="unitDetect" id="161">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu40"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1410" y="3810" width="20" height="20" type="mapText" id="162">
+      <properties>
+        <property name="text" value="城市(70,190)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1430" y="3830" width="20" height="20" type="unitAdd" id="163">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1810" y="210" width="20" height="20" type="unitAdd" id="164">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu41"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="210" width="20" height="20" type="unitDetect" id="165">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu41"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="210" width="20" height="20" type="mapText" id="166">
+      <properties>
+        <property name="text" value="城市(90,10)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1830" y="230" width="20" height="20" type="unitAdd" id="167">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1810" y="610" width="20" height="20" type="unitAdd" id="168">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu42"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="610" width="20" height="20" type="unitDetect" id="169">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu42"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="610" width="20" height="20" type="mapText" id="170">
+      <properties>
+        <property name="text" value="城市(90,30)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1830" y="630" width="20" height="20" type="unitAdd" id="171">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1810" y="1010" width="20" height="20" type="unitAdd" id="172">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu43"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="1010" width="20" height="20" type="unitDetect" id="173">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu43"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="1010" width="20" height="20" type="mapText" id="174">
+      <properties>
+        <property name="text" value="城市(90,50)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1830" y="1030" width="20" height="20" type="unitAdd" id="175">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1810" y="1410" width="20" height="20" type="unitAdd" id="176">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu44"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="1410" width="20" height="20" type="unitDetect" id="177">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu44"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="1410" width="20" height="20" type="mapText" id="178">
+      <properties>
+        <property name="text" value="城市(90,70)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1830" y="1430" width="20" height="20" type="unitAdd" id="179">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1810" y="1810" width="20" height="20" type="unitAdd" id="180">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu45"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="1810" width="20" height="20" type="unitDetect" id="181">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu45"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="1810" width="20" height="20" type="mapText" id="182">
+      <properties>
+        <property name="text" value="城市(90,90)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1830" y="1830" width="20" height="20" type="unitAdd" id="183">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1810" y="2210" width="20" height="20" type="unitAdd" id="184">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu46"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="2210" width="20" height="20" type="unitDetect" id="185">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu46"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="2210" width="20" height="20" type="mapText" id="186">
+      <properties>
+        <property name="text" value="城市(90,110)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1830" y="2230" width="20" height="20" type="unitAdd" id="187">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1810" y="2610" width="20" height="20" type="unitAdd" id="188">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu47"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="2610" width="20" height="20" type="unitDetect" id="189">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu47"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="2610" width="20" height="20" type="mapText" id="190">
+      <properties>
+        <property name="text" value="城市(90,130)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1830" y="2630" width="20" height="20" type="unitAdd" id="191">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1810" y="3010" width="20" height="20" type="unitAdd" id="192">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu48"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="3010" width="20" height="20" type="unitDetect" id="193">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu48"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="3010" width="20" height="20" type="mapText" id="194">
+      <properties>
+        <property name="text" value="城市(90,150)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1830" y="3030" width="20" height="20" type="unitAdd" id="195">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1810" y="3410" width="20" height="20" type="unitAdd" id="196">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu49"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="3410" width="20" height="20" type="unitDetect" id="197">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu49"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="3410" width="20" height="20" type="mapText" id="198">
+      <properties>
+        <property name="text" value="城市(90,170)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1830" y="3430" width="20" height="20" type="unitAdd" id="199">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="1810" y="3810" width="20" height="20" type="unitAdd" id="200">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu50"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="3810" width="20" height="20" type="unitDetect" id="201">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu50"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="1810" y="3810" width="20" height="20" type="mapText" id="202">
+      <properties>
+        <property name="text" value="城市(90,190)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="1830" y="3830" width="20" height="20" type="unitAdd" id="203">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2210" y="210" width="20" height="20" type="unitAdd" id="204">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu51"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="210" width="20" height="20" type="unitDetect" id="205">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu51"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="210" width="20" height="20" type="mapText" id="206">
+      <properties>
+        <property name="text" value="城市(110,10)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2230" y="230" width="20" height="20" type="unitAdd" id="207">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2210" y="610" width="20" height="20" type="unitAdd" id="208">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu52"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="610" width="20" height="20" type="unitDetect" id="209">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu52"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="610" width="20" height="20" type="mapText" id="210">
+      <properties>
+        <property name="text" value="城市(110,30)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2230" y="630" width="20" height="20" type="unitAdd" id="211">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2210" y="1010" width="20" height="20" type="unitAdd" id="212">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu53"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="1010" width="20" height="20" type="unitDetect" id="213">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu53"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="1010" width="20" height="20" type="mapText" id="214">
+      <properties>
+        <property name="text" value="城市(110,50)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2230" y="1030" width="20" height="20" type="unitAdd" id="215">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2210" y="1410" width="20" height="20" type="unitAdd" id="216">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu54"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="1410" width="20" height="20" type="unitDetect" id="217">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu54"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="1410" width="20" height="20" type="mapText" id="218">
+      <properties>
+        <property name="text" value="城市(110,70)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2230" y="1430" width="20" height="20" type="unitAdd" id="219">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2210" y="1810" width="20" height="20" type="unitAdd" id="220">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu55"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="1810" width="20" height="20" type="unitDetect" id="221">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu55"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="1810" width="20" height="20" type="mapText" id="222">
+      <properties>
+        <property name="text" value="城市(110,90)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2230" y="1830" width="20" height="20" type="unitAdd" id="223">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2210" y="2210" width="20" height="20" type="unitAdd" id="224">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu56"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="2210" width="20" height="20" type="unitDetect" id="225">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu56"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="2210" width="20" height="20" type="mapText" id="226">
+      <properties>
+        <property name="text" value="城市(110,110)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2230" y="2230" width="20" height="20" type="unitAdd" id="227">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2210" y="2610" width="20" height="20" type="unitAdd" id="228">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu57"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="2610" width="20" height="20" type="unitDetect" id="229">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu57"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="2610" width="20" height="20" type="mapText" id="230">
+      <properties>
+        <property name="text" value="城市(110,130)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2230" y="2630" width="20" height="20" type="unitAdd" id="231">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2210" y="3010" width="20" height="20" type="unitAdd" id="232">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu58"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="3010" width="20" height="20" type="unitDetect" id="233">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu58"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="3010" width="20" height="20" type="mapText" id="234">
+      <properties>
+        <property name="text" value="城市(110,150)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2230" y="3030" width="20" height="20" type="unitAdd" id="235">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2210" y="3410" width="20" height="20" type="unitAdd" id="236">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu59"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="3410" width="20" height="20" type="unitDetect" id="237">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu59"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="3410" width="20" height="20" type="mapText" id="238">
+      <properties>
+        <property name="text" value="城市(110,170)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2230" y="3430" width="20" height="20" type="unitAdd" id="239">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2210" y="3810" width="20" height="20" type="unitAdd" id="240">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu60"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="3810" width="20" height="20" type="unitDetect" id="241">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu60"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2210" y="3810" width="20" height="20" type="mapText" id="242">
+      <properties>
+        <property name="text" value="城市(110,190)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2230" y="3830" width="20" height="20" type="unitAdd" id="243">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2610" y="210" width="20" height="20" type="unitAdd" id="244">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu61"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="210" width="20" height="20" type="unitDetect" id="245">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu61"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="210" width="20" height="20" type="mapText" id="246">
+      <properties>
+        <property name="text" value="城市(130,10)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2630" y="230" width="20" height="20" type="unitAdd" id="247">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2610" y="610" width="20" height="20" type="unitAdd" id="248">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu62"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="610" width="20" height="20" type="unitDetect" id="249">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu62"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="610" width="20" height="20" type="mapText" id="250">
+      <properties>
+        <property name="text" value="城市(130,30)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2630" y="630" width="20" height="20" type="unitAdd" id="251">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2610" y="1010" width="20" height="20" type="unitAdd" id="252">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu63"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="1010" width="20" height="20" type="unitDetect" id="253">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu63"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="1010" width="20" height="20" type="mapText" id="254">
+      <properties>
+        <property name="text" value="城市(130,50)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2630" y="1030" width="20" height="20" type="unitAdd" id="255">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2610" y="1410" width="20" height="20" type="unitAdd" id="256">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu64"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="1410" width="20" height="20" type="unitDetect" id="257">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu64"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="1410" width="20" height="20" type="mapText" id="258">
+      <properties>
+        <property name="text" value="城市(130,70)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2630" y="1430" width="20" height="20" type="unitAdd" id="259">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2610" y="1810" width="20" height="20" type="unitAdd" id="260">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu65"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="1810" width="20" height="20" type="unitDetect" id="261">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu65"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="1810" width="20" height="20" type="mapText" id="262">
+      <properties>
+        <property name="text" value="城市(130,90)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2630" y="1830" width="20" height="20" type="unitAdd" id="263">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2610" y="2210" width="20" height="20" type="unitAdd" id="264">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu66"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="2210" width="20" height="20" type="unitDetect" id="265">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu66"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="2210" width="20" height="20" type="mapText" id="266">
+      <properties>
+        <property name="text" value="城市(130,110)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2630" y="2230" width="20" height="20" type="unitAdd" id="267">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2610" y="2610" width="20" height="20" type="unitAdd" id="268">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu67"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="2610" width="20" height="20" type="unitDetect" id="269">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu67"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="2610" width="20" height="20" type="mapText" id="270">
+      <properties>
+        <property name="text" value="城市(130,130)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2630" y="2630" width="20" height="20" type="unitAdd" id="271">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2610" y="3010" width="20" height="20" type="unitAdd" id="272">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu68"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="3010" width="20" height="20" type="unitDetect" id="273">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu68"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="3010" width="20" height="20" type="mapText" id="274">
+      <properties>
+        <property name="text" value="城市(130,150)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2630" y="3030" width="20" height="20" type="unitAdd" id="275">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2610" y="3410" width="20" height="20" type="unitAdd" id="276">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu69"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="3410" width="20" height="20" type="unitDetect" id="277">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu69"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="3410" width="20" height="20" type="mapText" id="278">
+      <properties>
+        <property name="text" value="城市(130,170)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2630" y="3430" width="20" height="20" type="unitAdd" id="279">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="2610" y="3810" width="20" height="20" type="unitAdd" id="280">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu70"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="3810" width="20" height="20" type="unitDetect" id="281">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu70"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="2610" y="3810" width="20" height="20" type="mapText" id="282">
+      <properties>
+        <property name="text" value="城市(130,190)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="2630" y="3830" width="20" height="20" type="unitAdd" id="283">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3010" y="210" width="20" height="20" type="unitAdd" id="284">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu71"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="210" width="20" height="20" type="unitDetect" id="285">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu71"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="210" width="20" height="20" type="mapText" id="286">
+      <properties>
+        <property name="text" value="城市(150,10)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3030" y="230" width="20" height="20" type="unitAdd" id="287">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3010" y="610" width="20" height="20" type="unitAdd" id="288">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu72"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="610" width="20" height="20" type="unitDetect" id="289">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu72"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="610" width="20" height="20" type="mapText" id="290">
+      <properties>
+        <property name="text" value="城市(150,30)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3030" y="630" width="20" height="20" type="unitAdd" id="291">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3010" y="1010" width="20" height="20" type="unitAdd" id="292">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu73"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="1010" width="20" height="20" type="unitDetect" id="293">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu73"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="1010" width="20" height="20" type="mapText" id="294">
+      <properties>
+        <property name="text" value="城市(150,50)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3030" y="1030" width="20" height="20" type="unitAdd" id="295">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3010" y="1410" width="20" height="20" type="unitAdd" id="296">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu74"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="1410" width="20" height="20" type="unitDetect" id="297">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu74"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="1410" width="20" height="20" type="mapText" id="298">
+      <properties>
+        <property name="text" value="城市(150,70)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3030" y="1430" width="20" height="20" type="unitAdd" id="299">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3010" y="1810" width="20" height="20" type="unitAdd" id="300">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu75"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="1810" width="20" height="20" type="unitDetect" id="301">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu75"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="1810" width="20" height="20" type="mapText" id="302">
+      <properties>
+        <property name="text" value="城市(150,90)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3030" y="1830" width="20" height="20" type="unitAdd" id="303">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3010" y="2210" width="20" height="20" type="unitAdd" id="304">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu76"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="2210" width="20" height="20" type="unitDetect" id="305">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu76"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="2210" width="20" height="20" type="mapText" id="306">
+      <properties>
+        <property name="text" value="城市(150,110)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3030" y="2230" width="20" height="20" type="unitAdd" id="307">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3010" y="2610" width="20" height="20" type="unitAdd" id="308">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu77"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="2610" width="20" height="20" type="unitDetect" id="309">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu77"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="2610" width="20" height="20" type="mapText" id="310">
+      <properties>
+        <property name="text" value="城市(150,130)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3030" y="2630" width="20" height="20" type="unitAdd" id="311">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3010" y="3010" width="20" height="20" type="unitAdd" id="312">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu78"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="3010" width="20" height="20" type="unitDetect" id="313">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu78"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="3010" width="20" height="20" type="mapText" id="314">
+      <properties>
+        <property name="text" value="城市(150,150)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3030" y="3030" width="20" height="20" type="unitAdd" id="315">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3010" y="3410" width="20" height="20" type="unitAdd" id="316">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu79"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="3410" width="20" height="20" type="unitDetect" id="317">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu79"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="3410" width="20" height="20" type="mapText" id="318">
+      <properties>
+        <property name="text" value="城市(150,170)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3030" y="3430" width="20" height="20" type="unitAdd" id="319">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3010" y="3810" width="20" height="20" type="unitAdd" id="320">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu80"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="3810" width="20" height="20" type="unitDetect" id="321">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu80"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3010" y="3810" width="20" height="20" type="mapText" id="322">
+      <properties>
+        <property name="text" value="城市(150,190)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3030" y="3830" width="20" height="20" type="unitAdd" id="323">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3410" y="210" width="20" height="20" type="unitAdd" id="324">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu81"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="210" width="20" height="20" type="unitDetect" id="325">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu81"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="210" width="20" height="20" type="mapText" id="326">
+      <properties>
+        <property name="text" value="城市(170,10)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3430" y="230" width="20" height="20" type="unitAdd" id="327">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3410" y="610" width="20" height="20" type="unitAdd" id="328">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu82"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="610" width="20" height="20" type="unitDetect" id="329">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu82"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="610" width="20" height="20" type="mapText" id="330">
+      <properties>
+        <property name="text" value="城市(170,30)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3430" y="630" width="20" height="20" type="unitAdd" id="331">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3410" y="1010" width="20" height="20" type="unitAdd" id="332">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu83"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="1010" width="20" height="20" type="unitDetect" id="333">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu83"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="1010" width="20" height="20" type="mapText" id="334">
+      <properties>
+        <property name="text" value="城市(170,50)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3430" y="1030" width="20" height="20" type="unitAdd" id="335">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3410" y="1410" width="20" height="20" type="unitAdd" id="336">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu84"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="1410" width="20" height="20" type="unitDetect" id="337">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu84"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="1410" width="20" height="20" type="mapText" id="338">
+      <properties>
+        <property name="text" value="城市(170,70)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3430" y="1430" width="20" height="20" type="unitAdd" id="339">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3410" y="1810" width="20" height="20" type="unitAdd" id="340">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu85"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="1810" width="20" height="20" type="unitDetect" id="341">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu85"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="1810" width="20" height="20" type="mapText" id="342">
+      <properties>
+        <property name="text" value="城市(170,90)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3430" y="1830" width="20" height="20" type="unitAdd" id="343">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3410" y="2210" width="20" height="20" type="unitAdd" id="344">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu86"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="2210" width="20" height="20" type="unitDetect" id="345">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu86"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="2210" width="20" height="20" type="mapText" id="346">
+      <properties>
+        <property name="text" value="城市(170,110)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3430" y="2230" width="20" height="20" type="unitAdd" id="347">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3410" y="2610" width="20" height="20" type="unitAdd" id="348">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu87"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="2610" width="20" height="20" type="unitDetect" id="349">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu87"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="2610" width="20" height="20" type="mapText" id="350">
+      <properties>
+        <property name="text" value="城市(170,130)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3430" y="2630" width="20" height="20" type="unitAdd" id="351">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3410" y="3010" width="20" height="20" type="unitAdd" id="352">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu88"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="3010" width="20" height="20" type="unitDetect" id="353">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu88"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="3010" width="20" height="20" type="mapText" id="354">
+      <properties>
+        <property name="text" value="城市(170,150)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3430" y="3030" width="20" height="20" type="unitAdd" id="355">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3410" y="3410" width="20" height="20" type="unitAdd" id="356">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu89"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="3410" width="20" height="20" type="unitDetect" id="357">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu89"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="3410" width="20" height="20" type="mapText" id="358">
+      <properties>
+        <property name="text" value="城市(170,170)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3430" y="3430" width="20" height="20" type="unitAdd" id="359">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3410" y="3810" width="20" height="20" type="unitAdd" id="360">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu90"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="3810" width="20" height="20" type="unitDetect" id="361">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu90"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3410" y="3810" width="20" height="20" type="mapText" id="362">
+      <properties>
+        <property name="text" value="城市(170,190)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3430" y="3830" width="20" height="20" type="unitAdd" id="363">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3810" y="210" width="20" height="20" type="unitAdd" id="364">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu91"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="210" width="20" height="20" type="unitDetect" id="365">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu91"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="210" width="20" height="20" type="mapText" id="366">
+      <properties>
+        <property name="text" value="城市(190,10)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3830" y="230" width="20" height="20" type="unitAdd" id="367">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3810" y="610" width="20" height="20" type="unitAdd" id="368">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu92"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="610" width="20" height="20" type="unitDetect" id="369">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu92"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="610" width="20" height="20" type="mapText" id="370">
+      <properties>
+        <property name="text" value="城市(190,30)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3830" y="630" width="20" height="20" type="unitAdd" id="371">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3810" y="1010" width="20" height="20" type="unitAdd" id="372">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu93"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="1010" width="20" height="20" type="unitDetect" id="373">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu93"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="1010" width="20" height="20" type="mapText" id="374">
+      <properties>
+        <property name="text" value="城市(190,50)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3830" y="1030" width="20" height="20" type="unitAdd" id="375">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3810" y="1410" width="20" height="20" type="unitAdd" id="376">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu94"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="1410" width="20" height="20" type="unitDetect" id="377">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu94"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="1410" width="20" height="20" type="mapText" id="378">
+      <properties>
+        <property name="text" value="城市(190,70)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3830" y="1430" width="20" height="20" type="unitAdd" id="379">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3810" y="1810" width="20" height="20" type="unitAdd" id="380">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu95"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="1810" width="20" height="20" type="unitDetect" id="381">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu95"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="1810" width="20" height="20" type="mapText" id="382">
+      <properties>
+        <property name="text" value="城市(190,90)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3830" y="1830" width="20" height="20" type="unitAdd" id="383">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3810" y="2210" width="20" height="20" type="unitAdd" id="384">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu96"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="2210" width="20" height="20" type="unitDetect" id="385">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu96"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="2210" width="20" height="20" type="mapText" id="386">
+      <properties>
+        <property name="text" value="城市(190,110)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3830" y="2230" width="20" height="20" type="unitAdd" id="387">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3810" y="2610" width="20" height="20" type="unitAdd" id="388">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu97"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="2610" width="20" height="20" type="unitDetect" id="389">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu97"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="2610" width="20" height="20" type="mapText" id="390">
+      <properties>
+        <property name="text" value="城市(190,130)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3830" y="2630" width="20" height="20" type="unitAdd" id="391">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3810" y="3010" width="20" height="20" type="unitAdd" id="392">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu98"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="3010" width="20" height="20" type="unitDetect" id="393">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu98"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="3010" width="20" height="20" type="mapText" id="394">
+      <properties>
+        <property name="text" value="城市(190,150)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3830" y="3030" width="20" height="20" type="unitAdd" id="395">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3810" y="3410" width="20" height="20" type="unitAdd" id="396">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu99"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="3410" width="20" height="20" type="unitDetect" id="397">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu99"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="3410" width="20" height="20" type="mapText" id="398">
+      <properties>
+        <property name="text" value="城市(190,170)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3830" y="3430" width="20" height="20" type="unitAdd" id="399">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+    <object x="3810" y="3810" width="20" height="20" type="unitAdd" id="400">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="turret*1"/>
+        <property name="deactivatedBy" value="acti_tu100"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="3810" width="20" height="20" type="unitDetect" id="401">
+      <properties>
+        <property name="minUnits" value="1"/>
+        <property name="onlyBuildings" type="bool" value="true"/>
+        <property name="id" value="acti_tu100"/>
+        <property name="resetActivationAfter" value="20s"/>
+      </properties>
+    </object>
+    <object x="3810" y="3810" width="20" height="20" type="mapText" id="402">
+      <properties>
+        <property name="text" value="城市(190,190)"/>
+        <property name="textSize" value="12"/>
+        <property name="resetActivationAfter" value="1s"/>
+      </properties>
+    </object>
+    <object x="3830" y="3830" width="20" height="20" type="unitAdd" id="403">
+      <properties>
+        <property name="team" value="-1"/>
+        <property name="spawnUnits" value="c_tank*1"/>
+        <property name="warmup" value="20s"/>
+        <property name="resetActivationAfter" value="50s"/>
+      </properties>
+    </object>
+  </objectgroup>
+</map>

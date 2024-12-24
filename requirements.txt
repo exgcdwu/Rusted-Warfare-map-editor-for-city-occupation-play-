@@ -1,0 +1,6 @@
+numpy==1.26.4
+Pillow==10.3.0
+setuptools==69.2.0
+asteval==0.9.33
+regex==2024.7.24
+pybind11==2.13.6

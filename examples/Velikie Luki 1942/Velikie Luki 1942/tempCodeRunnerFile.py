@@ -1,0 +1,1 @@
+            lukimap.addObject_one(operation[3])

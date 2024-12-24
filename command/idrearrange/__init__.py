@@ -1,0 +1,1 @@
+from command.idrearrange._core import auto_func as idrearrange

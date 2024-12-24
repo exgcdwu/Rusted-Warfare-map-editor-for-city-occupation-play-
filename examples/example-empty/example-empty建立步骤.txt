@@ -1,0 +1,36 @@
+1.使用地图编辑器(Tiled,notTiled)创建新地图
+
+地图格式：zlib
+
+渲染顺序：右下(right-down)
+
+方向：orthogonal
+
+200 * 200大小
+
+2.手动载入地块集
+
+默认地块集
+terrain/Deep Water.tsx
+terrain/Dirt.tsx
+terrain/Ice.tsx
+terrain/Lava.tsx
+terrain/Long Grass.tsx
+terrain/Mountain.tsx
+terrain/Sand.tsx
+terrain/Shallow Water.tsx
+terrain/Short Grass.tsx
+terrain/Snow.tsx
+terrain/Stone.tsx
+terrain/Water.tsx
+units.tsx
+
+其他地块集
+export_units.tsx
+
+3.手动创建所需的地块层和宾语层
+
+宾语层 Triggers
+地块层 Ground
+地块层 Items
+地块层 Units

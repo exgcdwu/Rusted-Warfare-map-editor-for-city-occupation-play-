@@ -1,0 +1,1 @@
+from command.objectgroupauto._data._core import auto_func_arg

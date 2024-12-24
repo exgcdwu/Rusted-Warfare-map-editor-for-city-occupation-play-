@@ -1,0 +1,1 @@
+from command.layerauto._core import auto_func as layerauto

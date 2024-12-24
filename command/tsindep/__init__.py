@@ -1,0 +1,1 @@
+from command.tsindep._core import auto_func as tsindep
