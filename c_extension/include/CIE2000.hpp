@@ -2,15 +2,15 @@
 
 #define CIE2000_HPP
 
-    const double M_PI = 3.14159265358979323846;
+    #define M_PI 3.14159265358979323846
 
     // D65 reference white
     const double Xr = 95.047;
      const double Yr = 100.000;
      const double Zr = 108.883;
 
-    // gamma
-     const double gamma = 2.4;
+    // CIE_gamma
+     const double CIE_gamma = 2.4;
 
     // CIE2000 arguments
      const double kL = 0.015;

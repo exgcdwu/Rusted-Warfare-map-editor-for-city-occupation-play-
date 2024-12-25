@@ -14,7 +14,7 @@
         // Linearize the RGB values
         for (int i = 0; i < 3; ++i) {
             if (rgbd[i] > 0.04045)
-                rgbd[i] = std::pow((rgbd[i] + 0.055) / 1.055, gamma);
+                rgbd[i] = std::pow((rgbd[i] + 0.055) / 1.055, CIE_gamma);
             else
                 rgbd[i] = rgbd[i] / 12.92;
         }
