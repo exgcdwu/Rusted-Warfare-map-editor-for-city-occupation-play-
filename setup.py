@@ -57,9 +57,5 @@ setup(
     }, 
     cmdclass={
         'install': PostInstallCommand,
-    },
-    data_files=[
-        ('', ['c_extension/*.txt', 'c_extension/include/*.hpp', 'c_extension/src/include/*.cpp', 
-                'c_extension/src/include/*.cpp', 'c_extension/src/rwmapautoc/*.cpp'])
-    ],
+    }
 )

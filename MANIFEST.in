@@ -1,0 +1,5 @@
+include c_extension/*.txt
+include c_extension/include/*.hpp
+include c_extension/src/include/*.cpp
+include c_extension/src/include/*.cpp
+include c_extension/src/rwmapautoc/*.cpp
