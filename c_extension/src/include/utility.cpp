@@ -32,7 +32,7 @@ std::vector<size_t> new_index_jump_shape_vector(std::vector<size_t>& shape){
 
 void throw_index(size_t index, size_t sum, int code){
     if (index >= sum){
-        std::cout << "throw code:" << code << '(' << index << ':T,' << sum << ':F)' << std::endl;
+        std::cout << "throw code:" << code << "(" << index << ":T," << sum << ":F)" << std::endl;
         throw std::runtime_error("");
     }
 }
