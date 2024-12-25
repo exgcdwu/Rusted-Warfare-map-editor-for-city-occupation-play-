@@ -59,6 +59,6 @@ setup(
         'install': PostInstallCommand,
     },
     data_files=[
-        ('', ['c_extersion/'])
+        ('', ['c_extension/'])
     ],
 )
