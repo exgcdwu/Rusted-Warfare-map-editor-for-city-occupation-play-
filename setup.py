@@ -49,7 +49,9 @@ setup(
     packages = find_packages(exclude=["tests", "examples"]),
     package_data = {'rwmap': ['other_data/*.txt', DATA_PREFIX_MAPS + '*.tsx', DATA_PREFIX_MAPS + 'bitmaps/*.png',
                              DATA_PREFIX_MAPS + 'ridges/*.tsx', DATA_PREFIX_MAPS + 'terrain/*.tsx'], 
-                    'command': ['*.json']},
+                    'command': ['*.json'], 
+                    'c_extension': ['*.txt', 'include/*.hpp', 'src/include/*.cpp', 
+                                    'src/include/*.cpp', 'src/rwmapautoc/*.cpp']},
     python_requires = '>=3.6.0',
     install_requires = readline_file("./rwmap/other_data/requirements.txt"), 
     entry_points={
