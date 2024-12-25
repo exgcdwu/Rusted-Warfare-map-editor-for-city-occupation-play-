@@ -1,34 +1,20 @@
 # setup.py
 
 import os
-from setuptools import setup, find_packages
-from setuptools import Command
+from setuptools import setup, Extension, find_packages
+from setuptools.command.install import install
 import subprocess
+import sys
 
+__version__ = '1.7.9.1'
 
-__version__ = '1.8.0'
-
-cmake_sh = 'cmake_install.sh'
-
-class CMakeBuildCommand(Command):
-
-    description = "Run cmake to build c extension."
-    user_options = []
-
-    def initialize_options(self):
-        pass
-
-    def finalize_options(self):
-        pass
-
+class PostInstallCommand(install):
     def run(self):
-        this_dir = os.path.abspath(os.path.dirname(__file__))
-        cmakel = readline_file(cmake_sh)
-        for cmakel_now in cmakel:
-            subprocess.check_call(' '.split(cmakel_now), cwd=this_dir)
-
-ext_modules = [
-]
+        install.run(self)
+        subprocess.check_call([sys.executable, '-c', 'import subprocess; '
+                               'subprocess.check_call(["cmake", "-B", "build", "-S", "c_extension"])'])
+        subprocess.check_call([sys.executable, '-c', 'import subprocess; '
+                               'subprocess.check_call(["cmake", "--build", "build", "--config", "Release"])'])
 
 def read_file(file:str):
     with open(file, encoding = 'utf-8') as file:
@@ -47,7 +33,8 @@ ARGPARSE_FUNC = {
     "idrearrange": "idrearrange", 
     "layerauto": "layerauto", 
     "tilesetauto": "tilesetauto",
-    "layerobauto": "layerobauto"
+    "layerobauto": "layerobauto",
+    "resizeauto": "resizeauto"
 }
 
 setup(
@@ -68,11 +55,7 @@ setup(
     entry_points={
         "console_scripts": [f"{name} = {ARGPARSE_FILE}:{value}" for name, value in ARGPARSE_FUNC.items()]
     }, 
-    scripts=[cmake_sh],
     cmdclass={
-        'runscript': CMakeBuildCommand,  # 注册自定义命令类
-    },
-    zip_safe = False
+        'install': PostInstallCommand,
+    }
 )
-
-# MSYS2 windows模拟linux环境

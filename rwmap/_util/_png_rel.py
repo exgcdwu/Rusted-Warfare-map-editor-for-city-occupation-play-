@@ -25,7 +25,10 @@ def get_png_text(image:Image.Image)->str:
     return base64_str
 
 def get_image(image_path:str)->Image.Image:
-    image = Image.open(image_path)
+    try:
+        image = Image.open(image_path)
+    except:
+        raise FileNotFoundError(f"Image path {image_path} not found")
     return image
 
 def get_image_from_png_text(png_text:str) -> Image.Image:

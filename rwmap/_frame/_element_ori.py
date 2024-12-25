@@ -3,8 +3,12 @@ from typing import Union
 from copy import deepcopy
 
 class ElementOri:
-    def __init__(self, properties:elepro.ElementProperties)->None:
+    def __init__(self, tag:str, properties:elepro.ElementProperties)->None:
+        self._tag = tag
         self._properties = deepcopy(properties)
+
+    def tag(self)->str:
+        return self._tag
     
     '''
 

@@ -284,6 +284,15 @@ class UNIT:
     modularSpider_smallgunturretT2 = "modularSpider_smallgunturretT2"
     modularSpider_smallgunturret = "modularSpider_smallgunturret"
 
+class TAG:
+    objectgroup = "objectgroup"
+    layer = "layer"
+    imagelayer = "imagelayer"
+    tileset = "tileset"
+    properties = "properties"
+    property = "property"
+    map = "map"
+
 KNOWN_MAP_TAG_SET = {"objectgroup", "layer", "imagelayer", "tileset", "properties"}
 OLI_TAG_LIST = ["objectgroup", "layer", "imagelayer"]
 OLI_TAG_DICT = {"objectgroup": 0, "layer": 1, "imagelayer": 2}

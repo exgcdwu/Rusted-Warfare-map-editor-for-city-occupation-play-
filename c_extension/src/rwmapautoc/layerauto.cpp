@@ -264,7 +264,7 @@ void layerauto_average(uint8_t* image, uint8_t* tileset, uint32_t* tileset_gid, 
 
 }
 
-py::array_t<uint32_t> layerauto(py::array_t<uint8_t> image, py::array_t<uint8_t> tileset, py::array_t<uint32_t> tileset_index, int mode_code, bool isverbose = false, bool isdebug = false, py::array_t<uint32_t> tileset_terrain = py::none()) {
+py::array_t<uint32_t> layerauto(py::array_t<uint8_t> image, py::array_t<uint8_t> tileset, py::array_t<uint32_t> tileset_index, int mode_code, bool isverbose = false, bool isdebug = false) {
     
     if (isverbose){
         std::cout << "layerauto: initialization..." << std::endl;

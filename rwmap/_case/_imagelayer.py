@@ -10,12 +10,13 @@ import os
 
 import rwmap._util as utility
 import rwmap._frame as frame
+import rwmap._data.const as const
 from rwmap._frame._element_ori import ElementOri
 from rwmap._frame._element_property import ElementProperties
 
 class ImageLayer(ElementOri):
     def __init__(self, map_path:str, properties:ElementProperties, image_properties:ElementProperties)->None:
-        super().__init__(properties)
+        super().__init__(const.TAG.imagelayer, properties)
         self._properties = deepcopy(properties)
         self._image_properties = deepcopy(image_properties)
         self._map_path = deepcopy(map_path)

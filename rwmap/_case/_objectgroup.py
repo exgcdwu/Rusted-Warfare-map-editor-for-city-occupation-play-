@@ -9,13 +9,17 @@ from typing import Union
 
 import rwmap._util as utility
 import rwmap._frame as frame
+import rwmap._data.const as const
 from rwmap._case._object import TObject
 from rwmap._frame._element_ori import ElementOri
 from rwmap._frame._element_property import ElementProperties
 
 class ObjectGroup(ElementOri):
+    pass
+
+class ObjectGroup(ElementOri):
     def __init__(self, properties:ElementProperties, object_list:list[TObject])->None:
-        super().__init__(properties)
+        super().__init__(const.TAG.objectgroup, properties)
         self._object_list = deepcopy(object_list)
 
     def __iter__(self):
@@ -77,3 +81,12 @@ class ObjectGroup(ElementOri):
         for tobject in self._object_list:
             max_now = max(max_now, int(tobject.returnDefaultProperty("id")))
         return max_now
+
+    def resize(self, resize_o:frame.Coordinate)->ObjectGroup:
+        objectgroup_new = deepcopy(self)
+        for tobject in objectgroup_new._object_list:
+            tobject.assignDefaultProperty('x', str(float(tobject.returnDefaultProperty('x')) * resize_o.x()))
+            tobject.assignDefaultProperty('y', str(float(tobject.returnDefaultProperty('y')) * resize_o.y()))
+            tobject.assignDefaultProperty('width', str(float(tobject.returnDefaultProperty('width')) * resize_o.x()))
+            tobject.assignDefaultProperty('height', str(float(tobject.returnDefaultProperty('height')) * resize_o.y()))
+        return objectgroup_new

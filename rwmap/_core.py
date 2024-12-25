@@ -36,13 +36,17 @@ class RWmap(ElementOri):
     def __init__(self, properties:ElementProperties, tileset_list:list[case.TileSet],
                   layer_list:list[case.Layer], objectGroup_list:list[case.ObjectGroup], 
                   imageLayer_list:list[case.ImageLayer], oli_order_list:list[int], other_elements:list[et.Element] = [])->None:
-        super().__init__(properties)
+        super().__init__(const.TAG.map, properties)
         self._tileset_list = deepcopy(tileset_list)
         self._layer_list = deepcopy(layer_list)
         self._objectGroup_list = deepcopy(objectGroup_list)
         self._imageLayer_list = deepcopy(imageLayer_list)
         self._oli_order_list = deepcopy(oli_order_list)
         self._other_elements = deepcopy(other_elements)
+        self._tileset_now = None
+        self._layer_now = None
+        self._imageLayer_now = None
+        self._objectgroup_now = None
     @classmethod
     def init_mapfile(cls, map_file:str, rwmaps_dir = RWMAP_MAPS):
         xmlTree:et.ElementTree = et.ElementTree(file=map_file)
@@ -87,7 +91,13 @@ class RWmap(ElementOri):
     def size(self)->frame.Coordinate:
         return frame.Coordinate(int(self._properties.returnDefaultProperty("width")), 
                                 int(self._properties.returnDefaultProperty("height")))
+
+    def size_t(self)->frame.Coordinate:
+        return self.size()
     
+    def size_o(self)->frame.Coordinate:
+        return self.size().transpose()
+
     def tilecount(self)->int:
         return self.size().mul()
 
@@ -153,7 +163,10 @@ class RWmap(ElementOri):
         return [objectgroup.name() for objectgroup in self._objectGroup_list]
 
     def get_layer_s(self, name:str)->case.Layer:
+        if self._layer_now != None and self._layer_now.name() == name:
+            return self._layer_now
         layer = utility.get_ElementOri_from_list_by_name_s(self._layer_list, name)
+        self._layer_now = layer
         return layer
     
     def layer_s_ahead(self, name:str, to_index:int = 0):
@@ -162,12 +175,16 @@ class RWmap(ElementOri):
         self._layer_list.insert(to_index, layer_s)
     
     def get_imageLayer_s(self, name:str)->case.ImageLayer:
+        if self._imageLayer_now != None and self._imageLayer_now.name() == name:
+            return self._imageLayer_now
         imageLayer = utility.get_ElementOri_from_list_by_name_s(self._imageLayer_list, name)
+        self._imageLayer_now = imageLayer
         return imageLayer
     
     def get_ndarray_fromImageLayer(self, imagelayer_name:str, resize_coo:frame.Coordinate = None)->np.ndarray:
         image_path = self.get_imageLayer_s(imagelayer_name).source_path()
-
+        if image_path == None:
+            raise FileNotFoundError(f"Image source {self.get_imageLayer_s(imagelayer_name).source()} not found")
         image_now = utility.get_image(image_path)
         image_now = image_now.copy()
         if image_now.mode != 'RGB':
@@ -196,7 +213,10 @@ class RWmap(ElementOri):
         raise ValueError("gid is illegal.")
 
     def get_tileset_s(self, name:str)->case.TileSet:
+        if self._tileset_now != None and self._tileset_now.name() == name:
+            return self._tileset_now
         tileset = utility.get_ElementOri_from_list_by_name_s(self._tileset_list, name)
+        self._tileset_now = tileset
         return tileset
     
     def tileset_s_ahead(self, name:str, to_index:int = 0):
@@ -205,7 +225,16 @@ class RWmap(ElementOri):
         self._tileset_list.insert(to_index, tileset_s)
 
     def get_objectgroup_s(self, name:str)->case.ObjectGroup:
+        if self._objectgroup_now != None and self._objectgroup_now.name() == name:
+            return self._objectgroup_now
         objectgroup = utility.get_ElementOri_from_list_by_name_s(self._objectGroup_list, name)
+        self._objectgroup_now = objectgroup
+        return objectgroup
+    
+    def get_objectgroup_s_ex(self, name:str)->case.ObjectGroup:
+        objectgroup = self.get_objectgroup_s(name)
+        if objectgroup == None:
+            raise KeyError(f"get_objectgroup_s: {name} not found.")
         return objectgroup
     
     def objectGroup_s_ahead(self, name:str, to_index:int = 0):
@@ -242,6 +271,45 @@ class RWmap(ElementOri):
     def add_tileset_fromMapPath(self, map_path:str)->None:
         rwmap = RWmap.init_mapfile(map_path)
         self.add_tileset_fromMap(rwmap)
+
+    def delete_tileset_s(self, tileset_s:case.TileSet)->None:
+        self._tileset_list.remove(tileset_s)
+        self._tileset_now = None
+
+    def delete_imageLayer_s(self, imageLayer_s:case.ImageLayer)->None:
+        index_now = self._imageLayer_list.index(imageLayer_s)
+        utility.remove_nth_occurrence(self._oli_order_list, const.OLI_TAG_DICT[imageLayer_s.tag()], index_now)
+        self._imageLayer_list.remove(imageLayer_s)
+        self._imageLayer_now = None
+
+    def delete_layer_s(self, layer_s:case.Layer)->None:
+        index_now = self._layer_list.index(layer_s)
+        utility.remove_nth_occurrence(self._oli_order_list, const.OLI_TAG_DICT[layer_s.tag()], index_now)
+        self._layer_list.remove(layer_s)
+        self._layer_now = None
+
+    def delete_objectGroup_s(self, objectGroup_s:case.ObjectGroup)->None:
+        index_now = self._objectGroup_list.index(objectGroup_s)
+        utility.remove_nth_occurrence(self._oli_order_list, const.OLI_TAG_DICT[objectGroup_s.tag()], index_now)
+        self._objectGroup_list.remove(objectGroup_s)
+        self._objectGroup_now = None
+
+    def delete_tileset(self, tileset_name:str)->None:
+        tilset_s = self.get_tileset_s(tileset_name)
+        self.delete_tileset_s(tilset_s)
+
+    def delete_imageLayer(self, imageLayer_name:str)->None:
+        imageLayer_s = self.get_imageLayer_s(imageLayer_name)
+        self.delete_imageLayer_s(imageLayer_s)
+
+    def delete_layer(self, layer_name:str)->None:
+        layer_s = self.get_layer_s(layer_name)
+        self.delete_layer_s(layer_s)
+
+    def delete_objectGroup(self, objectGroup_name:str)->None:
+        objectGroup_s = self.get_objectGroup_s(objectGroup_name)
+        self.delete_objectGroup_s(objectGroup_s)
+
 
     def append_objectGroup_s(self, objectGroup_s:case.ObjectGroup)->None:
         self._objectGroup_list.append(objectGroup_s)
@@ -349,7 +417,8 @@ class RWmap(ElementOri):
                     self._tileset_list[index] = tileset.dependent(rwmaps_dir)
 
     def addObject_type(self, tobject:case.TObject, objectGroup_name:str = const.NAME.Triggers, isresetid = True):
-        objectGroup_now = self.get_objectgroup_s(objectGroup_name)
+        objectGroup_now = self.get_objectgroup_s_ex(objectGroup_name)
+        
         if isresetid:
             tobject.assignDefaultProperty("id", self._properties.returnDefaultProperty("nextobjectid"))
             str_nextobjectid = str(max(int(self._properties.returnDefaultProperty("nextobjectid")), int(tobject.returnDefaultProperty("id")) + 1))
@@ -358,7 +427,7 @@ class RWmap(ElementOri):
         
 
     def addObject_dict(self, objectGroup_name:str = const.NAME.Triggers, default_properties:dict[str, str] = {}, optional_properties :dict[str, Union[str, dict[str, str]]] = {}, other_properties:list[et.Element] = [])->None:
-        objectGroup_now = self.get_objectgroup_s(objectGroup_name)
+        objectGroup_now = self.get_objectgroup_s_ex(objectGroup_name)
         default_properties_n = deepcopy(default_properties)
         if default_properties_n.get("id") == None:
             default_properties_n["id"] = self._properties.returnDefaultProperty("nextobjectid")
@@ -406,11 +475,11 @@ class RWmap(ElementOri):
                     yield tobject
     
     def delete_object_s(self, tobject:case.TObject, objectGroup_name:str = const.NAME.Triggers):
-        objectGroup_now = self.get_objectgroup_s(objectGroup_name)
+        objectGroup_now = self.get_objectgroup_s_ex(objectGroup_name)
         objectGroup_now.deleteObject(tobject)
 
     def index_object_s(self, tobject:case.TObject, objectGroup_name:str = const.NAME.Triggers)->int:
-        objectGroup_now = self.get_objectgroup_s(objectGroup_name)
+        objectGroup_now = self.get_objectgroup_s_ex(objectGroup_name)
         return objectGroup_now.index_object_s(tobject)
 
     def _tileplace_to_gid(self, tileplace:Union[int, tuple[str, int], frame.TagCoordinate])->int:
@@ -542,11 +611,6 @@ class RWmap(ElementOri):
         import rwmapautoc
         layer_n = rwmapautoc.layerauto(image_now, tileset_now, gid_now, 0, isverbose, isdebug)
 
-        def map_func_temp(x):
-            return tileset_now_dict[x]
-        
-        layer_n = np.vectorize(map_func_temp)(layer_n)
-
         self.get_layer_s(layer_name)._tilematrix[layer_start.y():(layer_start.y() + deal_size.y()), layer_start.x():(layer_start.x() + deal_size.x())] = layer_n
         
     def addTile_terrain(self, layerplace:frame.TagCoordinate, tileplace:Union[int, tuple[str, int], frame.TagCoordinate]):
@@ -599,8 +663,15 @@ class RWmap(ElementOri):
         self.addTile_group_list(otgroup._tilegroup_list, offset_grid)
         self.addObject_group(otgroup._tobject_group, offset_grid * self.tile_size())
         
-
-
+    def resize(self, resize_t:frame.Coordinate)->RWmap:
+        new_rwmap = deepcopy(self)
+        new_rwmap._properties['height'] = str(int(self._properties['height']) * resize_t.x())
+        new_rwmap._properties['width'] = str(int(self._properties['width']) * resize_t.y())
+        for i, layer_n in enumerate(new_rwmap._layer_list):
+            new_rwmap._layer_list[i] = layer_n.resize(resize_t)
+        for i, objectgroup_n in enumerate(new_rwmap._objectGroup_list):
+            new_rwmap._objectGroup_list[i] = objectgroup_n.resize(resize_t.transpose())
+        return new_rwmap
         
         
 

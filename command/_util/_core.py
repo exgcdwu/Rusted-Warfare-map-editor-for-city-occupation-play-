@@ -62,6 +62,7 @@ class AUTOKEY:
     print = "print"
     left_brace = "007B"
     right_brace = "007D"
+    objectGroup_name = "objectGroup_name"
 
     operation_type = "operation_type"
     object = "object"
@@ -251,7 +252,7 @@ def get_config_dict(config:str)->dict:
     return config_dict
 
 def standard_error(isdebug:bool, language:str, info_err, error_id:int, sub_info_error = None)->None:
-    print(str_lang(language, info_err), file=sys.stderr)
+    print(str_lang(language, info_err) + "(" + str(error_id) + ")", file=sys.stderr)
     if sub_info_error != None:
         pprint(sub_info_error)
     if isdebug:

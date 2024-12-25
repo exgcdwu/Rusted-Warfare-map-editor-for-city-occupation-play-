@@ -78,23 +78,39 @@ termux python环境及包下载（需要一段时间，保持网络畅通）（�
 
 【将地块集和图片嵌入地图，解决Tiled不能嵌入图片的问题。】
 
-[ID重排](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/idrearrange/)
+[地块集自动化](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/tilesetauto/)
 
-【宾语ID重排，可以兼容自动化（或者说，宾语自动化开始就会检测，然后试图ID重排）】
+【自动生成地块集】
 
-[宾语自动化引导教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_guide.md)
+[地块自动化](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/layerauto/)
 
-[宾语自动化地图示例](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/example/auto_example.tmx)
+【地块映射】
 
-[宾语自动化地图示例自动化结果](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/example/auto_example_answer.tmx)
+[地块自动添加障碍](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/layerobauto/)
 
-[宾语自动化参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_tutorial.md)
+【自动添加周期地块】
+
+[地图放大](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/resizeauto/)
+
+【地图放大】
+
+[宾语自动化引导教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_guide.md)
+
+[宾语自动化地图示例](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/example/auto_example.tmx)
+
+[宾语自动化地图示例自动化结果](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/example/auto_example_answer.tmx)
+
+[宾语自动化参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_tutorial.md)
 
 【一个结合Tiled或者notTiled共同使用的宾语生成器，使用命令行操作，基于该库开发】
 
 [宾语自动化app](https://github.com/Delta-Water/RustedWarfare-Development-Tools)
 
 【宾语自动化命令行已经可以图形化。感谢print("")的帮助。】
+
+[ID重排](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/idrearrange/)
+
+【宾语ID重排，可以兼容自动化（或者说，宾语自动化开始就会检测，然后试图ID重排）】
 
 ## 其他
 

@@ -88,7 +88,7 @@ class TileSet(ElementOri):
     def __init__(self, properties:ElementProperties, size:frame.Coordinate, tile_size:frame.Coordinate, map_path:str, image_properties:ElementProperties = None,
                   png_text:str = None, tilelist_properties:list[ElementProperties] = [], coo_to_tileid_matrix:np.ndarray = None, 
                   tileid_to_coo_list:list[frame.Coordinate] = None, other_elements:list[et.Element] = [], isdependent_tsx = False)->None:
-        super().__init__(properties)
+        super().__init__(const.TAG.tileset, properties)
         self._size = deepcopy(size)
         self._tile_size = deepcopy(tile_size)
         self._image_properties = deepcopy(image_properties)

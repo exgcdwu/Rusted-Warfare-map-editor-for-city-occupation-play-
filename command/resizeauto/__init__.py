@@ -1,0 +1,1 @@
+from command.resizeauto._core import auto_func as resizeauto

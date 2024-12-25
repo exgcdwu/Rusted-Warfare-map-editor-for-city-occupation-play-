@@ -10,14 +10,17 @@ sys.path.append(package_dir)
 
 from copy import deepcopy
 import numpy as np
+from typing import Callable
+import colorsys
 
 import rwmap as rw
 from command._util import *
 
+
 def auto_func():
     parser = argparse.ArgumentParser(
-        description='The independence of Tilesets.\n' + \
-                    '地块集独立化。')
+        description='Auto generation of layerauto for obstacle(usually cliff or water).\n' + \
+                    '地块集障碍自动部署。')
     
     parser.add_argument('map_path', action = "store", metavar = 'file', type=str, 
                         help='The input path of RW map file.\n' + \
@@ -55,17 +58,11 @@ def auto_func():
                         "命令行提示的语言(中文(ch),英文(eg))。语言设置将会被存储。(command/config.json)"
                         )
 
-    parser.add_argument("-di", "--deleteimagelist", 
-                        action = "store", metavar = "list[name]", type = str, nargs = "*", 
-                        required = False, default = "|", 
-                        help = 'The name of imagelayer which would be deleted.\n' +\
-                        "被删除图像层的名称")
-    
-    parser.add_argument('-i', '--imagelayer', 
-                        action = "store", metavar = "name", type = str, nargs = "?", 
-                        required = False, default = "|", 
-                        help='The name of imagelayer.\n' + \
-                            '底图名称。')
+    parser.add_argument('-s', '--resize', 
+                        action = "store", metavar = "Coordinate", type = int, nargs = 2, 
+                        required = False, default = [1, 1], 
+                        help='Resize, must be positive integer(the first is x, and the second is y).\n' + \
+                            '放大倍数，应为正整数。(第一个x(高度),第二个y(宽度))')
 
     args = parser.parse_args()
 
@@ -83,26 +80,20 @@ def auto_func():
 
     ignorewarning = args.ignorewarning
 
-    deleteimagelist = args.deleteimagelist if args.deleteimagelist != '|' else []
+    rsize = args.resize
 
     language = input_language(isdebug, language)
 
     standard_out_underline(language, isverbose, "Initialization|初始化")
-
     standard_out(language, isverbose, "Map data is being imported...|地图数据载入...")
-
     check_input_output_path(isdebug, language, isyes, input_path, output_path)
-
     map_now = get_rwmap(isdebug, language, input_path)
 
-    standard_out_underline(language, isverbose, "Tilesets independence|地块集独立化")
+    standard_out_underline(language, isverbose, "Automatic processing of RWmap|地层自动处理")
 
-    map_now.tileset_dependent()
-    for imagelayer_name in deleteimagelist:
-        map_now.delete_imageLayer(imagelayer_name)
+    map_now = map_now.resize(rw.frame.Coordinate(rsize[0], rsize[1]))
 
     standard_out_underline(language, isverbose, "Map outputting|地图输出")
-
     output_rwmap(isdebug, language, map_now, output_path)
 
 if __name__ == "__main__":

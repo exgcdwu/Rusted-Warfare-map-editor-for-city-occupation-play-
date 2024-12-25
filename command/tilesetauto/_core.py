@@ -71,7 +71,7 @@ def auto_func():
                             '提供纯色地块集名称。(-c)')
     
     parser.add_argument('-c', '--color', 
-                        action = "store", metavar = "name", type = str, nargs = "+", 
+                        action = "store", metavar = "RGB color", type = str, nargs = "+", 
                         required = False, default = "|",
                         help='The color of tileset.\n' + \
                             '纯色颜色。')
@@ -83,7 +83,7 @@ def auto_func():
                             '纯色名称。')
     
     parser.add_argument('-cr', '--colorterrain', 
-                        action = "store", metavar = "(int, int)", type = int, nargs = "+", 
+                        action = "store", metavar = "list[int]", type = int, nargs = "+", 
                         required = False, 
                         help='The terrain of different color.\n' + \
                             '不同颜色之间存在的地形。')
@@ -95,7 +95,7 @@ def auto_func():
                             '纯色地块的宽度')
     
     parser.add_argument('-cp', '--delta_lxc', 
-                        action = "store", metavar = "float", type = float, nargs = 3, 
+                        action = "store", metavar = "list[float]", type = float, nargs = 3, 
                         required = False, 
                         help='delta l,x,c of the terrain.\n' + \
                             '地形的delta_l, delta_x, delta_c')

@@ -38,3 +38,8 @@ def search_list_to_index(nlist:list, value)->int:
 def list_filling(nlist:list, length:int, value, istolist = False)->list:
     nlist_now = [[deepcopy(value)] if istolist else deepcopy(value) for value in nlist] + [deepcopy(value) for i in range(length - len(nlist))]
     return nlist_now
+
+def remove_nth_occurrence(lst:list, value, n:int):
+    indices = [i for i, x in enumerate(lst) if x == value]
+    if len(indices) >= n + 1:
+        del lst[indices[n]]

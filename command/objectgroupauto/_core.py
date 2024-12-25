@@ -372,13 +372,17 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
         default_pro.update(tobject_args_translation(rw.const.OBJECTDE.name, operation[AUTOKEY.name], dict_name))
     if operation.get(AUTOKEY.type) != None:
         default_pro.update(tobject_args_translation(rw.const.OBJECTDE.type, operation[AUTOKEY.type], dict_name))
+    if operation.get(AUTOKEY.objectGroup_name) != None:
+        objectgroup_name_dict = tobject_args_translation(AUTOKEY.objectGroup_name, operation[AUTOKEY.objectGroup_name], dict_name)
+        objectgroup_name = objectgroup_name_dict.get(AUTOKEY.objectGroup_name)
+        objectgroup_name = objectgroup_name if objectgroup_name != None else rw.const.NAME.Triggers
 
     optional_pro = {}
     if operation.get(AUTOKEY.optional) != None:
         for key, value in operation[AUTOKEY.optional].items():
             optional_pro.update(tobject_args_translation(key, value, dict_name))
 
-    return rw.case.TObject("object", default_pro, optional_pro)
+    return (rw.case.TObject("object", default_pro, optional_pro), objectgroup_name)
 
 def mapvalue_to_value(value, ntype):
     if isinstance(value, dict):
@@ -1299,7 +1303,7 @@ def auto_func():
 
                 if operation_now_type == AUTOKEY.object:
                     
-                    object_now = get_tobject(operation_now, object_dict, ori_pos, ori_size)
+                    object_now, obg_name = get_tobject(operation_now, object_dict, ori_pos, ori_size)
 
                     if object_now != None:
                         
@@ -1319,7 +1323,7 @@ def auto_func():
                             if id_to_tobject.get(object_dict[AUTOKEY.IDs][tottobid]) == None:
                                 standard_warning_ob(f"A tagged object can't find the object that was once created.(child ID:{object_dict[AUTOKEY.IDs][tottobid]})" + 
                                                  f"|一个标记宾语不能找到它曾经产生的宾语。(儿子 ID:{object_dict[AUTOKEY.IDs][tottobid]})", 1, 18, tobject_id, tobject_name, tobject_x, tobject_y)
-                                map_now.addObject_type(object_now, isresetid = False)
+                                map_now.addObject_type(object_now, isresetid = False, objectGroup_name = obg_name)
                             else:
                                 idnow_object:rw.case.TObject = deepcopy(id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]])
                                 if isnewtaggedobject:
@@ -1329,10 +1333,10 @@ def auto_func():
                                     if is_tagged_object_simple(idnow_object):
                                         idnow_object.assignDefaultProperty(rw.const.OBJECTDE.name, idnow_object.returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
                                         tobject_list.append(idnow_object)
-                                        map_now.addObject_type(idnow_object, isresetid = True)
+                                        map_now.addObject_type(idnow_object, isresetid = True, objectGroup_name = obg_name)
                             id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]] = deepcopy(object_now)
                         else:
-                            map_now.addObject_type(object_now)
+                            map_now.addObject_type(object_now, objectGroup_name = obg_name)
                             if not isdelete:
                                 IDs_update(tobject, object_now)
                         tottobid = tottobid + 1

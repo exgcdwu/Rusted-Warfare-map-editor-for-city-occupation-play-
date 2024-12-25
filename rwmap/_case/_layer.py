@@ -16,8 +16,11 @@ import rwmap._data.const as const
 
 
 class Layer(ElementOri):
+    pass
+
+class Layer(ElementOri):
     def __init__(self, properties:ElementProperties, tilematrix:np.ndarray, encoding:str, compression:Union[str, None])->None:
-        super().__init__(properties)
+        super().__init__(const.TAG.layer, properties)
         self._tilematrix = deepcopy(tilematrix)
         self._encoding = deepcopy(encoding)
         self._compression = deepcopy(compression)
@@ -187,6 +190,10 @@ class Layer(ElementOri):
                 
                 self.assigntileid_terrain(pos_index, tileset, tileset._terrainid_to_tileid_dict[in_matrix_n[tilerec_index.x(), tilerec_index.y()]])
     
-    
-    
-        
+
+    def resize(self, resize_t:frame.Coordinate)->Layer:
+        layer_new = deepcopy(self)
+        layer_new._properties['height'] = str(int(self._properties['height']) * resize_t.x())
+        layer_new._properties['width'] = str(int(self._properties['width']) * resize_t.y())
+        layer_new._tilematrix = np.tile(layer_new._tilematrix, (resize_t.x(), resize_t.y()))
+        return layer_new
