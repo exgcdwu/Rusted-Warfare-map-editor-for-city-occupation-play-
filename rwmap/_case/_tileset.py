@@ -663,14 +663,15 @@ class TileSet(ElementOri):
     def __repr__(self)->str:
         return self.output_str()
 
-    def output_etElement(self)->et.Element:
+    def output_etElement(self, isdeletesource:bool = True)->et.Element:
         root = et.Element("tileset")
         if self._isdependent_tsx:
             root.attrib['firstgid'] = self._properties.returnDefaultProperty('firstgid')
             root.attrib['source'] = self._properties.returnDefaultProperty('source')
         else:
             temp_pro = deepcopy(self._properties)
-            temp_pro.deleteDefaultProperty('source')
+            if isdeletesource:
+                temp_pro.deleteDefaultProperty('source')
             root = temp_pro.output_etElement(root)
             if self._png_text != None:
                 png_element = et.Element("property", {"name": "embedded_png"})
@@ -682,7 +683,7 @@ class TileSet(ElementOri):
                 properties.insert(0, png_element)
             if self._image_properties != None:
                 image_element = et.Element("image")
-                if self._png_text != None and self._image_properties.returnDefaultProperty("source") != None:
+                if isdeletesource and self._png_text != None and self._image_properties.returnDefaultProperty("source") != None:
                     self._image_properties.deleteDefaultProperty("source")
                 image_element = self._image_properties.output_etElement(image_element)
                 root.append(image_element)

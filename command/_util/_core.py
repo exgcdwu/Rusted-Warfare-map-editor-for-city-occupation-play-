@@ -283,7 +283,7 @@ def output_rwmap(isdebug:bool, language:str, rwmap:rw.RWmap, output_path:str)->N
     try:
         standard_out(language, True, f"RW map output({output_path})..." + 
             f"|地图文件导出({output_path})...")
-        rwmap.write_file(output_path)
+        rwmap.write_file(output_path, False, False)
     except:
         standard_error(isdebug, language, "Error of map outputting.|地图文件输出错误。", 31)
 

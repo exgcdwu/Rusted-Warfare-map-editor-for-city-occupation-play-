@@ -193,7 +193,8 @@ class Layer(ElementOri):
 
     def resize(self, resize_t:frame.Coordinate)->Layer:
         layer_new = deepcopy(self)
-        layer_new._properties['height'] = str(int(self._properties['height']) * resize_t.x())
-        layer_new._properties['width'] = str(int(self._properties['width']) * resize_t.y())
-        layer_new._tilematrix = np.tile(layer_new._tilematrix, (resize_t.x(), resize_t.y()))
+        layer_new._properties.assignDefaultProperty('height', str(int(self._properties.returnDefaultProperty('height')) * resize_t.x()))
+        layer_new._properties.assignDefaultProperty('width', str(int(self._properties.returnDefaultProperty('width')) * resize_t.y()))
+        layer_new._tilematrix = np.repeat(layer_new._tilematrix, repeats = resize_t.x(), axis = 0)
+        layer_new._tilematrix = np.repeat(layer_new._tilematrix, repeats = resize_t.y(), axis = 1)
         return layer_new

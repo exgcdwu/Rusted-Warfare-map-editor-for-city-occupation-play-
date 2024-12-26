@@ -4,7 +4,6 @@ from PIL import Image
 import numpy as np
 import imageio
 from copy import deepcopy
-import cv2
 
 import rwmap._frame as frame
 
@@ -84,6 +83,8 @@ def func_fit_compare_ave(np1:np.ndarray, np2:np.ndarray):
     return -np_sum
 
 def add_hsv_gaussian_noise(image:np.ndarray, stddev:list[float], mean:list[float] = [0, 0, 0], randseed:int = -1)->np.ndarray:
+    
+    import cv2
     if randseed != -1:
         np.random.seed(randseed)
     hsv_image = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
@@ -128,6 +129,9 @@ def add_hsv_gaussian_noise(image:np.ndarray, stddev:list[float], mean:list[float
         return noisy_image_rgb
     
 def add_hsv_gaussian_noisel(image:np.ndarray, stddev:list[list[float]], stddev_arr:list[np.ndarray], mean:list[float] = [0, 0, 0], randseed:int = -1)->np.ndarray:
+    
+    import cv2
+    
     if randseed != -1:
         np.random.seed(randseed)
     hsv_image = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)

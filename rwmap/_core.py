@@ -372,13 +372,13 @@ class RWmap(ElementOri):
     def __repr__(self)->str:
         return self.output_str()
 
-    def output_etElement(self)->et.Element:
+    def output_etElement(self, isdeletesource:bool = True)->et.Element:
         root = et.Element("map")
         root = self._properties.output_etElement(root)
         if self._tileset_list != None:
             for tileset in self._tileset_list:
                 if tileset.isexist():
-                    root.append(tileset.output_etElement())
+                    root.append(tileset.output_etElement(isdeletesource))
         oi = 0
         li = 0
         ii = 0
@@ -405,10 +405,11 @@ class RWmap(ElementOri):
                 if tileset.isexist():
                     tileset.change_map_path(map_path)
 
-    def write_file(self, map_file:str)->None:
+    def write_file(self, map_file:str, ischangemappath:bool = True, isdeletesource:bool = True)->None:
         temp_map = deepcopy(self)
-        temp_map.change_map_path(map_file)
-        utility.output_file_from_etElement(temp_map.output_etElement(), map_file)
+        if ischangemappath:
+            temp_map.change_map_path(map_file)
+        utility.output_file_from_etElement(temp_map.output_etElement(isdeletesource), map_file)
 
     def tileset_dependent(self, rwmaps_dir = RWMAP_MAPS)->None:
         if self._tileset_list != None:
@@ -665,8 +666,8 @@ class RWmap(ElementOri):
         
     def resize(self, resize_t:frame.Coordinate)->RWmap:
         new_rwmap = deepcopy(self)
-        new_rwmap._properties['height'] = str(int(self._properties['height']) * resize_t.x())
-        new_rwmap._properties['width'] = str(int(self._properties['width']) * resize_t.y())
+        new_rwmap._properties.assignDefaultProperty('height', str(int(self._properties.returnDefaultProperty('height')) * resize_t.x()))
+        new_rwmap._properties.assignDefaultProperty('width', str(int(self._properties.returnDefaultProperty('width')) * resize_t.y()))
         for i, layer_n in enumerate(new_rwmap._layer_list):
             new_rwmap._layer_list[i] = layer_n.resize(resize_t)
         for i, objectgroup_n in enumerate(new_rwmap._objectGroup_list):
