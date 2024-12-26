@@ -11,6 +11,8 @@ some-other-processes/
 WITE1941/
 stellaris/
 
+*.psd
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
