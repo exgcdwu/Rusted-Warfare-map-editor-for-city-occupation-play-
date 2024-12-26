@@ -183,7 +183,7 @@ def langstr_add_str(langstr:str, str_now:str):
 
 def langstrlist_add(langstr_list:list):
     if langstr_list == []:
-        return ''
+        return '|'
     langstr_matrix = [langstr.split("|") for langstr in langstr_list]
     max_lang = max([len(langstr_list) for langstr_list in langstr_matrix])
     langstr_ans = "|".join([''.join([langstr_matrix[i][j] for i in range(len(langstr_matrix)) if j < len(langstr_matrix[i])]) for j in range(max_lang)])
