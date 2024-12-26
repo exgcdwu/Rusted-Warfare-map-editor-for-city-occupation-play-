@@ -7,3 +7,4 @@ pybind11==2.13.6
 pybind11_global==2.13.6
 imageio==2.13.6
 opencv-python==4.10.0.84
+scipy==1.14.1
