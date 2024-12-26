@@ -1,8 +1,5 @@
 from copy import deepcopy
 import numpy as np
-from scipy.ndimage import zoom
-from scipy.interpolate import CubicSpline
-from scipy.optimize import fsolve, minimize
 from typing import Callable
 import math
 
@@ -65,6 +62,7 @@ def save_matrix_exclude0(matrix_s:np.ndarray, pos:frame.Coordinate, in_matrix:np
     _save_matrix_exclude0_s(matrix_s, tuplen[0], tuplen[1], tuplen[2], exclude)
 
 def scale_nparr(matrix_s:np.ndarray, scale_size:frame.Coordinate)->np.ndarray:
+    from scipy.ndimage import zoom
     scale_factor = [scale_size.x(), scale_size.y(), 1]
     zoomed_array = zoom(matrix_s, zoom = scale_factor, order = 0, grid_mode = True, mode = 'reflect')
     return zoomed_array
@@ -86,6 +84,7 @@ class Bezier(Callable):
 
 
 def cubic_m(points:np.ndarray, t:np.ndarray)->Callable:
+    from scipy.interpolate import CubicSpline
     cs = CubicSpline(t, points, bc_type = 'clamped')
     return cs
 
