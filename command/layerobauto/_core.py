@@ -1,12 +1,12 @@
 import os
 import sys
 import argparse
-current_dir_path = os.path.dirname(os.path.abspath(__file__))
-example_dir_path = os.path.dirname(current_dir_path)
+current_file_path = os.path.abspath(__file__)
+current_dir_path = os.path.dirname(current_file_path)
+command_dir_path = os.path.dirname(current_dir_path)
+package_dir = os.path.dirname(command_dir_path)
 
-package_dir = os.path.dirname(example_dir_path)
 sys.path.append(package_dir)
-#这两项可以省略，如果pip安装（确定包的位置）
 
 from copy import deepcopy
 import numpy as np
