@@ -6,7 +6,7 @@ from setuptools.command.install import install
 import subprocess
 import sys
 
-__version__ = '1.8.0'
+__version__ = '1.8.1'
 
 class PostInstallCommand(install):
     def run(self):
@@ -31,11 +31,17 @@ ARGPARSE_FUNC = {
     "objectgroupauto": "objectgroupauto", 
     "tsindep": "tsindep", 
     "idrearrange": "idrearrange", 
-    "layerauto": "layerauto", 
+    "layermapauto": "layermapauto", 
     "tilesetauto": "tilesetauto",
     "layerobauto": "layerobauto",
     "resizeauto": "resizeauto"
 }
+STE_VERSION = ["v10", "v100"]
+
+
+
+for ste in STE_VERSION:
+    ARGPARSE_FUNC["stellaris_" + ste] = "stellaris_" + ste
 
 setup(
     name = 'rwmapeditor_exgcdwu',

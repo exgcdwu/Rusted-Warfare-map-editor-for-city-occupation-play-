@@ -169,10 +169,9 @@ class Rectangle:
         return cls(initialCoordinate, addCoordinate)
 
     def _iterator(self):
-        for i in range(0, self._addCoordinate.x()):
-            for j in range(0, self._addCoordinate.y()):
-                coordinate_now = self._initialCoordinate + Coordinate(i, j)
-                yield Coordinate(coordinate_now.x(), coordinate_now.y())
+        for i in range(self.i().x(), self.e().x()):
+            for j in range(self.i().y(), self.e().y()):
+                yield Coordinate(i, j)
 
     def __iter__(self):
         return self._iterator()

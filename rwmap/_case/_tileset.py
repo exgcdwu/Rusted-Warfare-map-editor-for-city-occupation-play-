@@ -779,8 +779,11 @@ class TileSet(ElementOri):
             raise exception.CoordinateIndexError(f"Beyond the boundary of this tileset{self.name()}")
         return tagcoo
 
+    def contain(self, tile_grid:frame.Coordinate)->bool:
+        return tile_grid < self._size and tile_grid > const.COO.SIZE_ZERO
+
     def coo_to_tileid(self, tile_grid:frame.Coordinate, isre:bool = True)->int:
-        if tile_grid < self._size:
+        if self.contain(tile_grid):
             if self._tileid_to_coo_list != None:
                 if isre:
                     id_ans = int(self._coo_to_tileid_matrix[tile_grid.x(), tile_grid.y()])
@@ -798,6 +801,17 @@ class TileSet(ElementOri):
     def coo_to_gid(self, tile_grid:frame.Coordinate, isre:bool = True)->int:
         return self.coo_to_tileid(tile_grid, isre = isre) + self.firstgid()
     
+    def rec_to_tileid(self, tile_rec_grid:frame.Rectangle, isre:bool = True)->set[int]:
+        tileidset = set()
+        tile_rec_grid_temp = tile_rec_grid + frame.Coordinate(1, 1)
+        for tile_grid in tile_rec_grid_temp:
+            tileid = self.coo_to_tileid(tile_grid, isre = isre)
+            tileidset.add(tileid)
+        return tileidset
+    
+    def rec_to_gid(self, tile_rec_grid:frame.Rectangle, isre:bool = True)->set[int]:
+        return {x + self.firstgid() for x in self.rec_to_tileid(tile_rec_grid, isre = isre)}
+
     def gid_to_coo(self, gid:int, isre:bool = True)->frame.TagCoordinate:
         return self.tileid_to_coo(self.gid_to_tileid(gid), isre = isre)
 

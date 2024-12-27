@@ -11,20 +11,30 @@ sys.path.append(package_dir)
 from copy import deepcopy
 import numpy as np
 from typing import Callable
-import colorsys
 
 import rwmap as rw
 from command._util import *
 
-def get_config_layerauto(config_dict:dict)->tuple:
-    map_loe = config_dict['lo_map_e']
-    map_ee = config_dict['e_map_e']
-    map_elo = config_dict['e_map_lo']
+fitcompare_dict = {
+    "func_fit_compare_ave": rw.utility.func_fit_compare_ave
+}
+
+def layer_check(map_now:rw.RWmap, layer_name:str, language:str, isyes:bool):
+    if map_now.get_layer_s(layer_name) != None:
+        question(language, True, "The layer already exists, is it overwritten?" + \
+                "|图层已经存在，是否覆盖？", ["y", "n"], ["n"], {}, isyes, "y")
+    else:
+        map_now.add_layer(layer_name)
+
+def fitcompare_check(fitcompare:Callable, isdebug:bool, language:str):
+    if fitcompare_dict.get(fitcompare) == None:
+        standard_error(isdebug, language, f"The function's name of fitcompare is wrong.(name:{fitcompare})" + 
+                           f"|图像比对函数名称错误。(名称:{fitcompare})", 34)
 
 def auto_func():
     parser = argparse.ArgumentParser(
-        description='Resize of rwmap.\n' + \
-                    '地图放大。')
+        description='Auto generation of layer.\n' + \
+                    '图块层自动部署。')
     
     parser.add_argument('map_path', action = "store", metavar = 'file', type=str, 
                         help='The input path of RW map file.\n' + \
@@ -62,11 +72,29 @@ def auto_func():
                         "命令行提示的语言(中文(ch),英文(eg))。语言设置将会被存储。(command/config.json)"
                         )
 
-    parser.add_argument('-j', '--config', 
-                        action = "store", metavar = "file", type = str, nargs = "?", 
-                        required = True, default = '|', const = '|', 
-                        help='Setting(.json).\n' + \
-                            '设置(.json)')
+    parser.add_argument('-i', '--imagelayer', 
+                        action = "store", metavar = "name", type = str, nargs = "?", 
+                        required = False, default = "|", 
+                        help='The name of imagelayer.\n' + \
+                            '底图名称。')
+
+    parser.add_argument('-l', '--layer', 
+                        action = "store", metavar = "name", type = str, nargs = "?", 
+                        required = False, default = "Ground", const = "Ground", 
+                        help='The name of layer.\n' + \
+                            '地层名称。')
+    
+    parser.add_argument('-c', '--fitcompare', 
+                        action = "store", metavar = "name", type = str, nargs = "?", 
+                        required = False, default = "func_fit_compare_ave", const = "func_fit_compare_ave", 
+                        help='The function of image comparison.\n' + \
+                            '图片对比函数。')
+
+    parser.add_argument('-w', '--whitelist', 
+                        action = "store", metavar = "name", type = str, nargs = "+", 
+                        required = True, 
+                        help='White list of tileset.\n' + \
+                            '地块集名称白名单')
 
     args = parser.parse_args()
 
@@ -84,7 +112,13 @@ def auto_func():
 
     ignorewarning = args.ignorewarning
 
-    config_path = args.config
+    imagelayer_name = args.imagelayer
+
+    layer_name = args.layer
+
+    fitcompare = args.fitcompare
+
+    white_list = args.whitelist
 
     language = input_language(isdebug, language)
 
@@ -93,10 +127,22 @@ def auto_func():
     check_input_output_path(isdebug, language, isyes, input_path, output_path)
     map_now = get_rwmap(isdebug, language, input_path)
 
-    standard_out_underline(language, isverbose, "Automatic processing of RWmap|地层自动处理")
+    standard_out_underline(language, isverbose, "Automatic processing of layer|图块层自动计算")
+    layer_check(map_now, layer_name, language, isyes)
+    imagelayer_check(map_now, imagelayer_name, isdebug, language)
+    fitcompare_check(fitcompare, isdebug, language)
 
-    config_dict = get_config_dict(config_path)
-    get_config_layerauto(config_dict)
+    tileSet_whiteSet = set(white_list)
+
+    auto_debug = True
+    if auto_debug:
+        map_now.addTile_auto_quick(layer_name, imagelayer_name, isverbose = isverbose, isdebug = isdebug, tileSet_whiteSet = tileSet_whiteSet)
+    try:
+        if not auto_debug:
+            map_now.addTile_auto_quick(layer_name, imagelayer_name, isverbose = isverbose, isdebug = isdebug, tileSet_whiteSet = tileSet_whiteSet)
+    except:
+        standard_error(isdebug, language, "Failure of tile auto.|图块自动化失败。", 35)
+    map_now.layer_s_ahead(layer_name)
 
     standard_out_underline(language, isverbose, "Map outputting|地图输出")
     output_rwmap(isdebug, language, map_now, output_path)

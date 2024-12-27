@@ -1,0 +1,1 @@
+from command.layermapauto._core import auto_func as layermapauto

@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as et
 from copy import deepcopy
 from typing import Union
+import regex as re
 
 import rwmap._util as utility
 
@@ -74,3 +75,13 @@ class ElementProperties:
                 dict_now[name] = self.returnOptionalProperty(name)
         self._optional_properties = dict_now
     
+    def isreDefaultProperty(self, name:str, value_re:Union[str, dict[str, str]])->bool:
+        value = self.returnDefaultProperty(name)
+        value = value if value != None else ''
+        return re.match(value_re, value)
+
+    
+    def isreOptionalProperty(self, name:str, value_re:Union[str, dict[str, str]])->bool:
+        value = self.returnOptionalProperty(name)
+        value = value if value != None else ''
+        return re.match(value_re, value)

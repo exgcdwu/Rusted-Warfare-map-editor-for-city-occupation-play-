@@ -297,3 +297,5 @@ KNOWN_MAP_TAG_SET = {"objectgroup", "layer", "imagelayer", "tileset", "propertie
 OLI_TAG_LIST = ["objectgroup", "layer", "imagelayer"]
 OLI_TAG_DICT = {"objectgroup": 0, "layer": 1, "imagelayer": 2}
 OLI_TAG_SET = set(OLI_TAG_LIST)
+
+LAOBG_TILE = Union[frame.TagCoordinate, frame.TagRectangle]

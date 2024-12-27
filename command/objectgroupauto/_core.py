@@ -372,6 +372,8 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
         default_pro.update(tobject_args_translation(rw.const.OBJECTDE.name, operation[AUTOKEY.name], dict_name))
     if operation.get(AUTOKEY.type) != None:
         default_pro.update(tobject_args_translation(rw.const.OBJECTDE.type, operation[AUTOKEY.type], dict_name))
+    
+    objectgroup_name = rw.const.NAME.Triggers
     if operation.get(AUTOKEY.objectGroup_name) != None:
         objectgroup_name_dict = tobject_args_translation(AUTOKEY.objectGroup_name, operation[AUTOKEY.objectGroup_name], dict_name)
         objectgroup_name = objectgroup_name_dict.get(AUTOKEY.objectGroup_name)
