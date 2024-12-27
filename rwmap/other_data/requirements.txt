@@ -9,3 +9,4 @@ imageio==2.13.6
 opencv-python==4.10.0.84
 scipy==1.14.1
 networkx==3.4.2
+sortedcontainers==2.4.0
