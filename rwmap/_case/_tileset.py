@@ -156,8 +156,10 @@ class TileSet(ElementOri):
             if root.get('firstgid') != None:
                 root_n.attrib['firstgid'] = root.attrib['firstgid']
             root_n.attrib['source'] = root.attrib['source']
-            root_n.attrib.pop('tiledversion')
-            root_n.attrib.pop('version')
+            if root_n.attrib.get('tiledversion') != None:
+                root_n.attrib.pop('tiledversion')
+            if root_n.attrib.get('version') != None:
+                root_n.attrib.pop('version')
             properties = ElementProperties.init_etElement(root_n)
             isdependent_tsx = True
         else:
@@ -663,6 +665,9 @@ class TileSet(ElementOri):
     def __repr__(self)->str:
         return self.output_str()
 
+    def istsx(self)->bool:
+        return self._isdependent_tsx
+
     def output_etElement(self, isdeletetsxsource:bool = False, isdeleteimgsource:bool = False)->et.Element:
         root = et.Element("tileset")
         if self._isdependent_tsx:
@@ -670,7 +675,7 @@ class TileSet(ElementOri):
             root.attrib['source'] = self._properties.returnDefaultProperty('source')
         else:
             temp_pro = deepcopy(self._properties)
-            if isdeletetsxsource:
+            if isdeletetsxsource and (not self.istsx()):
                 temp_pro.deleteDefaultProperty('source')
             root = temp_pro.output_etElement(root)
             if self._png_text != None:
