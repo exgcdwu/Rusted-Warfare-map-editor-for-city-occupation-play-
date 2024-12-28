@@ -281,11 +281,11 @@ def get_rwmap(isdebug:bool, language:str, rwpath:str)->rw.RWmap:
     except et.ParseError:
         standard_error(isdebug, language, "File parsing error, the file may not be XML file. Maybe it's not RW map file.|地图文件解析错误，不符合xml格式。也许导入的不是铁锈地图。", 25)
 
-def output_rwmap(isdebug:bool, language:str, rwmap:rw.RWmap, output_path:str)->None:
+def output_rwmap(isdebug:bool, language:str, rwmap:rw.RWmap, output_path:str, ischangemappath:bool = True, isdeletetsxsource:bool = False, isdeleteimgsource:bool = False)->None:
     try:
         standard_out(language, True, f"RW map output({output_path})..." + 
             f"|地图文件导出({output_path})...")
-        rwmap.write_file(output_path, False, False)
+        rwmap.write_file(output_path, ischangemappath, isdeletetsxsource, isdeleteimgsource)
     except:
         standard_error(isdebug, language, "Error of map outputting.|地图文件输出错误。", 31)
 

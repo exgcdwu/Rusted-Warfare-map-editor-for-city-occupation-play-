@@ -103,7 +103,8 @@ def auto_func():
 
     standard_out_underline(language, isverbose, "Map outputting|地图输出")
 
-    output_rwmap(isdebug, language, map_now, output_path)
+    output_rwmap(isdebug, language, map_now, output_path, ischangemappath = False, 
+                 isdeletetsxsource = True, isdeleteimgsource = False)
 
 if __name__ == "__main__":
     auto_func()        

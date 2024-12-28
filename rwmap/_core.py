@@ -466,13 +466,13 @@ class RWmap(ElementOri):
     def __repr__(self)->str:
         return self.output_str()
 
-    def output_etElement(self, isdeletesource:bool = True)->et.Element:
+    def output_etElement(self, isdeletetsxsource:bool = False, isdeleteimgsource:bool = False)->et.Element:
         root = et.Element("map")
         root = self._properties.output_etElement(root)
         if self._tileset_list != None:
             for tileset in self._tileset_list:
                 if tileset.isexist():
-                    root.append(tileset.output_etElement(isdeletesource))
+                    root.append(tileset.output_etElement(isdeletetsxsource, isdeleteimgsource))
         oi = 0
         li = 0
         ii = 0
@@ -499,11 +499,11 @@ class RWmap(ElementOri):
                 if tileset.isexist():
                     tileset.change_map_path(map_path)
 
-    def write_file(self, map_file:str, ischangemappath:bool = True, isdeletesource:bool = True)->None:
+    def write_file(self, map_file:str, ischangemappath:bool = True, isdeletetsxsource:bool = False, isdeleteimgsource:bool = False)->None:
         temp_map = deepcopy(self)
         if ischangemappath:
             temp_map.change_map_path(map_file)
-        utility.output_file_from_etElement(temp_map.output_etElement(isdeletesource), map_file)
+        utility.output_file_from_etElement(temp_map.output_etElement(isdeletetsxsource, isdeleteimgsource), map_file)
 
     def tileset_dependent(self, rwmaps_dir = RWMAP_MAPS)->None:
         if self._tileset_list != None:

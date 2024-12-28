@@ -14,7 +14,6 @@ from copy import deepcopy
 import numpy as np
 from typing import Callable
 import time
-from matplotlib.patches import FancyArrowPatch
 
 import rwmap as rw
 from command._util import *
@@ -295,7 +294,8 @@ def node_edge_move(node_list:list[rw.frame.Coordinate], edge_list:list[tuple[int
             node_v_list_ch[i] = (node_v_list_ch[i] * FRICTION_FORCE_COE + n1 * MOVE_GAP)
 
         if tnow % CYCLEVIEWMOD == 0 and ISVIEW:
-
+            
+            from matplotlib.patches import FancyArrowPatch
             import matplotlib.pyplot as plt
 
             fig, ax = plt.subplots()

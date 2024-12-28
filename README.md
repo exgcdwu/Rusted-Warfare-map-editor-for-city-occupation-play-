@@ -53,7 +53,8 @@ termux python环境及包下载（需要一段时间，保持网络畅通）（�
     pip install regex # 1.6.3新加入
     pip install pybind11 # 1.8.0新加入
     pip install imageio # 1.8.0新加入
-    
+    pip install sortedcontainers # 1.8.0新加入
+
     pip install rwmapeditor-exgcdwu==1.8.0 --no-deps
     termux-setup-storage
 

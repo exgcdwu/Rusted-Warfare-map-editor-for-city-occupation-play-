@@ -110,10 +110,9 @@ def scale_nparr_l(colorl:np.ndarray, colorr:np.ndarray, noisel:list[float], nois
     segment_now = Segment(points, t_arr)
     nparr_ans = np.ndarray([scale_size.x(), scale_size.y(), colorl.shape[0]], np.uint8)
 
-    import matplotlib.pyplot as plt
-
     isdebug = False
     if isdebug:
+        import matplotlib.pyplot as plt
         import pdb;pdb.set_trace()
         num = 1000
         sl = 0
