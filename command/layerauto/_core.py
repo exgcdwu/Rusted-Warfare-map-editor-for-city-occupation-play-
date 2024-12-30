@@ -26,14 +26,6 @@ def objectre_to_layer__to__obg_re_to_int_dict(config_dict:dict)->dict[str, dict[
                 obg_re_dict[rw.const._LAYERAUTO.map_type] = DEFAULT_OBMAPTYPE
     return config_dict_temp
 
-def objectre_to_layer__to__obg_re_to_int_dict(config_dict:dict)->dict[str, dict[str, int]]:
-    config_dict_temp = deepcopy(config_dict)
-    for obg, obg_re_list in config_dict_temp.items():
-        for obg_re_dict in obg_re_list:
-            if obg_re_dict.get(rw.const._LAYERAUTO.map_type) == None:
-                obg_re_dict[rw.const._LAYERAUTO.map_type] = DEFAULT_OBMAPTYPE
-    return config_dict_temp
-
 def json_to_LAOBG_TILE_one(tileplace, simplify_dict:dict)->rw.const.LAOBG_TILE:
     if isinstance(tileplace, dict):
         for k, v in tileplace.items():

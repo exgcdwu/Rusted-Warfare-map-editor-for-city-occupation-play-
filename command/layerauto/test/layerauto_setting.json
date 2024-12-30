@@ -1,7 +1,8 @@
 {
     "rwmapauto_type": "layerauto", 
     "simplify": {
-        "tile_T": "巴巴罗萨计划（T版）地块byXs", 
+        "tile_T": "巴巴罗萨计划(N4版)地块byXs", 
+        "tile_S": "巴巴罗萨计划(N4版)渐变海洋地块byXs", 
         "tile_ass": "辅助地块（1.2版）byXs"
     }, 
     "objectre_to_layer": {
@@ -44,7 +45,7 @@
         {
             "exe_name": "sea_origin", 
             "layer_to_exe": [
-                [{"Ground": [{"tile_T": [5, 12]}]}, 1]
+                [{"Ground": [{"tile_T": [5, 12]}, {"tile_S": [[1, 0], [6, 11]]}]}, 1]
             ], 
             "exe": {
                 "exe_type": "map", 
@@ -70,7 +71,19 @@
             "exe_name": "river_origin", 
             "layer_to_exe": [
                 [{"Ground": [{"tile_T": [[0, 0], [3, 11]]}, {"tile_T": [5, 12]}]}, 1], 
-                [{"Items": [{"tile_T": [4, 12]}, {"tile_T": [5, 12]}]}, 1]
+                [{"Items": [{"tile_T": [[0, 0], [3, 11]]}, {"tile_T": [4, 12]}, {"tile_T": [5, 12]}]}, 1]
+            ], 
+            "exe": {
+                "exe_type": "map", 
+                "exe_operation": {}
+            }, 
+            "exe_to_layer": {}
+        }, 
+        {
+            "exe_name": "railway_origin", 
+            "layer_to_exe": [
+                [{"ItemsExtra": [{"tile_T": [[0, 15], [4, 16]]}, {"tile_T": [0, 17]}]}, 1], 
+                [{"Items": [{"tile_T": [[0, 15], [4, 16]]}, {"tile_T": [0, 17]}]}, 1]
             ], 
             "exe": {
                 "exe_type": "map", 
@@ -177,17 +190,6 @@
                             {"tile_T": [0, 5]}, {"tile_T": [1, 5]}, 
                             {"tile_T": [0, 8]}, {"tile_T": [1, 8]}, 
                             {"tile_T": [0, 11]}, {"tile_T": [1, 11]}]}, 1]
-            ], 
-            "exe": {
-                "exe_type": "map", 
-                "exe_operation": {}
-            }, 
-            "exe_to_layer": {}
-        }, 
-        {
-            "exe_name": "railway_origin", 
-            "layer_to_exe": [
-                [{"Items": [{"tile_T": [[0, 15], [4, 16]]}, {"tile_T": [0, 17]}]}, 1]
             ], 
             "exe": {
                 "exe_type": "map", 
@@ -427,6 +429,7 @@
         {
             "exe_name": "Items_exe", 
             "layer_to_exe": [
+                [{"river_origin": 1}, 1], 
                 [{"railway": [11000, 10001, 11001]}, 11001], 
                 [{"railway": [10110, 10100, 10010]}, 10110], 
                 [{"railway": 10011}, 10011], 
@@ -449,6 +452,7 @@
                 "exe_operation": {}
             }, 
             "exe_to_layer": {
+                "1": [["Items", "empty", 0, 0]], 
                 "11001": [["Items", "tile_T", 0, 15]], 
                 "10110": [["Items", "tile_T", 0, 16]], 
                 "10011": [["Items", "tile_T", 1, 15]], 
@@ -478,6 +482,7 @@
                 [{"sea_origin": 1}, 0], 
                 [{"river_origin": 1}, 0], 
                 [{"railway_origin": 1}, 0], 
+                [{"railway_origin": 1}, 5], 
                 [{"river":   10011, "city": [1, 2, 3, 4]}, 11100], 
                 [{"railway": 10011, "city": [1, 2, 3, 4]}, 11100], 
                 [{"river":   10101, "city": [1, 2, 3, 4]}, 11010], 
@@ -492,6 +497,7 @@
                 "exe_operation": {}
             }, 
             "exe_to_layer": {
+                "5": [["ItemsExtra", "empty", 0, 0]], 
                 "1": [["ItemsExtra", "tile_T", 2, 13], ["PathingOverride", "tile_ass", 9, 4]], 
                 "2": [["ItemsExtra", "tile_T", 2, 14]], 
                 "3": [["ItemsExtra", "tile_T", 3, 13]], 
