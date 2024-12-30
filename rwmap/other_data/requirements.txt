@@ -5,7 +5,7 @@ asteval==0.9.33
 regex==2024.7.24
 pybind11==2.13.6
 pybind11_global==2.13.6
-imageio==2.13.6
+imageio==2.36.0
 opencv-python==4.10.0.84
 scipy==1.14.1
 networkx==3.4.2
