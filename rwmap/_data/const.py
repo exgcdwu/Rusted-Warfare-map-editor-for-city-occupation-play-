@@ -298,4 +298,15 @@ OLI_TAG_LIST = ["objectgroup", "layer", "imagelayer"]
 OLI_TAG_DICT = {"objectgroup": 0, "layer": 1, "imagelayer": 2}
 OLI_TAG_SET = set(OLI_TAG_LIST)
 
-LAOBG_TILE = Union[frame.TagCoordinate, frame.TagRectangle]
+LAOBG_TILE = Union[list[Union[frame.TagCoordinate, frame.TagRectangle, int, tuple[str, int]]], 
+                   frame.TagCoordinate, frame.TagRectangle, int, tuple[str, int]]
+
+class _LAYERAUTO:
+    re = "re"
+    map_type = "map_type"
+    gid = "gid"
+    left_top = "left-top"
+    middle = "middle"
+    expansion = 'expansion'
+    terrain = 'terrain'
+    map = 'map'

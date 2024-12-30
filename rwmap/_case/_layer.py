@@ -19,23 +19,29 @@ class Layer(ElementOri):
     pass
 
 class Layer(ElementOri):
-    def __init__(self, properties:ElementProperties, tilematrix:np.ndarray, encoding:str, compression:Union[str, None])->None:
+    def __init__(self, properties:ElementProperties, tilematrix:np.ndarray, encoding:str = "base64", compression:Union[str, None] = "zlib", isexist = True):
         super().__init__(const.TAG.layer, properties)
         self._tilematrix = deepcopy(tilematrix)
         self._encoding = deepcopy(encoding)
         self._compression = deepcopy(compression)
+        self._isexist = isexist
     @classmethod
-    def init_etElement(cls, root:et.Element)->None:
+    def init_etElement(cls, root:et.Element):
         properties = ElementProperties.init_etElement(root)
         data = utility.get_etElement_callable_from_tag_s(root, "data")
         _tilematrix = utility.get_etElement_ndarray_from_text_packed(data, frame.Coordinate(root.attrib['width'], root.attrib['height']))
         return cls(properties, _tilematrix, data.attrib["encoding"], data.attrib.get("compression"))
     
     @classmethod
-    def init_Layer(cls, property:frame.TagCoordinate, id:int, compression:str = "zlib")->None:
+    def init_Layer(cls, property:frame.TagCoordinate, id:int, compression:str = "zlib"):
         properties = ElementProperties("layer", {"id": str(id), "name": property.tag(), "width": str(property.x()), "height": str(property.y())})
         return cls(properties, np.zeros((property.y(), property.x()), dtype = np.uint32), "base64", compression)
 
+    @classmethod
+    def init_tilematrix(cls, name:str, tilematrix:np.ndarray, id:int, isexist:bool = True):
+        properties = ElementProperties("layer", {"id": str(id), "name": name, "width": str(tilematrix.shape[1]), "height": str(tilematrix.shape[0])})
+        return cls(properties, tilematrix, isexist = isexist)
+    
     def output_str(self, output_rectangle:frame.Rectangle = frame.Rectangle(frame.Coordinate(), frame.Coordinate(-1, -1)))->str:
         str_ans = ""
         str_ans = str_ans + self._properties.output_str() + "\n"
@@ -52,6 +58,9 @@ class Layer(ElementOri):
     
     def name(self)->str:
         return self._properties.returnDefaultProperty("name")
+    
+    def isexist(self)->bool:
+        return self._isexist
     
     def size(self)->frame.Coordinate:
         return frame.Coordinate(int(self._properties.returnDefaultProperty("height")), 
@@ -85,6 +94,9 @@ class Layer(ElementOri):
     
     def change_opacity(self, num:float)->None:
         self._properties.assignDefaultProperty("opacity", f"{num:.2f}")
+
+    def change_visible(self, visible:bool)->None:
+        self._properties.assignDefaultProperty("visible", str(int(visible)))
 
     def tileid(self, place_grid:frame.Coordinate)->int:
         return int(self._tilematrix[place_grid.x()][place_grid.y()])

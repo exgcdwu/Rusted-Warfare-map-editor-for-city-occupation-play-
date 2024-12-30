@@ -6,7 +6,7 @@ from setuptools.command.install import install
 import subprocess
 import sys
 
-__version__ = '1.8.4'
+__version__ = '1.8.4.1'
 
 class PostInstallCommand(install):
     def run(self):
@@ -34,6 +34,7 @@ ARGPARSE_FUNC = {
     "layermapauto": "layermapauto", 
     "tilesetauto": "tilesetauto",
     "layerobauto": "layerobauto",
+    "layerauto": "layerauto",
     "resizeauto": "resizeauto"
 }
 STE_VERSION = ["v10", "v100"]

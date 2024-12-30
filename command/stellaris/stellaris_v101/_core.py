@@ -574,8 +574,8 @@ def auto_func():
         CAPITAL_TIME = 2.5
         node_round = 6
         edge_width = 0.5
-        advise_edge_dis = 45
-        node_force_coe = 1600
+        advise_edge_dis = 60
+        node_force_coe = 3600
         team_sum = 16
         CREDIT = 4
         fresh_time = 160
@@ -601,9 +601,9 @@ def auto_func():
     star_tileset_mappath = "./command/stellaris/stellaris_v" + version_d + "/tile/群星实验-tr1.tmx"
     template_tileset_mappath = "./command/stellaris/stellaris_v" + version_d + "/tile/ob_template.tmx"
 
-    fresh_step = np.ceil(fresh_time / FRESH_NUM)
-    fresh_time_cap = fresh_time / CAPITAL_TIME
-    fresh_step_cap = np.ceil(fresh_time_cap / FRESH_NUM)
+    fresh_step = int(np.ceil(fresh_time / FRESH_NUM))
+    fresh_time_cap = int(fresh_time / CAPITAL_TIME)
+    fresh_step_cap = int(np.ceil(fresh_time_cap / FRESH_NUM))
 
     zero_coo = rw.frame.Coordinate(0, 0)
     map_size_o = map_size_t.transpose()
@@ -615,12 +615,12 @@ def auto_func():
     if randseed != -1:
         np.random.seed(randseed)
     else:
-        randseed = int(time.time())
+        randseed = int(time.time()) % 9999991
         np.random.seed(randseed)
 
     #
 
-
+    rw.const.UNIT.hovercraft
 
 
     standard_out_underline(language, isverbose, "Initialization|初始化")

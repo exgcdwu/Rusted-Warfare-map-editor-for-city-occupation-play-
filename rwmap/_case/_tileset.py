@@ -668,7 +668,17 @@ class TileSet(ElementOri):
     def istsx(self)->bool:
         return self._isdependent_tsx
 
+    def normpath(self):
+        sou = self._properties.returnDefaultProperty('source')
+        if sou != None:
+            self._properties.assignDefaultProperty('source', utility.normpath(sou))
+
+        sou = self._image_properties.returnDefaultProperty('source')
+        if sou != None:
+            self._image_properties.assignDefaultProperty('source', utility.normpath(sou))
+
     def output_etElement(self, isdeletetsxsource:bool = False, isdeleteimgsource:bool = False)->et.Element:
+        self.normpath()
         root = et.Element("tileset")
         if self._isdependent_tsx:
             root.attrib['firstgid'] = self._properties.returnDefaultProperty('firstgid')
@@ -785,7 +795,7 @@ class TileSet(ElementOri):
         return tagcoo
 
     def contain(self, tile_grid:frame.Coordinate)->bool:
-        return tile_grid < self._size and tile_grid > const.COO.SIZE_ZERO
+        return (self._size.contain(tile_grid)) and (tile_grid.contain_equal(const.COO.SIZE_ZERO))
 
     def coo_to_tileid(self, tile_grid:frame.Coordinate, isre:bool = True)->int:
         if self.contain(tile_grid):

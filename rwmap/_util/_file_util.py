@@ -17,6 +17,9 @@ def find_file(current_dir:str, target_path:str)->str:
     else:
         return None
     
+def normpath(path:str)->str:
+    return os.path.normpath(path).replace('\\', '/')
+
 def get_path(path_now:str, path_original:str, path_target:str)->str:
     if os.path.isabs(path_target):
         return path_target

@@ -42,6 +42,7 @@ class ImageLayer(ElementOri):
         return str_ans
 
     def output_etElement(self)->et.Element:
+        self.normpath()
         root = et.Element("imagelayer")
         root = self._properties.output_etElement(root)
         image_root = et.Element("image")
@@ -79,3 +80,9 @@ class ImageLayer(ElementOri):
 
     def imageTile(self, place_grid:frame.Coordinate, tile_size:frame.Coordinate)->np.ndarray:
         return utility.image_division_coo(self.source_path(), tile_size, place_grid)
+    
+    def normpath(self):
+
+        sou = self._image_properties.returnDefaultProperty('source')
+        if sou != None:
+            self._image_properties.assignDefaultProperty('source', utility.normpath(sou))

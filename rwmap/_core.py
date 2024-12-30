@@ -30,7 +30,7 @@ RWMAP_DIR = os.path.dirname(__file__)
 RWMAP_MAPS = RWMAP_DIR + "/other_data/maps/"
 
 def exenparr_deal_expand(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]]] = {}):
-    exe_to_exe_nparr = {e:np.ndarray(v) for e, v in exe_to_exe.items()}
+    exe_to_exe_nparr = {e:np.array(v) for e, v in exe_to_exe.items()}
     exe_set = set(exe_to_exe_nparr.keys())
     exe_dict = SortedDict({i:[] for i in exe_set})
     exe_to_exe_dict = SortedDict(exe_to_exe_nparr)
@@ -48,12 +48,14 @@ def exenparr_deal_expand(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]
     while exe_num > 0:
         ml = exe_dict.get(min_exe[men])
         nl = ml[-1]
-        fm = exe_to_exe_dict.get(min_exe)
+        fm = exe_to_exe_dict.get(min_exe[men])
         for i in range(-1, 2):
             for j in range(-1, 2):
+                if nl[0] + i < 0 or nl[0] + i >= rwnparr.shape[0] or nl[1] + j < 0 or nl[1] + j >= rwnparr.shape[1]:
+                    continue
                 if rwnparr[nl[0] + i, nl[1] + j] == 0 and fm[i + 1, j + 1] != -1:
                     rwnparr[nl[0] + i, nl[1] + j] = fm[i + 1, j + 1]
-                    el = exe_dict.get(fm[i, j])
+                    el = exe_dict.get(fm[i + 1, j + 1])
                     if el != None:
                         el.append((nl[0] + i, nl[1] + j))
                         exe_num = exe_num + 1
@@ -65,18 +67,26 @@ def exenparr_deal_expand(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]
 
 def exenparr_deal_shrink_one(exe_tree:nx.DiGraph, rwnparr:np.ndarray, i:int, j:int, sx:int, sy:int)->int:
     pid = 0
-    while True:
-        plfd = exe_tree[pid].get('lfd')
+    iscycle = True
+    #print(f"new cycle:{i}, {j},\n {rwnparr[i - 1:i + 2, j - 1:j + 2]}")
+    #import pdb;pdb.set_trace()
+    while iscycle:
+        plfd = exe_tree.nodes[pid].get('lfd')
         if plfd != None:
             return plfd
+        
+        iscycle = False
         for ee in exe_tree.edges(pid):
-            plx = i + exe_tree[ee]['pla'][0]
-            ply = j + exe_tree[ee]['pla'][1]
-            if plx >= 0 or plx < sx or ply >= 0 or ply < sy:
-                return rwnparr[i, j]
-            if rwnparr[plx, ply] == exe_tree[ee]['exe']:
-                pid = ee
+            plx = i + exe_tree.nodes[ee[1]]['pla'][0] - 1
+            ply = j + exe_tree.nodes[ee[1]]['pla'][1] - 1
+            if plx < 0 or plx >= sx or ply < 0 or ply >= sy:
+                return None
+            if rwnparr[plx, ply] == exe_tree.nodes[ee[1]]['exe']:
+                pid = ee[1]
+                iscycle = True
                 break
+        #print(f"pid:{pid}, rwnparr:{rwnparr[plx, ply]}, exe:{exe_tree.nodes[ee[1]]['exe']}, i:({exe_tree.nodes[ee[1]]['pla'][0]}, {exe_tree.nodes[ee[1]]['pla'][1]}), pl:({plx}, {ply})")
+        #import pdb;pdb.set_trace()
         
 
 def exenparr_deal_shrink(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]]] = {}):
@@ -87,17 +97,14 @@ def exenparr_deal_shrink(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]
     p_ind = p_ind + 1
     for k, vll in exe_to_exe.items():
         node_now = 0
-        vllt = deepcopy(vll)
-        ke = vllt[1][1]
-        vllt[1][1] = k
-        for i, vl in enumerate(vllt):
+        for i, vl in enumerate(vll):
             for j, v in enumerate(vl):
                 if v == -1:
                     continue
                 else:
                     ised = False
                     for edge in exe_tree.edges(node_now):
-                        if exe_tree[edge[1]]['exe'] == v and exe_tree[edge[1]]['pla'] == (i, j):
+                        if exe_tree.nodes[edge[1]]['exe'] == v and exe_tree.nodes[edge[1]]['pla'] == (i, j):
                             node_now = edge[1]
                             ised = True
                             break
@@ -109,12 +116,17 @@ def exenparr_deal_shrink(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]
                     exe_tree.add_edge(node_now, p_ind)
                     node_now = p_ind
                     p_ind = p_ind + 1
-        exe_tree[node_now]['lfd'] = ke
+
+        exe_tree.nodes[node_now]['lfd'] = k
 
     rwnparr_new = deepcopy(rwnparr)
     for i in range(rwnparr.shape[0]):
         for j in range(rwnparr.shape[1]):
-            rwnparr_new[i, j] = exenparr_deal_shrink_one(exe_tree, rwnparr, i, j, rwnparr.shape[0], rwnparr.shape[1])
+            if rwnparr[i, j] == 0:
+                continue
+            exe_new = exenparr_deal_shrink_one(exe_tree, rwnparr, i, j, rwnparr.shape[0], rwnparr.shape[1])
+            if exe_new != None:
+                rwnparr_new[i, j] = exe_new
     return rwnparr_new
 
 class RWmap(ElementOri):
@@ -437,6 +449,20 @@ class RWmap(ElementOri):
         layer_n.changeid(self.nextlayerid())
         self.nextlayerid_pp()
         self.append_layer_s(layer_n)
+
+    def add_Layer_fromLayer_replace(self, layer:case.Layer)->None:
+        layer_q = self.get_layer_s(layer.name())
+        if layer_q != None:
+            ind = self._layer_list.index(layer_q)
+            self._layer_list[ind] = deepcopy(layer)
+            self._layer_list[ind].changeid(layer_q.id())
+        else:
+            self.add_Layer_fromLayer(layer)
+
+    def add_Layer_fromTilematrix(self, name:str, tilematrix:np.ndarray, isexist:bool = True)->None:
+        layer_n = case.Layer.init_tilematrix(name, tilematrix, self.nextlayerid(), isexist)
+        self.append_layer_s(layer_n)
+        self.nextlayerid_pp()
 
     def add_objectgroup(self, objectgroup_name:str = const.NAME.Triggers)->None:
         objectgroup = case.ObjectGroup.init_ObjectGroup(objectgroup_name)
@@ -773,26 +799,44 @@ class RWmap(ElementOri):
             new_rwmap._objectGroup_list[i] = objectgroup_n.resize(resize_t.transpose())
         return new_rwmap
         
-    def _layerobjectgroup_to_dictnparr(self, obg_re_to_int_list:list[str, dict[str, int]])->dict[str, np.ndarray]:
+    def _layerobjectgroup_to_dictnparr(self, obg_re_to_int_dict:dict[str, list[dict]])->dict[str, np.ndarray]:
         lobg_dict = {}
         tile_size_t = self.tile_size_t().changetype(np.uint32)
-        for obg_re_to_int in obg_re_to_int_list:
+        for obg, obg_re_list in obg_re_to_int_dict.items():
             layer_tile = np.zeros(self.size_t().output_tuple(), np.uint32)
-            ob_re_orall = "(" + ")|(".join(obg_re_to_int[1].keys()) + ")"
-            for tobject in self.iterator_object_s(obg_re_to_int[0], {const.OBJECTDE.name, ob_re_orall}):
-                size_tb = (int(tobject.returnDefaultProperty(const.OBJECTDE.y)) // tile_size_t.x(), int(tobject.returnDefaultProperty(const.OBJECTDE.x)) // tile_size_t.y())
-                for ob_re, intn in obg_re_to_int[1].items():
+            ob_re_orall = "(" + ")|(".join([obg_re_dict[const._LAYERAUTO.re] for obg_re_dict in obg_re_list]) + ")"
+            
+            for tobject in self.iterator_object_s(obg, {const.OBJECTDE.name: ob_re_orall}):
+                for obg_re_dict in obg_re_list:
+                    size_type = obg_re_dict[const._LAYERAUTO.map_type]
+                    if size_type == const._LAYERAUTO.left_top:
+                        size_tb = (int(tobject.returnDefaultProperty(const.OBJECTDE.y)) // tile_size_t.x(), int(tobject.returnDefaultProperty(const.OBJECTDE.x)) // tile_size_t.y())
+                    elif size_type == const._LAYERAUTO.middle:
+                        size_tb = ((int(tobject.returnDefaultProperty(const.OBJECTDE.y)) + int(tobject.returnDefaultProperty(const.OBJECTDE.height)) // 2) // tile_size_t.x(), 
+                                   (int(tobject.returnDefaultProperty(const.OBJECTDE.x)) + int(tobject.returnDefaultProperty(const.OBJECTDE.width)) // 2) // tile_size_t.y())
+                    if size_tb[0] < 0 or size_tb[1] < 0 or size_tb[0] >= layer_tile.shape[0] or size_tb[1] >= layer_tile.shape[1]:
+                        continue
+                    ob_re = obg_re_dict[const._LAYERAUTO.re]
+                    intn = obg_re_dict[const._LAYERAUTO.gid]
                     if tobject.isreDefaultProperty(const.OBJECTDE.name, ob_re):
                         layer_tile[size_tb] = intn
-            lobg_dict[obg_re_to_int[0]] = layer_tile
+            lobg_dict[obg] = layer_tile
+            
         for layer_s in self._layer_list:
             lobg_dict[layer_s.name()] = layer_s._tilematrix
         return lobg_dict
 
     def _tileplace_to_setofgid(self, tileplace:const.LAOBG_TILE)->set[int]:
-        set_n = self._tileplace_to_gid(tileplace)
-        if isinstance(set_n, int):
-            set_n = set([set_n])
+        if isinstance(tileplace, list):
+            set_n = set()
+            for tileplace_one in tileplace:
+                tileplace = self._tileplace_to_gid(tileplace_one)
+                if isinstance(tileplace, set):
+                    set_n.update(tileplace)
+                else:
+                    set_n.add(tileplace)
+        else:
+            set_n = set([self._tileplace_to_gid(tileplace)])
         return set_n
 
     def _tileplacedict_to_dictofsetofgid(self, tileplace_dict:dict[str, const.LAOBG_TILE])->dict[str, set[int]]:
@@ -802,40 +846,73 @@ class RWmap(ElementOri):
         return gidset_dict
 
     def _layerobjectgroup_to_exenparr(self, lobg_dict:dict[str, np.ndarray], 
-                                     tileplace_to_exe:list[dict[str, const.LAOBG_TILE], int])->np.ndarray:
+                                     tileplace_to_exe:list[list[dict[str, const.LAOBG_TILE], int]])->np.ndarray:
         exe_nparr = np.zeros(self.size_t().output_tuple(), np.uint32)
         for tileplace_exe in tileplace_to_exe:
             tileplace_and = self._tileplacedict_to_dictofsetofgid(tileplace_exe[0])
             exe = tileplace_exe[1]
             mask = np.ones(self.size_t().output_tuple(), np.bool_)
             for lobg_name, gidset in tileplace_and.items():
-                mask = mask & (np.in1d(lobg_dict[lobg_name], gidset))
+                mask = mask & (np.isin(lobg_dict[lobg_name], np.array(list(gidset), lobg_dict[lobg_name].dtype)))
             exe_nparr[mask] = exe
         return exe_nparr
 
     def _exe_to_tileplace_change_lobg(self, lobg_dict:dict[str, np.ndarray], exe_nparr:np.ndarray, exe_to_laygid:dict[int, list[tuple[str, int]]]):
+        
         for i in range(exe_nparr.shape[0]):
             for j in range(exe_nparr.shape[1]):
+                if exe_nparr[i, j] == 0 or exe_to_laygid.get(exe_nparr[i, j]) == None:
+                    continue
+
                 lsn = exe_to_laygid[exe_nparr[i, j]]
                 for la, tc in lsn:
                     lobg_dict[la][i, j] = tc
 
-    def layerobjectgroup_map_auto(self, obg_re_to_int_list:list[str, dict[str, int]], 
-                                  tileplace_to_exe:list[list[frame.TagRectangle, tuple[str, set[int]], tuple[str, int]], int], 
-                                  exe_to_tileplace:dict[int, list[tuple[str, frame.TagCoordinate]]], 
-                                  exe_to_exe:dict[int, list[list[int]]] = {}, exe_mode:str = 'map')->RWmap:
-        map_temp = deepcopy(self)
-        lobg_dict = map_temp._layerobjectgroup_to_dictnparr(obg_re_to_int_list)
-        exe_nparr = map_temp._layerobjectgroup_to_exenparr(lobg_dict, tileplace_to_exe)
-        if exe_mode == 'expansion':
+    def _layerobjectgroup_map_auto_oneexe(self, exe_name:str, lobg_dict:dict[str, np.ndarray], 
+                                          tileplace_to_exe:list[list[dict[str, const.LAOBG_TILE], int]], 
+                                  exe_to_tileplace:dict[int, list[list[str, frame.TagCoordinate]]], 
+                                  exe_to_exe:dict[int, list[list[int]]] = {}, 
+                                  exe_mode:str = const._LAYERAUTO.map, isaddlayer_obg_exe:bool = False)->RWmap:
+        exe_nparr = self._layerobjectgroup_to_exenparr(lobg_dict, tileplace_to_exe)
+        if exe_mode == const._LAYERAUTO.expansion:
             exenparr_deal_expand(exe_nparr, exe_to_exe)
-        elif exe_mode == 'terrain':
-            exenparr_deal_shrink(exe_nparr, exe_to_exe)
-        elif exe_mode == 'map':
+        elif exe_mode == const._LAYERAUTO.terrain:
+            exe_nparr = exenparr_deal_shrink(exe_nparr, exe_to_exe)
+        elif exe_mode == const._LAYERAUTO.map:
             pass
         exe_to_laygid = {k:[(vi[0], self._tileplace_to_gid(vi[1])) for vi in v] for k, v in exe_to_tileplace.items()}
-        map_temp._exe_to_tileplace_change_lobg(lobg_dict, exe_nparr, exe_to_laygid)
+        lobg_dict[exe_name] = exe_nparr
+        self._exe_to_tileplace_change_lobg(lobg_dict, exe_nparr, exe_to_laygid)
+        if isaddlayer_obg_exe:
+            self.add_Layer_fromTilematrix(exe_name, exe_nparr, False)
+            layer_s = self.get_layer_s(exe_name)
+            layer_s.change_visible(False)
 
+    def layerobjectgroup_map_auto(self, exe_name_list:list[str], 
+                                  tileplace_to_exe_list:list[list[dict[str, const.LAOBG_TILE], int]], 
+                                  exe_to_tileplace_list:dict[int, list[list[str, frame.TagCoordinate]]], 
+                                  obg_re_to_int_dict:dict[str, list[dict]] = {}, 
+                                  exe_to_exe_list:dict[int, list[list[int]]] = [], 
+                                  exe_mode_list:str = const._LAYERAUTO.map, isaddlayer_obg_exe:bool = False)->RWmap:
+        map_temp = deepcopy(self)
+        lobg_dict = map_temp._layerobjectgroup_to_dictnparr(obg_re_to_int_dict)
+
+        for i in range(len(tileplace_to_exe_list)):
+            map_temp._layerobjectgroup_map_auto_oneexe(exe_name_list[i], lobg_dict, tileplace_to_exe_list[i], 
+                                                   exe_to_tileplace_list[i], exe_to_exe_list[i], 
+                exe_mode_list[i] if i < len(exe_mode_list) else {}, True)
+        if not isaddlayer_obg_exe:
+            map_temp.delete_layer_withnotexist()
+
+        return map_temp
+
+    def delete_layer_withnotexist(self):
+        layer_del = []
+        for layer_i in range(len(self._layer_list) - 1, -1, -1):
+            if not self._layer_list[layer_i].isexist():
+                layer_del.append(layer_i)
+        for index in layer_del:
+            self.delete_layer_s(self._layer_list[index])
 
 
         

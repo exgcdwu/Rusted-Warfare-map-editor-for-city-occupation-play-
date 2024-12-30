@@ -16,10 +16,96 @@ import colorsys
 import rwmap as rw
 from command._util import *
 
+DEFAULT_OBMAPTYPE = rw.const._LAYERAUTO.left_top
+
+def objectre_to_layer__to__obg_re_to_int_dict(config_dict:dict)->dict[str, dict[str, int]]:
+    config_dict_temp = deepcopy(config_dict)
+    for obg, obg_re_list in config_dict_temp.items():
+        for obg_re_dict in obg_re_list:
+            if obg_re_dict.get(rw.const._LAYERAUTO.map_type) == None:
+                obg_re_dict[rw.const._LAYERAUTO.map_type] = DEFAULT_OBMAPTYPE
+    return config_dict_temp
+
+def objectre_to_layer__to__obg_re_to_int_dict(config_dict:dict)->dict[str, dict[str, int]]:
+    config_dict_temp = deepcopy(config_dict)
+    for obg, obg_re_list in config_dict_temp.items():
+        for obg_re_dict in obg_re_list:
+            if obg_re_dict.get(rw.const._LAYERAUTO.map_type) == None:
+                obg_re_dict[rw.const._LAYERAUTO.map_type] = DEFAULT_OBMAPTYPE
+    return config_dict_temp
+
+def json_to_LAOBG_TILE_one(tileplace, simplify_dict:dict)->rw.const.LAOBG_TILE:
+    if isinstance(tileplace, dict):
+        for k, v in tileplace.items():
+            kl = simplify_dict.get(k)
+            kl = k if kl == None else kl
+            if isinstance(v, list):
+                if isinstance(v[0], list):
+                    return rw.frame.TagRectangle.init_ae(kl, 
+                            rw.frame.Coordinate(v[0][0], v[0][1]), 
+                            rw.frame.Coordinate(v[1][0], v[1][1]))
+                else:
+                    return rw.frame.TagCoordinate.init_xy(kl, v[0], v[1])
+            else:
+                return tuple(kl, v)
+    else:
+        return tileplace
+
+def json_to_LAOBG_TILE(tileplace, simplify_dict:dict)->rw.const.LAOBG_TILE:
+    if isinstance(tileplace, list):
+        return [json_to_LAOBG_TILE_one(tileplace_one, simplify_dict) for tileplace_one in tileplace]
+    else:
+        return json_to_LAOBG_TILE_one(tileplace, simplify_dict)
+
+def layer_to_exe__to__tileplace_to_exe_one(config_list:list, simplify_dict:dict)->list[dict[str, rw.const.LAOBG_TILE], int]:
+    gid = config_list[1]
+    t_dict_l = {}
+    for k, v in config_list[0].items():
+        t_dict_l[k] = json_to_LAOBG_TILE(v, simplify_dict)
+    return [t_dict_l, gid]
+
+def layer_to_exe__to__tileplace_to_exe(config_list:list, simplify_dict:dict)->list[list[dict[str, rw.const.LAOBG_TILE], int]]:
+    tileplace_to_exe = [layer_to_exe__to__tileplace_to_exe_one(config_one, simplify_dict) for config_one in config_list]
+    return tileplace_to_exe
+    
+def list_to_strtagcoo(li:list[str, str, int, int], simplify_dict:dict)->list[str, rw.frame.TagCoordinate]:
+    li0 = li[0] if simplify_dict.get(li[0]) == None else simplify_dict[li[0]]
+    li1 = li[1] if simplify_dict.get(li[1]) == None else simplify_dict[li[1]]
+    return [li0, rw.frame.TagCoordinate.init_xy(li1, li[2], li[3])]
+
+def exe_to_layer__to__exe_to_tileplace(config_dict:dict[str, list[list[str, str, int, int]]], simplify_dict:dict)->dict[int, list[list[str, rw.frame.TagCoordinate]]]:
+    return {int(k):[list_to_strtagcoo(vi, simplify_dict) for vi in v] for k, v in config_dict.items()}
+
+def exe__to__exetype_and_exe_to_exe(config_dict:dict)->tuple[str, dict[int, list[list[int]]]]:
+    exe_mode = config_dict["exe_type"]
+    exe_operation = config_dict["exe_operation"]
+    exe_operation = {int(k):v for k, v in exe_operation.items()}
+    return (exe_mode, exe_operation)
+
 def get_config_layerauto(config_dict:dict)->tuple:
-    map_loe = config_dict['lo_map_e']
-    map_ee = config_dict['e_map_e']
-    map_elo = config_dict['e_map_lo']
+    if config_dict['rwmapauto_type'] != 'layerauto':
+        return ()
+    simplify_dict = config_dict['simplify'] if config_dict.get('simplify') != None else {}
+    objectre_to_layer_dict = config_dict['objectre_to_layer'] if config_dict.get('objectre_to_layer') != None else {}
+    exe_list = config_dict['exe']
+    tileplace_to_exe_list = []
+    exe_mode_list = []
+    exe_to_exe_list = []
+    exe_to_tileplace_list = []
+    exe_name_list = []
+    for exe in exe_list:
+        tileplace_to_exe_list.append(layer_to_exe__to__tileplace_to_exe(exe["layer_to_exe"], simplify_dict))
+        exetype, exe_to_exe = exe__to__exetype_and_exe_to_exe(exe["exe"])
+        exe_mode_list.append(exetype)
+        exe_to_exe_list.append(exe_to_exe)
+        exe_to_tileplace = exe_to_layer__to__exe_to_tileplace(exe["exe_to_layer"], simplify_dict)
+        exe_to_tileplace_list.append(exe_to_tileplace)
+        exe_name = exe["exe_name"]
+        exe_name_list.append(exe_name)
+    return (exe_name_list, tileplace_to_exe_list, 
+            exe_to_tileplace_list, 
+            objectre_to_layer_dict, exe_to_exe_list, 
+            exe_mode_list)
 
 def auto_func():
     parser = argparse.ArgumentParser(
@@ -96,10 +182,18 @@ def auto_func():
     standard_out_underline(language, isverbose, "Automatic processing of RWmap|地层自动处理")
 
     config_dict = get_config_dict(config_path)
-    get_config_layerauto(config_dict)
-
+    exe_name_list, tileplace_to_exe_list, \
+            exe_to_tileplace_list, \
+            objectre_to_layer_dict, exe_to_exe_list, \
+            exe_mode_list = get_config_layerauto(config_dict)
+    
+    new_map_now = map_now.layerobjectgroup_map_auto(exe_name_list, tileplace_to_exe_list, 
+            exe_to_tileplace_list, 
+            objectre_to_layer_dict, exe_to_exe_list, 
+            exe_mode_list, isaddlayer_obg_exe = isdebug)
+    
     standard_out_underline(language, isverbose, "Map outputting|地图输出")
-    output_rwmap(isdebug, language, map_now, output_path)
+    output_rwmap(isdebug, language, new_map_now, output_path)
 
 if __name__ == "__main__":
     auto_func()        

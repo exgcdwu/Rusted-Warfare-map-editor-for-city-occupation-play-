@@ -75,7 +75,7 @@ class ElementProperties:
                 dict_now[name] = self.returnOptionalProperty(name)
         self._optional_properties = dict_now
     
-    def isreDefaultProperty(self, name:str, value_re:Union[str, dict[str, str]])->bool:
+    def isreDefaultProperty(self, name:str, value_re:str)->bool:
         value = self.returnDefaultProperty(name)
         value = value if value != None else ''
         return re.match(value_re, value)

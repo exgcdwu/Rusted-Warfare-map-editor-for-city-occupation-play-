@@ -120,6 +120,14 @@ class Coordinate:
             return -1
         else:
             return 0
+
+    def __gt__(self, other)->int:
+        if self.x() > other.x() and self.y() > other.y():
+            return 1
+        elif self.x() < other.x() and self.y() < other.y():
+            return -1
+        else:
+            return 0
         
     def contain(self, other:Coordinate)->bool:
         if isinstance(other, Coordinate):
@@ -127,14 +135,26 @@ class Coordinate:
         else:
             raise ValueError(f"Coordinate __contain__: not Coordinate")
 
+    def contain_equal(self, other:Coordinate)->bool:
+        if isinstance(other, Coordinate):
+            return other.x() <= self.x() and other.y() <= self.y()
+        else:
+            raise ValueError(f"Coordinate contain_equal: not Coordinate")
+
     def __contain__(self, other:Coordinate)->bool:
         return self.contain(other)
-        
+
     def out_contain(self, other:Coordinate)->bool:
         if isinstance(other, Coordinate):
             return other.x() > self.x() and other.y() > self.y()
         else:
             raise ValueError(f"Coordinate _out_contain: not Coordinate")
+        
+    def out_contain_equal(self, other:Coordinate)->bool:
+        if isinstance(other, Coordinate):
+            return other.x() >= self.x() and other.y() >= self.y()
+        else:
+            raise ValueError(f"Coordinate _out_contain_equal: not Coordinate")
 
     def output_str(self)->str:
         str_now = "Coordinate:(" + f"{self.x():.2f}" + "," + f"{self.y():.2f}" + "," + "dtype = " + str(self.dtype()) + ")"

@@ -14,5 +14,3 @@ rwmap_output_path = "D:\Game\steam\steamapps\common\Rusted Warfare\mods\maps\六
 
 rwmap_now = rw.RWmap.init_mapfile(rwmap_input_path)
 rwmap_now.write_file(rwmap_output_path)
-
-rw.const.OBJECTOP.allToActivate
