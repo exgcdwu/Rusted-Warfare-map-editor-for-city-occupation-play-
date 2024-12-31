@@ -42,6 +42,7 @@ termux python环境及包下载：
     pip install pybind11 # 1.8.0新加入
     pip install imageio # 1.8.0新加入
     pip install sortedcontainers # 1.8.0新加入
+    pip install networkx # 1.8.5 新加入
 
     pip install rwmapeditor-exgcdwu==1.8.5 --no-deps
     termux-setup-storage
