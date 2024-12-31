@@ -24,7 +24,7 @@ python实现铁锈地图文件地块编辑和宾语编辑。
 
 ## 安装
 
-提供三种安装方法(pip, 下载下来安装, 手机Termux)，安装教程(https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/INSTALL.md)
+提供三种安装方法(pip, 下载下来安装, 手机Termux)，[安装教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/INSTALL.md)
 
 ## 教程
 
