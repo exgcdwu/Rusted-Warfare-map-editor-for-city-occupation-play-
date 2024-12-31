@@ -3,7 +3,10 @@
     "simplify": {
         "tile_T": "巴巴罗萨计划(N4版)地块byXs", 
         "tile_S": "巴巴罗萨计划(N4版)渐变海洋地块byXs", 
-        "tile_ass": "辅助地块（1.2版）byXs"
+        "tile_ass": "辅助地块（1.2版）byXs", 
+        "layer_Ground": "Ground", 
+        "layer_Items1": "Items", 
+        "layer_Items2": "ItemsExtra"
     }, 
     "objectre_to_layer": {
         "Triggers":[
@@ -45,7 +48,7 @@
         {
             "exe_name": "sea_origin", 
             "layer_to_exe": [
-                [{"Ground": [{"tile_T": [5, 12]}, {"tile_S": [[1, 0], [6, 11]]}]}, 1]
+                [{"layer_Ground": [{"tile_T": [5, 12]}, {"tile_S": [[1, 0], [6, 11]]}]}, 1]
             ], 
             "exe": {
                 "exe_type": "map", 
@@ -56,7 +59,7 @@
         {
             "exe_name": "mountain_origin", 
             "layer_to_exe": [
-                [{"Ground": [{"tile_T": [5, 2]}, {"tile_T": [6, 2]}, 
+                [{"layer_Ground": [{"tile_T": [5, 2]}, {"tile_T": [6, 2]}, 
                             {"tile_T": [5, 5]}, {"tile_T": [6, 5]}, 
                             {"tile_T": [5, 8]}, {"tile_T": [6, 8]}, 
                             {"tile_T": [5, 11]}, {"tile_T": [6, 11]}]}, 1]
@@ -70,8 +73,8 @@
         {
             "exe_name": "river_origin", 
             "layer_to_exe": [
-                [{"Ground": [{"tile_T": [[0, 0], [3, 11]]}, {"tile_T": [5, 12]}]}, 1], 
-                [{"Items": [{"tile_T": [[0, 0], [3, 11]]}, {"tile_T": [4, 12]}, {"tile_T": [5, 12]}]}, 1]
+                [{"layer_Ground": [{"tile_T": [[0, 0], [3, 11]]}, {"tile_T": [5, 12]}]}, 1], 
+                [{"layer_Items1": [{"tile_T": [[0, 0], [3, 11]]}, {"tile_T": [4, 12]}, {"tile_T": [5, 12]}]}, 1]
             ], 
             "exe": {
                 "exe_type": "map", 
@@ -82,8 +85,8 @@
         {
             "exe_name": "railway_origin", 
             "layer_to_exe": [
-                [{"ItemsExtra": [{"tile_T": [[0, 15], [4, 16]]}, {"tile_T": [0, 17]}]}, 1], 
-                [{"Items": [{"tile_T": [[0, 15], [4, 16]]}, {"tile_T": [0, 17]}]}, 1]
+                [{"layer_Items2": [{"tile_T": [[0, 15], [4, 16]]}, {"tile_T": [0, 17]}]}, 1], 
+                [{"layer_Items1": [{"tile_T": [[0, 15], [4, 16]]}, {"tile_T": [0, 17]}]}, 1]
             ], 
             "exe": {
                 "exe_type": "map", 
@@ -186,7 +189,7 @@
         {
             "exe_name": "bridge", 
             "layer_to_exe": [
-                [{"Ground": [{"tile_T": [0, 2]}, {"tile_T": [1, 2]}, 
+                [{"layer_Ground": [{"tile_T": [0, 2]}, {"tile_T": [1, 2]}, 
                             {"tile_T": [0, 5]}, {"tile_T": [1, 5]}, 
                             {"tile_T": [0, 8]}, {"tile_T": [1, 8]}, 
                             {"tile_T": [0, 11]}, {"tile_T": [1, 11]}]}, 1]
@@ -292,10 +295,10 @@
         {
             "exe_name": "climate", 
             "layer_to_exe": [
-                [{"Ground": [{"tile_T": [[0, 0], [6, 2]]}]}, 1], 
-                [{"Ground": [{"tile_T": [[0, 3], [6, 5]]}]}, 2], 
-                [{"Ground": [{"tile_T": [[0, 6], [6, 8]]}]}, 3], 
-                [{"Ground": [{"tile_T": [[0, 9], [6, 11]]}]}, 4]
+                [{"layer_Ground": [{"tile_T": [[0, 0], [6, 2]]}]}, 1], 
+                [{"layer_Ground": [{"tile_T": [[0, 3], [6, 5]]}]}, 2], 
+                [{"layer_Ground": [{"tile_T": [[0, 6], [6, 8]]}]}, 3], 
+                [{"layer_Ground": [{"tile_T": [[0, 9], [6, 11]]}]}, 4]
             ], 
             "exe": {
                 "exe_type": "map", 
@@ -304,7 +307,7 @@
             "exe_to_layer": {}
         }, 
         {
-            "exe_name": "Ground_exe", 
+            "exe_name": "layer_Ground_exe", 
             "layer_to_exe": [
                 [{"river": 10110, "climate": 1}, 100], 
                 [{"river": 11001, "climate": 1}, 101], 
@@ -372,62 +375,62 @@
                 "exe_operation": {}
             }, 
             "exe_to_layer": {
-                "100": [["Ground", "tile_T", 0, 0]], 
-                "101": [["Ground", "tile_T", 0, 1]], 
-                "102": [["Ground", "tile_T", 0, 2]], 
-                "103": [["Ground", "tile_T", 0, 3]], 
-                "104": [["Ground", "tile_T", 0, 4]], 
-                "105": [["Ground", "tile_T", 0, 5]], 
-                "106": [["Ground", "tile_T", 0, 6]], 
-                "107": [["Ground", "tile_T", 0, 7]], 
-                "108": [["Ground", "tile_T", 0, 8]], 
-                "109": [["Ground", "tile_T", 0, 9]], 
-                "1010": [["Ground", "tile_T", 0, 10]], 
-                "1011": [["Ground", "tile_T", 0, 11]], 
-                "110": [["Ground", "tile_T", 1, 0]], 
-                "111": [["Ground", "tile_T", 1, 1]], 
-                "112": [["Ground", "tile_T", 1, 2]], 
-                "113": [["Ground", "tile_T", 1, 3]], 
-                "114": [["Ground", "tile_T", 1, 4]], 
-                "115": [["Ground", "tile_T", 1, 5]], 
-                "116": [["Ground", "tile_T", 1, 6]], 
-                "117": [["Ground", "tile_T", 1, 7]], 
-                "118": [["Ground", "tile_T", 1, 8]], 
-                "119": [["Ground", "tile_T", 1, 9]], 
-                "1110": [["Ground", "tile_T", 1, 10]], 
-                "1111": [["Ground", "tile_T", 1, 11]], 
-                "120": [["Ground", "tile_T", 2, 0]], 
-                "121": [["Ground", "tile_T", 2, 1]], 
-                "122": [["Ground", "tile_T", 2, 2]], 
-                "123": [["Ground", "tile_T", 2, 3]], 
-                "124": [["Ground", "tile_T", 2, 4]], 
-                "125": [["Ground", "tile_T", 2, 5]], 
-                "126": [["Ground", "tile_T", 2, 6]], 
-                "127": [["Ground", "tile_T", 2, 7]], 
-                "128": [["Ground", "tile_T", 2, 8]], 
-                "129": [["Ground", "tile_T", 2, 9]], 
-                "1210": [["Ground", "tile_T", 2, 10]], 
-                "1211": [["Ground", "tile_T", 2, 11]], 
-                "130": [["Ground", "tile_T", 3, 0]], 
-                "131": [["Ground", "tile_T", 3, 1]], 
-                "132": [["Ground", "tile_T", 3, 2]], 
-                "133": [["Ground", "tile_T", 3, 3]], 
-                "134": [["Ground", "tile_T", 3, 4]], 
-                "135": [["Ground", "tile_T", 3, 5]], 
-                "136": [["Ground", "tile_T", 3, 6]], 
-                "137": [["Ground", "tile_T", 3, 7]], 
-                "138": [["Ground", "tile_T", 3, 8]], 
-                "139": [["Ground", "tile_T", 3, 9]], 
-                "1310": [["Ground", "tile_T", 3, 10]], 
-                "1311": [["Ground", "tile_T", 3, 11]], 
-                "141": [["Ground", "tile_T", 4, 1]], 
-                "144": [["Ground", "tile_T", 4, 4]], 
-                "147": [["Ground", "tile_T", 4, 7]], 
-                "1410": [["Ground", "tile_T", 4, 10]]
+                "100": [["layer_Ground", "tile_T", 0, 0]], 
+                "101": [["layer_Ground", "tile_T", 0, 1]], 
+                "102": [["layer_Ground", "tile_T", 0, 2]], 
+                "103": [["layer_Ground", "tile_T", 0, 3]], 
+                "104": [["layer_Ground", "tile_T", 0, 4]], 
+                "105": [["layer_Ground", "tile_T", 0, 5]], 
+                "106": [["layer_Ground", "tile_T", 0, 6]], 
+                "107": [["layer_Ground", "tile_T", 0, 7]], 
+                "108": [["layer_Ground", "tile_T", 0, 8]], 
+                "109": [["layer_Ground", "tile_T", 0, 9]], 
+                "1010": [["layer_Ground", "tile_T", 0, 10]], 
+                "1011": [["layer_Ground", "tile_T", 0, 11]], 
+                "110": [["layer_Ground", "tile_T", 1, 0]], 
+                "111": [["layer_Ground", "tile_T", 1, 1]], 
+                "112": [["layer_Ground", "tile_T", 1, 2]], 
+                "113": [["layer_Ground", "tile_T", 1, 3]], 
+                "114": [["layer_Ground", "tile_T", 1, 4]], 
+                "115": [["layer_Ground", "tile_T", 1, 5]], 
+                "116": [["layer_Ground", "tile_T", 1, 6]], 
+                "117": [["layer_Ground", "tile_T", 1, 7]], 
+                "118": [["layer_Ground", "tile_T", 1, 8]], 
+                "119": [["layer_Ground", "tile_T", 1, 9]], 
+                "1110": [["layer_Ground", "tile_T", 1, 10]], 
+                "1111": [["layer_Ground", "tile_T", 1, 11]], 
+                "120": [["layer_Ground", "tile_T", 2, 0]], 
+                "121": [["layer_Ground", "tile_T", 2, 1]], 
+                "122": [["layer_Ground", "tile_T", 2, 2]], 
+                "123": [["layer_Ground", "tile_T", 2, 3]], 
+                "124": [["layer_Ground", "tile_T", 2, 4]], 
+                "125": [["layer_Ground", "tile_T", 2, 5]], 
+                "126": [["layer_Ground", "tile_T", 2, 6]], 
+                "127": [["layer_Ground", "tile_T", 2, 7]], 
+                "128": [["layer_Ground", "tile_T", 2, 8]], 
+                "129": [["layer_Ground", "tile_T", 2, 9]], 
+                "1210": [["layer_Ground", "tile_T", 2, 10]], 
+                "1211": [["layer_Ground", "tile_T", 2, 11]], 
+                "130": [["layer_Ground", "tile_T", 3, 0]], 
+                "131": [["layer_Ground", "tile_T", 3, 1]], 
+                "132": [["layer_Ground", "tile_T", 3, 2]], 
+                "133": [["layer_Ground", "tile_T", 3, 3]], 
+                "134": [["layer_Ground", "tile_T", 3, 4]], 
+                "135": [["layer_Ground", "tile_T", 3, 5]], 
+                "136": [["layer_Ground", "tile_T", 3, 6]], 
+                "137": [["layer_Ground", "tile_T", 3, 7]], 
+                "138": [["layer_Ground", "tile_T", 3, 8]], 
+                "139": [["layer_Ground", "tile_T", 3, 9]], 
+                "1310": [["layer_Ground", "tile_T", 3, 10]], 
+                "1311": [["layer_Ground", "tile_T", 3, 11]], 
+                "141": [["layer_Ground", "tile_T", 4, 1]], 
+                "144": [["layer_Ground", "tile_T", 4, 4]], 
+                "147": [["layer_Ground", "tile_T", 4, 7]], 
+                "1410": [["layer_Ground", "tile_T", 4, 10]]
             }
         }, 
         {
-            "exe_name": "Items_exe", 
+            "exe_name": "layer_Items1_exe", 
             "layer_to_exe": [
                 [{"river_origin": 1}, 1], 
                 [{"railway": [11000, 10001, 11001]}, 11001], 
@@ -452,27 +455,27 @@
                 "exe_operation": {}
             }, 
             "exe_to_layer": {
-                "1": [["Items", "empty", 0, 0]], 
-                "11001": [["Items", "tile_T", 0, 15]], 
-                "10110": [["Items", "tile_T", 0, 16]], 
-                "10011": [["Items", "tile_T", 1, 15]], 
-                "10101": [["Items", "tile_T", 1, 16]], 
-                "11010": [["Items", "tile_T", 2, 15]], 
-                "11100": [["Items", "tile_T", 2, 16]], 
-                "11110": [["Items", "tile_T", 4, 15]], 
-                "11101": [["Items", "tile_T", 4, 16]], 
-                "11011": [["Items", "tile_T", 3, 15]], 
-                "10111": [["Items", "tile_T", 3, 16]], 
-                "11111": [["Items", "tile_T", 0, 17]], 
-                "21111": [["Items", "tile_T", 4, 12]], 
-                "20001": [["Items", "tile_T", 1, 12]], 
-                "20010": [["Items", "tile_T", 2, 12]], 
-                "20100": [["Items", "tile_T", 0, 12]], 
-                "21000": [["Items", "tile_T", 3, 12]]
+                "1": [["layer_Items1", "empty", 0, 0]], 
+                "11001": [["layer_Items1", "tile_T", 0, 15]], 
+                "10110": [["layer_Items1", "tile_T", 0, 16]], 
+                "10011": [["layer_Items1", "tile_T", 1, 15]], 
+                "10101": [["layer_Items1", "tile_T", 1, 16]], 
+                "11010": [["layer_Items1", "tile_T", 2, 15]], 
+                "11100": [["layer_Items1", "tile_T", 2, 16]], 
+                "11110": [["layer_Items1", "tile_T", 4, 15]], 
+                "11101": [["layer_Items1", "tile_T", 4, 16]], 
+                "11011": [["layer_Items1", "tile_T", 3, 15]], 
+                "10111": [["layer_Items1", "tile_T", 3, 16]], 
+                "11111": [["layer_Items1", "tile_T", 0, 17]], 
+                "21111": [["layer_Items1", "tile_T", 4, 12]], 
+                "20001": [["layer_Items1", "tile_T", 1, 12]], 
+                "20010": [["layer_Items1", "tile_T", 2, 12]], 
+                "20100": [["layer_Items1", "tile_T", 0, 12]], 
+                "21000": [["layer_Items1", "tile_T", 3, 12]]
             }
         }, 
         {
-            "exe_name": "ItemsExtra_exe", 
+            "exe_name": "layer_Items2_exe", 
             "layer_to_exe": [
                 [{"city": 1}, 1], 
                 [{"city": 2}, 2], 
@@ -497,15 +500,15 @@
                 "exe_operation": {}
             }, 
             "exe_to_layer": {
-                "5": [["ItemsExtra", "empty", 0, 0]], 
-                "1": [["ItemsExtra", "tile_T", 2, 13], ["PathingOverride", "tile_ass", 9, 4]], 
-                "2": [["ItemsExtra", "tile_T", 2, 14]], 
-                "3": [["ItemsExtra", "tile_T", 3, 13]], 
-                "4": [["ItemsExtra", "tile_T", 3, 14]], 
-                "11100": [["ItemsExtra", "tile_T", 0, 13]], 
-                "11010": [["ItemsExtra", "tile_T", 0, 14]], 
-                "10101": [["ItemsExtra", "tile_T", 1, 13]], 
-                "10011": [["ItemsExtra", "tile_T", 1, 14]]
+                "5": [["layer_Items2", "empty", 0, 0]], 
+                "1": [["layer_Items2", "tile_T", 2, 13], ["PathingOverride", "tile_ass", 9, 4]], 
+                "2": [["layer_Items2", "tile_T", 2, 14]], 
+                "3": [["layer_Items2", "tile_T", 3, 13]], 
+                "4": [["layer_Items2", "tile_T", 3, 14]], 
+                "11100": [["layer_Items2", "tile_T", 0, 13]], 
+                "11010": [["layer_Items2", "tile_T", 0, 14]], 
+                "10101": [["layer_Items2", "tile_T", 1, 13]], 
+                "10011": [["layer_Items2", "tile_T", 1, 14]]
             }
         }
     ]

@@ -53,7 +53,9 @@ def layer_to_exe__to__tileplace_to_exe_one(config_list:list, simplify_dict:dict)
     gid = config_list[1]
     t_dict_l = {}
     for k, v in config_list[0].items():
-        t_dict_l[k] = json_to_LAOBG_TILE(v, simplify_dict)
+        kl = simplify_dict.get(k)
+        kl = k if kl == None else kl
+        t_dict_l[kl] = json_to_LAOBG_TILE(v, simplify_dict)
     return [t_dict_l, gid]
 
 def layer_to_exe__to__tileplace_to_exe(config_list:list, simplify_dict:dict)->list[list[dict[str, rw.const.LAOBG_TILE], int]]:
