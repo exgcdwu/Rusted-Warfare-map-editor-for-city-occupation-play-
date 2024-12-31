@@ -1,0 +1,8 @@
+图层自动化设置(巴巴罗萨N4,渐变海洋,辅助地块1.2).json:
+要求:有Triggers,Ground,Items,ItemsExtra,PathingOverride层。
+要求:已经添加了巴巴罗萨N4地块，巴巴罗萨N4渐变海洋，辅助地块1.2
+结果：
+Triggers: "c."开头的城市宾语将会在ItemsExtra释放城市。
+Ground/Items 均可以放置河流，将会自动排列。
+Items/ItemsExtra 均可以放置铁路，将会自动排列。
+河流铁路交界处自动生成桥梁。

@@ -14,7 +14,6 @@
 
 使用git将本仓库克隆到本地，然后切换到仓库目录，运行
 
-    cmake_intstall.sh
     python setup.py install
 
 ## 手机termux
