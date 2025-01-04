@@ -35,7 +35,66 @@ ERROR code:
 32: There's no imagelayer name(with the num is less than 1) and can't sure about the imagelayer.|没有图像层名称(且图像层数目不为1)，因此无法确定图像层。
 33: The name of imagelayer is wrong.|图像层名称错误。
 34: The function's name of fitcompare is wrong.|图像比对函数名称错误。
-Failure of tile auto.|图块自动化失败。
+35: Failure of layer map auto.|图层映射失败。
+36: Element "" does not exist. Please add layer/objectgroup/tileset/imagelayer|元素 "" 不存在。请添加对应图层/宾语层/地块集/图像层...
+37: More than one element match "" . Please delete one of layer/objectgroup/tileset/imagelayer|多于一个元素匹配了 "" 。请删除多余的对应图层/宾语层/地块集/图像层...
+38-39: layerauto_setting.json->rwmapauto_type:{"layerauto"}/"layerauto"
+40:    layerauto_setting.json->simplify:{}/{}
+41-43: layerauto_setting.json->simplify->*:[](2), ""
+44-46: layerauto_setting.json->simplify->*:[]->1:{"re", "norm"}
+47-48: layerauto_setting.json->simplify->*:[]->0:""
+49:    layerauto_setting.json->objectre_to_layer:{}/{}
+50-53: layerauto_setting.json->objectre_to_layer->"" in {objectgroup name set simplified by simplify regex}
+54-55: layerauto_setting.json->objectre_to_layer:[]
+56-58: layerauto_setting.json->objectre_to_layer->[]*:{}(3)
+59-60: layerauto_setting.json->objectre_to_layer->[]*->re:""
+61:    layerauto_setting.json->objectre_to_layer->[]*->re:""(check regex)
+62-63: layerauto_setting.json->objectre_to_layer->[]*->map_type:{"middle", "left-top"}/"left-top"
+64-66: layerauto_setting.json->objectre_to_layer->[]*->gid:int(>=1)
+67:    layerauto_setting.json->execution:{}/{}
+68-69: layerauto_setting.json->execution->*:{}
+70-71: layerauto_setting.json->execution->*->layer_to_exe:[]
+72-74: layerauto_setting.json->execution->*->layer_to_exe->[]*:[](2)
+75-77: layerauto_setting.json->execution->*->layer_to_exe->[]*->1:int(>=1)
+78-79: layerauto_setting.json->execution->*->layer_to_exe->[]*->0:dict
+80-83: layerauto_setting.json->execution->*->layer_to_exe->[]*->0->"" in {layer and ob/exe name set simplified by simplify regex}
+84-85: layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*:{},[],int
+86:    layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*):int(>=0)
+87:    layerauto_setting.json->execution->*->exe:[]/[]
+88-89: layerauto_setting.json->execution->*->exe->[]*->exe_type:{"expansion", "terrain", "random"}
+91:    layerauto_setting.json->execution->*->exe->[]*->exe_operation->int(>=1)
+92:    layerauto_setting.json->execution->*->exe->[]*->exe_operation->*(exe_type:expansion):matrix(3, 3, int(>=-1))
+93:    layerauto_setting.json->execution->*->exe_to_layer:{}/{}
+94-95: layerauto_setting.json->execution->"" not in {layer and ob/exe name set simplified by simplify regex}
+96-97: layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*):{},int
+98-101:  layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*)->"" in {tileset name set simplified by simplify regex}
+102-105: layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*)->*:[](2), int(>=0)
+106-109: layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*)->*->0:[](2), int(>=0)
+112-115: layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*)->*->1:[](2), int(>=0)
+116-118: layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*)->*->0->0:int(>=0)
+119-121: layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*)->*->0->1:int(>=0)
+122:     layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*)->*->0:[] in tileset size
+123-125: layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*)->*->1->0:int(>=0)
+126-128: layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*)->*->1->1:int(>=0)
+129:     layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*)->*->1:[] in tileset size
+132:     layerauto_setting.json->execution->*->exe_to_layer->""(int(>=0))
+133-134: layerauto_setting.json->execution->*->exe_to_layer->*:[]
+135-137: layerauto_setting.json->execution->*->exe_to_layer->*->[]*:[](4)
+138-142: layerauto_setting.json->execution->*->exe_to_layer->*->[]*->0:"" in {layer and ob/exe name set simplified by simplify regex}
+143-147: layerauto_setting.json->execution->*->exe_to_layer->*->[]*->1:"" in {tileset name set simplified by simplify regex}
+148-150: layerauto_setting.json->execution->*->exe_to_layer->*->[]*->2:int(>=0)
+152-154: layerauto_setting.json->execution->*->exe_to_layer->*->[]*->3:int(>=0)
+155:     layerauto_setting.json->execution->*->exe_to_layer->*->[]*->(2,3) in (1)(tileset size)
+156:     layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*)->*->0,1:not []^int
+157:     layerauto_setting.json->execution->*->layer_to_exe->[]*->0->*(->[]*)->*->int in tileset size
+158-159: layerauto_setting.json->execution->*->exe->[]*:{}
+160:     layerauto_setting.json->execution->*->exe->[]*->exe_border:{}/{}
+161-162: layerauto_setting.json->execution->*->exe->[]*->exe_border->all:int(>=-3)/-3
+163-164: layerauto_setting.json->execution->*->exe->[]*->exe_operation:{}
+165:     layerauto_setting.json->execution->*->exe->[]*->exe_operation->*(exe_type:terrain):matrix(3, 3, /(1-2), int(>=-1, >=-2))
+166-167: layerauto_setting.json->execution->*->exe->[]*->exe_operation->*(exe_type:random):{}
+168:     layerauto_setting.json->execution->*->exe->[]*->exe_operation->*(exe_type:random)->""(int(>=0))
+# Sometimes xx0/xx1 error do not exist.
 
 WARNING code:
 

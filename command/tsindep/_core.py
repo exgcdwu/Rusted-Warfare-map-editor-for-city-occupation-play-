@@ -93,7 +93,7 @@ def auto_func():
 
     check_input_output_path(isdebug, language, isyes, input_path, output_path)
 
-    map_now = get_rwmap(isdebug, language, input_path)
+    map_now = get_rwmap(isdebug, language, isverbose, input_path)
 
     standard_out_underline(language, isverbose, "Tilesets independence|地块集独立化")
 
@@ -103,7 +103,7 @@ def auto_func():
 
     standard_out_underline(language, isverbose, "Map outputting|地图输出")
 
-    output_rwmap(isdebug, language, map_now, output_path, ischangemappath = False, 
+    output_rwmap(isdebug, language, isverbose, map_now, output_path, ischangemappath = False, 
                  isdeletetsxsource = True, isdeleteimgsource = False)
 
 if __name__ == "__main__":

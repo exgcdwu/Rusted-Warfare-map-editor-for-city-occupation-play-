@@ -79,7 +79,7 @@ def auto_func():
 
     check_input_output_path(isdebug, language, isyes, input_path, output_path)
 
-    map_now = get_rwmap(isdebug, language, input_path)
+    map_now = get_rwmap(isdebug, language, isverbose, input_path)
 
     standard_out_underline(language, isverbose, "ID rearrangement|ID重排")
 
@@ -87,7 +87,7 @@ def auto_func():
 
     standard_out_underline(language, isverbose, "Map outputting|地图输出")
 
-    output_rwmap(isdebug, language, map_now, output_path)
+    output_rwmap(isdebug, language, isverbose, map_now, output_path)
 
 if __name__ == "__main__":
     auto_func()        

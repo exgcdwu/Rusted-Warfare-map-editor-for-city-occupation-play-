@@ -111,7 +111,7 @@ def auto_func():
     standard_out_underline(language, isverbose, "Initialization|初始化")
     standard_out(language, isverbose, "Map data is being imported...|地图数据载入...")
     check_input_output_path(isdebug, language, isyes, input_path, output_path)
-    map_now = get_rwmap(isdebug, language, input_path)
+    map_now = get_rwmap(isdebug, language, isverbose, input_path)
 
 
     standard_out_underline(language, isverbose, "Automatic processing of layer|地块障碍自动加入")
@@ -121,7 +121,7 @@ def auto_func():
             map_now.addTile(rw.frame.TagCoordinate(layer_name, i), (tileset_name, tileset_gid))
 
     standard_out_underline(language, isverbose, "Map outputting|地图输出")
-    output_rwmap(isdebug, language, map_now, output_path)
+    output_rwmap(isdebug, language, isverbose, map_now, output_path)
 
 if __name__ == "__main__":
     auto_func()        

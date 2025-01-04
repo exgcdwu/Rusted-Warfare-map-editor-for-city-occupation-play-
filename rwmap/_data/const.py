@@ -309,4 +309,4 @@ class _LAYERAUTO:
     middle = "middle"
     expansion = 'expansion'
     terrain = 'terrain'
-    map = 'map'
+    random = 'random'

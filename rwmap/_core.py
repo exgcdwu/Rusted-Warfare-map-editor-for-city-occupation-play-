@@ -65,69 +65,110 @@ def exenparr_deal_expand(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]
         if len(ml) == 0:
             men = men + 1
 
-def exenparr_deal_shrink_one(exe_tree:nx.DiGraph, rwnparr:np.ndarray, i:int, j:int, sx:int, sy:int)->int:
-    pid = 0
-    iscycle = True
+def exenparr_deal_shrink_one(exe_tree:nx.DiGraph, rwnparr:np.ndarray, i:int, j:int, sx:int, sy:int, exe_name:str = None)->int:
     #print(f"new cycle:{i}, {j},\n {rwnparr[i - 1:i + 2, j - 1:j + 2]}")
     #import pdb;pdb.set_trace()
-    while iscycle:
-        plfd = exe_tree.nodes[pid].get('lfd')
+    node_list = [0]
+    pid_list = []
+    while len(node_list):
+        pid = node_list[-1]
+        node_list.pop()
+        plfd = exe_tree.nodes[pid].get('l')
         if plfd != None:
-            return plfd
+            pid_list.append(plfd)
+            continue
         
-        iscycle = False
         for ee in exe_tree.edges(pid):
-            plx = i + exe_tree.nodes[ee[1]]['pla'][0] - 1
-            ply = j + exe_tree.nodes[ee[1]]['pla'][1] - 1
+            plx = i + exe_tree.nodes[ee[1]]['p'][0] - 1
+            ply = j + exe_tree.nodes[ee[1]]['p'][1] - 1
             if plx < 0 or plx >= sx or ply < 0 or ply >= sy:
-                return None
-            if rwnparr[plx, ply] == exe_tree.nodes[ee[1]]['exe']:
-                pid = ee[1]
-                iscycle = True
-                break
-        #print(f"pid:{pid}, rwnparr:{rwnparr[plx, ply]}, exe:{exe_tree.nodes[ee[1]]['exe']}, i:({exe_tree.nodes[ee[1]]['pla'][0]}, {exe_tree.nodes[ee[1]]['pla'][1]}), pl:({plx}, {ply})")
-        #import pdb;pdb.set_trace()
+                if exe_tree.nodes[ee[1]]['b']:
+                    node_list.append(ee[1])
+            else:
+                if rwnparr[plx, ply] == exe_tree.nodes[ee[1]]['e']:
+                    node_list.append(ee[1])
+                    #print(f"pid:{pid}, rwnparr:{rwnparr[plx, ply]}, exe:{exe_tree.nodes[ee[1]]['e']}, i:({exe_tree.nodes[ee[1]]['p'][0]}, {exe_tree.nodes[ee[1]]['p'][1]}), pl:({plx}, {ply})")
+                    #import pdb;pdb.set_trace()
+
+    if len(pid_list) == 0:
+        return None
+    elif len(pid_list) == 1:
+        return pid_list[0]
+    else:
+        raise ValueError(f"({exe_name}, {i}, {j})->{pid_list}: mapping failed, key duplicated.")
+        
         
 
-def exenparr_deal_shrink(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]]] = {}):
+def exenparr_deal_shrink(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[list[int]]]] = {}):
     
     exe_tree = nx.DiGraph()
     p_ind = 0
-    exe_tree.add_node(p_ind, exe = -1)
+    exe_tree.add_node(p_ind, e = -1)
     p_ind = p_ind + 1
+
     for k, vll in exe_to_exe.items():
         node_now = 0
-        for i, vl in enumerate(vll):
+        vllp = vll[0]
+        for i, vl in enumerate(vllp):
             for j, v in enumerate(vl):
                 if v == -1:
                     continue
                 else:
+
+                    isborder = (vl == vll[1][i][j]) or (vll[1][i][j] == -1)
+
                     ised = False
                     for edge in exe_tree.edges(node_now):
-                        if exe_tree.nodes[edge[1]]['exe'] == v and exe_tree.nodes[edge[1]]['pla'] == (i, j):
+                        if exe_tree.nodes[edge[1]]['e'] == v and exe_tree.nodes[edge[1]]['p'] == (i, j)\
+                           and exe_tree.nodes[edge[1]]['b'] == isborder:
                             node_now = edge[1]
                             ised = True
                             break
                     if ised:
                         continue
                     
-                    exe_tree.add_node(p_ind, pla = (i, j), exe = v)
+                    exe_tree.add_node(p_ind, p = (i, j), e = v, b = isborder)
 
                     exe_tree.add_edge(node_now, p_ind)
                     node_now = p_ind
                     p_ind = p_ind + 1
 
-        exe_tree.nodes[node_now]['lfd'] = k
+        exe_tree.nodes[node_now]['l'] = k
 
-    rwnparr_new = deepcopy(rwnparr)
+    rwnparr_new = np.zeros(rwnparr.shape, dtype = np.uint32)
     for i in range(rwnparr.shape[0]):
         for j in range(rwnparr.shape[1]):
-            if rwnparr[i, j] == 0:
-                continue
             exe_new = exenparr_deal_shrink_one(exe_tree, rwnparr, i, j, rwnparr.shape[0], rwnparr.shape[1])
             if exe_new != None:
                 rwnparr_new[i, j] = exe_new
     return rwnparr_new
+
+import random
+from bisect import bisect_left
+
+def initialize_cdf(prob_dict):
+    keys = list(prob_dict.keys())
+    values = list(prob_dict.values())
+    cdf = [values[0]]
+    for i in range(1, len(values)):
+        cdf.append(cdf[-1] + values[i])
+    return (keys + [None], cdf + [1])
+
+def generate_random_number(prob_dict_t):
+    rand_num = random.random()
+    index = bisect_left(prob_dict_t[1], rand_num)
+    return prob_dict_t[0][index]
+
+def exenparr_deal_random(rwnparr:np.ndarray, random_dict:dict[int, dict[int, float]]):
+    random_dict_t = {k:initialize_cdf(v) for k, v in random_dict.items()}
+    for i in range(rwnparr.shape[0]):
+        for j in range(rwnparr.shape[1]):
+            if random_dict_t.get(rwnparr[i, j]) == None:
+                continue
+            else:
+                rm = generate_random_number(random_dict_t[rwnparr[i, j]])
+                if rm != None:
+                    rwnparr[i, j] = rm
 
 class RWmap(ElementOri):
     pass
@@ -153,7 +194,6 @@ class RWmap(ElementOri):
         root:et.Element = xmlTree.getroot()
         properties = ElementProperties.init_etElement(root)
 
-
         tileset_list = [case.TileSet(ElementProperties("tileset", {"firstgid": const.KEY.empty_tile, "name": "empty"}), frame.Coordinate(1, 1), frame.Coordinate(), None)]
         tileset_list = tileset_list + [case.TileSet.init_etElement(map_file, tileset, rwmaps_dir) for tileset in root if tileset.tag == "tileset"]
         layer_list = [case.Layer.init_etElement(layer) for layer in root if layer.tag == "layer"]
@@ -163,7 +203,10 @@ class RWmap(ElementOri):
 
         other_elements = [other_element for other_element in root if not other_element.tag in const.KNOWN_MAP_TAG_SET]  
 
-        return cls(properties, tileset_list, layer_list, objectGroup_list, imageLayer_list, oli_order_list, other_elements)
+        rwmap_now = cls(properties, tileset_list, layer_list, objectGroup_list, imageLayer_list, oli_order_list, other_elements)
+        rwmap_now.resetnextlayerid()
+        rwmap_now.resetnextobjectid()
+        return rwmap_now
 
     @classmethod
     def init_map(cls, size:frame.Coordinate, tile_size:frame.Coordinate = const.COO.SIZE_STANDARD):
@@ -217,23 +260,61 @@ class RWmap(ElementOri):
     
     def end_point_object(self)->frame.Coordinate:
         return self.size() * self.tile_size()
-    
-    def nextlayerid(self)->int:
-        return int(self._properties.returnDefaultProperty("nextlayerid"))
+
+    def resetnextlayerid(self, isaboutnextlayerid = True)->None:
+        id_now = 1
+        for i in self._layer_list:
+            idn = i.id()
+            if idn != None:
+                id_now = max(id_now, idn + 1)
+        for i in self._objectGroup_list:
+            idn = i.id()
+            if idn != None:
+                id_now = max(id_now, idn + 1)
+        for i in self._imageLayer_list:
+            idn = i.id()
+            if idn != None:
+                id_now = max(id_now, idn + 1)
+        nl = self.nextlayerid()
+        if isaboutnextlayerid and nl != None:
+            id_now = max(id_now, nl)
+
+        for i in self._layer_list:
+            idn = i.id()
+            if idn == None:
+                i.changeid(id_now)
+                id_now = id_now + 1
+        for i in self._objectGroup_list:
+            idn = i.id()
+            if idn == None:
+                i.changeid(id_now)
+                id_now = id_now + 1
+        for i in self._imageLayer_list:
+            idn = i.id()
+            if idn == None:
+                i.changeid(id_now)
+                id_now = id_now + 1
+
+        self.changenextlayerid(id_now)
+
+    def nextlayerid(self)->Union[int, None]:
+        nl = self._properties.returnDefaultProperty("nextlayerid")
+        return int(nl) if nl != None else nl
 
     def changenextlayerid(self, layerid:int)->None:
         self._properties.assignDefaultProperty("nextlayerid", str(layerid))
 
     def nextlayerid_pp(self)->None:
-        self.changenextlayerid(self.nextlayerid() + 1)
+        nl = self.nextlayerid()
+        self.changenextlayerid(nl + 1)
 
     def nextobjectid(self)->int:
         return int(self._properties.returnDefaultProperty("nextobjectid"))
     
-    def changenextobjectid(self, layerid:int)->None:
-        self._properties.assignDefaultProperty("nextobjectid", str(layerid))
+    def changenextobjectid(self, objectid:int)->None:
+        self._properties.assignDefaultProperty("nextobjectid", str(objectid))
 
-    def nextlayerid_pp(self)->None:
+    def nextobjectid_pp(self)->None:
         self.changenextobjectid(self.nextobjectid() + 1)
 
     def resetlayer_terrain(self, layername:str, tilesetname:str)->None:
@@ -247,7 +328,7 @@ class RWmap(ElementOri):
             maxid_now = max(maxid_now, objectGroup.max_id() + 1)
         self.changenextobjectid(maxid_now)
 
-    def resetid(self)->None:
+    def resetobjectid(self)->None:
         id_to_tobject = {}
         id_now = 1
         for objectGroup in self._objectGroup_list:
@@ -275,6 +356,17 @@ class RWmap(ElementOri):
         self._layer_now = layer
         return layer
     
+    def get_layer_s_ex(self, name:str)->case.Layer:
+        if self._layer_now != None and self._layer_now.name() == name:
+            return self._layer_now
+        layer = utility.get_ElementOri_from_list_by_name_ex_s(self._layer_list, name)
+        self._layer_now = layer
+        return layer
+
+    def get_layer_s_re_ex(self, restr:str)->case.Layer:
+        layer = utility.get_ElementOri_from_list_by_restr_ex_s(self._layer_list, restr)
+        return layer
+    
     def layer_s_ahead(self, name:str, to_index:int = 0):
         layer_s = self.get_layer_s(name)
         self._layer_list.remove(layer_s)
@@ -287,6 +379,17 @@ class RWmap(ElementOri):
         self._imageLayer_now = imageLayer
         return imageLayer
     
+    def get_imageLayer_s_ex(self, name:str)->case.ImageLayer:
+        if self._imageLayer_now != None and self._imageLayer_now.name() == name:
+            return self._imageLayer_now
+        imageLayer = utility.get_ElementOri_from_list_by_name_ex_s(self._imageLayer_list, name)
+        self._imageLayer_now = imageLayer
+        return imageLayer
+    
+    def get_imageLayer_s_re_ex(self, restr:str)->case.Layer:
+        imageLayer = utility.get_ElementOri_from_list_by_restr_ex_s(self._imageLayer_list, restr)
+        return imageLayer
+
     def get_ndarray_fromImageLayer(self, imagelayer_name:str, resize_coo:frame.Coordinate = None)->np.ndarray:
         image_path = self.get_imageLayer_s(imagelayer_name).source_path()
         if image_path == None:
@@ -325,6 +428,17 @@ class RWmap(ElementOri):
         self._tileset_now = tileset
         return tileset
     
+    def get_tileset_s_ex(self, name:str)->case.TileSet:
+        if self._tileset_now != None and self._tileset_now.name() == name:
+            return self._tileset_now
+        tileset = utility.get_ElementOri_from_list_by_name_ex_s(self._tileset_list, name)
+        self._tileset_now = tileset
+        return tileset
+    
+    def get_tileset_s_re_ex(self, restr:str)->case.Layer:
+        tileset = utility.get_ElementOri_from_list_by_restr_ex_s(self._tileset_list, restr)
+        return tileset
+    
     def tileset_s_ahead(self, name:str, to_index:int = 0):
         tileset_s = self.get_imageLayer_s(name)
         self._tileset_list.remove(tileset_s)
@@ -338,15 +452,29 @@ class RWmap(ElementOri):
         return objectgroup
     
     def get_objectgroup_s_ex(self, name:str)->case.ObjectGroup:
-        objectgroup = self.get_objectgroup_s(name)
-        if objectgroup == None:
-            raise KeyError(f"get_objectgroup_s: {name} not found.")
+        if self._objectgroup_now != None and self._objectgroup_now.name() == name:
+            return self._objectgroup_now
+        objectgroup = utility.get_ElementOri_from_list_by_name_ex_s(self._objectGroup_list, name)
+        self._objectgroup_now = objectgroup
+        return objectgroup
+    
+    def get_objectgroup_s_re_ex(self, restr:str)->case.Layer:
+        objectgroup = utility.get_ElementOri_from_list_by_restr_ex_s(self._objectGroup_list, restr)
         return objectgroup
     
     def objectGroup_s_ahead(self, name:str, to_index:int = 0):
         objectgroup_s = self.get_objectgroup_s(name)
         self._objectGroup_list.remove(objectgroup_s)
         self._objectGroup_list.insert(to_index, objectgroup_s)
+
+    def get_layer_name(self)->list[str]:
+        return [i.name() for i in self._layer_list]
+    def get_objectgroup_name(self)->list[str]:
+        return [i.name() for i in self._objectGroup_list]
+    def get_tileset_name(self)->list[str]:
+        return [i.name() for i in self._tileset_list]
+    def get_imagelayer_name(self)->list[str]:
+        return [i.name() for i in self._imageLayer_list]
 
     def add_tileset_purecolor(self, map_path:str, color_nparr:np.ndarray, tile_properties:list[list[str]], png_path:str, tsx_path:str, rwmaps_dir:str = RWMAP_MAPS, noise:list[int] = [0, 0, 0], randseed:int = -1)->None:
         tileset = case.TileSet.init_pure_color(rwmaps_dir, map_path, color_nparr, tile_properties, self.tile_size(), png_path, tsx_path, noise = noise, randseed = randseed)
@@ -413,7 +541,7 @@ class RWmap(ElementOri):
         self.delete_layer_s(layer_s)
 
     def delete_objectGroup(self, objectGroup_name:str)->None:
-        objectGroup_s = self.get_objectGroup_s(objectGroup_name)
+        objectGroup_s = self.get_objectgroup_s(objectGroup_name)
         self.delete_objectGroup_s(objectGroup_s)
 
 
@@ -459,10 +587,11 @@ class RWmap(ElementOri):
         else:
             self.add_Layer_fromLayer(layer)
 
-    def add_Layer_fromTilematrix(self, name:str, tilematrix:np.ndarray, isexist:bool = True)->None:
+    def add_Layer_fromTilematrix(self, name:str, tilematrix:np.ndarray, isexist:bool = True)->case.Layer:
         layer_n = case.Layer.init_tilematrix(name, tilematrix, self.nextlayerid(), isexist)
         self.append_layer_s(layer_n)
         self.nextlayerid_pp()
+        return layer_n
 
     def add_objectgroup(self, objectgroup_name:str = const.NAME.Triggers)->None:
         objectgroup = case.ObjectGroup.init_ObjectGroup(objectgroup_name)
@@ -470,8 +599,8 @@ class RWmap(ElementOri):
 
     def add_objectgroup_fromObjectGroup(self, objectgroup:case.ObjectGroup)->None:
         objectgroup_n = deepcopy(objectgroup)
-        layerid = int(self._properties.returnDefaultProperty("nextlayerid"))
-        self._properties.assignDefaultProperty("nextlayerid", str(layerid + 1))
+        layerid = self.nextlayerid()
+        self.nextlayerid_pp()
         objectgroup_n.changeid(layerid)
         self.append_objectGroup_s(objectgroup_n)
 
@@ -529,6 +658,8 @@ class RWmap(ElementOri):
         temp_map = deepcopy(self)
         if ischangemappath:
             temp_map.change_map_path(map_file)
+        temp_map.resetnextlayerid(isaboutnextlayerid = False)
+        temp_map.resetnextobjectid(isaboutnextobjectid = False)
         utility.output_file_from_etElement(temp_map.output_etElement(isdeletetsxsource, isdeleteimgsource), map_file)
 
     def tileset_dependent(self, rwmaps_dir = RWMAP_MAPS)->None:
@@ -861,9 +992,8 @@ class RWmap(ElementOri):
         
         for i in range(exe_nparr.shape[0]):
             for j in range(exe_nparr.shape[1]):
-                if exe_nparr[i, j] == 0 or exe_to_laygid.get(exe_nparr[i, j]) == None:
+                if exe_to_laygid.get(exe_nparr[i, j]) == None:
                     continue
-
                 lsn = exe_to_laygid[exe_nparr[i, j]]
                 for la, tc in lsn:
                     lobg_dict[la][i, j] = tc
@@ -871,33 +1001,37 @@ class RWmap(ElementOri):
     def _layerobjectgroup_map_auto_oneexe(self, exe_name:str, lobg_dict:dict[str, np.ndarray], 
                                           tileplace_to_exe:list[list[dict[str, const.LAOBG_TILE], int]], 
                                   exe_to_tileplace:dict[int, list[list[str, frame.TagCoordinate]]], 
-                                  exe_to_exe:dict[int, list[list[int]]] = {}, 
-                                  exe_mode:str = const._LAYERAUTO.map, isaddlayer_obg_exe:bool = False)->RWmap:
+                                  exe_to_exe:list = [], 
+                                  exe_mode:list[str] = [], isaddlayer_obg_exe:bool = False)->RWmap:
         exe_nparr = self._layerobjectgroup_to_exenparr(lobg_dict, tileplace_to_exe)
-        if exe_mode == const._LAYERAUTO.expansion:
-            exenparr_deal_expand(exe_nparr, exe_to_exe)
-        elif exe_mode == const._LAYERAUTO.terrain:
-            exe_nparr = exenparr_deal_shrink(exe_nparr, exe_to_exe)
-        elif exe_mode == const._LAYERAUTO.map:
-            pass
+        for i in range(len(exe_mode)):
+            if exe_mode[i] == const._LAYERAUTO.expansion:
+                exenparr_deal_expand(exe_nparr, exe_to_exe[i])
+            elif exe_mode[i] == const._LAYERAUTO.terrain:
+                exe_nparr = exenparr_deal_shrink(exe_nparr, exe_to_exe[i])
+            elif exe_mode[i] == const._LAYERAUTO.random:
+                exenparr_deal_random(exe_nparr, exe_to_exe[i])
+                
         exe_to_laygid = {k:[(vi[0], self._tileplace_to_gid(vi[1])) for vi in v] for k, v in exe_to_tileplace.items()}
         lobg_dict[exe_name] = exe_nparr
         self._exe_to_tileplace_change_lobg(lobg_dict, exe_nparr, exe_to_laygid)
         if isaddlayer_obg_exe:
-            self.add_Layer_fromTilematrix(exe_name, exe_nparr, False)
-            layer_s = self.get_layer_s(exe_name)
+            layer_s = self.add_Layer_fromTilematrix(exe_name, exe_nparr, False)
             layer_s.change_visible(False)
 
     def layerobjectgroup_map_auto(self, exe_name_list:list[str], 
                                   tileplace_to_exe_list:list[list[dict[str, const.LAOBG_TILE], int]], 
                                   exe_to_tileplace_list:dict[int, list[list[str, frame.TagCoordinate]]], 
                                   obg_re_to_int_dict:dict[str, list[dict]] = {}, 
-                                  exe_to_exe_list:dict[int, list[list[int]]] = [], 
-                                  exe_mode_list:str = const._LAYERAUTO.map, isaddlayer_obg_exe:bool = False)->RWmap:
+                                  exe_to_exe_list:list = [], 
+                                  exe_mode_list:list[list[str]] = [], isaddlayer_obg_exe:bool = False, language:str = "eg", isverbose:bool = False, bl:int = 4)->RWmap:
         map_temp = deepcopy(self)
         lobg_dict = map_temp._layerobjectgroup_to_dictnparr(obg_re_to_int_dict)
 
         for i in range(len(tileplace_to_exe_list)):
+            from command._util import standard_out
+            standard_out(language, isverbose, " " * bl + f"Layer {exe_name_list[i]} is processing...|" + \
+                     " " * bl + f"{exe_name_list[i]} 层正在生成中...")
             map_temp._layerobjectgroup_map_auto_oneexe(exe_name_list[i], lobg_dict, tileplace_to_exe_list[i], 
                                                    exe_to_tileplace_list[i], exe_to_exe_list[i], 
                 exe_mode_list[i] if i < len(exe_mode_list) else {}, True)

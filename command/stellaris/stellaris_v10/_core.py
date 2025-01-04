@@ -936,7 +936,7 @@ def auto_func():
 
     map_now._objectGroup_list[0]._object_list
 
-    output_rwmap(isdebug, language, map_now, output_path)
+    output_rwmap(isdebug, language, isverbose, map_now, output_path)
 
 
 

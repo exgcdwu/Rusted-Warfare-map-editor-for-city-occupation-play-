@@ -6,7 +6,7 @@ from rwmap._util._str_util import *
 
 from rwmap._util._dict_util import dict_isconflict, udictstr_to_dict
 
-from rwmap._util._class_rel import get_ElementOri_from_list_by_name_s
+from rwmap._util._class_rel import *
 
 from rwmap._util._png_rel import *
 

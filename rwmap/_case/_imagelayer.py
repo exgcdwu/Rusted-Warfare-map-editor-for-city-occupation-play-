@@ -64,10 +64,11 @@ class ImageLayer(ElementOri):
         return self.output_str()
 
     def id(self)->int:
-        return int(self._properties.returnDefaultProperty("id"))
+        idn = self._properties.returnDefaultProperty("id")
+        return int(idn) if idn != None else idn
     
     def changeid(self, id:int)->None:
-        self._properties.assignDefaultProperty("id", id)
+        self._properties.assignDefaultProperty("id", str(id))
 
     def opacity(self)->float:
         return float(self._properties.returnDefaultProperty("opacity"))

@@ -8,3 +8,4 @@ import rwmap._object as tobject
 import rwmap._otgroup as otgroup
 import rwmap._case as case
 import rwmap._util as utility
+import rwmap._exceptions as rwexceptions

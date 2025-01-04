@@ -37,10 +37,11 @@ class ObjectGroup(ElementOri):
         return cls(properties, [])
     
     def id(self)->int:
-        return int(self._properties.returnDefaultProperty("id"))
+        idn = self._properties.returnDefaultProperty("id")
+        return int(idn) if idn != None else idn
     
     def changeid(self, id:int)->None:
-        self._properties.assignDefaultProperty("id", id)
+        self._properties.assignDefaultProperty("id", str(id))
     
     def output_str(self, objectnum:int = -1)->str:
         str_ans = ""

@@ -1,0 +1,1 @@
+python ./command/layerauto/_core.py ./command/layerauto/test/layerauto_example.tmx -o ./command/layerauto/test/layerauto_example_answer.tmx -j ./command/layerauto/test/layerauto_setting.json -v -y --debug

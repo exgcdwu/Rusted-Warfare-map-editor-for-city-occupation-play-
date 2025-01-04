@@ -125,7 +125,7 @@ def auto_func():
     standard_out_underline(language, isverbose, "Initialization|初始化")
     standard_out(language, isverbose, "Map data is being imported...|地图数据载入...")
     check_input_output_path(isdebug, language, isyes, input_path, output_path)
-    map_now = get_rwmap(isdebug, language, input_path)
+    map_now = get_rwmap(isdebug, language, isverbose, input_path)
 
     standard_out_underline(language, isverbose, "Automatic processing of layer|图块层自动计算")
     layer_check(map_now, layer_name, language, isyes)
@@ -141,11 +141,11 @@ def auto_func():
         if not auto_debug:
             map_now.addTile_auto_quick(layer_name, imagelayer_name, isverbose = isverbose, isdebug = isdebug, tileSet_whiteSet = tileSet_whiteSet)
     except:
-        standard_error(isdebug, language, "Failure of tile auto.|图块自动化失败。", 35)
+        standard_error(isdebug, language, "Failure of layer map auto.|图层映射失败。", 35)
     map_now.layer_s_ahead(layer_name)
 
     standard_out_underline(language, isverbose, "Map outputting|地图输出")
-    output_rwmap(isdebug, language, map_now, output_path)
+    output_rwmap(isdebug, language, isverbose, map_now, output_path)
 
 if __name__ == "__main__":
     auto_func()        
