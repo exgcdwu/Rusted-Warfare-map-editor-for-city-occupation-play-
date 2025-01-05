@@ -338,9 +338,9 @@ addoffsetsize：可选，数字数组，默认为"0 0"，建筑添加宾语大�
 
 detectname: 可选，默认为""，建筑检测宾语名字。
 
-detectoffset: 可选，数字数组，默认为"-10 0"，建筑检测宾语偏移。
+detectoffset: 可选，数字数组，默认为"0 0"，建筑检测宾语偏移。
 
-detectoffsetsize: 可选，数字数组，默认为"20 0"，建筑检测宾语大小改变。
+detectoffsetsize: 可选，数字数组，默认为"0 0"，建筑检测宾语大小改变。
 
 inadd_prefix：可选，默认不存在。将会导入对应inadd_info的数据，建立初始建筑。
 

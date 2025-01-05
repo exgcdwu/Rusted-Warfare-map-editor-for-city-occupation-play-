@@ -1,0 +1,125 @@
+{
+    "rwmapauto_type": "layerauto", 
+    "simplify": {
+        "tile_T": ["^.*巴巴罗萨计划(?!.*渐变海洋).*地块byXs.*$", "re"], 
+        "tile_S": ["^.*巴巴罗萨计划.*渐变海洋地块byXs.*$", "re"], 
+        "layer_Ground": "Ground", 
+        "layer_Items_input_river": "Items_river"
+    }, 
+    "objectre_to_layer": {
+        "Triggers":[
+            {
+                "re": "^c\\..*$", 
+                "map_type": "middle", 
+                "gid": 1
+            }
+        ]
+    }, 
+    "execution": [
+        {
+            "exe_name": "sea_origin", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [5, 12]}, {"tile_S": [[1, 0], [6, 11]]}]}, 1], 
+                [{"layer_Items_input_river": [{"tile_T": [5, 12]}, {"tile_S": [[1, 0], [6, 11]]}]}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "river_origin", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [[0, 0], [3, 11]]}]}, 1], 
+                [{"layer_Items_input_river": [{"tile_T": [[0, 0], [3, 11]]}, {"tile_T": [[0, 12], [4, 12]]}]}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "climate", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [[0, 0], [6, 2]]}]}, 1], 
+                [{"layer_Ground": [{"tile_T": [[0, 3], [6, 5]]}]}, 2], 
+                [{"layer_Ground": [{"tile_T": [[0, 6], [6, 8]]}]}, 3], 
+                [{"layer_Ground": [{"tile_T": [[0, 9], [6, 11]]}]}, 4]
+            ]
+        }, 
+        {
+            "exe_name": "city_expansion", 
+            "layer_to_exe": [
+                [{"Triggers": 1}, 1]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "expansion", 
+                    "exe_operation": {
+                        "1": [
+                            [-1,  2, -1], 
+                            [ 2, -1,  2], 
+                            [-1,  2, -1]
+                        ], 
+                        "2": [
+                            [-1,  3, -1], 
+                            [ 3, -1,  3], 
+                            [-1,  3, -1]
+                        ], 
+                        "3": [
+                            [-1,  4, -1], 
+                            [ 4, -1,  4], 
+                            [-1,  4, -1]
+                        ], 
+                        "4": [
+                            [-1,  5, -1], 
+                            [ 5, -1,  5], 
+                            [-1,  5, -1]
+                        ], 
+                        "5": [
+                            [-1,  6, -1], 
+                            [ 6, -1,  6], 
+                            [-1,  6, -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "city_origin_ground", 
+            "layer_to_exe": [
+                [{"city_expansion": 1}, 1], 
+                [{"city_expansion": 2}, 2], 
+                [{"city_expansion": 3}, 3], 
+                [{"city_expansion": 4}, 4], 
+                [{"city_expansion": 5}, 5], 
+                [{"city_expansion": 6}, 6], 
+                [{"sea_origin": 1}, 0], 
+                [{"river_origin": 1}, 0]
+            ]
+        }, 
+        {
+            "exe_name": "layer_Ground_output_city_exe", 
+            "layer_to_exe": [
+                [{"city_origin_ground": [1, 2, 3, 4], "climate": 1}, 140], 
+                [{"city_origin_ground": 5, "climate": 1}, 150], 
+                [{"city_origin_ground": 6, "climate": 1}, 160], 
+                [{"city_origin_ground": [1, 2, 3, 4], "climate": 2}, 143], 
+                [{"city_origin_ground": 5, "climate": 2}, 153], 
+                [{"city_origin_ground": 6, "climate": 2}, 163], 
+                [{"city_origin_ground": [1, 2, 3, 4], "climate": 3}, 146], 
+                [{"city_origin_ground": 5, "climate": 3}, 156], 
+                [{"city_origin_ground": 6, "climate": 3}, 166], 
+                [{"city_origin_ground": [1, 2, 3, 4], "climate": 4}, 149], 
+                [{"city_origin_ground": 5, "climate": 4}, 159], 
+                [{"city_origin_ground": 6, "climate": 4}, 169]
+            ], 
+            "exe_to_layer": {
+                "140": [["layer_Ground", "tile_T", 4, 0]], 
+                "150": [["layer_Ground", "tile_T", 5, 0]], 
+                "160": [["layer_Ground", "tile_T", 6, 0]], 
+                "143": [["layer_Ground", "tile_T", 4, 3]], 
+                "153": [["layer_Ground", "tile_T", 5, 3]], 
+                "163": [["layer_Ground", "tile_T", 6, 3]], 
+                "146": [["layer_Ground", "tile_T", 4, 6]], 
+                "156": [["layer_Ground", "tile_T", 5, 6]], 
+                "166": [["layer_Ground", "tile_T", 6, 6]], 
+                "149": [["layer_Ground", "tile_T", 4, 9]], 
+                "159": [["layer_Ground", "tile_T", 5, 9]], 
+                "169": [["layer_Ground", "tile_T", 6, 9]]
+            }
+        }
+    ]
+}

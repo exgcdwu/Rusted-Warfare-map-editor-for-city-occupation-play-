@@ -65,6 +65,16 @@ def exenparr_deal_expand(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]
         if len(ml) == 0:
             men = men + 1
 
+def ma33_str(rwnparr:np.ndarray, i:int, j:int)->str:
+    str_ans = ""
+    for ui in range(i - 1, i + 2):
+        for uj in range(j - 1, j + 2):
+            if i < 0 or i >= rwnparr.shape[0] or j < 0 or j >= rwnparr.shape[1]:
+                str_ans = str_ans + 'b '
+            str_ans = str_ans + str(rwnparr[ui, uj]) + " "
+        str_ans = str_ans + "\n"
+    return str_ans
+
 def exenparr_deal_shrink_one(exe_tree:nx.DiGraph, rwnparr:np.ndarray, i:int, j:int, sx:int, sy:int, exe_name:str = None)->int:
     #print(f"new cycle:{i}, {j},\n {rwnparr[i - 1:i + 2, j - 1:j + 2]}")
     #import pdb;pdb.set_trace()
@@ -95,11 +105,11 @@ def exenparr_deal_shrink_one(exe_tree:nx.DiGraph, rwnparr:np.ndarray, i:int, j:i
     elif len(pid_list) == 1:
         return pid_list[0]
     else:
-        raise ValueError(f"({exe_name}, {i}, {j})->{pid_list}: mapping failed, key duplicated.")
+        raise ValueError(f"({exe_name}, {i}, {j}), \n{ma33_str(rwnparr, i, j)}->{pid_list}: mapping failed, key duplicated.")
         
         
 
-def exenparr_deal_shrink(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[list[int]]]] = {}):
+def exenparr_deal_shrink(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[list[int]]]] = {}, exe_name:str = None):
     
     exe_tree = nx.DiGraph()
     p_ind = 0
@@ -138,7 +148,7 @@ def exenparr_deal_shrink(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[list
     rwnparr_new = np.zeros(rwnparr.shape, dtype = np.uint32)
     for i in range(rwnparr.shape[0]):
         for j in range(rwnparr.shape[1]):
-            exe_new = exenparr_deal_shrink_one(exe_tree, rwnparr, i, j, rwnparr.shape[0], rwnparr.shape[1])
+            exe_new = exenparr_deal_shrink_one(exe_tree, rwnparr, i, j, rwnparr.shape[0], rwnparr.shape[1], exe_name = exe_name)
             if exe_new != None:
                 rwnparr_new[i, j] = exe_new
     return rwnparr_new
@@ -572,25 +582,39 @@ class RWmap(ElementOri):
         self.nextlayerid_pp()
         self.append_imageLayer_s(imageLayer)
 
-    def add_Layer_fromLayer(self, layer:case.Layer)->None:
-        layer_n = deepcopy(layer)
-        layer_n.changeid(self.nextlayerid())
+    def add_Layer_fromLayer_s(self, layer_s:case.Layer)->case.Layer:
+        layer_s.changeid(self.nextlayerid())
         self.nextlayerid_pp()
-        self.append_layer_s(layer_n)
+        self.append_layer_s(layer_s)
+        return layer_s
+    
+    def add_Layer_fromLayer(self, layer:case.Layer)->case.Layer:
+        layer_n = deepcopy(layer)
+        return self.add_Layer_fromLayer(layer_n)
 
-    def add_Layer_fromLayer_replace(self, layer:case.Layer)->None:
-        layer_q = self.get_layer_s(layer.name())
+    def add_Layer_fromLayer_replace_s(self, layer_s:case.Layer)->case.Layer:
+        layer_q = self.get_layer_s(layer_s.name())
         if layer_q != None:
             ind = self._layer_list.index(layer_q)
-            self._layer_list[ind] = deepcopy(layer)
+            self._layer_list[ind] = layer_s
             self._layer_list[ind].changeid(layer_q.id())
+            return layer_s
         else:
-            self.add_Layer_fromLayer(layer)
-
+            return self.add_Layer_fromLayer_s(layer_s)
+    
+    def add_Layer_fromLayer_replace(self, layer:case.Layer)->case.Layer:
+        layer_n = deepcopy(layer)
+        return self.add_Layer_fromLayer_replace_s(layer_n)
+        
     def add_Layer_fromTilematrix(self, name:str, tilematrix:np.ndarray, isexist:bool = True)->case.Layer:
         layer_n = case.Layer.init_tilematrix(name, tilematrix, self.nextlayerid(), isexist)
         self.append_layer_s(layer_n)
         self.nextlayerid_pp()
+        return layer_n
+
+    def add_Layer_fromTilematrix_replace(self, name:str, tilematrix:np.ndarray, isexist:bool = True)->case.Layer:
+        layer_n = case.Layer.init_tilematrix(name, tilematrix, self.nextlayerid(), isexist)
+        self.add_Layer_fromLayer_replace_s(layer_n)
         return layer_n
 
     def add_objectgroup(self, objectgroup_name:str = const.NAME.Triggers)->None:
@@ -967,7 +991,11 @@ class RWmap(ElementOri):
                 else:
                     set_n.add(tileplace)
         else:
-            set_n = set([self._tileplace_to_gid(tileplace)])
+            tileplace = self._tileplace_to_gid(tileplace)
+            if isinstance(tileplace, set):
+                set_n = tileplace
+            else:
+                set_n = set([tileplace])
         return set_n
 
     def _tileplacedict_to_dictofsetofgid(self, tileplace_dict:dict[str, const.LAOBG_TILE])->dict[str, set[int]]:
@@ -1008,7 +1036,7 @@ class RWmap(ElementOri):
             if exe_mode[i] == const._LAYERAUTO.expansion:
                 exenparr_deal_expand(exe_nparr, exe_to_exe[i])
             elif exe_mode[i] == const._LAYERAUTO.terrain:
-                exe_nparr = exenparr_deal_shrink(exe_nparr, exe_to_exe[i])
+                exe_nparr = exenparr_deal_shrink(exe_nparr, exe_to_exe[i], exe_name = exe_name)
             elif exe_mode[i] == const._LAYERAUTO.random:
                 exenparr_deal_random(exe_nparr, exe_to_exe[i])
                 
@@ -1016,7 +1044,7 @@ class RWmap(ElementOri):
         lobg_dict[exe_name] = exe_nparr
         self._exe_to_tileplace_change_lobg(lobg_dict, exe_nparr, exe_to_laygid)
         if isaddlayer_obg_exe:
-            layer_s = self.add_Layer_fromTilematrix(exe_name, exe_nparr, False)
+            layer_s = self.add_Layer_fromTilematrix_replace(exe_name, exe_nparr, False)
             layer_s.change_visible(False)
 
     def layerobjectgroup_map_auto(self, exe_name_list:list[str], 
@@ -1035,8 +1063,8 @@ class RWmap(ElementOri):
             map_temp._layerobjectgroup_map_auto_oneexe(exe_name_list[i], lobg_dict, tileplace_to_exe_list[i], 
                                                    exe_to_tileplace_list[i], exe_to_exe_list[i], 
                 exe_mode_list[i] if i < len(exe_mode_list) else {}, True)
-        if not isaddlayer_obg_exe:
-            map_temp.delete_layer_withnotexist()
+            if not isaddlayer_obg_exe:
+                map_temp.delete_layer_withnotexist()
 
         return map_temp
 

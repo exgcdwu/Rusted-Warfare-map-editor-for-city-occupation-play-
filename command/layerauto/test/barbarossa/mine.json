@@ -1,0 +1,28 @@
+{
+    "rwmapauto_type": "layerauto", 
+    "simplify": {
+        "tile_ass": ["^辅助地块.*1.2.*byXs.*$", "re"], 
+        "layer_Ground": "Ground", 
+        "layer_PathingOverride": "PathingOverride"
+    }, 
+    "objectre_to_layer": {
+        "Triggers":[
+            {
+                "re": "^c\\..*$", 
+                "map_type": "middle", 
+                "gid": 1
+            }
+        ]
+    }, 
+    "execution": [
+        {
+            "exe_name": "layer_PathingOverride_exe", 
+            "layer_to_exe": [
+                [{"Triggers": 1}, 1]
+            ], 
+            "exe_to_layer": {
+                "1": [["layer_PathingOverride", "tile_ass", 9, 4]]
+            }
+        }
+    ]
+}

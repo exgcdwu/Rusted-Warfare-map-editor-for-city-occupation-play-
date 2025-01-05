@@ -1,0 +1,144 @@
+{
+    "rwmapauto_type": "layerauto", 
+    "simplify": {
+        "tile_T": ["^.*巴巴罗萨计划(?!.*渐变海洋).*地块byXs.*$", "re"], 
+        "tile_S": ["^.*巴巴罗萨计划.*渐变海洋地块byXs.*$", "re"], 
+        "layer_Ground": "Ground", 
+        "layer_Items_input_river": "Items_river", 
+        "layer_Items_input_city": "Items_city"
+    }, 
+    "execution": [
+        {
+            "exe_name": "sea_origin", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [5, 12]}, {"tile_S": [[1, 0], [6, 11]]}]}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "river_origin", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [[0, 0], [3, 11]]}, {"tile_T": [5, 12]}]}, 1], 
+                [{"layer_Items_input_river": [{"tile_T": [[0, 0], [3, 11]]}, {"tile_T": [4, 12]}, {"tile_T": [5, 12]}]}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "city_origin", 
+            "layer_to_exe": [
+                [{"layer_Items_input_city": {"tile_T": [[0, 13], [3, 14]]}}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "ground_origin", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [[4, 0], [6, 11]]}]}, 1], 
+                [{"sea_origin": 1}, 0], 
+                [{"river_origin": 1}, 0], 
+                [{"city_origin": 1}, 0]
+            ]
+        }, 
+        {
+            "exe_name": "climate", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [[0, 0], [6, 2]]}]}, 1], 
+                [{"layer_Ground": [{"tile_T": [[0, 3], [6, 5]]}]}, 2], 
+                [{"layer_Ground": [{"tile_T": [[0, 6], [6, 8]]}]}, 3], 
+                [{"layer_Ground": [{"tile_T": [[0, 9], [6, 11]]}]}, 4]
+            ]
+        },  
+        {
+            "exe_name": "ground_random", 
+            "layer_to_exe": [
+                [{"ground_origin": 1}, 1]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "random", 
+                    "exe_operation": {
+                        "1": {"11": 0.1, "12": 0.1, "13": 0.1, 
+                              "21": 0.1, "22": 0.1, "23": 0.1, 
+                              "31": 0.1, "32": 0.1, "33": 0.1}
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "layer_ground_random_exe", 
+            "layer_to_exe": [
+                [{"climate": 1, "ground_random": 11}, 1011], 
+                [{"climate": 1, "ground_random": 12}, 1012], 
+                [{"climate": 1, "ground_random": 13}, 1013], 
+                [{"climate": 1, "ground_random": 21}, 1021], 
+                [{"climate": 1, "ground_random": 22}, 1022], 
+                [{"climate": 1, "ground_random": 23}, 1023], 
+                [{"climate": 1, "ground_random": 31}, 1031], 
+                [{"climate": 1, "ground_random": 32}, 1032], 
+                [{"climate": 1, "ground_random": 33}, 1033], 
+                [{"climate": 2, "ground_random": 11}, 2011], 
+                [{"climate": 2, "ground_random": 12}, 2012], 
+                [{"climate": 2, "ground_random": 13}, 2013], 
+                [{"climate": 2, "ground_random": 21}, 2021], 
+                [{"climate": 2, "ground_random": 22}, 2022], 
+                [{"climate": 2, "ground_random": 23}, 2023], 
+                [{"climate": 2, "ground_random": 31}, 2031], 
+                [{"climate": 2, "ground_random": 32}, 2032], 
+                [{"climate": 2, "ground_random": 33}, 2033], 
+                [{"climate": 3, "ground_random": 11}, 3011], 
+                [{"climate": 3, "ground_random": 12}, 3012], 
+                [{"climate": 3, "ground_random": 13}, 3013], 
+                [{"climate": 3, "ground_random": 21}, 3021], 
+                [{"climate": 3, "ground_random": 22}, 3022], 
+                [{"climate": 3, "ground_random": 23}, 3023], 
+                [{"climate": 3, "ground_random": 31}, 3031], 
+                [{"climate": 3, "ground_random": 32}, 3032], 
+                [{"climate": 3, "ground_random": 33}, 3033], 
+                [{"climate": 4, "ground_random": 11}, 4011], 
+                [{"climate": 4, "ground_random": 12}, 4012], 
+                [{"climate": 4, "ground_random": 13}, 4013], 
+                [{"climate": 4, "ground_random": 21}, 4021], 
+                [{"climate": 4, "ground_random": 22}, 4022], 
+                [{"climate": 4, "ground_random": 23}, 4023], 
+                [{"climate": 4, "ground_random": 31}, 4031], 
+                [{"climate": 4, "ground_random": 32}, 4032], 
+                [{"climate": 4, "ground_random": 33}, 4033]
+            ], 
+            "exe_to_layer": {
+                "1011": [["layer_Ground", "tile_T", 4, 0]], 
+                "1012": [["layer_Ground", "tile_T", 4, 1]], 
+                "1013": [["layer_Ground", "tile_T", 4, 2]], 
+                "1021": [["layer_Ground", "tile_T", 5, 0]], 
+                "1022": [["layer_Ground", "tile_T", 5, 1]], 
+                "1023": [["layer_Ground", "tile_T", 5, 2]], 
+                "1031": [["layer_Ground", "tile_T", 6, 0]], 
+                "1032": [["layer_Ground", "tile_T", 6, 1]], 
+                "1033": [["layer_Ground", "tile_T", 6, 2]], 
+                "2011": [["layer_Ground", "tile_T", 4, 3]], 
+                "2012": [["layer_Ground", "tile_T", 4, 4]], 
+                "2013": [["layer_Ground", "tile_T", 4, 5]], 
+                "2021": [["layer_Ground", "tile_T", 5, 3]], 
+                "2022": [["layer_Ground", "tile_T", 5, 4]], 
+                "2023": [["layer_Ground", "tile_T", 5, 5]], 
+                "2031": [["layer_Ground", "tile_T", 6, 3]], 
+                "2032": [["layer_Ground", "tile_T", 6, 4]], 
+                "2033": [["layer_Ground", "tile_T", 6, 5]], 
+                "3011": [["layer_Ground", "tile_T", 4, 6]], 
+                "3012": [["layer_Ground", "tile_T", 4, 7]], 
+                "3013": [["layer_Ground", "tile_T", 4, 8]], 
+                "3021": [["layer_Ground", "tile_T", 5, 6]], 
+                "3022": [["layer_Ground", "tile_T", 5, 7]], 
+                "3023": [["layer_Ground", "tile_T", 5, 8]], 
+                "3031": [["layer_Ground", "tile_T", 6, 6]], 
+                "3032": [["layer_Ground", "tile_T", 6, 7]], 
+                "3033": [["layer_Ground", "tile_T", 6, 8]], 
+                "4011": [["layer_Ground", "tile_T", 4, 9]], 
+                "4012": [["layer_Ground", "tile_T", 4, 10]], 
+                "4013": [["layer_Ground", "tile_T", 4, 11]], 
+                "4021": [["layer_Ground", "tile_T", 5, 9]], 
+                "4022": [["layer_Ground", "tile_T", 5, 10]], 
+                "4023": [["layer_Ground", "tile_T", 5, 11]], 
+                "4031": [["layer_Ground", "tile_T", 6, 9]], 
+                "4032": [["layer_Ground", "tile_T", 6, 10]], 
+                "4033": [["layer_Ground", "tile_T", 6, 11]]
+            }
+        }
+    ]
+}

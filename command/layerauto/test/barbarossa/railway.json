@@ -2,30 +2,19 @@
     "rwmapauto_type": "layerauto", 
     "simplify": {
         "tile_T": ["^.*巴巴罗萨计划(?!.*渐变海洋).*地块byXs.*$", "re"], 
-        "tile_S": ["^.*巴巴罗萨计划.*渐变海洋地块byXs.*$", "re"], 
-        "tile_ass": ["^辅助地块.*1.2.*byXs.*$", "re"], 
         "layer_Ground": "Ground", 
-        "layer_Items_input": "Items_railway", 
-        "layer_Items_output": "Items_railway", 
+        "layer_Items_input_railway": "Items_railway", 
+        "layer_Items_output_railway": "Items_railway", 
         "r0": "railway_origin_0", 
         "r1": "railway_origin_1", 
         "r2": "railway_origin_2", 
         "r3": "railway_origin_3"
     }, 
-    "objectre_to_layer": {
-        "Triggers":[
-            {
-                "re": "^c\\..*$", 
-                "map_type": "middle", 
-                "gid": 1
-            }
-        ]
-    }, 
     "execution": [
         {
             "exe_name": "railway_origin", 
             "layer_to_exe": [
-                [{"layer_Items_input": [{"tile_T": [[0, 15], [4, 16]]}, {"tile_T": [0, 17]}]}, 1]
+                [{"layer_Items_input_railway": [{"tile_T": [[0, 15], [4, 16]]}, {"tile_T": [0, 17]}]}, 1]
             ]
         }, 
         {
@@ -44,33 +33,33 @@
         {
             "exe_name": "railway_inner_origin", 
             "layer_to_exe": [
-                [{"layer_Items_input": {"tile_T": [0, 16]}}, 201102], 
-                [{"layer_Items_input": {"tile_T": [0, 15]}}, 210012], 
-                [{"layer_Items_input": {"tile_T": [1, 15]}}, 200112], 
-                [{"layer_Items_input": {"tile_T": [2, 16]}}, 211002], 
-                [{"layer_Items_input": {"tile_T": [2, 15]}}, 210102], 
-                [{"layer_Items_input": {"tile_T": [1, 16]}}, 201012], 
-                [{"layer_Items_input": {"tile_T": [3, 16]}}, 201112], 
-                [{"layer_Items_input": {"tile_T": [3, 15]}}, 210112], 
-                [{"layer_Items_input": {"tile_T": [4, 16]}}, 211012], 
-                [{"layer_Items_input": {"tile_T": [4, 15]}}, 211102], 
-                [{"layer_Items_input": {"tile_T": [0, 17]}}, 211112]
+                [{"layer_Items_input_railway": {"tile_T": [0, 16]}}, 201102], 
+                [{"layer_Items_input_railway": {"tile_T": [0, 15]}}, 210012], 
+                [{"layer_Items_input_railway": {"tile_T": [1, 15]}}, 200112], 
+                [{"layer_Items_input_railway": {"tile_T": [2, 16]}}, 211002], 
+                [{"layer_Items_input_railway": {"tile_T": [2, 15]}}, 210102], 
+                [{"layer_Items_input_railway": {"tile_T": [1, 16]}}, 201012], 
+                [{"layer_Items_input_railway": {"tile_T": [3, 16]}}, 201112], 
+                [{"layer_Items_input_railway": {"tile_T": [3, 15]}}, 210112], 
+                [{"layer_Items_input_railway": {"tile_T": [4, 16]}}, 211012], 
+                [{"layer_Items_input_railway": {"tile_T": [4, 15]}}, 211102], 
+                [{"layer_Items_input_railway": {"tile_T": [0, 17]}}, 211112]
             ]
         }, 
         {
             "exe_name": "railway_inner_for_external_origin", 
             "layer_to_exe": [
-                [{"layer_Items_input": {"tile_T": [0, 16]}}, 201102], 
-                [{"layer_Items_input": {"tile_T": [0, 15]}}, 210012], 
-                [{"layer_Items_input": {"tile_T": [1, 15]}}, 200112], 
-                [{"layer_Items_input": {"tile_T": [2, 16]}}, 211002], 
-                [{"layer_Items_input": {"tile_T": [2, 15]}}, 210102], 
-                [{"layer_Items_input": {"tile_T": [1, 16]}}, 201012], 
-                [{"layer_Items_input": {"tile_T": [3, 16]}}, 201112], 
-                [{"layer_Items_input": {"tile_T": [3, 15]}}, 210112], 
-                [{"layer_Items_input": {"tile_T": [4, 16]}}, 211012], 
-                [{"layer_Items_input": {"tile_T": [4, 15]}}, 211102], 
-                [{"layer_Items_input": {"tile_T": [0, 17]}}, 211112]
+                [{"layer_Items_input_railway": {"tile_T": [0, 16]}}, 201102], 
+                [{"layer_Items_input_railway": {"tile_T": [0, 15]}}, 210012], 
+                [{"layer_Items_input_railway": {"tile_T": [1, 15]}}, 200112], 
+                [{"layer_Items_input_railway": {"tile_T": [2, 16]}}, 211002], 
+                [{"layer_Items_input_railway": {"tile_T": [2, 15]}}, 210102], 
+                [{"layer_Items_input_railway": {"tile_T": [1, 16]}}, 201012], 
+                [{"layer_Items_input_railway": {"tile_T": [3, 16]}}, 201112], 
+                [{"layer_Items_input_railway": {"tile_T": [3, 15]}}, 210112], 
+                [{"layer_Items_input_railway": {"tile_T": [4, 16]}}, 211012], 
+                [{"layer_Items_input_railway": {"tile_T": [4, 15]}}, 211102], 
+                [{"layer_Items_input_railway": {"tile_T": [0, 17]}}, 211112]
             ]
         }, 
         {
@@ -330,7 +319,7 @@
             ]
         }, 
         {
-            "exe_name": "layer_Items_output_exe", 
+            "exe_name": "layer_Items_output_railway_exe", 
             "layer_to_exe": [
                 [{"railway": 201102}, 1016], 
                 [{"railway": 201002}, 1016], 
@@ -349,38 +338,38 @@
                 [{"railway": 211112}, 1017]
             ], 
             "exe_to_layer": {
-                "1016": [["layer_Items_output", "tile_T", 0, 16]], 
-                "1015": [["layer_Items_output", "tile_T", 0, 15]], 
-                "1116": [["layer_Items_output", "tile_T", 1, 16]], 
-                "1115": [["layer_Items_output", "tile_T", 1, 15]], 
-                "1216": [["layer_Items_output", "tile_T", 2, 16]], 
-                "1215": [["layer_Items_output", "tile_T", 2, 15]], 
-                "1316": [["layer_Items_output", "tile_T", 3, 16]], 
-                "1315": [["layer_Items_output", "tile_T", 3, 15]], 
-                "1017": [["layer_Items_output", "tile_T", 0, 17]]
+                "1016": [["layer_Items_output_railway", "tile_T", 0, 16]], 
+                "1015": [["layer_Items_output_railway", "tile_T", 0, 15]], 
+                "1116": [["layer_Items_output_railway", "tile_T", 1, 16]], 
+                "1115": [["layer_Items_output_railway", "tile_T", 1, 15]], 
+                "1216": [["layer_Items_output_railway", "tile_T", 2, 16]], 
+                "1215": [["layer_Items_output_railway", "tile_T", 2, 15]], 
+                "1316": [["layer_Items_output_railway", "tile_T", 3, 16]], 
+                "1315": [["layer_Items_output_railway", "tile_T", 3, 15]], 
+                "1017": [["layer_Items_output_railway", "tile_T", 0, 17]]
             }
         }, 
         {
             "exe_name": "layer_Ground_exe", 
             "layer_to_exe": [
-                [{"layer_Items_output_exe": 1016, "bridge_origin": 1, "climate": 1}, 102], 
-                [{"layer_Items_output_exe": 1016, "bridge_origin": 1, "climate": 2}, 105], 
-                [{"layer_Items_output_exe": 1016, "bridge_origin": 1, "climate": 3}, 108], 
-                [{"layer_Items_output_exe": 1016, "bridge_origin": 1, "climate": 4}, 1011], 
-                [{"layer_Items_output_exe": 1015, "bridge_origin": 1, "climate": 1}, 112], 
-                [{"layer_Items_output_exe": 1015, "bridge_origin": 1, "climate": 2}, 115], 
-                [{"layer_Items_output_exe": 1015, "bridge_origin": 1, "climate": 3}, 118], 
-                [{"layer_Items_output_exe": 1015, "bridge_origin": 1, "climate": 4}, 1111]
+                [{"layer_Items_output_railway_exe": 1016, "bridge_origin": 1, "climate": 1}, 102], 
+                [{"layer_Items_output_railway_exe": 1016, "bridge_origin": 1, "climate": 2}, 105], 
+                [{"layer_Items_output_railway_exe": 1016, "bridge_origin": 1, "climate": 3}, 108], 
+                [{"layer_Items_output_railway_exe": 1016, "bridge_origin": 1, "climate": 4}, 1011], 
+                [{"layer_Items_output_railway_exe": 1015, "bridge_origin": 1, "climate": 1}, 112], 
+                [{"layer_Items_output_railway_exe": 1015, "bridge_origin": 1, "climate": 2}, 115], 
+                [{"layer_Items_output_railway_exe": 1015, "bridge_origin": 1, "climate": 3}, 118], 
+                [{"layer_Items_output_railway_exe": 1015, "bridge_origin": 1, "climate": 4}, 1111]
             ], 
             "exe_to_layer": {
-                "102": [["layer_Items_output", "tile_T", 0, 2]], 
-                "105": [["layer_Items_output", "tile_T", 0, 5]], 
-                "108": [["layer_Items_output", "tile_T", 0, 2]], 
-                "1011": [["layer_Items_output", "tile_T", 0, 5]], 
-                "112": [["layer_Items_output", "tile_T", 1, 2]], 
-                "115": [["layer_Items_output", "tile_T", 1, 5]], 
-                "118": [["layer_Items_output", "tile_T", 1, 2]], 
-                "1111": [["layer_Items_output", "tile_T", 1, 5]]
+                "102": [["layer_Items_output_railway", "tile_T", 0, 2]], 
+                "105": [["layer_Items_output_railway", "tile_T", 0, 5]], 
+                "108": [["layer_Items_output_railway", "tile_T", 0, 2]], 
+                "1011": [["layer_Items_output_railway", "tile_T", 0, 5]], 
+                "112": [["layer_Items_output_railway", "tile_T", 1, 2]], 
+                "115": [["layer_Items_output_railway", "tile_T", 1, 5]], 
+                "118": [["layer_Items_output_railway", "tile_T", 1, 2]], 
+                "1111": [["layer_Items_output_railway", "tile_T", 1, 5]]
             }
         }
     ]

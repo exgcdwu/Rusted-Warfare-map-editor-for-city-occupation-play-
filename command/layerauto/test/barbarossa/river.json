@@ -3,37 +3,27 @@
     "simplify": {
         "tile_T": ["^.*巴巴罗萨计划(?!.*渐变海洋).*地块byXs.*$", "re"], 
         "tile_S": ["^.*巴巴罗萨计划.*渐变海洋地块byXs.*$", "re"], 
-        "tile_ass": ["^辅助地块.*1.2.*byXs.*$", "re"], 
         "layer_Ground": "Ground", 
-        "layer_Items_input": "Items_river", 
-        "layer_Items_output": "Items_river", 
+        "layer_Items_input_river": "Items_river", 
+        "layer_Items_output_river": "Items_river", 
         "r0": "river_origin_0", 
         "r1": "river_origin_1", 
         "r2": "river_origin_2", 
         "r3": "river_origin_3"
-    }, 
-    "objectre_to_layer": {
-        "Triggers":[
-            {
-                "re": "^c\\..*$", 
-                "map_type": "middle", 
-                "gid": 1
-            }
-        ]
     }, 
     "execution": [
         {
             "exe_name": "sea_origin", 
             "layer_to_exe": [
                 [{"layer_Ground": [{"tile_T": [5, 12]}, {"tile_S": [[1, 0], [6, 11]]}]}, 1], 
-                [{"layer_Items_input": [{"tile_T": [5, 12]}, {"tile_S": [[1, 0], [6, 11]]}]}, 1]
+                [{"layer_Items_input_river": [{"tile_T": [5, 12]}, {"tile_S": [[1, 0], [6, 11]]}]}, 1]
             ]
         }, 
         {
             "exe_name": "river_origin", 
             "layer_to_exe": [
                 [{"layer_Ground": [{"tile_T": [[0, 0], [3, 11]]}]}, 1], 
-                [{"layer_Items_input": [{"tile_T": [[0, 0], [3, 11]]}, {"tile_T": [[0, 12], [4, 12]]}]}, 1]
+                [{"layer_Items_input_river": [{"tile_T": [[0, 0], [3, 11]]}, {"tile_T": [[0, 12], [4, 12]]}]}, 1]
             ]
         }, 
         {
@@ -87,11 +77,11 @@
                 [{"layer_Ground": {"tile_T": [3, 9]}}, 210112], 
                 [{"layer_Ground": {"tile_T": [3, 10]}}, 211012], 
                 [{"layer_Ground": {"tile_T": [3, 11]}}, 211102], 
-                [{"layer_Items_input": {"tile_T": [4, 12]}}, 211112], 
-                [{"layer_Items_input": {"tile_T": [1, 12]}}, 200012], 
-                [{"layer_Items_input": {"tile_T": [2, 12]}}, 200102], 
-                [{"layer_Items_input": {"tile_T": [0, 12]}}, 201002], 
-                [{"layer_Items_input": {"tile_T": [3, 12]}}, 210002]
+                [{"layer_Items_input_river": {"tile_T": [4, 12]}}, 211112], 
+                [{"layer_Items_input_river": {"tile_T": [1, 12]}}, 200012], 
+                [{"layer_Items_input_river": {"tile_T": [2, 12]}}, 200102], 
+                [{"layer_Items_input_river": {"tile_T": [0, 12]}}, 201002], 
+                [{"layer_Items_input_river": {"tile_T": [3, 12]}}, 210002]
             ]
         }, 
         {
@@ -145,11 +135,11 @@
                 [{"layer_Ground": {"tile_T": [3, 9]}}, 210112], 
                 [{"layer_Ground": {"tile_T": [3, 10]}}, 211012], 
                 [{"layer_Ground": {"tile_T": [3, 11]}}, 211102], 
-                [{"layer_Items_input": {"tile_T": [4, 12]}}, 211112], 
-                [{"layer_Items_input": {"tile_T": [1, 12]}}, 200012], 
-                [{"layer_Items_input": {"tile_T": [2, 12]}}, 200102], 
-                [{"layer_Items_input": {"tile_T": [0, 12]}}, 201002], 
-                [{"layer_Items_input": {"tile_T": [3, 12]}}, 210002], 
+                [{"layer_Items_input_river": {"tile_T": [4, 12]}}, 211112], 
+                [{"layer_Items_input_river": {"tile_T": [1, 12]}}, 200012], 
+                [{"layer_Items_input_river": {"tile_T": [2, 12]}}, 200102], 
+                [{"layer_Items_input_river": {"tile_T": [0, 12]}}, 201002], 
+                [{"layer_Items_input_river": {"tile_T": [3, 12]}}, 210002], 
                 [{"sea_origin": 1}, 211112], 
                 [{"layer_Ground": {"tile_T": [5, 12]}}, 211112]
             ]
@@ -522,7 +512,7 @@
             }
         }, 
         {
-            "exe_name": "layer_Items_output_exe", 
+            "exe_name": "layer_Items_output_river_exe", 
             "layer_to_exe": [
                 [{"river": 211112}, 211112], 
                 [{"river": 200012}, 200012], 
@@ -532,12 +522,12 @@
                 [{"sea_origin": 1}, 0]
             ], 
             "exe_to_layer": {
-                "0": [["layer_Items_output", "empty", 0, 0]], 
-                "211112": [["layer_Items_output", "tile_T", 4, 12]], 
-                "200012": [["layer_Items_output", "tile_T", 1, 12]], 
-                "200102": [["layer_Items_output", "tile_T", 2, 12]], 
-                "201002": [["layer_Items_output", "tile_T", 0, 12]], 
-                "210002": [["layer_Items_output", "tile_T", 3, 12]]
+                "0": [["layer_Items_output_river", "empty", 0, 0]], 
+                "211112": [["layer_Items_output_river", "tile_T", 4, 12]], 
+                "200012": [["layer_Items_output_river", "tile_T", 1, 12]], 
+                "200102": [["layer_Items_output_river", "tile_T", 2, 12]], 
+                "201002": [["layer_Items_output_river", "tile_T", 0, 12]], 
+                "210002": [["layer_Items_output_river", "tile_T", 3, 12]]
             }
         }
     ]
