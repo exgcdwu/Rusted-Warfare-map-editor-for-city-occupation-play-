@@ -8,7 +8,7 @@
     "objectre_to_layer": {
         "Triggers":[
             {
-                "re": "^c\\..*$", 
+                "re": "^c-?\\d+\\..*$", 
                 "map_type": "middle", 
                 "gid": 1
             }

@@ -34,4 +34,4 @@
 图层自动化设置(巴巴罗萨,渐变海洋,炮塔装饰处理).json
 要求:有Triggers,Ground,PathingOverride层。
 要求:已经添加了巴巴罗萨地块，渐变海洋地块。
-结果:将Triggers层中"t"的宾语所在地块添加矿点。
+结果:将Triggers层中"t"的宾语所在地块添加炮塔装饰。

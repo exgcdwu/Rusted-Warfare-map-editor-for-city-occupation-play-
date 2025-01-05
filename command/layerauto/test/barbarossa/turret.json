@@ -9,8 +9,8 @@
     "objectre_to_layer": {
         "Triggers":[
             {
-                "re": "^t\\..*$", 
-                "map_type": "middle", 
+                "re": "^t-?\\d+.*$", 
+                "map_type": "left-top", 
                 "gid": 2
             }
         ]
@@ -23,18 +23,9 @@
             ]
         }, 
         {
-            "exe_name": "mountain_origin", 
-            "layer_to_exe": [
-                [{"layer_Ground": [{"tile_T": [5, 2]}, {"tile_T": [6, 2]}, 
-                            {"tile_T": [5, 5]}, {"tile_T": [6, 5]}, 
-                            {"tile_T": [5, 8]}, {"tile_T": [6, 8]}, 
-                            {"tile_T": [5, 11]}, {"tile_T": [6, 11]}]}, 1]
-            ]
-        }, 
-        {
             "exe_name": "turret", 
             "layer_to_exe": [
-                [{"Triggers": 1}, 1]
+                [{"Triggers": 2}, 1]
             ], 
             "exe": [
                 {
@@ -54,8 +45,7 @@
             "layer_to_exe": [
                 [{"turret": 1}, 1], 
                 [{"turret": 2}, 1], 
-                [{"sea_origin": 1}, 0], 
-                [{"mountain_origin": 1}, 0]
+                [{"sea_origin": 1}, 0]
             ], 
             "exe_to_layer": {
                 "1": [["layer_Items_output_turret", "tile_T", 4, 13]]
