@@ -255,7 +255,7 @@ inaddoffset: 当isinadd为是时可选，数字数组，默认为"0 0"，建筑�
 
 inaddoffsetsize: 当isinadd为是时可选，数字数组，默认为"0 0"，建筑初始添加宾语大小改变。
 
-inaddisinitialunit：可选，默认为否。启用时，建筑刷新将使用"unit"，而不是"spawnUnits"。除去"unit"和"team"以外的选项将不会出现。并将该宾语加入unitObject层。请确保unitObject层已经设置。
+inaddisinitialunit: 可选，默认为否。启用时，建筑刷新将使用"unit"，而不是"spawnUnits"。除去"unit"和"team"以外的选项将不会出现。并将该宾语加入unitObject层。请确保unitObject层已经设置。
 
 ## mtext_info
 

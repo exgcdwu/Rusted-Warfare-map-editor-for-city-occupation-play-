@@ -23284,7 +23284,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <object id="7" name="map_info" x="0" y="0" width="20" height="20">
       <properties>
         <property name="fog" value="los"/>
-        <property name="introText" value="宾语自动化示例，建议沙盒下实验。从示例产生结果需要使用-D -c选项。"/>
+        <property name="introText" value="宾语自动化示例，建议沙盒下实验。从示例产生结果需要使用-D -c -di选项。"/>
         <property name="type" value="skirmish"/>
         <property name="winCondition" value="mainBuildings"/>
       </properties>
@@ -24627,12 +24627,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textSize" value="7"/>
       </properties>
     </object>
-    <object x="7800" y="600" width="40" height="40" type="unitAdd" id="390">
-      <properties>
-        <property name="spawnUnits" value="turret*1"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
     <object x="7800" y="600" width="40" height="40" type="unitDetect" id="391">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -24648,12 +24642,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="turret*1"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="8000" y="600" width="40" height="40" type="unitAdd" id="393">
-      <properties>
-        <property name="spawnUnits" value="turret*1"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="8000" y="600" width="40" height="40" type="unitDetect" id="394">
@@ -24673,13 +24661,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8200" y="600" width="40" height="40" type="unitAdd" id="396">
-      <properties>
-        <property name="spawnUnits" value="turret*1"/>
-        <property name="team" value="0"/>
-        <property name="warmup" value="10s"/>
-      </properties>
-    </object>
     <object x="8200" y="600" width="40" height="40" type="unitDetect" id="397">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -24697,12 +24678,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7600" y="600" width="40" height="40" type="unitAdd" id="399">
-      <properties>
-        <property name="spawnUnits" value="turret*1"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
     <object x="7600" y="600" width="40" height="40" type="unitDetect" id="400">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -24717,12 +24692,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="warmup" value="20s"/>
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="turret*1"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="7800" y="800" width="40" height="40" type="unitAdd" id="402">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="-1"/>
       </properties>
     </object>
@@ -24750,12 +24719,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7600" y="800" width="40" height="40" type="unitAdd" id="406">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
     <object x="7600" y="800" width="40" height="40" type="mapText" id="407">
       <properties>
         <property name="text" value="城1"/>
@@ -24778,12 +24741,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="8000" y="800" width="40" height="40" type="unitAdd" id="410">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="8000" y="800" width="40" height="40" type="mapText" id="411">
@@ -24810,13 +24767,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8200" y="800" width="40" height="40" type="unitAdd" id="414">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-        <property name="warmup" value="10s"/>
-      </properties>
-    </object>
     <object x="8200" y="800" width="40" height="40" type="mapText" id="415">
       <properties>
         <property name="text" value="城4"/>
@@ -24841,12 +24791,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8600" y="600" width="40" height="40" type="unitAdd" id="418">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="8600" y="600" width="40" height="40" type="unitDetect" id="419">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -24864,12 +24808,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8800" y="600" width="40" height="40" type="unitAdd" id="421">
-      <properties>
-        <property name="spawnUnits" value="bugTurret*1"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="8800" y="600" width="40" height="40" type="unitDetect" id="422">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -24885,12 +24823,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="9000" y="600" width="40" height="40" type="unitAdd" id="424">
-      <properties>
-        <property name="spawnUnits" value="turret*1"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="9000" y="600" width="40" height="40" type="unitDetect" id="425">
@@ -24911,12 +24843,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="0"/>
       </properties>
     </object>
-    <object x="9200" y="600" width="40" height="40" type="unitAdd" id="427">
-      <properties>
-        <property name="spawnUnits" value="turret*1"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
     <object x="9200" y="600" width="40" height="40" type="unitDetect" id="428">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -24935,13 +24861,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="1"/>
       </properties>
     </object>
-    <object x="8400" y="600" width="40" height="40" type="unitAdd" id="430">
-      <properties>
-        <property name="spawnUnits" value="turret*1"/>
-        <property name="team" value="0"/>
-        <property name="warmup" value="20s"/>
-      </properties>
-    </object>
     <object x="8400" y="600" width="40" height="40" type="unitDetect" id="431">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -24957,12 +24876,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="turret*1"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="8600" y="800" width="40" height="40" type="unitAdd" id="433">
-      <properties>
-        <property name="spawnUnits" value="turret*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="8600" y="800" width="40" height="40" type="mapText" id="434">
@@ -24989,12 +24902,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8800" y="800" width="40" height="40" type="unitAdd" id="437">
-      <properties>
-        <property name="spawnUnits" value="bugTurret*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="8800" y="800" width="40" height="40" type="mapText" id="438">
       <properties>
         <property name="text" value="城7"/>
@@ -25017,12 +24924,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="bugTurret*1(techLevel=2)"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="9000" y="800" width="40" height="40" type="unitAdd" id="441">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="9000" y="800" width="40" height="40" type="mapText" id="442">
@@ -25050,12 +24951,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="0"/>
       </properties>
     </object>
-    <object x="9200" y="800" width="40" height="40" type="unitAdd" id="445">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
     <object x="9200" y="800" width="40" height="40" type="mapText" id="446">
       <properties>
         <property name="text" value="城9"/>
@@ -25079,13 +24974,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="8400" y="800" width="40" height="40" type="unitAdd" id="449">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-        <property name="warmup" value="20s"/>
       </properties>
     </object>
     <object x="8400" y="800" width="40" height="40" type="mapText" id="450">
@@ -25112,12 +25000,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9400" y="800" width="40" height="40" type="unitAdd" id="453">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="9400" y="800" width="40" height="40" type="mapText" id="454">
       <properties>
         <property name="text" value="城10"/>
@@ -25142,12 +25024,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9600" y="800" width="40" height="40" type="unitAdd" id="457">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="9600" y="800" width="40" height="40" type="mapText" id="458">
       <properties>
         <property name="text" value="城11"/>
@@ -25168,12 +25044,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="activatedBy" value="su11"/>
         <property name="warmup" value="20s"/>
         <property name="resetActivationAfter" value="20s"/>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="7800" y="1000" width="40" height="40" type="unitAdd" id="463">
-      <properties>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="-1"/>
       </properties>
@@ -25333,12 +25203,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7600" y="1000" width="40" height="40" type="unitAdd" id="485">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
     <object x="7600" y="1000" width="40" height="40" type="mapText" id="486">
       <properties>
         <property name="text" value="城1"/>
@@ -25479,25 +25343,19 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7590" y="1010" width="60" height="40" name="Ac2" type="basic" id="502">
+    <object x="7590" y="1010" width="60" height="40" name="A2c2" type="basic" id="502">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7590" y="1010" width="60" height="40" name="A2c2" type="basic" id="503">
+    <object x="7590" y="1010" width="60" height="40" name="A1c2" type="basic" id="503">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7590" y="1010" width="60" height="40" name="A1c2" type="basic" id="504">
+    <object x="7590" y="1010" width="60" height="40" name="Ac2" type="basic" id="504">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8000" y="1000" width="40" height="40" type="unitAdd" id="507">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="8000" y="1000" width="40" height="40" type="mapText" id="508">
@@ -25640,26 +25498,19 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7990" y="1010" width="60" height="40" name="A1c3" type="basic" id="524">
+    <object x="7990" y="1010" width="60" height="40" name="Ac3" type="basic" id="524">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7990" y="1010" width="60" height="40" name="Ac3" type="basic" id="525">
+    <object x="7990" y="1010" width="60" height="40" name="A2c3" type="basic" id="525">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7990" y="1010" width="60" height="40" name="A2c3" type="basic" id="526">
+    <object x="7990" y="1010" width="60" height="40" name="A1c3" type="basic" id="526">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8200" y="1000" width="20" height="20" type="unitAdd" id="529">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-        <property name="warmup" value="10s"/>
       </properties>
     </object>
     <object x="8200" y="1000" width="20" height="20" type="mapText" id="530">
@@ -25802,25 +25653,19 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8190" y="1010" width="40" height="20" name="A2c4" type="basic" id="546">
+    <object x="8190" y="1010" width="40" height="20" name="Ac4" type="basic" id="546">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8190" y="1010" width="40" height="20" name="Ac4" type="basic" id="547">
+    <object x="8190" y="1010" width="40" height="20" name="A1c4" type="basic" id="547">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8190" y="1010" width="40" height="20" name="A1c4" type="basic" id="548">
+    <object x="8190" y="1010" width="40" height="20" name="A2c4" type="basic" id="548">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8600" y="1000" width="40" height="40" type="unitAdd" id="551">
-      <properties>
-        <property name="spawnUnits" value="turret*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="8600" y="1000" width="40" height="40" type="mapText" id="552">
@@ -25963,25 +25808,19 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="onlyBuildings" value="true" type="bool"/>
       </properties>
     </object>
-    <object x="8590" y="1010" width="60" height="40" name="A1c5" type="basic" id="568">
+    <object x="8590" y="1010" width="60" height="40" name="Ac5" type="basic" id="568">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8590" y="1010" width="60" height="40" name="Ac5" type="basic" id="569">
+    <object x="8590" y="1010" width="60" height="40" name="A2c5" type="basic" id="569">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8590" y="1010" width="60" height="40" name="A2c5" type="basic" id="570">
+    <object x="8590" y="1010" width="60" height="40" name="A1c5" type="basic" id="570">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8800" y="1000" width="40" height="40" type="unitAdd" id="573">
-      <properties>
-        <property name="spawnUnits" value="bugTurret*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="8800" y="1000" width="40" height="40" type="mapText" id="574">
@@ -26124,25 +25963,19 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8790" y="1010" width="60" height="40" name="Ac6" type="basic" id="590">
+    <object x="8790" y="1010" width="60" height="40" name="A2c6" type="basic" id="590">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8790" y="1010" width="60" height="40" name="A2c6" type="basic" id="591">
+    <object x="8790" y="1010" width="60" height="40" name="A1c6" type="basic" id="591">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8790" y="1010" width="60" height="40" name="A1c6" type="basic" id="592">
+    <object x="8790" y="1010" width="60" height="40" name="Ac6" type="basic" id="592">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9000" y="1000" width="40" height="40" type="unitAdd" id="595">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="9000" y="1000" width="40" height="40" type="mapText" id="596">
@@ -26286,25 +26119,19 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8990" y="1010" width="60" height="40" name="A1c7" type="basic" id="612">
+    <object x="8990" y="1010" width="60" height="40" name="A2c7" type="basic" id="612">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8990" y="1010" width="60" height="40" name="A2c7" type="basic" id="613">
+    <object x="8990" y="1010" width="60" height="40" name="Ac7" type="basic" id="613">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8990" y="1010" width="60" height="40" name="Ac7" type="basic" id="614">
+    <object x="8990" y="1010" width="60" height="40" name="A1c7" type="basic" id="614">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9200" y="1000" width="40" height="40" type="unitAdd" id="617">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="1"/>
       </properties>
     </object>
     <object x="9200" y="1000" width="40" height="40" type="mapText" id="618">
@@ -26463,13 +26290,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8400" y="1000" width="40" height="40" type="unitAdd" id="639">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-        <property name="warmup" value="20s"/>
-      </properties>
-    </object>
     <object x="8400" y="1000" width="40" height="40" type="mapText" id="640">
       <properties>
         <property name="text" value="城5"/>
@@ -26610,7 +26430,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8390" y="1010" width="60" height="40" name="A2c9" type="basic" id="656">
+    <object x="8390" y="1010" width="60" height="40" name="A1c9" type="basic" id="656">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -26620,15 +26440,9 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8390" y="1010" width="60" height="40" name="A1c9" type="basic" id="658">
+    <object x="8390" y="1010" width="60" height="40" name="A2c9" type="basic" id="658">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9400" y="1000" width="20" height="20" type="unitAdd" id="661">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="9400" y="1000" width="20" height="20" type="mapText" id="662">
@@ -26776,20 +26590,14 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9390" y="1010" width="40" height="20" name="A1c10" type="basic" id="679">
+    <object x="9390" y="1010" width="40" height="20" name="A2c10" type="basic" id="679">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9390" y="1010" width="40" height="20" name="A2c10" type="basic" id="680">
+    <object x="9390" y="1010" width="40" height="20" name="A1c10" type="basic" id="680">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9600" y="1000" width="40" height="40" type="unitAdd" id="683">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="9600" y="1000" width="40" height="40" type="mapText" id="684">
@@ -26947,12 +26755,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9800" y="1000" width="40" height="40" type="unitAdd" id="705">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="9800" y="1000" width="40" height="40" type="mapText" id="706">
       <properties>
         <property name="text" value="城12"/>
@@ -27093,7 +26895,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9790" y="1010" width="60" height="40" name="A2c12" type="basic" id="722">
+    <object x="9790" y="1010" width="60" height="40" name="A1c12" type="basic" id="722">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
@@ -27103,7 +26905,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9790" y="1010" width="60" height="40" name="A1c12" type="basic" id="724">
+    <object x="9790" y="1010" width="60" height="40" name="A2c12" type="basic" id="724">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
@@ -27139,12 +26941,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="warmup" value="9.0s"/>
         <property name="resetActivationAfter" value="3s"/>
-      </properties>
-    </object>
-    <object x="6600" y="1200" width="40" height="40" type="unitAdd" id="732">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="6600" y="1200" width="40" height="40" type="mapText" id="733">
@@ -27240,12 +27036,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="6400" y="1200" width="40" height="40" type="unitAdd" id="754">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="-2"/>
       </properties>
     </object>
     <object x="6400" y="1200" width="40" height="40" type="mapText" id="755">
@@ -27362,15 +27152,9 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="9"/>
       </properties>
     </object>
-    <object x="6390" y="1210" width="60" height="40" name="Ac14" type="basic" id="771">
+    <object x="6390" y="1210" width="60" height="40" name="Ac14" type="basic" id="772">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="6800" y="1200" width="40" height="40" type="unitAdd" id="776">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="3"/>
       </properties>
     </object>
     <object x="6800" y="1200" width="40" height="40" type="mapText" id="777">
@@ -27483,7 +27267,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7800" y="1200" width="40" height="40" type="unitAdd" id="797">
       <properties>
-        <property name="deactivatedBy" value="su27,fd1,Ac14,Bc14"/>
+        <property name="deactivatedBy" value="su27,fd1,Bc14,Ac14"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="-1"/>
@@ -27517,7 +27301,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7600" y="1200" width="40" height="40" type="unitAdd" id="801">
       <properties>
-        <property name="deactivatedBy" value="su29,fd1,Ac14,Bc14"/>
+        <property name="deactivatedBy" value="su29,fd1,Bc14,Ac14"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="-2"/>
@@ -27635,7 +27419,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9200" y="1200" width="40" height="40" type="unitAdd" id="816">
       <properties>
-        <property name="deactivatedBy" value="su34,fd1,Ac14,Bc14"/>
+        <property name="deactivatedBy" value="su34,fd1,Bc14,Ac14"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="-2"/>
@@ -27652,7 +27436,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9400" y="1200" width="40" height="40" type="unitAdd" id="818">
       <properties>
-        <property name="deactivatedBy" value="su35,fd1,Bc13,Nc13"/>
+        <property name="deactivatedBy" value="su35,fd1,Nc13,Bc13"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="0"/>
@@ -27673,12 +27457,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="7800" y="1400" width="40" height="40" type="unitAdd" id="824">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1"/>
-        <property name="team" value="-1"/>
       </properties>
     </object>
     <object x="7800" y="1400" width="40" height="40" type="unitDetect" id="825">
@@ -27814,12 +27592,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7790" y="1410" width="60" height="40" name="A1c16" type="basic" id="840">
+    <object x="7790" y="1410" width="60" height="40" name="A2c16" type="basic" id="841">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7790" y="1410" width="60" height="40" name="A2c16" type="basic" id="841">
+    <object x="7790" y="1410" width="60" height="40" name="A1c16" type="basic" id="842">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -27858,12 +27636,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城2"/>
-      </properties>
-    </object>
-    <object x="7600" y="1400" width="40" height="40" type="unitAdd" id="850">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1"/>
-        <property name="team" value="-2"/>
       </properties>
     </object>
     <object x="7600" y="1400" width="40" height="40" type="unitDetect" id="851">
@@ -27999,12 +27771,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7590" y="1410" width="60" height="40" name="A2c17" type="basic" id="867">
+    <object x="7590" y="1410" width="60" height="40" name="A2c17" type="basic" id="866">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7590" y="1410" width="60" height="40" name="A1c17" type="basic" id="868">
+    <object x="7590" y="1410" width="60" height="40" name="A1c17" type="basic" id="867">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28043,12 +27815,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城1"/>
-      </properties>
-    </object>
-    <object x="8000" y="1400" width="40" height="40" type="unitAdd" id="876">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="8000" y="1400" width="40" height="40" type="unitDetect" id="877">
@@ -28184,7 +27950,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7990" y="1410" width="60" height="40" name="A1c18" type="basic" id="892">
+    <object x="7990" y="1410" width="60" height="40" name="A1c18" type="basic" id="893">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28228,13 +27994,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城3"/>
-      </properties>
-    </object>
-    <object x="8200" y="1400" width="40" height="40" type="unitAdd" id="902">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1"/>
-        <property name="team" value="0"/>
-        <property name="warmup" value="10s"/>
       </properties>
     </object>
     <object x="8200" y="1400" width="40" height="40" type="unitDetect" id="903">
@@ -28375,7 +28134,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8190" y="1410" width="60" height="40" name="A2c19" type="basic" id="920">
+    <object x="8190" y="1410" width="60" height="40" name="A2c19" type="basic" id="919">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28414,12 +28173,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城4"/>
-      </properties>
-    </object>
-    <object x="8600" y="1400" width="40" height="40" type="unitAdd" id="928">
-      <properties>
-        <property name="spawnUnits" value="turret*1"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="8600" y="1400" width="40" height="40" type="unitDetect" id="929">
@@ -28555,12 +28308,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="onlyBuildings" value="true" type="bool"/>
       </properties>
     </object>
-    <object x="8590" y="1410" width="60" height="40" name="A1c20" type="basic" id="945">
+    <object x="8590" y="1410" width="60" height="40" name="A2c20" type="basic" id="944">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8590" y="1410" width="60" height="40" name="A2c20" type="basic" id="946">
+    <object x="8590" y="1410" width="60" height="40" name="A1c20" type="basic" id="946">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28599,12 +28352,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城6"/>
-      </properties>
-    </object>
-    <object x="8800" y="1400" width="40" height="40" type="unitAdd" id="954">
-      <properties>
-        <property name="spawnUnits" value="bugTurret*1"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="8800" y="1400" width="40" height="40" type="unitDetect" id="955">
@@ -28740,12 +28487,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8790" y="1410" width="60" height="40" name="A1c21" type="basic" id="971">
+    <object x="8790" y="1410" width="60" height="40" name="A2c21" type="basic" id="971">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8790" y="1410" width="60" height="40" name="A2c21" type="basic" id="972">
+    <object x="8790" y="1410" width="60" height="40" name="A1c21" type="basic" id="972">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28784,12 +28531,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城7"/>
-      </properties>
-    </object>
-    <object x="9000" y="1400" width="40" height="40" type="unitAdd" id="980">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="9000" y="1400" width="40" height="40" type="unitDetect" id="981">
@@ -28926,12 +28667,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8990" y="1410" width="60" height="40" name="A1c22" type="basic" id="996">
+    <object x="8990" y="1410" width="60" height="40" name="A2c22" type="basic" id="996">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8990" y="1410" width="60" height="40" name="A2c22" type="basic" id="997">
+    <object x="8990" y="1410" width="60" height="40" name="A1c22" type="basic" id="997">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28970,12 +28711,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城8"/>
-      </properties>
-    </object>
-    <object x="9200" y="1400" width="40" height="40" type="unitAdd" id="1006">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1"/>
-        <property name="team" value="1"/>
       </properties>
     </object>
     <object x="9200" y="1400" width="40" height="40" type="unitDetect" id="1007">
@@ -29117,7 +28852,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9190" y="1410" width="60" height="40" name="A1c23" type="basic" id="1023">
+    <object x="9190" y="1410" width="60" height="40" name="A1c23" type="basic" id="1024">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29156,13 +28891,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城9"/>
-      </properties>
-    </object>
-    <object x="8400" y="1400" width="40" height="40" type="unitAdd" id="1032">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1"/>
-        <property name="team" value="0"/>
-        <property name="warmup" value="20s"/>
       </properties>
     </object>
     <object x="8400" y="1400" width="40" height="40" type="unitDetect" id="1033">
@@ -29298,12 +29026,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8390" y="1410" width="60" height="40" name="A1c24" type="basic" id="1048">
+    <object x="8390" y="1410" width="60" height="40" name="A2c24" type="basic" id="1048">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8390" y="1410" width="60" height="40" name="A2c24" type="basic" id="1050">
+    <object x="8390" y="1410" width="60" height="40" name="A1c24" type="basic" id="1050">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29342,12 +29070,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城5"/>
-      </properties>
-    </object>
-    <object x="9600" y="1400" width="40" height="40" type="unitAdd" id="1058">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="9600" y="1400" width="40" height="40" type="unitDetect" id="1059">
@@ -29529,12 +29251,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城11"/>
       </properties>
     </object>
-    <object x="9400" y="1400" width="40" height="40" type="unitAdd" id="1084">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="9400" y="1400" width="40" height="40" type="unitDetect" id="1085">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -29668,12 +29384,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9390" y="1410" width="60" height="40" name="A1c26" type="basic" id="1100">
+    <object x="9390" y="1410" width="60" height="40" name="A1c26" type="basic" id="1101">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9390" y="1410" width="60" height="40" name="A2c26" type="basic" id="1101">
+    <object x="9390" y="1410" width="60" height="40" name="A2c26" type="basic" id="1102">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
@@ -29712,12 +29428,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城10"/>
-      </properties>
-    </object>
-    <object x="9800" y="1400" width="40" height="40" type="unitAdd" id="1110">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="9800" y="1400" width="40" height="40" type="unitDetect" id="1111">
@@ -29899,12 +29609,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城12(白)"/>
       </properties>
     </object>
-    <object x="10000" y="1400" width="40" height="40" type="unitAdd" id="1136">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="10000" y="1400" width="40" height="40" type="unitDetect" id="1137">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -30038,12 +29742,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9990" y="1410" width="60" height="40" name="A1c28" type="basic" id="1152">
+    <object x="9990" y="1410" width="60" height="40" name="A2c28" type="basic" id="1152">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9990" y="1410" width="60" height="40" name="A2c28" type="basic" id="1154">
+    <object x="9990" y="1410" width="60" height="40" name="A1c28" type="basic" id="1153">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30084,12 +29788,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城13"/>
       </properties>
     </object>
-    <object x="7800" y="1600" width="40" height="40" type="unitAdd" id="1161">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
     <object x="7800" y="1600" width="40" height="40" type="mapText" id="1162">
       <properties>
         <property name="text" value="城2"/>
@@ -30112,12 +29810,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" type="unitAdd" id="1183">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="-2"/>
       </properties>
     </object>
     <object x="7600" y="1600" width="40" height="40" type="mapText" id="1184">
@@ -30144,12 +29836,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8000" y="1600" width="40" height="40" type="unitAdd" id="1205">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="8000" y="1600" width="40" height="40" type="mapText" id="1206">
       <properties>
         <property name="text" value="城3"/>
@@ -30172,13 +29858,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" type="unitAdd" id="1227">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-        <property name="warmup" value="10s"/>
       </properties>
     </object>
     <object x="8200" y="1600" width="40" height="40" type="mapText" id="1228">
@@ -30205,12 +29884,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8600" y="1600" width="40" height="40" type="unitAdd" id="1249">
-      <properties>
-        <property name="spawnUnits" value="turret*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="8600" y="1600" width="40" height="40" type="mapText" id="1250">
       <properties>
         <property name="text" value="城6"/>
@@ -30235,12 +29908,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8800" y="1600" width="40" height="40" type="unitAdd" id="1271">
-      <properties>
-        <property name="spawnUnits" value="bugTurret*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="8800" y="1600" width="40" height="40" type="mapText" id="1272">
       <properties>
         <property name="text" value="城7"/>
@@ -30263,12 +29930,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="bugTurret*1(techLevel=2)"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" type="unitAdd" id="1293">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="9000" y="1600" width="40" height="40" type="mapText" id="1294">
@@ -30296,12 +29957,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="0"/>
       </properties>
     </object>
-    <object x="9200" y="1600" width="40" height="40" type="unitAdd" id="1315">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
     <object x="9200" y="1600" width="40" height="40" type="mapText" id="1316">
       <properties>
         <property name="text" value="城9"/>
@@ -30325,13 +29980,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" type="unitAdd" id="1337">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-        <property name="warmup" value="20s"/>
       </properties>
     </object>
     <object x="8400" y="1600" width="40" height="40" type="mapText" id="1338">
@@ -30358,12 +30006,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9600" y="1600" width="40" height="40" type="unitAdd" id="1359">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="9600" y="1600" width="40" height="40" type="mapText" id="1360">
       <properties>
         <property name="text" value="城11"/>
@@ -30388,12 +30030,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9400" y="1600" width="40" height="40" type="unitAdd" id="1381">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="9400" y="1600" width="40" height="40" type="mapText" id="1382">
       <properties>
         <property name="text" value="城10"/>
@@ -30416,12 +30052,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="11400" y="1600" width="40" height="40" type="unitAdd" id="1404">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="11400" y="1600" width="40" height="40" type="unitDetect" id="1405">
@@ -30557,12 +30187,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="11390" y="1610" width="60" height="40" name="A1c40" type="basic" id="1420">
+    <object x="11390" y="1610" width="60" height="40" name="A2c40" type="basic" id="1421">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11390" y="1610" width="60" height="40" name="A2c40" type="basic" id="1421">
+    <object x="11390" y="1610" width="60" height="40" name="A1c40" type="basic" id="1422">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30601,12 +30231,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城20(白)"/>
-      </properties>
-    </object>
-    <object x="11600" y="1600" width="40" height="40" type="unitAdd" id="1430">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="11600" y="1600" width="40" height="40" type="unitDetect" id="1431">
@@ -30747,7 +30371,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11590" y="1610" width="60" height="40" name="A2c41" type="basic" id="1448">
+    <object x="11590" y="1610" width="60" height="40" name="A2c41" type="basic" id="1447">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30786,12 +30410,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城21"/>
-      </properties>
-    </object>
-    <object x="11200" y="1600" width="40" height="40" type="unitAdd" id="1456">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="11200" y="1600" width="40" height="40" type="unitDetect" id="1457">
@@ -30932,7 +30550,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11190" y="1610" width="60" height="40" name="A2c42" type="basic" id="1474">
+    <object x="11190" y="1610" width="60" height="40" name="A2c42" type="basic" id="1473">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30971,12 +30589,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城19"/>
-      </properties>
-    </object>
-    <object x="9800" y="1600" width="40" height="40" type="unitAdd" id="1482">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="9800" y="1600" width="40" height="40" type="mapText" id="1483">
@@ -31065,12 +30677,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="0"/>
       </properties>
     </object>
-    <object x="10000" y="1600" width="40" height="40" type="unitAdd" id="1507">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="10000" y="1600" width="40" height="40" type="mapText" id="1508">
       <properties>
         <property name="text" value="城13"/>
@@ -31154,12 +30760,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="deactivatedBy" value="su51,fd2,Bc44"/>
         <property name="warmup" value="12s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="10200" y="1600" width="40" height="40" type="unitAdd" id="1532">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="0"/>
       </properties>
     </object>
@@ -31269,15 +30869,9 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="10201" y="1601" width="40" height="40" type="unitAdd" id="1553">
       <properties>
-        <property name="deactivatedBy" value="su53,fd1,Bc45,Nc45"/>
+        <property name="deactivatedBy" value="su53,fd1,Nc45,Bc45"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="10400" y="1600" width="40" height="40" type="unitAdd" id="1557">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="0"/>
       </properties>
     </object>
@@ -31384,12 +30978,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="3"/>
       </properties>
     </object>
-    <object x="10600" y="1600" width="40" height="40" type="unitAdd" id="1584">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="10600" y="1600" width="40" height="40" type="mapText" id="1585">
       <properties>
         <property name="text" value="城16"/>
@@ -31473,12 +31061,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="deactivatedBy" value="su58,fi2,Bc47"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="10800" y="1600" width="40" height="40" type="unitAdd" id="1609">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="0"/>
       </properties>
     </object>
@@ -31623,12 +31205,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="3"/>
       </properties>
     </object>
-    <object x="11000" y="1600" width="40" height="40" type="unitAdd" id="1642">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="11000" y="1600" width="40" height="40" type="mapText" id="1643">
       <properties>
         <property name="text" value="城18"/>
@@ -31737,12 +31313,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <object x="5400" y="2240" width="40" height="40" type="unitRemove" id="1673">
       <properties>
         <property name="warmup" value="10s"/>
-      </properties>
-    </object>
-    <object x="6400" y="2200" width="40" height="40" type="unitAdd" id="1677">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="-2"/>
       </properties>
     </object>
     <object x="6400" y="2200" width="40" height="40" type="unitDetect" id="1678">
@@ -31878,12 +31448,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6390" y="2210" width="60" height="40" name="Ac50" type="basic" id="1693">
+    <object x="6390" y="2210" width="60" height="40" name="A2c50" type="basic" id="1693">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6390" y="2210" width="60" height="40" name="A2c50" type="basic" id="1694">
+    <object x="6390" y="2210" width="60" height="40" name="Ac50" type="basic" id="1694">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -31927,12 +31497,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城1 兵力撤退方向-&gt;"/>
-      </properties>
-    </object>
-    <object x="6600" y="2200" width="40" height="40" type="unitAdd" id="1703">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="-2"/>
       </properties>
     </object>
     <object x="6600" y="2200" width="40" height="40" type="unitDetect" id="1704">
@@ -32119,12 +31683,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城2 兵力撤退方向-&gt;"/>
       </properties>
     </object>
-    <object x="6800" y="2200" width="40" height="40" type="unitAdd" id="1729">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
     <object x="6800" y="2200" width="40" height="40" type="unitDetect" id="1730">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -32258,12 +31816,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6790" y="2210" width="60" height="40" name="A1c52" type="basic" id="1745">
+    <object x="6790" y="2210" width="60" height="40" name="A2c52" type="basic" id="1745">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6790" y="2210" width="60" height="40" name="A2c52" type="basic" id="1747">
+    <object x="6790" y="2210" width="60" height="40" name="A1c52" type="basic" id="1747">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32424,12 +31982,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="warmup" value="1s"/>
       </properties>
     </object>
-    <object x="11800" y="1600" width="40" height="40" type="unitAdd" id="1785">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="11800" y="1600" width="40" height="40" type="mapText" id="1786">
       <properties>
         <property name="text" value="城22"/>
@@ -32544,7 +32096,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="9"/>
       </properties>
     </object>
-    <object x="11790" y="1610" width="60" height="40" name="Ac53" type="basic" id="1802">
+    <object x="11790" y="1610" width="60" height="40" name="Ac53" type="basic" id="1804">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32600,12 +32152,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
         <property name="spawnUnits" value="bomber"/>
         <property name="warmup" value="1s"/>
-      </properties>
-    </object>
-    <object x="6400" y="2400" width="40" height="40" type="unitAdd" id="1817">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
       </properties>
     </object>
     <object x="6400" y="2400" width="40" height="40" type="unitDetect" id="1818">
@@ -32741,17 +32287,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6390" y="2410" width="60" height="40" name="Ac54" type="basic" id="1833">
+    <object x="6390" y="2410" width="60" height="40" name="A2c54" type="basic" id="1833">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6390" y="2410" width="60" height="40" name="A1c54" type="basic" id="1834">
+    <object x="6390" y="2410" width="60" height="40" name="Ac54" type="basic" id="1834">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6390" y="2410" width="60" height="40" name="A2c54" type="basic" id="1835">
+    <object x="6390" y="2410" width="60" height="40" name="A1c54" type="basic" id="1835">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32960,12 +32506,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="warmup" value="1s"/>
       </properties>
     </object>
-    <object x="12000" y="1600" width="40" height="40" type="unitAdd" id="1870">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="12000" y="1600" width="40" height="40" type="mapText" id="1871">
       <properties>
         <property name="text" value="城23"/>
@@ -33005,12 +32545,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="6600" y="2400" width="40" height="40" type="unitAdd" id="1879">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="-2"/>
       </properties>
     </object>
     <object x="6600" y="2400" width="40" height="40" type="unitDetect" id="1880">
@@ -33197,12 +32731,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城2"/>
       </properties>
     </object>
-    <object x="6800" y="2400" width="40" height="40" type="unitAdd" id="1905">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
     <object x="6800" y="2400" width="40" height="40" type="unitDetect" id="1906">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -33341,12 +32869,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6790" y="2410" width="60" height="40" name="Ac56" type="basic" id="1922">
+    <object x="6790" y="2410" width="60" height="40" name="A2c56" type="basic" id="1922">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6790" y="2410" width="60" height="40" name="A2c56" type="basic" id="1923">
+    <object x="6790" y="2410" width="60" height="40" name="Ac56" type="basic" id="1923">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -33566,12 +33094,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="warmup" value="1s"/>
       </properties>
     </object>
-    <object x="6400" y="3000" width="40" height="40" type="unitAdd" id="1960">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
     <object x="6400" y="3000" width="40" height="40" type="unitDetect" id="1961">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -33710,12 +33232,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6390" y="3010" width="60" height="40" name="A1c57" type="basic" id="1977">
+    <object x="6390" y="3010" width="60" height="40" name="A2c57" type="basic" id="1977">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6390" y="3010" width="60" height="40" name="A2c57" type="basic" id="1978">
+    <object x="6390" y="3010" width="60" height="40" name="A1c57" type="basic" id="1978">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -33754,12 +33276,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="textColor" value="#FFFFFF"/>
         <property name="textSize" value="7"/>
         <property name="text" value="城1-a"/>
-      </properties>
-    </object>
-    <object x="6600" y="3000" width="40" height="40" type="unitAdd" id="1986">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="-2"/>
       </properties>
     </object>
     <object x="6600" y="3000" width="40" height="40" type="unitDetect" id="1987">
@@ -33946,12 +33462,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="text" value="城2"/>
       </properties>
     </object>
-    <object x="6800" y="3000" width="40" height="40" type="unitAdd" id="2012">
-      <properties>
-        <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
     <object x="6800" y="3000" width="40" height="40" type="unitDetect" id="2013">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
@@ -34090,12 +33600,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6790" y="3010" width="60" height="40" name="A2c59" type="basic" id="2029">
+    <object x="6790" y="3010" width="60" height="40" name="Ac59" type="basic" id="2029">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6790" y="3010" width="60" height="40" name="Ac59" type="basic" id="2030">
+    <object x="6790" y="3010" width="60" height="40" name="A2c59" type="basic" id="2030">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -34480,7 +33990,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       </properties>
     </object>
   </objectgroup>
-  <objectgroup id="4" name="unitObject">
+  <objectgroup id="4" name="UnitObject">
     <object id="363" name="2 工厂" x="10040" y="3040" width="20" height="20">
       <properties>
         <property name="team" value="1"/>
@@ -34599,6 +34109,486 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
       <properties>
         <property name="team" value="8"/>
         <property name="unit" value="Builder"/>
+      </properties>
+    </object>
+    <object x="7800" y="600" width="40" height="40" id="390">
+      <properties>
+        <property name="unit" value="turret"/>
+        <property name="team" value="-1"/>
+      </properties>
+    </object>
+    <object x="8000" y="600" width="40" height="40" id="393">
+      <properties>
+        <property name="unit" value="turret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8200" y="600" width="40" height="40" id="396">
+      <properties>
+        <property name="unit" value="turret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="7600" y="600" width="40" height="40" id="399">
+      <properties>
+        <property name="unit" value="turret"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="7800" y="800" width="40" height="40" id="402">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-1"/>
+      </properties>
+    </object>
+    <object x="7600" y="800" width="40" height="40" id="406">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="8000" y="800" width="40" height="40" id="410">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8200" y="800" width="40" height="40" id="414">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8600" y="600" width="40" height="40" id="418">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8800" y="600" width="40" height="40" id="421">
+      <properties>
+        <property name="unit" value="bugTurret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9000" y="600" width="40" height="40" id="424">
+      <properties>
+        <property name="unit" value="turret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9200" y="600" width="40" height="40" id="427">
+      <properties>
+        <property name="unit" value="turret"/>
+        <property name="team" value="1"/>
+      </properties>
+    </object>
+    <object x="8400" y="600" width="40" height="40" id="430">
+      <properties>
+        <property name="unit" value="turret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8600" y="800" width="40" height="40" id="433">
+      <properties>
+        <property name="unit" value="turret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8800" y="800" width="40" height="40" id="437">
+      <properties>
+        <property name="unit" value="bugTurret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9000" y="800" width="40" height="40" id="441">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9200" y="800" width="40" height="40" id="445">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="1"/>
+      </properties>
+    </object>
+    <object x="8400" y="800" width="40" height="40" id="449">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9400" y="800" width="40" height="40" id="453">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9600" y="800" width="40" height="40" id="457">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="7800" y="1000" width="40" height="40" id="463">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-1"/>
+      </properties>
+    </object>
+    <object x="7600" y="1000" width="40" height="40" id="485">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="8000" y="1000" width="40" height="40" id="507">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8200" y="1000" width="20" height="20" id="529">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8600" y="1000" width="40" height="40" id="551">
+      <properties>
+        <property name="unit" value="turret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8800" y="1000" width="40" height="40" id="573">
+      <properties>
+        <property name="unit" value="bugTurret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9000" y="1000" width="40" height="40" id="595">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9200" y="1000" width="40" height="40" id="617">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="1"/>
+      </properties>
+    </object>
+    <object x="8400" y="1000" width="40" height="40" id="639">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9400" y="1000" width="20" height="20" id="661">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9600" y="1000" width="40" height="40" id="683">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9800" y="1000" width="40" height="40" id="705">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="6600" y="1200" width="40" height="40" id="732">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="6400" y="1200" width="40" height="40" id="754">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="6800" y="1200" width="40" height="40" id="776">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="3"/>
+      </properties>
+    </object>
+    <object x="7800" y="1400" width="40" height="40" id="824">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-1"/>
+      </properties>
+    </object>
+    <object x="7600" y="1400" width="40" height="40" id="850">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="8000" y="1400" width="40" height="40" id="876">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8200" y="1400" width="40" height="40" id="902">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8600" y="1400" width="40" height="40" id="928">
+      <properties>
+        <property name="unit" value="turret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8800" y="1400" width="40" height="40" id="954">
+      <properties>
+        <property name="unit" value="bugTurret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9000" y="1400" width="40" height="40" id="980">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9200" y="1400" width="40" height="40" id="1006">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="1"/>
+      </properties>
+    </object>
+    <object x="8400" y="1400" width="40" height="40" id="1032">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9600" y="1400" width="40" height="40" id="1058">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9400" y="1400" width="40" height="40" id="1084">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9800" y="1400" width="40" height="40" id="1110">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="10000" y="1400" width="40" height="40" id="1136">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="7800" y="1600" width="40" height="40" id="1161">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-1"/>
+      </properties>
+    </object>
+    <object x="7600" y="1600" width="40" height="40" id="1183">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="8000" y="1600" width="40" height="40" id="1205">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8200" y="1600" width="40" height="40" id="1227">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8600" y="1600" width="40" height="40" id="1249">
+      <properties>
+        <property name="unit" value="turret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="8800" y="1600" width="40" height="40" id="1271">
+      <properties>
+        <property name="unit" value="bugTurret"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9000" y="1600" width="40" height="40" id="1293">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9200" y="1600" width="40" height="40" id="1315">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="1"/>
+      </properties>
+    </object>
+    <object x="8400" y="1600" width="40" height="40" id="1337">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9600" y="1600" width="40" height="40" id="1359">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9400" y="1600" width="40" height="40" id="1381">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="11400" y="1600" width="40" height="40" id="1404">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="11600" y="1600" width="40" height="40" id="1430">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="11200" y="1600" width="40" height="40" id="1456">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="9800" y="1600" width="40" height="40" id="1482">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="10000" y="1600" width="40" height="40" id="1507">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="10200" y="1600" width="40" height="40" id="1532">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="10400" y="1600" width="40" height="40" id="1557">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="10600" y="1600" width="40" height="40" id="1584">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="10800" y="1600" width="40" height="40" id="1609">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="11000" y="1600" width="40" height="40" id="1642">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="6400" y="2200" width="40" height="40" id="1677">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="6600" y="2200" width="40" height="40" id="1703">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="6800" y="2200" width="40" height="40" id="1729">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="11800" y="1600" width="40" height="40" id="1785">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="6400" y="2400" width="40" height="40" id="1817">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="12000" y="1600" width="40" height="40" id="1870">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="6600" y="2400" width="40" height="40" id="1879">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="6800" y="2400" width="40" height="40" id="1905">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="1"/>
+      </properties>
+    </object>
+    <object x="6400" y="3000" width="40" height="40" id="1960">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="0"/>
+      </properties>
+    </object>
+    <object x="6600" y="3000" width="40" height="40" id="1986">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="-2"/>
+      </properties>
+    </object>
+    <object x="6800" y="3000" width="40" height="40" id="2012">
+      <properties>
+        <property name="unit" value="supplyDepot"/>
+        <property name="team" value="1"/>
       </properties>
     </object>
   </objectgroup>

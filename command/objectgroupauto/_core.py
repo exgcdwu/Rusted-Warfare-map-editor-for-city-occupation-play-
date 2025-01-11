@@ -612,7 +612,10 @@ def tobject_ids_do(tobject:rw.case.TObject, myinfo, info, ids_now_dict, isreset,
 
 def is_tagged_object_simple(tobject:rw.case.TObject):
     object_type = tobject.returnDefaultProperty(rw.const.OBJECTDE.type)
-    isnewtaggedobject = (object_type == None or re.match("^$", object_type))
+    object_name = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
+    isnewtaggedobject = (object_type == None or re.match("^$", object_type)) and \
+        ((object_name != None) or (object_name != ""))
+
     return isnewtaggedobject
 
 def object_op_split_set(tobject:rw.case.TObject, opname:str)->set[str]:
@@ -1390,7 +1393,7 @@ def auto_func(args = None):
                     if object_now != None:
                         
                         isnewtaggedobject = is_tagged_object_simple(object_now)
-                        if isnewtaggedobject:
+                        if isnewtaggedobject and obg_name == rw.const.NAME.Triggers:
                             if isdelete_sym:
                                 object_now.assignDefaultProperty(rw.const.OBJECTDE.name, object_now.returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_op)
                             if isdelete_all_sym:
@@ -1408,7 +1411,7 @@ def auto_func(args = None):
                                                  tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
                             else:
                                 idnow_object:rw.case.TObject = deepcopy(id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]])
-                                if isnewtaggedobject:
+                                if isnewtaggedobject and obg_name == rw.const.NAME.Triggers:
                                     if is_tagged_object_simple(idnow_object):
                                         object_now._optional_properties = deepcopy(idnow_object._optional_properties)
                                 else:
@@ -1417,10 +1420,22 @@ def auto_func(args = None):
                                         tobject_list.append(idnow_object)
                                         map_now.addObject_type(idnow_object, isresetid = True)
                             
-                            map_now.addObject_type(object_now, isresetid = False, objectGroup_name = obg_name)
+                            try:
+                                map_now.addObject_type(object_now, isresetid = False, objectGroup_name = obg_name)
+                            except rw.rwexceptions.ElementOriNotFoundError:
+                                standard_error_ob(f"There's no objectgroup:{obg_name}.|没有objectgroup层:{obg_name}。", 
+                                                  -4, tobject_id, tobject_name, tobject_x, tobject_y, isenter = True)
+                            
                             id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]] = object_now
+
                         else:
-                            map_now.addObject_type(object_now, objectGroup_name = obg_name)
+
+                            try:
+                                map_now.addObject_type(object_now, objectGroup_name = obg_name)
+                            except rw.rwexceptions.ElementOriNotFoundError:
+                                standard_error_ob(f"There's no objectgroup:{obg_name}.|没有objectgroup层:{obg_name}。", 
+                                                  -4, tobject_id, tobject_name, tobject_x, tobject_y)
+
                             if not isdelete:
                                 IDs_update(tobject, object_now)
 
@@ -1549,7 +1564,7 @@ def auto_func(args = None):
 
     if iscitetrans:
         standard_out(language, isverbose, "Other objects are being translated by cite.|其他普通宾语正在被引用翻译...")
-        for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(.+)"}):
+        for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(.+)"}, objectGroup_re = '^.*$'):
             for key, value in tobject._default_properties.items():
                 value_now = mapvalue_to_value_basic(value)
                 if not isinstance(value_now, bool):
@@ -1564,7 +1579,6 @@ def auto_func(args = None):
     iscycle = isdelete_id
     while iscycle:
 
-        import pdb;pdb.set_trace()
         iscycle = False
 
         tid_set = set()
@@ -1577,9 +1591,7 @@ def auto_func(args = None):
                     nid = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
                     if nid != None and nid != "":
                         tnid_set.add(nid)
-                        
-                if "Ac29" in st:
-                    import pdb;pdb.set_trace()
+
                 tnid_set.update(st)
                 tid_set.update(st)
         
@@ -1599,10 +1611,10 @@ def auto_func(args = None):
                     dtobject_id.add(tobject.returnDefaultProperty("id"))
                     #import pdb;pdb.set_trace()
                     iscycle = True
-
-    for tobject in [tobject for tobject in map_now.iterator_object_s()]:
-        if dtobject_id.issuperset([tobject.returnDefaultProperty("id")]):
-            map_now.delete_object_s(tobject)
+    for obg in map_now._objectGroup_list:
+        for tobject in [tobject for tobject in obg._object_list]:
+            if dtobject_id.issuperset([tobject.returnDefaultProperty("id")]):
+                obg.deleteObject(tobject)
 
     time_tagged_e = time.time()
     time_tagged = time_tagged_e - time_tagged_i
@@ -1638,7 +1650,7 @@ def auto_func(args = None):
         standard_out(language, isverbose and isresetid, "The IDs are rearranging...|ID正在重排...")
         id_mapping = {}
         id_now = 1
-        for tobject in map_now.iterator_object_s():
+        for tobject in map_now.iterator_object_s(objectGroup_re = '^.*$'):
             tobid = tobject.returnDefaultProperty("id")
             tobject_x = tobject.returnDefaultProperty("x")
             tobject_y = tobject.returnDefaultProperty("y")
@@ -1651,7 +1663,7 @@ def auto_func(args = None):
             id_now = id_now + 1
 
         id_now = 1
-        for tobject in map_now.iterator_object_s():
+        for tobject in map_now.iterator_object_s(objectGroup_re = '^.*$'):
             tobid = tobject.returnDefaultProperty("id")
             if is_tagged_object_simple(tobject):
                 ids_now = tobject.returnOptionalProperty(AUTOKEY.IDs)

@@ -23906,6 +23906,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="aunitbrace_now" value=""/>
     <property name="detectReset" value="{reset}"/>
     <property name="idprefix" value="tu"/>
+    <property name="inaddisinitialunit" type="bool" value="true"/>
     <property name="inaddwarmup" value="0s"/>
     <property name="isdetectdeacti" type="bool" value="false"/>
     <property name="isinadd" type="bool" value="true"/>
@@ -23989,6 +23990,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="aunitbrace_now" value="(techLevel=2)"/>
     <property name="detectReset" value="{reset}"/>
     <property name="idprefix" value="su"/>
+    <property name="inaddisinitialunit" type="bool" value="true"/>
     <property name="inaddwarmup" value="0s"/>
     <property name="isdetectdeacti" type="bool" value="false"/>
     <property name="isinadd" type="bool" value="true"/>
@@ -25311,6 +25313,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="aunitbrace_now" value="(techLevel=2)"/>
     <property name="detectReset" value="{reset}"/>
     <property name="idprefix" value="tu"/>
+    <property name="inaddisinitialunit" type="bool" value="true"/>
     <property name="inaddwarmup" value="0s"/>
     <property name="isdetectdeacti" type="bool" value="false"/>
     <property name="isinadd" type="bool" value="true"/>
@@ -25335,7 +25338,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="4" name="unitObject">
+ <objectgroup id="4" name="UnitObject">
   <object id="363" name="2 工厂" x="10040" y="3040" width="20" height="20">
    <properties>
     <property name="team" value="1"/>

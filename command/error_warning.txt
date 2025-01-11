@@ -1,4 +1,5 @@
 ERROR code:
+-4: There's no objectgroup.|没有objectgroup层。
 -3: There's no json file.|没有json文件。
 -2: json is error.|json 读取失败。
 -1: An error from operation.

@@ -66,7 +66,7 @@ inadd_info_operation_list = \
                 AUTOKEY.offset: f"{INFOKEY.inaddoffset}", 
                 AUTOKEY.offsetsize: f"{INFOKEY.inaddoffsetsize}", 
                 AUTOKEY.name: "{" + f"{INFOKEY.inaddname}" + "}", 
-                AUTOKEY.type: rw.const.OBJECTTYPE.unitAdd, 
+                AUTOKEY.type: (rw.const.OBJECTTYPE.unitAdd, f"not {INFOKEY.inaddisinitialunit}", AUTOKEY.brace), 
                 AUTOKEY.objectGroup_name: (rw.const.NAME.UnitObject, f"{INFOKEY.inaddisinitialunit}", AUTOKEY.brace), 
                 AUTOKEY.optional: {
                     rw.const.OBJECTOP.spawnUnits: (br(f"{INFOKEY.inaddunit}") + "*" + br(f"{INFOKEY.inaddspawnnum}") + br(f"{INFOKEY.inaddaunitbrace}"), f"not {INFOKEY.inaddisinitialunit}", AUTOKEY.brace), 
