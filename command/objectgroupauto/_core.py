@@ -1,5 +1,5 @@
 from typing import Union
-from copy import deepcopy
+from copy import deepcopy, copy
 import regex as re
 import os
 from pprint import pprint
@@ -43,26 +43,30 @@ def search_cite(prefix):
             results[key] = cite_object_dict[key]
     return results
 
-def standard_error_ob(info_err, error_id:int, ID_now:str = None, name_now:str = None, x_now:str = None, y_now:str = None, sub_info_error:str = None)->None:
+def standard_error_ob(info_err, error_id:int, ID_now:str = None, name_now:str = None, x_now:str = None, y_now:str = None, sub_info_error:str = None, isenter = False)->None:
+    enter_l = "\n|\n"
+    info_err_n = langstrlist_add([enter_l, info_err]) if isenter else info_err
     ID_now_l = str_lang(language, f", ID:{ID_now}|, ID:{ID_now}") if ID_now != None else ""
     name_now_l = str_lang(language, f", name:{name_now}|, 名称:{name_now}") if name_now != None else ""
     xy_now_l = str_lang(language, f", coordinate:({x_now}, {y_now})|, 坐标:({x_now}, {y_now})") if x_now != None else ""
     error_l = str_lang(language, f", ERROR:{error_id}|, 错误码:{error_id}")
     str_error_default = "(" + f"{ID_now_l}{name_now_l}{xy_now_l}{error_l}"[2:] + ")"
-    print(str_lang(language, info_err) + str_error_default, file=sys.stderr)
+    print(str_lang(language, info_err_n) + str_error_default, file=sys.stderr)
     if sub_info_error != None:
         pprint(sub_info_error)
     if isdebug:
         import pdb;pdb.set_trace()
     exit(error_id)
 
-def standard_warning_ob(info_warn, warn_id:int, error_id:int, ID_now:str = None, name_now:str = None, x_now:str = None, y_now:str = None, sub_info_warn:str = None)->None:
+def standard_warning_ob(info_warn, warn_id:int, error_id:int, ID_now:str = None, name_now:str = None, x_now:str = None, y_now:str = None, sub_info_warn:str = None, isenter = False)->None:
+    enter_l = "\n|\n"
+    info_warn_n = langstrlist_add([enter_l, info_warn]) if isenter else info_warn
     ID_now_l = str_lang(language, f", ID:{ID_now}|, ID:{ID_now}") if ID_now != None else ""
     name_now_l = str_lang(language, f", name:{name_now}|, 名称:{name_now}") if name_now != None else ""
     xy_now_l = str_lang(language, f", coordinate:({x_now}, {y_now})|, 坐标:({x_now}, {y_now})") if x_now != None else ""
     warn_l = str_lang(language, f", WARNING:{warn_id}|, 警告码:{warn_id}")
     str_warning_default = "(" + f"{ID_now_l}{name_now_l}{xy_now_l}{warn_l}"[2:] + ")"
-    print(str_lang(language, info_warn) + str_warning_default, file=sys.stdout)
+    print(str_lang(language, info_warn_n) + str_warning_default, file=sys.stdout)
     if sub_info_warn != None:
         pprint(sub_info_warn)
     if isdebug:
@@ -78,7 +82,7 @@ def id_debug_pdb(tobject:rw.case.TObject, ID:int):
     if isdebug and tobject.returnDefaultProperty("id") == str(ID):
         import pdb;pdb.set_trace()
 
-def standard_error_get_args(tobject:rw.case.TObject, info_tobject:rw.case.TObject, info_err, error_id:int, sub_info_error:str = None)->None:
+def standard_error_get_args(tobject:rw.case.TObject, info_tobject:rw.case.TObject, info_err, error_id:int, sub_info_error:str = None, isenter:bool = False)->None:
     tobject_id = tobject.returnDefaultProperty("id")
     tobject_name = tobject.returnDefaultProperty("name")
     tobject_x = tobject.returnDefaultProperty("x")
@@ -89,9 +93,9 @@ def standard_error_get_args(tobject:rw.case.TObject, info_tobject:rw.case.TObjec
     info_tobject_y = info_tobject.returnDefaultProperty("y")
     info_err_now = langstrlist_add([info_err, f"(info name:{info_tobject_name},info id:{info_tobject_id},info coordinate:({info_tobject_x}, {info_tobject_y}))" + \
                     f"|(info 名称:{info_tobject_name},info ID:{info_tobject_id},info 坐标:({info_tobject_x}, {info_tobject_y}))"])
-    standard_error_ob(info_err_now, error_id, tobject_id, tobject_name, tobject_x, tobject_y, sub_info_error)
+    standard_error_ob(info_err_now, error_id, tobject_id, tobject_name, tobject_x, tobject_y, sub_info_error, isenter = isenter)
 
-def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.TObject, object_dict:dict)->dict:
+def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.TObject, object_dict:dict, isenter:bool = False)->dict:
     args_dict = {}
     split_now = name.split(info[AUTOKEY.opargs_seg])
     opargs = split_now[1:]
@@ -106,20 +110,20 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.
         standard_error_get_args(tobject, info_tobject, 
                         f"Required arguments are missing below in a tagged object.(maybe \".\" is missing?)(name:'{name}',need:{info[AUTOKEY.args]},reality:{args_n})" + \
                        f"|标记宾语中的必需参数缺失。(也许\".\"缺失？)(扣除前缀后的名称:'{name}',必需参数要求:{info[AUTOKEY.args]},必需参数实际:{args_n})", 
-                       8, info_args_temp)
+                       8, info_args_temp, isenter = isenter)
     elif len(args_n) > len(info[AUTOKEY.args]):
         info_args_temp = args_n[len(info[AUTOKEY.args]):]
         standard_error_get_args(tobject, info_tobject, 
                                 f"Too many required arguments below in a tagged object.(name:'{name}',need:{info[AUTOKEY.args]},reality:{args_n})" + \
                        f"|标记宾语中的必需参数过多。(扣除前缀后的名称:'{name}',必需参数要求:{info[AUTOKEY.args]},必需参数实际:{args_n})", 
-                       9, info_args_temp)
+                       9, info_args_temp, isenter = isenter)
 
     for index, thing in enumerate(info[AUTOKEY.args]):
         if args_n[index] == '':
             standard_error_get_args(tobject, info_tobject, 
                                 f"One of args is empty.(name:'{name}',index:{index + 1})" + \
                            f"|标记宾语的必填参数出现空。(扣除前缀后的名称:'{name}'，第几个必填参数:{index + 1})", 
-                           29)
+                           29, isenter = isenter)
         args_dict[thing[0]] = thing[1](args_n[index])
     
     prefix_len = info[AUTOKEY.opargs_prefix_len]
@@ -149,14 +153,14 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.
                 if var_now == '':
                     standard_error_get_args(tobject, info_tobject, f"One of opargs(not bool) is empty.(name:'{name}',op:',{prefix_now}')" + \
                                             f"|标记宾语的选填参数(不为bool)出现空。(扣除前缀后的名称:'{name}'，选填参数:',{prefix_now}')", 
-                                            28)
+                                            28, isenter = isenter)
                 elif var_now == "None":
                     continue
                 args_dict[key_now] = type_now(var_now)
         else:
             if prefix_now != "d" and prefix_now != 'D':
                 standard_error_get_args(tobject, info_tobject, f"Unknown optional arguments in a tagged object.(name:'{name}', optional tag:,{prefix_now})" + \
-                               f"|在标记宾语中出现的可选参数无法识别。(扣除前缀后的名称:'{name}', 问题可选前缀:,{prefix_now})", 7)
+                               f"|在标记宾语中出现的可选参数无法识别。(扣除前缀后的名称:'{name}', 问题可选前缀:,{prefix_now})", 7, isenter = isenter)
 
     tobject_ids = tobject.returnOptionalProperty(AUTOKEY.IDs)
     tobject_ids = tobject_ids.split(AUTOKEY.IDs_seg) if (tobject_ids != None and tobject_ids != '') else []
@@ -611,6 +615,72 @@ def is_tagged_object_simple(tobject:rw.case.TObject):
     isnewtaggedobject = (object_type == None or re.match("^$", object_type))
     return isnewtaggedobject
 
+def object_op_split_set(tobject:rw.case.TObject, opname:str)->set[str]:
+    op = tobject.returnOptionalProperty(opname)
+    if op != None:
+        return set(op.split(","))
+    else:
+        return set()
+    
+def object_de_split_set(tobject:rw.case.TObject, dename:str)->set[str]:
+    op = tobject.returnDefaultProperty(dename)
+    if op != None and op != "":
+        return set(op.split(","))
+    else:
+        return set()
+    
+def object_input_id_set(tobject:rw.case.TObject)->set[str]:
+    ac = object_op_split_set(tobject, rw.const.OBJECTOP.activatedBy)
+    deac = object_op_split_set(tobject, rw.const.OBJECTOP.deactivatedBy)
+    return ac | deac
+    
+def object_input_id_set_basic(tobject:rw.case.TObject)->set[str]:
+    ac = object_op_split_set(tobject, rw.const.OBJECTOP.activatedBy)
+    deac = object_op_split_set(tobject, rw.const.OBJECTOP.deactivatedBy)
+    nameid = object_de_split_set(tobject, rw.const.OBJECTDE.name)
+    return ac | deac | nameid
+
+def idstr_filtrate(id_str:str, id_set:set[str])->str:
+    if id_str == None:
+        return ""
+    id_list = id_str.split(",")
+    id_list = [idn for idn in id_list if idn in id_set]
+    id_str_ans = ",".join(id_list)
+    return id_str_ans
+
+def reset_id_filtrate_op(tobject:rw.case.TObject, opname:str, id_set:set[str])->bool:
+    idn = tobject.returnOptionalProperty(opname)
+    idn = idstr_filtrate(idn, id_set)
+    if idn == "":
+        tobject.deleteOptionalProperty(opname)
+        return False
+    else:
+        tobject.assignOptionalProperty(opname, idn)
+        return True
+    
+def reset_id_filtrate_de(tobject:rw.case.TObject, opname:str, id_set:set[str])->bool:
+    idn = tobject.returnDefaultProperty(opname)
+    idn = idstr_filtrate(idn, id_set)
+    if idn == "":
+        tobject.deleteDefaultProperty(opname)
+        return False
+    else:
+        tobject.assignDefaultProperty(opname, idn)
+        return True
+
+def object_output_id_reset(tobject:rw.case.TObject, id_set:set[str])->bool:
+    return reset_id_filtrate_op(tobject, rw.const.OBJECTOP.id, id_set) or \
+        reset_id_filtrate_op(tobject, rw.const.OBJECTOP.activateIds, id_set) or \
+        reset_id_filtrate_op(tobject, rw.const.OBJECTOP.alsoActivate, id_set)
+
+def object_output_id_reset_basic(tobject:rw.case.TObject, id_set:set[str])->bool:
+    return reset_id_filtrate_op(tobject, rw.const.OBJECTOP.id, id_set) or \
+        reset_id_filtrate_op(tobject, rw.const.OBJECTOP.activateIds, id_set) or \
+        reset_id_filtrate_op(tobject, rw.const.OBJECTOP.alsoActivate, id_set) or \
+        reset_id_filtrate_de(tobject, rw.const.OBJECTDE.name, id_set)
+    
+
+
 def isdigit_str(s):
     return s.isdigit() or (s[0] == '-' and s[1:].isdigit())
 
@@ -620,7 +690,7 @@ operation_dict = {
 
 }
 
-def auto_func():
+def auto_func(args = None):
     parser = argparse.ArgumentParser(
         description='Objects of Triggers are automatically processed by information\'s mode.\n' + \
                     '触发器(Triggers)的宾语将会根据信息变量进行自动化处理。')
@@ -653,6 +723,10 @@ def auto_func():
     parser.add_argument("-d", "--delete", 
                         action = 'store_true', help = 'Delete the info and tagged objects with ,d.\n' + \
                             "删除带,d标记的info和标记宾语。")
+
+    parser.add_argument("-di", "--deleteid", 
+                        action = 'store_true', help = 'Delete extra unitDetect objects.\n' + \
+                            "删除多余的检测宾语。")
 
     parser.add_argument("-D", "--DeleteAllSym", 
                         action = 'store_true', help = 'Delete all info and tagged objects.\n' + \
@@ -735,6 +809,7 @@ def auto_func():
     isdelete = args.DeleteAllSym
     isdelete_d = args.delete
     isdelete_all = args.DeleteAll
+    isdelete_id = args.deleteid
     global isreset
     isreset = args.reset
     isverbose = args.verbose
@@ -1153,6 +1228,8 @@ def auto_func():
     dtobject_id:set[str] = set()
     tobject_list = [tobject for tobject in map_now.iterator_object_s(default_re = {rw.const.OBJECTDE.type: r"(?!.+)", 
                                                            rw.const.OBJECTDE.name: r".+"}) if is_tagged_object_simple(tobject) and (tobject.returnOptionalProperty(AUTOKEY.IDdep) == None or tobject.returnOptionalProperty(AUTOKEY.IDdep) == '0')]
+    all_related_obauto_tobject_list = copy(tobject_list)
+    
     index_tobject = 0
 
     time_dif_info = {}
@@ -1163,6 +1240,7 @@ def auto_func():
 
     standard_out(language, isverbose, "Tagged objects are processing...|标记宾语正在处理...")
     init_progress()
+    standard_error_enter = (isverbose == 1)
     while index_tobject < len(tobject_list):
         tobject = tobject_list[index_tobject]
         insert_index = index_tobject + 1
@@ -1202,7 +1280,7 @@ def auto_func():
             info_y = tobject_info.returnDefaultProperty("y")
             standard_error_ob(f"A tree tagged object produced by tree tagged object cannot match any info. Please check if the prefix is corret in the name(properties) of tree_info.(father ID:{info_id}, father name:{info_name}, father coordinate({info_x}, {info_y}))" + 
                            f"|生成的标记宾语无法匹配，请查找对应tree_info name中前缀是否正确。(上级 ID:{info_id}, 上级 名称:{info_name}, 上级 坐标({info_x}, {info_y}))", 
-                           26, tobject_id, tobject_name, tobject_x, tobject_y)
+                           26, tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
         if ischange:
 
             time_tag_i1 = time.time()
@@ -1222,7 +1300,7 @@ def auto_func():
             object_dict[AUTOKEY.tobject_id] = tobject_id
             object_dict[AUTOKEY.tobject_name] = tobject_name
 
-            object_dict.update(get_args(myinfo, tobject_name_to_solve, tobject, info_tobject, object_dict))
+            object_dict.update(get_args(myinfo, tobject_name_to_solve, tobject, info_tobject, object_dict, isenter = standard_error_enter))
             
             if info.get(AUTOKEY.info_prefix) != None:
                 for info_pre in info[AUTOKEY.info_prefix]:
@@ -1231,7 +1309,8 @@ def auto_func():
 
             if myinfo.get(AUTOKEY.isinfo_sub) != None and myinfo.get(AUTOKEY.isinfo_sub) == True:
                 standard_error_ob(f"Incorrect use of the subordinate info object.|" + 
-                               f"附属宾语的不正确使用。", 2, tobject_id, tobject_name, tobject_x, tobject_y)
+                               f"附属宾语的不正确使用。", 2, tobject_id, tobject_name, tobject_x, tobject_y, 
+                               isenter = standard_error_enter)
 
             if tobject.returnOptionalProperty(AUTOKEY.IDdep) == None:
                 tobject.assignOptionalProperty(AUTOKEY.IDdep, "0")
@@ -1280,7 +1359,7 @@ def auto_func():
                         if id_to_tobject.get(ids) == None:
                             standard_warning_ob(f"An object that needs to be deleted could not be found.(parent ID:{tobject_id})" + 
                                              f"|一个需要被删除的宾语无法找到。(父亲 ID:{tobject_id})", 
-                                             4, 21, tobject_id, tobject_name, tobject_x, tobject_y)
+                                             4, 21, tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
                         elif not is_tagged_object_simple(id_to_tobject[ids]):
                             dtobject_id.add(ids)
                 continue
@@ -1291,7 +1370,7 @@ def auto_func():
                     if operation_index.get(operation_now[AUTOKEY.tag]) != None:
                         standard_error_ob(f"operation tags are duplicated.({operation_now[AUTOKEY.tag]})" + 
                                        f"|命令标记发生重合。({operation_now[AUTOKEY.tag]})", 
-                                       15, tobject_id, tobject_name, tobject_x, tobject_y)
+                                       15, tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
                     operation_index[operation_now[AUTOKEY.tag]] = index
 
             tottobid = 0
@@ -1325,8 +1404,8 @@ def auto_func():
                             object_now.assignDefaultProperty("id", object_dict[AUTOKEY.IDs][tottobid])
                             if id_to_tobject.get(object_dict[AUTOKEY.IDs][tottobid]) == None:
                                 standard_warning_ob(f"A tagged object can't find the object that was once created.(child ID:{object_dict[AUTOKEY.IDs][tottobid]})" + 
-                                                 f"|一个标记宾语不能找到它曾经产生的宾语。(儿子 ID:{object_dict[AUTOKEY.IDs][tottobid]})", 1, 18, tobject_id, tobject_name, tobject_x, tobject_y)
-                                map_now.addObject_type(object_now, isresetid = False, objectGroup_name = obg_name)
+                                                 f"|一个标记宾语不能找到它曾经产生的宾语。(儿子 ID:{object_dict[AUTOKEY.IDs][tottobid]})", 1, 18, 
+                                                 tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
                             else:
                                 idnow_object:rw.case.TObject = deepcopy(id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]])
                                 if isnewtaggedobject:
@@ -1336,12 +1415,16 @@ def auto_func():
                                     if is_tagged_object_simple(idnow_object):
                                         idnow_object.assignDefaultProperty(rw.const.OBJECTDE.name, idnow_object.returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
                                         tobject_list.append(idnow_object)
-                                        map_now.addObject_type(idnow_object, isresetid = True, objectGroup_name = obg_name)
-                            id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]] = deepcopy(object_now)
+                                        map_now.addObject_type(idnow_object, isresetid = True)
+                            
+                            map_now.addObject_type(object_now, isresetid = False, objectGroup_name = obg_name)
+                            id_to_tobject[object_dict[AUTOKEY.IDs][tottobid]] = object_now
                         else:
                             map_now.addObject_type(object_now, objectGroup_name = obg_name)
                             if not isdelete:
                                 IDs_update(tobject, object_now)
+
+                        all_related_obauto_tobject_list.append(object_now)
                         tottobid = tottobid + 1
                     
                 elif operation_now_type == AUTOKEY.goto:
@@ -1377,7 +1460,8 @@ def auto_func():
                         if key != AUTOKEY.operation_type:
                             object_dict[str_translation(key, object_dict)] = object_dict.get(value) != None
                 elif operation_now_type == AUTOKEY.error:
-                    standard_error_ob(str_translation(operation_now[AUTOKEY.error_info], object_dict), -1, tobject_id, tobject_name, tobject_x, tobject_y)
+                    standard_error_ob(str_translation(operation_now[AUTOKEY.error_info], object_dict), 
+                                      -1, tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
                 elif operation_now_type == AUTOKEY.pdb_pause:
                     ispdb = True
                     print_pdb = None
@@ -1413,7 +1497,7 @@ def auto_func():
                 if id_to_tobject.get(idnow) == None:
                     standard_warning_ob(f"An object that needs to be deleted could not be found.(parent ID:{tobject_id})" + 
                                      f"|一个需要被删除的宾语不能找到。(父亲 ID:{tobject_id})", 
-                                     4, 21, tobject_id, tobject_name, tobject_x, tobject_y)
+                                     4, 21, tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
                 else:
                     if is_tagged_object_simple(id_to_tobject[idnow]):
                         id_to_tobject[idnow].assignDefaultProperty(rw.const.OBJECTDE.name, id_to_tobject[idnow].returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_all_op)
@@ -1440,7 +1524,7 @@ def auto_func():
                         origin_name = cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + AUTOKEY.tobject_name)
                         standard_error_ob(f"Reference tags(cite_name) are duplicated。(original ID:({origin_id}), original name:({origin_name}), Cite:{object_dict[AUTOKEY.cite_name]})" + \
                                        f"|标记宾语引用(cite_name)发生重合。(重合 ID:({origin_id}), 重合名称:({origin_name}), 引用名称(cite_name):{object_dict[AUTOKEY.cite_name]})", 
-                                       14, tobject_id, tobject_name, tobject_x, tobject_y)
+                                       14, tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
                     cite_object_dict[object_dict[AUTOKEY.cite_name] + "." + key] = value
             
 
@@ -1459,15 +1543,9 @@ def auto_func():
             time_dif_info_step[2][prefix_now] = time_tag3 + (time_dif_info_step[2][prefix_now] if time_dif_info_step[2].get(prefix_now) != None else 0)
             time_info_step[2][info[AUTOKEY.info_key]] = time_tag3 + (time_info_step[2][info[AUTOKEY.info_key]] if time_info_step[2].get(info[AUTOKEY.info_key]) != None else 0)
         
-        print_progress_o(language, isverbose == 1, index_tobject, len(tobject_list))
+        print_progress_o(language, isverbose == 1, index_tobject, len(tobject_list), isenter = False)
 
-    standard_out(language, isverbose and (isdelete_all or isdelete), "Some objects are being deleted...|需要被删除的宾语正在回收...")
-    standard_out(language, isverbose and (isdelete_d), "Some objects are being deleted if eligible...|需要被删除的宾语正在回收，如有必要...")
-    for tobject in [tobject for tobject in map_now.iterator_object_s()]:
-        if dtobject_id.issuperset([tobject.returnDefaultProperty("id")]):
-            map_now.delete_object_s(tobject)
-
-    debug_pdb(isdebug)
+    standard_out(language, isverbose == 1, "|")
 
     if iscitetrans:
         standard_out(language, isverbose, "Other objects are being translated by cite.|其他普通宾语正在被引用翻译...")
@@ -1480,6 +1558,51 @@ def auto_func():
                 value_now = mapvalue_to_value_basic(value)
                 if not isinstance(value_now, bool):
                     tobject.assignOptionalProperty(key, brace_one_translation_cycle(value_now, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite))
+
+    standard_out(language, isverbose and (isdelete_d or isdelete_id or isdelete_all or isdelete), "Some objects are being deleted if eligible...|需要被删除的宾语正在回收，如有必要...")
+
+    iscycle = isdelete_id
+    while iscycle:
+
+        import pdb;pdb.set_trace()
+        iscycle = False
+
+        tid_set = set()
+        tnid_set = set()
+
+        for tobject in map_now.iterator_object_s():
+            if (not dtobject_id.issuperset([tobject.returnDefaultProperty("id")])) and (not is_tagged_object_simple(tobject)):
+                st = object_input_id_set(tobject)
+                if not tobject.returnDefaultProperty(rw.const.OBJECTDE.type) == rw.const.OBJECTTYPE.unitDetect:
+                    nid = tobject.returnDefaultProperty(rw.const.OBJECTDE.name)
+                    if nid != None and nid != "":
+                        tnid_set.add(nid)
+                        
+                if "Ac29" in st:
+                    import pdb;pdb.set_trace()
+                tnid_set.update(st)
+                tid_set.update(st)
+        
+        for tobject in all_related_obauto_tobject_list:
+            if (not dtobject_id.issuperset([tobject.returnDefaultProperty("id")])) and (not is_tagged_object_simple(tobject)):
+                temp_object = deepcopy(tobject)
+                if tobject.returnDefaultProperty(rw.const.OBJECTDE.type) == rw.const.OBJECTTYPE.basic:
+                    isexist = object_output_id_reset_basic(tobject, tid_set)
+                else:
+                    isexist = object_output_id_reset(tobject, tnid_set)
+
+                #if int(tobject.returnDefaultProperty("x")) == 7800 and int(tobject.returnDefaultProperty("y")) == 1600:
+                    #import pdb;pdb.set_trace()
+
+                if (not isexist) and (tobject.returnDefaultProperty(rw.const.OBJECTDE.type) in 
+                                    {rw.const.OBJECTTYPE.unitDetect, rw.const.OBJECTTYPE.basic}):
+                    dtobject_id.add(tobject.returnDefaultProperty("id"))
+                    #import pdb;pdb.set_trace()
+                    iscycle = True
+
+    for tobject in [tobject for tobject in map_now.iterator_object_s()]:
+        if dtobject_id.issuperset([tobject.returnDefaultProperty("id")]):
+            map_now.delete_object_s(tobject)
 
     time_tagged_e = time.time()
     time_tagged = time_tagged_e - time_tagged_i

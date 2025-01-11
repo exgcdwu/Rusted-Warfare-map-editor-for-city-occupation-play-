@@ -24,7 +24,7 @@ def init_progress():
 TIME_ITERATION = 5
 TIME_FLASH = 1
 
-def print_progress(iteration, total, time_iteration=TIME_ITERATION, hms_l = ['Est. ', 'h ', 'm ', 's '], prefix='', suffix='', decimals=1, length_p=UNDERLINE_EVEN_NUM, fill='='):
+def print_progress(iteration, total, time_iteration=TIME_ITERATION, hms_l = ['Est. ', 'h ', 'm ', 's '], prefix='', suffix='', decimals=1, length_p=UNDERLINE_EVEN_NUM, fill='=', isenter = False):
 
     global PROGRESS_TIME
     global PROGRESS_TIME_LIST
@@ -78,18 +78,18 @@ def print_progress(iteration, total, time_iteration=TIME_ITERATION, hms_l = ['Es
     
     lp = len(progress)
     if lp < PROGRESS_PREVIOUS_LEN:
-        clear_progress = '\r' + ' ' * (PROGRESS_PREVIOUS_LEN + 5) + '\r'
+        clear_progress = '\r' + ' ' * (PROGRESS_PREVIOUS_LEN + 20) + '\r'
         sys.stdout.write(clear_progress)
 
     PROGRESS_PREVIOUS_LEN = lp
     sys.stdout.write(progress)
     sys.stdout.flush()
-    if iteration == total:
+    if isenter and iteration == total:
         print("")
 
-def print_progress_o(language, isverbose, iteration, total, time_iteration=TIME_ITERATION, length=UNDERLINE_EVEN_NUM, hms = ["h |时 ", "m |分 ", "s |秒 ", "Est. |估计 "], prefix='progress: |进度: ', suffix='finish|完成', decimals=1, fill='='):
+def print_progress_o(language, isverbose, iteration, total, time_iteration=TIME_ITERATION, length=UNDERLINE_EVEN_NUM, hms = ["h |时 ", "m |分 ", "s |秒 ", "Est. |估计 "], prefix='progress: |进度: ', suffix='finish|完成', decimals=1, fill='=', isenter = False):
     if isverbose:
         prefix_l = str_lang(language, prefix)
         suffix_l = str_lang(language, suffix)
         hms_l = [str_lang(language, i) for i in hms]
-        print_progress(iteration, total, time_iteration, hms_l, prefix_l, suffix_l, decimals, length, fill)
+        print_progress(iteration, total, time_iteration, hms_l, prefix_l, suffix_l, decimals, length, fill, isenter)

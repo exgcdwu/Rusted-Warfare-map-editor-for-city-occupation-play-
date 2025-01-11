@@ -160,6 +160,10 @@ class Coordinate:
         str_now = "Coordinate:(" + f"{self.x():.2f}" + "," + f"{self.y():.2f}" + "," + "dtype = " + str(self.dtype()) + ")"
         return str_now
     
+    def output_str_simple(self)->str:
+        str_now = "(" + f"{self.x():.2f}" + "," + f"{self.y():.2f}" + ")"
+        return str_now
+
     def __repr__(self)->str:
         return self.output_str()
     

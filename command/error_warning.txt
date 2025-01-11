@@ -1,4 +1,6 @@
 ERROR code:
+-3: There's no json file.|没有json文件。
+-2: json is error.|json 读取失败。
 -1: An error from operation.
 0: External info import error.
 1: External info import loop error.
@@ -94,6 +96,33 @@ ERROR code:
 165:     layerauto_setting.json->execution->*->exe->[]*->exe_operation->*(exe_type:terrain):matrix(3, 3, /(1-2), int(>=-1, >=-2))
 166-167: layerauto_setting.json->execution->*->exe->[]*->exe_operation->*(exe_type:random):{}
 168:     layerauto_setting.json->execution->*->exe->[]*->exe_operation->*(exe_type:random)->""(int(>=0))
+169-171: stellaris_setting.json->rwmapauto_type:{"stellaris"}
+172-173: stellaris_setting.json->version:{"1.0"}
+175-176: stellaris_setting.json->json_version:""
+177-178: stellaris_setting.json->map_info:{}
+179-180: stellaris_setting.json->map_info->node_edge_minnodedis_num:[]
+181-183: stellaris_setting.json->map_info->node_edge_minnodedis_num->[]*:[](3)
+184-186: stellaris_setting.json->map_info->map_size:[](2)
+187-189: stellaris_setting.json->map_info->team_sum:int(>=2)
+190-191: stellaris_setting.json->star_map:{}
+192-195: stellaris_setting.json->star_map->see_range:float(0<=<=1)
+196-199: stellaris_setting.json->star_map->star_range:float(0<=<=1)
+200-202: stellaris_setting.json->star_map->edge_width:float(>=0)
+203-205: stellaris_setting.json->star_map->advise_edge_dis:int(>=0)
+206-208: stellaris_setting.json->star_map->node_force_coe:int(>=1)
+209-211: stellaris_setting.json->star_map->edge_force_coe:int(>=1)
+212-214: stellaris_setting.json->star_map->round_force_coe:int(>=1)
+215-217: stellaris_setting.json->star_map->node_core:float(>=0)
+218-220: stellaris_setting.json->star_map->node_round:float(>=0)
+221-223: stellaris_setting.json->star_map->edge_width:float(>=0)
+224-225: stellaris_setting.json->object_info:{}
+226-228: stellaris_setting.json->object_info->credit:int(>=0)
+229-230: stellaris_setting.json->star_move:{}
+231-233: stellaris_setting.json->star_move->move_gap:float(>=0)
+234-237: stellaris_setting.json->star_move->friction_coe:float(0<=<=1)
+238-240: stellaris_setting.json->star_move->error_v:float(>=0)
+241: The graph cannot be created.|地图无法生成。
+242: The movement of stars is abnormal.|星系移动异常。
 # Sometimes xx0/xx1 error do not exist.
 
 WARNING code:

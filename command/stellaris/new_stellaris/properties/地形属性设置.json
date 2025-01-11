@@ -1,0 +1,26 @@
+{
+    "purecolor-name": [
+        "#000000:虚空,block-land|0;0;0", 
+        "#090919:视域,block-land", 
+        "#828583:FTL航线,water", 
+        "#fdfcb6:星系,water-bridge"
+    ], 
+    "purecolor-colorpair-y": -1, 
+    "purecolor-colorpair": [
+        [0, 1], 
+        [1, 2], 
+        [2, 3]
+    ], 
+    "purecolor-ntexist": {
+        "0": 0, 
+        "1": 1, 
+        "2": 2, 
+        "3": 2
+    }, 
+    "purecolor-delta-lxc": [
+        [0, 0, 0], 
+        [0, 0, 0], 
+        [0, 0, 0]
+    ]
+
+}

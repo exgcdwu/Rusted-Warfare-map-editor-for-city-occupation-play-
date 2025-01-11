@@ -144,7 +144,7 @@ def str_lang(language:str, info_str:str)->str:
     language_index = language_dict[language]
     info_list = info_str.split(language_seg)
     if len(info_list) != len(language_set):
-        debug_pdb("standard print error(language).")
+        debug_pdb(True, "standard print error(language).")
     return info_list[language_index]
 
 def standard_out(language:str, ifdo:bool, info_str)->None:
@@ -190,6 +190,8 @@ def langstrlist_add(langstr_list:list):
     langstr_ans = "|".join([''.join([langstr_matrix[i][j] for i in range(len(langstr_matrix)) if j < len(langstr_matrix[i])]) for j in range(max_lang)])
     return langstr_ans
 
+ISAUTO_PRINT = False
+
 def question(language:str, condition:bool, tip:str, chosen_list:list, break_list:set, chosen_dict:dict, isauto = False, auto = None)->bool:
     chosen_set = set(chosen_list)
     break_set = set(break_list)
@@ -208,8 +210,8 @@ def question(language:str, condition:bool, tip:str, chosen_list:list, break_list
     isfirst = True
     while(condition):
         if isauto:
-            standard_out(language, True, tip_now)
-            standard_out(language, True, f"Automatically enter {auto}.|自动输入{auto}。")
+            standard_out(language, ISAUTO_PRINT, tip_now)
+            standard_out(language, ISAUTO_PRINT, f"Automatically enter {auto}.|自动输入{auto}。")
             ispathsame = auto
         else:
             if isfirst:
@@ -254,6 +256,18 @@ def get_config_dict(config:str)->dict:
         config_dict = {}
     return config_dict
 
+def get_config_dict_ex(isdebug:bool, language:str, config:str)->dict:
+    try:
+        config_n = get_config_dict(config)
+    except:
+        standard_error(isdebug, language, f"{config} is error." + \
+                       f"|{config} 读取失败。", error_id = -2)
+    if config_n == {}:
+        standard_error(isdebug, language, f"There's no json file." + \
+                       f"|没有json文件。", error_id = -3)
+    return config_n
+
+
 def standard_error(isdebug:bool, language:str, info_err, error_id:int, sub_info_error = None)->None:
     print(str_lang(language, info_err) + "(" + str(error_id) + ")", file=sys.stderr)
     if sub_info_error != None:
@@ -274,8 +288,8 @@ def standard_warning(isdebug:bool, ignorewarning:bool, language:str, info_warn, 
 def get_rwmap(isdebug:bool, language:str, isverbose:bool, rwpath:str)->rw.RWmap:
     try:
         if isverbose:
-            standard_out(language, True, f"RW map input({rwpath})..." + 
-                f"|地图文件导入({rwpath})...")
+            standard_out(language, True, f"RW map input({rwpath})" + 
+                f"|地图文件导入({rwpath})")
         map_now = rw.RWmap.init_mapfile(f'{rwpath}')
         return map_now
     except FileNotFoundError:
@@ -285,8 +299,8 @@ def get_rwmap(isdebug:bool, language:str, isverbose:bool, rwpath:str)->rw.RWmap:
 
 def output_rwmap(isdebug:bool, language:str, isverbose:bool, rwmap:rw.RWmap, output_path:str, ischangemappath:bool = True, isdeletetsxsource:bool = False, isdeleteimgsource:bool = False)->None:
     try:
-        standard_out(language, isverbose, f"RW map output({output_path})..." + 
-            f"|地图文件导出({output_path})...")
+        standard_out(language, isverbose, f"RW map output({output_path})" + 
+            f"|地图文件导出({output_path})")
         rwmap.write_file(output_path, ischangemappath, isdeletetsxsource, isdeleteimgsource)
     except:
         standard_error(isdebug, language, "Error of map outputting.|地图文件输出错误。", 31)
@@ -504,10 +518,10 @@ def is_intmin_integer(s:str, int_min:int):
 def is_intmin_integer_t(mt:tuple):
     return is_intmin_integer(mt[0], mt[1])
 
-CONFIG_ERROR_ID_SET = set([i for i in range(-1, 38)] + [156]) 
+CONFIG_ERROR_ID_SET = set([i for i in range(-1, 38)] + [156, 241, 242]) 
 CONFIG_CODE_SET = set()
-MAX_ERROR_TOP_ID = 157
-MAX_CONFIG_TOP_ID = 50
+MAX_ERROR_TOP_ID = 229
+MAX_CONFIG_TOP_ID = 121
 
 def error_id_debug(isdebug, config_code, error_id, error_id_add, strlist_pre, arg, config):
     if isdebug:

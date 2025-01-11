@@ -14,7 +14,7 @@ import numpy as np
 import rwmap as rw
 from command._util import *
 
-def auto_func():
+def auto_func(args = None):
     parser = argparse.ArgumentParser(
         description='The independence of Tilesets.\n' + \
                     '地块集独立化。')

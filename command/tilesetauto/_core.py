@@ -115,8 +115,8 @@ def auto_func():
     parser.add_argument('-r', '--randseed', 
                         action = "store", metavar = "number", type = int, nargs = "?", 
                         required = False, default = -1, const = -1, 
-                        help='random seed.\n' + \
-                            '随机数种子。')
+                        help='random seed(default:-1, time as randseed).\n' + \
+                            '随机数种子(默认-1 以时间随机)。')
 
     parser.add_argument('--resizediv', 
                         action = "store", metavar = "number", type = int, nargs = "?", 

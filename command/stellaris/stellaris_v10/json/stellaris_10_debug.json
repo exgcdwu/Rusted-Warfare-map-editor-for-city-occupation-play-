@@ -1,0 +1,33 @@
+{
+    "rwmapauto_type": "stellaris", 
+    "version": "1.0", 
+    "json_version": "debug", 
+    "default_name": "", 
+    "map_info":{
+        "node_edge_minnodedis_num": [
+            [10, 20, 10], 
+            [10, 20, 10]
+        ], 
+        "map_size": [100, 120], 
+        "team_sum": 10
+    }, 
+    "star_map":{
+        "see_range": 0.95, 
+        "star_range": 0.9, 
+        "advise_edge_dis": 20, 
+        "node_force_coe": 100, 
+        "round_force_coe": 36, 
+        "edge_force_coe": 1, 
+        "node_core": 1.5, 
+        "node_round": 5.0, 
+        "edge_width": 0.1
+    }, 
+    "star_move":{
+        "move_gap": 0.1, 
+        "friction_coe": 0.6, 
+        "error_v": 1.2
+    }, 
+    "object_info":{
+        "credit": 5
+    }
+}

@@ -42,6 +42,15 @@ class ObjectGroup(ElementOri):
     
     def changeid(self, id:int)->None:
         self._properties.assignDefaultProperty("id", str(id))
+
+    def opacity(self)->float:
+        return float(self._properties.returnDefaultProperty("opacity"))
+    
+    def change_opacity(self, num:float)->None:
+        self._properties.assignDefaultProperty("opacity", f"{num:.2f}")
+
+    def change_visible(self, visible:bool)->None:
+        self._properties.assignDefaultProperty("visible", str(int(visible)))
     
     def output_str(self, objectnum:int = -1)->str:
         str_ans = ""

@@ -25318,12 +25318,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7790" y="1010" width="60" height="40" name="A2c1" type="basic" id="480">
+    <object x="7790" y="1010" width="60" height="40" name="A1c1" type="basic" id="480">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7790" y="1010" width="60" height="40" name="A1c1" type="basic" id="481">
+    <object x="7790" y="1010" width="60" height="40" name="A2c1" type="basic" id="481">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -25479,17 +25479,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7590" y="1010" width="60" height="40" name="A1c2" type="basic" id="502">
+    <object x="7590" y="1010" width="60" height="40" name="Ac2" type="basic" id="502">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7590" y="1010" width="60" height="40" name="Ac2" type="basic" id="503">
+    <object x="7590" y="1010" width="60" height="40" name="A2c2" type="basic" id="503">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7590" y="1010" width="60" height="40" name="A2c2" type="basic" id="504">
+    <object x="7590" y="1010" width="60" height="40" name="A1c2" type="basic" id="504">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -25640,12 +25640,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7990" y="1010" width="60" height="40" name="Ac3" type="basic" id="524">
+    <object x="7990" y="1010" width="60" height="40" name="A1c3" type="basic" id="524">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7990" y="1010" width="60" height="40" name="A1c3" type="basic" id="525">
+    <object x="7990" y="1010" width="60" height="40" name="Ac3" type="basic" id="525">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -25802,12 +25802,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8190" y="1010" width="40" height="20" name="Ac4" type="basic" id="546">
+    <object x="8190" y="1010" width="40" height="20" name="A2c4" type="basic" id="546">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8190" y="1010" width="40" height="20" name="A2c4" type="basic" id="547">
+    <object x="8190" y="1010" width="40" height="20" name="Ac4" type="basic" id="547">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -25968,12 +25968,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8590" y="1010" width="60" height="40" name="A2c5" type="basic" id="569">
+    <object x="8590" y="1010" width="60" height="40" name="Ac5" type="basic" id="569">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8590" y="1010" width="60" height="40" name="Ac5" type="basic" id="570">
+    <object x="8590" y="1010" width="60" height="40" name="A2c5" type="basic" id="570">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -26124,17 +26124,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8790" y="1010" width="60" height="40" name="A2c6" type="basic" id="590">
+    <object x="8790" y="1010" width="60" height="40" name="Ac6" type="basic" id="590">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8790" y="1010" width="60" height="40" name="A1c6" type="basic" id="591">
+    <object x="8790" y="1010" width="60" height="40" name="A2c6" type="basic" id="591">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8790" y="1010" width="60" height="40" name="Ac6" type="basic" id="592">
+    <object x="8790" y="1010" width="60" height="40" name="A1c6" type="basic" id="592">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -26291,12 +26291,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8990" y="1010" width="60" height="40" name="Ac7" type="basic" id="613">
+    <object x="8990" y="1010" width="60" height="40" name="A2c7" type="basic" id="613">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8990" y="1010" width="60" height="40" name="A2c7" type="basic" id="614">
+    <object x="8990" y="1010" width="60" height="40" name="Ac7" type="basic" id="614">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -26453,12 +26453,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9190" y="1010" width="60" height="40" name="A1c8" type="basic" id="635">
+    <object x="9190" y="1010" width="60" height="40" name="A2c8" type="basic" id="635">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9190" y="1010" width="60" height="40" name="A2c8" type="basic" id="636">
+    <object x="9190" y="1010" width="60" height="40" name="A1c8" type="basic" id="636">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -26776,12 +26776,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9390" y="1010" width="40" height="20" name="A2c10" type="basic" id="679">
+    <object x="9390" y="1010" width="40" height="20" name="A1c10" type="basic" id="679">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9390" y="1010" width="40" height="20" name="A1c10" type="basic" id="680">
+    <object x="9390" y="1010" width="40" height="20" name="A2c10" type="basic" id="680">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -27171,51 +27171,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6600" y="1200" width="40" height="40" name="13" type="unitDetect" id="736">
-      <properties>
-        <property name="alsoActivate" value="Ac13,A1c13"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="6600" y="1200" width="40" height="40" type="unitDetect" id="737">
-      <properties>
-        <property name="alsoActivate" value="Ac13,A1c13"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="6600" y="1200" width="40" height="40" type="unitDetect" id="738">
-      <properties>
-        <property name="alsoActivate" value="Ac13,A1c13"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="6600" y="1200" width="40" height="40" name="13" type="unitDetect" id="739">
-      <properties>
-        <property name="alsoActivate" value="Ac13,A2c13"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="6600" y="1200" width="40" height="40" type="unitDetect" id="740">
-      <properties>
-        <property name="alsoActivate" value="Ac13,A2c13"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
     <object x="6600" y="1200" width="40" height="40" name="13" type="unitDetect" id="741">
       <properties>
         <property name="id" value="Bc13"/>
@@ -27287,21 +27242,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6590" y="1210" width="60" height="40" name="Ac13" type="basic" id="749">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="6590" y="1210" width="60" height="40" name="A1c13" type="basic" id="750">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="6590" y="1210" width="60" height="40" name="A2c13" type="basic" id="751">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="6400" y="1200" width="40" height="40" type="unitAdd" id="754">
       <properties>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
@@ -27334,7 +27274,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6400" y="1200" width="40" height="40" name="14" type="unitDetect" id="758">
       <properties>
-        <property name="alsoActivate" value="Ac14,A1c14"/>
+        <property name="alsoActivate" value="Ac14"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27343,7 +27283,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6400" y="1200" width="40" height="40" type="unitDetect" id="759">
       <properties>
-        <property name="alsoActivate" value="Ac14,A1c14"/>
+        <property name="alsoActivate" value="Ac14"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27352,7 +27292,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6400" y="1200" width="40" height="40" type="unitDetect" id="760">
       <properties>
-        <property name="alsoActivate" value="Ac14,A1c14"/>
+        <property name="alsoActivate" value="Ac14"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27361,7 +27301,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6400" y="1200" width="40" height="40" name="14" type="unitDetect" id="761">
       <properties>
-        <property name="alsoActivate" value="Ac14,A2c14"/>
+        <property name="alsoActivate" value="Ac14"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27370,7 +27310,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6400" y="1200" width="40" height="40" type="unitDetect" id="762">
       <properties>
-        <property name="alsoActivate" value="Ac14,A2c14"/>
+        <property name="alsoActivate" value="Ac14"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27422,43 +27362,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="9"/>
       </properties>
     </object>
-    <object x="6400" y="1200" width="40" height="40" name="14" type="unitDetect" id="768">
-      <properties>
-        <property name="id" value="Nc14"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="6400" y="1200" width="40" height="40" type="unitDetect" id="769">
-      <properties>
-        <property name="alsoActivate" value="Nc14"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="6400" y="1200" width="40" height="40" type="unitDetect" id="770">
-      <properties>
-        <property name="alsoActivate" value="Nc14"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="6390" y="1210" width="60" height="40" name="A1c14" type="basic" id="771">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="6390" y="1210" width="60" height="40" name="Ac14" type="basic" id="772">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="6390" y="1210" width="60" height="40" name="A2c14" type="basic" id="773">
+    <object x="6390" y="1210" width="60" height="40" name="Ac14" type="basic" id="771">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -27495,7 +27399,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6800" y="1200" width="40" height="40" name="15" type="unitDetect" id="780">
       <properties>
-        <property name="alsoActivate" value="Ac15,A1c15"/>
+        <property name="alsoActivate" value="Ac15"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27504,7 +27408,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6800" y="1200" width="40" height="40" type="unitDetect" id="781">
       <properties>
-        <property name="alsoActivate" value="Ac15,A1c15"/>
+        <property name="alsoActivate" value="Ac15"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27513,7 +27417,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6800" y="1200" width="40" height="40" type="unitDetect" id="782">
       <properties>
-        <property name="alsoActivate" value="Ac15,A1c15"/>
+        <property name="alsoActivate" value="Ac15"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27522,7 +27426,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6800" y="1200" width="40" height="40" name="15" type="unitDetect" id="783">
       <properties>
-        <property name="alsoActivate" value="Ac15,A2c15"/>
+        <property name="alsoActivate" value="Ac15"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27531,56 +27435,11 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6800" y="1200" width="40" height="40" type="unitDetect" id="784">
       <properties>
-        <property name="alsoActivate" value="Ac15,A2c15"/>
+        <property name="alsoActivate" value="Ac15"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
         <property name="team" value="8"/>
-      </properties>
-    </object>
-    <object x="6800" y="1200" width="40" height="40" name="15" type="unitDetect" id="785">
-      <properties>
-        <property name="id" value="Bc15"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="6800" y="1200" width="40" height="40" type="unitDetect" id="786">
-      <properties>
-        <property name="alsoActivate" value="Bc15"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="6800" y="1200" width="40" height="40" type="unitDetect" id="787">
-      <properties>
-        <property name="alsoActivate" value="Bc15"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="6800" y="1200" width="40" height="40" type="unitDetect" id="788">
-      <properties>
-        <property name="alsoActivate" value="Bc15"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="6800" y="1200" width="40" height="40" type="unitDetect" id="789">
-      <properties>
-        <property name="alsoActivate" value="Bc15"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="9"/>
       </properties>
     </object>
     <object x="6800" y="1200" width="40" height="40" name="15" type="unitDetect" id="790">
@@ -27609,17 +27468,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6790" y="1210" width="60" height="40" name="A1c15" type="basic" id="793">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="6790" y="1210" width="60" height="40" name="A2c15" type="basic" id="794">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="6790" y="1210" width="60" height="40" name="Ac15" type="basic" id="795">
+    <object x="6790" y="1210" width="60" height="40" name="Ac15" type="basic" id="793">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -27803,7 +27652,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9400" y="1200" width="40" height="40" type="unitAdd" id="818">
       <properties>
-        <property name="deactivatedBy" value="su35,fd1,Nc13,Bc13"/>
+        <property name="deactivatedBy" value="su35,fd1,Bc13,Nc13"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="0"/>
@@ -27851,7 +27700,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7800" y="1400" width="40" height="40" name="16" type="unitDetect" id="827">
       <properties>
-        <property name="alsoActivate" value="Ac16,A1c16"/>
+        <property name="alsoActivate" value="A1c16"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27860,7 +27709,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7800" y="1400" width="40" height="40" type="unitDetect" id="828">
       <properties>
-        <property name="alsoActivate" value="Ac16,A1c16"/>
+        <property name="alsoActivate" value="A1c16"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27869,7 +27718,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7800" y="1400" width="40" height="40" type="unitDetect" id="829">
       <properties>
-        <property name="alsoActivate" value="Ac16,A1c16"/>
+        <property name="alsoActivate" value="A1c16"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27878,7 +27727,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7800" y="1400" width="40" height="40" name="16" type="unitDetect" id="830">
       <properties>
-        <property name="alsoActivate" value="Ac16,A2c16"/>
+        <property name="alsoActivate" value="A2c16"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27887,7 +27736,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7800" y="1400" width="40" height="40" type="unitDetect" id="831">
       <properties>
-        <property name="alsoActivate" value="Ac16,A2c16"/>
+        <property name="alsoActivate" value="A2c16"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -27965,17 +27814,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7790" y="1410" width="60" height="40" name="A2c16" type="basic" id="840">
+    <object x="7790" y="1410" width="60" height="40" name="A1c16" type="basic" id="840">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7790" y="1410" width="60" height="40" name="Ac16" type="basic" id="841">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="7790" y="1410" width="60" height="40" name="A1c16" type="basic" id="842">
+    <object x="7790" y="1410" width="60" height="40" name="A2c16" type="basic" id="841">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28041,7 +27885,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7600" y="1400" width="40" height="40" name="17" type="unitDetect" id="853">
       <properties>
-        <property name="alsoActivate" value="Ac17,A1c17"/>
+        <property name="alsoActivate" value="A1c17"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28050,7 +27894,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7600" y="1400" width="40" height="40" type="unitDetect" id="854">
       <properties>
-        <property name="alsoActivate" value="Ac17,A1c17"/>
+        <property name="alsoActivate" value="A1c17"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28059,7 +27903,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7600" y="1400" width="40" height="40" type="unitDetect" id="855">
       <properties>
-        <property name="alsoActivate" value="Ac17,A1c17"/>
+        <property name="alsoActivate" value="A1c17"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28068,7 +27912,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7600" y="1400" width="40" height="40" name="17" type="unitDetect" id="856">
       <properties>
-        <property name="alsoActivate" value="Ac17,A2c17"/>
+        <property name="alsoActivate" value="A2c17"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28077,7 +27921,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="7600" y="1400" width="40" height="40" type="unitDetect" id="857">
       <properties>
-        <property name="alsoActivate" value="Ac17,A2c17"/>
+        <property name="alsoActivate" value="A2c17"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28155,11 +27999,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7590" y="1410" width="60" height="40" name="Ac17" type="basic" id="866">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="7590" y="1410" width="60" height="40" name="A2c17" type="basic" id="867">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
@@ -28231,7 +28070,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8000" y="1400" width="40" height="40" name="18" type="unitDetect" id="879">
       <properties>
-        <property name="alsoActivate" value="Ac18,A1c18"/>
+        <property name="alsoActivate" value="A1c18"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28240,7 +28079,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8000" y="1400" width="40" height="40" type="unitDetect" id="880">
       <properties>
-        <property name="alsoActivate" value="Ac18,A1c18"/>
+        <property name="alsoActivate" value="A1c18"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28249,7 +28088,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8000" y="1400" width="40" height="40" type="unitDetect" id="881">
       <properties>
-        <property name="alsoActivate" value="Ac18,A1c18"/>
+        <property name="alsoActivate" value="A1c18"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28258,7 +28097,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8000" y="1400" width="40" height="40" name="18" type="unitDetect" id="882">
       <properties>
-        <property name="alsoActivate" value="Ac18,A2c18"/>
+        <property name="alsoActivate" value="A2c18"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28267,7 +28106,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8000" y="1400" width="40" height="40" type="unitDetect" id="883">
       <properties>
-        <property name="alsoActivate" value="Ac18,A2c18"/>
+        <property name="alsoActivate" value="A2c18"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28345,17 +28184,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7990" y="1410" width="60" height="40" name="A2c18" type="basic" id="892">
+    <object x="7990" y="1410" width="60" height="40" name="A1c18" type="basic" id="892">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="7990" y="1410" width="60" height="40" name="Ac18" type="basic" id="893">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="7990" y="1410" width="60" height="40" name="A1c18" type="basic" id="894">
+    <object x="7990" y="1410" width="60" height="40" name="A2c18" type="basic" id="894">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28422,7 +28256,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8200" y="1400" width="40" height="40" name="19" type="unitDetect" id="905">
       <properties>
-        <property name="alsoActivate" value="Ac19,A1c19"/>
+        <property name="alsoActivate" value="A1c19"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28431,7 +28265,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8200" y="1400" width="40" height="40" type="unitDetect" id="906">
       <properties>
-        <property name="alsoActivate" value="Ac19,A1c19"/>
+        <property name="alsoActivate" value="A1c19"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28440,7 +28274,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8200" y="1400" width="40" height="40" type="unitDetect" id="907">
       <properties>
-        <property name="alsoActivate" value="Ac19,A1c19"/>
+        <property name="alsoActivate" value="A1c19"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28449,7 +28283,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8200" y="1400" width="40" height="40" name="19" type="unitDetect" id="908">
       <properties>
-        <property name="alsoActivate" value="Ac19,A2c19"/>
+        <property name="alsoActivate" value="A2c19"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28458,7 +28292,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8200" y="1400" width="40" height="40" type="unitDetect" id="909">
       <properties>
-        <property name="alsoActivate" value="Ac19,A2c19"/>
+        <property name="alsoActivate" value="A2c19"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -28541,11 +28375,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8190" y="1410" width="60" height="40" name="Ac19" type="basic" id="919">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="8190" y="1410" width="60" height="40" name="A2c19" type="basic" id="920">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
@@ -28612,7 +28441,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8600" y="1400" width="40" height="40" name="20" type="unitDetect" id="931">
       <properties>
-        <property name="alsoActivate" value="Ac20,A1c20"/>
+        <property name="alsoActivate" value="A1c20"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="team" value="0"/>
@@ -28621,7 +28450,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8600" y="1400" width="40" height="40" type="unitDetect" id="932">
       <properties>
-        <property name="alsoActivate" value="Ac20,A1c20"/>
+        <property name="alsoActivate" value="A1c20"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="team" value="2"/>
@@ -28630,7 +28459,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8600" y="1400" width="40" height="40" type="unitDetect" id="933">
       <properties>
-        <property name="alsoActivate" value="Ac20,A1c20"/>
+        <property name="alsoActivate" value="A1c20"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="team" value="4"/>
@@ -28639,7 +28468,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8600" y="1400" width="40" height="40" name="20" type="unitDetect" id="934">
       <properties>
-        <property name="alsoActivate" value="Ac20,A2c20"/>
+        <property name="alsoActivate" value="A2c20"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="team" value="6"/>
@@ -28648,7 +28477,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8600" y="1400" width="40" height="40" type="unitDetect" id="935">
       <properties>
-        <property name="alsoActivate" value="Ac20,A2c20"/>
+        <property name="alsoActivate" value="A2c20"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="team" value="8"/>
@@ -28726,11 +28555,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="onlyBuildings" value="true" type="bool"/>
       </properties>
     </object>
-    <object x="8590" y="1410" width="60" height="40" name="Ac20" type="basic" id="944">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="8590" y="1410" width="60" height="40" name="A1c20" type="basic" id="945">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
@@ -28802,7 +28626,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8800" y="1400" width="40" height="40" name="21" type="unitDetect" id="957">
       <properties>
-        <property name="alsoActivate" value="Ac21,A1c21"/>
+        <property name="alsoActivate" value="A1c21"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="bugTurret"/>
@@ -28811,7 +28635,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8800" y="1400" width="40" height="40" type="unitDetect" id="958">
       <properties>
-        <property name="alsoActivate" value="Ac21,A1c21"/>
+        <property name="alsoActivate" value="A1c21"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="bugTurret"/>
@@ -28820,7 +28644,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8800" y="1400" width="40" height="40" type="unitDetect" id="959">
       <properties>
-        <property name="alsoActivate" value="Ac21,A1c21"/>
+        <property name="alsoActivate" value="A1c21"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="bugTurret"/>
@@ -28829,7 +28653,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8800" y="1400" width="40" height="40" name="21" type="unitDetect" id="960">
       <properties>
-        <property name="alsoActivate" value="Ac21,A2c21"/>
+        <property name="alsoActivate" value="A2c21"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="bugTurret"/>
@@ -28838,7 +28662,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8800" y="1400" width="40" height="40" type="unitDetect" id="961">
       <properties>
-        <property name="alsoActivate" value="Ac21,A2c21"/>
+        <property name="alsoActivate" value="A2c21"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="bugTurret"/>
@@ -28916,12 +28740,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8790" y="1410" width="60" height="40" name="A1c21" type="basic" id="970">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8790" y="1410" width="60" height="40" name="Ac21" type="basic" id="971">
+    <object x="8790" y="1410" width="60" height="40" name="A1c21" type="basic" id="971">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -28993,7 +28812,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9000" y="1400" width="40" height="40" name="22" type="unitDetect" id="983">
       <properties>
-        <property name="alsoActivate" value="Ac22,A1c22"/>
+        <property name="alsoActivate" value="A1c22"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29002,7 +28821,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9000" y="1400" width="40" height="40" type="unitDetect" id="984">
       <properties>
-        <property name="alsoActivate" value="Ac22,A1c22"/>
+        <property name="alsoActivate" value="A1c22"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29011,7 +28830,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9000" y="1400" width="40" height="40" type="unitDetect" id="985">
       <properties>
-        <property name="alsoActivate" value="Ac22,A1c22"/>
+        <property name="alsoActivate" value="A1c22"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29020,7 +28839,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9000" y="1400" width="40" height="40" name="22" type="unitDetect" id="986">
       <properties>
-        <property name="alsoActivate" value="Ac22,A2c22"/>
+        <property name="alsoActivate" value="A2c22"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29029,7 +28848,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9000" y="1400" width="40" height="40" type="unitDetect" id="987">
       <properties>
-        <property name="alsoActivate" value="Ac22,A2c22"/>
+        <property name="alsoActivate" value="A2c22"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29112,12 +28931,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8990" y="1410" width="60" height="40" name="Ac22" type="basic" id="997">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8990" y="1410" width="60" height="40" name="A2c22" type="basic" id="998">
+    <object x="8990" y="1410" width="60" height="40" name="A2c22" type="basic" id="997">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29184,7 +28998,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9200" y="1400" width="40" height="40" name="23" type="unitDetect" id="1009">
       <properties>
-        <property name="alsoActivate" value="Ac23,A1c23"/>
+        <property name="alsoActivate" value="A1c23"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29193,7 +29007,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9200" y="1400" width="40" height="40" type="unitDetect" id="1010">
       <properties>
-        <property name="alsoActivate" value="Ac23,A1c23"/>
+        <property name="alsoActivate" value="A1c23"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29202,7 +29016,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9200" y="1400" width="40" height="40" type="unitDetect" id="1011">
       <properties>
-        <property name="alsoActivate" value="Ac23,A1c23"/>
+        <property name="alsoActivate" value="A1c23"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29211,7 +29025,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9200" y="1400" width="40" height="40" name="23" type="unitDetect" id="1012">
       <properties>
-        <property name="alsoActivate" value="Ac23,A2c23"/>
+        <property name="alsoActivate" value="A2c23"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29220,7 +29034,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9200" y="1400" width="40" height="40" type="unitDetect" id="1013">
       <properties>
-        <property name="alsoActivate" value="Ac23,A2c23"/>
+        <property name="alsoActivate" value="A2c23"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29308,11 +29122,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9190" y="1410" width="60" height="40" name="Ac23" type="basic" id="1024">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="9200" y="1400" width="40" height="40" type="mapText" id="1025">
       <properties>
         <property name="activatedBy" value="A1c23"/>
@@ -29375,7 +29184,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8400" y="1400" width="40" height="40" name="24" type="unitDetect" id="1035">
       <properties>
-        <property name="alsoActivate" value="Ac24,A1c24"/>
+        <property name="alsoActivate" value="A1c24"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29384,7 +29193,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8400" y="1400" width="40" height="40" type="unitDetect" id="1036">
       <properties>
-        <property name="alsoActivate" value="Ac24,A1c24"/>
+        <property name="alsoActivate" value="A1c24"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29393,7 +29202,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8400" y="1400" width="40" height="40" type="unitDetect" id="1037">
       <properties>
-        <property name="alsoActivate" value="Ac24,A1c24"/>
+        <property name="alsoActivate" value="A1c24"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29402,7 +29211,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8400" y="1400" width="40" height="40" name="24" type="unitDetect" id="1038">
       <properties>
-        <property name="alsoActivate" value="Ac24,A2c24"/>
+        <property name="alsoActivate" value="A2c24"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29411,7 +29220,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="8400" y="1400" width="40" height="40" type="unitDetect" id="1039">
       <properties>
-        <property name="alsoActivate" value="Ac24,A2c24"/>
+        <property name="alsoActivate" value="A2c24"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29489,17 +29298,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8390" y="1410" width="60" height="40" name="A2c24" type="basic" id="1048">
+    <object x="8390" y="1410" width="60" height="40" name="A1c24" type="basic" id="1048">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="8390" y="1410" width="60" height="40" name="Ac24" type="basic" id="1049">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8390" y="1410" width="60" height="40" name="A1c24" type="basic" id="1050">
+    <object x="8390" y="1410" width="60" height="40" name="A2c24" type="basic" id="1050">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29565,7 +29369,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9600" y="1400" width="40" height="40" name="25" type="unitDetect" id="1061">
       <properties>
-        <property name="alsoActivate" value="Ac25,A1c25"/>
+        <property name="alsoActivate" value="A1c25"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29574,7 +29378,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9600" y="1400" width="40" height="40" type="unitDetect" id="1062">
       <properties>
-        <property name="alsoActivate" value="Ac25,A1c25"/>
+        <property name="alsoActivate" value="A1c25"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29583,7 +29387,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9600" y="1400" width="40" height="40" type="unitDetect" id="1063">
       <properties>
-        <property name="alsoActivate" value="Ac25,A1c25"/>
+        <property name="alsoActivate" value="A1c25"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29592,7 +29396,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9600" y="1400" width="40" height="40" name="25" type="unitDetect" id="1064">
       <properties>
-        <property name="alsoActivate" value="Ac25,A2c25"/>
+        <property name="alsoActivate" value="A2c25"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29601,7 +29405,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9600" y="1400" width="40" height="40" type="unitDetect" id="1065">
       <properties>
-        <property name="alsoActivate" value="Ac25,A2c25"/>
+        <property name="alsoActivate" value="A2c25"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29679,17 +29483,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9590" y="1410" width="60" height="40" name="A1c25" type="basic" id="1074">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="9590" y="1410" width="60" height="40" name="A2c25" type="basic" id="1075">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9590" y="1410" width="60" height="40" name="Ac25" type="basic" id="1076">
+    <object x="9590" y="1410" width="60" height="40" name="A1c25" type="basic" id="1076">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -29755,7 +29554,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9400" y="1400" width="40" height="40" name="26" type="unitDetect" id="1087">
       <properties>
-        <property name="alsoActivate" value="Ac26,A1c26"/>
+        <property name="alsoActivate" value="A1c26"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="20s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29764,7 +29563,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9400" y="1400" width="40" height="40" type="unitDetect" id="1088">
       <properties>
-        <property name="alsoActivate" value="Ac26,A1c26"/>
+        <property name="alsoActivate" value="A1c26"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="20s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29773,7 +29572,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9400" y="1400" width="40" height="40" type="unitDetect" id="1089">
       <properties>
-        <property name="alsoActivate" value="Ac26,A1c26"/>
+        <property name="alsoActivate" value="A1c26"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="20s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29782,7 +29581,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9400" y="1400" width="40" height="40" name="26" type="unitDetect" id="1090">
       <properties>
-        <property name="alsoActivate" value="Ac26,A2c26"/>
+        <property name="alsoActivate" value="A2c26"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="20s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29791,7 +29590,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9400" y="1400" width="40" height="40" type="unitDetect" id="1091">
       <properties>
-        <property name="alsoActivate" value="Ac26,A2c26"/>
+        <property name="alsoActivate" value="A2c26"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="20s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29869,17 +29668,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9390" y="1410" width="60" height="40" name="A2c26" type="basic" id="1100">
+    <object x="9390" y="1410" width="60" height="40" name="A1c26" type="basic" id="1100">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
     </object>
-    <object x="9390" y="1410" width="60" height="40" name="A1c26" type="basic" id="1101">
-      <properties>
-        <property name="resetActivationAfter" value="20s"/>
-      </properties>
-    </object>
-    <object x="9390" y="1410" width="60" height="40" name="Ac26" type="basic" id="1102">
+    <object x="9390" y="1410" width="60" height="40" name="A2c26" type="basic" id="1101">
       <properties>
         <property name="resetActivationAfter" value="20s"/>
       </properties>
@@ -29945,7 +29739,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9800" y="1400" width="40" height="40" name="27" type="unitDetect" id="1113">
       <properties>
-        <property name="alsoActivate" value="Ac27,A1c27"/>
+        <property name="alsoActivate" value="A1c27"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29954,7 +29748,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9800" y="1400" width="40" height="40" type="unitDetect" id="1114">
       <properties>
-        <property name="alsoActivate" value="Ac27,A1c27"/>
+        <property name="alsoActivate" value="A1c27"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29963,7 +29757,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9800" y="1400" width="40" height="40" type="unitDetect" id="1115">
       <properties>
-        <property name="alsoActivate" value="Ac27,A1c27"/>
+        <property name="alsoActivate" value="A1c27"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29972,7 +29766,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9800" y="1400" width="40" height="40" name="27" type="unitDetect" id="1116">
       <properties>
-        <property name="alsoActivate" value="Ac27,A2c27"/>
+        <property name="alsoActivate" value="A2c27"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -29981,7 +29775,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="9800" y="1400" width="40" height="40" type="unitDetect" id="1117">
       <properties>
-        <property name="alsoActivate" value="Ac27,A2c27"/>
+        <property name="alsoActivate" value="A2c27"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -30059,17 +29853,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9790" y="1410" width="60" height="40" name="A2c27" type="basic" id="1126">
+    <object x="9790" y="1410" width="60" height="40" name="A1c27" type="basic" id="1126">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9790" y="1410" width="60" height="40" name="A1c27" type="basic" id="1127">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9790" y="1410" width="60" height="40" name="Ac27" type="basic" id="1128">
+    <object x="9790" y="1410" width="60" height="40" name="A2c27" type="basic" id="1128">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30135,7 +29924,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="10000" y="1400" width="40" height="40" name="28" type="unitDetect" id="1139">
       <properties>
-        <property name="alsoActivate" value="Ac28,A1c28"/>
+        <property name="alsoActivate" value="A1c28"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -30144,7 +29933,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="10000" y="1400" width="40" height="40" type="unitDetect" id="1140">
       <properties>
-        <property name="alsoActivate" value="Ac28,A1c28"/>
+        <property name="alsoActivate" value="A1c28"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -30153,7 +29942,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="10000" y="1400" width="40" height="40" type="unitDetect" id="1141">
       <properties>
-        <property name="alsoActivate" value="Ac28,A1c28"/>
+        <property name="alsoActivate" value="A1c28"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -30162,7 +29951,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="10000" y="1400" width="40" height="40" name="28" type="unitDetect" id="1142">
       <properties>
-        <property name="alsoActivate" value="Ac28,A2c28"/>
+        <property name="alsoActivate" value="A2c28"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -30171,7 +29960,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="10000" y="1400" width="40" height="40" type="unitDetect" id="1143">
       <properties>
-        <property name="alsoActivate" value="Ac28,A2c28"/>
+        <property name="alsoActivate" value="A2c28"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -30254,12 +30043,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="9990" y="1410" width="60" height="40" name="A2c28" type="basic" id="1153">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9990" y="1410" width="60" height="40" name="Ac28" type="basic" id="1154">
+    <object x="9990" y="1410" width="60" height="40" name="A2c28" type="basic" id="1154">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -30330,137 +30114,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7800" y="1600" width="40" height="40" name="29" type="unitDetect" id="1165">
-      <properties>
-        <property name="alsoActivate" value="Ac29,A1c29"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="7800" y="1600" width="40" height="40" type="unitDetect" id="1166">
-      <properties>
-        <property name="alsoActivate" value="Ac29,A1c29"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="7800" y="1600" width="40" height="40" type="unitDetect" id="1167">
-      <properties>
-        <property name="alsoActivate" value="Ac29,A1c29"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="7800" y="1600" width="40" height="40" name="29" type="unitDetect" id="1168">
-      <properties>
-        <property name="alsoActivate" value="Ac29,A2c29"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="7800" y="1600" width="40" height="40" type="unitDetect" id="1169">
-      <properties>
-        <property name="alsoActivate" value="Ac29,A2c29"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
-    <object x="7800" y="1600" width="40" height="40" name="29" type="unitDetect" id="1170">
-      <properties>
-        <property name="id" value="Bc29"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="7800" y="1600" width="40" height="40" type="unitDetect" id="1171">
-      <properties>
-        <property name="alsoActivate" value="Bc29"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="7800" y="1600" width="40" height="40" type="unitDetect" id="1172">
-      <properties>
-        <property name="alsoActivate" value="Bc29"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="7800" y="1600" width="40" height="40" type="unitDetect" id="1173">
-      <properties>
-        <property name="alsoActivate" value="Bc29"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="7800" y="1600" width="40" height="40" type="unitDetect" id="1174">
-      <properties>
-        <property name="alsoActivate" value="Bc29"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="7800" y="1600" width="40" height="40" name="29" type="unitDetect" id="1175">
-      <properties>
-        <property name="id" value="Nc29"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="7800" y="1600" width="40" height="40" type="unitDetect" id="1176">
-      <properties>
-        <property name="alsoActivate" value="Nc29"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="7800" y="1600" width="40" height="40" type="unitDetect" id="1177">
-      <properties>
-        <property name="alsoActivate" value="Nc29"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="7790" y="1610" width="60" height="40" name="Ac29" type="basic" id="1178">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="7790" y="1610" width="60" height="40" name="A1c29" type="basic" id="1179">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="7790" y="1610" width="60" height="40" name="A2c29" type="basic" id="1180">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="7600" y="1600" width="40" height="40" type="unitAdd" id="1183">
       <properties>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
@@ -30491,137 +30144,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="7600" y="1600" width="40" height="40" name="30" type="unitDetect" id="1187">
-      <properties>
-        <property name="alsoActivate" value="Ac30,A1c30"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" type="unitDetect" id="1188">
-      <properties>
-        <property name="alsoActivate" value="Ac30,A1c30"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" type="unitDetect" id="1189">
-      <properties>
-        <property name="alsoActivate" value="Ac30,A1c30"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" name="30" type="unitDetect" id="1190">
-      <properties>
-        <property name="alsoActivate" value="Ac30,A2c30"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" type="unitDetect" id="1191">
-      <properties>
-        <property name="alsoActivate" value="Ac30,A2c30"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" name="30" type="unitDetect" id="1192">
-      <properties>
-        <property name="id" value="Bc30"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" type="unitDetect" id="1193">
-      <properties>
-        <property name="alsoActivate" value="Bc30"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" type="unitDetect" id="1194">
-      <properties>
-        <property name="alsoActivate" value="Bc30"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" type="unitDetect" id="1195">
-      <properties>
-        <property name="alsoActivate" value="Bc30"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" type="unitDetect" id="1196">
-      <properties>
-        <property name="alsoActivate" value="Bc30"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" name="30" type="unitDetect" id="1197">
-      <properties>
-        <property name="id" value="Nc30"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" type="unitDetect" id="1198">
-      <properties>
-        <property name="alsoActivate" value="Nc30"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="7600" y="1600" width="40" height="40" type="unitDetect" id="1199">
-      <properties>
-        <property name="alsoActivate" value="Nc30"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="7590" y="1610" width="60" height="40" name="Ac30" type="basic" id="1200">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="7590" y="1610" width="60" height="40" name="A2c30" type="basic" id="1201">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="7590" y="1610" width="60" height="40" name="A1c30" type="basic" id="1202">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="8000" y="1600" width="40" height="40" type="unitAdd" id="1205">
       <properties>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
@@ -30650,137 +30172,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" name="31" type="unitDetect" id="1209">
-      <properties>
-        <property name="alsoActivate" value="Ac31,A1c31"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" type="unitDetect" id="1210">
-      <properties>
-        <property name="alsoActivate" value="Ac31,A1c31"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" type="unitDetect" id="1211">
-      <properties>
-        <property name="alsoActivate" value="Ac31,A1c31"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" name="31" type="unitDetect" id="1212">
-      <properties>
-        <property name="alsoActivate" value="Ac31,A2c31"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" type="unitDetect" id="1213">
-      <properties>
-        <property name="alsoActivate" value="Ac31,A2c31"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" name="31" type="unitDetect" id="1214">
-      <properties>
-        <property name="id" value="Bc31"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" type="unitDetect" id="1215">
-      <properties>
-        <property name="alsoActivate" value="Bc31"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" type="unitDetect" id="1216">
-      <properties>
-        <property name="alsoActivate" value="Bc31"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" type="unitDetect" id="1217">
-      <properties>
-        <property name="alsoActivate" value="Bc31"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" type="unitDetect" id="1218">
-      <properties>
-        <property name="alsoActivate" value="Bc31"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" name="31" type="unitDetect" id="1219">
-      <properties>
-        <property name="id" value="Nc31"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" type="unitDetect" id="1220">
-      <properties>
-        <property name="alsoActivate" value="Nc31"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="8000" y="1600" width="40" height="40" type="unitDetect" id="1221">
-      <properties>
-        <property name="alsoActivate" value="Nc31"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="7990" y="1610" width="60" height="40" name="A1c31" type="basic" id="1222">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="7990" y="1610" width="60" height="40" name="A2c31" type="basic" id="1223">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="7990" y="1610" width="60" height="40" name="Ac31" type="basic" id="1224">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
     <object x="8200" y="1600" width="40" height="40" type="unitAdd" id="1227">
@@ -30814,137 +30205,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8200" y="1600" width="40" height="40" name="32" type="unitDetect" id="1231">
-      <properties>
-        <property name="alsoActivate" value="Ac32,A1c32"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" type="unitDetect" id="1232">
-      <properties>
-        <property name="alsoActivate" value="Ac32,A1c32"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" type="unitDetect" id="1233">
-      <properties>
-        <property name="alsoActivate" value="Ac32,A1c32"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" name="32" type="unitDetect" id="1234">
-      <properties>
-        <property name="alsoActivate" value="Ac32,A2c32"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" type="unitDetect" id="1235">
-      <properties>
-        <property name="alsoActivate" value="Ac32,A2c32"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" name="32" type="unitDetect" id="1236">
-      <properties>
-        <property name="id" value="Bc32"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" type="unitDetect" id="1237">
-      <properties>
-        <property name="alsoActivate" value="Bc32"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" type="unitDetect" id="1238">
-      <properties>
-        <property name="alsoActivate" value="Bc32"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" type="unitDetect" id="1239">
-      <properties>
-        <property name="alsoActivate" value="Bc32"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" type="unitDetect" id="1240">
-      <properties>
-        <property name="alsoActivate" value="Bc32"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" name="32" type="unitDetect" id="1241">
-      <properties>
-        <property name="id" value="Nc32"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" type="unitDetect" id="1242">
-      <properties>
-        <property name="alsoActivate" value="Nc32"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="8200" y="1600" width="40" height="40" type="unitDetect" id="1243">
-      <properties>
-        <property name="alsoActivate" value="Nc32"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="8190" y="1610" width="60" height="40" name="A2c32" type="basic" id="1244">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8190" y="1610" width="60" height="40" name="A1c32" type="basic" id="1245">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8190" y="1610" width="60" height="40" name="Ac32" type="basic" id="1246">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="8600" y="1600" width="40" height="40" type="unitAdd" id="1249">
       <properties>
         <property name="spawnUnits" value="turret*1(techLevel=2)"/>
@@ -30975,137 +30235,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8600" y="1600" width="40" height="40" name="33" type="unitDetect" id="1253">
-      <properties>
-        <property name="alsoActivate" value="Ac33,A1c33"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="team" value="0"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8600" y="1600" width="40" height="40" type="unitDetect" id="1254">
-      <properties>
-        <property name="alsoActivate" value="Ac33,A1c33"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="team" value="2"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8600" y="1600" width="40" height="40" type="unitDetect" id="1255">
-      <properties>
-        <property name="alsoActivate" value="Ac33,A1c33"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="team" value="4"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8600" y="1600" width="40" height="40" name="33" type="unitDetect" id="1256">
-      <properties>
-        <property name="alsoActivate" value="Ac33,A2c33"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="team" value="6"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8600" y="1600" width="40" height="40" type="unitDetect" id="1257">
-      <properties>
-        <property name="alsoActivate" value="Ac33,A2c33"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="team" value="8"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8600" y="1600" width="40" height="40" name="33" type="unitDetect" id="1258">
-      <properties>
-        <property name="id" value="Bc33"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="team" value="1"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8600" y="1600" width="40" height="40" type="unitDetect" id="1259">
-      <properties>
-        <property name="alsoActivate" value="Bc33"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="team" value="3"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8600" y="1600" width="40" height="40" type="unitDetect" id="1260">
-      <properties>
-        <property name="alsoActivate" value="Bc33"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="team" value="5"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8600" y="1600" width="40" height="40" type="unitDetect" id="1261">
-      <properties>
-        <property name="alsoActivate" value="Bc33"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="team" value="7"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8600" y="1600" width="40" height="40" type="unitDetect" id="1262">
-      <properties>
-        <property name="alsoActivate" value="Bc33"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="team" value="9"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8600" y="1600" width="40" height="40" name="33" type="unitDetect" id="1263">
-      <properties>
-        <property name="id" value="Nc33"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8600" y="1600" width="40" height="40" type="unitDetect" id="1264">
-      <properties>
-        <property name="alsoActivate" value="Nc33"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="team" value="-2"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8600" y="1600" width="40" height="40" type="unitDetect" id="1265">
-      <properties>
-        <property name="alsoActivate" value="Nc33"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="team" value="-1"/>
-        <property name="onlyBuildings" value="true" type="bool"/>
-      </properties>
-    </object>
-    <object x="8590" y="1610" width="60" height="40" name="Ac33" type="basic" id="1266">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8590" y="1610" width="60" height="40" name="A1c33" type="basic" id="1267">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8590" y="1610" width="60" height="40" name="A2c33" type="basic" id="1268">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="8800" y="1600" width="40" height="40" type="unitAdd" id="1271">
       <properties>
         <property name="spawnUnits" value="bugTurret*1(techLevel=2)"/>
@@ -31134,137 +30263,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="bugTurret*1(techLevel=2)"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" name="34" type="unitDetect" id="1275">
-      <properties>
-        <property name="alsoActivate" value="Ac34,A1c34"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" type="unitDetect" id="1276">
-      <properties>
-        <property name="alsoActivate" value="Ac34,A1c34"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" type="unitDetect" id="1277">
-      <properties>
-        <property name="alsoActivate" value="Ac34,A1c34"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" name="34" type="unitDetect" id="1278">
-      <properties>
-        <property name="alsoActivate" value="Ac34,A2c34"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" type="unitDetect" id="1279">
-      <properties>
-        <property name="alsoActivate" value="Ac34,A2c34"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" name="34" type="unitDetect" id="1280">
-      <properties>
-        <property name="id" value="Bc34"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" type="unitDetect" id="1281">
-      <properties>
-        <property name="alsoActivate" value="Bc34"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" type="unitDetect" id="1282">
-      <properties>
-        <property name="alsoActivate" value="Bc34"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" type="unitDetect" id="1283">
-      <properties>
-        <property name="alsoActivate" value="Bc34"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" type="unitDetect" id="1284">
-      <properties>
-        <property name="alsoActivate" value="Bc34"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-        <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" name="34" type="unitDetect" id="1285">
-      <properties>
-        <property name="id" value="Nc34"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" type="unitDetect" id="1286">
-      <properties>
-        <property name="alsoActivate" value="Nc34"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="8800" y="1600" width="40" height="40" type="unitDetect" id="1287">
-      <properties>
-        <property name="alsoActivate" value="Nc34"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="bugTurret"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="8790" y="1610" width="60" height="40" name="A1c34" type="basic" id="1288">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8790" y="1610" width="60" height="40" name="Ac34" type="basic" id="1289">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8790" y="1610" width="60" height="40" name="A2c34" type="basic" id="1290">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
     <object x="9000" y="1600" width="40" height="40" type="unitAdd" id="1293">
@@ -31298,137 +30296,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="0"/>
       </properties>
     </object>
-    <object x="9000" y="1600" width="40" height="40" name="35" type="unitDetect" id="1297">
-      <properties>
-        <property name="alsoActivate" value="Ac35,A1c35"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" type="unitDetect" id="1298">
-      <properties>
-        <property name="alsoActivate" value="Ac35,A1c35"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" type="unitDetect" id="1299">
-      <properties>
-        <property name="alsoActivate" value="Ac35,A1c35"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" name="35" type="unitDetect" id="1300">
-      <properties>
-        <property name="alsoActivate" value="Ac35,A2c35"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" type="unitDetect" id="1301">
-      <properties>
-        <property name="alsoActivate" value="Ac35,A2c35"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" name="35" type="unitDetect" id="1302">
-      <properties>
-        <property name="id" value="Bc35"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" type="unitDetect" id="1303">
-      <properties>
-        <property name="alsoActivate" value="Bc35"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" type="unitDetect" id="1304">
-      <properties>
-        <property name="alsoActivate" value="Bc35"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" type="unitDetect" id="1305">
-      <properties>
-        <property name="alsoActivate" value="Bc35"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" type="unitDetect" id="1306">
-      <properties>
-        <property name="alsoActivate" value="Bc35"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" name="35" type="unitDetect" id="1307">
-      <properties>
-        <property name="id" value="Nc35"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" type="unitDetect" id="1308">
-      <properties>
-        <property name="alsoActivate" value="Nc35"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="9000" y="1600" width="40" height="40" type="unitDetect" id="1309">
-      <properties>
-        <property name="alsoActivate" value="Nc35"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="8990" y="1610" width="60" height="40" name="A1c35" type="basic" id="1310">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8990" y="1610" width="60" height="40" name="Ac35" type="basic" id="1311">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8990" y="1610" width="60" height="40" name="A2c35" type="basic" id="1312">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="9200" y="1600" width="40" height="40" type="unitAdd" id="1315">
       <properties>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
@@ -31458,137 +30325,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" name="36" type="unitDetect" id="1319">
-      <properties>
-        <property name="alsoActivate" value="Ac36,A1c36"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" type="unitDetect" id="1320">
-      <properties>
-        <property name="alsoActivate" value="Ac36,A1c36"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" type="unitDetect" id="1321">
-      <properties>
-        <property name="alsoActivate" value="Ac36,A1c36"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" name="36" type="unitDetect" id="1322">
-      <properties>
-        <property name="alsoActivate" value="Ac36,A2c36"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" type="unitDetect" id="1323">
-      <properties>
-        <property name="alsoActivate" value="Ac36,A2c36"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" name="36" type="unitDetect" id="1324">
-      <properties>
-        <property name="id" value="Bc36"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" type="unitDetect" id="1325">
-      <properties>
-        <property name="alsoActivate" value="Bc36"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" type="unitDetect" id="1326">
-      <properties>
-        <property name="alsoActivate" value="Bc36"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" type="unitDetect" id="1327">
-      <properties>
-        <property name="alsoActivate" value="Bc36"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" type="unitDetect" id="1328">
-      <properties>
-        <property name="alsoActivate" value="Bc36"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" name="36" type="unitDetect" id="1329">
-      <properties>
-        <property name="id" value="Nc36"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" type="unitDetect" id="1330">
-      <properties>
-        <property name="alsoActivate" value="Nc36"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="9200" y="1600" width="40" height="40" type="unitDetect" id="1331">
-      <properties>
-        <property name="alsoActivate" value="Nc36"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="9190" y="1610" width="60" height="40" name="A1c36" type="basic" id="1332">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9190" y="1610" width="60" height="40" name="A2c36" type="basic" id="1333">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9190" y="1610" width="60" height="40" name="Ac36" type="basic" id="1334">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
     <object x="8400" y="1600" width="40" height="40" type="unitAdd" id="1337">
@@ -31622,137 +30358,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="8400" y="1600" width="40" height="40" name="37" type="unitDetect" id="1341">
-      <properties>
-        <property name="alsoActivate" value="Ac37,A1c37"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" type="unitDetect" id="1342">
-      <properties>
-        <property name="alsoActivate" value="Ac37,A1c37"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" type="unitDetect" id="1343">
-      <properties>
-        <property name="alsoActivate" value="Ac37,A1c37"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" name="37" type="unitDetect" id="1344">
-      <properties>
-        <property name="alsoActivate" value="Ac37,A2c37"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" type="unitDetect" id="1345">
-      <properties>
-        <property name="alsoActivate" value="Ac37,A2c37"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" name="37" type="unitDetect" id="1346">
-      <properties>
-        <property name="id" value="Bc37"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" type="unitDetect" id="1347">
-      <properties>
-        <property name="alsoActivate" value="Bc37"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" type="unitDetect" id="1348">
-      <properties>
-        <property name="alsoActivate" value="Bc37"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" type="unitDetect" id="1349">
-      <properties>
-        <property name="alsoActivate" value="Bc37"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" type="unitDetect" id="1350">
-      <properties>
-        <property name="alsoActivate" value="Bc37"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" name="37" type="unitDetect" id="1351">
-      <properties>
-        <property name="id" value="Nc37"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" type="unitDetect" id="1352">
-      <properties>
-        <property name="alsoActivate" value="Nc37"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="8400" y="1600" width="40" height="40" type="unitDetect" id="1353">
-      <properties>
-        <property name="alsoActivate" value="Nc37"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="8390" y="1610" width="60" height="40" name="Ac37" type="basic" id="1354">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8390" y="1610" width="60" height="40" name="A2c37" type="basic" id="1355">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="8390" y="1610" width="60" height="40" name="A1c37" type="basic" id="1356">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="9600" y="1600" width="40" height="40" type="unitAdd" id="1359">
       <properties>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
@@ -31781,137 +30386,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" name="38" type="unitDetect" id="1363">
-      <properties>
-        <property name="alsoActivate" value="Ac38,A1c38"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" type="unitDetect" id="1364">
-      <properties>
-        <property name="alsoActivate" value="Ac38,A1c38"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" type="unitDetect" id="1365">
-      <properties>
-        <property name="alsoActivate" value="Ac38,A1c38"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" name="38" type="unitDetect" id="1366">
-      <properties>
-        <property name="alsoActivate" value="Ac38,A2c38"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" type="unitDetect" id="1367">
-      <properties>
-        <property name="alsoActivate" value="Ac38,A2c38"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" name="38" type="unitDetect" id="1368">
-      <properties>
-        <property name="id" value="Bc38"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" type="unitDetect" id="1369">
-      <properties>
-        <property name="alsoActivate" value="Bc38"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" type="unitDetect" id="1370">
-      <properties>
-        <property name="alsoActivate" value="Bc38"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" type="unitDetect" id="1371">
-      <properties>
-        <property name="alsoActivate" value="Bc38"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" type="unitDetect" id="1372">
-      <properties>
-        <property name="alsoActivate" value="Bc38"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" name="38" type="unitDetect" id="1373">
-      <properties>
-        <property name="id" value="Nc38"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" type="unitDetect" id="1374">
-      <properties>
-        <property name="alsoActivate" value="Nc38"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="9600" y="1600" width="40" height="40" type="unitDetect" id="1375">
-      <properties>
-        <property name="alsoActivate" value="Nc38"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="9590" y="1610" width="60" height="40" name="A2c38" type="basic" id="1376">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9590" y="1610" width="60" height="40" name="Ac38" type="basic" id="1377">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9590" y="1610" width="60" height="40" name="A1c38" type="basic" id="1378">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
     <object x="9400" y="1600" width="40" height="40" type="unitAdd" id="1381">
@@ -31944,137 +30418,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9400" y="1600" width="40" height="40" name="39" type="unitDetect" id="1385">
-      <properties>
-        <property name="alsoActivate" value="Ac39,A1c39"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="9400" y="1600" width="40" height="40" type="unitDetect" id="1386">
-      <properties>
-        <property name="alsoActivate" value="Ac39,A1c39"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="9400" y="1600" width="40" height="40" type="unitDetect" id="1387">
-      <properties>
-        <property name="alsoActivate" value="Ac39,A1c39"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="9400" y="1600" width="40" height="40" name="39" type="unitDetect" id="1388">
-      <properties>
-        <property name="alsoActivate" value="Ac39,A2c39"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="9400" y="1600" width="40" height="40" type="unitDetect" id="1389">
-      <properties>
-        <property name="alsoActivate" value="Ac39,A2c39"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
-    <object x="9400" y="1600" width="40" height="40" name="39" type="unitDetect" id="1390">
-      <properties>
-        <property name="id" value="Bc39"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="9400" y="1600" width="40" height="40" type="unitDetect" id="1391">
-      <properties>
-        <property name="alsoActivate" value="Bc39"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="9400" y="1600" width="40" height="40" type="unitDetect" id="1392">
-      <properties>
-        <property name="alsoActivate" value="Bc39"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="9400" y="1600" width="40" height="40" type="unitDetect" id="1393">
-      <properties>
-        <property name="alsoActivate" value="Bc39"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="9400" y="1600" width="40" height="40" type="unitDetect" id="1394">
-      <properties>
-        <property name="alsoActivate" value="Bc39"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="9400" y="1600" width="40" height="40" name="39" type="unitDetect" id="1395">
-      <properties>
-        <property name="id" value="Nc39"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="9400" y="1600" width="40" height="40" type="unitDetect" id="1396">
-      <properties>
-        <property name="alsoActivate" value="Nc39"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="9400" y="1600" width="40" height="40" type="unitDetect" id="1397">
-      <properties>
-        <property name="alsoActivate" value="Nc39"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="20s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="9390" y="1610" width="60" height="40" name="Ac39" type="basic" id="1398">
-      <properties>
-        <property name="resetActivationAfter" value="20s"/>
-      </properties>
-    </object>
-    <object x="9390" y="1610" width="60" height="40" name="A2c39" type="basic" id="1399">
-      <properties>
-        <property name="resetActivationAfter" value="20s"/>
-      </properties>
-    </object>
-    <object x="9390" y="1610" width="60" height="40" name="A1c39" type="basic" id="1400">
-      <properties>
-        <property name="resetActivationAfter" value="20s"/>
-      </properties>
-    </object>
     <object x="11400" y="1600" width="40" height="40" type="unitAdd" id="1404">
       <properties>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
@@ -32100,7 +30443,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11400" y="1600" width="40" height="40" name="40" type="unitDetect" id="1407">
       <properties>
-        <property name="alsoActivate" value="Ac40,A1c40"/>
+        <property name="alsoActivate" value="A1c40"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32109,7 +30452,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11400" y="1600" width="40" height="40" type="unitDetect" id="1408">
       <properties>
-        <property name="alsoActivate" value="Ac40,A1c40"/>
+        <property name="alsoActivate" value="A1c40"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32118,7 +30461,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11400" y="1600" width="40" height="40" type="unitDetect" id="1409">
       <properties>
-        <property name="alsoActivate" value="Ac40,A1c40"/>
+        <property name="alsoActivate" value="A1c40"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32127,7 +30470,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11400" y="1600" width="40" height="40" name="40" type="unitDetect" id="1410">
       <properties>
-        <property name="alsoActivate" value="Ac40,A2c40"/>
+        <property name="alsoActivate" value="A2c40"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32136,7 +30479,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11400" y="1600" width="40" height="40" type="unitDetect" id="1411">
       <properties>
-        <property name="alsoActivate" value="Ac40,A2c40"/>
+        <property name="alsoActivate" value="A2c40"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32214,17 +30557,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="11390" y="1610" width="60" height="40" name="A2c40" type="basic" id="1420">
+    <object x="11390" y="1610" width="60" height="40" name="A1c40" type="basic" id="1420">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11390" y="1610" width="60" height="40" name="A1c40" type="basic" id="1421">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="11390" y="1610" width="60" height="40" name="Ac40" type="basic" id="1422">
+    <object x="11390" y="1610" width="60" height="40" name="A2c40" type="basic" id="1421">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32290,7 +30628,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11600" y="1600" width="40" height="40" name="41" type="unitDetect" id="1433">
       <properties>
-        <property name="alsoActivate" value="Ac41,A1c41"/>
+        <property name="alsoActivate" value="A1c41"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32299,7 +30637,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11600" y="1600" width="40" height="40" type="unitDetect" id="1434">
       <properties>
-        <property name="alsoActivate" value="Ac41,A1c41"/>
+        <property name="alsoActivate" value="A1c41"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32308,7 +30646,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11600" y="1600" width="40" height="40" type="unitDetect" id="1435">
       <properties>
-        <property name="alsoActivate" value="Ac41,A1c41"/>
+        <property name="alsoActivate" value="A1c41"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32317,7 +30655,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11600" y="1600" width="40" height="40" name="41" type="unitDetect" id="1436">
       <properties>
-        <property name="alsoActivate" value="Ac41,A2c41"/>
+        <property name="alsoActivate" value="A2c41"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32326,7 +30664,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11600" y="1600" width="40" height="40" type="unitDetect" id="1437">
       <properties>
-        <property name="alsoActivate" value="Ac41,A2c41"/>
+        <property name="alsoActivate" value="A2c41"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32404,12 +30742,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="11590" y="1610" width="60" height="40" name="Ac41" type="basic" id="1446">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="11590" y="1610" width="60" height="40" name="A1c41" type="basic" id="1447">
+    <object x="11590" y="1610" width="60" height="40" name="A1c41" type="basic" id="1446">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32480,7 +30813,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11200" y="1600" width="40" height="40" name="42" type="unitDetect" id="1459">
       <properties>
-        <property name="alsoActivate" value="Ac42,A1c42"/>
+        <property name="alsoActivate" value="A1c42"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32489,7 +30822,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11200" y="1600" width="40" height="40" type="unitDetect" id="1460">
       <properties>
-        <property name="alsoActivate" value="Ac42,A1c42"/>
+        <property name="alsoActivate" value="A1c42"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32498,7 +30831,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11200" y="1600" width="40" height="40" type="unitDetect" id="1461">
       <properties>
-        <property name="alsoActivate" value="Ac42,A1c42"/>
+        <property name="alsoActivate" value="A1c42"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32507,7 +30840,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11200" y="1600" width="40" height="40" name="42" type="unitDetect" id="1462">
       <properties>
-        <property name="alsoActivate" value="Ac42,A2c42"/>
+        <property name="alsoActivate" value="A2c42"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32516,7 +30849,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11200" y="1600" width="40" height="40" type="unitDetect" id="1463">
       <properties>
-        <property name="alsoActivate" value="Ac42,A2c42"/>
+        <property name="alsoActivate" value="A2c42"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -32594,17 +30927,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="11190" y="1610" width="60" height="40" name="A2c42" type="basic" id="1472">
+    <object x="11190" y="1610" width="60" height="40" name="A1c42" type="basic" id="1472">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="11190" y="1610" width="60" height="40" name="A1c42" type="basic" id="1473">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="11190" y="1610" width="60" height="40" name="Ac42" type="basic" id="1474">
+    <object x="11190" y="1610" width="60" height="40" name="A2c42" type="basic" id="1474">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -32675,51 +31003,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="9800" y="1600" width="40" height="40" name="43" type="unitDetect" id="1486">
-      <properties>
-        <property name="alsoActivate" value="Ac43,A1c43"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="9800" y="1600" width="40" height="40" type="unitDetect" id="1487">
-      <properties>
-        <property name="alsoActivate" value="Ac43,A1c43"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="9800" y="1600" width="40" height="40" type="unitDetect" id="1488">
-      <properties>
-        <property name="alsoActivate" value="Ac43,A1c43"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="9800" y="1600" width="40" height="40" name="43" type="unitDetect" id="1489">
-      <properties>
-        <property name="alsoActivate" value="Ac43,A2c43"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="9800" y="1600" width="40" height="40" type="unitDetect" id="1490">
-      <properties>
-        <property name="alsoActivate" value="Ac43,A2c43"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
     <object x="9800" y="1600" width="40" height="40" name="43" type="unitDetect" id="1491">
       <properties>
         <property name="id" value="Bc43"/>
@@ -32763,47 +31046,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
         <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="9800" y="1600" width="40" height="40" name="43" type="unitDetect" id="1496">
-      <properties>
-        <property name="id" value="Nc43"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="9800" y="1600" width="40" height="40" type="unitDetect" id="1497">
-      <properties>
-        <property name="alsoActivate" value="Nc43"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="9800" y="1600" width="40" height="40" type="unitDetect" id="1498">
-      <properties>
-        <property name="alsoActivate" value="Nc43"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="9790" y="1610" width="60" height="40" name="Ac43" type="basic" id="1499">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9790" y="1610" width="60" height="40" name="A1c43" type="basic" id="1500">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9790" y="1610" width="60" height="40" name="A2c43" type="basic" id="1501">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
     <object x="9801" y="1601" width="40" height="40" type="unitDetect" id="1502">
@@ -32853,51 +31095,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="10000" y="1600" width="40" height="40" name="44" type="unitDetect" id="1511">
-      <properties>
-        <property name="alsoActivate" value="Ac44,A1c44"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="10000" y="1600" width="40" height="40" type="unitDetect" id="1512">
-      <properties>
-        <property name="alsoActivate" value="Ac44,A1c44"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="10000" y="1600" width="40" height="40" type="unitDetect" id="1513">
-      <properties>
-        <property name="alsoActivate" value="Ac44,A1c44"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="10000" y="1600" width="40" height="40" name="44" type="unitDetect" id="1514">
-      <properties>
-        <property name="alsoActivate" value="Ac44,A2c44"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="10000" y="1600" width="40" height="40" type="unitDetect" id="1515">
-      <properties>
-        <property name="alsoActivate" value="Ac44,A2c44"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
     <object x="10000" y="1600" width="40" height="40" name="44" type="unitDetect" id="1516">
       <properties>
         <property name="id" value="Bc44"/>
@@ -32941,47 +31138,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
         <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="10000" y="1600" width="40" height="40" name="44" type="unitDetect" id="1521">
-      <properties>
-        <property name="id" value="Nc44"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="10000" y="1600" width="40" height="40" type="unitDetect" id="1522">
-      <properties>
-        <property name="alsoActivate" value="Nc44"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="10000" y="1600" width="40" height="40" type="unitDetect" id="1523">
-      <properties>
-        <property name="alsoActivate" value="Nc44"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="9990" y="1610" width="60" height="40" name="A1c44" type="basic" id="1524">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9990" y="1610" width="60" height="40" name="Ac44" type="basic" id="1525">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="9990" y="1610" width="60" height="40" name="A2c44" type="basic" id="1526">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
     <object x="10001" y="1601" width="40" height="40" type="unitDetect" id="1527">
@@ -33029,51 +31185,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="10200" y="1600" width="40" height="40" name="45" type="unitDetect" id="1536">
-      <properties>
-        <property name="alsoActivate" value="Ac45,A1c45"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="10200" y="1600" width="40" height="40" type="unitDetect" id="1537">
-      <properties>
-        <property name="alsoActivate" value="Ac45,A1c45"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="10200" y="1600" width="40" height="40" type="unitDetect" id="1538">
-      <properties>
-        <property name="alsoActivate" value="Ac45,A1c45"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="10200" y="1600" width="40" height="40" name="45" type="unitDetect" id="1539">
-      <properties>
-        <property name="alsoActivate" value="Ac45,A2c45"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="10200" y="1600" width="40" height="40" type="unitDetect" id="1540">
-      <properties>
-        <property name="alsoActivate" value="Ac45,A2c45"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
       </properties>
     </object>
     <object x="10200" y="1600" width="40" height="40" name="45" type="unitDetect" id="1541">
@@ -33147,21 +31258,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="10190" y="1610" width="60" height="40" name="A2c45" type="basic" id="1549">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="10190" y="1610" width="60" height="40" name="Ac45" type="basic" id="1550">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="10190" y="1610" width="60" height="40" name="A1c45" type="basic" id="1551">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
     <object x="10201" y="1601" width="40" height="40" type="unitDetect" id="1552">
       <properties>
         <property name="resetActivationAfter" value="3s"/>
@@ -33209,51 +31305,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="10400" y="1600" width="40" height="40" name="46" type="unitDetect" id="1561">
-      <properties>
-        <property name="alsoActivate" value="Ac46,A1c46"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="10400" y="1600" width="40" height="40" type="unitDetect" id="1562">
-      <properties>
-        <property name="alsoActivate" value="Ac46,A1c46"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="10400" y="1600" width="40" height="40" type="unitDetect" id="1563">
-      <properties>
-        <property name="alsoActivate" value="Ac46,A1c46"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="10400" y="1600" width="40" height="40" name="46" type="unitDetect" id="1564">
-      <properties>
-        <property name="alsoActivate" value="Ac46,A2c46"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="10400" y="1600" width="40" height="40" type="unitDetect" id="1565">
-      <properties>
-        <property name="alsoActivate" value="Ac46,A2c46"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
     <object x="10400" y="1600" width="40" height="40" name="46" type="unitDetect" id="1566">
       <properties>
         <property name="id" value="Bc46"/>
@@ -33297,47 +31348,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
         <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="10400" y="1600" width="40" height="40" name="46" type="unitDetect" id="1571">
-      <properties>
-        <property name="id" value="Nc46"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="10400" y="1600" width="40" height="40" type="unitDetect" id="1572">
-      <properties>
-        <property name="alsoActivate" value="Nc46"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="10400" y="1600" width="40" height="40" type="unitDetect" id="1573">
-      <properties>
-        <property name="alsoActivate" value="Nc46"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="10390" y="1610" width="60" height="40" name="A1c46" type="basic" id="1574">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="10390" y="1610" width="60" height="40" name="Ac46" type="basic" id="1575">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="10390" y="1610" width="60" height="40" name="A2c46" type="basic" id="1576">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
     <object x="10401" y="1601" width="40" height="40" type="unitDetect" id="1577">
@@ -33404,51 +31414,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="10600" y="1600" width="40" height="40" name="47" type="unitDetect" id="1588">
-      <properties>
-        <property name="alsoActivate" value="Ac47,A1c47"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="10600" y="1600" width="40" height="40" type="unitDetect" id="1589">
-      <properties>
-        <property name="alsoActivate" value="Ac47,A1c47"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="10600" y="1600" width="40" height="40" type="unitDetect" id="1590">
-      <properties>
-        <property name="alsoActivate" value="Ac47,A1c47"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="10600" y="1600" width="40" height="40" name="47" type="unitDetect" id="1591">
-      <properties>
-        <property name="alsoActivate" value="Ac47,A2c47"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="10600" y="1600" width="40" height="40" type="unitDetect" id="1592">
-      <properties>
-        <property name="alsoActivate" value="Ac47,A2c47"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
     <object x="10600" y="1600" width="40" height="40" name="47" type="unitDetect" id="1593">
       <properties>
         <property name="id" value="Bc47"/>
@@ -33492,47 +31457,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
         <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="10600" y="1600" width="40" height="40" name="47" type="unitDetect" id="1598">
-      <properties>
-        <property name="id" value="Nc47"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="10600" y="1600" width="40" height="40" type="unitDetect" id="1599">
-      <properties>
-        <property name="alsoActivate" value="Nc47"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="10600" y="1600" width="40" height="40" type="unitDetect" id="1600">
-      <properties>
-        <property name="alsoActivate" value="Nc47"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="10590" y="1610" width="60" height="40" name="Ac47" type="basic" id="1601">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="10590" y="1610" width="60" height="40" name="A1c47" type="basic" id="1602">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="10590" y="1610" width="60" height="40" name="A2c47" type="basic" id="1603">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
     <object x="10601" y="1601" width="40" height="40" type="unitDetect" id="1604">
@@ -33582,51 +31506,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="10800" y="1600" width="40" height="40" name="48" type="unitDetect" id="1613">
-      <properties>
-        <property name="alsoActivate" value="Ac48,A1c48"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="10800" y="1600" width="40" height="40" type="unitDetect" id="1614">
-      <properties>
-        <property name="alsoActivate" value="Ac48,A1c48"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="10800" y="1600" width="40" height="40" type="unitDetect" id="1615">
-      <properties>
-        <property name="alsoActivate" value="Ac48,A1c48"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="10800" y="1600" width="40" height="40" name="48" type="unitDetect" id="1616">
-      <properties>
-        <property name="alsoActivate" value="Ac48,A2c48"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="10800" y="1600" width="40" height="40" type="unitDetect" id="1617">
-      <properties>
-        <property name="alsoActivate" value="Ac48,A2c48"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
     <object x="10800" y="1600" width="40" height="40" name="48" type="unitDetect" id="1618">
       <properties>
         <property name="id" value="Bc48"/>
@@ -33670,47 +31549,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
         <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="10800" y="1600" width="40" height="40" name="48" type="unitDetect" id="1623">
-      <properties>
-        <property name="id" value="Nc48"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="10800" y="1600" width="40" height="40" type="unitDetect" id="1624">
-      <properties>
-        <property name="alsoActivate" value="Nc48"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="10800" y="1600" width="40" height="40" type="unitDetect" id="1625">
-      <properties>
-        <property name="alsoActivate" value="Nc48"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="10790" y="1610" width="60" height="40" name="Ac48" type="basic" id="1626">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="10790" y="1610" width="60" height="40" name="A1c48" type="basic" id="1627">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="10790" y="1610" width="60" height="40" name="A2c48" type="basic" id="1628">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
     <object x="10801" y="1601" width="40" height="40" type="unitDetect" id="1629">
@@ -33813,137 +31651,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="20s"/>
         <property name="spawnUnits" value="supplyDepot*1(techLevel=2)"/>
         <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" name="49" type="unitDetect" id="1646">
-      <properties>
-        <property name="alsoActivate" value="Ac49,A1c49"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="0"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" type="unitDetect" id="1647">
-      <properties>
-        <property name="alsoActivate" value="Ac49,A1c49"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="2"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" type="unitDetect" id="1648">
-      <properties>
-        <property name="alsoActivate" value="Ac49,A1c49"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="4"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" name="49" type="unitDetect" id="1649">
-      <properties>
-        <property name="alsoActivate" value="Ac49,A2c49"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="6"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" type="unitDetect" id="1650">
-      <properties>
-        <property name="alsoActivate" value="Ac49,A2c49"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="8"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" name="49" type="unitDetect" id="1651">
-      <properties>
-        <property name="id" value="Bc49"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="1"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" type="unitDetect" id="1652">
-      <properties>
-        <property name="alsoActivate" value="Bc49"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="3"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" type="unitDetect" id="1653">
-      <properties>
-        <property name="alsoActivate" value="Bc49"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="5"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" type="unitDetect" id="1654">
-      <properties>
-        <property name="alsoActivate" value="Bc49"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="7"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" type="unitDetect" id="1655">
-      <properties>
-        <property name="alsoActivate" value="Bc49"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="9"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" name="49" type="unitDetect" id="1656">
-      <properties>
-        <property name="id" value="Nc49"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" type="unitDetect" id="1657">
-      <properties>
-        <property name="alsoActivate" value="Nc49"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="11000" y="1600" width="40" height="40" type="unitDetect" id="1658">
-      <properties>
-        <property name="alsoActivate" value="Nc49"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="10990" y="1610" width="60" height="40" name="A2c49" type="basic" id="1659">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="10990" y="1610" width="60" height="40" name="A1c49" type="basic" id="1660">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="10990" y="1610" width="60" height="40" name="Ac49" type="basic" id="1661">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
     <object x="11001" y="1601" width="40" height="40" type="unitDetect" id="1662">
@@ -34171,12 +31878,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6390" y="2210" width="60" height="40" name="A2c50" type="basic" id="1693">
+    <object x="6390" y="2210" width="60" height="40" name="Ac50" type="basic" id="1693">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6390" y="2210" width="60" height="40" name="Ac50" type="basic" id="1694">
+    <object x="6390" y="2210" width="60" height="40" name="A2c50" type="basic" id="1694">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -34361,17 +32068,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6590" y="2210" width="60" height="40" name="Ac51" type="basic" id="1719">
+    <object x="6590" y="2210" width="60" height="40" name="A1c51" type="basic" id="1719">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6590" y="2210" width="60" height="40" name="A1c51" type="basic" id="1720">
+    <object x="6590" y="2210" width="60" height="40" name="A2c51" type="basic" id="1720">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6590" y="2210" width="60" height="40" name="A2c51" type="basic" id="1721">
+    <object x="6590" y="2210" width="60" height="40" name="Ac51" type="basic" id="1721">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -34437,7 +32144,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6800" y="2200" width="40" height="40" name="52" type="unitDetect" id="1732">
       <properties>
-        <property name="alsoActivate" value="Ac52,A1c52"/>
+        <property name="alsoActivate" value="A1c52"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -34446,7 +32153,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6800" y="2200" width="40" height="40" type="unitDetect" id="1733">
       <properties>
-        <property name="alsoActivate" value="Ac52,A1c52"/>
+        <property name="alsoActivate" value="A1c52"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -34455,7 +32162,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6800" y="2200" width="40" height="40" type="unitDetect" id="1734">
       <properties>
-        <property name="alsoActivate" value="Ac52,A1c52"/>
+        <property name="alsoActivate" value="A1c52"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -34464,7 +32171,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6800" y="2200" width="40" height="40" name="52" type="unitDetect" id="1735">
       <properties>
-        <property name="alsoActivate" value="Ac52,A2c52"/>
+        <property name="alsoActivate" value="A2c52"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -34473,7 +32180,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="6800" y="2200" width="40" height="40" type="unitDetect" id="1736">
       <properties>
-        <property name="alsoActivate" value="Ac52,A2c52"/>
+        <property name="alsoActivate" value="A2c52"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -34551,17 +32258,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6790" y="2210" width="60" height="40" name="Ac52" type="basic" id="1745">
+    <object x="6790" y="2210" width="60" height="40" name="A1c52" type="basic" id="1745">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6790" y="2210" width="60" height="40" name="A2c52" type="basic" id="1746">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="6790" y="2210" width="60" height="40" name="A1c52" type="basic" id="1747">
+    <object x="6790" y="2210" width="60" height="40" name="A2c52" type="basic" id="1747">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -34754,7 +32456,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11800" y="1600" width="40" height="40" name="53" type="unitDetect" id="1789">
       <properties>
-        <property name="alsoActivate" value="Ac53,A1c53"/>
+        <property name="alsoActivate" value="Ac53"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -34763,7 +32465,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11800" y="1600" width="40" height="40" type="unitDetect" id="1790">
       <properties>
-        <property name="alsoActivate" value="Ac53,A1c53"/>
+        <property name="alsoActivate" value="Ac53"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -34772,7 +32474,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11800" y="1600" width="40" height="40" type="unitDetect" id="1791">
       <properties>
-        <property name="alsoActivate" value="Ac53,A1c53"/>
+        <property name="alsoActivate" value="Ac53"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -34781,7 +32483,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11800" y="1600" width="40" height="40" name="53" type="unitDetect" id="1792">
       <properties>
-        <property name="alsoActivate" value="Ac53,A2c53"/>
+        <property name="alsoActivate" value="Ac53"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -34790,7 +32492,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11800" y="1600" width="40" height="40" type="unitDetect" id="1793">
       <properties>
-        <property name="alsoActivate" value="Ac53,A2c53"/>
+        <property name="alsoActivate" value="Ac53"/>
         <property name="minUnits" value="1"/>
         <property name="resetActivationAfter" value="1s"/>
         <property name="unitType" value="supplyDepot"/>
@@ -34842,43 +32544,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="9"/>
       </properties>
     </object>
-    <object x="11800" y="1600" width="40" height="40" name="53" type="unitDetect" id="1799">
-      <properties>
-        <property name="id" value="Nc53"/>
-        <property name="maxUnits" value="0"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-      </properties>
-    </object>
-    <object x="11800" y="1600" width="40" height="40" type="unitDetect" id="1800">
-      <properties>
-        <property name="alsoActivate" value="Nc53"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="11800" y="1600" width="40" height="40" type="unitDetect" id="1801">
-      <properties>
-        <property name="alsoActivate" value="Nc53"/>
-        <property name="minUnits" value="1"/>
-        <property name="resetActivationAfter" value="1s"/>
-        <property name="unitType" value="supplyDepot"/>
-        <property name="team" value="-1"/>
-      </properties>
-    </object>
-    <object x="11790" y="1610" width="60" height="40" name="A2c53" type="basic" id="1802">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="11790" y="1610" width="60" height="40" name="Ac53" type="basic" id="1803">
-      <properties>
-        <property name="resetActivationAfter" value="1s"/>
-      </properties>
-    </object>
-    <object x="11790" y="1610" width="60" height="40" name="A1c53" type="basic" id="1804">
+    <object x="11790" y="1610" width="60" height="40" name="Ac53" type="basic" id="1802">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -34894,7 +32560,7 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     </object>
     <object x="11801" y="1601" width="40" height="40" type="unitAdd" id="1806">
       <properties>
-        <property name="deactivatedBy" value="su66,fd1,Bc53,Ac53"/>
+        <property name="deactivatedBy" value="su66,fd1,Ac53,Bc53"/>
         <property name="warmup" value="6s"/>
         <property name="spawnUnits" value="bugTurret*1"/>
         <property name="team" value="-2"/>
@@ -34905,13 +32571,6 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="warmup" value="30s"/>
         <property name="spawnUnits" value="antiAirTurretFlak*1"/>
         <property name="team" value="-2"/>
-      </properties>
-    </object>
-    <object x="5400" y="2280" width="40" height="40" type="unitDetect" id="1808">
-      <properties>
-        <property name="resetActivationAfter" value="0.25s"/>
-        <property name="id" value="fi4"/>
-        <property name="maxUnits" value="0"/>
       </properties>
     </object>
     <object x="5400" y="2280" width="40" height="40" type="unitRemove" id="1809">
@@ -35087,12 +32746,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6390" y="2410" width="60" height="40" name="A2c54" type="basic" id="1834">
+    <object x="6390" y="2410" width="60" height="40" name="A1c54" type="basic" id="1834">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6390" y="2410" width="60" height="40" name="A1c54" type="basic" id="1835">
+    <object x="6390" y="2410" width="60" height="40" name="A2c54" type="basic" id="1835">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -35487,12 +33146,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6590" y="2410" width="60" height="40" name="A1c55" type="basic" id="1895">
+    <object x="6590" y="2410" width="60" height="40" name="Ac55" type="basic" id="1895">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6590" y="2410" width="60" height="40" name="Ac55" type="basic" id="1896">
+    <object x="6590" y="2410" width="60" height="40" name="A1c55" type="basic" id="1896">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -35682,12 +33341,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6790" y="2410" width="60" height="40" name="A2c56" type="basic" id="1922">
+    <object x="6790" y="2410" width="60" height="40" name="Ac56" type="basic" id="1922">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6790" y="2410" width="60" height="40" name="Ac56" type="basic" id="1923">
+    <object x="6790" y="2410" width="60" height="40" name="A2c56" type="basic" id="1923">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -36051,12 +33710,12 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6390" y="3010" width="60" height="40" name="A2c57" type="basic" id="1977">
+    <object x="6390" y="3010" width="60" height="40" name="A1c57" type="basic" id="1977">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6390" y="3010" width="60" height="40" name="A1c57" type="basic" id="1978">
+    <object x="6390" y="3010" width="60" height="40" name="A2c57" type="basic" id="1978">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -36236,17 +33895,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6590" y="3010" width="60" height="40" name="A1c58" type="basic" id="2002">
+    <object x="6590" y="3010" width="60" height="40" name="Ac58" type="basic" id="2002">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6590" y="3010" width="60" height="40" name="Ac58" type="basic" id="2003">
+    <object x="6590" y="3010" width="60" height="40" name="A2c58" type="basic" id="2003">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6590" y="3010" width="60" height="40" name="A2c58" type="basic" id="2004">
+    <object x="6590" y="3010" width="60" height="40" name="A1c58" type="basic" id="2004">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
@@ -36426,17 +34085,17 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
         <property name="team" value="-1"/>
       </properties>
     </object>
-    <object x="6790" y="3010" width="60" height="40" name="Ac59" type="basic" id="2028">
+    <object x="6790" y="3010" width="60" height="40" name="A1c59" type="basic" id="2028">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6790" y="3010" width="60" height="40" name="A1c59" type="basic" id="2029">
+    <object x="6790" y="3010" width="60" height="40" name="A2c59" type="basic" id="2029">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>
     </object>
-    <object x="6790" y="3010" width="60" height="40" name="A2c59" type="basic" id="2030">
+    <object x="6790" y="3010" width="60" height="40" name="Ac59" type="basic" id="2030">
       <properties>
         <property name="resetActivationAfter" value="1s"/>
       </properties>

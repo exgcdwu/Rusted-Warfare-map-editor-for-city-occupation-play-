@@ -925,7 +925,7 @@ class RWmap(ElementOri):
         selfid = str(id(self))
         gidmatrix = tilegroup.get_acce_s(selfid)
         if type(gidmatrix) != np.ndarray:
-            gidmatrix = np.ndarray([tilegroup.size().x(), tilegroup.size().y()], dtype = np.uint32)
+            gidmatrix = np.zeros([tilegroup.size().x(), tilegroup.size().y()], dtype = np.uint32)
             for place_grid in tilegroup.size():
                 gidmatrix[place_grid.x(), place_grid.y()] = self._tileplace_to_gid(tilegroup[place_grid])
         

@@ -50,7 +50,7 @@
 
 请将所有info复制下来放入地图，这样可以使用所有自动化模式。info宾语并不会追求简洁，将尽力将所有可能的城夺自动化情况纳入考虑，主要用于实际使用。下文并不会详细解释这些info的原理，仅介绍用法和可能修改的必要参数。想要了解原理请阅读[引导教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_guide.md)。如果想对参数进行细致修改，请查找[参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_tutorial.md)。
 
-想要获得实际地图，必须添加-c选项。建议添加-D选项。
+想要获得实际地图，必须添加-c选项。建议添加-D -di选项。
 
 本示例基本用于两队游玩，混战需要修改。
 
