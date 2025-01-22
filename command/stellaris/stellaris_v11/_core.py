@@ -10,6 +10,7 @@ import time
 import math
 import subprocess
 import warnings
+import itertools
 
 current_file_path = os.path.abspath(__file__)
 current_dir_path = os.path.dirname(current_file_path)
@@ -24,6 +25,13 @@ from command._util import *
 
 current_file_path = os.path.abspath(__file__)
 current_dir_path = os.path.dirname(current_file_path)
+
+def generate_permutations(n):
+    # 创建一个从 0 到 n-1 的列表
+    numbers = list(range(n))
+    # 生成全排列
+    permutations = list(itertools.permutations(numbers))
+    return permutations
 
 class UnionFind:
     def __init__(self, size):
@@ -515,9 +523,32 @@ def stellaris_random_node_line(isdebug, language, isverbose, node_edge_minnodedi
     star_nparr, ftl_nparr = get_star_ftl_nparr(node_list, edge_list, edge_width, size_t, node_core, node_round, node_id, edge_id)
     return (star_nparr, ftl_nparr, node_list, edge_list)
 
-def stellaris_add_node_object():
+EXTERNAL_WIDTH_MAX = 10
+EXTERNAL_WIDTH = 0
+EXTERNAL_HEIGHT = 0
+EXTERNAL_INITIAL = rw.frame.Coordinate(-30, 10)
+
+def get_external_coo():
+    EXTERNAL_WIDTH = (EXTERNAL_WIDTH + 1) % EXTERNAL_WIDTH_MAX
     pass
 
+def external_flash_id_tobject(map_now:rw.RWmap, time_initial:int, period:int, fresh_num:int):
+    fresh_step = period // fresh_num
+    fd_initial = [str(i + time_initial) for i in range(0, period, fresh_step)]
+    fd_list = ['fd' + i + '_' + str(period) for i in fd_initial]
+    fd_id_list = [f"{fd_cite}.did" for fd_cite in fd_list]
+    for i, ini in enumerate(fd_initial):
+        tobject_fd = rw.object_useful.Auto("fd." + fd_list[i] + "." + str(ini) + "s." + str(period) + 's', pos = COO(fnow * 80, 20) + half_tile_size)
+        fnow = fnow + 1
+        map_now.addObject_one(tobject_fd)
+    tobject_one_fd = [rw.object_useful.Node(rw.const.COO.SIZE_ZERO, name = fdi) for fdi in fd_id_list]
+
+
+
+
+
+def stellaris_ogob_add():
+    pass
 
 
 def auto_func():
@@ -831,56 +862,34 @@ def auto_func():
         move_gap = move_gap, friction_coe = friction_coe, error_v = error_v, 
         randseed = randseed_now)
 
-        ISNORM = False
-        if ISNORM:
-            standard_out(language, isverbose, f"  Space process..." + 
-                            f"|  虚空绘制...")
-            map_now.addTerrainid_square(ground_rect, star_tileset, terrain_name_space, isedgeterrain = False)
-            
-            map_now.resetlayer_terrain(rw.const.NAME.Ground, star_tileset)
-            
-            standard_out(language, isverbose, f"  see process..." + 
-                            f"|  视域绘制...")
-            space_matrix = -np.ones((map_size_t.x(), map_size_t.y()), dtype = np.int64)
-            x, y = np.ogrid[:space_matrix.shape[0], :space_matrix.shape[1]]
-            condition = (2 * (x + 0.5) / map_size_t.x() - 1) ** 2 + (2 * (y + 0.5) / map_size_t.y() - 1) ** 2 <= see_range
-            space_matrix[condition] =  terrainid_see
-            map_now.addTerrainid_group(rw.const.NAME.Ground, star_tileset, space_matrix, zero_coo, ground_rect)
-            
-            standard_out(language, isverbose, f"  FTL process..." + 
-                            f"|  FTL航线绘制...")
-            map_now.addTerrainid_group(rw.const.NAME.Ground, star_tileset, ftl_nparr, zero_coo, ground_rect)
+        standard_out(language, isverbose, f"  Space process..." + 
+                        f"|  虚空绘制...")
+        map_now.addTile_square(ground_rect, space_c)
+        
+        standard_out(language, isverbose, f"  see process..." + 
+                        f"|  视域绘制...")
+        space_matrix = np.zeros((map_size_t.x(), map_size_t.y()), dtype = np.uint32)
+        x, y = np.ogrid[:space_matrix.shape[0], :space_matrix.shape[1]]
+        condition = (2 * (x + 0.5) / map_size_t.x() - 1) ** 2 + (2 * (y + 0.5) / map_size_t.y() - 1) ** 2 <= see_range
+        
+        space_matrix[condition] = see_g
 
-            standard_out(language, isverbose, f"  Star process..." + 
-                            f"|  星系绘制...")
-            map_now.addTerrainid_group(rw.const.NAME.Ground, star_tileset, star_nparr, zero_coo, ground_rect)
-        else:
-            standard_out(language, isverbose, f"  Space process..." + 
-                            f"|  虚空绘制...")
-            map_now.addTile_square(ground_rect, space_c)
-            
-            standard_out(language, isverbose, f"  see process..." + 
-                            f"|  视域绘制...")
-            space_matrix = np.zeros((map_size_t.x(), map_size_t.y()), dtype = np.uint32)
-            x, y = np.ogrid[:space_matrix.shape[0], :space_matrix.shape[1]]
-            condition = (2 * (x + 0.5) / map_size_t.x() - 1) ** 2 + (2 * (y + 0.5) / map_size_t.y() - 1) ** 2 <= see_range
-            
-            space_matrix[condition] = see_g
+        layer_ground = map_now.get_layer_s(rw.const.NAME.Ground)
+        layer_ground.assigntileid_squarematrix_exclude0(zero_coo, space_matrix)
+        
+        standard_out(language, isverbose, f"  FTL process..." + 
+                        f"|  FTL航线绘制...")
+        
+        layer_ground.assigntileid_squarematrix_exclude0(zero_coo, ftl_nparr)
 
-            layer_ground = map_now.get_layer_s(rw.const.NAME.Ground)
-            layer_ground.assigntileid_squarematrix_exclude0(zero_coo, space_matrix)
-            
-            standard_out(language, isverbose, f"  FTL process..." + 
-                            f"|  FTL航线绘制...")
-            
-            layer_ground.assigntileid_squarematrix_exclude0(zero_coo, ftl_nparr)
-
-            standard_out(language, isverbose, f"  Star process..." + 
-                            f"|  星系绘制...")
-            
-            layer_ground.assigntileid_squarematrix_exclude0(zero_coo, star_nparr)
+        standard_out(language, isverbose, f"  Star process..." + 
+                        f"|  星系绘制...")
+        
+        layer_ground.assigntileid_squarematrix_exclude0(zero_coo, star_nparr)
 
         standard_out(language, isverbose, "  Triggers process...|  宾语层添加...")
+
+        stellaris_ogob_add()
 
         for i in template.iterator_object_s(default_re = {"name": TEMPLATE_RE}):
             i.assignDefaultProperty("x", "-200")
@@ -896,7 +905,7 @@ def auto_func():
 ↓↓↓↓
 简要玩法说明：
 星系(供应站,激光防御塔)持续提供舰队(导弹舰,战列舰)。
-每个玩家开局首都星系是激光防御塔，快速生产导弹舰(2倍速于普通星系)
+每个玩家开局首都星系是激光防御塔，快速生产导弹舰({CAPITAL_TIME}倍速于普通星系)
 首都星系激光防御塔升级后快速生产战列舰。
 其他星系为补给站，生产导弹舰。
 星系中会随机出现野怪，消灭不会有奖励。
@@ -904,8 +913,8 @@ def auto_func():
 ↓↓↓↓
 地图,地块和程序作者：咕咕咕
 地图官方群(城夺社): 699981990
-地图版本: {version_now}
-随机种子: {randseed_now}
+地图版本: {version}
+随机种子: {randseed}
 ↓↓↓↓
 该地图由程序生成，星图和玩家分布是随机的。不保证公平性。
 房主请勿事先打开地图观看地图来制订策略——被视为作弊行为。
@@ -916,6 +925,8 @@ def auto_func():
 地图大小:({map_size_t.x()}, {map_size_t.y()})
 星图属性:(星系:{node_num_sum}, FTL航线:{edge_num_sum})
 最大玩家数目:{team_sum}
+兵力标准刷新速度:{fresh_time}s
+首都刷新倍速:{CAPITAL_TIME}
 ↓↓↓↓
 鸣谢人员:
 感谢黑沼帝国,向宠等群友提供的建议。
@@ -929,20 +940,30 @@ def auto_func():
 
         COO = rw.frame.Coordinate
         fnow = 0
-        fd_initial = ['25', '45', '65', '85']
-        fd_period = '80'
+
+        TIME_INITIAL = 25
+        fresh_time = 80
+        FRESH_NUM = 4
+        CAPITAL_TIME = 2
+
+        fresh_step = int(np.ceil(fresh_time / FRESH_NUM))
+        fresh_time_cap = int(fresh_time / CAPITAL_TIME)
+        fresh_step_cap = int(np.ceil(fresh_time_cap / FRESH_NUM))
+
+        fd_initial = [str(i + TIME_INITIAL) for i in range(0, fresh_time, fresh_step)]
+        fd_period = str(fresh_time)
         fd_list = ['fd' + str(i) + '_' + str(fd_period) for i in fd_initial]
-        fd_id_list = ['fd1', 'fd2', 'fd3', 'fd4']
+        fd_id_list = ['fd' + str(i + 1) for i in range(FRESH_NUM)]
         for i, ini in enumerate(fd_initial):
             tobject_fd = rw.object_useful.Auto("fd." + fd_list[i] + "." + str(ini) + "s." + str(fd_period) + 's', pos = COO(fnow * 80, 20) + half_tile_size)
             fnow = fnow + 1
             map_now.addObject_one(tobject_fd)
         tobject_one_fd = [rw.object_useful.Node(zero_coo, name = fdi) for fdi in fd_id_list]
 
-        fd_bs_initial = ['25', '35', '45', '55']
-        fd_bs_period = '40'
+        fd_bs_initial = [str(i + TIME_INITIAL) for i in range(0, fresh_time_cap, fresh_step_cap)]
+        fd_bs_period = str(fresh_time_cap)
         fd_bs_list = ['fd' + str(i) + '_' + str(fd_bs_period) for i in fd_bs_initial]
-        fd_bs_id_list = ['fd5', 'fd6', 'fd7', 'fd8']
+        fd_bs_id_list = ['fd' + str(i + 1 + FRESH_NUM) for i in range(FRESH_NUM)]
         for i, ini in enumerate(fd_bs_initial):
             tobject_fd = rw.object_useful.Auto("fd." + fd_bs_list[i] + "." + str(ini) + "s." + str(fd_bs_period) + 's', pos = COO(fnow * 80, 20) + half_tile_size)
             fnow = fnow + 1
@@ -993,8 +1014,9 @@ def auto_func():
                     r_ch_now = r_ch_now + ghost_pro[1]
                     if rand_now < r_ch_now:
                         tobject_ghost = rw.object_useful.Auto("a." + ghost_pro[0] + "." + fi_list[0] + ",t-2")
+                        d_list = generate_permutations(len(nodeq_list))
                         for ti in range(ghost_pro[2]):
-                            tnq_now = np.random.randint(0, len(nodeq_list))
+                            tnq_now = d_list[np.random.randint(0, len(nodeq_list))]
                             map_now.addObject_one(tobject_ghost.offset(nodeq_list[tnq_now]))
                         break
 

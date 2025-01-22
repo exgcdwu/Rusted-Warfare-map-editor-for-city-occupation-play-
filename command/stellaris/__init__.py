@@ -1,2 +1,1 @@
-from command.stellaris.stellaris_v10 import stellaris_v10
-from command.stellaris.stellaris_v101 import stellaris_v101
+from command.stellaris._core import auto_func as stellaris

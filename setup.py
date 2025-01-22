@@ -35,14 +35,10 @@ ARGPARSE_FUNC = {
     "tilesetauto": "tilesetauto",
     "layerobauto": "layerobauto",
     "layerauto": "layerauto",
-    "resizeauto": "resizeauto"
+    "resizeauto": "resizeauto", 
+    "stellaris": "stellaris", 
 }
-STE_VERSION = ["v10", "v100"]
 
-
-
-for ste in STE_VERSION:
-    ARGPARSE_FUNC["stellaris_" + ste] = "stellaris_" + ste
 
 setup(
     name = 'rwmapeditor_exgcdwu',

@@ -113,6 +113,7 @@ class AUTOKEY:
     not_useful_char = "[^\u4e00-\u9fa5A-Za-z0-9_{}]"
     not_useful_char_ad_point = "[^\u4e00-\u9fa5A-Za-z0-9_{}.]"
     not_useful_char_ad_point_for_cite = "[^\u4e00-\u9fa5A-Za-z0-9_{}.]|(?<=[.][\u4e00-\u9fa5A-Za-z0-9_{}]*)[.]"
+
     # re.finditer
 
 language_seg = '|'

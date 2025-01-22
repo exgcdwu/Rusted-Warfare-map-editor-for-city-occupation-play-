@@ -166,7 +166,7 @@ class TileSet(ElementOri):
             root_n = root
             isdependent_tsx = False
         png_text_pro = utility.get_etElement_callable_from_tag_s(root_n, "properties")
-        png_text = utility.get_etElement_name_to_text_s(png_text_pro, "embedded_png")
+        png_text = utility.get_etElement_name_to_text_s(png_text_pro, "embedded_png", root.attrib.get('name'))
         if png_text != None:
             properties.deleteOptionalProperty("embedded_png")
         image_properties = ElementProperties.init_etElement(utility.get_etElement_callable_from_tag_s(root_n, "image"))
@@ -767,7 +767,7 @@ class TileSet(ElementOri):
         self._properties.assignDefaultProperty("firstgid", str(firstgid))
 
     def exist_gid_to_tileid(self, gid:int)->bool:
-        return gid >= self.firstgid() and gid < self.endgid()
+        return self.isexist() and gid >= self.firstgid() and gid < self.endgid()
 
     def gid_to_tileid(self, gid:int)->tuple[str, int]:
         tileid = gid - self.firstgid()

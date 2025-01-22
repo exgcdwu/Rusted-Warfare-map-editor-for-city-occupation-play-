@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="800" height="500" tilewidth="20" tileheight="20" infinite="0" nextlayerid="4" nextobjectid="390">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="800" height="500" tilewidth="20" tileheight="20" infinite="0" nextlayerid="4" nextobjectid="404">
  <tileset firstgid="1" name="export_ground" tilewidth="20" tileheight="20" tilecount="341" columns="12">
   <properties>
    <property name="embedded_png">
@@ -24569,28 +24569,31 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
   <object id="224" name="zcco0.zcco城10.城10,e20s" x="9400" y="1400" width="40" height="40"/>
   <object id="225" name="zcco0.zcco城12.城12(白),x城12(红),v城12(蓝)" x="9800" y="1400" width="40" height="40"/>
   <object id="226" name="zcco0.zcco城13.城13,x城13(红)" x="10000" y="1400" width="40" height="40"/>
-  <object id="227" name="tree_info_c" x="600" y="1600" width="20" height="20">
+  <object id="227" name="tree_info_gc" x="600" y="4200" width="20" height="20">
    <properties>
-    <property name="a" value="{idprefix0_0}.a"/>
-    <property name="a1" value="{idprefix0_0}.a1"/>
-    <property name="a2" value="{idprefix0_0}.a2"/>
+    <property name="10c" value="{idprefix0_0}.10c"/>
+    <property name="1c" value="{idprefix0_0}.1c"/>
+    <property name="2c" value="{idprefix0_0}.2c"/>
+    <property name="3c" value="{idprefix0_0}.3c"/>
+    <property name="4c" value="{idprefix0_0}.4c"/>
+    <property name="5c" value="{idprefix0_0}.5c"/>
+    <property name="6c" value="{idprefix0_0}.6c"/>
+    <property name="7c" value="{idprefix0_0}.7c"/>
+    <property name="8c" value="{idprefix0_0}.8c"/>
+    <property name="9c" value="{idprefix0_0}.9c"/>
     <property name="args" value="inaddteam,str;cite_name,str;cityname,str"/>
-    <property name="b" value="{idprefix0_0}.b"/>
-    <property name="brace" value="a,b,n,a1,a2"/>
-    <property name="btteam" value="{inaddteam}"/>
-    <property name="defence_aunitbrace" value="None"/>
-    <property name="exist" value="{ismultiText and isteamdetect},{not (ismultiText and isteamdetect)},{isteamdetect},{ismultiText and isteamdetect},{isbugTurret}"/>
+    <property name="brace" value="1c,2c,3c,4c,5c,6c,7c,8c,9c,10c,nc"/>
+    <property name="exist" value="{ismultiText and isteamdetect},{not (ismultiText and isteamdetect)},{isteamdetect},{ismultiText and isteamdetect}"/>
     <property name="idprefix" value="mtd,1"/>
-    <property name="isbugTurret" type="bool" value="false"/>
     <property name="ismultiText" type="bool" value="false"/>
     <property name="isonlybuilding" type="bool" value="false"/>
     <property name="isteamdetect" type="bool" value="true"/>
     <property name="mtextsize" value="7"/>
-    <property name="n" value="{idprefix0_0}.n"/>
-    <property name="name" value="ztu{inaddteam},i{inaddwarmup},r{reset},u{dunit_op},t{team},o{isonlybuilding},B{aunitbrace};zci{inaddteam}.{cityname},s{mtextsize},i{inaddwarmup},r{reset},u{dunit_op},t{team},o{isonlybuilding},B{aunitbrace};ztdo.{idprefix0_0},u{dunit_op},r{teamreset},o{isonlybuilding};zmt.{idprefix0_0}.{cityname},s{mtextsize},a{atext},b{btext};b{btteam}.{idprefix0_0},p,f{f_cite},n{isneutralspawn},u{btdunit_op},w{isbugdisposable},y{isbugTurretdeacti or (not isteamdetect)},B{defence_aunitbrace}"/>
-    <property name="offset" value="0 0,0 0,0 0,0 0,1 1"/>
-    <property name="opargs" value="s,mtextsize,str,None;x,atext,str,None;v,btext,str,None;i,inaddwarmup,str,None;r,reset,str,None;u,dunit_op,str,None;t,team,str,None;e,teamreset,str,None;g,isbugTurret,bool,false;f,f_cite,str,None;n,isneutralspawn,bool,false;c,ismultiText,bool,false;o,isonlybuilding,bool,false;h,btdunit_op,str,None;w,isbugdisposable,bool,false;m,isteamdetect,bool,false;y,isbugTurretdeacti,bool,false;b,btteam,str;B,aunitbrace,str,None;A,defence_aunitbrace,str,None"/>
-    <property name="prefix" value="c"/>
+    <property name="name" value="ztu{inaddteam},i{inaddwarmup},r{reset},u{dunit_op},t{team},o{isonlybuilding},B{aunitbrace};zci{inaddteam}.{cityname},s{mtextsize},i{inaddwarmup},r{reset},u{dunit_op},t{team},o{isonlybuilding},B{aunitbrace};ztdg.{idprefix0_0},u{dunit_op},r{teamreset},o{isonlybuilding};zmtg.{idprefix0_0}.{cityname},s{mtextsize},1{text1},2{text2},3{text3},4{text4},5{text5},6{text6},7{text7},8{text8},9{text9},0{text10}"/>
+    <property name="nec" value="{idprefix0_0}.nec"/>
+    <property name="npc" value="{idprefix0_0}.npc"/>
+    <property name="opargs" value="s,mtextsize,str,None;i,inaddwarmup,str,None;r,reset,str,None;u,dunit_op,str,None;t,team,str,None;e,teamreset,str,None;f,f_cite,str,None;n,isneutralspawn,bool,false;c,ismultiText,bool,false;o,isonlybuilding,bool,false;m,isteamdetect,bool,false;B,aunitbrace,str,None;1,text1,str,None;2,text2,str,None;3,text3,str,None;4,text4,str,None;5,text5,str,None;6,text6,str,None;7,text7,str,None;8,text8,str,None;9,text9,str,None;0,text10,str,None"/>
+    <property name="prefix" value="gc"/>
    </properties>
   </object>
   <object id="228" name="c-1.c城2.城2" x="7800" y="1600" width="40" height="40"/>
@@ -25337,6 +25340,115 @@ e/eCD3IEudvS0hK8PWC0/B0FgwEAAK2tp9wsSfN1AAAAAElFTkSuQmCC
     <property name="textSize" value="7"/>
    </properties>
   </object>
+  <object id="390" name="teamDetect_info_ztdg" x="1800" y="4200" width="20" height="20">
+   <properties>
+    <property name="10c" value="{setidTeam10_0_0}"/>
+    <property name="1c" value="{setidTeam0_0_0}"/>
+    <property name="2c" value="{setidTeam1_0_0}"/>
+    <property name="3c" value="{setidTeam2_0_0}"/>
+    <property name="4c" value="{setidTeam3_0_0}"/>
+    <property name="5c" value="{setidTeam4_0_0}"/>
+    <property name="6c" value="{setidTeam5_0_0}"/>
+    <property name="7c" value="{setidTeam6_0_0}"/>
+    <property name="8c" value="{setidTeam7_0_0}"/>
+    <property name="9c" value="{setidTeam8_0_0}"/>
+    <property name="args" value="cite_name,str"/>
+    <property name="aunit" value="{'None' if isonlybuilding else ('aunit_now' if 'dunit_op' == 'None' else 'd.{dunit_op}')}"/>
+    <property name="aunit_now" value="supplyDepot"/>
+    <property name="brace" value="1c,2c,3c,4c,5c,6c,7c,8c,9c,10c,nc"/>
+    <property name="isonlybuilding" type="bool" value="false"/>
+    <property name="isprefixseg" type="bool" value="true"/>
+    <property name="minUnits" value="1"/>
+    <property name="nec" value="{setidTeam12_0_0}"/>
+    <property name="npc" value="{setidTeam11_0_0}"/>
+    <property name="onlyBuildings" value="{isonlybuilding}"/>
+    <property name="opargs" value="r,reset,str;u,dunit_op,str,None;o,isonlybuilding,bool,false"/>
+    <property name="prefix" value="ztdg"/>
+    <property name="reset" value="1s"/>
+    <property name="setTeam" value="0,1,2,3,4,5,6,7,8,9,-3 -1,-2"/>
+    <property name="setidTeam" value="1c;2c;3c;4c;5c;6c;7c;8c;9c;10c;npc;nec"/>
+   </properties>
+  </object>
+  <object id="391" name="multiText_info_zmtg" x="2200" y="4200" width="20" height="20">
+   <properties>
+    <property name="acti" value="{td_cite}.1c;{td_cite}.2c;{td_cite}.3c;{td_cite}.4c;{td_cite}.5c;{td_cite}.6c;{td_cite}.7c;{td_cite}.8c;{td_cite}.9c;{td_cite}.10c;{td_cite}.npc,{td_cite}.nec"/>
+    <property name="args" value="td_cite,str;text_m,str"/>
+    <property name="color" value="#FFDD00,#FF2200,#191970,#FFDD00,#FF2200,#191970,#FFDD00,#FF2200,#191970,#FFDD00,#FFFFFF"/>
+    <property name="isprefixseg" type="bool" value="true"/>
+    <property name="mtextsize" value="7"/>
+    <property name="opargs" value="s,mtextsize,str;1,text1,str,None;2,text2,str,None;3,text3,str,None;4,text4,str,None;5,text5,str,None;6,text6,str,None;7,text7,str,None;8,text8,str,None;9,text9,str,None;0,text10,str,None"/>
+    <property name="prefix" value="zmtg"/>
+    <property name="text" value="{text1},{text2},{text3},{text4},{text5},{text6},{text7},{text8},{text9},{text10},{text_m}"/>
+    <property name="text1" value="{text_m}"/>
+    <property name="text10" value="{text_m}"/>
+    <property name="text2" value="{text_m}"/>
+    <property name="text3" value="{text_m}"/>
+    <property name="text4" value="{text_m}"/>
+    <property name="text5" value="{text_m}"/>
+    <property name="text6" value="{text_m}"/>
+    <property name="text7" value="{text_m}"/>
+    <property name="text8" value="{text_m}"/>
+    <property name="text9" value="{text_m}"/>
+    <property name="textsize" value="{mtextsize}"/>
+   </properties>
+  </object>
+  <object id="392" name="tree_info_c" x="600" y="1600" width="20" height="20">
+   <properties>
+    <property name="a" value="{idprefix0_0}.a"/>
+    <property name="a1" value="{idprefix0_0}.a1"/>
+    <property name="a2" value="{idprefix0_0}.a2"/>
+    <property name="args" value="inaddteam,str;cite_name,str;cityname,str"/>
+    <property name="b" value="{idprefix0_0}.b"/>
+    <property name="brace" value="a,b,n,a1,a2"/>
+    <property name="btteam" value="{inaddteam}"/>
+    <property name="defence_aunitbrace" value="None"/>
+    <property name="exist" value="{ismultiText and isteamdetect},{not (ismultiText and isteamdetect)},{isteamdetect},{ismultiText and isteamdetect},{isbugTurret}"/>
+    <property name="idprefix" value="mtd,1"/>
+    <property name="isbugTurret" type="bool" value="false"/>
+    <property name="ismultiText" type="bool" value="false"/>
+    <property name="isonlybuilding" type="bool" value="false"/>
+    <property name="isteamdetect" type="bool" value="true"/>
+    <property name="mtextsize" value="7"/>
+    <property name="n" value="{idprefix0_0}.n"/>
+    <property name="name" value="ztu{inaddteam},i{inaddwarmup},r{reset},u{dunit_op},t{team},o{isonlybuilding},B{aunitbrace};zci{inaddteam}.{cityname},s{mtextsize},i{inaddwarmup},r{reset},u{dunit_op},t{team},o{isonlybuilding},B{aunitbrace};ztdo.{idprefix0_0},u{dunit_op},r{teamreset},o{isonlybuilding};zmt.{idprefix0_0}.{cityname},s{mtextsize},a{atext},b{btext};b{btteam}.{idprefix0_0},p,f{f_cite},n{isneutralspawn},u{btdunit_op},w{isbugdisposable},y{isbugTurretdeacti or (not isteamdetect)},B{defence_aunitbrace}"/>
+    <property name="offset" value="0 0,0 0,0 0,0 0,1 1"/>
+    <property name="opargs" value="s,mtextsize,str,None;x,atext,str,None;v,btext,str,None;i,inaddwarmup,str,None;r,reset,str,None;u,dunit_op,str,None;t,team,str,None;e,teamreset,str,None;g,isbugTurret,bool,false;f,f_cite,str,None;n,isneutralspawn,bool,false;c,ismultiText,bool,false;o,isonlybuilding,bool,false;h,btdunit_op,str,None;w,isbugdisposable,bool,false;m,isteamdetect,bool,false;y,isbugTurretdeacti,bool,false;b,btteam,str;B,aunitbrace,str,None;A,defence_aunitbrace,str,None"/>
+    <property name="prefix" value="c"/>
+   </properties>
+  </object>
+  <object id="393" name="object_info_zga" x="2400" y="4200" width="20" height="20">
+   <properties>
+    <property name="args" value="dc_unit,str;fd_cite,str"/>
+    <property name="ctddeacti" value="{(',' + &quot;{{ctd_cite}.idprefix0_0.teamtoid_depn['side']}&quot;) if 'ctd_cite' != '_0_' and 'side' != '_0_' else ''}"/>
+    <property name="ctddeacti_op" value="{(',' + &quot;{{ctd_cite}.idprefix0_0.teamtoid['opside']}&quot;) if 'ctd_cite' != '_0_' and 'opside' != '_0_' else ''}"/>
+    <property name="deactivatedBy" value="{fd_cite}.idprefix0{ctddeacti}{ctddeacti_op}{stepdeacti}"/>
+    <property name="isprefixseg" type="bool" value="true"/>
+    <property name="objectType" value="unitAdd"/>
+    <property name="opargs" value="t,team,str;c,ctd_cite,str,_0_;p,side,str,_0_;q,opside,str,_0_;k,step_cite,str,_0_"/>
+    <property name="prefix" value="zga"/>
+    <property name="spawnUnits" value="d.{dc_unit}"/>
+    <property name="stepdeacti" value="{',{step_cite}.idprefix0' if 'step_cite' != '_0_' else ''}"/>
+    <property name="team" value="-1"/>
+    <property name="warmup" value="1s"/>
+   </properties>
+  </object>
+  <object id="394" name="tree_info_ga" x="600" y="4240" width="20" height="20">
+   <properties>
+    <property name="args" value="dc_unit,str;fd_cite,str"/>
+    <property name="exist" value="{not isenemy},{isenemy},{isenemy}"/>
+    <property name="isenemy" value="{'ctd_cite' != '_0_'}"/>
+    <property name="isprefixseg" type="bool" value="true"/>
+    <property name="name" value="zga.{dc_unit}.{fd_cite},t-1,k{step_cite};zga.{dc_unit}.{fd_cite},t-1,c{ctd_cite},q-2,k{step_cite};zga.{dc_unit}.{fd_cite},t-2,c{ctd_cite},p-2,k{step_cite}"/>
+    <property name="opargs" value="c,ctd_cite,str,_0_;k,step_cite,str,_0_"/>
+    <property name="prefix" value="ga"/>
+   </properties>
+  </object>
+  <object id="401" name="gc0.c城1ga.城1,c" x="6400" y="4200" width="40" height="40"/>
+  <object id="402" name="gc-2.c城2ga.城2,c" x="6600" y="4200" width="40" height="40"/>
+  <object id="403" name="gc1.c城3ga.城3,c" x="6800" y="4200" width="40" height="40"/>
+  <object id="395" name="ga.bb.fd5_10,cc城1ga" x="7600" y="4200" width="20" height="20"/>
+  <object id="396" name="ga.mg.fd5_10,cc城2ga" x="7800" y="4200" width="20" height="20"/>
+  <object id="397" name="ga.hc.fd5_10,cc城3ga" x="8000" y="4200" width="20" height="20"/>
  </objectgroup>
  <objectgroup id="4" name="UnitObject">
   <object id="363" name="2 工厂" x="10040" y="3040" width="20" height="20">

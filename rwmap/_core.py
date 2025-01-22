@@ -429,7 +429,7 @@ class RWmap(ElementOri):
         for tileset in self._tileset_list:
             if tileset.exist_gid_to_tileid(gid):
                 return tileset
-        raise ValueError("gid is illegal.")
+        return None
 
     def get_tileset_s(self, name:str)->case.TileSet:
         if self._tileset_now != None and self._tileset_now.name() == name:

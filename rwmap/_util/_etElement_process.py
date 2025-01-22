@@ -47,13 +47,22 @@ def output_etElement_properties(dict_properties:dict[str, Union[dict[str, str], 
             root.append(nproperty)
     return root
 
-def get_etElement_name_to_text_s(root:et.Element, name:str)->Union[str, None]:
+def get_etElement_name_to_text_s(root:et.Element, name:str, info_name:str = None)->Union[str, None]:
     if root == None:
         return None
     for nproperty in root:
         if nproperty.attrib['name'] == name:
             text = nproperty.text
-            return text
+            if text == None:
+                try:
+                    pv = nproperty.attrib['value']
+                    import warnings
+                    warnings.warn(f"The text of an element({info_name})'s attrib({name}) cannot be found, but value can be found.", RuntimeWarning)
+                    return pv
+                except:
+                    return None
+            else:
+                return text
 
 def get_etElement_ndarray_from_text_packed(root:et.Element, reshape_Coordinate:frame.Coordinate)->np.ndarray:
     if root == None:

@@ -1,8 +1,10 @@
 # 宾语自动化参数说明
 
 - [宾语自动化参数说明](#宾语自动化参数说明)
+  - [使用](#使用)
+    - [命令](#命令)
+    - [命令参数](#命令参数)
   - [目标](#目标)
-  - [其他文档](#其他文档)
   - [info宾语介绍](#info宾语介绍)
     - [info宾语中基本参数介绍](#info宾语中基本参数介绍)
     - [info宾语的其他说明](#info宾语的其他说明)
@@ -59,9 +61,6 @@
   - [time\_info](#time_info)
     - [time\_info必填参数](#time_info必填参数)
     - [time\_info可选参数](#time_info可选参数)
-  - [使用](#使用)
-    - [命令](#命令)
-    - [命令参数](#命令参数)
     - [其他特性](#其他特性)
     - [注意事项](#注意事项)
       - [所有时间单位](#所有时间单位)
@@ -72,6 +71,55 @@
       - [字符问题](#字符问题)
       - [unit/team](#unitteam)
 
+## 使用
+
+### 命令
+
+打开终端，输入如下指令：
+
+    objectgroupauto {map_file}
+
+该指令读入地图路径，将转换结果自动输到原路径。
+
+### 命令参数
+
+    -o --output 输出到不同路径（建议，防止覆盖后无法悔改）。
+
+    -r --reset 选择进行id的重置。不添加-r命令可以保证已有的id不会改变(从其他地方使用id不会断线错位)。
+
+    -di --deleteid 产生的检测宾语会检测是否用到，如果没有用到就不添加，可以节省检测宾语。强烈建议与"-D -c"联用。
+
+    -d(--delete) -D(--DeleteAllSym) --DeleteAll：
+
+    默认情况下，带,d的info宾语或者标记宾语自动产生的宾语将会被删除（并且不产生），",d"后缀删除后仍然可以重新产生宾语。[正常使用]
+
+    -d --delete 命令会同时把带,d的info宾语或者标记宾语(也包括其city_info带,d)删除，删除标记没有反悔机会。[删除决定去掉的标记宾语/info宾语]
+
+    -D --DeleteAllSym命令在-d命令的基础上，将所有info宾语和标记宾语删除，只留下使用宾语。[发布地图]
+
+    --DeleteAll 命令会将所有info宾语、标记宾语和自动产生的宾语均删除，彻底除去使用痕迹。[取消使用该宾语格式]
+
+    --resetid 命令将会将宾语ID重置为自然数列。应当添加，否则ID空洞会越来越多，尤其是同一地图频繁进行自动化操作。不添加对实际地图没有影响。
+
+    -v --verbose 显示运行信息。仅有"-v" 或者 "-v 1"，会展示粗略信息。有"-v 2"会展示详细信息。
+
+    -c --citytrans表明除了info宾语，标记宾语，以及标记宾语产生的宾语，其他宾语也可以使用引用来获得参数。
+
+    --ignorewarning 发生warning时，会继续执行，而不会退出程序。
+
+    -y --isyes 自动同意程序的一切(y/n)请求
+
+    --check 不忽略程序中的一些检测，但是会对效率产生不利影响。
+
+    --language 后仅允许跟"ch"(中文)/"eg"(英文)。语言设置将会被储存，之后使用延续上一次的修改。
+
+    --infopath命令约定了.py文件路径，--infovar命令约定了变量名，随后程序会根据该约定变量来自动转换。
+    默认会使用command/objectgroupauto/_data中的auto_func_arg作为约定变量。可以自行修改约定变量来个性化自动转换模式。infopath中必须是一个python包。内部必须有一个config.json文件。
+
+[约定变量](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/_data/)
+
+[宾语自动化约定变量参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_var_tutorial.md)
+
 ## 目标
 
 该命令行工具旨在简化城夺地图的制作。对于需要在不同位置放置相同的一个或几个宾语时，但仅仅一些细节不同的时候，可以使用该工具简化操作。
@@ -79,12 +127,6 @@
 只需要按照命令行教程的格式在地图文件中添加额外的info宾语（需要填写大量参数）和标记宾语（仅有名称需要填写,类型不需要填写），标记宾语就会根据info宾语自动生成想要的宾语。
 
 具体来说，程序会识别标记宾语名称的前缀(prefix)，来找到指定的info宾语，并根据该info宾语的内容按照约定导入相关属性。相关属性可指定标记宾语的必填参数和可选参数，标记宾语可以依照info宾语的格式（args和opargs）填写参数。
-
-## 其他文档
-
-如果想循序渐进学习宾语自动化，请阅读[宾语自动化引导教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_guide.md)。
-
-[宾语自动化地图示例](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/example/auto_example.tmx)是一份地图文件，可供实际作图是复制粘贴和参考。还有一份该地图示例用法的具体说明，[宾语自动化示例说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_example.md)。
 
 ## info宾语介绍
 
@@ -362,9 +404,9 @@ prefix：标记宾语引用前缀。（[info宾语默认参数](#info宾语中�
 
 reset：必选，表示检测宾语的刷新周期。
 
-setTeam：数字二维数组，表示队伍分组。同阵营内部用空格隔开，阵营之间用逗号隔开。如果为-3，表示检测与本检测min和max互补的检测，且无队伍。填写例子"0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17,-3 -2 -1"。不允许小于等于-4。
+setTeam：数字二维数组，表示队伍分组。同阵营内部用空格隔开，阵营之间用逗号隔开。如果为-3，表示检测与本检测min和max互补的检测，且无队伍。填写例子"0 2 4 6 8 10,12 14 16 18,1 3 5 7 9 11 13 15 17,-3 -2 -1"。不允许小于等于-4。
 
-setidTeam：字符串二维数组，表示不同组的id前缀。不同组之间用";"隔开，一个阵营可以有一个或多个id。每一个组的第一个id相同时，表明不同组是一个阵营。填写例子"A_city,B_city"。
+setidTeam：字符串二维数组，表示不同组的id前缀。不同组之间用";"隔开，一个阵营可以有一个或多个id。每一个组的第一个id相同时，表明不同组是一个阵营。填写例子"Ac,Ac1;Ac,Ac2;Bc;Nc"。
 
 ### teamDetect可选参数
 
@@ -640,13 +682,15 @@ idprefix0是振荡器输出的id。
 
 ## step_info
 
-这是一个方波器。可进行时间修正。
+这是一个方波器。可进行时间修正。这个方波器在steptime的最后一个时间之后，isactiend为true时，为激活状态，否则不激活。之前每经过一个steptime，激活状态都会改变。
+
+如果steptime: "0s,5s,20s,40s,60s", isactiend: "true"。那么60s后激活，40s-60s不激活，20s-40s激活，5s-20s不激活，0s-5s激活。
 
 ### step_info必选参数
 
 prefix：标记宾语引用前缀。（[info宾语默认参数](#info宾语中基本参数介绍)）
 
-idprefix: 表示器输出的id前缀，城市id在idprefix后将自动按照1,2...顺序延伸，请确保其他id没有此前缀。
+idprefix: 表示方波器输出的id前缀，检测id在idprefix后将自动按照1,2...顺序延伸，请确保其他id没有此前缀。
 
 steptime：必选，字符串数组。添加宾语和删除宾语作用的时间。开头应当为0s。以避免出现bug。
 
@@ -680,7 +724,7 @@ time_prefix：可选，默认不存在。将会导入对应time_info的数据，
 
 ### step_info可被引用的其他参数
 
-idprefix0是振荡器输出的id。
+idprefix0是方波器输出的id。
 
 ## idcheck_info
 
@@ -753,55 +797,6 @@ timeratio：时间修正乘数。默认会对所在info的所有resetActivationA
 istime：可选，默认为是，在其他引用的info中默认为否，是否进行时间修正。
 
 iscorrectwarmup：可选，默认为否。如果为是，将会把该info的warmup和delay的时间也进行修正。
-
-## 使用
-
-### 命令
-
-打开终端，输入如下指令：
-
-    objectgroupauto {map_file}
-
-该指令读入地图路径，将转换结果自动输到原路径。
-
-### 命令参数
-
-    -o --output 输出到不同路径（建议，防止覆盖后无法悔改）。
-
-    -r --reset 选择进行id的重置。不添加-r命令可以保证已有的id不会改变(从其他地方使用id不会断线错位)。
-
-    -di --deleteid 产生的检测宾语会检测是否用到，如果没有用到就不添加，可以节省检测宾语。强烈建议与"-D -c"联用。
-
-    -d(--delete) -D(--DeleteAllSym) --DeleteAll：
-
-    默认情况下，带,d的info宾语或者标记宾语自动产生的宾语将会被删除（并且不产生），",d"后缀删除后仍然可以重新产生宾语。[正常使用]
-
-    -d --delete 命令会同时把带,d的info宾语或者标记宾语(也包括其city_info带,d)删除，删除标记没有反悔机会。[删除决定去掉的标记宾语/info宾语]
-
-    -D --DeleteAllSym命令在-d命令的基础上，将所有info宾语和标记宾语删除，只留下使用宾语。[发布地图]
-
-    --DeleteAll 命令会将所有info宾语、标记宾语和自动产生的宾语均删除，彻底除去使用痕迹。[取消使用该宾语格式]
-
-    --resetid 命令将会将宾语ID重置为自然数列。应当添加，否则ID空洞会越来越多，尤其是同一地图频繁进行自动化操作。不添加对实际地图没有影响。
-
-    -v --verbose 显示运行信息
-
-    -c --citytrans表明除了info宾语，标记宾语，以及标记宾语产生的宾语，其他宾语也可以使用引用来获得参数。
-
-    --ignorewarning 发生warning时，会继续执行，而不会退出程序。
-
-    -y --isyes 自动同意程序的一切(y/n)请求
-
-    --check 不忽略程序中的一些检测，但是会对效率产生不利影响。
-
-    --language 后仅允许跟"ch"(中文)/"eg"(英文)。语言设置将会被储存，之后使用延续上一次的修改。
-
-    --infopath命令约定了.py文件路径，--infovar命令约定了变量名，随后程序会根据该约定变量来自动转换。
-    默认会使用command/auto/_data中的auto_func_arg作为约定变量。可以自行修改约定变量来个性化自动转换模式。infopath中必须是一个python包。内部必须有一个config.json文件。
-
-[约定变量](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/_data/)
-
-[宾语自动化约定变量参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_var_tutorial.md)
 
 ### 其他特性
 

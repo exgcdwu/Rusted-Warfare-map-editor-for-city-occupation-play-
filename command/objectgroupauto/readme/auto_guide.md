@@ -7,7 +7,7 @@
   - [进阶教程（队伍检测, 字典）](#进阶教程队伍检测-字典)
   - [任意自动化（tree\_info和object\_info）](#任意自动化tree_info和object_info)
   - [多个文本/添加/删除（multi info系列）](#多个文本添加删除multi-info系列)
-  - [振荡器（flash\_info和building\_f\_info）](#振荡器flash_info和building_f_info)
+  - [振荡器和方波器（flash\_info和step\_info）](#振荡器和方波器flash_info和step_info)
 
 ## 前言
 
@@ -34,7 +34,7 @@
 
 ## 开始自动化（建筑）
 
-城夺地图的核心是建筑刷新。让我们以建筑刷新为例，开始了解自动化程序是如何运行的。在引导教程中出现的所有有效普通宾语、info宾语和标记宾语均会在[宾语自动化引导教程地图示例](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/example/auto_guide.tmx)中出现。并且也会在对应位置出现坐标。关于地图示例格式，请参考[地图示例格式](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_example.md#地图示例格式)，实际使用的地图示例和教程示例均遵循这样的格式。
+城夺地图的核心是建筑刷新。让我们以建筑刷新为例，开始了解自动化程序是如何运行的。在引导教程中出现的所有有效普通宾语、info宾语和标记宾语均会在[宾语自动化引导教程地图示例](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/example/auto_guide.tmx)中出现。并且也会在对应位置出现坐标。关于地图示例格式，请参考[地图示例格式](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_example.md#地图示例格式)，实际使用的地图示例和教程示例均遵循这样的格式。
 
 如果想用常规宾语完成一个建筑，至少需要两个宾语，比如：
 
@@ -74,13 +74,13 @@
 
 然而，除了与自动化相关的宾语之外，还有一些正常使用的宾语，我们不希望对它们产生变动。所以，info宾语、标记宾语和正常宾语需要区分开来。最后，我们采取的策略是，与自动化相关的宾语的类型统统不填，从而与正常宾语区分。info宾语和标记宾语的识别则是依靠其名字的前缀，后面会具体说明。info宾语需要名字进行识别，还有属性来规定该info的信息（填写一个info，需要更加详细）。标记宾语只需要填写名字，不需要填写属性（填写许多标记宾语，需要更加方便）。
 
-[宾语自动化参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_tutorial.md)包含当前版本中宾语自动化的所有参数和介绍，最为全面完整。
+[宾语自动化参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_tutorial.md)包含当前版本中宾语自动化的所有参数和介绍，最为全面完整。
 
-此外，还有一份[宾语自动化地图示例](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/example/auto_example.tmx)，这是一份地图文件，可供实际作图是复制粘贴和参考。还有一份该地图示例用法的具体说明，[宾语自动化示例说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_example.md)。
+此外，还有一份[宾语自动化地图示例](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/example/auto_example.tmx)，这是一份地图文件，可供实际作图是复制粘贴和参考。还有一份该地图示例用法的具体说明，[宾语自动化示例说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_example.md)。
 
 接下来，我们将具体讲解。
 
-我们可以先查看building_info的内容。请查看[参数说明inadd_info](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_tutorial.md#inadd_info)的inadd_info到building_info的内容。
+我们可以先查看building_info的内容。请查看[参数说明inadd_info](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_tutorial.md#inadd_info)的inadd_info到building_info的内容。
 
     ## inadd_info
 
@@ -96,7 +96,7 @@
 
     isinadd：可选，默认为是，在building_info中默认为否，是否添加城市的初始刷新。
 
-    inaddwarmup：当isinadd为是时可选，默认为{addWarmup}，表示单位添加的warmup。为0s或addWarmup不存在时，不产生warmup属性。
+    inaddwarmup：当isinadd为是时可选，默认为{addWarmup}，表示单位添加的warmup。为0s时，不产生warmup属性。
 
     inaddunit：当isinadd为是时可选，默认{aunit}，表示单位添加的类型。
 
@@ -110,7 +110,7 @@
 
     inaddoffsetsize: 当isinadd为是时可选，数字数组，默认为"0 0"，建筑初始添加宾语大小改变。
 
-    inaddisinitialunit：可选，默认为否。启用时，建筑刷新将使用"unit"，而不是"spawnUnits"。并且，除去"unit"和"team"以外的选项将不会出现。
+    inaddisinitialunit: 可选，默认为否。启用时，建筑刷新将使用"unit"，而不是"spawnUnits"。除去"unit"和"team"以外的选项将不会出现。并将该宾语加入unitObject层。请确保unitObject层已经设置。
 
     ## mtext_info
 
@@ -161,7 +161,7 @@
 
     brace：可选，默认没有，外部引用翻译列表。（[info宾语默认参数](#info宾语中基本参数介绍)）
 
-    addWarmup：可选，建筑添加的warmup。
+    addWarmup：可选，建筑添加的warmup。为0s或addWarmup不存在时，不产生warmup属性。
 
     addReset：可选，建筑添加的resetActivationAfter。
 
@@ -169,7 +169,7 @@
 
     minUnits：可选，默认没有，建筑检测的minUnits。
 
-    maxUnits：可选，默认为0，建筑检测的maxUnits。
+    maxUnits：可选，默认没有，建筑检测的maxUnits。
 
     team：可选，默认为-1，建筑添加的队伍。为-1时，建筑检测没有team。不为-1时，建筑检测有team。
 
@@ -181,6 +181,10 @@
 
     deacti：可选，字符串数组，默认没有。建筑添加宾语添加的额外deactivatedBy。
 
+    isdetectdeacti: 检测宾语是否抑制建筑添加宾语。
+
+    aunitbrace: 可选，字符串，默认为""。将在建筑添加后面添加内容（而不在建筑检测添加）。例如"(techLevel=2)"
+
     addname：可选，默认为""，建筑添加宾语名字。
 
     addoffset：可选，数字数组，默认为"0 0"，建筑添加宾语偏移。
@@ -189,9 +193,9 @@
 
     detectname: 可选，默认为""，建筑检测宾语名字。
 
-    detectoffset: 可选，数字数组，默认为"-10 0"，建筑检测宾语偏移。
+    detectoffset: 可选，数字数组，默认为"0 0"，建筑检测宾语偏移。
 
-    detectoffsetsize: 可选，数字数组，默认为"20 0"，建筑检测宾语大小改变。
+    detectoffsetsize: 可选，数字数组，默认为"0 0"，建筑检测宾语大小改变。
 
     inadd_prefix：可选，默认不存在。将会导入对应inadd_info的数据，建立初始建筑。
 
@@ -220,7 +224,7 @@
 
     标记 : "ci"
 
-`对于自动化宾语来说，我们约定，info打头为info宾语，标记打头为标记宾语，打头后面是该宾语在示例中的坐标。后面再跟它们的名字，类型不填。如果是info宾语，后面还会跟上它们的属性。不要把双引号也加上。"//"是注释符号，后面的文本请无视。`
+`对于本教程展示的自动化宾语来说，我们约定，info打头为info宾语，标记打头为标记宾语，打头后面是该宾语在示例中的坐标。后面再跟它们的名字，类型不填。如果是info宾语，后面还会跟上它们的属性。不要把双引号也加上。"//"是注释符号，后面的文本请无视。`
 
 对于建筑来说，想要实现对建筑刷新的控制需要一个id作为信息传递的中介。这个id具体是什么不重要，关键是不能与其他id重复。在这里，我们设定其只需要填写id的前缀(**idprefix**)，之后每添加一个新建筑，新产生建筑的id都会是该id前缀后面加一个数字，并且保证不会与其他id发生重复。
 
@@ -276,23 +280,25 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
     info : "building_info"
         prefix : "ci" // 前缀
         idprefix : "ci" // id前缀
-        args : "inaddteam,str;mtext,str"
-        opargs : "t,team,str,-1"
+        args : "inaddteam,str;mtext,str" // 必填参数列表，第一个为建筑的初始队伍，第二个为建筑名字
+        opargs : "t,team,str,-1" // 建筑持续刷新队伍，默认为-1
         detectReset : "20s" //检测reset
         aunit : "supplyDepot" //单位类型
 
     标记 : "ci0.莫斯科,t0" 或 "ci0.莫斯科"
 
-然而，一个建筑通常还需要一个可选参数**addReset**。这是unitAdd的resetActivationAfter。保证建筑可以持续刷新。
+然而，一个建筑通常还需要一些可选参数，分别是**isdetectdeacti**，**maxUnits**，**addReset**，它们保证了建筑在没有的时候能周期刷新。
 
     info : "building_info"
         prefix : "ci" // 前缀
         idprefix : "ci" // id前缀
-        args : "inaddteam,str;mtext,str"
-        opargs : "t,team,str,-1"
+        args : "inaddteam,str;mtext,str" // 必填参数列表，第一个为建筑的初始队伍，第二个为建筑名字
+        opargs : "t,team,str,-1" // 建筑持续刷新队伍，默认为-1
         detectReset : "20s" //检测reset
         aunit : "supplyDepot" //单位类型
-        addReset : "20s" //添加reset
+        addReset : "20s" //添加resetActivationAfter
+        maxUnits : "0" //检测的maxUnits
+        isdetectdeacti : "false" // 检测是否抑制建筑添加
 
     标记 : "ci0.莫斯科,t0" 或 "ci0.莫斯科"
 
@@ -312,10 +318,12 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
         prefix : "ci" // 前缀
         idprefix : "ci" // id前缀
         args : "inaddteam,str;mtext,str" // 必填参数列表，第一个为建筑的初始队伍，第二个为建筑名字
-        opargs : "t,team,str,-1"
+        opargs : "t,team,str,-1" // 建筑持续刷新队伍，默认为-1
         detectReset : "20s" //检测reset
         aunit : "supplyDepot" //单位类型
-        addReset : "20s" //添加reset
+        addReset : "20s" //添加resetActivationAfter
+        maxUnits : "0" //检测的maxUnits
+        isdetectdeacti : "false" // 检测是否抑制建筑添加
         isinadd : "true" // 启用建筑初始刷新
         ismtext : "true" // 启用建筑文本
 
@@ -327,10 +335,12 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
         prefix : "ci" // 前缀
         idprefix : "ci" // id前缀
         args : "inaddteam,str;mtext,str" // 必填参数列表，第一个为建筑的初始队伍，第二个为建筑名字
-        opargs : "t,team,str,-1" // 建筑刷新队伍
+        opargs : "t,team,str,-1" // 建筑持续刷新队伍，默认为-1
         detectReset : "20s" //检测reset
         aunit : "supplyDepot" //单位类型
-        addReset : "20s" //添加reset
+        addReset : "20s" //添加resetActivationAfter
+        maxUnits : "0" //检测的maxUnits
+        isdetectdeacti : "false" // 检测是否抑制建筑添加
         isinadd : "true" // 启用建筑初始刷新
         ismtext : "true" // 启用建筑文本
 
@@ -357,7 +367,7 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
 
 -D 选项会彻底删除info宾语和标记宾语，因此是不可逆的，强烈建议使用 -o 选项输出到新文件路径中。
 
-还有更多的宾语选项可供选择。可以这样查看帮助。还可以在[命令行参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_tutorial.md#命令参数)查看所有选项
+还有更多的宾语选项可供选择。可以这样查看帮助。还可以在[命令行参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_tutorial.md#命令参数)查看所有选项
 
     objectgroupauto -h
 
@@ -383,7 +393,7 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
 
 想要制作对一个建筑的队伍检测，必须制作与玩家数目相同的检测宾语。这需要花费很多精力。想象一张城夺地图，共有100个城市10个玩家，就需要1000个队伍检测宾语（如果全覆盖）。如果有200个城市20个玩家，就需要4000个队伍检测。这是十分沉重而机械的工作。
 
-有关于队伍检测宾语自动化的info是teamDetect_info。下面是该info的详细参数，您也可以在[teamDetect_info参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_tutorial.md#teamDetect_info)中的teamDetect部分看到。
+有关于队伍检测宾语自动化的info是teamDetect_info。下面是该info的详细参数，您也可以在[teamDetect_info参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_tutorial.md#teamDetect_info)中的teamDetect部分看到。
 
     ## teamDetect_info
 
@@ -395,9 +405,9 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
 
     reset：必选，表示检测宾语的刷新周期。
 
-    setTeam：数字二维数组，表示队伍分组。同阵营内部用空格隔开，阵营之间用逗号隔开。填写例子"0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17"。
+    setTeam：数字二维数组，表示队伍分组。同阵营内部用空格隔开，阵营之间用逗号隔开。如果为-3，表示检测与本检测min和max互补的检测，且无队伍。填写例子"0 2 4 6 8 10,12 14 16 18,1 3 5 7 9 11 13 15 17,-3 -2 -1"。不允许小于等于-4。
 
-    setidTeam：字符串数组，表示队伍id前缀。不同阵营之间用逗号隔开，一个阵营仅有一个id。填写例子"A_city,B_city"。
+    setidTeam：字符串二维数组，表示不同组的id前缀。不同组之间用";"隔开，一个阵营可以有一个或多个id。每一个组的第一个id相同时，表明不同组是一个阵营。填写例子"Ac,Ac1;Ac,Ac2;Bc;Nc"。
 
     ### teamDetect可选参数
 
@@ -413,9 +423,9 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
 
     aunit：可选，检测单位类型，用于unitType。
 
-    minUnits：可选，默认为1，建筑检测的minUnits。
+    minUnits：可选，默认为1，建筑检测的minUnits。如果为0，那么没有minUnits。不允许小于0。
 
-    maxUnits：可选，默认没有该参数，建筑检测的maxUnits。
+    maxUnits：可选，默认没有该参数，建筑检测的maxUnits。不允许小于0。必须大于等于minUnits。
 
     name：可选，字符串数组，默认没有，表示不同阵营宾语的名称。每个阵营仅会显示一个，不同阵营的名称之间用逗号隔开。填写例子"setidTeam0_0,setidTeam1_0"。
 
@@ -423,22 +433,32 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
 
     offsetsize：可选，数字二维数组，默认"0 0"，表示不同阵营宾语大小改变。当只有一个坐标时，该偏移对所有阵营均适用。不同阵营之间用逗号隔开，一个阵营有x和y两个坐标，中间空格隔开。填写例子"0 40,40 0"。
 
+    neutralindex: 可选，字符串，默认-1，最后一组id和team。一个数字，对引用setidTeam_id_dep和teamtoid_dep有影响。
+
+    basicoffset：可选，字符串数组，默认"-10 10"，表示basic宾语偏移（setidTeam中同一组出现不止一个）。
+
+    basicoffsetsize：可选，字符串数组，默认"20 0"，表示basic宾语大小偏移（setidTeam中同一组出现不止一个）。
+
     此外，还有大量only，将会原样添加到检测宾语中（如果有的话）。它们是：
     onlyIdle,onlyBuildings,onlyMainBuildings,onlyEmptyQueue,onlyBuilders,onlyOnResourcePool,onlyAttack,onlyAttackAir,onlyTechLevel,includeIncomplete,onlyWithTag
 
     ### teamDetect_info可被引用的其他参数
 
-    setidTeam0_0,setidTeam1_0...是生成的id。
+    setidTeam{i}_{j}_0 是生成的id。i是第几组，j是该组内的第几个id。只有 j = 0的id前缀对之后的变量有用（每组的第一个id）。
 
     setidTeam_id 是生成id的列表。
 
-    setidTeam_id_dep 是生成对应id补集的列表。
+    setidTeam_id_dep 是生成对应id补集(不包括neutralindex位置)的列表。
+
+    setidTeam_id_depn 是生成对应id补集的列表。
 
     teamtoi是队伍到id索引的字典。
 
     teamtoid是队伍到id的字典。
 
-    teamtoid_dep是队伍到对应id的补集的字典。
+    teamtoid_dep是队伍到对应id的补集(不包括neutralindex位置)的字典。
+
+    teamtoid_depn是队伍到对应id的补集的字典。
     
 我们可以看到，teamDetect_info有4个参数。**prefix**和**reset**就不做介绍了。我们重点介绍**setTeam**和**setidTeam**。**setidTeam**是不同阵营的队伍检测的id的前缀。如果做的是2队团战，那么只需要写两个前缀。如果做混团或混战，那么需要写相当于阵营数的前缀。**setTeam**则是不同阵营各自拥有的玩家队伍。通过书写两个参数，便可确定本局游戏的玩家阵营情况。
 
@@ -447,7 +467,7 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
     info : "teamDetect_info_td"
         prefix : "td" // 前缀
         reset : "3s" // 检测刷新时间
-        setidTeam : "Ac,Bc" // 阵营检测id
+        setidTeam : "Ac;Bc" // 阵营检测id
         setTeam : "0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17" // 阵营内的队伍
 
     标记 : "td"
@@ -457,7 +477,7 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
     info : "teamDetect_info_td"
         prefix : "td" // 前缀
         reset : "3s" // 检测刷新时间
-        setidTeam : "t0,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13,t14,t15,t16,t17,t18,t19" // 阵营检测id
+        setidTeam : "t0;t1;t2;t3;t4;t5;t6;t7;t8;t9;t10;t11;t12;t13;t14;t15;t16;t17;t18;t19" // 阵营检测id
         setTeam : "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19" // 阵营内的队伍
 
     标记 : "td"
@@ -467,7 +487,7 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
     info : "teamDetect_info_td"
         prefix : "td" // 前缀
         reset : "3s" // 检测刷新时间
-        setidTeam : "Ac,Bc,Cc,Dc" // 阵营检测id
+        setidTeam : "Ac;Bc;Cc;Dc" // 阵营检测id
         setTeam : "0 4,1 5,2 6,3 7" // 阵营内的队伍
 
     标记 : "td"
@@ -479,7 +499,7 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
     info : "teamDetect_info_td"
         prefix : "td" // 前缀
         reset : "3s" // 检测刷新时间
-        setidTeam : "Ac,Bc" // 阵营检测id
+        setidTeam : "Ac;Bc" // 阵营检测id
         setTeam : "0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17" // 阵营内的队伍
         name : "{'setidTeam0_0'[len(setidTeam[0]):]},{'setidTeam1_0'[len(setidTeam[1]):]}" // 查看id数字，不必细究怎么回事
         offset : "-20 0" // 将检测宾语x轴（竖直）向上提一格
@@ -503,7 +523,7 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
     info : "teamDetect_info_td"
         prefix : "td" // 前缀
         reset : "3s" // 检测刷新时间
-        setidTeam : "Ac,Bc" // 阵营检测id
+        setidTeam : "Ac;Bc" // 阵营检测id
         setTeam : "0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17" // 阵营内的队伍
         args : "cite_name,str" // 添加cite_name
         isprefixseg : "true" // 允许前缀与参数之间出现"."
@@ -529,7 +549,7 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
     info : "teamDetect_info_td"
         prefix : "td" // 前缀
         reset : "3s" // 检测刷新时间
-        setidTeam : "Ac,Bc" // 阵营检测id
+        setidTeam : "Ac;Bc" // 阵营检测id
         setTeam : "0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17" // 阵营内的队伍
         args : "cite_name,str" // 添加cite_name
         isprefixseg : "true" // 允许前缀与参数之间出现"."
@@ -549,7 +569,7 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
 
 其他队伍检测可能添加的参数包括aunit,onlyBuildings等，请自行使用。
 
-除了许多功能性的info，还有专门的info用于引用。它就是dictionary_info。下面是该info的详细参数，您也可以在[dictionary_info参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_tutorial.md#dictionary_info)中的dictionary部分看到。
+除了许多功能性的info，还有专门的info用于引用。它就是dictionary_info。下面是该info的详细参数，您也可以在[dictionary_info参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_tutorial.md#dictionary_info)中的dictionary部分看到。
 
     ## dictionary_info
 
@@ -584,7 +604,7 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
         spawnUnits : "d.mh10" // 刷新10小机甲，10重坦
         team: "0" // 队伍0
 
-现在，我们学会了队伍检测的自动化和引用如何使用。现在你可以更方便的检测你的建筑的归属，然后将队伍检测id用于控制其他各种宾语，确定地图的胜负判定方式，并且提高地图的可玩性。学会这些，你已经完全可以利用以上知识来大幅减轻您的工作量了。阅读至此，你已经可以直接去查看[地图示例](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/example/auto_example.tmx)以及[地图示例说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_example.md)去直接使用那些已经做好的宾语了。目前的城夺地图，您已经都可以去做了。然而，我们还有更灵活的宾语自动化处理方式。
+现在，我们学会了队伍检测的自动化和引用如何使用。现在你可以更方便的检测你的建筑的归属，然后将队伍检测id用于控制其他各种宾语，确定地图的胜负判定方式，并且提高地图的可玩性。学会这些，你已经完全可以利用以上知识来大幅减轻您的工作量了。阅读至此，你已经可以直接去查看[地图示例](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/example/auto_example.tmx)以及[地图示例说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_example.md)去直接使用那些已经做好的宾语了。目前的城夺地图，您已经都可以去做了。然而，我们还有更灵活的宾语自动化处理方式。
 
 ## 任意自动化（tree_info和object_info）
 
@@ -592,7 +612,7 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
 
 通常来说，很多建筑上就要摆放队伍检测来检测队伍归属。那将二者合一不是更好吗？这在1.5版本确实是这么做的。但是后来发现，这样做比较僵化。毕竟，除了对建筑进行检测，还可能会对其他单位进行队伍检测。而且，大面积的队伍检测建筑也不是不可能。由此，二者被分割开来，分为两个info分别处理。
 
-然而，仍然是有二者一起使用的需求的。想必作者不愿意放置一个城市的时候要同时放两个标记宾语。我们希望让自动化在具体放置上更简便。这样的话，tree_info就派上用场了。以下是tree_info的参数，您也可以在[tree_info参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_tutorial.md#tree_info)中的tree部分看到。
+然而，仍然是有二者一起使用的需求的。想必作者不愿意放置一个城市的时候要同时放两个标记宾语。我们希望让自动化在具体放置上更简便。这样的话，tree_info就派上用场了。以下是tree_info的参数，您也可以在[tree_info参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_tutorial.md#tree_info)中的tree部分看到。
 
     ## tree_info
 
@@ -634,10 +654,12 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
         prefix : "ci" // 前缀
         idprefix : "ci" // id前缀
         args : "inaddteam,str;mtext,str" // 必填参数列表，第一个为建筑的初始队伍，第二个为建筑名字
-        opargs : "t,team,str,-1" // 建筑刷新队伍
+        opargs : "t,team,str,-1" // 建筑持续刷新队伍，默认为-1
         detectReset : "20s" //检测reset
         aunit : "supplyDepot" //单位类型
         addReset : "20s" //添加reset
+        maxUnits : "0" //检测的maxUnits
+        isdetectdeacti : "false" // 检测是否抑制建筑添加
         isinadd : "true" // 启用建筑初始刷新
         ismtext : "true" // 启用建筑文本
 
@@ -646,7 +668,7 @@ info宾语的默认参数讲解告一段落。读者可能发现还有两个默�
     info : "teamDetect_info_td"
         prefix : "td" // 前缀
         reset : "3s" // 检测刷新时间
-        setidTeam : "Ac,Bc" // 阵营检测id
+        setidTeam : "Ac;Bc" // 阵营检测id
         setTeam : "0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17" // 阵营内的队伍
         args : "cite_name,str" // 添加cite_name
         isprefixseg : "true" // 允许前缀与参数之间出现"."
@@ -682,7 +704,7 @@ tree_info的**prefix**无需赘述。我们需要考虑**name**是什么。理�
 
 tree_info标记宾语可以自由代入这些参数了，并产生分支宾语以同时满足建筑生成和队伍检测功能。想要引用队伍检测时，引用"td莫斯科"即可。
 
-我们像是搭积木一样，把这样一个建筑+队伍检测的宾语自动化搭出来了。然而这些积木块的功能还是比较完整的。我们能不能从头搭一个自动化模式呢？这就需要object_info了。object_info的参数如下，您也可以在[object_info参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_tutorial.md#object_info)中的object部分看到。
+我们像是搭积木一样，把这样一个建筑+队伍检测的宾语自动化搭出来了。然而这些积木块的功能还是比较完整的。我们能不能从头搭一个自动化模式呢？这就需要object_info了。object_info的参数如下，您也可以在[object_info参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_tutorial.md#object_info)中的object部分看到。
 
     ## object_info
     
@@ -811,6 +833,8 @@ tree_info标记宾语可以自由代入这些参数了，并产生分支宾语�
 
 它将产生两个id探测器，上下分别探测城市的A队占领id和B队占领id。当我们把这一部件横着排成一排时，将会自动产生两排检测。我们对这些城市被A/B队占领的数量进行检测，并用检测结果控制删除宾语，删除玩家的建造单位来控制胜负。这是非常有效的。如果我们需要检测的是城市的队伍检测id，那么也许上面的object_info_mi, tree_info_pt, tree_info_pn可以有所变化，让它显示城市的名字而非检测id。留作思考。
 
+注意，针对这一常见的结构，有一个idcheck_info可以实现同样的功能，请参考自行了解[idcheck_info参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_tutorial.md#idcheck_info)。
+
 运用同样的方法，我们可以对tree_info进行一些改动，使得引用的是tree_info的标记宾语，而不是teamDetect_info的标记宾语。虽然可能使用起来是一样的。
 
     info : "tree_info_ctd"
@@ -866,7 +890,7 @@ tree_info标记宾语可以自由代入这些参数了，并产生分支宾语�
     textSize : "11" //文本大小
     textColor : "#191970" //RGB格式颜色
 
-我们发现，这个莫斯科城本身也有城名，可能也需要进行一些修改。让我们先来看multiText是如何实现的吧。multiText_info的参数如下。您也可以在[multiText_info参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_tutorial.md#multiText_info)中的multiText部分看到。
+我们发现，这个莫斯科城本身也有城名，可能也需要进行一些修改。让我们先来看multiText是如何实现的吧。multiText_info的参数如下。您也可以在[multiText_info参数](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/objectgroupauto/readme/auto_tutorial.md#multiText_info)中的multiText部分看到。
 
     ## multiText_info
 
@@ -910,7 +934,7 @@ tree_info标记宾语可以自由代入这些参数了，并产生分支宾语�
 
     offsetsize：可选，数字二维数组，默认"0 0"，表示不同组宾语大小改变。当只有一个坐标时，该偏移对所有组均适用。不同组之间用逗号隔开，一个组有x和y两个坐标，中间空格隔开。填写例子"0 40,40 0"。
 
-info默认参数不必解释。值得注意的是默认参数中没有**cite_name**，这意味这multi系列的info均没有引用，它们都是“效应器”，不需要引用以供其他标记宾语使用。
+info默认参数不必解释。值得注意的是默认参数中没有**cite_name**，这意味这几个multi info均没有引用，它们都是“效应器”，不需要引用以供其他标记宾语使用。
 
 我们可以发现，并没有一个参数指明了一共会产生几个mapText宾语。这一过程是自动的。对于这些参数来说，有两类参数。一类是引用参数，比如teamDetect_cite,numDetect_cite等，这些参数可以填入对应的引用，它们会提供id激活的相关信息，mapText会“保证”它们充分发挥作用。对于teamDetect_cite来说，就是会至少产生setidTeam的id前缀数量的mapText，并且一个个的被队伍检测的id激活。特别的，如果isdefaultText为真，那么还会产生第n+1个mapText，并且该mapText会被所有队伍检测id抑制。isdefaultText的含义是，有可能要求部署一个在所有阵营都不占领城市的情况下产生的城市文本。
 
@@ -961,7 +985,7 @@ info默认参数不必解释。值得注意的是默认参数中没有**cite_nam
     info : "teamDetect_info_td"
         prefix : "td" // 前缀
         reset : "3s" // 检测刷新时间
-        setidTeam : "Ac,Bc" // 阵营检测id
+        setidTeam : "Ac;Bc" // 阵营检测id
         setTeam : "0 2 4 6 8 10 12 14 16 18,1 3 5 7 9 11 13 15 17" // 阵营内的队伍
         args : "cite_name,str" // 添加cite_name
         isprefixseg : "true" // 允许前缀与参数之间出现"."
@@ -990,4 +1014,151 @@ info默认参数不必解释。值得注意的是默认参数中没有**cite_nam
 
 这样，我们可以使用cco来部署不同阵营占领时颜色不同的城市了。
 
-## 振荡器（flash_info和building_f_info）
+类似的，multiAdd_info和multiRemove_info也有类似的结构（只是不常用到），如果有相关需求，请自行查看参数说明的对应内容。
+
+## 振荡器和方波器（flash_info和step_info）
+
+振荡器和方波器对地图没有直接的影响。它们的作用是产生一个id。这个id按照一定的规律激活和关闭。这个id可以作用于地图上的刷兵、塔防以及广播等宾语，间接产生效果。
+
+让我们先看看振荡器:
+
+    ## flash_info
+
+    这是一个振荡器，为了解决unitAdd在deactivatedBy由激活到不激活时，异常触发刷兵的bug。该振荡器需要一片空间，可以作为控制台一部分。具体来说，将振荡器检测id加入unitAdd的deactivatedBy中，就能在振荡器激活变为非激活时，直接产生刷新。不得将振荡器放置在玩家可以接触到的区域。
+
+    具体来说，如果initialtime："5s,15s"，periodtime："5s,20s"。那么，检测id激活停止将会在5s,15s,20s,35s,40s,55s...无限完成。
+
+    可进行时间修正。
+
+    ### flash_info必选参数
+
+    prefix：标记宾语引用前缀。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+    idprefix: 表示振荡器输出的id前缀，检测id在idprefix后将自动按照1,2...顺序延伸，请确保其他id没有此前缀。
+
+    initialtime：必选，字符串数组。检测id停止激活的若干初始时间。时间应当不断增加，最后一个initial为周期开始的时间。
+
+    ### flash_info可选参数
+
+    isprefixseg: 可选，默认为否。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+    args：可选，默认没有，必填参数。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+    opargs：可选，默认没有，可选参数。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+    cite_name：可选，默认没有，标志宾语标记。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+    brace：可选，默认没有，外部引用翻译列表。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+    detectReset：可选，默认为"0.25s"，振荡器检测的resetActivationAfter。
+
+    periodtime：可选，字符串数组，默认没有。检测id停止激活的若干周期时间（在周期中停止激活的相位）。最后一个periodtime为周期时间。
+
+    initialacti：可选，二维字符串数组。初始添加的acti。不同组被";"分割。如果仅有一个，那么acti将会应用于所有添加宾语中。acti将尽力全部加入添加宾语组中。
+
+    initialdeacti：可选，二维字符串数组。初始添加的deacti。不同组被";"分割。如果仅有一个，那么ddeacti将会应用于所有添加宾语中。deacti将尽力全部加入添加宾语组中。
+
+    periodacti：可选，二维字符串数组。周期添加的acti。不同组被";"分割。如果仅有一个，那么acti将会应用于所有添加宾语中。acti将尽力全部加入添加宾语组中。
+
+    perioddeacti：可选，二维字符串数组。周期添加的deacti。不同组被";"分割。如果仅有一个，那么ddeacti将会应用于所有添加宾语中。deacti将尽力全部加入添加宾语组中。
+
+    time_prefix：可选，默认不存在。将会导入对应time_info的数据，进行时间修正。
+
+    ### flash_info可被引用的其他参数
+
+    idprefix0是振荡器输出的id。
+
+那么，我们可以这样放置刷兵单位（受到振荡器控制)
+
+    info : "flash_info_fd" // 周期振荡器
+        prefix : "fd" // 前缀
+        isprefixseg : "true" // 允许前缀与参数之间出现"."
+        idprefix : "fd" //  振荡器id前缀
+        args : "cite_name,str;init,str;period,str" // 三个必填参数，分别是引用名称，初始时间，周期时间
+        initialtime : "{init}" // 初始时间代入
+        periodtime : "{period}" // 周期时间代入
+        did : "{idprefix0}" // id(idprefix0)的简化表示 
+        brace : "did" // 可被外部引用
+
+    标记 : "fd.fd200_100.100s.200s" // 一个振荡器标记，100s,300s,500s...会被激发
+
+    unitAdd //单位刷新
+        spawnUnits : "mechgun*1" //刷新小机甲
+        team : "-1" //队伍中立，允许被玩家同化
+        deactivatedBy : "fd200_100.did" //受到振荡器控制(100s,300s...刷兵)。如果刷兵受振荡器控制，尽量不要使用activatedBy。
+
+这个振荡器可以在许多刷新宾语中使用。接下来会写一个受到城市控制的刷兵。
+
+    unitAdd //单位刷新
+        spawnUnits : "mechgun*1" //刷新小机甲
+        team : "-1" //队伍中立，允许被玩家同化
+        deactivatedBy : "fd200_100.did,c莫斯科.b" //受到振荡器控制(100s,300s...刷兵)。且受到莫斯科城B队占领抑制(为A队占领或中立状态时才能正常刷新)。(该占领抑制请查看进阶教程和任意自动化)。
+
+当然了，这个振荡器的initialtime和periodtime都可以有多个，可以自行设置。
+
+接下来我们再来看看step_info:
+
+    ## step_info
+
+    这是一个方波器。可进行时间修正。
+
+    ### step_info必选参数
+
+    prefix：标记宾语引用前缀。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+    idprefix: 表示器输出的id前缀，城市id在idprefix后将自动按照1,2...顺序延伸，请确保其他id没有此前缀。
+
+    steptime：必选，字符串数组。添加宾语和删除宾语作用的时间。开头应当为0s。以避免出现bug。
+
+    iaactiend: 必选。当isactiend为true时，检测id最后为激活状态。之前每经过一个steptime，激活状态都会改变。
+
+    ### step_info可选参数
+
+    isprefixseg: 可选，默认为否。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+    args：可选，默认没有，必填参数。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+    opargs：可选，默认没有，可选参数。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+    cite_name：可选，默认没有，标志宾语标记。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+    brace：可选，默认没有，外部引用翻译列表。（[info宾语默认参数](#info宾语中基本参数介绍)）
+
+    detectReset：可选，默认为"0.25s"，振荡器检测的resetActivationAfter。
+
+    aunit：可选，建筑单位类型，默认为高射炮"antiAirTurretFlak"。
+
+    spawnnum：可选，默认为1，添加的数量。
+
+    team：可选，默认为-2，添加的队伍。
+
+    stepacti：可选，二维字符串数组。初始添加的acti。不同组被";"分割。如果仅有一个，那么acti将会应用于所有改变宾语中。acti将尽力全部加入宾语组中。
+
+    stepdeacti：可选，二维字符串数组。初始添加的deacti。不同组被";"分割。如果仅有一个，那么ddeacti将会应用于所有改变宾语中。deacti将尽力全部加入宾语组中。
+
+    time_prefix：可选，默认不存在。将会导入对应time_info的数据，进行时间修正。
+
+    ### step_info可被引用的其他参数
+
+    idprefix0是振荡器输出的id。
+
+方波器的一个经典用处是用作刷兵停止。
+
+    info : "step_info_si" // 刷兵时间终止
+        prefix : "si" // 前缀
+        isprefixseg : "true" // 允许前缀与参数之间出现"."
+        idprefix : "si" //  振荡器id前缀
+        args : "cite_name,str;step,str" // 两个必填参数，分别是引用名称，刷兵终止时间
+        steptime : "0s,{step}" // 刷兵终止时间代入
+        isactiend : "true" // 刷兵终止时间之后激活
+        did : "{idprefix0}" // id(idprefix0)的简化表示 
+        brace : "did" // 可被外部引用
+
+    标记 : "si.si1000.1000s" // 一个1000s后激活，之前不激活的方波器。
+
+    unitAdd //单位刷新
+        spawnUnits : "mechgun*1" //刷新小机甲
+        team : "-1" //队伍中立，允许被玩家同化
+        deactivatedBy : "fd200_100.did,si1000.did" //受到振荡器控制(100s,300s...刷兵)，且受到方波器控制(1000s后不再刷新)。这意味着会刷5轮兵(100s,300s,500s,700s,900s)。
+
+当然，方波器的steptime也可以加入更多时间，请自行设置。

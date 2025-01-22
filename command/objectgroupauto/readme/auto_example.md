@@ -1,7 +1,8 @@
 # 宾语自动化示例说明
 
 - [宾语自动化示例说明](#宾语自动化示例说明)
-  - [目标](#目标)
+  - [开始使用](#开始使用)
+  - [标记宾语](#标记宾语)
   - [地图示例格式](#地图示例格式)
   - [万能速查](#万能速查)
   - [塔防t](#塔防t)
@@ -36,13 +37,45 @@
     - [team](#team)
     - [时间](#时间)
 
-## 目标
+## 开始使用
 
-提供可在地图中直接复制粘贴的info宾语及其用法，为[宾语自动化地图示例](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/example/auto_example.tmx)提供注释。
+打开Termux应用或安装有python库rwmapeditor-exgcdwu的终端，请输入（文件名字应当为实际的文件路径，手机上请用mt浏览器查询文件路径）:
 
-如果想学习宾语自动化，请阅读[宾语自动化引导教程](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_guide.md)。
+    objectgroupauto "宾语自动化例子(1.8.7).tmx" -o "宾语自动化结果展示(铁锈可以打开)(1.8.7).tmx" -v -y -D -di -c
 
-如果想阅读宾语自动化的所有具体参数和详细注意事项，请阅读[宾语自动化参数说明](https://github.com/exgcdwu/Rusted-Warfare-map-editor-for-city-occupation-play-/blob/main/command/auto/readme/auto_tutorial.md)。
+可以用铁锈打开"宾语自动化例子"自动化后产生的新文件。
+
+一个可以参考宾语自动化示例说明的文件，应当按照以下步骤创造:
+
+    创建您的新地图
+
+    创建Triggers触发层
+
+    将"宾语自动化例子"文件中所有"info"宾语以及"dd.d"或者形如"ddx.dx"(x是一个不同的字母)的宾语复制粘贴进您的地图。以及fi,fd,si宾语复制粘贴进入（这些宾语不得与其他宾语重合，应当在地图外。）
+
+然后开始编写标记宾语，然后运行:
+
+    objectgroupauto "地图(未自动化).tmx" -o "地图.tmx" -v -y -D -di -c
+
+这样就能将自己的地图自动化了。
+
+之后将会介绍宾语自动化例子地图的格式，以及如何编写标记宾语。
+
+## 标记宾语
+
+标记宾语是一个没有类型，但有名称的宾语，且名称中有特定的前缀。在这里举几个例子(使用宾语自动化模板的)：
+
+  t0 一个初始玩家为1的塔防
+
+  t0,usu 一个初始玩家为1的补给站
+
+  c0.c1.莫斯科 一个名字为莫斯科，引用为c1，队伍为0的城市。
+
+  a.mg.fi20 一个受fi20的振荡器控制的，刷新小机甲的刷兵点。
+
+  还有很多...
+
+您可以对比"宾语自动化例子"里右边的各项标记宾语和其产生的结果，选择如何使用这些自动化模式。
 
 ## 地图示例格式
 

@@ -1,6 +1,6 @@
 from typing import Union
 from copy import deepcopy, copy
-import regex as re
+import regex as reg
 import os
 from pprint import pprint
 import argparse
@@ -185,15 +185,17 @@ def brace_one_str(value):
 def brace_one_translation(expression_b:str, dict_name:dict, seg_re:str)->str:
 
     expression_b = " " + expression_b + " "
-
-    expression_b_seg_index = [match_now.start() for match_now in re.finditer(seg_re, expression_b)]
+    try:
+        expression_b_seg_index = [match_now.start() for match_now in reg.finditer(seg_re, expression_b)]
+    except:
+        import pdb;pdb.set_trace()
     brace_one_list = [expression_b[expression_b_seg_index[index] + 1:expression_b_seg_index[index + 1]] for index in range(len(expression_b_seg_index) - 1)]
     
     for index in range(len(brace_one_list)):
         brace_one_ans = dict_name.get(brace_one_list[index])
         if brace_one_ans != None:
             brace_one_list[index] = brace_one_ans
-    
+
     expression_b_ans = "".join([expression_b[expression_b_seg_index[index]] + brace_one_str(brace_one_list[index]) for index in range(len(brace_one_list))])[1:]
     return expression_b_ans
 
@@ -211,7 +213,7 @@ def brace_one_translation_quick_for_trans(expression_b:str, dict_name:dict)->str
 def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, depth = MAXTRANSDEPTH, brace_exp_depth:int = MAXTRANSDEPTH):
     if brace_exp_depth == 0:
         return expression_b
-    
+
     expression_b_origin = expression_b
     expression_b = brace_one_translation_cycle(expression_b, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite)
     expression_b_origin_now = expression_b
@@ -240,6 +242,7 @@ def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, depth 
 
     if (prev or expression_b_origin != expression_b):
         expression_b = expression_translation(expression_b, dict_name, False, brace_exp_depth = brace_exp_depth - 1)
+    
     try:
         expression_b_temp = aeval(expression_b)
     except Exception as e:
@@ -269,7 +272,7 @@ def str_translation(value:Union[str, bool], dict_name:dict)->str:
     index_list = []
     for index in range(0, len(value)):
         if left_brace == -1:
-            raise ValueError("The string have '}' but don't have '{'.")
+            raise ValueError("The string have '}' but don't have '{'." + f"  (\"{value}\")")
         if value[index] == "{":
             if left_index == -1:
                 left_index = index
@@ -286,7 +289,7 @@ def str_translation(value:Union[str, bool], dict_name:dict)->str:
                     index_list.append((left_index, right_index))
                 left_index = -1
     if left_brace > 0:
-        raise ValueError("The string have '{' but don't have '}'.")
+        raise ValueError("The string have '{' but don't have '}'." + f"  (\"{value}\")")
     if index_list == []:
         return value
     value_ans = value[0:index_list[0][0]]
