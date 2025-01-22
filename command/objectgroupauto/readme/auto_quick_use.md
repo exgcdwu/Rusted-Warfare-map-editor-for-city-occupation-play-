@@ -10,13 +10,13 @@
 
 首先是下载Termux应用。
 
-![安装图片](./figure/termux1.jpg)
+![Termux应用](./figure/termux1.jpg)
 
-![安装图片](./figure/termux2.jpg)
+![Termux安装](./figure/termux2.jpg)
 
 然后进入Termux，你会看到这样一个对话框。
 
-![安装图片](./figure/termux-in1.jpg)
+![Termux界面](./figure/termux-in1.jpg)
 
 接下来我们的操作都会在这里进行。
 
@@ -24,13 +24,13 @@
 
     pkg update -y
 
-![安装图片](./figure/termux-install1.jpg)
+![pkg update -y 过程1](./figure/termux-install1.jpg)
 
-![安装图片](./figure/termux-install2.jpg)
+![pkg update -y 过程2](./figure/termux-install2.jpg)
 
 这一步要花些时间（十几分钟），请保持网络畅通。可以划屏先干别的。
 
-![安装图片](./figure/termux-install-y.jpg)
+![pkg update -y 过程需要按y](./figure/termux-install-y.jpg)
 
 如果看到有类似于这样询问是否继续的问题，请输入y再回车。
 
@@ -40,7 +40,7 @@
     pkg install -y python-numpy
     pkg install -y python-pillow
 
-![安装图片](./figure/termux-python.jpg)
+![安装python和相关库](./figure/termux-python.jpg)
 
 至此，python和重要的库安装完毕。
 
@@ -48,7 +48,7 @@
 
     pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple #（如果清华镜像不可以，换成别的镜像比如https://pypi.mirrors.ustc.edu.cn/simple 也行）
 
-![安装图片](./figure/termux-install3.jpg)
+![pip安装](./figure/termux-install3.jpg)
 
 接下来将与宾语自动化相关的库全部安装。
 
@@ -67,7 +67,7 @@
 
     termux-setup-storage
 
-![安装图片](./figure/termux-storage.jpg)
+![存储权限申请](./figure/termux-storage.jpg)
 
 然后点同意获取读取存储权限。
 
@@ -91,19 +91,19 @@
 
 首先在notTiled中新建一个地图。并将其导出。
 
-![安装图片](./figure/init.jpg)
+![notTiled地图初始化](./figure/init.jpg)
 
-![安装图片](./figure/output.jpg)
+![notTiled地图导出](./figure/output.jpg)
 
 在mt浏览器中用文本模式打开"宾语自动化例子"，搜索Triggers。将整个objectgroup复制下来。
 
-![安装图片](./figure/find-triggers.jpg)
+![mt浏览器中找到Triggers层](./figure/find-triggers.jpg)
 
-![安装图片](./figure/triggers-copy.jpg)
+![Triggers层拷贝](./figure/triggers-copy.jpg)
 
 然后在mt浏览器中用文本模式打开您的地图，在\<\/map\>末尾之前将复制的内容粘贴。
 
-![安装图片](./figure/triggers-paste.jpg)
+![Triggers层粘贴](./figure/triggers-paste.jpg)
 
 如此，您已经将宾语自动化模板复制完毕。再将这张地图导入notTiled中。
 
