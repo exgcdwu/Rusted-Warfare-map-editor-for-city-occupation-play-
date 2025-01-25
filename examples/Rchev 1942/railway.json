@@ -1,0 +1,376 @@
+{
+    "rwmapauto_type": "layerauto", 
+    "simplify": {
+        "tile_T": ["^.*巴巴罗萨计划(?!.*渐变海洋).*地块byXs.*$", "re"], 
+        "layer_Ground": "Ground", 
+        "layer_Items_input_railway": "Items_railway", 
+        "layer_Items_output_railway": "Items_railway", 
+        "r0": "railway_origin_0", 
+        "r1": "railway_origin_1", 
+        "r2": "railway_origin_2", 
+        "r3": "railway_origin_3"
+    }, 
+    "execution": [
+        {
+            "exe_name": "railway_origin", 
+            "layer_to_exe": [
+                [{"layer_Items_input_railway": [{"tile_T": [[0, 15], [4, 16]]}, {"tile_T": [0, 17]}]}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "bridge_origin", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [0, 2]}, 
+                                {"tile_T": [0, 5]}, 
+                                {"tile_T": [0, 8]}, 
+                                {"tile_T": [0, 11]}]}, 1], 
+                [{"layer_Ground": [{"tile_T": [0, 2]}, 
+                                {"tile_T": [0, 5]}, 
+                                {"tile_T": [0, 8]}, 
+                                {"tile_T": [0, 11]}]}, 2]
+            ]
+        }, 
+        {
+            "exe_name": "railway_inner_origin", 
+            "layer_to_exe": [
+                [{"layer_Items_input_railway": {"tile_T": [0, 16]}}, 201102], 
+                [{"layer_Items_input_railway": {"tile_T": [0, 15]}}, 210012], 
+                [{"layer_Items_input_railway": {"tile_T": [1, 15]}}, 200112], 
+                [{"layer_Items_input_railway": {"tile_T": [2, 16]}}, 211002], 
+                [{"layer_Items_input_railway": {"tile_T": [2, 15]}}, 210102], 
+                [{"layer_Items_input_railway": {"tile_T": [1, 16]}}, 201012], 
+                [{"layer_Items_input_railway": {"tile_T": [3, 16]}}, 201112], 
+                [{"layer_Items_input_railway": {"tile_T": [3, 15]}}, 210112], 
+                [{"layer_Items_input_railway": {"tile_T": [4, 16]}}, 211012], 
+                [{"layer_Items_input_railway": {"tile_T": [4, 15]}}, 211102], 
+                [{"layer_Items_input_railway": {"tile_T": [0, 17]}}, 211112]
+            ]
+        }, 
+        {
+            "exe_name": "railway_inner_for_external_origin", 
+            "layer_to_exe": [
+                [{"layer_Items_input_railway": {"tile_T": [0, 16]}}, 201102], 
+                [{"layer_Items_input_railway": {"tile_T": [0, 15]}}, 210012], 
+                [{"layer_Items_input_railway": {"tile_T": [1, 15]}}, 200112], 
+                [{"layer_Items_input_railway": {"tile_T": [2, 16]}}, 211002], 
+                [{"layer_Items_input_railway": {"tile_T": [2, 15]}}, 210102], 
+                [{"layer_Items_input_railway": {"tile_T": [1, 16]}}, 201012], 
+                [{"layer_Items_input_railway": {"tile_T": [3, 16]}}, 201112], 
+                [{"layer_Items_input_railway": {"tile_T": [3, 15]}}, 210112], 
+                [{"layer_Items_input_railway": {"tile_T": [4, 16]}}, 211012], 
+                [{"layer_Items_input_railway": {"tile_T": [4, 15]}}, 211102], 
+                [{"layer_Items_input_railway": {"tile_T": [0, 17]}}, 211112]
+            ]
+        }, 
+        {
+            "exe_name": "railway_inner_origin_0", 
+            "layer_to_exe": [
+                [{"railway_inner_origin": 210002}, 1],
+                [{"railway_inner_origin": 210012}, 1],
+                [{"railway_inner_origin": 210102}, 1],
+                [{"railway_inner_origin": 210112}, 1],
+                [{"railway_inner_origin": 211002}, 1],
+                [{"railway_inner_origin": 211012}, 1],
+                [{"railway_inner_origin": 211102}, 1],
+                [{"railway_inner_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway_inner_origin_1", 
+            "layer_to_exe": [
+                [{"railway_inner_origin": 201002}, 1], 
+                [{"railway_inner_origin": 201012}, 1], 
+                [{"railway_inner_origin": 201102}, 1], 
+                [{"railway_inner_origin": 201112}, 1], 
+                [{"railway_inner_origin": 211002}, 1], 
+                [{"railway_inner_origin": 211012}, 1], 
+                [{"railway_inner_origin": 211102}, 1], 
+                [{"railway_inner_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway_inner_origin_2", 
+            "layer_to_exe": [
+                [{"railway_inner_origin": 200102}, 1], 
+                [{"railway_inner_origin": 200112}, 1], 
+                [{"railway_inner_origin": 201102}, 1], 
+                [{"railway_inner_origin": 201112}, 1], 
+                [{"railway_inner_origin": 210102}, 1], 
+                [{"railway_inner_origin": 210112}, 1], 
+                [{"railway_inner_origin": 211102}, 1], 
+                [{"railway_inner_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway_inner_origin_3", 
+            "layer_to_exe": [
+                [{"railway_inner_origin": 200012}, 1], 
+                [{"railway_inner_origin": 200112}, 1], 
+                [{"railway_inner_origin": 201012}, 1], 
+                [{"railway_inner_origin": 201112}, 1], 
+                [{"railway_inner_origin": 210012}, 1], 
+                [{"railway_inner_origin": 210112}, 1], 
+                [{"railway_inner_origin": 211012}, 1], 
+                [{"railway_inner_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway_inner_for_external_origin_0", 
+            "layer_to_exe": [
+                [{"railway_inner_for_external_origin": 210002}, 1],
+                [{"railway_inner_for_external_origin": 210012}, 1],
+                [{"railway_inner_for_external_origin": 210102}, 1],
+                [{"railway_inner_for_external_origin": 210112}, 1],
+                [{"railway_inner_for_external_origin": 211002}, 1],
+                [{"railway_inner_for_external_origin": 211012}, 1],
+                [{"railway_inner_for_external_origin": 211102}, 1],
+                [{"railway_inner_for_external_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway_inner_for_external_origin_1", 
+            "layer_to_exe": [
+                [{"railway_inner_for_external_origin": 201002}, 1], 
+                [{"railway_inner_for_external_origin": 201012}, 1], 
+                [{"railway_inner_for_external_origin": 201102}, 1], 
+                [{"railway_inner_for_external_origin": 201112}, 1], 
+                [{"railway_inner_for_external_origin": 211002}, 1], 
+                [{"railway_inner_for_external_origin": 211012}, 1], 
+                [{"railway_inner_for_external_origin": 211102}, 1], 
+                [{"railway_inner_for_external_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway_inner_for_external_origin_2", 
+            "layer_to_exe": [
+                [{"railway_inner_for_external_origin": 200102}, 1], 
+                [{"railway_inner_for_external_origin": 200112}, 1], 
+                [{"railway_inner_for_external_origin": 201102}, 1], 
+                [{"railway_inner_for_external_origin": 201112}, 1], 
+                [{"railway_inner_for_external_origin": 210102}, 1], 
+                [{"railway_inner_for_external_origin": 210112}, 1], 
+                [{"railway_inner_for_external_origin": 211102}, 1], 
+                [{"railway_inner_for_external_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway_inner_for_external_origin_3", 
+            "layer_to_exe": [
+                [{"railway_inner_for_external_origin": 200012}, 1], 
+                [{"railway_inner_for_external_origin": 200112}, 1], 
+                [{"railway_inner_for_external_origin": 201012}, 1], 
+                [{"railway_inner_for_external_origin": 201112}, 1], 
+                [{"railway_inner_for_external_origin": 210012}, 1], 
+                [{"railway_inner_for_external_origin": 210112}, 1], 
+                [{"railway_inner_for_external_origin": 211012}, 1], 
+                [{"railway_inner_for_external_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway_external_origin_0", 
+            "layer_to_exe": [
+                [{"railway_inner_for_external_origin_3": 1}, 1]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "terrain", 
+                    "exe_border": {
+                        "all": 1
+                    }, 
+                    "exe_operation": {
+                        "1": [
+                            [ -1,  1,  -1], 
+                            [ -1,  -1,  -1], 
+                            [ -1,  -1,  -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "railway_external_origin_1", 
+            "layer_to_exe": [
+                [{"railway_inner_for_external_origin_2": 1}, 1]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "terrain", 
+                    "exe_border": {
+                        "all": 1
+                    }, 
+                    "exe_operation": {
+                        "1": [
+                            [ -1,  -1,  -1], 
+                            [ 1,  -1,  -1], 
+                            [ -1,  -1,  -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "railway_external_origin_2", 
+            "layer_to_exe": [
+                [{"railway_inner_for_external_origin_1": 1}, 1]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "terrain", 
+                    "exe_border": {
+                        "all": 1
+                    }, 
+                    "exe_operation": {
+                        "1": [
+                            [ -1,  -1,  -1], 
+                            [ -1,  -1,  1], 
+                            [ -1,  -1,  -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "railway_external_origin_3", 
+            "layer_to_exe": [
+                [{"railway_inner_for_external_origin_0": 1}, 1]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "terrain", 
+                    "exe_border": {
+                        "all": 1
+                    }, 
+                    "exe_operation": {
+                        "1": [
+                            [ -1,  -1,  -1], 
+                            [ -1,  -1,  -1], 
+                            [ -1,  1,  -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "railway_origin_0", 
+            "layer_to_exe": [
+                [{"railway_inner_origin_0": 1, "railway_external_origin_0": 1}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway_origin_1", 
+            "layer_to_exe": [
+                [{"railway_inner_origin_1": 1, "railway_external_origin_1": 1}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway_origin_2", 
+            "layer_to_exe": [
+                [{"railway_inner_origin_2": 1, "railway_external_origin_2": 1}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway_origin_3", 
+            "layer_to_exe": [
+                [{"railway_inner_origin_3": 1, "railway_external_origin_3": 1}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway", 
+            "layer_to_exe": [
+                [{"r0": 0, "r1": 0, "r2": 0, "r3": 0}, 200002], 
+                [{"r0": 0, "r1": 0, "r2": 0, "r3": 1}, 200012], 
+                [{"r0": 0, "r1": 0, "r2": 1, "r3": 0}, 200102], 
+                [{"r0": 0, "r1": 0, "r2": 1, "r3": 1}, 200112], 
+                [{"r0": 0, "r1": 1, "r2": 0, "r3": 0}, 201002], 
+                [{"r0": 0, "r1": 1, "r2": 0, "r3": 1}, 201012], 
+                [{"r0": 0, "r1": 1, "r2": 1, "r3": 0}, 201102], 
+                [{"r0": 0, "r1": 1, "r2": 1, "r3": 1}, 201112], 
+                [{"r0": 1, "r1": 0, "r2": 0, "r3": 0}, 210002], 
+                [{"r0": 1, "r1": 0, "r2": 0, "r3": 1}, 210012], 
+                [{"r0": 1, "r1": 0, "r2": 1, "r3": 0}, 210102], 
+                [{"r0": 1, "r1": 0, "r2": 1, "r3": 1}, 210112], 
+                [{"r0": 1, "r1": 1, "r2": 0, "r3": 0}, 211002], 
+                [{"r0": 1, "r1": 1, "r2": 0, "r3": 1}, 211012], 
+                [{"r0": 1, "r1": 1, "r2": 1, "r3": 0}, 211102], 
+                [{"r0": 1, "r1": 1, "r2": 1, "r3": 1}, 211112], 
+                [{"railway_origin": 0}, 0]
+            ]
+        }, 
+        {
+            "exe_name": "bridge", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [0, 2]}, 
+                                {"tile_T": [0, 5]}, 
+                                {"tile_T": [0, 8]}, 
+                                {"tile_T": [0, 11]}]}, 1], 
+                [{"layer_Ground": [{"tile_T": [0, 2]}, 
+                                {"tile_T": [0, 5]}, 
+                                {"tile_T": [0, 8]}, 
+                                {"tile_T": [0, 11]}]}, 2]
+            ]
+        }, 
+        {
+            "exe_name": "climate", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [[0, 0], [6, 2]]}]}, 1], 
+                [{"layer_Ground": [{"tile_T": [[0, 3], [6, 5]]}]}, 2], 
+                [{"layer_Ground": [{"tile_T": [[0, 6], [6, 8]]}]}, 3], 
+                [{"layer_Ground": [{"tile_T": [[0, 9], [6, 11]]}]}, 4]
+            ]
+        }, 
+        {
+            "exe_name": "layer_Items_output_railway_exe", 
+            "layer_to_exe": [
+                [{"railway": 201102}, 1016], 
+                [{"railway": 201002}, 1016], 
+                [{"railway": 200102}, 1016], 
+                [{"railway": 210012}, 1015], 
+                [{"railway": 210002}, 1015], 
+                [{"railway": 200012}, 1015], 
+                [{"railway": 200112}, 1115], 
+                [{"railway": 211002}, 1216], 
+                [{"railway": 210102}, 1215], 
+                [{"railway": 201012}, 1116], 
+                [{"railway": 201112}, 1316], 
+                [{"railway": 210112}, 1315], 
+                [{"railway": 211012}, 1416], 
+                [{"railway": 211102}, 1415], 
+                [{"railway": 211112}, 1017]
+            ], 
+            "exe_to_layer": {
+                "1016": [["layer_Items_output_railway", "tile_T", 0, 16]], 
+                "1015": [["layer_Items_output_railway", "tile_T", 0, 15]], 
+                "1116": [["layer_Items_output_railway", "tile_T", 1, 16]], 
+                "1115": [["layer_Items_output_railway", "tile_T", 1, 15]], 
+                "1216": [["layer_Items_output_railway", "tile_T", 2, 16]], 
+                "1215": [["layer_Items_output_railway", "tile_T", 2, 15]], 
+                "1316": [["layer_Items_output_railway", "tile_T", 3, 16]], 
+                "1315": [["layer_Items_output_railway", "tile_T", 3, 15]], 
+                "1017": [["layer_Items_output_railway", "tile_T", 0, 17]]
+            }
+        }, 
+        {
+            "exe_name": "layer_Ground_exe", 
+            "layer_to_exe": [
+                [{"layer_Items_output_railway_exe": 1016, "bridge_origin": 1, "climate": 1}, 102], 
+                [{"layer_Items_output_railway_exe": 1016, "bridge_origin": 1, "climate": 2}, 105], 
+                [{"layer_Items_output_railway_exe": 1016, "bridge_origin": 1, "climate": 3}, 108], 
+                [{"layer_Items_output_railway_exe": 1016, "bridge_origin": 1, "climate": 4}, 1011], 
+                [{"layer_Items_output_railway_exe": 1015, "bridge_origin": 1, "climate": 1}, 112], 
+                [{"layer_Items_output_railway_exe": 1015, "bridge_origin": 1, "climate": 2}, 115], 
+                [{"layer_Items_output_railway_exe": 1015, "bridge_origin": 1, "climate": 3}, 118], 
+                [{"layer_Items_output_railway_exe": 1015, "bridge_origin": 1, "climate": 4}, 1111]
+            ], 
+            "exe_to_layer": {
+                "102": [["layer_Items_output_railway", "tile_T", 0, 2]], 
+                "105": [["layer_Items_output_railway", "tile_T", 0, 5]], 
+                "108": [["layer_Items_output_railway", "tile_T", 0, 2]], 
+                "1011": [["layer_Items_output_railway", "tile_T", 0, 5]], 
+                "112": [["layer_Items_output_railway", "tile_T", 1, 2]], 
+                "115": [["layer_Items_output_railway", "tile_T", 1, 5]], 
+                "118": [["layer_Items_output_railway", "tile_T", 1, 2]], 
+                "1111": [["layer_Items_output_railway", "tile_T", 1, 5]]
+            }
+        }
+    ]
+}

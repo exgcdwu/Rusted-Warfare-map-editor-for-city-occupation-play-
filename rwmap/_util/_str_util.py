@@ -2,10 +2,13 @@ import numpy as np
 import zlib
 import gzip
 import base64
+from typing import Union
 
-def ndarray_from_text_packed(text:str, encoding:str, compression:str)->np.ndarray:
+def ndarray_from_text_packed(text:str, encoding:str, compression:Union[str, None])->np.ndarray:
     if encoding == "base64":
         nmatrix = base64.b64decode(text)
+    elif encoding == "csv":
+        nmatrix = np.array([int(i) for i in text.split(",")])
     else:
         raise NotImplementedError(f": encoding type {encoding} not supported")
     if compression == "zlib":
@@ -21,7 +24,10 @@ def ndarray_from_text_packed(text:str, encoding:str, compression:str)->np.ndarra
     return nmatrix
 
 def text_packed_from_ndarray(ndarray_now:np.ndarray, encoding:str, compression:str):
-    text_packed = ndarray_now.flatten().tobytes()
+    if encoding == "base64":
+        text_packed = ndarray_now.flatten().tobytes()
+    else:
+        text_packed = ",".join(list(ndarray_now.flatten()))
     if compression == "zlib":
         text_packed = zlib.compress(text_packed)
     elif compression == "gzip":

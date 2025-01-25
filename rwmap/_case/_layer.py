@@ -30,6 +30,9 @@ class Layer(ElementOri):
         properties = ElementProperties.init_etElement(root)
         data = utility.get_etElement_callable_from_tag_s(root, "data")
         _tilematrix = utility.get_etElement_ndarray_from_text_packed(data, frame.Coordinate(root.attrib['width'], root.attrib['height']))
+        if data.attrib["encoding"] == "csv" and data.attrib.get("compression") == None:
+            import warnings
+            warnings.warn(f"The encoding is 'csv' and the compression is None for a layer({root.attrib['name']}), it's illegal for RustedWarfare.(Input)", RuntimeWarning)
         return cls(properties, _tilematrix, data.attrib["encoding"], data.attrib.get("compression"))
     
     @classmethod
@@ -54,6 +57,9 @@ class Layer(ElementOri):
         root = et.Element("layer")
         root = self._properties.output_etElement(root)
         root.append(utility.get_etElement_from_text_packed(self._tilematrix, self._encoding, self._compression))
+        if self._encoding == "csv" and self._compression == None:
+            import warnings
+            warnings.warn(f"The encoding is 'csv' and the compression is None for a layer({self.name()}), it's illegal for RustedWarfare.(Output)", RuntimeWarning)
         return root
     
     def name(self)->str:
@@ -98,6 +104,20 @@ class Layer(ElementOri):
 
     def change_visible(self, visible:bool)->None:
         self._properties.assignDefaultProperty("visible", str(int(visible)))
+
+    def encoding(self)->str:
+        return self._encoding
+    
+    def compression(self)->str:
+        return self._compression
+    
+    def change_encoding(self, encoding:str)->None:
+        self._encoding = encoding
+        self._properties.assignDefaultProperty("encoding", encoding)
+    
+    def change_compression(self, compression:str)->None:
+        self._compression = compression
+        self._properties.assignDefaultProperty("compression", compression)
 
     def tileid(self, place_grid:frame.Coordinate)->int:
         return int(self._tilematrix[place_grid.x()][place_grid.y()])

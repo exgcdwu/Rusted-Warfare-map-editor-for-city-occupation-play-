@@ -41,7 +41,7 @@
 
 打开Termux应用或安装有python库rwmapeditor-exgcdwu的终端，请输入（文件名字应当为实际的文件路径，手机上请用mt浏览器查询文件路径）:
 
-    objectgroupauto "宾语自动化例子(1.8.7).tmx" -o "宾语自动化结果展示(铁锈可以打开)(1.8.7).tmx" -v -y -D -di -c
+    objectgroupauto "宾语自动化例子(1.8.7.1).tmx" -o "宾语自动化结果展示(铁锈可以打开)(1.8.7.1).tmx" -v -y -D -di -c
 
 可以用铁锈打开"宾语自动化例子"自动化后产生的新文件。
 

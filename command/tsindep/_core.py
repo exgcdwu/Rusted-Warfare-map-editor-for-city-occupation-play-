@@ -100,6 +100,9 @@ def auto_func(args = None):
     map_now.tileset_dependent()
     for imagelayer_name in deleteimagelist:
         map_now.delete_imageLayer(imagelayer_name)
+    for layer_now in map_now._layer_list:
+        layer_now.change_encoding("base64")
+        layer_now.change_compression("zlib")
 
     standard_out_underline(language, isverbose, "Map outputting|地图输出")
 

@@ -56,8 +56,6 @@ def get_etElement_name_to_text_s(root:et.Element, name:str, info_name:str = None
             if text == None:
                 try:
                     pv = nproperty.attrib['value']
-                    import warnings
-                    warnings.warn(f"The text of an element({info_name})'s attrib({name}) cannot be found, but value can be found.", RuntimeWarning)
                     return pv
                 except:
                     return None
@@ -67,7 +65,7 @@ def get_etElement_name_to_text_s(root:et.Element, name:str, info_name:str = None
 def get_etElement_ndarray_from_text_packed(root:et.Element, reshape_Coordinate:frame.Coordinate)->np.ndarray:
     if root == None:
         return None
-    nmatrix = str_utility.ndarray_from_text_packed(root.text, root.attrib["encoding"], root.attrib["compression"])
+    nmatrix = str_utility.ndarray_from_text_packed(root.text, root.attrib["encoding"], root.attrib.get("compression"))
     nmatrix = np.reshape(nmatrix, [reshape_Coordinate.y(), reshape_Coordinate.x()])
     return nmatrix
 

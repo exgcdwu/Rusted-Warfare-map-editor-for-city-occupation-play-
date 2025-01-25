@@ -47,6 +47,9 @@ def exenparr_deal_expand(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]
     men = 0
     while exe_num > 0:
         ml = exe_dict.get(min_exe[men])
+        if len(ml) == 0:
+            men = men + 1
+            continue
         nl = ml[-1]
         fm = exe_to_exe_dict.get(min_exe[men])
         for i in range(-1, 2):
@@ -61,9 +64,6 @@ def exenparr_deal_expand(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]
                         exe_num = exe_num + 1
         ml.pop(-1)
         exe_num = exe_num - 1
-
-        if len(ml) == 0:
-            men = men + 1
 
 def ma33_str(rwnparr:np.ndarray, i:int, j:int)->str:
     str_ans = ""

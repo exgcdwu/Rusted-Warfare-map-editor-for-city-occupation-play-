@@ -1,0 +1,391 @@
+{
+    "rwmapauto_type": "layerauto", 
+    "simplify": {
+        "tile_T": ["^.*公路.*byXs.*$", "re"], 
+        "tile_bar": ["^.*巴巴罗萨计划(?!.*渐变海洋).*地块byXs.*$", "re"], 
+        "layer_Ground": "Ground", 
+        "layer_Items_input_road": "Items_road", 
+        "layer_Items_output_road": "Items_road", 
+        "r0": "road_origin_0", 
+        "r1": "road_origin_1", 
+        "r2": "road_origin_2", 
+        "r3": "road_origin_3"
+    }, 
+    "execution": [
+        {
+            "exe_name": "road_origin", 
+            "layer_to_exe": [
+                [{"layer_Items_input_road": {"tile_T": [[0, 0], [4, 2]]}}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "bridge_origin", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_bar": [0, 2]}, 
+                                {"tile_bar": [0, 5]}, 
+                                {"tile_bar": [0, 8]}, 
+                                {"tile_bar": [0, 11]}]}, 1], 
+                [{"layer_Ground": [{"tile_bar": [0, 2]}, 
+                                {"tile_bar": [0, 5]}, 
+                                {"tile_bar": [0, 8]}, 
+                                {"tile_bar": [0, 11]}]}, 2]
+            ]
+        }, 
+        {
+            "exe_name": "road_inner_origin", 
+            "layer_to_exe": [
+                [{"layer_Items_input_road": {"tile_T": [0, 0]}}, 210012], 
+                [{"layer_Items_input_road": {"tile_T": [0, 1]}}, 201102], 
+                [{"layer_Items_input_road": {"tile_T": [0, 2]}}, 211112], 
+                [{"layer_Items_input_road": {"tile_T": [1, 0]}}, 200112], 
+                [{"layer_Items_input_road": {"tile_T": [1, 1]}}, 201012], 
+                [{"layer_Items_input_road": {"tile_T": [1, 2]}}, 200012], 
+                [{"layer_Items_input_road": {"tile_T": [2, 0]}}, 210102], 
+                [{"layer_Items_input_road": {"tile_T": [2, 1]}}, 211002], 
+                [{"layer_Items_input_road": {"tile_T": [2, 2]}}, 200102], 
+                [{"layer_Items_input_road": {"tile_T": [3, 0]}}, 210112], 
+                [{"layer_Items_input_road": {"tile_T": [3, 1]}}, 201112], 
+                [{"layer_Items_input_road": {"tile_T": [3, 2]}}, 210002], 
+                [{"layer_Items_input_road": {"tile_T": [4, 0]}}, 211102], 
+                [{"layer_Items_input_road": {"tile_T": [4, 1]}}, 211012], 
+                [{"layer_Items_input_road": {"tile_T": [4, 2]}}, 201002]
+            ]
+        }, 
+        {
+            "exe_name": "road_inner_for_external_origin", 
+            "layer_to_exe": [
+                [{"layer_Items_input_road": {"tile_T": [0, 0]}}, 210012], 
+                [{"layer_Items_input_road": {"tile_T": [0, 1]}}, 201102], 
+                [{"layer_Items_input_road": {"tile_T": [0, 2]}}, 211112], 
+                [{"layer_Items_input_road": {"tile_T": [1, 0]}}, 200112], 
+                [{"layer_Items_input_road": {"tile_T": [1, 1]}}, 201012], 
+                [{"layer_Items_input_road": {"tile_T": [1, 2]}}, 200012], 
+                [{"layer_Items_input_road": {"tile_T": [2, 0]}}, 210102], 
+                [{"layer_Items_input_road": {"tile_T": [2, 1]}}, 211002], 
+                [{"layer_Items_input_road": {"tile_T": [2, 2]}}, 200102], 
+                [{"layer_Items_input_road": {"tile_T": [3, 0]}}, 210112], 
+                [{"layer_Items_input_road": {"tile_T": [3, 1]}}, 201112], 
+                [{"layer_Items_input_road": {"tile_T": [3, 2]}}, 210002], 
+                [{"layer_Items_input_road": {"tile_T": [4, 0]}}, 211102], 
+                [{"layer_Items_input_road": {"tile_T": [4, 1]}}, 211012], 
+                [{"layer_Items_input_road": {"tile_T": [4, 2]}}, 201002]
+            ]
+        }, 
+        {
+            "exe_name": "road_inner_origin_0", 
+            "layer_to_exe": [
+                [{"road_inner_origin": 210002}, 1],
+                [{"road_inner_origin": 210012}, 1],
+                [{"road_inner_origin": 210102}, 1],
+                [{"road_inner_origin": 210112}, 1],
+                [{"road_inner_origin": 211002}, 1],
+                [{"road_inner_origin": 211012}, 1],
+                [{"road_inner_origin": 211102}, 1],
+                [{"road_inner_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "road_inner_origin_1", 
+            "layer_to_exe": [
+                [{"road_inner_origin": 201002}, 1], 
+                [{"road_inner_origin": 201012}, 1], 
+                [{"road_inner_origin": 201102}, 1], 
+                [{"road_inner_origin": 201112}, 1], 
+                [{"road_inner_origin": 211002}, 1], 
+                [{"road_inner_origin": 211012}, 1], 
+                [{"road_inner_origin": 211102}, 1], 
+                [{"road_inner_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "road_inner_origin_2", 
+            "layer_to_exe": [
+                [{"road_inner_origin": 200102}, 1], 
+                [{"road_inner_origin": 200112}, 1], 
+                [{"road_inner_origin": 201102}, 1], 
+                [{"road_inner_origin": 201112}, 1], 
+                [{"road_inner_origin": 210102}, 1], 
+                [{"road_inner_origin": 210112}, 1], 
+                [{"road_inner_origin": 211102}, 1], 
+                [{"road_inner_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "road_inner_origin_3", 
+            "layer_to_exe": [
+                [{"road_inner_origin": 200012}, 1], 
+                [{"road_inner_origin": 200112}, 1], 
+                [{"road_inner_origin": 201012}, 1], 
+                [{"road_inner_origin": 201112}, 1], 
+                [{"road_inner_origin": 210012}, 1], 
+                [{"road_inner_origin": 210112}, 1], 
+                [{"road_inner_origin": 211012}, 1], 
+                [{"road_inner_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "road_inner_for_external_origin_0", 
+            "layer_to_exe": [
+                [{"road_inner_for_external_origin": 210002}, 1],
+                [{"road_inner_for_external_origin": 210012}, 1],
+                [{"road_inner_for_external_origin": 210102}, 1],
+                [{"road_inner_for_external_origin": 210112}, 1],
+                [{"road_inner_for_external_origin": 211002}, 1],
+                [{"road_inner_for_external_origin": 211012}, 1],
+                [{"road_inner_for_external_origin": 211102}, 1],
+                [{"road_inner_for_external_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "road_inner_for_external_origin_1", 
+            "layer_to_exe": [
+                [{"road_inner_for_external_origin": 201002}, 1], 
+                [{"road_inner_for_external_origin": 201012}, 1], 
+                [{"road_inner_for_external_origin": 201102}, 1], 
+                [{"road_inner_for_external_origin": 201112}, 1], 
+                [{"road_inner_for_external_origin": 211002}, 1], 
+                [{"road_inner_for_external_origin": 211012}, 1], 
+                [{"road_inner_for_external_origin": 211102}, 1], 
+                [{"road_inner_for_external_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "road_inner_for_external_origin_2", 
+            "layer_to_exe": [
+                [{"road_inner_for_external_origin": 200102}, 1], 
+                [{"road_inner_for_external_origin": 200112}, 1], 
+                [{"road_inner_for_external_origin": 201102}, 1], 
+                [{"road_inner_for_external_origin": 201112}, 1], 
+                [{"road_inner_for_external_origin": 210102}, 1], 
+                [{"road_inner_for_external_origin": 210112}, 1], 
+                [{"road_inner_for_external_origin": 211102}, 1], 
+                [{"road_inner_for_external_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "road_inner_for_external_origin_3", 
+            "layer_to_exe": [
+                [{"road_inner_for_external_origin": 200012}, 1], 
+                [{"road_inner_for_external_origin": 200112}, 1], 
+                [{"road_inner_for_external_origin": 201012}, 1], 
+                [{"road_inner_for_external_origin": 201112}, 1], 
+                [{"road_inner_for_external_origin": 210012}, 1], 
+                [{"road_inner_for_external_origin": 210112}, 1], 
+                [{"road_inner_for_external_origin": 211012}, 1], 
+                [{"road_inner_for_external_origin": 211112}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "road_external_origin_0", 
+            "layer_to_exe": [
+                [{"road_inner_for_external_origin_3": 1}, 1]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "terrain", 
+                    "exe_border": {
+                        "all": 1
+                    }, 
+                    "exe_operation": {
+                        "1": [
+                            [ -1,  1,  -1], 
+                            [ -1,  -1,  -1], 
+                            [ -1,  -1,  -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "road_external_origin_1", 
+            "layer_to_exe": [
+                [{"road_inner_for_external_origin_2": 1}, 1]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "terrain", 
+                    "exe_border": {
+                        "all": 1
+                    }, 
+                    "exe_operation": {
+                        "1": [
+                            [ -1,  -1,  -1], 
+                            [ 1,  -1,  -1], 
+                            [ -1,  -1,  -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "road_external_origin_2", 
+            "layer_to_exe": [
+                [{"road_inner_for_external_origin_1": 1}, 1]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "terrain", 
+                    "exe_border": {
+                        "all": 1
+                    }, 
+                    "exe_operation": {
+                        "1": [
+                            [ -1,  -1,  -1], 
+                            [ -1,  -1,  1], 
+                            [ -1,  -1,  -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "road_external_origin_3", 
+            "layer_to_exe": [
+                [{"road_inner_for_external_origin_0": 1}, 1]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "terrain", 
+                    "exe_border": {
+                        "all": 1
+                    }, 
+                    "exe_operation": {
+                        "1": [
+                            [ -1,  -1,  -1], 
+                            [ -1,  -1,  -1], 
+                            [ -1,  1,  -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "road_origin_0", 
+            "layer_to_exe": [
+                [{"road_inner_origin_0": 1, "road_external_origin_0": 1}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "road_origin_1", 
+            "layer_to_exe": [
+                [{"road_inner_origin_1": 1, "road_external_origin_1": 1}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "road_origin_2", 
+            "layer_to_exe": [
+                [{"road_inner_origin_2": 1, "road_external_origin_2": 1}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "road_origin_3", 
+            "layer_to_exe": [
+                [{"road_inner_origin_3": 1, "road_external_origin_3": 1}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "road", 
+            "layer_to_exe": [
+                [{"r0": 0, "r1": 0, "r2": 0, "r3": 0}, 200002], 
+                [{"r0": 0, "r1": 0, "r2": 0, "r3": 1}, 200012], 
+                [{"r0": 0, "r1": 0, "r2": 1, "r3": 0}, 200102], 
+                [{"r0": 0, "r1": 0, "r2": 1, "r3": 1}, 200112], 
+                [{"r0": 0, "r1": 1, "r2": 0, "r3": 0}, 201002], 
+                [{"r0": 0, "r1": 1, "r2": 0, "r3": 1}, 201012], 
+                [{"r0": 0, "r1": 1, "r2": 1, "r3": 0}, 201102], 
+                [{"r0": 0, "r1": 1, "r2": 1, "r3": 1}, 201112], 
+                [{"r0": 1, "r1": 0, "r2": 0, "r3": 0}, 210002], 
+                [{"r0": 1, "r1": 0, "r2": 0, "r3": 1}, 210012], 
+                [{"r0": 1, "r1": 0, "r2": 1, "r3": 0}, 210102], 
+                [{"r0": 1, "r1": 0, "r2": 1, "r3": 1}, 210112], 
+                [{"r0": 1, "r1": 1, "r2": 0, "r3": 0}, 211002], 
+                [{"r0": 1, "r1": 1, "r2": 0, "r3": 1}, 211012], 
+                [{"r0": 1, "r1": 1, "r2": 1, "r3": 0}, 211102], 
+                [{"r0": 1, "r1": 1, "r2": 1, "r3": 1}, 211112], 
+                [{"road_origin": 0}, 0]
+            ]
+        }, 
+        {
+            "exe_name": "bridge", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_bar": [0, 2]}, 
+                                {"tile_bar": [0, 5]}, 
+                                {"tile_bar": [0, 8]}, 
+                                {"tile_bar": [0, 11]}]}, 1], 
+                [{"layer_Ground": [{"tile_bar": [0, 2]}, 
+                                {"tile_bar": [0, 5]}, 
+                                {"tile_bar": [0, 8]}, 
+                                {"tile_bar": [0, 11]}]}, 2]
+            ]
+        }, 
+        {
+            "exe_name": "climate", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_bar": [[0, 0], [6, 2]]}]}, 1], 
+                [{"layer_Ground": [{"tile_bar": [[0, 3], [6, 5]]}]}, 2], 
+                [{"layer_Ground": [{"tile_bar": [[0, 6], [6, 8]]}]}, 3], 
+                [{"layer_Ground": [{"tile_bar": [[0, 9], [6, 11]]}]}, 4]
+            ]
+        }, 
+        {
+            "exe_name": "layer_Items_output_road_exe", 
+            "layer_to_exe": [
+                [{"road": 201102}, 101], 
+                [{"road": 201002}, 142], 
+                [{"road": 200102}, 122], 
+                [{"road": 210012}, 100], 
+                [{"road": 210002}, 132], 
+                [{"road": 200012}, 112], 
+                [{"road": 200112}, 110], 
+                [{"road": 211002}, 121], 
+                [{"road": 210102}, 120], 
+                [{"road": 201012}, 111], 
+                [{"road": 201112}, 131], 
+                [{"road": 210112}, 130], 
+                [{"road": 211012}, 141], 
+                [{"road": 211102}, 140], 
+                [{"road": 211112}, 102]
+            ], 
+            "exe_to_layer": {
+                "100": [["layer_Items_output_road", "tile_T", 0, 0]], 
+                "101": [["layer_Items_output_road", "tile_T", 0, 1]], 
+                "102": [["layer_Items_output_road", "tile_T", 0, 2]], 
+                "110": [["layer_Items_output_road", "tile_T", 1, 0]], 
+                "111": [["layer_Items_output_road", "tile_T", 1, 1]], 
+                "112": [["layer_Items_output_road", "tile_T", 1, 2]], 
+                "120": [["layer_Items_output_road", "tile_T", 2, 0]], 
+                "121": [["layer_Items_output_road", "tile_T", 2, 1]], 
+                "122": [["layer_Items_output_road", "tile_T", 2, 2]], 
+                "130": [["layer_Items_output_road", "tile_T", 3, 0]], 
+                "131": [["layer_Items_output_road", "tile_T", 3, 1]], 
+                "132": [["layer_Items_output_road", "tile_T", 3, 2]], 
+                "140": [["layer_Items_output_road", "tile_T", 4, 0]], 
+                "141": [["layer_Items_output_road", "tile_T", 4, 1]], 
+                "142": [["layer_Items_output_road", "tile_T", 4, 2]]
+            }
+        }, 
+        {
+            "exe_name": "layer_Ground_exe", 
+            "layer_to_exe": [
+                [{"layer_Items_output_road_exe": [101, 122, 142], "bridge_origin": 1, "climate": 1}, 102], 
+                [{"layer_Items_output_road_exe": [101, 122, 142], "bridge_origin": 1, "climate": 2}, 105], 
+                [{"layer_Items_output_road_exe": [101, 122, 142], "bridge_origin": 1, "climate": 3}, 108], 
+                [{"layer_Items_output_road_exe": [101, 122, 142], "bridge_origin": 1, "climate": 4}, 1011], 
+                [{"layer_Items_output_road_exe": [100, 112, 132], "bridge_origin": 1, "climate": 1}, 112], 
+                [{"layer_Items_output_road_exe": [100, 112, 132], "bridge_origin": 1, "climate": 2}, 115], 
+                [{"layer_Items_output_road_exe": [100, 112, 132], "bridge_origin": 1, "climate": 3}, 118], 
+                [{"layer_Items_output_road_exe": [100, 112, 132], "bridge_origin": 1, "climate": 4}, 1111]
+            ], 
+            "exe_to_layer": {
+                "102": [["layer_Items_output_road", "tile_bar", 0, 2]], 
+                "105": [["layer_Items_output_road", "tile_bar", 0, 5]], 
+                "108": [["layer_Items_output_road", "tile_bar", 0, 2]], 
+                "1011": [["layer_Items_output_road", "tile_bar", 0, 5]], 
+                "112": [["layer_Items_output_road", "tile_bar", 1, 2]], 
+                "115": [["layer_Items_output_road", "tile_bar", 1, 5]], 
+                "118": [["layer_Items_output_road", "tile_bar", 1, 2]], 
+                "1111": [["layer_Items_output_road", "tile_bar", 1, 5]]
+            }
+        }
+    ]
+}

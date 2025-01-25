@@ -1,0 +1,53 @@
+{
+    "rwmapauto_type": "layerauto", 
+    "simplify": {
+        "tile_T": ["^.*巴巴罗萨计划(?!.*渐变海洋).*地块byXs.*$", "re"], 
+        "layer_Ground": "Ground", 
+        "layer_Items_border": "Items_border"
+    }, 
+    "execution": [
+        {
+            "exe_name": "border_origin", 
+            "layer_to_exe": [
+                [{"layer_Items_border": {"tile_T": [[0, 1], [0, 5]]}}, 1], 
+                [{"layer_Items_border": [{"tile_T": [0, 9]}, {"tile_T": [2, 9]}, {"tile_T": [4, 9]}, {"tile_T": [6, 9]}, {"tile_T": [8, 9]}]}, 201112], 
+                [{"layer_Items_border": [{"tile_T": [1, 9]}, {"tile_T": [3, 9]}, {"tile_T": [5, 9]}, {"tile_T": [7, 9]}, {"tile_T": [9, 9]}]}, 210112], 
+                [{"layer_Items_border": [{"tile_T": [0, 10]}, {"tile_T": [2, 10]}, {"tile_T": [4, 10]}, {"tile_T": [6, 10]}, {"tile_T": [8, 10]}]}, 211012], 
+                [{"layer_Items_border": [{"tile_T": [1, 10]}, {"tile_T": [3, 10]}, {"tile_T": [5, 10]}, {"tile_T": [7, 10]}, {"tile_T": [9, 10]}]}, 211102]
+            ]
+        }, 
+        {
+            "exe_name": "border_type", 
+            "layer_to_exe": [
+                [{"layer_Items_border": [{"tile_T": [[0, 6], [1, 14]]}, {"tile_T": [0, 1]}]}, 0], 
+                [{"layer_Items_border": [{"tile_T": [[2, 6], [3, 14]]}, {"tile_T": [0, 2]}]}, 1], 
+                [{"layer_Items_border": [{"tile_T": [[4, 6], [5, 14]]}, {"tile_T": [0, 3]}]}, 2], 
+                [{"layer_Items_border": [{"tile_T": [[6, 6], [7, 14]]}, {"tile_T": [0, 4]}]}, 3], 
+                [{"layer_Items_border": [{"tile_T": [[8, 6], [9, 14]]}, {"tile_T": [0, 5]}]}, 4]
+            ]
+        }, 
+        {
+            "exe_name": "border_expansion", 
+            "layer_to_exe": [
+                [{"border_origin": 0}, 1], 
+                [{"border_origin": 1}, 0], 
+                [{"border_origin": 201112}, 200012], 
+                [{"border_origin": 210112}, 200102], 
+                [{"border_origin": 211012}, 201002], 
+                [{"border_origin": 211102}, 210002]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "expansion", 
+                    "exe_operation": {
+                        "200012": [
+                            [-1,       2,      -1], 
+                            [ 200012, -1,  200012], 
+                            [-1,       2,      -1]
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

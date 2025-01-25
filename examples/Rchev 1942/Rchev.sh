@@ -1,0 +1,2 @@
+python ./command/tsindep/_core.py "./examples/Rchev 1942/勒热夫战役.tmx" -o "./examples/Rchev 1942/勒热夫战役-i.tmx" -di "战役图" -y
+python ./command/layerauto/_core.py "./examples/Rchev 1942/勒热夫战役-i.tmx" -o "./examples/Rchev 1942/勒热夫战役-j.tmx" -j "./examples/Rchev 1942/river.json" "./examples/Rchev 1942/railway.json" "./examples/Rchev 1942/city_items.json" -v -y

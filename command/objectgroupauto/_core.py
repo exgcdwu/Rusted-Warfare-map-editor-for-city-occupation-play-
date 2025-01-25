@@ -394,15 +394,19 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
     return (rw.case.TObject("object", default_pro, optional_pro), objectgroup_name)
 
 def mapvalue_to_value(value, ntype):
-    if isinstance(value, dict):
+    if isinstance(value, dict) and value.get("type") != None:
         if value["type"] == "bool":
             value_now = ntype(True) if (value["value"] == "true" or value["value"] == "True") else ntype(False) 
             if isinstance(value_now, str):
                 value_now = value_now.lower()
             return value_now
     else:
+        if isinstance(value, dict):
+            value_n = value.get("text")
+        else:
+            value_n = value
         if ntype == bool:
-            value_now = str(value)
+            value_now = str(value_n)
             if (value_now == "true" or value_now == "True"):
                 value_now = True
             elif (value_now == "false" or value_now == "False"):
@@ -413,18 +417,18 @@ def mapvalue_to_value(value, ntype):
         elif isinstance(ntype, tuple):
             if ntype[0] == list:
                 if ntype[1] == str:
-                    value_now = value.split(",")
+                    value_now = value_n.split(",")
                 elif ntype[1] == int:
-                    value_now = value.split(" ")
+                    value_now = value_n.split(" ")
                     value_now = [int(value_now_i) for value_now_i in value_now]
                 elif ntype[1] == list:
                     if ntype[2] == str:
-                        value_now = [value_i.split(",") for value_i in value.split(";")]
+                        value_now = [value_i.split(",") for value_i in value_n.split(";")]
                     elif ntype[2] == int:
-                        value_now = [[int(value_ij) for value_ij in value_i.split(" ")] for value_i in value.split(",")]
+                        value_now = [[int(value_ij) for value_ij in value_i.split(" ")] for value_i in value_n.split(",")]
             return value_now
-        value_now = lower_bool_dict.get(value)
-        return value_now if value_now != None else value
+        value_now = lower_bool_dict.get(value_n)
+        return value_now if value_now != None else value_n
 
 def value_to_mapvalue(value, ntype):
     if ntype == bool:
