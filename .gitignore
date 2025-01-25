@@ -12,6 +12,8 @@ WITE1941/
 war graph/
 ground/
 
+export.tmx
+export_answer.tmx
 *.psd
 
 # Byte-compiled / optimized / DLL files
