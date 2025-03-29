@@ -6,7 +6,7 @@ from setuptools.command.install import install
 import subprocess
 import sys
 
-__version__ = '1.8.7.2'
+__version__ = '1.8.7.3'
 
 class PostInstallCommand(install):
     def run(self):

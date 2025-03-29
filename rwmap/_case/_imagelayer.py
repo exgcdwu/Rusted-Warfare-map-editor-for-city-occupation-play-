@@ -20,7 +20,6 @@ class ImageLayer(ElementOri):
         self._properties = deepcopy(properties)
         self._image_properties = deepcopy(image_properties)
         self._map_path = deepcopy(map_path)
-        self._size = self.size()
     @classmethod
     def init_etElement(cls, root:et.Element, map_path:str)->None:
         properties = ElementProperties.init_etElement(root)

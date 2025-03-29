@@ -61,7 +61,7 @@
 
 安装铁锈地图自动化库。
 
-    pip install rwmapeditor-exgcdwu==1.8.7.1 --no-deps # 这个版本号("1.8.7.1")填入目前最新的版本号。
+    pip install rwmapeditor-exgcdwu==1.8.7.3 --no-deps # 这个版本号("1.8.7.3")填入目前最新的版本号。
 
 为了能从手机中读取写入文件，继续。
 

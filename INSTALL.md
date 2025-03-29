@@ -44,7 +44,7 @@ termux python环境及包下载：
     pip install sortedcontainers # 1.8.0新加入
     pip install networkx # 1.8.5 新加入
 
-    pip install rwmapeditor-exgcdwu==1.8.7.1.1.1.1 --no-deps
+    pip install rwmapeditor-exgcdwu==1.8.7.3 --no-deps
     termux-setup-storage
 
 然后点同意获取读取存储权限
