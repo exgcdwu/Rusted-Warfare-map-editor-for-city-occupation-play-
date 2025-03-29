@@ -1,4 +1,6 @@
 ERROR code:
+-6: An object has no type and name.(WARNING code:5)|一个宾语没有类型也没有名字。
+-5: Permission denied:RW map file.|铁锈输入地图拒绝访问。
 -4: There's no objectgroup.|没有objectgroup层。
 -3: There's no json file.|没有json文件。
 -2: json is error.|json 读取失败。
@@ -132,3 +134,4 @@ WARNING code:
 2：A tagged object created by tree tagged object can't find its parent object.(ERROR code:19)
 3：A tree tagged object can't find its child object, although the child object has its father, then this child object will be unavailable.(ERROR code:20)
 4：An object that needs to be deleted could not be found.(ERROR code:21)
+5: An object has no type and name.(ERROR code:-6)|一个宾语没有类型也没有名字。

@@ -295,6 +295,8 @@ def get_rwmap(isdebug:bool, language:str, isverbose:bool, rwpath:str)->rw.RWmap:
         return map_now
     except FileNotFoundError:
         standard_error(isdebug, language, "RW map file is not found, please check your input path.|铁锈输入地图文件未找到，请仔细检查地图路径。", 24)
+    except FileNotFoundError:
+        standard_error(isdebug, language, "Permission denied:RW map file.|铁锈输入地图拒绝访问。", -5)
     except et.ParseError:
         standard_error(isdebug, language, "File parsing error, the file may not be XML file. Maybe it's not RW map file.|地图文件解析错误，不符合xml格式。也许导入的不是铁锈地图。", 25)
 

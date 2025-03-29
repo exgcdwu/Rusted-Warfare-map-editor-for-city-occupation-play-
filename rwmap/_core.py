@@ -44,6 +44,11 @@ def exenparr_deal_expand(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]
                 exe_dict[rwnparr[i, j]].append((i, j))
                 exe_num = exe_num + 1
 
+    min_exe_to_index = {}
+
+    for i, min_exe_n in enumerate(min_exe):
+        min_exe_to_index[min_exe_n] = i
+
     men = 0
     while exe_num > 0:
         ml = exe_dict.get(min_exe[men])
@@ -51,6 +56,7 @@ def exenparr_deal_expand(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]
             men = men + 1
             continue
         nl = ml[-1]
+        ml.pop(-1)
         fm = exe_to_exe_dict.get(min_exe[men])
         for i in range(-1, 2):
             for j in range(-1, 2):
@@ -60,9 +66,9 @@ def exenparr_deal_expand(rwnparr:np.ndarray, exe_to_exe:dict[int, list[list[int]
                     rwnparr[nl[0] + i, nl[1] + j] = fm[i + 1, j + 1]
                     el = exe_dict.get(fm[i + 1, j + 1])
                     if el != None:
+                        men = min(men, min_exe_to_index[fm[i + 1, j + 1]])
                         el.append((nl[0] + i, nl[1] + j))
                         exe_num = exe_num + 1
-        ml.pop(-1)
         exe_num = exe_num - 1
 
 def ma33_str(rwnparr:np.ndarray, i:int, j:int)->str:

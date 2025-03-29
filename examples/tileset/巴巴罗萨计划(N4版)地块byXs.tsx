@@ -201,6 +201,11 @@
    <property name="water" value=""/>
   </properties>
  </tile>
+ <tile id="83">
+  <properties>
+   <property name="cliff" value=""/>
+  </properties>
+ </tile>
  <tile id="84">
   <properties>
    <property name="water" value=""/>
@@ -246,9 +251,19 @@
    <property name="large-cliff" value=""/>
   </properties>
  </tile>
+ <tile id="118">
+  <properties>
+   <property name="water" value=""/>
+  </properties>
+ </tile>
  <tile id="119">
   <properties>
    <property name="large-cliff" value=""/>
+  </properties>
+ </tile>
+ <tile id="120">
+  <properties>
+   <property name="block-land" value=""/>
   </properties>
  </tile>
 </tileset>

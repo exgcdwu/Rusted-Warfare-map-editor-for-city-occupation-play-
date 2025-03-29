@@ -1,0 +1,2 @@
+python ./command/tsindep/_core.py "./examples/Rchev 1942/勒热夫战役.tmx" -o "./examples/Rchev 1942/勒热夫战役-i.tmx" -di "战役图" -y
+python ./command/objectgroupauto/_core.py "./examples/Rchev 1942/勒热夫战役-i.tmx" -o "./examples/Rchev 1942/勒热夫战役-o.tmx" -c -D -di -y -v 2

@@ -45,7 +45,9 @@ def search_cite(prefix):
 
 def standard_error_ob(info_err, error_id:int, ID_now:str = None, name_now:str = None, x_now:str = None, y_now:str = None, sub_info_error:str = None, isenter = False)->None:
     enter_l = "\n|\n"
-    info_err_n = langstrlist_add([enter_l, info_err]) if isenter else info_err
+    ERROR_now_l = "ERROR: |错误: "
+    info_err_n = langstrlist_add([ERROR_now_l, info_err])
+    info_err_n = langstrlist_add([enter_l, info_err_n]) if isenter else info_err_n
     ID_now_l = str_lang(language, f", ID:{ID_now}|, ID:{ID_now}") if ID_now != None else ""
     name_now_l = str_lang(language, f", name:{name_now}|, 名称:{name_now}") if name_now != None else ""
     xy_now_l = str_lang(language, f", coordinate:({x_now}, {y_now})|, 坐标:({x_now}, {y_now})") if x_now != None else ""
@@ -60,13 +62,17 @@ def standard_error_ob(info_err, error_id:int, ID_now:str = None, name_now:str = 
 
 def standard_warning_ob(info_warn, warn_id:int, error_id:int, ID_now:str = None, name_now:str = None, x_now:str = None, y_now:str = None, sub_info_warn:str = None, isenter = False)->None:
     enter_l = "\n|\n"
-    info_warn_n = langstrlist_add([enter_l, info_warn]) if isenter else info_warn
+    WARNING_now_l = "WARNING: |警告: "
+    info_warn_n = langstrlist_add([WARNING_now_l, info_warn])
+    info_warn_n = langstrlist_add([enter_l, info_warn_n]) if isenter else info_warn_n
     ID_now_l = str_lang(language, f", ID:{ID_now}|, ID:{ID_now}") if ID_now != None else ""
     name_now_l = str_lang(language, f", name:{name_now}|, 名称:{name_now}") if name_now != None else ""
     xy_now_l = str_lang(language, f", coordinate:({x_now}, {y_now})|, 坐标:({x_now}, {y_now})") if x_now != None else ""
+    error_l = str_lang(language, f", ERROR:{error_id}|, 错误码:{error_id}")
     warn_l = str_lang(language, f", WARNING:{warn_id}|, 警告码:{warn_id}")
-    str_warning_default = "(" + f"{ID_now_l}{name_now_l}{xy_now_l}{warn_l}"[2:] + ")"
-    print(str_lang(language, info_warn_n) + str_warning_default, file=sys.stdout)
+    igw_now_l = "(ignore warning)|(忽视警告)" if ignorewarning else "(exit(warning), --ignorewarning could ignore WARNING)|(程序终止(警告), --ignorewarning 可以忽视该警告)"
+    str_warning_default = "(" + f"{ID_now_l}{name_now_l}{xy_now_l}{error_l}{warn_l}"[2:] + ")"
+    print(str_lang(language, info_warn_n) + str_warning_default + str_lang(language, igw_now_l), file=sys.stdout)
     if sub_info_warn != None:
         pprint(sub_info_warn)
     if isdebug:
@@ -989,9 +995,13 @@ def auto_func(args = None):
 
                 info[AUTOKEY.isinfo_sub] = (info.get(AUTOKEY.isinfo_sub) != None and info[AUTOKEY.isinfo_sub])
 
-
+                if info_dict_now.get(info[AUTOKEY.prefix]) == None:   
+                    standard_error_ob(f"A required argument is missing in an info object.(prefix)" + 
+                                    f"|info宾语中的一个必需参数缺失。(prefix)", 
+                                    6, tobject_id, info_name, tobject_x, tobject_y)
 
                 info_dict_now[AUTOKEY.prefix] = info_dict_now[info[AUTOKEY.prefix]]
+
                 info_doids_dict[info_dict_now[AUTOKEY.prefix]] = deepcopy(info)
 
                 info_dict_now[AUTOKEY.info] = info_dict_now[AUTOKEY.prefix]
@@ -1116,6 +1126,7 @@ def auto_func(args = None):
                             standard_error_ob(f"An argument of the info object is invalid.(arg:{key_now})" +
                                            f"|info宾语的一个必需参数不合法。(参数:{key_now})", 
                                            12, tobject_id, info_name, tobject_x, tobject_y)
+                
 
                 if info_new.get(AUTOKEY.opargs) != None:
                     for value in info_new[AUTOKEY.opargs].values():
@@ -1260,6 +1271,11 @@ def auto_func(args = None):
         tobject_id = tobject.returnDefaultProperty("id")
         tobject_x = tobject.returnDefaultProperty("x")
         tobject_y = tobject.returnDefaultProperty("y")
+        if tobject_name == None:
+            standard_warning_ob(f"An object has no type and name." + 
+                    f"|一个宾语没有类型也没有名字。", 
+                    5, -6, tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
+            continue
         ischange = False
 
         for key, info in info_dict.items():
@@ -1536,18 +1552,20 @@ def auto_func(args = None):
                 cite_dict.update(myinfo[AUTOKEY.info_args] if myinfo.get(AUTOKEY.info_args) != None else OrderedDict())
                 cite_dict.update(OrderedDict([[info_one[0] + str(ti), str] for info_one in myinfo[AUTOKEY.ids] for ti in range(info_one[1])] + [[info_one[0], str] for info_one in myinfo[AUTOKEY.ids]]) if myinfo.get(AUTOKEY.ids) != None else OrderedDict())
                 
+                cite_name_now = str_translation(object_dict[AUTOKEY.cite_name], object_dict)
+
                 for key, value in object_dict.items():
                     
                     if (not (myinfo.get(AUTOKEY.isnot_cite_check) != None and myinfo[AUTOKEY.isnot_cite_check])) and cite_dict.get(key) == None:
                         continue
                     
-                    if cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + key) != None:
-                        origin_id = cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + AUTOKEY.tobject_id)
-                        origin_name = cite_object_dict.get(object_dict[AUTOKEY.cite_name] + "." + AUTOKEY.tobject_name)
-                        standard_error_ob(f"Reference tags(cite_name) are duplicated。(original ID:({origin_id}), original name:({origin_name}), Cite:{object_dict[AUTOKEY.cite_name]})" + \
-                                       f"|标记宾语引用(cite_name)发生重合。(重合 ID:({origin_id}), 重合名称:({origin_name}), 引用名称(cite_name):{object_dict[AUTOKEY.cite_name]})", 
+                    if cite_object_dict.get(cite_name_now + "." + key) != None:
+                        origin_id = cite_object_dict.get(cite_name_now + "." + AUTOKEY.tobject_id)
+                        origin_name = cite_object_dict.get(cite_name_now + "." + AUTOKEY.tobject_name)
+                        standard_error_ob(f"Reference tags(cite_name) are duplicated。(original ID:({origin_id}), original name:({origin_name}), Cite:{cite_name_now})" + \
+                                       f"|标记宾语引用(cite_name)发生重合。(重合 ID:({origin_id}), 重合名称:({origin_name}), 引用名称(cite_name):{cite_name_now})", 
                                        14, tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
-                    cite_object_dict[object_dict[AUTOKEY.cite_name] + "." + key] = value
+                    cite_object_dict[cite_name_now + "." + key] = value
             
 
             time_tag_e = time.time()

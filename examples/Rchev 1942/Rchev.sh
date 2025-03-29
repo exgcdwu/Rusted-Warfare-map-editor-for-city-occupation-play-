@@ -1,2 +1,5 @@
 python ./command/tsindep/_core.py "./examples/Rchev 1942/勒热夫战役.tmx" -o "./examples/Rchev 1942/勒热夫战役-i.tmx" -di "战役图" -y
-python ./command/layerauto/_core.py "./examples/Rchev 1942/勒热夫战役-i.tmx" -o "./examples/Rchev 1942/勒热夫战役-j.tmx" -j "./examples/Rchev 1942/river.json" "./examples/Rchev 1942/railway.json" "./examples/Rchev 1942/city_items.json" -v -y
+python ./command/objectgroupauto/_core.py "./examples/Rchev 1942/勒热夫战役-i.tmx" -o "./examples/Rchev 1942/勒热夫战役-o.tmx" -c -D -di -y -v
+python ./command/layerobauto/_core.py "./examples/Rchev 1942/勒热夫战役-o.tmx" -o "./examples/Rchev 1942/勒热夫战役-o.tmx" -y -t "属性覆盖" -tg 3 -s 3 3 -l PathingOverride
+python ./command/layerauto/_core.py "./examples/Rchev 1942/勒热夫战役-o.tmx" -o "./examples/Rchev 1942/勒热夫战役-j.tmx" -j "./examples/Rchev 1942/river_612.json" "./examples/Rchev 1942/railway.json" "./examples/Rchev 1942/city_items_42.json" "./examples/Rchev 1942/border.json" "./examples/Rchev 1942/block.json" -v 2 -y
+sh "./command/sh/move.sh" "./examples/Rchev 1942/勒热夫战役-j.tmx" "D:/Game/steam/steamapps/common/Rusted Warfare/mods/maps" "1942剧本：勒热夫-瑟乔夫卡战役【16p,城市争夺玩法】(V1.00)by咕咕咕.tmx"

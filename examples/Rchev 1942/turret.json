@@ -1,0 +1,55 @@
+{
+    "rwmapauto_type": "layerauto", 
+    "simplify": {
+        "tile_T": ["^.*巴巴罗萨计划(?!.*渐变海洋).*地块byXs.*$", "re"], 
+        "tile_S": ["^.*巴巴罗萨计划.*渐变海洋地块byXs.*$", "re"], 
+        "layer_Ground": "Ground", 
+        "layer_Items_output_turret": "Items_turret"
+    }, 
+    "objectre_to_layer": {
+        "Triggers":[
+            {
+                "re": "^a\\.tu.*$", 
+                "map_type": "left-top", 
+                "gid": 2
+            }
+        ]
+    }, 
+    "execution": [
+        {
+            "exe_name": "sea_origin", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [5, 12]}, {"tile_S": [[1, 0], [6, 11]]}]}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "turret", 
+            "layer_to_exe": [
+                [{"Triggers": 2}, 1]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "expansion", 
+                    "exe_operation": {
+                        "1": [
+                            [-1, -1, -1], 
+                            [-1, -1,  2], 
+                            [-1,  2,  2]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "layer_Items_output_turret_exe", 
+            "layer_to_exe": [
+                [{"turret": 1}, 1], 
+                [{"turret": 2}, 1], 
+                [{"sea_origin": 1}, 0]
+            ], 
+            "exe_to_layer": {
+                "1": [["layer_Items_output_turret", "tile_T", 4, 13]]
+            }
+        }
+    ]
+}

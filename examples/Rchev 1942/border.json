@@ -1,7 +1,7 @@
 {
     "rwmapauto_type": "layerauto", 
     "simplify": {
-        "tile_T": ["^.*巴巴罗萨计划(?!.*渐变海洋).*地块byXs.*$", "re"], 
+        "tile_T": ["^辅助地块.*1.2.*byXs.*$", "re"], 
         "layer_Ground": "Ground", 
         "layer_Items_border": "Items_border"
     }, 
@@ -19,15 +19,15 @@
         {
             "exe_name": "border_type", 
             "layer_to_exe": [
-                [{"layer_Items_border": [{"tile_T": [[0, 6], [1, 14]]}, {"tile_T": [0, 1]}]}, 0], 
-                [{"layer_Items_border": [{"tile_T": [[2, 6], [3, 14]]}, {"tile_T": [0, 2]}]}, 1], 
-                [{"layer_Items_border": [{"tile_T": [[4, 6], [5, 14]]}, {"tile_T": [0, 3]}]}, 2], 
-                [{"layer_Items_border": [{"tile_T": [[6, 6], [7, 14]]}, {"tile_T": [0, 4]}]}, 3], 
-                [{"layer_Items_border": [{"tile_T": [[8, 6], [9, 14]]}, {"tile_T": [0, 5]}]}, 4]
+                [{"layer_Items_border": [{"tile_T": [[0, 6], [1, 14]]}, {"tile_T": [0, 1]}]}, 1], 
+                [{"layer_Items_border": [{"tile_T": [[2, 6], [3, 14]]}, {"tile_T": [0, 2]}]}, 2], 
+                [{"layer_Items_border": [{"tile_T": [[4, 6], [5, 14]]}, {"tile_T": [0, 3]}]}, 3], 
+                [{"layer_Items_border": [{"tile_T": [[6, 6], [7, 14]]}, {"tile_T": [0, 4]}]}, 4], 
+                [{"layer_Items_border": [{"tile_T": [[8, 6], [9, 14]]}, {"tile_T": [0, 5]}]}, 5]
             ]
         }, 
         {
-            "exe_name": "border_expansion", 
+            "exe_name": "border_direction_expansion", 
             "layer_to_exe": [
                 [{"border_origin": 0}, 1], 
                 [{"border_origin": 1}, 0], 
@@ -41,13 +41,297 @@
                     "exe_type": "expansion", 
                     "exe_operation": {
                         "200012": [
-                            [-1,       2,      -1], 
+                            [ 201002, -1,  200102], 
                             [ 200012, -1,  200012], 
-                            [-1,       2,      -1]
+                            [ 200102, -1,  201002]
+                        ], 
+                        "200102": [
+                            [ 210002, 200102,  200012], 
+                            [-1     ,     -1,      -1], 
+                            [ 200012, 200102,  210002]
+                        ], 
+                        "201002": [
+                            [ 200012, 201002,  210002], 
+                            [-1     ,     -1,      -1], 
+                            [ 210002, 201002,  200012]
+                        ], 
+                        "210002": [
+                            [ 200102, -1,  201002], 
+                            [ 210002, -1,  210002], 
+                            [ 201002, -1,  200102]
                         ]
                     }
                 }
             ]
+        }, 
+        {
+            "exe_name": "border_branch_expansion", 
+            "layer_to_exe": [
+                [{"border_origin": 0}, 1], 
+                [{"border_origin": 1}, 0], 
+                [{"border_origin": [201112, 210112, 211012, 211102]}, 2]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "expansion", 
+                    "exe_operation": {
+                        "2": [
+                            [-1,  3, -1], 
+                            [ 3, -1,  3], 
+                            [-1,  3, -1]
+                        ], 
+                        "3": [
+                            [-1,  4, -1], 
+                            [ 4, -1,  4], 
+                            [-1,  4, -1]
+                        ], 
+                        "4": [
+                            [-1,  2, -1], 
+                            [ 2, -1,  2], 
+                            [-1,  2, -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "border_terrain", 
+            "layer_to_exe": [
+                [{"border_origin": [201112, 210112, 211012, 211102, 1]}, 1]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "terrain", 
+                    "exe_operation": {
+                        "200002": [
+                            [-1,  0, -1], 
+                            [ 0,  1,  0], 
+                            [-1,  0, -1]
+                        ], 
+                        "200012": [
+                            [-1,  0, -1], 
+                            [ 0,  1,  0], 
+                            [-1,  1, -1]
+                        ], 
+                        "200102": [
+                            [-1,  0, -1], 
+                            [ 0,  1,  1], 
+                            [-1,  0, -1]
+                        ], 
+                        "200112": [
+                            [-1,  0, -1], 
+                            [ 0,  1,  1], 
+                            [-1,  1, -1]
+                        ], 
+                        "201002": [
+                            [-1,  0, -1], 
+                            [ 1,  1,  0], 
+                            [-1,  0, -1]
+                        ], 
+                        "201012": [
+                            [-1,  0, -1], 
+                            [ 1,  1,  0], 
+                            [-1,  1, -1]
+                        ], 
+                        "201102": [
+                            [-1,  0, -1], 
+                            [ 1,  1,  1], 
+                            [-1,  0, -1]
+                        ], 
+                        "201112": [
+                            [-1,  0, -1], 
+                            [ 1,  1,  1], 
+                            [-1,  1, -1]
+                        ], 
+                        "210002": [
+                            [-1,  1, -1], 
+                            [ 0,  1,  0], 
+                            [-1,  0, -1]
+                        ], 
+                        "210012": [
+                            [-1,  1, -1], 
+                            [ 0,  1,  0], 
+                            [-1,  1, -1]
+                        ], 
+                        "210102": [
+                            [-1,  1, -1], 
+                            [ 0,  1,  1], 
+                            [-1,  0, -1]
+                        ], 
+                        "210112": [
+                            [-1,  1, -1], 
+                            [ 0,  1,  1], 
+                            [-1,  1, -1]
+                        ], 
+                        "211002": [
+                            [-1,  1, -1], 
+                            [ 1,  1,  0], 
+                            [-1,  0, -1]
+                        ], 
+                        "211012": [
+                            [-1,  1, -1], 
+                            [ 1,  1,  0], 
+                            [-1,  1, -1]
+                        ], 
+                        "211102": [
+                            [-1,  1, -1], 
+                            [ 1,  1,  1], 
+                            [-1,  0, -1]
+                        ], 
+                        "211112": [
+                            [-1,  1, -1], 
+                            [ 1,  1,  1], 
+                            [-1,  1, -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "border_terrain_correct", 
+            "layer_to_exe": [
+                [{"border_terrain": 200002}, 200002], 
+                [{"border_terrain": 200012}, 200012], 
+                [{"border_terrain": 200102}, 200102], 
+                [{"border_terrain": 200112}, 200112], 
+                [{"border_terrain": 201002}, 201002], 
+                [{"border_terrain": 201012}, 201012], 
+                [{"border_terrain": 201102}, 201102], 
+                [{"border_terrain": 201112}, 201112], 
+                [{"border_terrain": 210002}, 210002], 
+                [{"border_terrain": 210012}, 210012], 
+                [{"border_terrain": 210102}, 210102], 
+                [{"border_terrain": 210112}, 210112], 
+                [{"border_terrain": 211002}, 211002], 
+                [{"border_terrain": 211012}, 211012], 
+                [{"border_terrain": 211102}, 211102], 
+                [{"border_terrain": 211112}, 211112], 
+                [{"border_terrain": 201102, "border_direction_expansion": 210002, 
+                "border_branch_expansion": 2}, 211102], 
+                [{"border_terrain": 201102, "border_direction_expansion": 200012, 
+                "border_branch_expansion": 2}, 201112], 
+                [{"border_terrain": 210012, "border_direction_expansion": 201002, 
+                "border_branch_expansion": 2}, 211012], 
+                [{"border_terrain": 210012, "border_direction_expansion": 200102, 
+                "border_branch_expansion": 2}, 210112]
+            ]
+        }, 
+        {
+            "exe_name": "border", 
+            "layer_to_exe": [
+                [{"border_terrain_correct": 200112, "border_type": 1}, 207], 
+                [{"border_terrain_correct": 201012, "border_type": 1}, 208], 
+                [{"border_terrain_correct": 201102, "border_type": 1}, 216], 
+                [{"border_terrain_correct": 201112, "border_type": 1}, 209], 
+                [{"border_terrain_correct": 210012, "border_type": 1}, 206], 
+                [{"border_terrain_correct": 210102, "border_type": 1}, 217], 
+                [{"border_terrain_correct": 210112, "border_type": 1}, 219], 
+                [{"border_terrain_correct": 211002, "border_type": 1}, 218], 
+                [{"border_terrain_correct": 211012, "border_type": 1}, 2010], 
+                [{"border_terrain_correct": 211102, "border_type": 1}, 2110], 
+                [{"border_terrain_correct": 211112, "border_type": 1}, 201], 
+                [{"border_terrain_correct": 200112, "border_type": 2}, 227], 
+                [{"border_terrain_correct": 201012, "border_type": 2}, 228], 
+                [{"border_terrain_correct": 201102, "border_type": 2}, 236], 
+                [{"border_terrain_correct": 201112, "border_type": 2}, 229], 
+                [{"border_terrain_correct": 210012, "border_type": 2}, 226], 
+                [{"border_terrain_correct": 210102, "border_type": 2}, 237], 
+                [{"border_terrain_correct": 210112, "border_type": 2}, 239], 
+                [{"border_terrain_correct": 211002, "border_type": 2}, 238], 
+                [{"border_terrain_correct": 211012, "border_type": 2}, 2210], 
+                [{"border_terrain_correct": 211102, "border_type": 2}, 2310], 
+                [{"border_terrain_correct": 211112, "border_type": 2}, 202], 
+                [{"border_terrain_correct": 200112, "border_type": 3}, 247], 
+                [{"border_terrain_correct": 201012, "border_type": 3}, 248], 
+                [{"border_terrain_correct": 201102, "border_type": 3}, 256], 
+                [{"border_terrain_correct": 201112, "border_type": 3}, 249], 
+                [{"border_terrain_correct": 210012, "border_type": 3}, 246], 
+                [{"border_terrain_correct": 210102, "border_type": 3}, 257], 
+                [{"border_terrain_correct": 210112, "border_type": 3}, 259], 
+                [{"border_terrain_correct": 211002, "border_type": 3}, 258], 
+                [{"border_terrain_correct": 211012, "border_type": 3}, 2410], 
+                [{"border_terrain_correct": 211102, "border_type": 3}, 2510], 
+                [{"border_terrain_correct": 211112, "border_type": 3}, 204], 
+                [{"border_terrain_correct": 200112, "border_type": 4}, 267], 
+                [{"border_terrain_correct": 201012, "border_type": 4}, 268], 
+                [{"border_terrain_correct": 201102, "border_type": 4}, 276], 
+                [{"border_terrain_correct": 201112, "border_type": 4}, 269], 
+                [{"border_terrain_correct": 210012, "border_type": 4}, 266], 
+                [{"border_terrain_correct": 210102, "border_type": 4}, 277], 
+                [{"border_terrain_correct": 210112, "border_type": 4}, 279], 
+                [{"border_terrain_correct": 211002, "border_type": 4}, 278], 
+                [{"border_terrain_correct": 211012, "border_type": 4}, 2610], 
+                [{"border_terrain_correct": 211102, "border_type": 4}, 2710], 
+                [{"border_terrain_correct": 211112, "border_type": 4}, 205], 
+                [{"border_terrain_correct": 200112, "border_type": 5}, 287], 
+                [{"border_terrain_correct": 201012, "border_type": 5}, 288], 
+                [{"border_terrain_correct": 201102, "border_type": 5}, 296], 
+                [{"border_terrain_correct": 201112, "border_type": 5}, 289], 
+                [{"border_terrain_correct": 210012, "border_type": 5}, 286], 
+                [{"border_terrain_correct": 210102, "border_type": 5}, 297], 
+                [{"border_terrain_correct": 210112, "border_type": 5}, 299], 
+                [{"border_terrain_correct": 211002, "border_type": 5}, 298], 
+                [{"border_terrain_correct": 211012, "border_type": 5}, 2810], 
+                [{"border_terrain_correct": 211102, "border_type": 5}, 2910], 
+                [{"border_terrain_correct": 211112, "border_type": 5}, 206]
+            ], 
+            "exe_to_layer": {
+                "201": [["layer_Items_border", "tile_T", 0, 1]], 
+                "202": [["layer_Items_border", "tile_T", 0, 2]], 
+                "203": [["layer_Items_border", "tile_T", 0, 3]], 
+                "204": [["layer_Items_border", "tile_T", 0, 4]], 
+                "205": [["layer_Items_border", "tile_T", 0, 5]], 
+                "206": [["layer_Items_border", "tile_T", 0, 6]], 
+                "207": [["layer_Items_border", "tile_T", 0, 7]], 
+                "208": [["layer_Items_border", "tile_T", 0, 8]], 
+                "209": [["layer_Items_border", "tile_T", 0, 9]], 
+                "2010": [["layer_Items_border", "tile_T", 0, 10]], 
+                "216": [["layer_Items_border", "tile_T", 1, 6]], 
+                "217": [["layer_Items_border", "tile_T", 1, 7]], 
+                "218": [["layer_Items_border", "tile_T", 1, 8]], 
+                "219": [["layer_Items_border", "tile_T", 1, 9]], 
+                "2110": [["layer_Items_border", "tile_T", 1, 10]], 
+                "226": [["layer_Items_border", "tile_T", 2, 6]], 
+                "227": [["layer_Items_border", "tile_T", 2, 7]], 
+                "228": [["layer_Items_border", "tile_T", 2, 8]], 
+                "229": [["layer_Items_border", "tile_T", 2, 9]], 
+                "2210": [["layer_Items_border", "tile_T", 2, 10]], 
+                "236": [["layer_Items_border", "tile_T", 3, 6]], 
+                "237": [["layer_Items_border", "tile_T", 3, 7]], 
+                "238": [["layer_Items_border", "tile_T", 3, 8]], 
+                "239": [["layer_Items_border", "tile_T", 3, 9]], 
+                "2310": [["layer_Items_border", "tile_T", 3, 10]], 
+                "246": [["layer_Items_border", "tile_T", 4, 6]], 
+                "247": [["layer_Items_border", "tile_T", 4, 7]], 
+                "248": [["layer_Items_border", "tile_T", 4, 8]], 
+                "249": [["layer_Items_border", "tile_T", 4, 9]], 
+                "2410": [["layer_Items_border", "tile_T", 4, 10]], 
+                "256": [["layer_Items_border", "tile_T", 5, 6]], 
+                "257": [["layer_Items_border", "tile_T", 5, 7]], 
+                "258": [["layer_Items_border", "tile_T", 5, 8]], 
+                "259": [["layer_Items_border", "tile_T", 5, 9]], 
+                "2510": [["layer_Items_border", "tile_T", 5, 10]], 
+                "266": [["layer_Items_border", "tile_T", 6, 6]], 
+                "267": [["layer_Items_border", "tile_T", 6, 7]], 
+                "268": [["layer_Items_border", "tile_T", 6, 8]], 
+                "269": [["layer_Items_border", "tile_T", 6, 9]], 
+                "2610": [["layer_Items_border", "tile_T", 6, 10]], 
+                "276": [["layer_Items_border", "tile_T", 7, 6]], 
+                "277": [["layer_Items_border", "tile_T", 7, 7]], 
+                "278": [["layer_Items_border", "tile_T", 7, 8]], 
+                "279": [["layer_Items_border", "tile_T", 7, 9]], 
+                "2710": [["layer_Items_border", "tile_T", 7, 10]], 
+                "286": [["layer_Items_border", "tile_T", 8, 6]], 
+                "287": [["layer_Items_border", "tile_T", 8, 7]], 
+                "288": [["layer_Items_border", "tile_T", 8, 8]], 
+                "289": [["layer_Items_border", "tile_T", 8, 9]], 
+                "2810": [["layer_Items_border", "tile_T", 8, 10]], 
+                "296": [["layer_Items_border", "tile_T", 9, 6]], 
+                "297": [["layer_Items_border", "tile_T", 9, 7]], 
+                "298": [["layer_Items_border", "tile_T", 9, 8]], 
+                "299": [["layer_Items_border", "tile_T", 9, 9]], 
+                "2910": [["layer_Items_border", "tile_T", 9, 10]]
+            }
         }
     ]
 }

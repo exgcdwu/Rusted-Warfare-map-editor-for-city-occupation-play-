@@ -1,0 +1,298 @@
+{
+    "rwmapauto_type": "layerauto", 
+    "simplify": {
+        "tile_T": ["^.*巴巴罗萨计划(?!.*渐变海洋).*地块byXs.*$", "re"], 
+        "tile_S": ["^.*巴巴罗萨计划.*渐变海洋地块byXs.*$", "re"], 
+        "layer_Ground": "Ground", 
+        "layer_Items_input_river": "Items_river", 
+        "layer_Items_input_railway": "Items_railway", 
+        "layer_Items_output_city": "Items_city"
+    }, 
+    "objectre_to_layer": {
+        "Triggers":[
+            {
+                "re": "^c-?\\d+\\..*$", 
+                "map_type": "middle", 
+                "gid": 1
+            }
+        ]
+    }, 
+    "execution": [
+        {
+            "exe_name": "railway_origin", 
+            "layer_to_exe": [
+                [{"layer_Items_input_railway": [{"tile_T": [[0, 15], [4, 16]]}, {"tile_T": [0, 17]}]}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "railway_origin_turn", 
+            "layer_to_exe": [
+                [{"layer_Items_input_railway": {"tile_T": [2, 16]}}, 211002], 
+                [{"layer_Items_input_railway": {"tile_T": [2, 15]}}, 210102], 
+                [{"layer_Items_input_railway": {"tile_T": [1, 16]}}, 201012], 
+                [{"layer_Items_input_railway": {"tile_T": [1, 15]}}, 200112]
+            ]
+        }, 
+        {
+            "exe_name": "city_origin_ori", 
+            "layer_to_exe": [
+                [{"layer_Items_output_city": {"tile_T": [2, 13]}}, 1], 
+                [{"layer_Items_output_city": {"tile_T": [2, 14]}}, 2], 
+                [{"layer_Items_output_city": {"tile_T": [3, 13]}}, 3], 
+                [{"layer_Items_output_city": {"tile_T": [3, 14]}}, 4]
+            ]
+        }, 
+        {
+            "exe_name": "sea_origin", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [5, 12]}, {"tile_S": [[1, 0], [6, 11]]}]}, 1], 
+                [{"layer_Items_input_river": [{"tile_T": [5, 12]}, {"tile_S": [[1, 0], [6, 11]]}]}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "river_origin", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [[0, 0], [3, 11]]}]}, 1], 
+                [{"layer_Items_input_river": [{"tile_T": [[0, 0], [3, 11]]}, {"tile_T": [[0, 12], [4, 12]]}]}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "river_origin_turn", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [1, 1]}, {"tile_T": [1, 4]}, 
+                                   {"tile_T": [1, 7]}, {"tile_T": [1, 10]}]}, 211002], 
+                [{"layer_Ground": [{"tile_T": [1, 0]}, {"tile_T": [1, 3]}, 
+                                   {"tile_T": [1, 6]}, {"tile_T": [1, 9]}]}, 200112], 
+                [{"layer_Ground": [{"tile_T": [2, 0]}, {"tile_T": [2, 3]}, 
+                                   {"tile_T": [2, 6]}, {"tile_T": [2, 9]}]}, 210102], 
+                [{"layer_Ground": [{"tile_T": [2, 1]}, {"tile_T": [2, 4]}, 
+                                   {"tile_T": [2, 7]}, {"tile_T": [2, 10]}]}, 201012]
+            ]
+        }, 
+        {
+            "exe_name": "mountain_origin", 
+            "layer_to_exe": [
+                [{"layer_Ground": [{"tile_T": [5, 2]}, {"tile_T": [6, 2]}, 
+                            {"tile_T": [5, 5]}, {"tile_T": [6, 5]}, 
+                            {"tile_T": [5, 8]}, {"tile_T": [6, 8]}, 
+                            {"tile_T": [5, 11]}, {"tile_T": [6, 11]}]}, 1]
+            ]
+        }, 
+        {
+            "exe_name": "city_expansion_pre", 
+            "layer_to_exe": [
+                [{"city_origin_ori": 1}, 1], 
+                [{"city_origin_ori": 2}, 2], 
+                [{"city_origin_ori": 3}, 3], 
+                [{"city_origin_ori": 4}, 4]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "expansion", 
+                    "exe_operation": {
+                        "1": [
+                            [-1,  2, -1], 
+                            [ 2, -1,  2], 
+                            [-1,  2, -1]
+                        ], 
+                        "2": [
+                            [-1,  3, -1], 
+                            [ 3, -1,  3], 
+                            [-1,  3, -1]
+                        ], 
+                        "3": [
+                            [-1,  4, -1], 
+                            [ 4, -1,  4], 
+                            [-1,  4, -1]
+                        ], 
+                        "4": [
+                            [-1,  5, -1], 
+                            [ 5, -1,  5], 
+                            [-1,  5, -1]
+                        ], 
+                        "5": [
+                            [-1,  6, -1], 
+                            [ 6, -1,  6], 
+                            [-1,  6, -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "city_expansion", 
+            "layer_to_exe": [
+                [{"city_expansion_pre": 1}, 1], 
+                [{"city_expansion_pre": 2}, 2], 
+                [{"city_expansion_pre": 3}, 3], 
+                [{"city_expansion_pre": 4}, 4], 
+                [{"city_expansion_pre": 5}, 4], 
+                [{"city_expansion_pre": 6}, 5]
+            ]
+        }, 
+        {
+            "exe_name": "city_origin_pre", 
+            "layer_to_exe": [
+                [{"city_expansion": 1}, 1], 
+                [{"city_expansion": 2}, 2], 
+                [{"city_expansion": 3}, 3], 
+                [{"city_expansion": 4}, 4], 
+                [{"city_expansion": 5}, 4]
+            ], 
+            "exe": [
+                {
+                    "exe_type": "terrain", 
+                    "exe_border": {
+                        "all": 4
+                    }, 
+                    "exe_operation": {
+                        "1": [
+                            [-1, -1, -1], 
+                            [-1,  1, -1], 
+                            [-1, -1, -1]
+                        ], 
+                        "2": [
+                            [-1, -1, -1], 
+                            [-1,  2, -1], 
+                            [-1, -1, -1]
+                        ], 
+                        "3": [
+                            [-1, -1, -1], 
+                            [-1,  3, -1], 
+                            [-1, -1, -1]
+                        ], 
+                        "411004": [
+                            [-1,  4, -1], 
+                            [ 4,  4,  0], 
+                            [-1,  0, -1]
+                        ], 
+                        "410104": [
+                            [-1,  4, -1], 
+                            [ 0,  4,  4], 
+                            [-1,  0, -1]
+                        ], 
+                        "401014": [
+                            [-1,  0, -1], 
+                            [ 4,  4,  0], 
+                            [-1,  4, -1]
+                        ], 
+                        "400114": [
+                            [-1,  0, -1], 
+                            [ 0,  4,  4], 
+                            [-1,  4, -1]
+                        ], 
+                        "101": [
+                            [-1,  4, -1], 
+                            [ 0,  4,  0], 
+                            [-1,  0, -1]
+                        ], 
+                        "102": [
+                            [-1,  0, -1], 
+                            [ 4,  4,  0], 
+                            [-1,  0, -1]
+                        ], 
+                        "103": [
+                            [-1,  0, -1], 
+                            [ 0,  4,  4], 
+                            [-1,  0, -1]
+                        ], 
+                        "104": [
+                            [-1,  0, -1], 
+                            [ 0,  4,  0], 
+                            [-1,  4, -1]
+                        ], 
+                        "105": [
+                            [-1,  4, -1], 
+                            [ 0,  4,  0], 
+                            [-1,  4, -1]
+                        ], 
+                        "106": [
+                            [-1,  0, -1], 
+                            [ 4,  4,  4], 
+                            [-1,  0, -1]
+                        ]
+                    }
+                }
+            ]
+        }, 
+        {
+            "exe_name": "city_origin", 
+            "layer_to_exe": [
+                [{"city_origin_pre": 1}, 1], 
+                [{"city_origin_pre": 2}, 2], 
+                [{"city_origin_pre": 3}, 3], 
+                [{"city_expansion": [4, 5]}, 4], 
+                [{"city_origin_pre": [101, 102, 103, 104, 105, 106]}, 0], 
+                [{"city_origin_pre": 411004}, 411004], 
+                [{"city_origin_pre": 400114}, 400114], 
+                [{"city_origin_pre": 410104}, 410104], 
+                [{"city_origin_pre": 401014}, 401014]
+            ]
+        }, 
+        {
+            "exe_name": "city", 
+            "layer_to_exe": [
+                [{"city_origin": 1}, 1], 
+                [{"city_origin": 2}, 2], 
+                [{"city_origin": 3}, 3], 
+                [{"city_origin": 4}, 4], 
+                [{"city_origin": 411004}, 411004], 
+                [{"city_origin": 400114}, 400114], 
+                [{"city_origin": 410104}, 410104], 
+                [{"city_origin": 401014}, 401014], 
+                [{"river_origin": 1}, 0], 
+                [{"city_origin": [1, 2, 3, 4], "river_origin_turn": 211002}, 400114], 
+                [{"city_origin": [1, 2, 3, 4], "river_origin_turn": 200112}, 411004], 
+                [{"city_origin": [1, 2, 3, 4], "river_origin_turn": 210102}, 401014], 
+                [{"city_origin": [1, 2, 3, 4], "river_origin_turn": 201012}, 410104], 
+                [{"city_origin": 411004, "river_origin_turn": [200112, 211002, 210102, 201012]}, 0], 
+                [{"city_origin": 400114, "river_origin_turn": [200112, 211002, 210102, 201012]}, 0], 
+                [{"city_origin": 410104, "river_origin_turn": [200112, 211002, 210102, 201012]}, 0], 
+                [{"city_origin": 401014, "river_origin_turn": [200112, 211002, 210102, 201012]}, 0], 
+                [{"city_origin": 411004, "river_origin_turn": 200112}, 411004], 
+                [{"city_origin": 400114, "river_origin_turn": 211002}, 400114], 
+                [{"city_origin": 410104, "river_origin_turn": 201012}, 410104], 
+                [{"city_origin": 401014, "river_origin_turn": 210102}, 401014], 
+                [{"railway_origin": 1}, 0], 
+                [{"city_origin": [1, 2, 3, 4], "railway_origin_turn": 211002}, 400114], 
+                [{"city_origin": [1, 2, 3, 4], "railway_origin_turn": 200112}, 411004], 
+                [{"city_origin": [1, 2, 3, 4], "railway_origin_turn": 210102}, 401014], 
+                [{"city_origin": [1, 2, 3, 4], "railway_origin_turn": 201012}, 410104], 
+                [{"city_origin": 411004, "railway_origin_turn": [200112, 211002, 210102, 201012]}, 0], 
+                [{"city_origin": 400114, "railway_origin_turn": [200112, 211002, 210102, 201012]}, 0], 
+                [{"city_origin": 410104, "railway_origin_turn": [200112, 211002, 210102, 201012]}, 0], 
+                [{"city_origin": 401014, "railway_origin_turn": [200112, 211002, 210102, 201012]}, 0], 
+                [{"city_origin": 411004, "railway_origin_turn": 200112}, 411004], 
+                [{"city_origin": 400114, "railway_origin_turn": 211002}, 400114], 
+                [{"city_origin": 410104, "railway_origin_turn": 201012}, 410104], 
+                [{"city_origin": 401014, "railway_origin_turn": 210102}, 401014], 
+                [{"mountain_origin": 1}, 0], 
+                [{"sea_origin": 1}, 0]
+            ]
+        }, 
+        {
+            "exe_name": "layer_Items_output_city_exe", 
+            "layer_to_exe": [
+                [{"city": 1}, 1], 
+                [{"city": 2}, 2], 
+                [{"city": 3}, 3], 
+                [{"city": 4}, 4], 
+                [{"city": 411004}, 411004], 
+                [{"city": 400114}, 400114], 
+                [{"city": 410104}, 410104], 
+                [{"city": 401014}, 401014]
+            ], 
+            "exe_to_layer": {
+                "0": [["layer_Items_output_city", "empty", 0, 0]], 
+                "1": [["layer_Items_output_city", "tile_T", 2, 13]], 
+                "2": [["layer_Items_output_city", "tile_T", 2, 14]], 
+                "3": [["layer_Items_output_city", "tile_T", 3, 13]], 
+                "4": [["layer_Items_output_city", "tile_T", 3, 14]], 
+                "411004": [["layer_Items_output_city", "tile_T", 0, 13]], 
+                "400114": [["layer_Items_output_city", "tile_T", 1, 14]], 
+                "410104": [["layer_Items_output_city", "tile_T", 0, 14]], 
+                "401014": [["layer_Items_output_city", "tile_T", 1, 13]]
+            }
+        }
+    ]
+}

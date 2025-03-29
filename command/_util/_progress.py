@@ -21,7 +21,7 @@ def init_progress():
     PROGRESS_PREVIOUS_NUM = None
     PROGRESS_PREVIOUS_LEN = UNDERLINE_EVEN_NUM
 
-TIME_ITERATION = 5
+TIME_ITERATION = 50
 TIME_FLASH = 1
 
 def print_progress(iteration, total, time_iteration=TIME_ITERATION, hms_l = ['Est. ', 'h ', 'm ', 's '], prefix='', suffix='', decimals=1, length_p=UNDERLINE_EVEN_NUM, fill='=', isenter = False):
