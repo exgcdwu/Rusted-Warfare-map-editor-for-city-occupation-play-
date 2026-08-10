@@ -250,7 +250,8 @@ def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, depth 
         expression_b = expression_translation(expression_b, dict_name, False, brace_exp_depth = brace_exp_depth - 1)
     
     try:
-        expression_b_temp = aeval(expression_b)
+        with safe_aeval_context(aeval):
+            expression_b_temp = aeval(expression_b)
     except Exception as e:
         return expression_b
     else:
