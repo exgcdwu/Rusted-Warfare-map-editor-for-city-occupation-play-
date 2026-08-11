@@ -110,6 +110,6 @@ inadd_info = {
         AUTOKEY.optional: inadd_info_optional_set, 
         AUTOKEY.prefix: INFOKEY.prefix, 
         AUTOKEY.isinfo_sub: True, 
-        AUTOKEY.no_check: True
+        AUTOKEY.no_check: True, 
     }
 }

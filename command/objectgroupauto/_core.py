@@ -996,6 +996,10 @@ def auto_func(args = None):
 
                 info[AUTOKEY.isinfo_sub] = (info.get(AUTOKEY.isinfo_sub) != None and info[AUTOKEY.isinfo_sub])
 
+                if info.get(AUTOKEY.isinfo_sub) != None and info.get(AUTOKEY.isinfo_sub) == True:
+                    standard_error_ob(f"Incorrect use of the subordinate info object.|" + 
+                                f"附属宾语的不正确使用。", 2, tobject_id, info_name, tobject_x, tobject_y)
+
                 if info_dict_now.get(info[AUTOKEY.prefix]) == None:   
                     standard_error_ob(f"A required argument is missing in an info object.(prefix)" + 
                                     f"|info宾语中的一个必需参数缺失。(prefix)", 
@@ -1119,7 +1123,8 @@ def auto_func(args = None):
                 args_dict = deepcopy(info_dict_now)
 
                 #args/opargs check
-                if info_new.get(AUTOKEY.args) != None:
+                
+                if info_new.get(AUTOKEY.args) != None: 
                     for key_n in info_new[AUTOKEY.args]:
                         key_now = key_n[0]
                         args_dict[key_n[0]] = key_n[1]
@@ -1127,7 +1132,6 @@ def auto_func(args = None):
                             standard_error_ob(f"An argument of the info object is invalid.(arg:{key_now})" +
                                            f"|info宾语的一个必需参数不合法。(参数:{key_now})", 
                                            12, tobject_id, info_name, tobject_x, tobject_y)
-                
 
                 if info_new.get(AUTOKEY.opargs) != None:
                     for value in info_new[AUTOKEY.opargs].values():
@@ -1296,6 +1300,7 @@ def auto_func(args = None):
                 and (not re.match(AUTOKEY.info_re, tobject_name)):
                 ischange = True
                 break
+        
         if black_tobject_name_set.issuperset([tobject_name]):
             ischange = False
         
@@ -1333,11 +1338,6 @@ def auto_func(args = None):
                 for info_pre in info[AUTOKEY.info_prefix]:
                     info_temp = info_dict[info_pre]
                     object_dict.update(info_temp)
-
-            if myinfo.get(AUTOKEY.isinfo_sub) != None and myinfo.get(AUTOKEY.isinfo_sub) == True:
-                standard_error_ob(f"Incorrect use of the subordinate info object.|" + 
-                               f"附属宾语的不正确使用。", 2, tobject_id, tobject_name, tobject_x, tobject_y, 
-                               isenter = standard_error_enter)
 
             if tobject.returnOptionalProperty(AUTOKEY.IDdep) == None:
                 tobject.assignOptionalProperty(AUTOKEY.IDdep, "0")

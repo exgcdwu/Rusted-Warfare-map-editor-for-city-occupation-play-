@@ -93,6 +93,6 @@ mtext_info = {
         AUTOKEY.default_args:mtext_info_default_args_dict, 
         AUTOKEY.optional: mtext_info_optional_set, 
         AUTOKEY.prefix: INFOKEY.prefix, 
-        AUTOKEY.isinfo_sub: True
+        AUTOKEY.isinfo_sub: True, 
     }
 }
