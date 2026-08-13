@@ -9,6 +9,7 @@ from collections import OrderedDict
 import sys
 import pdb
 import time
+import warnings
 
 from asteval import Interpreter
 
@@ -101,15 +102,138 @@ def standard_error_get_args(tobject:rw.case.TObject, info_tobject:rw.case.TObjec
                     f"|(info 名称:{info_tobject_name},info ID:{info_tobject_id},info 坐标:({info_tobject_x}, {info_tobject_y}))"])
     standard_error_ob(info_err_now, error_id, tobject_id, tobject_name, tobject_x, tobject_y, sub_info_error, isenter = isenter)
 
+def escaped_split(text:str, sep:str)->list:
+    """Split text by sep, but only on non-escaped occurrences. \\<sep> is treated as literal <sep>."""
+    result = []
+    current = []
+    i = 0
+    while i < len(text):
+        if text[i] == '\\' and i + 1 < len(text):
+            current.append(text[i])
+            current.append(text[i + 1])
+            i += 2
+        elif text[i] == sep:
+            result.append(''.join(current))
+            current = []
+            i += 1
+        else:
+            current.append(text[i])
+            i += 1
+    result.append(''.join(current))
+    return result
+
+def unescape(text:str)->str:
+    """Restore escape sequences: escaped dot/comma/backslash return to their literal characters. Other \\x stays as-is."""
+    result = []
+    i = 0
+    while i < len(text):
+        if text[i] == '\\' and i + 1 < len(text) and text[i + 1] in ('.', ',', '\\'):
+            result.append(text[i + 1])
+            i += 2
+        else:
+            result.append(text[i])
+            i += 1
+    return ''.join(result)
+
+def args_str_to_value(value:str, ntype):
+    """str keeps escape sequences (may be re-parsed by get_args later);
+    other types convert after unescape."""
+    if ntype == str:
+        return value
+    return ntype(unescape(value))
+
+def unescape_property(value):
+    """Unescape a property value: str or mapvalue dict (e.g. {"text":...} / {"value":...})."""
+    if isinstance(value, dict):
+        return {k: (unescape(v) if isinstance(v, str) else v) for k, v in value.items()}
+    if isinstance(value, str):
+        return unescape(value)
+    return value
+
+def unescape_tobject(tobject:rw.case.TObject):
+    """Unescape string values of a final (non-tagged) object before output."""
+    for key, value in tobject._default_properties.items():
+        tobject.assignDefaultProperty(key, unescape_property(value))
+    for key, value in tobject._optional_properties.items():
+        tobject.assignOptionalProperty(key, unescape_property(value))
+
+def expr_escape_to_sentinel(text:str)->str:
+    """Replace every `\\X` pair with sentinel so the compiler sees no backslashes.
+
+    `\\`+C  -> `\\x01`+C      (C is any char except backslash)
+    `\\`+`\\` -> `\\x01`+`\\x02`
+    Left-to-right scan; after consuming two chars skip both.
+    """
+    out = []
+    i = 0
+    n = len(text)
+    while i < n:
+        if text[i] == '\\' and i + 1 < n:
+            nxt = text[i + 1]
+            if nxt == '\\':
+                out.append('\x01')
+                out.append('\x02')
+            else:
+                out.append('\x01')
+                out.append(nxt)
+            i += 2
+        else:
+            out.append(text[i])
+            i += 1
+    return ''.join(out)
+
+def expr_sentinel_to_escape(text:str)->str:
+    """Inverse of expr_escape_to_sentinel.
+
+    `\\x01`+`\\x02` -> `\\`+`\\`
+    `\\x01`+C       -> `\\`+C
+    """
+    out = []
+    i = 0
+    n = len(text)
+    while i < n:
+        if text[i] == '\x01' and i + 1 < n:
+            nxt = text[i + 1]
+            if nxt == '\x02':
+                out.append('\\')
+                out.append('\\')
+            else:
+                out.append('\\')
+                out.append(nxt)
+            i += 2
+        else:
+            out.append(text[i])
+            i += 1
+    return ''.join(out)
+
+def escaped_seg_index(expression_b:str, seg_re:str)->list:
+    """Find regex match positions, skipping backslash-escaped characters(\\X is an atomic unit).
+
+    First collect all regex match positions as before, then remove any position that
+    lies inside a \\X escape pair (`\\` plus the following char).
+    """
+    raw_idx = [match_now.start() for match_now in reg.finditer(seg_re, expression_b)]
+    escaped_positions = set()
+    i = 0
+    n = len(expression_b)
+    while i < n:
+        if expression_b[i] == '\\' and i + 1 < n:
+            escaped_positions.add(i)
+            escaped_positions.add(i + 1)
+            i += 2
+            continue
+        i += 1
+    return [p for p in raw_idx if p not in escaped_positions]
+
 def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.TObject, object_dict:dict, isenter:bool = False)->dict:
     args_dict = {}
-    split_now = name.split(info[AUTOKEY.opargs_seg])
+    split_now = escaped_split(name, info[AUTOKEY.opargs_seg])
     opargs = split_now[1:]
 
     if split_now[0] == "":
         args_n = []
     else:
-        args_n = split_now[0].split(info[AUTOKEY.seg])
+        args_n = escaped_split(split_now[0], info[AUTOKEY.seg])
     
     if len(args_n) < len(info[AUTOKEY.args]):
         info_args_temp = info[AUTOKEY.args][len(args_n):]
@@ -130,7 +254,7 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.
                                 f"One of args is empty.(name:'{name}',index:{index + 1})" + \
                            f"|标记宾语的必填参数出现空。(扣除前缀后的名称:'{name}'，第几个必填参数:{index + 1})", 
                            29, isenter = isenter)
-        args_dict[thing[0]] = thing[1](args_n[index])
+        args_dict[thing[0]] = args_str_to_value(args_n[index], thing[1])
     
     prefix_len = info[AUTOKEY.opargs_prefix_len]
 
@@ -153,7 +277,8 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.
             type_now = info_thing[1]
 
             if type_now == bool:
-                deal_bool = True if var_now == "" else mapvalue_to_value(var_now, type_now)
+                var_now_u = unescape(var_now)
+                deal_bool = True if var_now_u == "" else mapvalue_to_value(var_now_u, type_now)
                 args_dict[key_now] = (deal_bool ^ object_dict[key_now]) if object_dict.get(key_now) != None else deal_bool
             else:
                 if var_now == '':
@@ -162,7 +287,7 @@ def get_args(info:dict, name:str, tobject:rw.case.TObject, info_tobject:rw.case.
                                             28, isenter = isenter)
                 elif var_now == "None":
                     continue
-                args_dict[key_now] = type_now(var_now)
+                args_dict[key_now] = args_str_to_value(var_now, type_now)
         else:
             if prefix_now != "d" and prefix_now != 'D':
                 standard_error_get_args(tobject, info_tobject, f"Unknown optional arguments in a tagged object.(name:'{name}', optional tag:,{prefix_now})" + \
@@ -192,13 +317,13 @@ def brace_one_translation(expression_b:str, dict_name:dict, seg_re:str)->str:
 
     expression_b = " " + expression_b + " "
     try:
-        expression_b_seg_index = [match_now.start() for match_now in reg.finditer(seg_re, expression_b)]
+        expression_b_seg_index = escaped_seg_index(expression_b, seg_re)
     except:
         import pdb;pdb.set_trace()
     brace_one_list = [expression_b[expression_b_seg_index[index] + 1:expression_b_seg_index[index + 1]] for index in range(len(expression_b_seg_index) - 1)]
     
     for index in range(len(brace_one_list)):
-        brace_one_ans = dict_name.get(brace_one_list[index])
+        brace_one_ans = dict_name.get(unescape(brace_one_list[index]))
         if brace_one_ans != None:
             brace_one_list[index] = brace_one_ans
 
@@ -250,12 +375,18 @@ def brace_translation(expression_b:str, dict_name:dict, prev:bool = True, depth 
         expression_b = expression_translation(expression_b, dict_name, False, brace_exp_depth = brace_exp_depth - 1)
     
     try:
-        with safe_aeval_context(aeval):
-            expression_b_temp = aeval(expression_b)
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=SyntaxWarning)
+            with safe_aeval_context(aeval):
+                expression_b_temp = aeval(expr_escape_to_sentinel(expression_b))
     except Exception as e:
         return expression_b
     else:
-        return expression_b if expression_b_temp == None else expression_b_temp
+        if expression_b_temp == None:
+            return expression_b
+        if isinstance(expression_b_temp, str):
+            return expr_sentinel_to_escape(expression_b_temp)
+        return expression_b_temp
 
 def expression_translation(expression_s:str, dict_name:dict, prev:bool = True, depth = MAXTRANSDEPTH, brace_exp_depth:int = MAXTRANSDEPTH):
     if brace_exp_depth == 0:
@@ -1417,6 +1548,8 @@ def auto_func(args = None):
                     if object_now != None:
                         
                         isnewtaggedobject = is_tagged_object_simple(object_now)
+                        if not isnewtaggedobject:
+                            unescape_tobject(object_now)
                         if isnewtaggedobject and obg_name == rw.const.NAME.Triggers:
                             if isdelete_sym:
                                 object_now.assignDefaultProperty(rw.const.OBJECTDE.name, object_now.returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_op)
@@ -1553,7 +1686,7 @@ def auto_func(args = None):
                 cite_dict.update(myinfo[AUTOKEY.info_args] if myinfo.get(AUTOKEY.info_args) != None else OrderedDict())
                 cite_dict.update(OrderedDict([[info_one[0] + str(ti), str] for info_one in myinfo[AUTOKEY.ids] for ti in range(info_one[1])] + [[info_one[0], str] for info_one in myinfo[AUTOKEY.ids]]) if myinfo.get(AUTOKEY.ids) != None else OrderedDict())
                 
-                cite_name_now = str_translation(object_dict[AUTOKEY.cite_name], object_dict)
+                cite_name_now = unescape(str_translation(object_dict[AUTOKEY.cite_name], object_dict))
 
                 for key, value in object_dict.items():
                     
