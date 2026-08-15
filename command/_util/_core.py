@@ -42,6 +42,7 @@ class AUTOKEY:
     IDdep = "IDdep"
     operation = "operation"
     tobject = "tobject"
+    tobject_cur = "tobject_cur"
     offset = "offset"
     offsetsize = "offsetsize"
     name = "name"

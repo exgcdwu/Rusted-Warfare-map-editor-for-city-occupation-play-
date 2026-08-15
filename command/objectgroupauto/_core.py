@@ -546,7 +546,9 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
     elif shape == AUTOKEY.operation_shape_rectangle:
         other_properties = []
     else:
-        ori_tobject = dict_name.get(AUTOKEY.tobject)
+        ori_tobject = dict_name.get(AUTOKEY.tobject_cur)
+        if ori_tobject is None:
+            ori_tobject = dict_name.get(AUTOKEY.tobject)
         if tobject_have_ellipse(ori_tobject):
             other_properties = [et.Element("ellipse")]
 
@@ -1483,6 +1485,7 @@ def auto_func(args = None):
             object_dict = deepcopy(info)
             object_dict[AUTOKEY.tobject_id] = tobject_id
             object_dict[AUTOKEY.tobject_name] = tobject_name
+            object_dict[AUTOKEY.tobject_cur] = tobject
 
             object_dict.update(get_args(myinfo, tobject_name_to_solve, tobject, info_tobject, object_dict, isenter = standard_error_enter))
             
