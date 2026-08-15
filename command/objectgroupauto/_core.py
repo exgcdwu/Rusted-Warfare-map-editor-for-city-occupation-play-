@@ -322,7 +322,18 @@ def brace_one_translation(expression_b:str, dict_name:dict, seg_re:str)->str:
     except:
         import pdb;pdb.set_trace()
     brace_one_list = [expression_b[expression_b_seg_index[index] + 1:expression_b_seg_index[index + 1]] for index in range(len(expression_b_seg_index) - 1)]
-    
+
+    # cite 组合键：各段 unescape 后用 "." 连接作为整体键查询。
+    # cite_object_dict 以 "cite名.属性名" 组合键注册；引用表达式按 "." 切出的多段
+    # （段内可能含转义逗号/点）需重组为同一组合键，而非逐段查表。
+    if seg_re == AUTOKEY.not_useful_char_ad_point_for_cite and len(brace_one_list) > 1:
+        combined_key = ".".join([unescape(seg) for seg in brace_one_list])
+        combined_ans = dict_name.get(combined_key)
+        if combined_ans is not None:
+            ans = expression_b[expression_b_seg_index[0]] + brace_one_str(combined_ans)
+            ans += expression_b[expression_b_seg_index[-1]]
+            return ans[1:]
+
     for index in range(len(brace_one_list)):
         brace_one_ans = dict_name.get(unescape(brace_one_list[index]))
         if brace_one_ans != None:
