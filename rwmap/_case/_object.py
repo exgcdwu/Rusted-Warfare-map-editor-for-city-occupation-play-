@@ -10,7 +10,7 @@ class TObject(ElementProperties):
 class TObject(ElementProperties):
     def __init__(self, tag:str, default_properties:dict[str, str] = {}, optional_properties:dict[str, Union[str, dict[str, str]]] = {}, other_properties:list[et.Element] = [])->None:
         super().__init__(tag, default_properties, optional_properties)
-        self._other_properties = deepcopy(other_properties)
+        self._other_properties = deepcopy(other_properties) if other_properties is not None else []
 
     def copy(self, tobject:TObject):
         self.__init__(tobject._tag, tobject._default_properties, tobject._optional_properties, tobject._other_properties)
@@ -28,7 +28,9 @@ class TObject(ElementProperties):
     def output_etElement(self, root:et.Element)->et.Element:
         etElement_ans = super().output_etElement(root)
         for etEle in self._other_properties:
-            etElement_ans.append(deepcopy(etEle))
+            etEle_copy = deepcopy(etEle)
+            etEle_copy.tail = None
+            etElement_ans.append(etEle_copy)
         return etElement_ans
         
     def output_str(self)->str:

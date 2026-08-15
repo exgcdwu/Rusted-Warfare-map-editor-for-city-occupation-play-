@@ -2,6 +2,7 @@ from typing import Union
 from copy import deepcopy, copy
 import regex as reg
 import os
+import xml.etree.ElementTree as et
 from pprint import pprint
 import argparse
 import importlib
@@ -479,6 +480,14 @@ def tobject_args_translation(key:str, value:str, dict_name:dict)->dict:
 
     return dict_ans
 
+def tobject_have_ellipse(tobject)->bool:
+    if tobject == None:
+        return False
+    for p in (getattr(tobject, "_other_properties", None) or []):
+        if p.tag == "ellipse":
+            return True
+    return False
+
 def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori_size:rw.frame.Coordinate)->rw.case.TObject:
     
     if operation.get(AUTOKEY.exist) != None:
@@ -529,7 +538,19 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
         for key, value in operation[AUTOKEY.optional].items():
             optional_pro.update(tobject_args_translation(key, value, dict_name))
 
-    return (rw.case.TObject("object", default_pro, optional_pro), objectgroup_name)
+    other_properties = []
+    shape = operation.get(AUTOKEY.operation_shape, AUTOKEY.operation_shape_default)
+    shape = brace_translation(shape, dict_name)
+    if shape == AUTOKEY.operation_shape_ellipse:
+        other_properties = [et.Element("ellipse")]
+    elif shape == AUTOKEY.operation_shape_rectangle:
+        other_properties = []
+    else:
+        ori_tobject = dict_name.get(AUTOKEY.tobject)
+        if tobject_have_ellipse(ori_tobject):
+            other_properties = [et.Element("ellipse")]
+
+    return (rw.case.TObject("object", default_pro, optional_pro, other_properties), objectgroup_name)
 
 def mapvalue_to_value(value, ntype):
     if isinstance(value, dict) and value.get("type") != None:

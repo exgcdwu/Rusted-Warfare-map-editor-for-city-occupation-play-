@@ -69,6 +69,10 @@ class AUTOKEY:
     objectGroup_name = "objectGroup_name"
 
     operation_type = "operation_type"
+    operation_shape = "operation_shape"
+    operation_shape_ellipse = "ellipse"
+    operation_shape_rectangle = "rectangle"
+    operation_shape_default = "default"
     object = "object"
     goto = "goto"
     ifend_tag = "ifend_tag"
