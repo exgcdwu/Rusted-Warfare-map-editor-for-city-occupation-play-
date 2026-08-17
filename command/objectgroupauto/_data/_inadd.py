@@ -27,6 +27,14 @@ inadd_info_args_dict[INFOKEY.inaddisshowOnMap] = bool
 inadd_info_args_dict[INFOKEY.inaddname] = str
 inadd_info_args_dict[INFOKEY.inaddoffset] = (list, int)
 inadd_info_args_dict[INFOKEY.inaddoffsetsize] = (list, int)
+inadd_info_args_dict[INFOKEY.inaddalsoActivate] = str
+inadd_info_args_dict[INFOKEY.inaddid] = str
+inadd_info_args_dict[INFOKEY.inaddglobalMessage] = str
+inadd_info_args_dict[INFOKEY.inaddglobalMessage_delayPerChar] = str
+inadd_info_args_dict[INFOKEY.inaddglobalMessage_textColor] = str
+inadd_info_args_dict[INFOKEY.inadddebugMessage] = str
+inadd_info_args_dict[INFOKEY.inaddallToActivate] = bool
+inadd_info_args_dict[INFOKEY.inaddshowOnMap] = bool
 
 inadd_info_default_args_dict = {
     INFOKEY.isinadd: "true", 
@@ -50,12 +58,23 @@ inadd_info_var_dependent_dict = {
     INFOKEY.inaddoffset: INFOKEY.isinadd, 
     INFOKEY.inaddoffsetsize: INFOKEY.isinadd, 
     INFOKEY.inaddisinitialunit: INFOKEY.isinadd, 
-    INFOKEY.inaddaunitbrace: INFOKEY.isinadd
+    INFOKEY.inaddaunitbrace: INFOKEY.isinadd, 
+    INFOKEY.inaddalsoActivate: INFOKEY.isinadd, 
+    INFOKEY.inaddid: INFOKEY.isinadd, 
+    INFOKEY.inaddglobalMessage: INFOKEY.isinadd, 
+    INFOKEY.inaddglobalMessage_delayPerChar: INFOKEY.isinadd, 
+    INFOKEY.inaddglobalMessage_textColor: INFOKEY.isinadd, 
+    INFOKEY.inadddebugMessage: INFOKEY.isinadd, 
+    INFOKEY.inaddallToActivate: INFOKEY.isinadd, 
+    INFOKEY.inaddshowOnMap: INFOKEY.isinadd
 }
 
 inadd_info_optional_set = {
     INFOKEY.isinadd, INFOKEY.inaddname, INFOKEY.inaddisshowOnMap, INFOKEY.inaddspawnnum, 
-    INFOKEY.inaddoffset, INFOKEY.inaddoffsetsize, INFOKEY.inaddaunitbrace
+    INFOKEY.inaddoffset, INFOKEY.inaddoffsetsize, INFOKEY.inaddaunitbrace, 
+    INFOKEY.inaddalsoActivate, INFOKEY.inaddid, INFOKEY.inaddglobalMessage, 
+    INFOKEY.inaddglobalMessage_delayPerChar, INFOKEY.inaddglobalMessage_textColor, 
+    INFOKEY.inadddebugMessage, INFOKEY.inaddallToActivate, INFOKEY.inaddshowOnMap
 }
 
 inadd_info_operation_list = \
@@ -73,11 +92,27 @@ inadd_info_operation_list = \
                     rw.const.OBJECTOP.unit: ("{" + f"{INFOKEY.inaddunit}" + "}", f"{INFOKEY.inaddisinitialunit}", AUTOKEY.brace), 
                     rw.const.OBJECTOP.team: "{" + f"{INFOKEY.inaddteam}" + "}", 
                     rw.const.OBJECTOP.warmup: ("{" + f"{INFOKEY.inaddwarmup}" + "}", f"('{INFOKEY.inaddwarmup}' != '0s' and '{INFOKEY.inaddwarmup}' != '0.0s') and not({INFOKEY.inaddisinitialunit})", AUTOKEY.brace), 
-                    rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.inaddisshowOnMap} and not({INFOKEY.inaddisinitialunit})", AUTOKEY.brace), 
+                    rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.inaddshowOnMap}", AUTOKEY.brace), 
+                    rw.const.OBJECTOP.alsoActivate: ("{" + f"{INFOKEY.inaddalsoActivate}" + "}", f"{INFOKEY.inaddalsoActivate}", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.id: ("{" + f"{INFOKEY.inaddid}" + "}", f"{INFOKEY.inaddid}", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.globalMessage: ("{" + f"{INFOKEY.inaddglobalMessage}" + "}", f"{INFOKEY.inaddglobalMessage}", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.globalMessage_delayPerChar: ("{" + f"{INFOKEY.inaddglobalMessage_delayPerChar}" + "}", f"{INFOKEY.inaddglobalMessage_delayPerChar}", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.globalMessage_textColor: ("{" + f"{INFOKEY.inaddglobalMessage_textColor}" + "}", f"{INFOKEY.inaddglobalMessage_textColor}", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.debugMessage: ("{" + f"{INFOKEY.inadddebugMessage}" + "}", f"{INFOKEY.inadddebugMessage}", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.allToActivate: (True, f"{INFOKEY.inaddallToActivate}", AUTOKEY.brace), 
                 }
             }
         ] + \
-    operation_ifend("inadd_if_isinadd")
+    operation_ifend("inadd_if_isinadd") + \
+    operation_if(f"{INFOKEY.inaddisshowOnMap}", "inadd_warning_isshowOnMap") + \
+        [
+            {
+                AUTOKEY.operation_type: AUTOKEY.warning, 
+                AUTOKEY.warning_info: "inaddisshowOnMap is deprecated. Use inaddshowOnMap instead.|inaddisshowOnMap 已过时，请改用 inaddshowOnMap。", 
+                AUTOKEY.warning_id: 6, 
+            }
+        ] + \
+    operation_ifend("inadd_warning_isshowOnMap")
 
 def inadd_info_sub(info_dict:str)->dict:
     info_dict_ans = deepcopy(info_dict)

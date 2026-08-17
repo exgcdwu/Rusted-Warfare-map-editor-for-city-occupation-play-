@@ -28,6 +28,13 @@ numDetect_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
 
 numDetect_info_args_dict[INFOKEY.cite_name] = str
 
+numDetect_info_args_dict[INFOKEY.globalMessage] = (list, list, str)
+numDetect_info_args_dict[INFOKEY.globalMessage_delayPerChar] = (list, list, str)
+numDetect_info_args_dict[INFOKEY.globalMessage_textColor] = (list, list, str)
+numDetect_info_args_dict[INFOKEY.debugMessage] = (list, list, str)
+numDetect_info_args_dict[INFOKEY.allToActivate] = (list, list, bool)
+numDetect_info_args_dict[INFOKEY.showOnMap] = (list, list, bool)
+
 DETECT_OPTION_DICT = {
     OBJECT_ARGS.onlyIdle:bool, 
     OBJECT_ARGS.onlyBuildings:bool, 
@@ -44,7 +51,7 @@ DETECT_OPTION_DICT = {
 numDetect_info_args_dict.update(DETECT_OPTION_DICT)
 
 numDetect_info_default_args_dict = {
-    INFOKEY.name: "[\"{'setid\" + \"Num\" + str(ex) + \"_0'[len(setidNum[ex]):]}\" " + f"for ex in range({INFOKEY.lenidNum})]", 
+    INFOKEY.name: "[\"{'setid\" + \"Num\" + str(ex) + \"_0'[len(setidNum[\" + str(ex) + \"]):]}\" " + f"for ex in range({INFOKEY.lenidNum})]", 
     INFOKEY.offset: f"[[0, 0] for ex in range({INFOKEY.lenidNum})]", 
     INFOKEY.offsetsize: f"[[0, 0] for ex in range({INFOKEY.lenidNum})]"
 }
@@ -55,6 +62,12 @@ numDetect_info_optional_set.add(INFOKEY.isprefixseg)
 numDetect_info_optional_set.add(INFOKEY.aunit)
 numDetect_info_optional_set.add(INFOKEY.team)
 numDetect_info_optional_set.add(INFOKEY.cite_name)
+numDetect_info_optional_set.add(INFOKEY.globalMessage)
+numDetect_info_optional_set.add(INFOKEY.globalMessage_delayPerChar)
+numDetect_info_optional_set.add(INFOKEY.globalMessage_textColor)
+numDetect_info_optional_set.add(INFOKEY.debugMessage)
+numDetect_info_optional_set.add(INFOKEY.allToActivate)
+numDetect_info_optional_set.add(INFOKEY.showOnMap)
 DETECT_OPTION_SET = set(DETECT_OPTION_DICT.keys())
 numDetect_info_optional_set.update(DETECT_OPTION_SET)
 
@@ -90,7 +103,13 @@ numDetect_info_operation_optional = {
     rw.const.OBJECTOP.maxUnits: ("{maxUnits_now}", "maxUnits_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.resetActivationAfter: "{" + INFOKEY.reset + "}", 
     rw.const.OBJECTOP.unitType: ("{" + f"{INFOKEY.aunit}" + "}", INFOKEY.aunit, AUTOKEY.exist), 
-    rw.const.OBJECTOP.team: ("{" + f"{INFOKEY.team}" + "}", "team", AUTOKEY.exist)
+    rw.const.OBJECTOP.team: ("{" + f"{INFOKEY.team}" + "}", "team", AUTOKEY.exist), 
+    rw.const.OBJECTOP.globalMessage: ("{" + f"{INFOKEY.globalMessage}" + "[i][j]}", INFOKEY.globalMessage, AUTOKEY.exist), 
+    rw.const.OBJECTOP.globalMessage_delayPerChar: ("{" + f"{INFOKEY.globalMessage_delayPerChar}" + "[i][j]}", INFOKEY.globalMessage_delayPerChar, AUTOKEY.exist), 
+    rw.const.OBJECTOP.globalMessage_textColor: ("{" + f"{INFOKEY.globalMessage_textColor}" + "[i][j]}", INFOKEY.globalMessage_textColor, AUTOKEY.exist), 
+    rw.const.OBJECTOP.debugMessage: ("{" + f"{INFOKEY.debugMessage}" + "[i][j]}", INFOKEY.debugMessage, AUTOKEY.exist), 
+    rw.const.OBJECTOP.allToActivate: (True, f"{INFOKEY.allToActivate}[i][j]", AUTOKEY.brace), 
+    rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.showOnMap}[i][j]", AUTOKEY.brace), 
 }
 numDetect_info_operation_optional.update(DETECT_OPTION_OPERATION_OPTIONAL)
 
@@ -191,6 +210,10 @@ numDetect_info_operation_list = \
     operation_cycle_end("i", "i + 1", "numDetect_cycle1")
 
 
+numDetect_info_is_cite_white_list = [
+    "lenidNum", 
+]
+
 numDetect_info = {
     INFOKEY.numDetect_info:{
         AUTOKEY.info_args:numDetect_info_args_dict, 
@@ -210,7 +233,8 @@ numDetect_info = {
         AUTOKEY.opargs_seg: ",", 
         AUTOKEY.operation_pre:numDetect_info_operation_pre_list, 
         AUTOKEY.operation:numDetect_info_operation_list, 
-        AUTOKEY.no_check: True
+        AUTOKEY.no_check: True, 
+        AUTOKEY.is_cite_white_list: numDetect_info_is_cite_white_list
     }
 }
 

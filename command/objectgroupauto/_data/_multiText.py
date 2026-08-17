@@ -32,6 +32,15 @@ multiText_info_args_dict[INFOKEY.text] = (list, str)
 multiText_info_args_dict[INFOKEY.offset] = (list, list, int)
 multiText_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
 
+multiText_info_args_dict[INFOKEY.alsoActivate] = (list, str)
+multiText_info_args_dict[INFOKEY.id] = (list, str)
+multiText_info_args_dict[INFOKEY.globalMessage] = (list, str)
+multiText_info_args_dict[INFOKEY.globalMessage_delayPerChar] = (list, str)
+multiText_info_args_dict[INFOKEY.globalMessage_textColor] = (list, str)
+multiText_info_args_dict[INFOKEY.debugMessage] = (list, str)
+multiText_info_args_dict[INFOKEY.allToActivate] = (list, bool)
+multiText_info_args_dict[INFOKEY.showOnMap] = (list, bool)
+
 multiText_info_default_args_dict = {
     INFOKEY.name: "", 
     INFOKEY.offset: "0 0", 
@@ -50,6 +59,14 @@ multiText_info_optional_set.add(INFOKEY.isdefaultText)
 multiText_info_optional_set.add(INFOKEY.textsize)
 multiText_info_optional_set.add(INFOKEY.color)
 multiText_info_optional_set.add(INFOKEY.name)
+multiText_info_optional_set.add(INFOKEY.alsoActivate)
+multiText_info_optional_set.add(INFOKEY.id)
+multiText_info_optional_set.add(INFOKEY.globalMessage)
+multiText_info_optional_set.add(INFOKEY.globalMessage_delayPerChar)
+multiText_info_optional_set.add(INFOKEY.globalMessage_textColor)
+multiText_info_optional_set.add(INFOKEY.debugMessage)
+multiText_info_optional_set.add(INFOKEY.allToActivate)
+multiText_info_optional_set.add(INFOKEY.showOnMap)
 
 multiText_info_var_dependent_dict = {INFOKEY.isdefaultText:INFOKEY.teamDetect_cite}
 
@@ -66,6 +83,14 @@ multiText_info_operation_optional = {
     rw.const.OBJECTOP.textColor: ("{color_now}", "color_now_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.textSize: ("{textsize_now}", "textsize_now_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.text: ("{text_now}", "text_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.alsoActivate: ("{alsoActivate_now}", "alsoActivate_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.id: ("{id_now}", "id_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.globalMessage: ("{globalMessage_now}", "globalMessage_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.globalMessage_delayPerChar: ("{globalMessage_delayPerChar_now}", "globalMessage_delayPerChar_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.globalMessage_textColor: ("{globalMessage_textColor_now}", "globalMessage_textColor_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.debugMessage: ("{debugMessage_now}", "debugMessage_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.allToActivate: (True, "allToActivate_now_exist and allToActivate_now", AUTOKEY.brace), 
+    rw.const.OBJECTOP.showOnMap: (True, "showOnMap_now_exist and showOnMap_now", AUTOKEY.brace), 
 }
 
 def operation_join_quote(assign_name:str, info_args:str):
@@ -192,6 +217,14 @@ multiText_info_operation_list = \
         operation_list_assign(f"{INFOKEY.color}", "i", "color_now", "multiText") + \
         operation_list_assign(f"{INFOKEY.text}", "i", "text_now", "multiText") + \
         operation_list_assign(f"{INFOKEY.textsize}", "i", "textsize_now", "multiText") + \
+        operation_list_assign(f"{INFOKEY.alsoActivate}", "i", "alsoActivate_now", "multiText") + \
+        operation_list_assign(f"{INFOKEY.id}", "i", "id_now", "multiText") + \
+        operation_list_assign(f"{INFOKEY.globalMessage}", "i", "globalMessage_now", "multiText") + \
+        operation_list_assign(f"{INFOKEY.globalMessage_delayPerChar}", "i", "globalMessage_delayPerChar_now", "multiText") + \
+        operation_list_assign(f"{INFOKEY.globalMessage_textColor}", "i", "globalMessage_textColor_now", "multiText") + \
+        operation_list_assign(f"{INFOKEY.debugMessage}", "i", "debugMessage_now", "multiText") + \
+        operation_list_assign(f"{INFOKEY.allToActivate}", "i", "allToActivate_now", "multiText", "False") + \
+        operation_list_assign(f"{INFOKEY.showOnMap}", "i", "showOnMap_now", "multiText", "False") + \
         operation_exist_if(f"{INFOKEY.teamDetect_cite}", "multiText_exist_if_teamDetect_cite_assign") + \
             operation_if("i < {" + f"{INFOKEY.teamDetect_cite}" + "}." + f"{INFOKEY.lenidTeam}", "multiText_if_teamDetect_cite_assign_acti", 1) + \
                 operation_ids_assign(f"{INFOKEY.acti}_now_exist", f"{INFOKEY.acti}_now_" + "{i}", "{" + f"{INFOKEY.teamDetect_cite}" + "}" + f".{INFOKEY.setidTeam}" + "{i}_0_0", "multiText", "actiids_addteamDetect") + \

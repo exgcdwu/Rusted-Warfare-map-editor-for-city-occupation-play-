@@ -35,6 +35,15 @@ multiAdd_info_args_dict[INFOKEY.name] = (list, str)
 multiAdd_info_args_dict[INFOKEY.offset] = (list, list, int)
 multiAdd_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
 
+multiAdd_info_args_dict[INFOKEY.alsoActivate] = (list, str)
+multiAdd_info_args_dict[INFOKEY.id] = (list, str)
+multiAdd_info_args_dict[INFOKEY.globalMessage] = (list, str)
+multiAdd_info_args_dict[INFOKEY.globalMessage_delayPerChar] = (list, str)
+multiAdd_info_args_dict[INFOKEY.globalMessage_textColor] = (list, str)
+multiAdd_info_args_dict[INFOKEY.debugMessage] = (list, str)
+multiAdd_info_args_dict[INFOKEY.allToActivate] = (list, bool)
+multiAdd_info_args_dict[INFOKEY.showOnMap] = (list, bool)
+
 multiAdd_info_default_args_dict = {
     INFOKEY.name: "", 
     INFOKEY.offset: "0 0", 
@@ -52,6 +61,14 @@ multiAdd_info_optional_set.add(INFOKEY.reset)
 multiAdd_info_optional_set.add(INFOKEY.warmup)
 multiAdd_info_optional_set.add(INFOKEY.delay)
 multiAdd_info_optional_set.add(INFOKEY.repeat)
+multiAdd_info_optional_set.add(INFOKEY.alsoActivate)
+multiAdd_info_optional_set.add(INFOKEY.id)
+multiAdd_info_optional_set.add(INFOKEY.globalMessage)
+multiAdd_info_optional_set.add(INFOKEY.globalMessage_delayPerChar)
+multiAdd_info_optional_set.add(INFOKEY.globalMessage_textColor)
+multiAdd_info_optional_set.add(INFOKEY.debugMessage)
+multiAdd_info_optional_set.add(INFOKEY.allToActivate)
+multiAdd_info_optional_set.add(INFOKEY.showOnMap)
 
 multiAdd_info_var_dependent_dict = {}
 
@@ -70,6 +87,14 @@ multiAdd_info_operation_optional = {
     rw.const.OBJECTOP.warmup: ("{warmup_now}", "warmup_now_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.repeatDelay: ("{repeat_now}", "repeat_now_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.delay: ("{delay_now}", "delay_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.alsoActivate: ("{alsoActivate_now}", "alsoActivate_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.id: ("{id_now}", "id_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.globalMessage: ("{globalMessage_now}", "globalMessage_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.globalMessage_delayPerChar: ("{globalMessage_delayPerChar_now}", "globalMessage_delayPerChar_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.globalMessage_textColor: ("{globalMessage_textColor_now}", "globalMessage_textColor_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.debugMessage: ("{debugMessage_now}", "debugMessage_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.allToActivate: (True, "allToActivate_now_exist and allToActivate_now", AUTOKEY.brace), 
+    rw.const.OBJECTOP.showOnMap: (True, "showOnMap_now_exist and showOnMap_now", AUTOKEY.brace), 
 }
 
 multiAdd_info_operation_list = \
@@ -142,6 +167,14 @@ multiAdd_info_operation_list = \
         operation_list_assign(f"{INFOKEY.warmup}", "i", "warmup_now", "multiAdd") + \
         operation_list_assign(f"{INFOKEY.repeat}", "i", "repeat_now", "multiAdd") + \
         operation_list_assign(f"{INFOKEY.delay}", "i", "delay_now", "multiAdd") + \
+        operation_list_assign(f"{INFOKEY.alsoActivate}", "i", "alsoActivate_now", "multiAdd") + \
+        operation_list_assign(f"{INFOKEY.id}", "i", "id_now", "multiAdd") + \
+        operation_list_assign(f"{INFOKEY.globalMessage}", "i", "globalMessage_now", "multiAdd") + \
+        operation_list_assign(f"{INFOKEY.globalMessage_delayPerChar}", "i", "globalMessage_delayPerChar_now", "multiAdd") + \
+        operation_list_assign(f"{INFOKEY.globalMessage_textColor}", "i", "globalMessage_textColor_now", "multiAdd") + \
+        operation_list_assign(f"{INFOKEY.debugMessage}", "i", "debugMessage_now", "multiAdd") + \
+        operation_list_assign(f"{INFOKEY.allToActivate}", "i", "allToActivate_now", "multiAdd", "False") + \
+        operation_list_assign(f"{INFOKEY.showOnMap}", "i", "showOnMap_now", "multiAdd", "False") + \
         operation_exist_if(f"{INFOKEY.teamDetect_cite}", "multiAdd_exist_if_teamDetect_cite_assign") + \
             operation_if("team_now_exist == True", "multiAdd_exist_if_teamDetect_cite_assign_team_exist") + \
                 operation_if("{" + f"{INFOKEY.teamDetect_cite}" + "}" + ".teamtoi.get('team_now') != None", "multiAdd_if_teamDetect_cite_assign_acti") + \

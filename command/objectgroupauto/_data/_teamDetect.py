@@ -34,6 +34,13 @@ teamDetect_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
 
 teamDetect_info_args_dict[INFOKEY.cite_name] = str
 
+teamDetect_info_args_dict[INFOKEY.globalMessage] = (list, list, str)
+teamDetect_info_args_dict[INFOKEY.globalMessage_delayPerChar] = (list, list, str)
+teamDetect_info_args_dict[INFOKEY.globalMessage_textColor] = (list, list, str)
+teamDetect_info_args_dict[INFOKEY.debugMessage] = (list, list, str)
+teamDetect_info_args_dict[INFOKEY.allToActivate] = (list, list, bool)
+teamDetect_info_args_dict[INFOKEY.showOnMap] = (list, list, bool)
+
 DETECT_OPTION_DICT = {
     OBJECT_ARGS.onlyIdle:bool, 
     OBJECT_ARGS.onlyBuildings:bool, 
@@ -61,11 +68,18 @@ teamDetect_info_default_args_dict = {
 teamDetect_info_optional_set = {INFOKEY.brace}
 
 teamDetect_info_optional_set.add(INFOKEY.isprefixseg)
+teamDetect_info_optional_set.add(INFOKEY.aunit)
 teamDetect_info_optional_set.add(INFOKEY.cite_name)
 teamDetect_info_optional_set.add(INFOKEY.minUnits)
 teamDetect_info_optional_set.add(INFOKEY.maxUnits)
 teamDetect_info_optional_set.add(INFOKEY.args)
 teamDetect_info_optional_set.add(INFOKEY.opargs)
+teamDetect_info_optional_set.add(INFOKEY.globalMessage)
+teamDetect_info_optional_set.add(INFOKEY.globalMessage_delayPerChar)
+teamDetect_info_optional_set.add(INFOKEY.globalMessage_textColor)
+teamDetect_info_optional_set.add(INFOKEY.debugMessage)
+teamDetect_info_optional_set.add(INFOKEY.allToActivate)
+teamDetect_info_optional_set.add(INFOKEY.showOnMap)
 DETECT_OPTION_SET = set(DETECT_OPTION_DICT.keys())
 teamDetect_info_optional_set.update(DETECT_OPTION_SET)
 
@@ -103,7 +117,13 @@ teamDetect_info_operation_optional = {
     rw.const.OBJECTOP.maxUnits: ("{" + INFOKEY.maxUnits + "}", INFOKEY.maxUnits, AUTOKEY.exist), 
     rw.const.OBJECTOP.resetActivationAfter: "{" + INFOKEY.reset + "}", 
     rw.const.OBJECTOP.unitType: ("{" + f"{INFOKEY.aunit}" + "}", INFOKEY.aunit, AUTOKEY.exist), 
-    rw.const.OBJECTOP.team: "{" + f"{INFOKEY.setTeam}" + "[i][j]}"
+    rw.const.OBJECTOP.team: "{" + f"{INFOKEY.setTeam}" + "[i][j]}", 
+    rw.const.OBJECTOP.globalMessage: ("{" + f"{INFOKEY.globalMessage}" + "[i][j]}", INFOKEY.globalMessage, AUTOKEY.exist), 
+    rw.const.OBJECTOP.globalMessage_delayPerChar: ("{" + f"{INFOKEY.globalMessage_delayPerChar}" + "[i][j]}", INFOKEY.globalMessage_delayPerChar, AUTOKEY.exist), 
+    rw.const.OBJECTOP.globalMessage_textColor: ("{" + f"{INFOKEY.globalMessage_textColor}" + "[i][j]}", INFOKEY.globalMessage_textColor, AUTOKEY.exist), 
+    rw.const.OBJECTOP.debugMessage: ("{" + f"{INFOKEY.debugMessage}" + "[i][j]}", INFOKEY.debugMessage, AUTOKEY.exist), 
+    rw.const.OBJECTOP.allToActivate: (True, f"{INFOKEY.allToActivate}[i][j]", AUTOKEY.brace), 
+    rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.showOnMap}[i][j]", AUTOKEY.brace), 
 }
 teamDetect_info_operation_optional.update(DETECT_OPTION_OPERATION_OPTIONAL)
 
@@ -284,6 +304,7 @@ teamDetect_info_operation_list = \
     operation_cycle_end("i", "i + 1", "teamDetect_cycle2_basic")
 
 teamDetect_info_is_cite_white_list = [
+    "lenidTeam", 
     "setidTeam_id", 
     "setidTeam_id_depn", 
     "setidTeam_id_dep", 

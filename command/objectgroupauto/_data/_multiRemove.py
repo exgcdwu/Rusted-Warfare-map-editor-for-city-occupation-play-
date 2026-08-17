@@ -34,6 +34,15 @@ multiRemove_info_args_dict[INFOKEY.name] = (list, str)
 multiRemove_info_args_dict[INFOKEY.offset] = (list, list, int)
 multiRemove_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
 
+multiRemove_info_args_dict[INFOKEY.alsoActivate] = (list, str)
+multiRemove_info_args_dict[INFOKEY.id] = (list, str)
+multiRemove_info_args_dict[INFOKEY.globalMessage] = (list, str)
+multiRemove_info_args_dict[INFOKEY.globalMessage_delayPerChar] = (list, str)
+multiRemove_info_args_dict[INFOKEY.globalMessage_textColor] = (list, str)
+multiRemove_info_args_dict[INFOKEY.debugMessage] = (list, str)
+multiRemove_info_args_dict[INFOKEY.allToActivate] = (list, bool)
+multiRemove_info_args_dict[INFOKEY.showOnMap] = (list, bool)
+
 multiRemove_info_default_args_dict = {
     INFOKEY.name: "", 
     INFOKEY.offset: "0 0", 
@@ -52,6 +61,14 @@ multiRemove_info_optional_set.add(INFOKEY.reset)
 multiRemove_info_optional_set.add(INFOKEY.warmup)
 multiRemove_info_optional_set.add(INFOKEY.delay)
 multiRemove_info_optional_set.add(INFOKEY.repeat)
+multiRemove_info_optional_set.add(INFOKEY.alsoActivate)
+multiRemove_info_optional_set.add(INFOKEY.id)
+multiRemove_info_optional_set.add(INFOKEY.globalMessage)
+multiRemove_info_optional_set.add(INFOKEY.globalMessage_delayPerChar)
+multiRemove_info_optional_set.add(INFOKEY.globalMessage_textColor)
+multiRemove_info_optional_set.add(INFOKEY.debugMessage)
+multiRemove_info_optional_set.add(INFOKEY.allToActivate)
+multiRemove_info_optional_set.add(INFOKEY.showOnMap)
 
 multiRemove_info_var_dependent_dict = {}
 
@@ -69,6 +86,14 @@ multiRemove_info_operation_optional = {
     rw.const.OBJECTOP.warmup: ("{warmup_now}", "warmup_now_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.repeatDelay: ("{repeat_now}", "repeat_now_exist", AUTOKEY.brace), 
     rw.const.OBJECTOP.delay: ("{delay_now}", "delay_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.alsoActivate: ("{alsoActivate_now}", "alsoActivate_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.id: ("{id_now}", "id_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.globalMessage: ("{globalMessage_now}", "globalMessage_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.globalMessage_delayPerChar: ("{globalMessage_delayPerChar_now}", "globalMessage_delayPerChar_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.globalMessage_textColor: ("{globalMessage_textColor_now}", "globalMessage_textColor_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.debugMessage: ("{debugMessage_now}", "debugMessage_now_exist", AUTOKEY.brace), 
+    rw.const.OBJECTOP.allToActivate: (True, "allToActivate_now_exist and allToActivate_now", AUTOKEY.brace), 
+    rw.const.OBJECTOP.showOnMap: (True, "showOnMap_now_exist and showOnMap_now", AUTOKEY.brace), 
 }
 
 multiRemove_info_operation_list = \
@@ -124,6 +149,14 @@ multiRemove_info_operation_list = \
         operation_list_assign(f"{INFOKEY.warmup}", "i", "warmup_now", "multiRemove") + \
         operation_list_assign(f"{INFOKEY.repeat}", "i", "repeat_now", "multiRemove") + \
         operation_list_assign(f"{INFOKEY.delay}", "i", "delay_now", "multiRemove") + \
+        operation_list_assign(f"{INFOKEY.alsoActivate}", "i", "alsoActivate_now", "multiRemove") + \
+        operation_list_assign(f"{INFOKEY.id}", "i", "id_now", "multiRemove") + \
+        operation_list_assign(f"{INFOKEY.globalMessage}", "i", "globalMessage_now", "multiRemove") + \
+        operation_list_assign(f"{INFOKEY.globalMessage_delayPerChar}", "i", "globalMessage_delayPerChar_now", "multiRemove") + \
+        operation_list_assign(f"{INFOKEY.globalMessage_textColor}", "i", "globalMessage_textColor_now", "multiRemove") + \
+        operation_list_assign(f"{INFOKEY.debugMessage}", "i", "debugMessage_now", "multiRemove") + \
+        operation_list_assign(f"{INFOKEY.allToActivate}", "i", "allToActivate_now", "multiRemove", "False") + \
+        operation_list_assign(f"{INFOKEY.showOnMap}", "i", "showOnMap_now", "multiRemove", "False") + \
         operation_exist_if(f"{INFOKEY.teamDetect_cite}", "multiRemove_exist_if_teamDetect_cite_assign") + \
             operation_if("team_now_exist == True", "multiRemove_exist_if_teamDetect_cite_assign_team_exist") + \
                 operation_if("{" + f"{INFOKEY.teamDetect_cite}" + "}" + ".teamtoi.get(team_now) != None", "multiRemove_if_teamDetect_cite_assign_acti") + \

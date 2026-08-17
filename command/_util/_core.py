@@ -104,6 +104,10 @@ class AUTOKEY:
     pdb_pause = "pdb_pause"
     error = "error"
     error_info = "error_info"
+    warning = "warning"
+    warning_info = "warning_info"
+    warning_id = "warning_id"
+    warning_error_id = "warning_error_id"
     isnot_cite_check = "isnot_cite_check"
     is_cite_white_list = "is_cite_white_list"
 

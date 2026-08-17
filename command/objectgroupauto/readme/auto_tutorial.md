@@ -185,6 +185,10 @@ brace：字符串数组。在最后会将数组中的所有键进行字符串翻
 
 数字二维数组：第一维用","隔开，第二维用" "隔开
 
+布尔数组：布尔值之间用','隔开
+
+布尔二维数组：第一维用";"隔开，第二维用","隔开
+
 info宾语内的属性也可以互相引用。假如info宾语内有一个属性为aunit:supplyDepot。那么，设置另一个属性为inaddunit:{aunit}即可实现引用（引用自己标记宾语的属性）。
 
 ## tree_info
@@ -289,6 +293,8 @@ inaddwarmup：当isinadd为是时可选，默认为{addWarmup}，表示单位添
 
 inaddunit：当isinadd为是时可选，默认{aunit}，表示单位添加的类型。
 
+inaddaunitbrace：当isinadd为是时可选，默认{aunitbrace}，表示单位添加的 aunitbrace。
+
 inaddspawnnum：当isinadd为是时可选，默认为1，表示单位添加的数量。
 
 inaddisshowOnMap: 当isinadd为是时可选，默认为否，启用时，初始城市生成时小地图显示。
@@ -300,6 +306,22 @@ inaddoffset: 当isinadd为是时可选，数字数组，默认为"0 0"，建筑�
 inaddoffsetsize: 当isinadd为是时可选，数字数组，默认为"0 0"，建筑初始添加宾语大小改变。
 
 inaddisinitialunit: 可选，默认为否。启用时，建筑刷新将使用"unit"，而不是"spawnUnits"。除去"unit"和"team"以外的选项将不会出现。并将该宾语加入unitObject层。请确保unitObject层已经设置。
+
+inaddalsoActivate：当isinadd为是时可选，默认没有，单位添加的 alsoActivate。
+
+inaddid：当isinadd为是时可选，默认没有，单位添加的 id。
+
+inaddglobalMessage：当isinadd为是时可选，默认没有，单位添加的 globalMessage。
+
+inaddglobalMessage_delayPerChar：当isinadd为是时可选，默认没有，单位添加的 globalMessage_delayPerChar。
+
+inaddglobalMessage_textColor：当isinadd为是时可选，默认没有，单位添加的 globalMessage_textColor。
+
+inadddebugMessage：当isinadd为是时可选，默认没有，单位添加的 debugMessage。
+
+inaddallToActivate：当isinadd为是时可选，默认为否，单位添加的 allToActivate。
+
+inaddshowOnMap：当isinadd为是时可选，默认为否，单位添加的 showOnMap（替代已过时的 inaddisshowOnMap，后者仍可用但会给出警告码 6）。
 
 ## mtext_info
 
@@ -322,6 +344,22 @@ mname: 当ismtext为是时可选，默认为""，文本宾语名字。
 moffset: 当ismtext为是时可选，数字数组，默认为"0 0"，文本宾语偏移。
 
 moffsetsize: 当ismtext为是时可选，数字数组，默认为"0 0"，文本宾语大小改变。
+
+malsoActivate：当ismtext为是时可选，默认没有，文本添加的 alsoActivate。
+
+mid：当ismtext为是时可选，默认没有，文本添加的 id。
+
+mglobalMessage：当ismtext为是时可选，默认没有，文本添加的 globalMessage。
+
+mglobalMessage_delayPerChar：当ismtext为是时可选，默认没有。
+
+mglobalMessage_textColor：当ismtext为是时可选，默认没有。
+
+mdebugMessage：当ismtext为是时可选，默认没有。
+
+mallToActivate：当ismtext为是时可选，默认为否，文本添加的 allToActivate。
+
+mshowOnMap：当ismtext为是时可选，默认为否，文本添加的 showOnMap。
 
 ## building_info
 
@@ -392,6 +430,38 @@ mtext_prefix：可选，默认不存在。将会导入对应mtext_info的数据�
 
 time_prefix：可选，默认不存在。将会导入对应time_info的数据，进行时间修正。
 
+detectid：可选，默认为空，建筑检测的 id。未设置时为 idprefix + "0"。
+
+detectalsoActivate：可选，默认没有，建筑检测的 alsoActivate。
+
+detectglobalMessage：可选，默认没有，建筑检测的 globalMessage。
+
+detectglobalMessage_delayPerChar：可选，默认没有，建筑检测的 globalMessage_delayPerChar。
+
+detectglobalMessage_textColor：可选，默认没有，建筑检测的 globalMessage_textColor。
+
+detectdebugMessage：可选，默认没有，建筑检测的 debugMessage。
+
+detectallToActivate：可选，默认为否，建筑检测的 allToActivate。
+
+detectshowOnMap：可选，默认为否，建筑检测的 showOnMap。
+
+addalsoActivate：可选，默认没有，建筑添加的 alsoActivate。
+
+addid：可选，默认没有，建筑添加的 id。
+
+addglobalMessage：可选，默认没有，建筑添加的 globalMessage。
+
+addglobalMessage_delayPerChar：可选，默认没有，建筑添加的 globalMessage_delayPerChar。
+
+addglobalMessage_textColor：可选，默认没有，建筑添加的 globalMessage_textColor。
+
+adddebugMessage：可选，默认没有，建筑添加的 debugMessage。
+
+addallToActivate：可选，默认为否，建筑添加的 allToActivate。
+
+addshowOnMap：可选，默认为否，建筑添加的 showOnMap。
+
 ### building_info可被引用的其他参数
 
 idprefix0是建筑检测的id。
@@ -436,12 +506,24 @@ offsetsize：可选，数字二维数组，默认"0 0"，表示不同阵营宾�
 
 neutralindex: 可选，字符串，默认-1，最后一组id和team。一个数字，对引用setidTeam_id_dep和teamtoid_dep有影响。
 
-basicoffset：可选，字符串数组，默认"-10 10"，表示basic宾语偏移（setidTeam中同一组出现不止一个）。
+basicoffset：可选，数字数组，默认"-10 10"，表示basic宾语偏移（setidTeam中同一组出现不止一个）。
 
-basicoffsetsize：可选，字符串数组，默认"20 0"，表示basic宾语大小偏移（setidTeam中同一组出现不止一个）。
+basicoffsetsize：可选，数字数组，默认"20 0"，表示basic宾语大小偏移（setidTeam中同一组出现不止一个）。
 
 此外，还有大量only，将会原样添加到检测宾语中（如果有的话）。它们是：
 onlyIdle,onlyBuildings,onlyMainBuildings,onlyEmptyQueue,onlyBuilders,onlyOnResourcePool,onlyAttack,onlyAttackAir,onlyTechLevel,includeIncomplete,onlyWithTag
+
+globalMessage：可选，字符串二维数组，默认没有，检测宾语的 globalMessage。
+
+globalMessage_delayPerChar：可选，字符串二维数组，默认没有。
+
+globalMessage_textColor：可选，字符串二维数组，默认没有。
+
+debugMessage：可选，字符串二维数组，默认没有。
+
+allToActivate：可选，布尔二维数组，默认为否，检测宾语的 allToActivate。
+
+showOnMap：可选，布尔二维数组，默认为否，检测宾语的 showOnMap。
 
 ### teamDetect_info可被引用的其他参数
 
@@ -471,8 +553,6 @@ prefix：标记宾语引用前缀。（[info宾语默认参数](#info宾语中�
 
 reset：必选，表示检测宾语的刷新周期。
 
-team：必选，表示检测宾语的检测队伍
-
 setNum：数字二维数组，表示不同数量检测的分组。使用相同id的检测内部用空格隔开（一组之内，两两分开，第一个做minUnits，第二个做maxUnits），使用不同id的检测之间用逗号隔开。填写例子"0 2 6 8,3 5"（检测到0-2,6-8个单位激活第一个id，检测到3-5个单位激活第二个id）（如果minUnits小于等于0，则不添加，如果maxUnits大于等于65536，则不添加）。
 
 setidNum：字符串数组，表示不同数量检测的id前缀。不同检测id之间用逗号隔开，一个阵营仅有一个id。填写例子"A_city,B_city"。
@@ -491,6 +571,8 @@ brace：可选，默认没有，外部引用翻译列表。（[info宾语默认�
 
 aunit：可选，检测单位类型，用于unitType。
 
+team：可选，表示检测宾语的检测队伍
+
 name：可选，字符串数组，默认为""，表示不同组宾语的名称。每个组仅会显示一个，不同组的名称之间用逗号隔开。
 
 offset：可选，数字二维数组，默认"0 0"，表示不同组宾语偏移。当只有一个坐标时，该偏移对所有组均适用。不同组之间用逗号隔开，一个组有x和y两个坐标，中间空格隔开。填写例子"0 -20,-20 0"。
@@ -499,6 +581,18 @@ offsetsize：可选，数字二维数组，默认"0 0"，表示不同组宾语�
 
 此外，还有大量only，将会原样添加到检测宾语中（如果有的话）。它们是：
 onlyIdle,onlyBuildings,onlyMainBuildings,onlyEmptyQueue,onlyBuilders,onlyOnResourcePool,onlyAttack,onlyAttackAir,onlyTechLevel,includeIncomplete,onlyWithTag
+
+globalMessage：可选，字符串二维数组，默认没有，检测宾语的 globalMessage。
+
+globalMessage_delayPerChar：可选，字符串二维数组，默认没有。
+
+globalMessage_textColor：可选，字符串二维数组，默认没有。
+
+debugMessage：可选，字符串二维数组，默认没有。
+
+allToActivate：可选，布尔二维数组，默认为否，检测宾语的 allToActivate。
+
+showOnMap：可选，布尔二维数组，默认为否，检测宾语的 showOnMap。
 
 ### numDetect_info可被引用的其他参数
 
@@ -546,6 +640,22 @@ offset：可选，数字二维数组，默认"0 0"，表示不同组宾语偏移
 
 offsetsize：可选，数字二维数组，默认"0 0"，表示不同组宾语大小改变。当只有一个坐标时，该偏移对所有组均适用。不同组之间用逗号隔开，一个组有x和y两个坐标，中间空格隔开。填写例子"0 40,40 0"。
 
+alsoActivate：可选，字符串数组，默认没有。文本宾语的 alsoActivate。
+
+id：可选，字符串数组，默认没有。文本宾语的 id。
+
+globalMessage：可选，字符串数组，默认没有。文本宾语的 globalMessage。
+
+globalMessage_delayPerChar：可选，字符串数组，默认没有。
+
+globalMessage_textColor：可选，字符串数组，默认没有。
+
+debugMessage：可选，字符串数组，默认没有。
+
+allToActivate：可选，布尔数组，默认为否。文本宾语的 allToActivate。
+
+showOnMap：可选，布尔数组，默认为否。文本宾语的 showOnMap。
+
 ## multiRemove_info
 
 这是一个产生多个删除宾语的info宾语。类似于multiText。可进行时间修正。
@@ -589,6 +699,22 @@ offset：可选，数字二维数组，默认"0 0"，表示不同组宾语偏移
 offsetsize：可选，数字二维数组，默认"0 0"，表示不同组宾语大小改变。当只有一个坐标时，该偏移对所有组均适用。不同组之间用逗号隔开，一个组有x和y两个坐标，中间空格隔开。填写例子"0 40,40 0"。
 
 time_prefix：可选，默认不存在。将会导入对应time_info的数据，进行时间修正。
+
+alsoActivate：可选，字符串数组，默认没有。删除宾语的 alsoActivate。
+
+id：可选，字符串数组，默认没有。删除宾语的 id。
+
+globalMessage：可选，字符串数组，默认没有。删除宾语的 globalMessage。
+
+globalMessage_delayPerChar：可选，字符串数组，默认没有。
+
+globalMessage_textColor：可选，字符串数组，默认没有。
+
+debugMessage：可选，字符串数组，默认没有。
+
+allToActivate：可选，布尔数组，默认为否。删除宾语的 allToActivate。
+
+showOnMap：可选，布尔数组，默认为否。删除宾语的 showOnMap。
 
 ## multiAdd_info
 
@@ -635,6 +761,22 @@ offset：可选，数字二维数组，默认"0 0"，表示不同组宾语偏移
 offsetsize：可选，数字二维数组，默认"0 0"，表示不同组宾语大小改变。当只有一个坐标时，该偏移对所有组均适用。不同组之间用逗号隔开，一个组有x和y两个坐标，中间空格隔开。填写例子"0 40,40 0"。
 
 time_prefix：可选，默认不存在。将会导入对应time_info的数据，进行时间修正。
+
+alsoActivate：可选，字符串数组，默认没有。添加宾语的 alsoActivate。
+
+id：可选，字符串数组，默认没有。添加宾语的 id。
+
+globalMessage：可选，字符串数组，默认没有。添加宾语的 globalMessage。
+
+globalMessage_delayPerChar：可选，字符串数组，默认没有。
+
+globalMessage_textColor：可选，字符串数组，默认没有。
+
+debugMessage：可选，字符串数组，默认没有。
+
+allToActivate：可选，布尔数组，默认为否。添加宾语的 allToActivate。
+
+showOnMap：可选，布尔数组，默认为否。添加宾语的 showOnMap。
 
 ## flash_info
 
@@ -696,7 +838,7 @@ idprefix: 表示方波器输出的id前缀，检测id在idprefix后将自动按�
 
 steptime：必选，字符串数组。添加宾语和删除宾语作用的时间。开头应当为0s。以避免出现bug。
 
-iaactiend: 必选。当isactiend为true时，检测id最后为激活状态。之前每经过一个steptime，激活状态都会改变。
+isactiend: 必选。当isactiend为true时，检测id最后为激活状态。之前每经过一个steptime，激活状态都会改变。
 
 ### step_info可选参数
 
@@ -718,9 +860,9 @@ spawnnum：可选，默认为1，添加的数量。
 
 team：可选，默认为-2，添加的队伍。
 
-stepacti：可选，二维字符串数组。初始添加的acti。不同组被";"分割。如果仅有一个，那么acti将会应用于所有改变宾语中。acti将尽力全部加入宾语组中。
+stepacti：可选，字符串数组，默认没有。每个时间点对应的 acti。如果仅有一个，那么该 acti 将会应用于所有改变宾语中。acti 将尽力全部加入宾语组中。
 
-stepdeacti：可选，二维字符串数组。初始添加的deacti。不同组被";"分割。如果仅有一个，那么ddeacti将会应用于所有改变宾语中。deacti将尽力全部加入宾语组中。
+stepdeacti：可选，字符串数组，默认没有。每个时间点对应的 deacti。如果仅有一个，那么该 deacti 将会应用于所有改变宾语中。deacti 将尽力全部加入宾语组中。
 
 time_prefix：可选，默认不存在。将会导入对应time_info的数据，进行时间修正。
 

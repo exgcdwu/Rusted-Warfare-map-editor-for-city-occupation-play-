@@ -593,11 +593,17 @@ def mapvalue_to_value(value, ntype):
                 elif ntype[1] == int:
                     value_now = value_n.split(" ")
                     value_now = [int(value_now_i) for value_now_i in value_now]
+                elif ntype[1] == bool:
+                    value_now = [lower_bool_dict.get(str(value_now_i).lower(), False) for value_now_i in value_n.split(",")]
+                    value_now = [bool(value_now_i) if value_now_i != None else value_now_i for value_now_i in value_now]
+                    value_now = [value_now_i == True or value_now_i == 1 for value_now_i in value_now]
                 elif ntype[1] == list:
                     if ntype[2] == str:
                         value_now = [value_i.split(",") for value_i in value_n.split(";")]
                     elif ntype[2] == int:
                         value_now = [[int(value_ij) for value_ij in value_i.split(" ")] for value_i in value_n.split(",")]
+                    elif ntype[2] == bool:
+                        value_now = [[bool(lower_bool_dict.get(str(value_ij).lower(), False)) for value_ij in value_i.split(",")] for value_i in value_n.split(";")]
             return value_now
         value_now = lower_bool_dict.get(value_n)
         return value_now if value_now != None else value_n
@@ -612,12 +618,18 @@ def value_to_mapvalue(value, ntype):
             elif ntype[1] == int:
                 value = [str(value_i) for value_i in value]
                 value_now = " ".join(value)
+            elif ntype[1] == bool:
+                value = [str(bool(value_i)).lower() for value_i in value]
+                value_now = ",".join(value)
             elif ntype[1] == list:
                 if ntype[2] == str:
                     value_now = ";".join([",".join(value_i) for value_i in value])
                 elif ntype[2] == int:
                     value_now = [[str(value_ij) for value_ij in value_i] for value_i in value]
                     value_now = ",".join([" ".join(value_i) for value_i in value_now])
+                elif ntype[2] == bool:
+                    value_now = [[str(bool(value_ij)).lower() for value_ij in value_i] for value_i in value]
+                    value_now = ";".join([",".join(value_i) for value_i in value_now])
             return value_now
         return value
     
@@ -634,11 +646,15 @@ def get_type(value):
     if isinstance(value, list):
         if len(value) == 0 or isinstance(value[0], str):
             return (list, str)
+        elif isinstance(value[0], bool):
+            return (list, bool)
         elif isinstance(value[0], int):
             return (list, int)
         elif isinstance(value[0], list):
             if len(value[0]) == 0 or isinstance(value[0][0], str):
                 return (list, list, str)
+            elif isinstance(value[0][0], bool):
+                return (list, list, bool)
             elif isinstance(value[0][0], int):
                 return (list, list, int)
     else:
@@ -652,12 +668,18 @@ def type_to_str(value, ntype):
             elif ntype[1] == int:
                 value = [str(value_i) for value_i in value]
                 value_now = " ".join(value)
+            elif ntype[1] == bool:
+                value = [str(bool(value_i)).lower() for value_i in value]
+                value_now = ",".join(value)
             elif ntype[1] == list:
                 if ntype[2] == str:
                     value_now = ";".join([",".join(value_i) for value_i in value])
                 elif ntype[2] == int:
                     value_now = [[str(value_ij) for value_ij in value_i] for value_i in value]
                     value_now = ",".join([" ".join(value_i) for value_i in value_now])
+                elif ntype[2] == bool:
+                    value_now = [[str(bool(value_ij)).lower() for value_ij in value_i] for value_i in value]
+                    value_now = ";".join([",".join(value_i) for value_i in value_now])
             return value_now
     else:
         return str(value)
@@ -670,11 +692,17 @@ def str_to_type(value, ntype):
             elif ntype[1] == int:
                 value_now = value.split(" ")
                 value_now = [int(value_now_i) for value_now_i in value_now]
+            elif ntype[1] == bool:
+                value_now = [lower_bool_dict.get(str(value_now_i).lower(), False) for value_now_i in value.split(",")]
+                value_now = [bool(value_now_i) if value_now_i != None else value_now_i for value_now_i in value_now]
+                value_now = [value_now_i == True or value_now_i == 1 for value_now_i in value_now]
             elif ntype[1] == list:
                 if ntype[2] == str:
                     value_now = [value_i.split(",") for value_i in value.split(";")]
                 elif ntype[2] == int:
                     value_now = [[int(value_ij) for value_ij in value_i.split(" ")] for value_i in value.split(",")]
+                elif ntype[2] == bool:
+                    value_now = [[bool(lower_bool_dict.get(str(value_ij).lower(), False)) for value_ij in value_i.split(",")] for value_i in value.split(";")]
             return value_now
     elif ntype == bool:
         value_now = True if value == "True" else False
@@ -1262,6 +1290,12 @@ def auto_func(args = None):
                                         info_doids_dict[info_dict_now[AUTOKEY.prefix]][AUTOKEY.optional].add(value_n)
                         elif operation_now_type == AUTOKEY.error:
                             standard_error_ob(str_translation(operation_now[AUTOKEY.error_info], object_dict), -1, tobject_id, info_name, tobject_x, tobject_y)
+                        elif operation_now_type == AUTOKEY.warning:
+                            warning_info = str_translation(operation_now[AUTOKEY.warning_info], object_dict)
+                            warning_id = operation_now.get(AUTOKEY.warning_id, 6)
+                            warning_error_id = operation_now.get(AUTOKEY.warning_error_id, 30)
+                            standard_warning_ob(warning_info, warning_id, warning_error_id, 
+                                                tobject_id, info_name, tobject_x, tobject_y, isenter = False)
                         elif operation_now_type == AUTOKEY.pdb_pause:
                             ispdb = True
                             print_pdb = None
@@ -1669,6 +1703,12 @@ def auto_func(args = None):
                 elif operation_now_type == AUTOKEY.error:
                     standard_error_ob(str_translation(operation_now[AUTOKEY.error_info], object_dict), 
                                       -1, tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
+                elif operation_now_type == AUTOKEY.warning:
+                    warning_info = str_translation(operation_now[AUTOKEY.warning_info], object_dict)
+                    warning_id = operation_now.get(AUTOKEY.warning_id, 6)
+                    warning_error_id = operation_now.get(AUTOKEY.warning_error_id, 30)
+                    standard_warning_ob(warning_info, warning_id, warning_error_id, 
+                                        tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
                 elif operation_now_type == AUTOKEY.pdb_pause:
                     ispdb = True
                     print_pdb = None

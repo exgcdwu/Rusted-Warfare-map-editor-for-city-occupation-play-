@@ -23,6 +23,14 @@ mtext_info_args_dict[INFOKEY.mtext] = str
 mtext_info_args_dict[INFOKEY.mname] = str
 mtext_info_args_dict[INFOKEY.moffset] = (list, int)
 mtext_info_args_dict[INFOKEY.moffsetsize] = (list, int)
+mtext_info_args_dict[INFOKEY.malsoActivate] = str
+mtext_info_args_dict[INFOKEY.mid] = str
+mtext_info_args_dict[INFOKEY.mglobalMessage] = str
+mtext_info_args_dict[INFOKEY.mglobalMessage_delayPerChar] = str
+mtext_info_args_dict[INFOKEY.mglobalMessage_textColor] = str
+mtext_info_args_dict[INFOKEY.mdebugMessage] = str
+mtext_info_args_dict[INFOKEY.mallToActivate] = bool
+mtext_info_args_dict[INFOKEY.mshowOnMap] = bool
 
 mtext_info_default_args_dict = {
     INFOKEY.ismtext: "true",  
@@ -38,11 +46,22 @@ mtext_info_var_dependent_dict = {
     INFOKEY.moffset: INFOKEY.ismtext, 
     INFOKEY.moffsetsize: INFOKEY.ismtext, 
     INFOKEY.mtext: INFOKEY.ismtext, 
+    INFOKEY.malsoActivate: INFOKEY.ismtext, 
+    INFOKEY.mid: INFOKEY.ismtext, 
+    INFOKEY.mglobalMessage: INFOKEY.ismtext, 
+    INFOKEY.mglobalMessage_delayPerChar: INFOKEY.ismtext, 
+    INFOKEY.mglobalMessage_textColor: INFOKEY.ismtext, 
+    INFOKEY.mdebugMessage: INFOKEY.ismtext, 
+    INFOKEY.mallToActivate: INFOKEY.ismtext, 
+    INFOKEY.mshowOnMap: INFOKEY.ismtext
 }
 
 mtext_info_optional_set = {
     INFOKEY.ismtext, INFOKEY.mcolor, INFOKEY.mtextsize, INFOKEY.mname, 
-    INFOKEY.moffset, INFOKEY.moffsetsize
+    INFOKEY.moffset, INFOKEY.moffsetsize, 
+    INFOKEY.malsoActivate, INFOKEY.mid, INFOKEY.mglobalMessage, 
+    INFOKEY.mglobalMessage_delayPerChar, INFOKEY.mglobalMessage_textColor, 
+    INFOKEY.mdebugMessage, INFOKEY.mallToActivate, INFOKEY.mshowOnMap
 }
 
 mtext_info_operation_list = \
@@ -58,6 +77,14 @@ mtext_info_operation_list = \
                     rw.const.OBJECTOP.text: "{" + f"{INFOKEY.mtext}" + "}", 
                     rw.const.OBJECTOP.textColor: ("{" + f"{INFOKEY.mcolor}" + "}", "mcolor", AUTOKEY.exist), 
                     rw.const.OBJECTOP.textSize: ("{" + f"{INFOKEY.mtextsize}" + "}", "mtextsize", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.alsoActivate: ("{" + f"{INFOKEY.malsoActivate}" + "}", f"{INFOKEY.malsoActivate}", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.id: ("{" + f"{INFOKEY.mid}" + "}", f"{INFOKEY.mid}", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.globalMessage: ("{" + f"{INFOKEY.mglobalMessage}" + "}", f"{INFOKEY.mglobalMessage}", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.globalMessage_delayPerChar: ("{" + f"{INFOKEY.mglobalMessage_delayPerChar}" + "}", f"{INFOKEY.mglobalMessage_delayPerChar}", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.globalMessage_textColor: ("{" + f"{INFOKEY.mglobalMessage_textColor}" + "}", f"{INFOKEY.mglobalMessage_textColor}", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.debugMessage: ("{" + f"{INFOKEY.mdebugMessage}" + "}", f"{INFOKEY.mdebugMessage}", AUTOKEY.exist), 
+                    rw.const.OBJECTOP.allToActivate: (True, f"{INFOKEY.mallToActivate}", AUTOKEY.brace), 
+                    rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.mshowOnMap}", AUTOKEY.brace), 
                 }
             }
         ] + \

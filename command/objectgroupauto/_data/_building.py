@@ -46,6 +46,24 @@ building_info_args_dict[INFOKEY.maxUnits] = str
 
 building_info_args_dict[INFOKEY.cite_name] = str
 
+building_info_args_dict[INFOKEY.detectid] = str
+building_info_args_dict[INFOKEY.detectalsoActivate] = str
+building_info_args_dict[INFOKEY.detectglobalMessage] = str
+building_info_args_dict[INFOKEY.detectglobalMessage_delayPerChar] = str
+building_info_args_dict[INFOKEY.detectglobalMessage_textColor] = str
+building_info_args_dict[INFOKEY.detectdebugMessage] = str
+building_info_args_dict[INFOKEY.detectallToActivate] = bool
+building_info_args_dict[INFOKEY.detectshowOnMap] = bool
+
+building_info_args_dict[INFOKEY.addalsoActivate] = str
+building_info_args_dict[INFOKEY.addid] = str
+building_info_args_dict[INFOKEY.addglobalMessage] = str
+building_info_args_dict[INFOKEY.addglobalMessage_delayPerChar] = str
+building_info_args_dict[INFOKEY.addglobalMessage_textColor] = str
+building_info_args_dict[INFOKEY.adddebugMessage] = str
+building_info_args_dict[INFOKEY.addallToActivate] = bool
+building_info_args_dict[INFOKEY.addshowOnMap] = bool
+
 building_info_default_args_dict = {
     INFOKEY.addWarmup: "0s", 
     INFOKEY.isonlybuilding: "false", 
@@ -66,6 +84,12 @@ building_info_default_args_dict = {
 building_info_optional_set = {
     INFOKEY.isprefixseg, INFOKEY.minUnits, INFOKEY.maxUnits, INFOKEY.addReset, 
     INFOKEY.isonlybuilding, INFOKEY.isshowOnMap, INFOKEY.cite_name, INFOKEY.deacti, 
+    INFOKEY.detectid, INFOKEY.detectalsoActivate, INFOKEY.detectglobalMessage, 
+    INFOKEY.detectglobalMessage_delayPerChar, INFOKEY.detectglobalMessage_textColor, 
+    INFOKEY.detectdebugMessage, INFOKEY.detectallToActivate, INFOKEY.detectshowOnMap, 
+    INFOKEY.addalsoActivate, INFOKEY.addid, INFOKEY.addglobalMessage, 
+    INFOKEY.addglobalMessage_delayPerChar, INFOKEY.addglobalMessage_textColor, 
+    INFOKEY.adddebugMessage, INFOKEY.addallToActivate, INFOKEY.addshowOnMap
 }
 
 building_info_var_dependent_dict = {}
@@ -98,10 +122,17 @@ building_info_operation_list = \
                 rw.const.OBJECTOP.resetActivationAfter: "{" + f"{INFOKEY.detectReset}" + "}", 
                 rw.const.OBJECTOP.unitType: ("{" + f"{INFOKEY.aunit}" + "}", f"{INFOKEY.isonlybuilding} == False", AUTOKEY.brace), 
                 rw.const.OBJECTOP.team: ("{" + f"{INFOKEY.team}" + "}", f"{INFOKEY.team} != -1", AUTOKEY.brace), 
-                rw.const.OBJECTOP.id: "{" + f"{INFOKEY.idprefix}" + "0}", 
+                rw.const.OBJECTOP.id: ("{" + f"'{INFOKEY.detectid}' if {INFOKEY.detectid} != None else '{INFOKEY.idprefix}0'" + "}", "True", AUTOKEY.brace), 
                 rw.const.OBJECTOP.onlyBuildings: ("{" + f"{INFOKEY.isonlybuilding}" + "}", f"{INFOKEY.isonlybuilding}", AUTOKEY.brace), 
                 rw.const.OBJECTOP.minUnits: ("{" + f"{INFOKEY.minUnits}" + "}", f"{INFOKEY.minUnits}", AUTOKEY.exist), 
                 rw.const.OBJECTOP.maxUnits: ("{" + f"{INFOKEY.maxUnits}" + "}", f"{INFOKEY.maxUnits}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.alsoActivate: ("{" + f"{INFOKEY.detectalsoActivate}" + "}", f"{INFOKEY.detectalsoActivate}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.globalMessage: ("{" + f"{INFOKEY.detectglobalMessage}" + "}", f"{INFOKEY.detectglobalMessage}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.globalMessage_delayPerChar: ("{" + f"{INFOKEY.detectglobalMessage_delayPerChar}" + "}", f"{INFOKEY.detectglobalMessage_delayPerChar}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.globalMessage_textColor: ("{" + f"{INFOKEY.detectglobalMessage_textColor}" + "}", f"{INFOKEY.detectglobalMessage_textColor}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.debugMessage: ("{" + f"{INFOKEY.detectdebugMessage}" + "}", f"{INFOKEY.detectdebugMessage}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.allToActivate: (True, f"{INFOKEY.detectallToActivate}", AUTOKEY.brace), 
+                rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.detectshowOnMap}", AUTOKEY.brace), 
             }
         }
     ] + \
@@ -119,7 +150,14 @@ building_info_operation_list = \
                 rw.const.OBJECTOP.resetActivationAfter: ("{" + f"{INFOKEY.addReset}" + "}", f"{INFOKEY.addReset}", AUTOKEY.exist), 
                 rw.const.OBJECTOP.spawnUnits: br(f"{INFOKEY.aunit}")+ "*" + br(f"{INFOKEY.spawnnum}") + br(f"{INFOKEY.aunitbrace}") , 
                 rw.const.OBJECTOP.team: "{" + f"{INFOKEY.team}" + "}", 
-                rw.const.OBJECTOP.showOnMap: (True, f"{INFOKEY.isshowOnMap}", AUTOKEY.brace), 
+                rw.const.OBJECTOP.showOnMap: (True, f"({INFOKEY.addshowOnMap}) or ({INFOKEY.isshowOnMap})", AUTOKEY.brace), 
+                rw.const.OBJECTOP.alsoActivate: ("{" + f"{INFOKEY.addalsoActivate}" + "}", f"{INFOKEY.addalsoActivate}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.id: ("{" + f"{INFOKEY.addid}" + "}", f"{INFOKEY.addid}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.globalMessage: ("{" + f"{INFOKEY.addglobalMessage}" + "}", f"{INFOKEY.addglobalMessage}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.globalMessage_delayPerChar: ("{" + f"{INFOKEY.addglobalMessage_delayPerChar}" + "}", f"{INFOKEY.addglobalMessage_delayPerChar}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.globalMessage_textColor: ("{" + f"{INFOKEY.addglobalMessage_textColor}" + "}", f"{INFOKEY.addglobalMessage_textColor}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.debugMessage: ("{" + f"{INFOKEY.adddebugMessage}" + "}", f"{INFOKEY.adddebugMessage}", AUTOKEY.exist), 
+                rw.const.OBJECTOP.allToActivate: (True, f"{INFOKEY.addallToActivate}", AUTOKEY.brace), 
             }
         }
     ]
