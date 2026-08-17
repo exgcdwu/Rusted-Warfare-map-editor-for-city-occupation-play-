@@ -21,6 +21,8 @@ tree_info_args_dict[INFOKEY.name] = (list, list, str)
 tree_info_args_dict[INFOKEY.exist] = (list, str)
 tree_info_args_dict[INFOKEY.offset] = (list, list, int)
 tree_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
+tree_info_args_dict[INFOKEY.gset] = (list, list, int)
+tree_info_args_dict[INFOKEY.gsetsize] = (list, list, int)
 tree_info_args_dict[INFOKEY.idprefix] = (list, list, str)
 tree_info_args_dict[INFOKEY.isprefixseg] = bool
 
@@ -32,7 +34,8 @@ tree_info_default_args_dict = {
 
 tree_info_optional_set = {
     INFOKEY.cite_name, INFOKEY.idprefix, 
-    INFOKEY.isprefixseg
+    INFOKEY.isprefixseg, 
+    INFOKEY.gset, INFOKEY.gsetsize
 }
 
 IDPREFIX_PRE_OPERATION = \
@@ -59,6 +62,8 @@ tree_info_operation_list = \
         operation_cycle_start("i", "0", "i < len(name)", "tree_operation_cycle_1") + \
             operation_list_assign(f"{INFOKEY.offset}", "i", "offset_now", "tree", "[0, 0]") + \
             operation_list_assign(f"{INFOKEY.offsetsize}", "i", "offsetsize_now", "tree", "[0, 0]") + \
+            operation_list_assign(f"{INFOKEY.gset}", "i", "set_now", "tree") + \
+            operation_list_assign(f"{INFOKEY.gsetsize}", "i", "setsize_now", "tree") + \
             operation_list_assign(f"{INFOKEY.exist}", "i", "exist_now", "tree", "True") + \
             operation_if("exist_now_{i}", "tree_operation_if_exist_now") + \
                 [
@@ -66,6 +71,8 @@ tree_info_operation_list = \
                         AUTOKEY.operation_type: AUTOKEY.object, 
                         AUTOKEY.offset: "offset_now_{i}", 
                         AUTOKEY.offsetsize: "offsetsize_now_{i}", 
+                        AUTOKEY.set: "set_now_{i}", 
+                        AUTOKEY.setsize: "setsize_now_{i}", 
                         AUTOKEY.name: "{','.join(name[i])}&12"
                     }
                 ] + \

@@ -34,6 +34,8 @@ multiAdd_info_args_dict[INFOKEY.repeat] = (list, str)
 multiAdd_info_args_dict[INFOKEY.name] = (list, str)
 multiAdd_info_args_dict[INFOKEY.offset] = (list, list, int)
 multiAdd_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
+multiAdd_info_args_dict[INFOKEY.gset] = (list, list, int)
+multiAdd_info_args_dict[INFOKEY.gsetsize] = (list, list, int)
 
 multiAdd_info_args_dict[INFOKEY.alsoActivate] = (list, str)
 multiAdd_info_args_dict[INFOKEY.id] = (list, str)
@@ -69,6 +71,8 @@ multiAdd_info_optional_set.add(INFOKEY.globalMessage_textColor)
 multiAdd_info_optional_set.add(INFOKEY.debugMessage)
 multiAdd_info_optional_set.add(INFOKEY.allToActivate)
 multiAdd_info_optional_set.add(INFOKEY.showOnMap)
+multiAdd_info_optional_set.add(INFOKEY.gset)
+multiAdd_info_optional_set.add(INFOKEY.gsetsize)
 
 multiAdd_info_var_dependent_dict = {}
 
@@ -159,6 +163,8 @@ multiAdd_info_operation_list = \
         operation_list_assign(f"{INFOKEY.name}", "i", "name_now", "multiAdd") + \
         operation_list_assign(f"{INFOKEY.offset}", "i", "offset_now", "multiAdd", "[0, 0]") + \
         operation_list_assign(f"{INFOKEY.offsetsize}", "i", "offsetsize_now", "multiAdd", "[0, 0]") + \
+        operation_list_assign(f"{INFOKEY.gset}", "i", "set_now", "multiAdd") + \
+        operation_list_assign(f"{INFOKEY.gsetsize}", "i", "setsize_now", "multiAdd") + \
         operation_list_assign(f"{INFOKEY.acti}", "i", "acti_now", "multiAdd") + \
         operation_list_assign(f"{INFOKEY.deacti}", "i", "deacti_now", "multiAdd") + \
         operation_list_assign(f"{INFOKEY.spawnUnits}", "i", "spawnUnits_now", "multiAdd") + \
@@ -196,6 +202,8 @@ multiAdd_info_operation_list = \
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 AUTOKEY.offset: "offset_now_{i}", 
                 AUTOKEY.offsetsize: "offsetsize_now_{i}", 
+                AUTOKEY.set: "set_now_{i}", 
+                AUTOKEY.setsize: "setsize_now_{i}", 
                 AUTOKEY.name: ("{name_now}", "name_now_exist", AUTOKEY.brace), 
                 AUTOKEY.type: rw.const.OBJECTTYPE.unitAdd, 
                 AUTOKEY.optional: multiAdd_info_operation_optional

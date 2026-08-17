@@ -499,6 +499,46 @@ def tobject_have_ellipse(tobject)->bool:
             return True
     return False
 
+def _resolve_coord_value(value, dict_name):
+    """把产生宾语坐标/大小值翻译并转为 Coordinate。
+    支持：已拆分的 2 元素列表，或字符串表达式（如 "[{sx}, 0]" / "{sx} 0"）。
+    无法解析成两个数字时报错。"""
+    import re as _re
+    import rwmap as _rw
+    v = value
+    if isinstance(v, str):
+        v = brace_translation(v, dict_name)
+    if isinstance(v, str):
+        items = _re.split(r"[,\s\[\]]+", v.strip())
+        items = [it for it in items if it != ""]
+    elif isinstance(v, (list, tuple)):
+        items = list(v)
+    else:
+        items = [v]
+    nums = []
+    for it in items:
+        if isinstance(it, bool):
+            nums.append(int(it))
+            continue
+        if isinstance(it, (int, float)):
+            nums.append(int(it))
+            continue
+        s = str(it).strip()
+        # 用 str_translation 递归解析引用（如 {sx} -> {rx} -> 数字）
+        if _re.search(r"[{}]", s):
+            s2 = str_translation(s, dict_name)
+        else:
+            s2 = s
+        try:
+            nums.append(int(str(s2).strip()))
+        except Exception as _e:
+            import sys as _sys
+            print("DBG resolve elem", repr(it), "s2=", repr(s2), "dict sx=", repr(dict_name.get("sx")), "dict rx=", repr(dict_name.get("rx")), "keys=", [k for k in dict_name if k in ("sx","rx","nx","tx","pname","gset")], file=_sys.stderr)
+            raise ValueError(f"cannot resolve coordinate value: {value!r} (element {it!r})") from _e
+    if len(nums) < 2:
+        raise ValueError(f"coordinate value needs at least 2 numbers: {value!r}")
+    return _rw.frame.Coordinate(str(nums[0]), str(nums[1]))
+
 def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori_size:rw.frame.Coordinate)->rw.case.TObject:
     
     if operation.get(AUTOKEY.exist) != None:
@@ -510,22 +550,40 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
             if dict_name.get(death_now) != None and dict_name.get(death_now) == True:
                 return None
     
+    # 产生宾语的绝对坐标/大小：set/setsize（可选用 set_key 指定键）优先，再叠加 offset/offsetsize
+    pos = ori_pos
+    set_pos = operation.get(AUTOKEY.set)
+    if set_pos is None:
+        set_key = operation.get(AUTOKEY.set_key)
+        if set_key is not None and dict_name.get(set_key) is not None:
+            set_pos = dict_name[set_key]
+    if set_pos is not None:
+        set_pos = _resolve_coord_value(set_pos, dict_name)
+        pos = set_pos
+
+    size = ori_size
+    set_size = operation.get(AUTOKEY.setsize)
+    if set_size is None:
+        set_size_key = operation.get(AUTOKEY.setsize_key)
+        if set_size_key is not None and dict_name.get(set_size_key) is not None:
+            set_size = dict_name[set_size_key]
+    if set_size is not None:
+        set_size = _resolve_coord_value(set_size, dict_name)
+        size = set_size
+
     offset = operation.get(AUTOKEY.offset)
-    if offset != None:
-        offset = brace_translation(offset, dict_name)
-        offset = rw.frame.Coordinate(offset[0], offset[1])
+    if offset is not None:
+        offset = _resolve_coord_value(offset, dict_name)
     else:
         offset = rw.frame.Coordinate()
 
-    offsetsize = rw.frame.Coordinate()
     offsetsize = operation.get(AUTOKEY.offsetsize)
-    if offsetsize != None:
-        offsetsize = brace_translation(offsetsize, dict_name)
-        offsetsize = rw.frame.Coordinate(offsetsize[0], offsetsize[1])
+    if offsetsize is not None:
+        offsetsize = _resolve_coord_value(offsetsize, dict_name)
     else:
         offsetsize = rw.frame.Coordinate()
-    pos = ori_pos + offset
-    size = ori_size + offsetsize
+    pos = pos + offset
+    size = size + offsetsize
 
     default_pro = {
         rw.const.OBJECTDE.x: str(pos.x()), 
@@ -534,7 +592,11 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
         rw.const.OBJECTDE.height: str(size.y())
     }
     if operation.get(AUTOKEY.name) != None:
-        default_pro.update(tobject_args_translation(rw.const.OBJECTDE.name, operation[AUTOKEY.name], dict_name))
+        _res = tobject_args_translation(rw.const.OBJECTDE.name, operation[AUTOKEY.name], dict_name)
+        if '{{cite_name}' in str(dict_name.get('name')):
+            import sys as _sys
+            print('DBG trans result=', repr(_res), 'dict name=', repr(dict_name.get('name')), 'cite=', repr(dict_name.get('cite_name')), 'pname=', repr(dict_name.get('pname')), 'keys_sample=', {k[:20]:repr(v)[:20] for k,v in list(dict_name.items())[:8]}, file=_sys.stderr)
+        default_pro.update(_res)
     if operation.get(AUTOKEY.type) != None:
         default_pro.update(tobject_args_translation(rw.const.OBJECTDE.type, operation[AUTOKEY.type], dict_name))
     
@@ -565,6 +627,23 @@ def get_tobject(operation:dict, dict_name:dict, ori_pos:rw.frame.Coordinate, ori
 
     return (rw.case.TObject("object", default_pro, optional_pro, other_properties), objectgroup_name)
 
+def _try_int(s):
+    """尝试转 int；不是纯数字则保留原字符串（允许引用表达式，使用时再翻译）。"""
+    s2 = s.strip()
+    try:
+        return int(s2)
+    except Exception:
+        return s
+
+def _try_bool(s):
+    """尝试转 bool；不是纯 true/false 则保留原字符串（允许引用表达式，使用时再翻译）。"""
+    s2 = str(s).strip().lower()
+    if s2 in ("true",):
+        return True
+    if s2 in ("false",):
+        return False
+    return s
+
 def mapvalue_to_value(value, ntype):
     if isinstance(value, dict) and value.get("type") != None:
         if value["type"] == "bool":
@@ -591,19 +670,19 @@ def mapvalue_to_value(value, ntype):
                 if ntype[1] == str:
                     value_now = value_n.split(",")
                 elif ntype[1] == int:
+                    # 允许元素不是纯数字（如引用表达式），保留为字符串，使用时再翻译
                     value_now = value_n.split(" ")
-                    value_now = [int(value_now_i) for value_now_i in value_now]
+                    value_now = [_try_int(v) for v in value_now]
                 elif ntype[1] == bool:
-                    value_now = [lower_bool_dict.get(str(value_now_i).lower(), False) for value_now_i in value_n.split(",")]
-                    value_now = [bool(value_now_i) if value_now_i != None else value_now_i for value_now_i in value_now]
-                    value_now = [value_now_i == True or value_now_i == 1 for value_now_i in value_now]
+                    value_now = value_n.split(",")
+                    value_now = [_try_bool(v) for v in value_now]
                 elif ntype[1] == list:
                     if ntype[2] == str:
                         value_now = [value_i.split(",") for value_i in value_n.split(";")]
                     elif ntype[2] == int:
-                        value_now = [[int(value_ij) for value_ij in value_i.split(" ")] for value_i in value_n.split(",")]
+                        value_now = [[_try_int(value_ij) for value_ij in value_i.split(" ")] for value_i in value_n.split(",")]
                     elif ntype[2] == bool:
-                        value_now = [[bool(lower_bool_dict.get(str(value_ij).lower(), False)) for value_ij in value_i.split(",")] for value_i in value_n.split(";")]
+                        value_now = [[_try_bool(value_ij) for value_ij in value_i.split(",")] for value_i in value_n.split(";")]
             return value_now
         value_now = lower_bool_dict.get(value_n)
         return value_now if value_now != None else value_n
@@ -1579,6 +1658,61 @@ def auto_func(args = None):
                 float(tobject.returnDefaultProperty(rw.const.OBJECTDE.width)), 
                 float(tobject.returnDefaultProperty(rw.const.OBJECTDE.height))
             )
+
+            # 标记宾语自身的坐标/大小调整：先 sx/sy/sw/sh（绝对），再 ox/oy/ow/oh（偏移）
+            try:
+                # 原始值（不移动）：tx/ty/tw/th
+                object_dict["tx"] = str(int(ori_pos.x()))
+                object_dict["ty"] = str(int(ori_pos.y()))
+                object_dict["tw"] = str(int(ori_size.x()))
+                object_dict["th"] = str(int(ori_size.y()))
+                _sx = object_dict.get("sx")
+                _sy = object_dict.get("sy")
+                _sw = object_dict.get("sw")
+                _sh = object_dict.get("sh")
+                if _sx is not None:
+                    _sx = str_translation(str(_sx), object_dict) if isinstance(_sx, str) else _sx
+                if _sy is not None:
+                    _sy = str_translation(str(_sy), object_dict) if isinstance(_sy, str) else _sy
+                if _sw is not None:
+                    _sw = str_translation(str(_sw), object_dict) if isinstance(_sw, str) else _sw
+                if _sh is not None:
+                    _sh = str_translation(str(_sh), object_dict) if isinstance(_sh, str) else _sh
+                if _sx is not None:
+                    ori_pos = rw.frame.Coordinate(str(_sx), str(ori_pos.y()))
+                if _sy is not None:
+                    ori_pos = rw.frame.Coordinate(str(ori_pos.x()), str(_sy))
+                if _sw is not None:
+                    ori_size = rw.frame.Coordinate(str(_sw), str(ori_size.y()))
+                if _sh is not None:
+                    ori_size = rw.frame.Coordinate(str(ori_size.x()), str(_sh))
+                if object_dict.get(AUTOKEY.ox) is not None:
+                    ori_pos = ori_pos + rw.frame.Coordinate(str(object_dict[AUTOKEY.ox]), "0")
+                if object_dict.get(AUTOKEY.oy) is not None:
+                    ori_pos = ori_pos + rw.frame.Coordinate("0", str(object_dict[AUTOKEY.oy]))
+                if object_dict.get(AUTOKEY.ow) is not None:
+                    ori_size = ori_size + rw.frame.Coordinate(str(object_dict[AUTOKEY.ow]), "0")
+                if object_dict.get(AUTOKEY.oh) is not None:
+                    ori_size = ori_size + rw.frame.Coordinate("0", str(object_dict[AUTOKEY.oh]))
+
+                # 把调整后的标记宾语自身坐标/大小写回，使输出也反映 sx/sy/sw/sh 与 ox/oy/ow/oh
+                tobject.assignDefaultProperty(rw.const.OBJECTDE.x, str(int(ori_pos.x())))
+                tobject.assignDefaultProperty(rw.const.OBJECTDE.y, str(int(ori_pos.y())))
+                tobject.assignDefaultProperty(rw.const.OBJECTDE.width, str(int(ori_size.x())))
+                tobject.assignDefaultProperty(rw.const.OBJECTDE.height, str(int(ori_size.y())))
+
+                # 移动后的值：nx/ny/nw/nh
+                object_dict["nx"] = str(int(ori_pos.x()))
+                object_dict["ny"] = str(int(ori_pos.y()))
+                object_dict["nw"] = str(int(ori_size.x()))
+                object_dict["nh"] = str(int(ori_size.y()))
+            except Exception as _e:
+                standard_error_ob(
+                    f"Failed to compute nx/ny/nw/nh for the tagged object (sx/sy/sw/sh or ox/oy/ow/oh may be invalid).({_e})" +
+                    f"|无法为标记宾语计算 nx/ny/nw/nh（sx/sy/sw/sh 或 ox/oy/ow/oh 可能无效）。({_e})",
+                    30, tobject_id, tobject_name, tobject_x, tobject_y, isenter = standard_error_enter)
+                raise
+
             #import pdb;pdb.set_trace()
             if isdelete_all or isdelete_all_sym or isdelete_sym:
                 if object_dict.get(AUTOKEY.IDs) != None:
@@ -1619,6 +1753,15 @@ def auto_func(args = None):
                         isnewtaggedobject = is_tagged_object_simple(object_now)
                         if not isnewtaggedobject:
                             unescape_tobject(object_now)
+                            # 产生宾语输出前的 cite 二次解析：把 oparg/name 等残留的 {cite.ref} 解析成实际值
+                            for _k, _v in object_now._default_properties.items():
+                                _vn = mapvalue_to_value_basic(_v)
+                                if not isinstance(_vn, bool):
+                                    object_now.assignDefaultProperty(_k, brace_one_translation_cycle(_vn, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite))
+                            for _k, _v in object_now._optional_properties.items():
+                                _vn = mapvalue_to_value_basic(_v)
+                                if not isinstance(_vn, bool):
+                                    object_now.assignOptionalProperty(_k, brace_one_translation_cycle(_vn, cite_object_dict, AUTOKEY.not_useful_char_ad_point_for_cite))
                         if isnewtaggedobject and obg_name == rw.const.NAME.Triggers:
                             if isdelete_sym:
                                 object_now.assignDefaultProperty(rw.const.OBJECTDE.name, object_now.returnDefaultProperty(rw.const.OBJECTDE.name) + AUTOKEY.delete_op)
@@ -1761,9 +1904,21 @@ def auto_func(args = None):
                 cite_dict.update(myinfo[AUTOKEY.info_args] if myinfo.get(AUTOKEY.info_args) != None else OrderedDict())
                 cite_dict.update(OrderedDict([[info_one[0] + str(ti), str] for info_one in myinfo[AUTOKEY.ids] for ti in range(info_one[1])] + [[info_one[0], str] for info_one in myinfo[AUTOKEY.ids]]) if myinfo.get(AUTOKEY.ids) != None else OrderedDict())
                 
-                cite_name_now = unescape(str_translation(object_dict[AUTOKEY.cite_name], object_dict))
+                cite_name_now = unescape(str_translation(object_dict[AUTOKEY.cite_name], object_dict))
+                # 常用几何数据引用：tx/ty/tw/th（原始）与 nx/ny/nw/nh（移动后）
+                geom_keys = {}
+                for _gk in ("tx","ty","tw","th","nx","ny","nw","nh"):
+                    if object_dict.get(_gk) is not None:
+                        geom_keys[_gk] = object_dict[_gk]
+                for g_key, g_val in geom_keys.items():
+                    cite_object_dict[cite_name_now + "." + g_key] = g_val
+                # sx/sy/sw/sh 与 ox/oy/ow/oh 仅内部计算使用，不对外发布
+                _geom_key_set = set(("sx","sy","sw","sh","ox","oy","ow","oh"))
+
 
                 for key, value in object_dict.items():
+                    if key in _geom_key_set:
+                        continue
                     
                     if (not (myinfo.get(AUTOKEY.isnot_cite_check) != None and myinfo[AUTOKEY.isnot_cite_check])) and cite_dict.get(key) == None:
                         continue

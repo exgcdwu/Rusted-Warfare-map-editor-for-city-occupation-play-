@@ -20,6 +20,8 @@ object_info_args_dict[INFOKEY.objectType] = str
 object_info_args_dict[INFOKEY.name] = str
 object_info_args_dict[INFOKEY.offset] = (list, int)
 object_info_args_dict[INFOKEY.offsetsize] = (list, int)
+object_info_args_dict[INFOKEY.gset] = (list, int)
+object_info_args_dict[INFOKEY.gsetsize] = (list, int)
 
 object_info_default_args_dict = {
     INFOKEY.offset: "0 0", 
@@ -31,6 +33,8 @@ object_info_optional_set = set()
 object_info_optional_set.add(INFOKEY.isprefixseg)
 object_info_optional_set.add(INFOKEY.objectType)
 object_info_optional_set.add(INFOKEY.name)
+object_info_optional_set.add(INFOKEY.gset)
+object_info_optional_set.add(INFOKEY.gsetsize)
 
 for key in OBJECT_ARGS_DICT.keys():
     if key.find("__") != -1:
@@ -57,6 +61,8 @@ object_info_operation_list = \
             AUTOKEY.operation_type: AUTOKEY.object, 
             AUTOKEY.offset: INFOKEY.offset, 
             AUTOKEY.offsetsize: INFOKEY.offsetsize,                 
+            AUTOKEY.set_key: INFOKEY.gset, 
+            AUTOKEY.setsize_key: INFOKEY.gsetsize,                 
             AUTOKEY.name: ("{" + f"{INFOKEY.name}" + "}", AUTOKEY.name, AUTOKEY.exist), 
             AUTOKEY.type: ("{" + f"{INFOKEY.objectType}" + "}", INFOKEY.objectType, AUTOKEY.exist), 
             AUTOKEY.optional: object_info_operation_list_optional

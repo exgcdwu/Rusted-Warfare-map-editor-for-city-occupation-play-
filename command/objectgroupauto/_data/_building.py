@@ -32,9 +32,13 @@ building_info_args_dict[INFOKEY.team] = str
 building_info_args_dict[INFOKEY.addname] = str
 building_info_args_dict[INFOKEY.addoffset] = (list, int)
 building_info_args_dict[INFOKEY.addoffsetsize] = (list, int)
+building_info_args_dict[INFOKEY.addgset] = (list, int)
+building_info_args_dict[INFOKEY.addgsetsize] = (list, int)
 building_info_args_dict[INFOKEY.detectname] = str
 building_info_args_dict[INFOKEY.detectoffset] = (list, int)
 building_info_args_dict[INFOKEY.detectoffsetsize] = (list, int)
+building_info_args_dict[INFOKEY.detectgset] = (list, int)
+building_info_args_dict[INFOKEY.detectgsetsize] = (list, int)
 building_info_args_dict[INFOKEY.isdetectdeacti] = bool
 
 building_info_args_dict[INFOKEY.acti] = (list, str)
@@ -87,9 +91,11 @@ building_info_optional_set = {
     INFOKEY.detectid, INFOKEY.detectalsoActivate, INFOKEY.detectglobalMessage, 
     INFOKEY.detectglobalMessage_delayPerChar, INFOKEY.detectglobalMessage_textColor, 
     INFOKEY.detectdebugMessage, INFOKEY.detectallToActivate, INFOKEY.detectshowOnMap, 
+    INFOKEY.detectgset, INFOKEY.detectgsetsize, 
     INFOKEY.addalsoActivate, INFOKEY.addid, INFOKEY.addglobalMessage, 
     INFOKEY.addglobalMessage_delayPerChar, INFOKEY.addglobalMessage_textColor, 
-    INFOKEY.adddebugMessage, INFOKEY.addallToActivate, INFOKEY.addshowOnMap
+    INFOKEY.adddebugMessage, INFOKEY.addallToActivate, INFOKEY.addshowOnMap, 
+    INFOKEY.addgset, INFOKEY.addgsetsize
 }
 
 building_info_var_dependent_dict = {}
@@ -116,6 +122,8 @@ building_info_operation_list = \
             AUTOKEY.operation_type: AUTOKEY.object, 
             AUTOKEY.offset: f"{INFOKEY.detectoffset}", 
             AUTOKEY.offsetsize: f"{INFOKEY.detectoffsetsize}", 
+            AUTOKEY.set_key: f"{INFOKEY.detectgset}", 
+            AUTOKEY.setsize_key: f"{INFOKEY.detectgsetsize}", 
             AUTOKEY.name: "{" + f"{INFOKEY.detectname}" + "}", 
             AUTOKEY.type: rw.const.OBJECTTYPE.unitDetect, 
             AUTOKEY.optional: {
@@ -141,6 +149,8 @@ building_info_operation_list = \
             AUTOKEY.operation_type: AUTOKEY.object, 
             AUTOKEY.offset: f"{INFOKEY.addoffset}", 
             AUTOKEY.offsetsize: f"{INFOKEY.addoffsetsize}", 
+            AUTOKEY.set_key: f"{INFOKEY.addgset}", 
+            AUTOKEY.setsize_key: f"{INFOKEY.addgsetsize}", 
             AUTOKEY.name: "{" + f"{INFOKEY.addname}" + "}", 
             AUTOKEY.type: rw.const.OBJECTTYPE.unitAdd, 
             AUTOKEY.optional: {

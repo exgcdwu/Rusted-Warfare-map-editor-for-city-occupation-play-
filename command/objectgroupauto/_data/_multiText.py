@@ -31,6 +31,8 @@ multiText_info_args_dict[INFOKEY.name] = (list, str)
 multiText_info_args_dict[INFOKEY.text] = (list, str)
 multiText_info_args_dict[INFOKEY.offset] = (list, list, int)
 multiText_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
+multiText_info_args_dict[INFOKEY.gset] = (list, list, int)
+multiText_info_args_dict[INFOKEY.gsetsize] = (list, list, int)
 
 multiText_info_args_dict[INFOKEY.alsoActivate] = (list, str)
 multiText_info_args_dict[INFOKEY.id] = (list, str)
@@ -67,6 +69,8 @@ multiText_info_optional_set.add(INFOKEY.globalMessage_textColor)
 multiText_info_optional_set.add(INFOKEY.debugMessage)
 multiText_info_optional_set.add(INFOKEY.allToActivate)
 multiText_info_optional_set.add(INFOKEY.showOnMap)
+multiText_info_optional_set.add(INFOKEY.gset)
+multiText_info_optional_set.add(INFOKEY.gsetsize)
 
 multiText_info_var_dependent_dict = {INFOKEY.isdefaultText:INFOKEY.teamDetect_cite}
 
@@ -212,6 +216,8 @@ multiText_info_operation_list = \
         operation_list_assign(f"{INFOKEY.name}", "i", "name_now", "multiText") + \
         operation_list_assign(f"{INFOKEY.offset}", "i", "offset_now", "multiText", "[0, 0]") + \
         operation_list_assign(f"{INFOKEY.offsetsize}", "i", "offsetsize_now", "multiText", "[0, 0]") + \
+        operation_list_assign(f"{INFOKEY.gset}", "i", "set_now", "multiText") + \
+        operation_list_assign(f"{INFOKEY.gsetsize}", "i", "setsize_now", "multiText") + \
         operation_list_assign(f"{INFOKEY.acti}", "i", "acti_now", "multiText") + \
         operation_list_assign(f"{INFOKEY.deacti}", "i", "deacti_now", "multiText") + \
         operation_list_assign(f"{INFOKEY.color}", "i", "color_now", "multiText") + \
@@ -251,6 +257,8 @@ multiText_info_operation_list = \
                 AUTOKEY.exist: ["text_now_exist"], 
                 AUTOKEY.offset: "offset_now_{i}", 
                 AUTOKEY.offsetsize: "offsetsize_now_{i}", 
+                AUTOKEY.set: "set_now_{i}", 
+                AUTOKEY.setsize: "setsize_now_{i}", 
                 AUTOKEY.name: ("{name_now}", "name_now_exist", AUTOKEY.brace), 
                 AUTOKEY.type: rw.const.OBJECTTYPE.mapText, 
                 AUTOKEY.optional: multiText_info_operation_optional

@@ -27,6 +27,8 @@ inadd_info_args_dict[INFOKEY.inaddisshowOnMap] = bool
 inadd_info_args_dict[INFOKEY.inaddname] = str
 inadd_info_args_dict[INFOKEY.inaddoffset] = (list, int)
 inadd_info_args_dict[INFOKEY.inaddoffsetsize] = (list, int)
+inadd_info_args_dict[INFOKEY.inaddgset] = (list, int)
+inadd_info_args_dict[INFOKEY.inaddgsetsize] = (list, int)
 inadd_info_args_dict[INFOKEY.inaddalsoActivate] = str
 inadd_info_args_dict[INFOKEY.inaddid] = str
 inadd_info_args_dict[INFOKEY.inaddglobalMessage] = str
@@ -57,6 +59,8 @@ inadd_info_var_dependent_dict = {
     INFOKEY.inaddname: INFOKEY.isinadd, 
     INFOKEY.inaddoffset: INFOKEY.isinadd, 
     INFOKEY.inaddoffsetsize: INFOKEY.isinadd, 
+    INFOKEY.inaddgset: INFOKEY.isinadd, 
+    INFOKEY.inaddgsetsize: INFOKEY.isinadd, 
     INFOKEY.inaddisinitialunit: INFOKEY.isinadd, 
     INFOKEY.inaddaunitbrace: INFOKEY.isinadd, 
     INFOKEY.inaddalsoActivate: INFOKEY.isinadd, 
@@ -71,7 +75,7 @@ inadd_info_var_dependent_dict = {
 
 inadd_info_optional_set = {
     INFOKEY.isinadd, INFOKEY.inaddname, INFOKEY.inaddisshowOnMap, INFOKEY.inaddspawnnum, 
-    INFOKEY.inaddoffset, INFOKEY.inaddoffsetsize, INFOKEY.inaddaunitbrace, 
+    INFOKEY.inaddoffset, INFOKEY.inaddoffsetsize, INFOKEY.inaddgset, INFOKEY.inaddgsetsize, INFOKEY.inaddaunitbrace, 
     INFOKEY.inaddalsoActivate, INFOKEY.inaddid, INFOKEY.inaddglobalMessage, 
     INFOKEY.inaddglobalMessage_delayPerChar, INFOKEY.inaddglobalMessage_textColor, 
     INFOKEY.inadddebugMessage, INFOKEY.inaddallToActivate, INFOKEY.inaddshowOnMap
@@ -84,6 +88,8 @@ inadd_info_operation_list = \
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 AUTOKEY.offset: f"{INFOKEY.inaddoffset}", 
                 AUTOKEY.offsetsize: f"{INFOKEY.inaddoffsetsize}", 
+                AUTOKEY.set_key: f"{INFOKEY.inaddgset}", 
+                AUTOKEY.setsize_key: f"{INFOKEY.inaddgsetsize}", 
                 AUTOKEY.name: "{" + f"{INFOKEY.inaddname}" + "}", 
                 AUTOKEY.type: (rw.const.OBJECTTYPE.unitAdd, f"not {INFOKEY.inaddisinitialunit}", AUTOKEY.brace), 
                 AUTOKEY.objectGroup_name: (rw.const.NAME.UnitObject, f"{INFOKEY.inaddisinitialunit}", AUTOKEY.brace), 

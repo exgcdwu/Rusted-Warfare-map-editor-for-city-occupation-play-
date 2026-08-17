@@ -23,6 +23,8 @@ mtext_info_args_dict[INFOKEY.mtext] = str
 mtext_info_args_dict[INFOKEY.mname] = str
 mtext_info_args_dict[INFOKEY.moffset] = (list, int)
 mtext_info_args_dict[INFOKEY.moffsetsize] = (list, int)
+mtext_info_args_dict[INFOKEY.mgset] = (list, int)
+mtext_info_args_dict[INFOKEY.mgsetsize] = (list, int)
 mtext_info_args_dict[INFOKEY.malsoActivate] = str
 mtext_info_args_dict[INFOKEY.mid] = str
 mtext_info_args_dict[INFOKEY.mglobalMessage] = str
@@ -45,6 +47,8 @@ mtext_info_var_dependent_dict = {
     INFOKEY.mname: INFOKEY.ismtext, 
     INFOKEY.moffset: INFOKEY.ismtext, 
     INFOKEY.moffsetsize: INFOKEY.ismtext, 
+    INFOKEY.mgset: INFOKEY.ismtext, 
+    INFOKEY.mgsetsize: INFOKEY.ismtext, 
     INFOKEY.mtext: INFOKEY.ismtext, 
     INFOKEY.malsoActivate: INFOKEY.ismtext, 
     INFOKEY.mid: INFOKEY.ismtext, 
@@ -58,7 +62,7 @@ mtext_info_var_dependent_dict = {
 
 mtext_info_optional_set = {
     INFOKEY.ismtext, INFOKEY.mcolor, INFOKEY.mtextsize, INFOKEY.mname, 
-    INFOKEY.moffset, INFOKEY.moffsetsize, 
+    INFOKEY.moffset, INFOKEY.moffsetsize, INFOKEY.mgset, INFOKEY.mgsetsize, 
     INFOKEY.malsoActivate, INFOKEY.mid, INFOKEY.mglobalMessage, 
     INFOKEY.mglobalMessage_delayPerChar, INFOKEY.mglobalMessage_textColor, 
     INFOKEY.mdebugMessage, INFOKEY.mallToActivate, INFOKEY.mshowOnMap
@@ -71,6 +75,8 @@ mtext_info_operation_list = \
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 AUTOKEY.offset: f"{INFOKEY.moffset}", 
                 AUTOKEY.offsetsize: f"{INFOKEY.moffsetsize}", 
+                AUTOKEY.set_key: f"{INFOKEY.mgset}", 
+                AUTOKEY.setsize_key: f"{INFOKEY.mgsetsize}", 
                 AUTOKEY.name: "{" + f"{INFOKEY.mname}" + "}", 
                 AUTOKEY.type: rw.const.OBJECTTYPE.mapText, 
                 AUTOKEY.optional: {

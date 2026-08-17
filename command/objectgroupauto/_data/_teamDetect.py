@@ -31,6 +31,8 @@ teamDetect_info_args_dict[INFOKEY.basicoffsetsize] = (list, int)
 teamDetect_info_args_dict[INFOKEY.name] = (list, str)
 teamDetect_info_args_dict[INFOKEY.offset] = (list, list, int)
 teamDetect_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
+teamDetect_info_args_dict[INFOKEY.gset] = (list, list, int)
+teamDetect_info_args_dict[INFOKEY.gsetsize] = (list, list, int)
 
 teamDetect_info_args_dict[INFOKEY.cite_name] = str
 
@@ -80,6 +82,8 @@ teamDetect_info_optional_set.add(INFOKEY.globalMessage_textColor)
 teamDetect_info_optional_set.add(INFOKEY.debugMessage)
 teamDetect_info_optional_set.add(INFOKEY.allToActivate)
 teamDetect_info_optional_set.add(INFOKEY.showOnMap)
+teamDetect_info_optional_set.add(INFOKEY.gset)
+teamDetect_info_optional_set.add(INFOKEY.gsetsize)
 DETECT_OPTION_SET = set(DETECT_OPTION_DICT.keys())
 teamDetect_info_optional_set.update(DETECT_OPTION_SET)
 
@@ -245,6 +249,36 @@ teamDetect_info_operation_list = \
                 }
             ] + \
         operation_elseend("teamDetect_if4") + \
+        operation_if(f"len({INFOKEY.gset}) != 1", "teamDetect_if_set") + \
+            [
+                {
+                    AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
+                    "set_now": f"{INFOKEY.gset}[i]"
+                }
+            ] + \
+        operation_else("teamDetect_if_set") + \
+            [
+                {
+                    AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
+                    "set_now": f"{INFOKEY.gset}[0]"
+                }
+            ] + \
+        operation_elseend("teamDetect_if_set") + \
+        operation_if(f"len({INFOKEY.gsetsize}) != 1", "teamDetect_if_setsize") + \
+            [
+                {
+                    AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
+                    "setsize_now": f"{INFOKEY.gsetsize}[i]"
+                }
+            ] + \
+        operation_else("teamDetect_if_setsize") + \
+            [
+                {
+                    AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
+                    "setsize_now": f"{INFOKEY.gsetsize}[0]"
+                }
+            ] + \
+        operation_elseend("teamDetect_if_setsize") + \
         operation_cycle_start("j", "0", f"j < setTeam_len_now", "teamDetect_cycle2") + \
             operation_if("j == 1", "teamDetect_closeaddid") + \
                 operation_typeset_expression("id_now_exist", "False") + \
@@ -255,6 +289,8 @@ teamDetect_info_operation_list = \
                         AUTOKEY.operation_type: AUTOKEY.object, 
                         AUTOKEY.offset: "offset_now", 
                         AUTOKEY.offsetsize: "offsetsize_now", 
+                        AUTOKEY.set: "set_now", 
+                        AUTOKEY.setsize: "setsize_now", 
                         AUTOKEY.name: ("{name_now}", "j == 0", AUTOKEY.brace), 
                         AUTOKEY.type: rw.const.OBJECTTYPE.unitDetect, 
                         AUTOKEY.optional: teamDetect_info_operation_optional

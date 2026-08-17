@@ -25,6 +25,8 @@ numDetect_info_args_dict[INFOKEY.aunit] = str
 numDetect_info_args_dict[INFOKEY.name] = (list, str)
 numDetect_info_args_dict[INFOKEY.offset] = (list, list, int)
 numDetect_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
+numDetect_info_args_dict[INFOKEY.gset] = (list, list, int)
+numDetect_info_args_dict[INFOKEY.gsetsize] = (list, list, int)
 
 numDetect_info_args_dict[INFOKEY.cite_name] = str
 
@@ -68,6 +70,8 @@ numDetect_info_optional_set.add(INFOKEY.globalMessage_textColor)
 numDetect_info_optional_set.add(INFOKEY.debugMessage)
 numDetect_info_optional_set.add(INFOKEY.allToActivate)
 numDetect_info_optional_set.add(INFOKEY.showOnMap)
+numDetect_info_optional_set.add(INFOKEY.gset)
+numDetect_info_optional_set.add(INFOKEY.gsetsize)
 DETECT_OPTION_SET = set(DETECT_OPTION_DICT.keys())
 numDetect_info_optional_set.update(DETECT_OPTION_SET)
 
@@ -195,11 +199,43 @@ numDetect_info_operation_list = \
                     }
                 ] + \
             operation_elseend("numDetect_if4") + \
+            operation_if(f"len({INFOKEY.gset}) != 1", "numDetect_if_set") + \
+                [
+                    {
+                        AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
+                        "set_now": f"{INFOKEY.gset}[i]"
+                    }
+                ] + \
+            operation_else("numDetect_if_set") + \
+                [
+                    {
+                        AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
+                        "set_now": f"{INFOKEY.gset}[0]"
+                    }
+                ] + \
+            operation_elseend("numDetect_if_set") + \
+            operation_if(f"len({INFOKEY.gsetsize}) != 1", "numDetect_if_setsize") + \
+                [
+                    {
+                        AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
+                        "setsize_now": f"{INFOKEY.gsetsize}[i]"
+                    }
+                ] + \
+            operation_else("numDetect_if_setsize") + \
+                [
+                    {
+                        AUTOKEY.operation_type:AUTOKEY.typeset_expression, 
+                        "setsize_now": f"{INFOKEY.gsetsize}[0]"
+                    }
+                ] + \
+            operation_elseend("numDetect_if_setsize") + \
             [
                 {
                     AUTOKEY.operation_type: AUTOKEY.object, 
                     AUTOKEY.offset: "offset_now", 
                     AUTOKEY.offsetsize: "offsetsize_now", 
+                    AUTOKEY.set: "set_now", 
+                    AUTOKEY.setsize: "setsize_now", 
                     AUTOKEY.name: ("{name_now}", "j == 0", AUTOKEY.brace), 
                     AUTOKEY.type: rw.const.OBJECTTYPE.unitDetect, 
                     AUTOKEY.optional: numDetect_info_operation_optional

@@ -33,6 +33,8 @@ multiRemove_info_args_dict[INFOKEY.repeat] = (list, str)
 multiRemove_info_args_dict[INFOKEY.name] = (list, str)
 multiRemove_info_args_dict[INFOKEY.offset] = (list, list, int)
 multiRemove_info_args_dict[INFOKEY.offsetsize] = (list, list, int)
+multiRemove_info_args_dict[INFOKEY.gset] = (list, list, int)
+multiRemove_info_args_dict[INFOKEY.gsetsize] = (list, list, int)
 
 multiRemove_info_args_dict[INFOKEY.alsoActivate] = (list, str)
 multiRemove_info_args_dict[INFOKEY.id] = (list, str)
@@ -69,6 +71,8 @@ multiRemove_info_optional_set.add(INFOKEY.globalMessage_textColor)
 multiRemove_info_optional_set.add(INFOKEY.debugMessage)
 multiRemove_info_optional_set.add(INFOKEY.allToActivate)
 multiRemove_info_optional_set.add(INFOKEY.showOnMap)
+multiRemove_info_optional_set.add(INFOKEY.gset)
+multiRemove_info_optional_set.add(INFOKEY.gsetsize)
 
 multiRemove_info_var_dependent_dict = {}
 
@@ -142,6 +146,8 @@ multiRemove_info_operation_list = \
         operation_list_assign(f"{INFOKEY.name}", "i", "name_now", "multiRemove") + \
         operation_list_assign(f"{INFOKEY.offset}", "i", "offset_now", "multiRemove", "[0, 0]") + \
         operation_list_assign(f"{INFOKEY.offsetsize}", "i", "offsetsize_now", "multiRemove", "[0, 0]") + \
+        operation_list_assign(f"{INFOKEY.gset}", "i", "set_now", "multiRemove") + \
+        operation_list_assign(f"{INFOKEY.gsetsize}", "i", "setsize_now", "multiRemove") + \
         operation_list_assign(f"{INFOKEY.acti}", "i", "acti_now", "multiRemove") + \
         operation_list_assign(f"{INFOKEY.deacti}", "i", "deacti_now", "multiRemove") + \
         operation_list_assign(f"{INFOKEY.team}", "i", "team_now", "multiRemove") + \
@@ -178,6 +184,8 @@ multiRemove_info_operation_list = \
                 AUTOKEY.operation_type: AUTOKEY.object, 
                 AUTOKEY.offset: "offset_now_{i}", 
                 AUTOKEY.offsetsize: "offsetsize_now_{i}", 
+                AUTOKEY.set: "set_now_{i}", 
+                AUTOKEY.setsize: "setsize_now_{i}", 
                 AUTOKEY.name: ("{name_now}", "name_now_exist", AUTOKEY.brace), 
                 AUTOKEY.type: rw.const.OBJECTTYPE.unitRemove, 
                 AUTOKEY.optional: multiRemove_info_operation_optional
